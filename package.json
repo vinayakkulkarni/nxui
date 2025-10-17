@@ -32,8 +32,8 @@
     "@nuxt/icon": "^2.2.3",
     "@nuxtjs/color-mode": "^4.0.1",
     "@nuxtjs/plausible": "^3.0.2",
-    "@nuxtjs/sitemap": "^8.1.0",
-    "@tanstack/vue-table": "^9.0.0-beta.7",
+    "@nuxtjs/sitemap": "^8.2.1",
+    "@tanstack/vue-table": "^9.0.0-beta.9",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
     "class-variance-authority": "^0.7.1",
@@ -68,10 +68,10 @@
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "vue": "^3.6.0-beta.15",
-    "wrangler": "^4.99.0"
+    "wrangler": "^4.100.0"
   },
   "engines": {
     "node": ">=24.0.0"
   },
-  "packageManager": "pnpm@11.4.0+sha512.f0febc7e37552ab485494a914241b338e0b3580b93d54ce31f00933015880863129038a1b4ae4e414a0ee63ac35bf21197e990172c4a68256450b5636310968f"
+  "packageManager": "pnpm@11.6.0+sha512.9a36518224080c6fe5165afdcfe79bfa118c29be703f3f462b1e32efe1e98e47e8750b148e08286250aad4113cc7993ca413c4e2cd447752708c2ee5751bc95f"
 }
