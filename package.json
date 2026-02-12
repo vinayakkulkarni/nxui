@@ -1,0 +1,28 @@
+{
+  "name": "nxui",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. Copy, paste, and ship.",
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "oxlint && eslint .",
+    "lint:fix": "oxlint --fix && eslint . --fix",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "prepare": "is-ci || husky"
+  },
+  "author": {
+    "name": "Vinayak Kulkarni",
+    "email": "inbox.vinayak@gmail.com",
+    "url": "https://vinayakkulkarni.dev"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "nuxt": "^4.2.2"
+  }
+}
