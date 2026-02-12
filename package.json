@@ -23,6 +23,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "nuxt": "^4.2.2"
+    "@vueuse/core": "^14.2.1",
+    "nuxt": "^4.2.2",
+    "reka-ui": "^2.8.0"
   }
 }
