@@ -1,0 +1,40 @@
+---
+title: Border Beam
+description: A moving gradient beam that travels along the border of its container. Perfect for highlighting active states.
+category: visual-effects
+---
+
+## Installation
+
+```bash
+npx shadcn-vue@latest add "https://nxui.dev/r/border-beam.json"
+```
+
+## Usage
+
+```vue
+<script setup lang="ts">
+  import BorderBeam from '~/components/ui/BorderBeam.vue';
+</script>
+
+<template>
+  <div class="relative flex h-[300px] w-full items-center justify-center overflow-hidden rounded-xl border bg-background">
+    <div class="z-10 text-center">
+      <h3 class="text-2xl font-bold tracking-tight">Border Beam</h3>
+      <p class="text-muted-foreground">The beam follows the border path</p>
+    </div>
+    <BorderBeam />
+  </div>
+</template>
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| size | `number` | `200` | Length of the beam in pixels. |
+| duration | `number` | `15` | Animation duration in seconds. |
+| borderWidth | `number` | `1.5` | Width of the border/beam in pixels. |
+| colorFrom | `string` | `'#ffaa40'` | Start color of the gradient. |
+| colorTo | `string` | `'#9c40ff'` | End color of the gradient. |
+| delay | `number` | `0` | Animation delay in seconds. |
