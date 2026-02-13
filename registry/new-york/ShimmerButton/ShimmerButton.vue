@@ -41,11 +41,11 @@
         :style="{
           background: `conic-gradient(from 0deg, transparent 0%, var(--shimmer-color) 10%, transparent 20%)`,
         }"
-      />
+      ></span>
     </span>
     <span
       class="absolute inset-[var(--shimmer-size)] rounded-[inherit] bg-[var(--bg)]"
-    />
+    ></span>
     <span class="relative z-10">
       <slot>Shimmer Button</slot>
     </span>

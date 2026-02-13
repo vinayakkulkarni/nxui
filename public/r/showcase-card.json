@@ -1,0 +1,18 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "showcase-card",
+  "type": "registry:ui",
+  "title": "Showcase Card",
+  "description": "A card with 3D tilt effect that responds to mouse movement.",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/ShowcaseCard/ShowcaseCard.vue",
+      "content": "<script setup lang=\"ts\">\n  import { useMouseInElement } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      class?: string;\n    }>(),\n    {\n      class: '',\n    },\n  );\n\n  const cardRef = ref<HTMLElement>();\n  const { elementX, elementY, isOutside } = useMouseInElement(cardRef);\n\n  const rotateX = computed(() => {\n    if (isOutside.value || !cardRef.value) return 0;\n    const rect = cardRef.value.getBoundingClientRect();\n    return -((elementY.value - rect.height / 2) / rect.height) * 8;\n  });\n\n  const rotateY = computed(() => {\n    if (isOutside.value || !cardRef.value) return 0;\n    const rect = cardRef.value.getBoundingClientRect();\n    return ((elementX.value - rect.width / 2) / rect.width) * 8;\n  });\n\n  const cardStyle = computed(() => ({\n    transform: `perspective(1000px) rotateX(${rotateX.value}deg) rotateY(${rotateY.value}deg)`,\n    transition: isOutside.value ? 'transform 0.5s ease-out' : 'transform 0.1s ease-out',\n  }));\n</script>\n\n<template>\n  <div\n    ref=\"cardRef\"\n    :class=\"cn(\n      'rounded-xl border bg-card p-6 shadow-sm transition-shadow hover:shadow-lg',\n      props.class,\n    )\"\n    :style=\"cardStyle\"\n  >\n    <slot ></slot>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/ShowcaseCard/ShowcaseCard.vue"
+    }
+  ]
+}

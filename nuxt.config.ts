@@ -1,77 +1,56 @@
-import tailwindcss from '@tailwindcss/vite';
-
 export default defineNuxtConfig({
+  extends: ['docus'],
+
   modules: [
-    '@nuxtjs/color-mode',
-    '@nuxt/icon',
-    '@nuxt/content',
-    'shadcn-nuxt',
     '@vueuse/nuxt',
     'motion-v/nuxt',
-    '@tresjs/nuxt',
   ],
+
   devtools: { enabled: true },
 
   future: {
     compatibilityVersion: 4,
   },
 
+  alias: {
+    '@registry': '../registry',
+  },
+
+  site: {
+    name: 'nxui',
+    description: 'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v.',
+    url: 'https://nxui.dev',
+  },
+
   app: {
     head: {
-      title: 'nxui - Animated Vue Components',
-      meta: [
-        {
-          name: 'description',
-          content:
-            'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. Copy, paste, and ship.',
-        },
-        { name: 'theme-color', content: '#000000' },
-      ],
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
     },
   },
 
-  css: ['~/assets/css/main.css'],
-
-  colorMode: {
-    classSuffix: '',
-    preference: 'system',
-    fallback: 'dark',
-  },
-
   content: {
-    build: {
-      markdown: {
-        highlight: {
-          theme: {
-            default: 'github-dark',
-            dark: 'github-dark',
-            light: 'github-light',
-          },
-          langs: ['vue', 'typescript', 'bash', 'json', 'css'],
-        },
-      },
+    database: {
+      type: 'd1',
+      bindingName: 'DB',
     },
   },
 
-  compatibilityDate: '2025-01-06',
+  compatibilityDate: '2025-07-18',
 
   nitro: {
     preset: 'cloudflare-pages',
-  },
-
-  vite: {
-    plugins: [tailwindcss()],
-  },
-
-  postcss: {
-    plugins: {
-      '@tailwindcss/postcss': {},
+    cloudflare: {
+      nodeCompat: true,
     },
-  },
-
-  shadcn: {
-    prefix: '',
-    componentDir: './app/components/ui',
+    rollupConfig: {
+      output: {
+        generatedCode: {
+          constBindings: true,
+        },
+      },
+    },
+    replace: {
+      'process.stdout': 'undefined',
+    },
   },
 });

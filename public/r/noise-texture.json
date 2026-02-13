@@ -1,0 +1,18 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "noise-texture",
+  "type": "registry:ui",
+  "title": "Noise Texture",
+  "description": "A canvas-based noise texture overlay for adding grain and texture to backgrounds.",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/NoiseTexture/NoiseTexture.vue",
+      "content": "<script setup lang=\"ts\">\n  import { useResizeObserver } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      opacity?: number;\n      class?: string;\n    }>(),\n    {\n      opacity: 0.04,\n      class: '',\n    },\n  );\n\n  const canvasRef = ref<HTMLCanvasElement>();\n  const containerRef = ref<HTMLElement>();\n\n  function generateNoise(canvas: HTMLCanvasElement) {\n    const ctx = canvas.getContext('2d');\n    if (!ctx) return;\n\n    const { width, height } = canvas;\n    const imageData = ctx.createImageData(width, height);\n    const data = imageData.data;\n\n    for (let i = 0; i < data.length; i += 4) {\n      const value = Math.random() * 255;\n      data[i] = value;\n      data[i + 1] = value;\n      data[i + 2] = value;\n      data[i + 3] = 255;\n    }\n\n    ctx.putImageData(imageData, 0, 0);\n  }\n\n  useResizeObserver(containerRef, (entries) => {\n    const entry = entries[0];\n    if (!entry || !canvasRef.value) return;\n\n    const { width, height } = entry.contentRect;\n    canvasRef.value.width = width;\n    canvasRef.value.height = height;\n    generateNoise(canvasRef.value);\n  });\n\n  onMounted(() => {\n    if (canvasRef.value) {\n      generateNoise(canvasRef.value);\n    }\n  });\n</script>\n\n<template>\n  <div\n    ref=\"containerRef\"\n    :class=\"cn('relative overflow-hidden', props.class)\"\n  >\n    <slot ></slot>\n    <canvas\n      ref=\"canvasRef\"\n      class=\"pointer-events-none absolute inset-0 size-full\"\n      :style=\"{ opacity }\"\n    ></canvas>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/NoiseTexture/NoiseTexture.vue"
+    }
+  ]
+}

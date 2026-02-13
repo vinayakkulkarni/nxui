@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "shimmer-button",
+  "type": "registry:ui",
+  "title": "Shimmer Button",
+  "description": "A button with a shimmer/shine animation effect.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/ShimmerButton/ShimmerButton.vue",
+      "content": "<script setup lang=\"ts\">\n  import { cn } from '~/lib/utils';\n\n  withDefaults(\n    defineProps<{\n      shimmerColor?: string;\n      shimmerSize?: string;\n      shimmerDuration?: string;\n      background?: string;\n      class?: string;\n    }>(),\n    {\n      shimmerColor: '#ffffff',\n      shimmerSize: '0.05em',\n      shimmerDuration: '3s',\n      background: 'rgba(0, 0, 0, 1)',\n      class: '',\n    },\n  );\n</script>\n\n<template>\n  <button\n    :class=\"cn(\n      'group relative inline-flex h-10 cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap rounded-md border border-white/5 px-6 py-2 text-sm font-medium text-white shadow-2xl transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_40px_8px_rgba(62,61,117,0.3)] dark:bg-[rgba(255,255,255,0.1)]',\n      $props.class,\n    )\"\n    :style=\"{\n      '--shimmer-color': shimmerColor,\n      '--shimmer-size': shimmerSize,\n      '--shimmer-duration': shimmerDuration,\n      '--bg': background,\n    }\"\n  >\n    <span\n      class=\"absolute inset-0 overflow-hidden rounded-[inherit]\"\n      :style=\"{ background: 'var(--bg)' }\"\n    >\n      <span\n        class=\"absolute inset-[-100%] animate-[shimmer-slide_var(--shimmer-duration)_ease-in-out_infinite]\"\n        :style=\"{\n          background: `conic-gradient(from 0deg, transparent 0%, var(--shimmer-color) 10%, transparent 20%)`,\n        }\"\n      ></span>\n    </span>\n    <span\n      class=\"absolute inset-[var(--shimmer-size)] rounded-[inherit] bg-[var(--bg)]\"\n    ></span>\n    <span class=\"relative z-10\">\n      <slot>Shimmer Button</slot>\n    </span>\n  </button>\n</template>\n\n<style scoped>\n  @keyframes shimmer-slide {\n    to {\n      transform: rotate(360deg);\n    }\n  }\n</style>\n",
+      "type": "registry:ui",
+      "target": "components/ui/ShimmerButton/ShimmerButton.vue"
+    }
+  ]
+}

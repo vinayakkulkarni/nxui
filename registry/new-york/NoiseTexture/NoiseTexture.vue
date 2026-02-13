@@ -57,11 +57,11 @@
     ref="containerRef"
     :class="cn('relative overflow-hidden', props.class)"
   >
-    <slot />
+    <slot ></slot>
     <canvas
       ref="canvasRef"
       class="pointer-events-none absolute inset-0 size-full"
       :style="{ opacity }"
-    />
+    ></canvas>
   </div>
 </template>

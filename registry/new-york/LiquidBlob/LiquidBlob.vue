@@ -67,9 +67,9 @@
     ref="containerRef"
     :class="cn('relative overflow-hidden', props.class)"
   >
-    <div class="absolute transition-none" :style="blobStyle" />
+    <div class="absolute transition-none" :style="blobStyle" ></div>
     <div class="relative z-10">
-      <slot />
+      <slot ></slot>
     </div>
   </div>
 </template>

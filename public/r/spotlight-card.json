@@ -1,0 +1,18 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "spotlight-card",
+  "type": "registry:ui",
+  "title": "Spotlight Card",
+  "description": "A card that follows the cursor with a spotlight glow effect.",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/SpotlightCard/SpotlightCard.vue",
+      "content": "<script setup lang=\"ts\">\n  import { useMouseInElement, useElementHover } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      spotlightColor?: string;\n      borderColor?: string;\n      borderWidth?: number;\n      borderRadius?: number;\n      glowIntensity?: number;\n      class?: string;\n    }>(),\n    {\n      spotlightColor: 'rgba(120, 119, 198, 0.3)',\n      borderWidth: 1,\n      borderRadius: 16,\n      glowIntensity: 0.15,\n      class: '',\n    },\n  );\n\n  const containerRef = ref<HTMLElement>();\n  const { elementX, elementY } = useMouseInElement(containerRef);\n  const isHovered = useElementHover(containerRef);\n\n  const spotlightStyle = computed(() => ({\n    left: `${elementX.value}px`,\n    top: `${elementY.value}px`,\n    width: '400px',\n    height: '400px',\n    transform: 'translate(-50%, -50%)',\n    background: `radial-gradient(circle, ${props.spotlightColor} 0%, transparent 70%)`,\n    opacity: isHovered.value ? props.glowIntensity * 5 : 0,\n  }));\n\n  const borderStyle = computed(() => ({\n    borderRadius: `${props.borderRadius}px`,\n    padding: `${props.borderWidth}px`,\n    background: props.borderColor\n      ? props.borderColor\n      : `conic-gradient(from 225deg, rgba(120, 119, 198, 0.9), rgba(120, 119, 198, 0.1) 25%, rgba(255, 255, 255, 0.15) 50%, rgba(120, 119, 198, 0.1) 75%, rgba(120, 119, 198, 0.9))`,\n    mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',\n    maskComposite: 'exclude',\n    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',\n    WebkitMaskComposite: 'xor',\n    opacity: isHovered.value ? 1 : 0.5,\n  }));\n</script>\n\n<template>\n  <div\n    ref=\"containerRef\"\n    :class=\"cn(\n      'relative overflow-hidden bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-950 dark:to-neutral-900 transition-all duration-500',\n      props.class,\n    )\"\n    :style=\"{ borderRadius: `${borderRadius}px` }\"\n  >\n    <div\n      class=\"pointer-events-none absolute inset-0 transition-opacity duration-500\"\n      :style=\"borderStyle\"\n    ></div>\n    <div\n      class=\"pointer-events-none absolute transition-opacity duration-300\"\n      :style=\"spotlightStyle\"\n    ></div>\n    <div\n      class=\"pointer-events-none absolute inset-0 transition-opacity duration-500\"\n      :style=\"{\n        borderRadius: `${borderRadius}px`,\n        opacity: isHovered ? 0.5 : 0,\n        boxShadow: 'inset 0 0 30px rgba(120, 119, 198, 0.1), 0 0 30px rgba(120, 119, 198, 0.1)',\n      }\"\n    ></div>\n    <div class=\"relative z-10\">\n      <slot ></slot>\n    </div>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/SpotlightCard/SpotlightCard.vue"
+    }
+  ]
+}

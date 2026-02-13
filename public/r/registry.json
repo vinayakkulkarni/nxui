@@ -1,0 +1,163 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry.json",
+  "name": "nxui",
+  "homepage": "https://nxui.dev",
+  "items": [
+    {
+      "name": "hyper-text",
+      "type": "registry:ui",
+      "title": "Hyper Text",
+      "description": "A text component that scrambles letters before revealing the final text on hover or load."
+    },
+    {
+      "name": "text-animate",
+      "type": "registry:ui",
+      "title": "Text Animate",
+      "description": "Versatile text animation component with multiple animation types and split modes."
+    },
+    {
+      "name": "true-focus",
+      "type": "registry:ui",
+      "title": "True Focus",
+      "description": "A text component that highlights words in sequence with a glowing focus effect."
+    },
+    {
+      "name": "scroll-based-velocity",
+      "type": "registry:ui",
+      "title": "Scroll Based Velocity",
+      "description": "Text that scrolls horizontally with velocity based on scroll speed."
+    },
+    {
+      "name": "border-beam",
+      "type": "registry:ui",
+      "title": "Border Beam",
+      "description": "A moving gradient beam that travels along the border of its container."
+    },
+    {
+      "name": "noise-texture",
+      "type": "registry:ui",
+      "title": "Noise Texture",
+      "description": "A canvas-based noise texture overlay for adding grain and texture to backgrounds."
+    },
+    {
+      "name": "pulsating-button",
+      "type": "registry:ui",
+      "title": "Pulsating Button",
+      "description": "A button with a subtle pulsating glow animation."
+    },
+    {
+      "name": "shimmer-button",
+      "type": "registry:ui",
+      "title": "Shimmer Button",
+      "description": "A button with a shimmer/shine animation effect."
+    },
+    {
+      "name": "interactive-hover-button",
+      "type": "registry:ui",
+      "title": "Interactive Hover Button",
+      "description": "A button with an interactive hover state that reveals a secondary layer."
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:ui",
+      "title": "Spotlight Card",
+      "description": "A card that follows the cursor with a spotlight glow effect."
+    },
+    {
+      "name": "showcase-card",
+      "type": "registry:ui",
+      "title": "Showcase Card",
+      "description": "A card with 3D tilt effect that responds to mouse movement."
+    },
+    {
+      "name": "matrix-rain",
+      "type": "registry:ui",
+      "title": "Matrix Rain",
+      "description": "The iconic Matrix digital rain effect rendered on canvas."
+    },
+    {
+      "name": "pixel-canvas",
+      "type": "registry:ui",
+      "title": "Pixel Canvas",
+      "description": "An interactive pixel grid that responds to mouse movement."
+    },
+    {
+      "name": "testimonial-marquee",
+      "type": "registry:ui",
+      "title": "Testimonial Marquee",
+      "description": "An infinite scrolling marquee of testimonial cards."
+    },
+    {
+      "name": "magnet-lines",
+      "type": "registry:ui",
+      "title": "Magnet Lines",
+      "description": "Lines that bend toward the cursor like a magnetic field."
+    },
+    {
+      "name": "liquid-blob",
+      "type": "registry:ui",
+      "title": "Liquid Blob",
+      "description": "A morphing liquid blob that follows the cursor."
+    },
+    {
+      "name": "dither-gradient",
+      "type": "registry:ui",
+      "title": "Dither Gradient",
+      "description": "A dithered gradient effect rendered on canvas."
+    },
+    {
+      "name": "particle-galaxy",
+      "type": "registry:ui",
+      "title": "Particle Galaxy",
+      "description": "A swirling 3D particle galaxy effect that responds to mouse movement."
+    },
+    {
+      "name": "hero-geometric",
+      "type": "registry:ui",
+      "title": "Hero Geometric",
+      "description": "A hero section with animated floating geometric shapes background."
+    },
+    {
+      "name": "circuit-board",
+      "type": "registry:ui",
+      "title": "Circuit Board",
+      "description": "An animated circuit board pattern with glowing data pulses."
+    },
+    {
+      "name": "auth-modal",
+      "type": "registry:ui",
+      "title": "Auth Modal",
+      "description": "An animated authentication modal with sign in and sign up tabs."
+    },
+    {
+      "name": "command-menu",
+      "type": "registry:ui",
+      "title": "Command Menu",
+      "description": "A spotlight-style command palette with keyboard shortcuts."
+    },
+    {
+      "name": "flight-status-card",
+      "type": "registry:ui",
+      "title": "Flight Status Card",
+      "description": "An animated card displaying real-time flight information."
+    },
+    {
+      "name": "github-calendar",
+      "type": "registry:ui",
+      "title": "GitHub Calendar",
+      "description": "A GitHub-style contribution heatmap calendar."
+    },
+    {
+      "name": "collection-surfer",
+      "type": "registry:ui",
+      "title": "Collection Surfer",
+      "description": "A draggable carousel with spring physics snapping."
+    },
+    {
+      "name": "magnetic-dock",
+      "type": "registry:ui",
+      "title": "Magnetic Dock",
+      "description": "A macOS-style dock with magnetic hover magnification effect."
+    }
+  ]
+}

@@ -31,7 +31,7 @@
       :class="{ 'group-hover:[animation-play-state:paused]': pauseOnHover }"
       :style="{ animationDuration, animationDirection }"
     >
-      <slot />
+      <slot ></slot>
     </div>
     <div
       class="flex shrink-0 animate-marquee items-stretch gap-4"
@@ -39,7 +39,7 @@
       :class="{ 'group-hover:[animation-play-state:paused]': pauseOnHover }"
       :style="{ animationDuration, animationDirection }"
     >
-      <slot />
+      <slot ></slot>
     </div>
   </div>
 </template>

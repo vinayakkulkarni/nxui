@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "testimonial-marquee",
+  "type": "registry:ui",
+  "title": "Testimonial Marquee",
+  "description": "An infinite scrolling marquee of testimonial cards.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/TestimonialMarquee/TestimonialMarquee.vue",
+      "content": "<script setup lang=\"ts\">\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      pauseOnHover?: boolean;\n      speed?: number;\n      direction?: 'left' | 'right';\n      class?: string;\n    }>(),\n    {\n      pauseOnHover: true,\n      speed: 40,\n      direction: 'left',\n      class: '',\n    },\n  );\n\n  const animationDuration = computed(() => `${props.speed}s`);\n  const animationDirection = computed(() =>\n    props.direction === 'right' ? 'reverse' : 'normal',\n  );\n</script>\n\n<template>\n  <div\n    :class=\"cn('group flex gap-4 overflow-hidden [--gap:1rem]', props.class)\"\n  >\n    <div\n      class=\"flex shrink-0 animate-marquee items-stretch gap-4\"\n      :class=\"{ 'group-hover:[animation-play-state:paused]': pauseOnHover }\"\n      :style=\"{ animationDuration, animationDirection }\"\n    >\n      <slot ></slot>\n    </div>\n    <div\n      class=\"flex shrink-0 animate-marquee items-stretch gap-4\"\n      aria-hidden=\"true\"\n      :class=\"{ 'group-hover:[animation-play-state:paused]': pauseOnHover }\"\n      :style=\"{ animationDuration, animationDirection }\"\n    >\n      <slot ></slot>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n  @keyframes marquee {\n    from {\n      transform: translateX(0);\n    }\n    to {\n      transform: translateX(calc(-100% - 1rem));\n    }\n  }\n\n  .animate-marquee {\n    animation: marquee linear infinite;\n  }\n</style>\n",
+      "type": "registry:ui",
+      "target": "components/ui/TestimonialMarquee/TestimonialMarquee.vue"
+    }
+  ]
+}

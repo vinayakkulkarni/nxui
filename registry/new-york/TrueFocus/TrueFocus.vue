@@ -136,19 +136,19 @@
       <span
         class="absolute left-[-10px] top-[-10px] size-4 rounded-[3px] border-[3px] border-b-0 border-r-0"
         :style="{ borderColor, filter: `drop-shadow(0 0 4px ${glowColor})` }"
-      />
+      ></span>
       <span
         class="absolute right-[-10px] top-[-10px] size-4 rounded-[3px] border-[3px] border-b-0 border-l-0"
         :style="{ borderColor, filter: `drop-shadow(0 0 4px ${glowColor})` }"
-      />
+      ></span>
       <span
         class="absolute bottom-[-10px] left-[-10px] size-4 rounded-[3px] border-[3px] border-r-0 border-t-0"
         :style="{ borderColor, filter: `drop-shadow(0 0 4px ${glowColor})` }"
-      />
+      ></span>
       <span
         class="absolute bottom-[-10px] right-[-10px] size-4 rounded-[3px] border-[3px] border-l-0 border-t-0"
         :style="{ borderColor, filter: `drop-shadow(0 0 4px ${glowColor})` }"
-      />
+      ></span>
     </component>
   </div>
 </template>

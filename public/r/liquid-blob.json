@@ -1,0 +1,18 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "liquid-blob",
+  "type": "registry:ui",
+  "title": "Liquid Blob",
+  "description": "A morphing liquid blob that follows the cursor.",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/LiquidBlob/LiquidBlob.vue",
+      "content": "<script setup lang=\"ts\">\n  import { useMouseInElement, useRafFn } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      color1?: string;\n      color2?: string;\n      size?: number;\n      speed?: number;\n      class?: string;\n    }>(),\n    {\n      color1: '#7c3aed',\n      color2: '#06b6d4',\n      size: 300,\n      speed: 1,\n      class: '',\n    },\n  );\n\n  const containerRef = ref<HTMLElement>();\n  const { elementX, elementY, isOutside } = useMouseInElement(containerRef);\n\n  const blobX = ref(50);\n  const blobY = ref(50);\n  const time = ref(0);\n\n  useRafFn(({ timestamp }) => {\n    time.value = timestamp * 0.001 * props.speed;\n\n    if (!isOutside.value && containerRef.value) {\n      const rect = containerRef.value.getBoundingClientRect();\n      const targetX = (elementX.value / rect.width) * 100;\n      const targetY = (elementY.value / rect.height) * 100;\n      blobX.value += (targetX - blobX.value) * 0.05;\n      blobY.value += (targetY - blobY.value) * 0.05;\n    } else {\n      blobX.value += (50 - blobX.value) * 0.02;\n      blobY.value += (50 - blobY.value) * 0.02;\n    }\n  });\n\n  const blobStyle = computed(() => {\n    const t = time.value;\n    const r1 = 40 + Math.sin(t) * 10;\n    const r2 = 40 + Math.cos(t * 0.8) * 15;\n    const r3 = 40 + Math.sin(t * 1.2) * 10;\n    const r4 = 40 + Math.cos(t * 0.6) * 15;\n\n    return {\n      width: `${props.size}px`,\n      height: `${props.size}px`,\n      left: `${blobX.value}%`,\n      top: `${blobY.value}%`,\n      transform: 'translate(-50%, -50%)',\n      background: `linear-gradient(135deg, ${props.color1}, ${props.color2})`,\n      borderRadius: `${r1}% ${100 - r1}% ${r2}% ${100 - r2}% / ${r3}% ${r4}% ${100 - r4}% ${100 - r3}%`,\n      filter: 'blur(40px)',\n      opacity: 0.7,\n    };\n  });\n</script>\n\n<template>\n  <div\n    ref=\"containerRef\"\n    :class=\"cn('relative overflow-hidden', props.class)\"\n  >\n    <div class=\"absolute transition-none\" :style=\"blobStyle\" ></div>\n    <div class=\"relative z-10\">\n      <slot ></slot>\n    </div>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/LiquidBlob/LiquidBlob.vue"
+    }
+  ]
+}

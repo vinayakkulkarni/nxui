@@ -41,6 +41,6 @@
     )"
     :style="cardStyle"
   >
-    <slot />
+    <slot ></slot>
   </div>
 </template>

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "pulsating-button",
+  "type": "registry:ui",
+  "title": "Pulsating Button",
+  "description": "A button with a subtle pulsating glow animation.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/PulsatingButton/PulsatingButton.vue",
+      "content": "<script setup lang=\"ts\">\n  import { cn } from '~/lib/utils';\n\n  withDefaults(\n    defineProps<{\n      pulseColor?: string;\n      duration?: string;\n      class?: string;\n    }>(),\n    {\n      pulseColor: '#0096ff',\n      duration: '1.5s',\n      class: '',\n    },\n  );\n</script>\n\n<template>\n  <button\n    :class=\"cn(\n      'relative inline-flex cursor-pointer items-center justify-center rounded-lg bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground',\n      $props.class,\n    )\"\n    :style=\"{\n      '--pulse-color': pulseColor,\n      '--duration': duration,\n    }\"\n  >\n    <div class=\"relative z-10\">\n      <slot>Pulsating Button</slot>\n    </div>\n    <div class=\"absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-lg bg-inherit\" ></div>\n  </button>\n</template>\n\n<style scoped>\n  button::before {\n    content: '';\n    position: absolute;\n    inset: -2px;\n    border-radius: inherit;\n    background: var(--pulse-color);\n    opacity: 0;\n    animation: pulse-ring var(--duration) cubic-bezier(0.215, 0.61, 0.355, 1)\n      infinite;\n  }\n\n  @keyframes pulse-ring {\n    0% {\n      opacity: 0.5;\n      transform: scale(0.95);\n    }\n    100% {\n      opacity: 0;\n      transform: scale(1.05);\n    }\n  }\n</style>\n",
+      "type": "registry:ui",
+      "target": "components/ui/PulsatingButton/PulsatingButton.vue"
+    }
+  ]
+}

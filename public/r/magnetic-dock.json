@@ -1,0 +1,19 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "magnetic-dock",
+  "type": "registry:ui",
+  "title": "Magnetic Dock",
+  "description": "A macOS-style dock with magnetic hover magnification effect.",
+  "dependencies": [
+    "@vueuse/core",
+    "motion-v"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/MagneticDock/MagneticDock.vue",
+      "content": "<script setup lang=\"ts\">\n  import { useMouseInElement } from '@vueuse/core';\n  import { motion } from 'motion-v';\n  import type { DockItem } from '~/types/components';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      items?: DockItem[];\n      magnification?: number;\n      distance?: number;\n      class?: string;\n    }>(),\n    {\n      items: () => [],\n      magnification: 1.5,\n      distance: 150,\n      class: '',\n    },\n  );\n\n  const dockRef = ref<HTMLElement>();\n  const { elementX, isOutside } = useMouseInElement(dockRef);\n  const hoveredIndex = ref(-1);\n\n  const itemRefs = ref<HTMLElement[]>([]);\n\n  function getScale(index: number): number {\n    if (isOutside.value) return 1;\n    const el = itemRefs.value[index];\n    if (!el) return 1;\n    const rect = el.getBoundingClientRect();\n    const dockRect = dockRef.value?.getBoundingClientRect();\n    if (!dockRect) return 1;\n\n    const itemCenterX = rect.left - dockRect.left + rect.width / 2;\n    const dist = Math.abs(elementX.value - itemCenterX);\n    if (dist > props.distance) return 1;\n\n    const scale = 1 + (props.magnification - 1) * (1 - dist / props.distance);\n    return scale;\n  }\n</script>\n\n<template>\n  <div\n    ref=\"dockRef\"\n    :class=\"cn('flex items-end gap-2 rounded-2xl border bg-card/80 px-3 pb-2 pt-3 shadow-lg backdrop-blur-md', props.class)\"\n  >\n    <div\n      v-for=\"(item, index) in props.items\"\n      :key=\"item.label\"\n      :ref=\"(el) => { if (el) itemRefs[index] = el as HTMLElement }\"\n      class=\"group relative flex flex-col items-center\"\n      @mouseenter=\"hoveredIndex = index\"\n      @mouseleave=\"hoveredIndex = -1\"\n    >\n      <Transition name=\"tooltip\">\n        <div\n          v-if=\"hoveredIndex === index\"\n          class=\"absolute -top-8 whitespace-nowrap rounded-md bg-popover px-2 py-1 text-xs font-medium text-popover-foreground shadow-md\"\n        >\n          {{ item.label }}\n        </div>\n      </Transition>\n      <component\n        :is=\"motion.button\"\n        class=\"flex items-center justify-center rounded-xl bg-muted/50 transition-colors hover:bg-muted\"\n        :style=\"{ width: `${getScale(index) * 40}px`, height: `${getScale(index) * 40}px` }\"\n        :animate=\"{ width: getScale(index) * 40, height: getScale(index) * 40 }\"\n        :transition=\"{ type: 'spring', stiffness: 400, damping: 25 }\"\n        @click=\"item.onClick?.()\"\n      >\n        <Icon :name=\"item.icon\" class=\"size-5 text-foreground\" />\n      </component>\n    </div>\n  </div>\n</template>\n\n<style scoped>\n.tooltip-enter-active,\n.tooltip-leave-active {\n  transition: opacity 0.15s, transform 0.15s;\n}\n.tooltip-enter-from,\n.tooltip-leave-to {\n  opacity: 0;\n  transform: translateY(4px);\n}\n</style>\n",
+      "type": "registry:ui",
+      "target": "components/ui/MagneticDock/MagneticDock.vue"
+    }
+  ]
+}

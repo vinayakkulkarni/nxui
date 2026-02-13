@@ -38,7 +38,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
           props.class,
         )"
     >
-      <slot />
+      <slot ></slot>
 
       <DialogClose
         v-if="showCloseButton"

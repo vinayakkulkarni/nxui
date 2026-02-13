@@ -60,11 +60,11 @@
     <div
       class="pointer-events-none absolute inset-0 transition-opacity duration-500"
       :style="borderStyle"
-    />
+    ></div>
     <div
       class="pointer-events-none absolute transition-opacity duration-300"
       :style="spotlightStyle"
-    />
+    ></div>
     <div
       class="pointer-events-none absolute inset-0 transition-opacity duration-500"
       :style="{
@@ -72,9 +72,9 @@
         opacity: isHovered ? 0.5 : 0,
         boxShadow: 'inset 0 0 30px rgba(120, 119, 198, 0.1), 0 0 30px rgba(120, 119, 198, 0.1)',
       }"
-    />
+    ></div>
     <div class="relative z-10">
-      <slot />
+      <slot ></slot>
     </div>
   </div>
 </template>

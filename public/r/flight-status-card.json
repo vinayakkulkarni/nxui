@@ -1,0 +1,18 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "flight-status-card",
+  "type": "registry:ui",
+  "title": "Flight Status Card",
+  "description": "An animated card displaying real-time flight information.",
+  "dependencies": [
+    "motion-v"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/FlightStatusCard/FlightStatusCard.vue",
+      "content": "<script setup lang=\"ts\">\n  import { motion } from 'motion-v';\n  import type { FlightInfo, FlightStatus } from '~/types/components';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      flight: FlightInfo;\n      class?: string;\n    }>(),\n    { class: '' },\n  );\n\n  const statusColors: Record<FlightStatus, string> = {\n    'boarding': 'bg-green-500/10 text-green-500',\n    'in-flight': 'bg-blue-500/10 text-blue-500',\n    'landed': 'bg-emerald-500/10 text-emerald-500',\n    'delayed': 'bg-red-500/10 text-red-500',\n  };\n\n  const statusLabels: Record<FlightStatus, string> = {\n    'boarding': 'Boarding',\n    'in-flight': 'In Flight',\n    'landed': 'Landed',\n    'delayed': 'Delayed',\n  };\n</script>\n\n<template>\n  <div :class=\"cn('w-full max-w-sm rounded-xl border bg-card p-5 shadow-sm', props.class)\">\n    <div class=\"mb-4 flex items-center justify-between\">\n      <div class=\"text-sm font-medium text-muted-foreground\">\n        {{ props.flight.airline }} · {{ props.flight.flightNumber }}\n      </div>\n      <span :class=\"cn('rounded-full px-2.5 py-0.5 text-xs font-medium', statusColors[props.flight.status])\">\n        {{ statusLabels[props.flight.status] }}\n      </span>\n    </div>\n\n    <div class=\"mb-4 flex items-center justify-between\">\n      <div class=\"text-left\">\n        <div class=\"text-2xl font-bold\">{{ props.flight.departure.code }}</div>\n        <div class=\"text-xs text-muted-foreground\">{{ props.flight.departure.city }}</div>\n        <div class=\"text-sm font-medium\">{{ props.flight.departure.time }}</div>\n      </div>\n      <div class=\"relative mx-4 flex flex-1 items-center\">\n        <div class=\"h-px w-full bg-border\" ></div>\n        <component\n          :is=\"motion.div\"\n          class=\"absolute\"\n          :style=\"{ left: `${props.flight.progress}%` }\"\n          :animate=\"{ left: `${props.flight.progress}%` }\"\n          :transition=\"{ type: 'spring', stiffness: 100, damping: 20 }\"\n        >\n          <Icon name=\"lucide:plane\" class=\"size-4 -translate-x-1/2 -translate-y-1/2 text-primary\" />\n        </component>\n      </div>\n      <div class=\"text-right\">\n        <div class=\"text-2xl font-bold\">{{ props.flight.arrival.code }}</div>\n        <div class=\"text-xs text-muted-foreground\">{{ props.flight.arrival.city }}</div>\n        <div class=\"text-sm font-medium\">{{ props.flight.arrival.time }}</div>\n      </div>\n    </div>\n\n    <div class=\"mb-2 h-1.5 overflow-hidden rounded-full bg-muted\">\n      <component\n        :is=\"motion.div\"\n        class=\"h-full rounded-full bg-primary\"\n        :animate=\"{ width: `${props.flight.progress}%` }\"\n        :transition=\"{ type: 'spring', stiffness: 80, damping: 20 }\"\n      />\n    </div>\n\n    <div v-if=\"props.flight.gate\" class=\"text-right text-xs text-muted-foreground\">\n      Gate {{ props.flight.gate }}\n    </div>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/FlightStatusCard/FlightStatusCard.vue"
+    }
+  ]
+}

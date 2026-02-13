@@ -1,0 +1,18 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "pixel-canvas",
+  "type": "registry:ui",
+  "title": "Pixel Canvas",
+  "description": "An interactive pixel grid that responds to mouse movement.",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/PixelCanvas/PixelCanvas.vue",
+      "content": "<script setup lang=\"ts\">\n  import {\n    useMouseInElement,\n    useRafFn,\n    useResizeObserver,\n  } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      pixelSize?: number;\n      colors?: string[];\n      fadeSpeed?: number;\n      class?: string;\n    }>(),\n    {\n      pixelSize: 20,\n      colors: () => ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#6c5ce7'],\n      fadeSpeed: 0.02,\n      class: '',\n    },\n  );\n\n  const containerRef = ref<HTMLElement>();\n  const canvasRef = ref<HTMLCanvasElement>();\n  const { elementX, elementY, isOutside } = useMouseInElement(containerRef);\n\n  interface Pixel {\n    x: number;\n    y: number;\n    color: string;\n    alpha: number;\n  }\n\n  const pixels = ref<Pixel[]>([]);\n\n  useResizeObserver(containerRef, (entries) => {\n    const entry = entries[0];\n    if (!entry || !canvasRef.value) return;\n\n    canvasRef.value.width = entry.contentRect.width;\n    canvasRef.value.height = entry.contentRect.height;\n  });\n\n  useRafFn(() => {\n    const canvas = canvasRef.value;\n    if (!canvas) return;\n\n    const ctx = canvas.getContext('2d');\n    if (!ctx) return;\n\n    if (!isOutside.value) {\n      const gridX =\n        Math.floor(elementX.value / props.pixelSize) * props.pixelSize;\n      const gridY =\n        Math.floor(elementY.value / props.pixelSize) * props.pixelSize;\n      const color =\n        props.colors[Math.floor(Math.random() * props.colors.length)];\n\n      const existing = pixels.value.find(\n        (p) => p.x === gridX && p.y === gridY,\n      );\n      if (existing) {\n        existing.alpha = 1;\n        existing.color = color;\n      } else {\n        pixels.value.push({ x: gridX, y: gridY, color, alpha: 1 });\n      }\n    }\n\n    ctx.clearRect(0, 0, canvas.width, canvas.height);\n\n    pixels.value = pixels.value.filter((pixel) => {\n      pixel.alpha -= props.fadeSpeed;\n      if (pixel.alpha <= 0) return false;\n\n      ctx.globalAlpha = pixel.alpha;\n      ctx.fillStyle = pixel.color;\n      ctx.fillRect(\n        pixel.x,\n        pixel.y,\n        props.pixelSize - 1,\n        props.pixelSize - 1,\n      );\n      return true;\n    });\n\n    ctx.globalAlpha = 1;\n  });\n\n  onMounted(() => {\n    if (canvasRef.value && containerRef.value) {\n      const rect = containerRef.value.getBoundingClientRect();\n      canvasRef.value.width = rect.width;\n      canvasRef.value.height = rect.height;\n    }\n  });\n</script>\n\n<template>\n  <div\n    ref=\"containerRef\"\n    :class=\"cn('relative cursor-crosshair overflow-hidden bg-black', props.class)\"\n  >\n    <canvas ref=\"canvasRef\" class=\"size-full\" ></canvas>\n    <div class=\"pointer-events-none absolute inset-0 z-10\">\n      <slot ></slot>\n    </div>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/PixelCanvas/PixelCanvas.vue"
+    }
+  ]
+}

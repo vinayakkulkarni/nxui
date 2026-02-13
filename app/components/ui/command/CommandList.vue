@@ -19,7 +19,7 @@ const forwarded = useForwardProps(delegatedProps)
     :class="cn('max-h-[300px] scroll-py-1 overflow-x-hidden overflow-y-auto', props.class)"
   >
     <div role="presentation">
-      <slot />
+      <slot ></slot>
     </div>
   </ListboxContent>
 </template>

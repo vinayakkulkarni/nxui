@@ -33,6 +33,6 @@
     </div>
     <span
       class="absolute inset-0 -z-10 scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100"
-    />
+    ></span>
   </button>
 </template>

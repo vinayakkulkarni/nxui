@@ -87,9 +87,9 @@
     ref="containerRef"
     :class="cn('relative overflow-hidden bg-black', props.class)"
   >
-    <canvas ref="canvasRef" class="size-full" />
+    <canvas ref="canvasRef" class="size-full" ></canvas>
     <div class="absolute inset-0 z-10">
-      <slot />
+      <slot ></slot>
     </div>
   </div>
 </template>
