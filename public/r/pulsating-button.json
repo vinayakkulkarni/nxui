@@ -3,7 +3,7 @@
   "name": "pulsating-button",
   "type": "registry:ui",
   "title": "Pulsating Button",
-  "description": "A button with a subtle pulsating glow animation.",
+  "description": "A button with a pulsating ring animation that draws attention.",
   "dependencies": [],
   "files": [
     {

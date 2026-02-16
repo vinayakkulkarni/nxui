@@ -1,9 +1,84 @@
 <script setup lang="ts">
-import GithubCalendar from '@registry/new-york/GithubCalendar/GithubCalendar.vue';
+  import { ref, computed } from 'vue';
+  import GithubCalendar from '@registry/new-york/GithubCalendar/GithubCalendar.vue';
+
+  const activeTab = ref(0);
+
+  const variants: { label: string; props: Record<string, unknown>; code: string }[] = [
+    {
+      label: 'Default',
+      props: { username: 'vinayakkulkarni' },
+      code: `<script setup lang="ts">
+  import GithubCalendar from '~/components/ui/GithubCalendar.vue';
 </script>
 
 <template>
-  <ComponentDemo>
-    <GithubCalendar username="vinayakkulkarni" color-scheme="green" />
+  <GithubCalendar username="vinayakkulkarni" />
+</template>`,
+    },
+    {
+      label: 'Grayscale',
+      props: { username: 'vinayakkulkarni', colorSchema: 'gray' },
+      code: `<script setup lang="ts">
+  import GithubCalendar from '~/components/ui/GithubCalendar.vue';
+</script>
+
+<template>
+  <GithubCalendar username="vinayakkulkarni" color-schema="gray" />
+</template>`,
+    },
+    {
+      label: 'Minimal',
+      props: { username: 'vinayakkulkarni', variant: 'minimal', colorSchema: 'blue' },
+      code: `<script setup lang="ts">
+  import GithubCalendar from '~/components/ui/GithubCalendar.vue';
+</script>
+
+<template>
+  <GithubCalendar username="vinayakkulkarni" variant="minimal" color-schema="blue" />
+</template>`,
+    },
+    {
+      label: 'Orange',
+      props: { username: 'vinayakkulkarni', colorSchema: 'orange', showTotal: false },
+      code: `<script setup lang="ts">
+  import GithubCalendar from '~/components/ui/GithubCalendar.vue';
+</script>
+
+<template>
+  <GithubCalendar username="vinayakkulkarni" color-schema="orange" :show-total="false" />
+</template>`,
+    },
+  ];
+
+  const currentVariant = computed(() => variants[activeTab.value]);
+
+  function handleTabClick(index: number) {
+    activeTab.value = index;
+  }
+</script>
+
+<template>
+  <ComponentDemo :code="currentVariant.code">
+    <div class="flex flex-col items-center gap-6 w-full overflow-hidden py-4">
+      <div class="scale-[0.55] md:scale-[0.7] origin-center">
+        <GithubCalendar v-bind="currentVariant.props" />
+      </div>
+      <div class="flex gap-2">
+        <button
+          v-for="(variant, index) in variants"
+          :key="variant.label"
+          class="px-3 py-1 text-xs rounded-full transition-colors"
+          :class="
+            activeTab === index
+              ? 'bg-foreground text-background'
+              : 'bg-muted text-muted-foreground hover:bg-muted/80'
+          "
+          @click="handleTabClick(index)"
+        >
+          {{ variant.label }}
+        </button>
+      </div>
+    </div>
   </ComponentDemo>
 </template>

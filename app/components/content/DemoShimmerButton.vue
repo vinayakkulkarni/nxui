@@ -3,7 +3,15 @@
 </script>
 
 <template>
-  <ComponentDemo>
+  <ComponentDemo
+    :code="`<script setup lang=&quot;ts&quot;>
+  import ShimmerButton from '~/components/ui/ShimmerButton.vue';
+</script>
+
+<template>
+  <ShimmerButton>Shimmer</ShimmerButton>
+</template>`"
+  >
     <ShimmerButton>Shimmer</ShimmerButton>
   </ComponentDemo>
 </template>

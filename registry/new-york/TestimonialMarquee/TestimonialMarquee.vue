@@ -1,60 +1,64 @@
 <script setup lang="ts">
+  import type { Testimonial } from '~/types/components';
   import { cn } from '~/lib/utils';
+  import TestimonialMarqueeRow from './TestimonialMarqueeRow.vue';
+  import TestimonialMarqueeCard from './TestimonialMarqueeCard.vue';
 
   const props = withDefaults(
     defineProps<{
-      pauseOnHover?: boolean;
+      items: Testimonial[];
+      variant?: 'default' | 'dual' | 'flush';
       speed?: number;
-      direction?: 'left' | 'right';
+      pauseOnHover?: boolean;
       class?: string;
     }>(),
     {
+      variant: 'default',
+      speed: 30,
       pauseOnHover: true,
-      speed: 40,
-      direction: 'left',
       class: '',
     },
   );
 
-  const animationDuration = computed(() => `${props.speed}s`);
-  const animationDirection = computed(() =>
-    props.direction === 'right' ? 'reverse' : 'normal',
+  // Ensure enough items for smooth loop
+  const displayItems = computed(() => {
+    let result = [...props.items];
+    while (result.length < 10) {
+      result = [...result, ...props.items];
+    }
+    return result;
+  });
+
+  const firstHalf = computed(() =>
+    displayItems.value.slice(0, Math.ceil(displayItems.value.length / 2)),
+  );
+  const secondHalf = computed(() =>
+    displayItems.value.slice(Math.ceil(displayItems.value.length / 2)),
   );
 </script>
 
 <template>
-  <div
-    :class="cn('group flex gap-4 overflow-hidden [--gap:1rem]', props.class)"
-  >
-    <div
-      class="flex shrink-0 animate-marquee items-stretch gap-4"
-      :class="{ 'group-hover:[animation-play-state:paused]': pauseOnHover }"
-      :style="{ animationDuration, animationDirection }"
-    >
-      <slot ></slot>
-    </div>
-    <div
-      class="flex shrink-0 animate-marquee items-stretch gap-4"
-      aria-hidden="true"
-      :class="{ 'group-hover:[animation-play-state:paused]': pauseOnHover }"
-      :style="{ animationDuration, animationDirection }"
-    >
-      <slot ></slot>
-    </div>
+  <!-- Dual row variant -->
+  <div v-if="variant === 'dual'" :class="cn('flex flex-col gap-4 overflow-hidden py-8', props.class)">
+    <TestimonialMarqueeRow :speed="speed" direction="left" :pause-on-hover="pauseOnHover">
+      <TestimonialMarqueeCard v-for="(item, i) in firstHalf" :key="`r1-${i}`" :item="item" />
+    </TestimonialMarqueeRow>
+    <TestimonialMarqueeRow :speed="speed" direction="right" :pause-on-hover="pauseOnHover">
+      <TestimonialMarqueeCard v-for="(item, i) in secondHalf" :key="`r2-${i}`" :item="item" />
+    </TestimonialMarqueeRow>
+  </div>
+
+  <!-- Flush variant -->
+  <div v-else-if="variant === 'flush'" :class="cn('overflow-hidden py-8', props.class)">
+    <TestimonialMarqueeRow :speed="speed" direction="left" :pause-on-hover="pauseOnHover" class="[--gap:0]">
+      <TestimonialMarqueeCard v-for="(item, i) in displayItems" :key="`f-${i}`" :item="item" variant="flush" />
+    </TestimonialMarqueeRow>
+  </div>
+
+  <!-- Default single row -->
+  <div v-else :class="cn('overflow-hidden py-8', props.class)">
+    <TestimonialMarqueeRow :speed="speed" direction="left" :pause-on-hover="pauseOnHover">
+      <TestimonialMarqueeCard v-for="(item, i) in displayItems" :key="`d-${i}`" :item="item" />
+    </TestimonialMarqueeRow>
   </div>
 </template>
-
-<style scoped>
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - 1rem));
-    }
-  }
-
-  .animate-marquee {
-    animation: marquee linear infinite;
-  }
-</style>

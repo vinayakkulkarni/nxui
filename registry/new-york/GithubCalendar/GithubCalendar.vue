@@ -1,108 +1,92 @@
 <script setup lang="ts">
-  import { useElementHover } from '@vueuse/core';
-  import type { ContributionDay } from '~/types/components';
+  import { ref, onMounted } from 'vue';
+  import type {
+    GithubContributionData,
+    GithubCalendarColorSchema,
+    GithubCalendarVariant,
+    GithubCalendarShape,
+  } from '~/types/components';
   import { cn } from '~/lib/utils';
+  import GithubCalendarGrid from './GithubCalendarGrid.vue';
+
+  const GITHUB_API_URL = 'https://github-contributions-api.deno.dev';
 
   const props = withDefaults(
     defineProps<{
-      username?: string;
-      year?: number;
-      colorScheme?: 'green' | 'blue' | 'purple';
+      username: string;
+      variant?: GithubCalendarVariant;
+      shape?: GithubCalendarShape;
+      glowIntensity?: number;
+      showTotal?: boolean;
+      colorSchema?: GithubCalendarColorSchema;
       class?: string;
     }>(),
     {
-      username: 'vinayakkulkarni',
-      year: () => new Date().getFullYear(),
-      colorScheme: 'green',
+      variant: 'default',
+      shape: 'rounded',
+      glowIntensity: 5,
+      showTotal: true,
+      colorSchema: 'green',
       class: '',
     },
   );
 
-  const colorMap: Record<string, string[]> = {
-    green: ['bg-neutral-800', 'bg-green-900', 'bg-green-700', 'bg-green-500', 'bg-green-300'],
-    blue: ['bg-neutral-800', 'bg-blue-900', 'bg-blue-700', 'bg-blue-500', 'bg-blue-300'],
-    purple: ['bg-neutral-800', 'bg-purple-900', 'bg-purple-700', 'bg-purple-500', 'bg-purple-300'],
-  };
+  const loading = ref(true);
+  const error = ref<string | null>(null);
+  const data = ref<GithubContributionData | null>(null);
 
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-  const contributions = computed<ContributionDay[]>(() => {
-    const days: ContributionDay[] = [];
-    const start = new Date(props.year, 0, 1);
-    const end = new Date(props.year, 11, 31);
-    const current = new Date(start);
-
-    while (current <= end) {
-      const rand = Math.random();
-      let level: 0 | 1 | 2 | 3 | 4 = 0;
-      if (rand > 0.7) level = 1;
-      if (rand > 0.8) level = 2;
-      if (rand > 0.9) level = 3;
-      if (rand > 0.95) level = 4;
-
-      days.push({
-        date: current.toISOString().split('T')[0],
-        count: level * Math.ceil(Math.random() * 5),
-        level,
-      });
-      current.setDate(current.getDate() + 1);
-    }
-    return days;
-  });
-
-  const weeks = computed(() => {
-    const result: ContributionDay[][] = [];
-    let week: ContributionDay[] = [];
-    const startDay = new Date(props.year, 0, 1).getDay();
-
-    for (let i = 0; i < startDay; i++) {
-      week.push({ date: '', count: 0, level: 0 });
-    }
-
-    for (const day of contributions.value) {
-      week.push(day);
-      if (week.length === 7) {
-        result.push(week);
-        week = [];
+  onMounted(async () => {
+    try {
+      const response = await fetch(`${GITHUB_API_URL}/${props.username}.json`);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch contributions for @${props.username}`);
       }
+      const json = (await response.json()) as GithubContributionData;
+      data.value = json;
+    } catch (err) {
+      error.value = err instanceof Error ? err.message : 'An unknown error occurred';
+    } finally {
+      loading.value = false;
     }
-    if (week.length > 0) result.push(week);
-    return result;
   });
-
-  const colors = computed(() => colorMap[props.colorScheme] ?? colorMap.green);
 </script>
 
 <template>
-  <div :class="cn('overflow-x-auto', props.class)">
-    <div class="mb-1 flex gap-[3px] pl-8 text-[10px] text-muted-foreground">
-      <span
-        v-for="(month, i) in months"
-        :key="month"
-        :style="{ width: `${(weeks.length / 12) * 13}px` }"
-      >
-        {{ month }}
-      </span>
+  <div :class="cn('w-full', props.class)">
+    <!-- Loading skeleton -->
+    <div v-if="loading" class="w-full h-32 animate-pulse bg-zinc-100 dark:bg-zinc-800 rounded-xl" />
+
+    <!-- Error state -->
+    <div
+      v-else-if="error"
+      class="p-4 rounded-lg border border-red-200 bg-red-50 dark:bg-red-950 dark:border-red-800 text-red-500 text-sm"
+    >
+      Error: {{ error }}
     </div>
-    <div class="flex gap-[3px]">
-      <div class="flex flex-col gap-[3px] pr-1 text-[10px] text-muted-foreground">
-        <span class="h-[13px]" ></span>
-        <span class="h-[13px] leading-[13px]">Mon</span>
-        <span class="h-[13px]" ></span>
-        <span class="h-[13px] leading-[13px]">Wed</span>
-        <span class="h-[13px]" ></span>
-        <span class="h-[13px] leading-[13px]">Fri</span>
-        <span class="h-[13px]" ></span>
+
+    <!-- Data loaded -->
+    <div v-else-if="data" class="flex flex-col gap-2">
+      <!-- Header -->
+      <div v-if="showTotal" class="flex items-center justify-between px-1">
+        <div class="flex items-center gap-2">
+          <svg height="16" viewBox="0 0 16 16" width="16" class="fill-current text-muted-foreground">
+            <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z" />
+          </svg>
+          <span class="font-semibold text-sm">@{{ username }}</span>
+        </div>
+        <span class="text-sm text-muted-foreground">
+          {{ data.totalContributions }} contributions in the last year
+        </span>
       </div>
-      <div v-for="(week, wi) in weeks" :key="wi" class="flex flex-col gap-[3px]">
-        <div
-          v-for="(day, di) in week"
-          :key="di"
-          class="size-[13px] rounded-sm transition-colors"
-          :class="day.date ? colors[day.level] : 'bg-transparent'"
-          :title="day.date ? `${day.date}: ${day.count} contributions` : ''"
-        ></div>
-      </div>
+
+      <!-- Grid -->
+      <GithubCalendarGrid
+        :weeks="data.contributions"
+        :variant="variant"
+        :shape="shape"
+        :glow-intensity="glowIntensity"
+        :color-schema="colorSchema"
+      />
     </div>
   </div>
 </template>

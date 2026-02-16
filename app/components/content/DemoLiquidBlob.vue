@@ -3,10 +3,19 @@ import LiquidBlob from '@registry/new-york/LiquidBlob/LiquidBlob.vue';
 </script>
 
 <template>
-  <ComponentDemo class="p-0">
-    <LiquidBlob class="h-[350px] w-full rounded-xl bg-neutral-950">
+  <ComponentDemo
+    full-width
+    :code="`<script setup lang=&quot;ts&quot;>
+  import LiquidBlob from '~/components/ui/LiquidBlob.vue';
+</script>
+
+<template>
+  <LiquidBlob class=&quot;h-[300px] w-full rounded-xl bg-neutral-100 dark:bg-zinc-900&quot; />
+</template>`"
+  >
+    <LiquidBlob class="h-[300px] w-full rounded-xl bg-neutral-100 dark:bg-zinc-900">
       <div class="flex h-full items-center justify-center">
-        <p class="text-lg font-medium text-white/80">Move your cursor</p>
+        <p class="text-lg font-medium text-neutral-800/80 dark:text-white/80">Move your cursor</p>
       </div>
     </LiquidBlob>
   </ComponentDemo>

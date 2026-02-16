@@ -3,7 +3,15 @@
 </script>
 
 <template>
-  <ComponentDemo>
+  <ComponentDemo
+    :code="`<script setup lang=&quot;ts&quot;>
+  import TrueFocus from '~/components/ui/TrueFocus.vue';
+</script>
+
+<template>
+  <TrueFocus sentence=&quot;True Focus Effect&quot; />
+</template>`"
+  >
     <TrueFocus sentence="True Focus Effect" />
   </ComponentDemo>
 </template>

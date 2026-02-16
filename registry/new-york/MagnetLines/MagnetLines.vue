@@ -1,94 +1,96 @@
 <script setup lang="ts">
-  import { useMouseInElement, useRafFn, useElementSize } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
     defineProps<{
-      lineCount?: number;
+      rows?: number;
+      columns?: number;
+      containerSize?: string;
       lineColor?: string;
-      lineWidth?: number;
-      magnetStrength?: number;
+      lineWidth?: string;
+      lineHeight?: string;
+      baseAngle?: number;
       class?: string;
     }>(),
     {
-      lineCount: 40,
-      lineColor: 'currentColor',
-      lineWidth: 1,
-      magnetStrength: 0.5,
+      rows: 9,
+      columns: 9,
+      containerSize: '80vmin',
+      lineColor: '#efefef',
+      lineWidth: '1vmin',
+      lineHeight: '6vmin',
+      baseAngle: -10,
       class: '',
     },
   );
 
-  const containerRef = ref<HTMLElement>();
-  const canvasRef = ref<HTMLCanvasElement>();
-  const { elementX, elementY, isOutside } = useMouseInElement(containerRef);
-  const { width, height } = useElementSize(containerRef);
+  const containerRef = ref<HTMLDivElement>();
+  const total = computed(() => props.rows * props.columns);
 
-  watch([width, height], ([w, h]) => {
-    if (canvasRef.value) {
-      canvasRef.value.width = w;
-      canvasRef.value.height = h;
-    }
-  });
+  const gridStyle = computed(() => ({
+    gridTemplateColumns: `repeat(${props.columns}, 1fr)`,
+    gridTemplateRows: `repeat(${props.rows}, 1fr)`,
+    width: props.containerSize,
+    height: props.containerSize,
+  }));
 
-  useRafFn(() => {
-    const canvas = canvasRef.value;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = props.lineColor;
-    ctx.lineWidth = props.lineWidth;
-
-    const spacing = canvas.width / (props.lineCount + 1);
-
-    for (let i = 1; i <= props.lineCount; i++) {
-      const baseX = i * spacing;
-      const startY = 0;
-      const endY = canvas.height;
-
-      ctx.beginPath();
-      ctx.moveTo(baseX, startY);
-
-      if (!isOutside.value) {
-        const dx = elementX.value - baseX;
-        const dy = elementY.value - canvas.height / 2;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        const influence =
-          Math.max(0, 1 - distance / (canvas.width * 0.4)) *
-          props.magnetStrength;
-
-        const cpX = baseX + dx * influence;
-        const cpY = canvas.height / 2 + dy * influence * 0.3;
-
-        ctx.quadraticCurveTo(cpX, cpY, baseX, endY);
-      } else {
-        ctx.lineTo(baseX, endY);
-      }
-
-      ctx.stroke();
-    }
-  });
+  function onPointerMove(e: PointerEvent) {
+    if (!containerRef.value) return;
+    const items = containerRef.value.querySelectorAll<HTMLSpanElement>('span');
+    items.forEach((item) => {
+      const rect = item.getBoundingClientRect();
+      const centerX = rect.x + rect.width / 2;
+      const centerY = rect.y + rect.height / 2;
+      const b = e.clientX - centerX;
+      const a = e.clientY - centerY;
+      const c = Math.sqrt(a * a + b * b) || 1;
+      const r =
+        ((Math.acos(b / c) * 180) / Math.PI) * (e.clientY > centerY ? 1 : -1);
+      item.style.setProperty('--rotate', `${r}deg`);
+    });
+  }
 
   onMounted(() => {
-    if (canvasRef.value && containerRef.value) {
-      const rect = containerRef.value.getBoundingClientRect();
-      canvasRef.value.width = rect.width;
-      canvasRef.value.height = rect.height;
-    }
+    window.addEventListener('pointermove', onPointerMove);
+    // Initialize with center angle
+    nextTick(() => {
+      if (!containerRef.value) return;
+      const items = containerRef.value.querySelectorAll<HTMLSpanElement>('span');
+      if (items.length) {
+        const mid = Math.floor(items.length / 2);
+        const rect = items[mid].getBoundingClientRect();
+        onPointerMove({
+          clientX: rect.x,
+          clientY: rect.y,
+        } as PointerEvent);
+      }
+    });
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('pointermove', onPointerMove);
   });
 </script>
 
 <template>
   <div
     ref="containerRef"
-    :class="cn('relative overflow-hidden', props.class)"
+    :class="cn('grid place-items-center', props.class)"
+    :style="gridStyle"
   >
-    <canvas ref="canvasRef" class="size-full" ></canvas>
-    <div class="pointer-events-none absolute inset-0 z-10">
-      <slot ></slot>
-    </div>
+    <span
+      v-for="i in total"
+      :key="i"
+      class="block origin-center"
+      :style="{
+        backgroundColor: lineColor,
+        width: lineWidth,
+        height: lineHeight,
+        '--rotate': `${baseAngle}deg`,
+        transform: 'rotate(var(--rotate))',
+        willChange: 'transform',
+        transition: 'transform 0.15s ease-out',
+      }"
+    />
   </div>
 </template>

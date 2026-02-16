@@ -1,10 +1,30 @@
-export default defineNuxtConfig({
-  extends: ['docus'],
+import tailwindcss from '@tailwindcss/vite';
 
+export default defineNuxtConfig({
   modules: [
+    '@nuxt/content',
+    '@nuxt/icon',
+    '@nuxtjs/color-mode',
     '@vueuse/nuxt',
     'motion-v/nuxt',
   ],
+
+  colorMode: {
+    preference: 'dark',
+    classSuffix: '',
+  },
+
+  icon: {
+    provider: 'iconify',
+  },
+
+  css: ['~/assets/css/main.css'],
+
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
+  },
 
   devtools: { enabled: true },
 
@@ -19,7 +39,7 @@ export default defineNuxtConfig({
   site: {
     name: 'nxui',
     description: 'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v.',
-    url: 'https://nxui.dev',
+    url: 'https://nxui.geoql.in',
   },
 
   app: {
@@ -29,6 +49,18 @@ export default defineNuxtConfig({
   },
 
   content: {
+    build: {
+      markdown: {
+        highlight: {
+          theme: {
+            light: 'material-theme-lighter',
+            default: 'material-theme',
+            dark: 'material-theme-palenight',
+          },
+          langs: ['bash', 'json', 'js', 'ts', 'html', 'css', 'vue', 'shell', 'md', 'yaml'],
+        },
+      },
+    },
     database: {
       type: 'd1',
       bindingName: 'DB',

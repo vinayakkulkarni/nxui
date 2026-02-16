@@ -3,7 +3,17 @@
 </script>
 
 <template>
-  <ComponentDemo class="h-[200px] w-full overflow-hidden">
-    <ScrollBasedVelocity text="nxui — " class="text-4xl font-bold" />
+  <ComponentDemo
+    full-width
+    class="overflow-hidden py-8"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import ScrollBasedVelocity from '~/components/ui/ScrollBasedVelocity.vue';
+</script>
+
+<template>
+  <ScrollBasedVelocity text=&quot;nxui — &quot; />
+</template>`"
+  >
+    <ScrollBasedVelocity text="nxui — " />
   </ComponentDemo>
 </template>

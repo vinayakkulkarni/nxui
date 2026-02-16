@@ -1,7 +1,7 @@
 {
   "$schema": "https://shadcn-vue.com/schema/registry.json",
   "name": "nxui",
-  "homepage": "https://nxui.dev",
+  "homepage": "https://nxui.geoql.in",
   "items": [
     {
       "name": "hyper-text",
@@ -38,12 +38,6 @@
       "type": "registry:ui",
       "title": "Noise Texture",
       "description": "A canvas-based noise texture overlay for adding grain and texture to backgrounds."
-    },
-    {
-      "name": "pulsating-button",
-      "type": "registry:ui",
-      "title": "Pulsating Button",
-      "description": "A button with a subtle pulsating glow animation."
     },
     {
       "name": "shimmer-button",
@@ -112,16 +106,10 @@
       "description": "A swirling 3D particle galaxy effect that responds to mouse movement."
     },
     {
-      "name": "hero-geometric",
+      "name": "node-diagram",
       "type": "registry:ui",
-      "title": "Hero Geometric",
-      "description": "A hero section with animated floating geometric shapes background."
-    },
-    {
-      "name": "circuit-board",
-      "type": "registry:ui",
-      "title": "Circuit Board",
-      "description": "An animated circuit board pattern with glowing data pulses."
+      "title": "Node Diagram",
+      "description": "An animated node diagram with glowing data pulses flowing through connections."
     },
     {
       "name": "auth-modal",
@@ -148,16 +136,46 @@
       "description": "A GitHub-style contribution heatmap calendar."
     },
     {
-      "name": "collection-surfer",
-      "type": "registry:ui",
-      "title": "Collection Surfer",
-      "description": "A draggable carousel with spring physics snapping."
-    },
-    {
       "name": "magnetic-dock",
       "type": "registry:ui",
       "title": "Magnetic Dock",
       "description": "A macOS-style dock with magnetic hover magnification effect."
+    },
+    {
+      "name": "collection-surfer",
+      "type": "registry:ui",
+      "title": "Collection Surfer",
+      "description": "A scroll-driven card carousel with parallax depth and momentum-based navigation."
+    },
+    {
+      "name": "hero-geometric",
+      "type": "registry:ui",
+      "title": "Hero Geometric",
+      "description": "A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering."
+    },
+    {
+      "name": "dither-prism-hero",
+      "type": "registry:ui",
+      "title": "Dither Prism Hero",
+      "description": "A prismatic dithered hero section with advanced WebGL shaders featuring ordered dithering, holographic iridescence, and floating particles."
+    },
+    {
+      "name": "webgl-liquid",
+      "type": "registry:ui",
+      "title": "WebGL Liquid",
+      "description": "A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior."
+    },
+    {
+      "name": "closing-plasma",
+      "type": "registry:ui",
+      "title": "Closing Plasma",
+      "description": "A premium footer-ready plasma background with atmospheric noise and smooth pointer-driven flow."
+    },
+    {
+      "name": "pulsating-button",
+      "type": "registry:ui",
+      "title": "Pulsating Button",
+      "description": "A button with a pulsating ring animation that draws attention."
     }
   ]
 }

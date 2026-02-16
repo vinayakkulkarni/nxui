@@ -3,7 +3,15 @@
 </script>
 
 <template>
-  <ComponentDemo>
-    <TextAnimate text="Beautiful Animations" animation="blurInUp" class="text-4xl font-bold" />
+  <ComponentDemo
+    :code="`<script setup lang=&quot;ts&quot;>
+  import TextAnimate from '~/components/ui/TextAnimate.vue';
+</script>
+
+<template>
+  <TextAnimate text=&quot;Beautiful Animations&quot; animation=&quot;blur-in-up&quot; class=&quot;text-4xl font-bold&quot; />
+</template>`"
+  >
+    <TextAnimate text="Beautiful Animations" animation="blur-in-up" class="text-4xl font-bold" />
   </ComponentDemo>
 </template>

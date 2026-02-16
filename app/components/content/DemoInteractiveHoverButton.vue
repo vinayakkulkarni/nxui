@@ -3,7 +3,15 @@
 </script>
 
 <template>
-  <ComponentDemo>
+  <ComponentDemo
+    :code="`<script setup lang=&quot;ts&quot;>
+  import InteractiveHoverButton from '~/components/ui/InteractiveHoverButton.vue';
+</script>
+
+<template>
+  <InteractiveHoverButton>Hover Me</InteractiveHoverButton>
+</template>`"
+  >
     <InteractiveHoverButton>Hover Me</InteractiveHoverButton>
   </ComponentDemo>
 </template>

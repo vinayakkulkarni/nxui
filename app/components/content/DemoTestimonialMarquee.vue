@@ -1,27 +1,63 @@
 <script setup lang="ts">
-import TestimonialMarquee from '@registry/new-york/TestimonialMarquee/TestimonialMarquee.vue';
+  import type { Testimonial } from '~/types/components';
+  import TestimonialMarquee from '@registry/new-york/TestimonialMarquee/TestimonialMarquee.vue';
 
-const testimonials = [
-  { name: 'Alice Johnson', role: 'Designer', text: 'Amazing UI library! Made my work so much easier.' },
-  { name: 'Bob Smith', role: 'Developer', text: 'The animations are buttery smooth and easy to customize.' },
-  { name: 'Carol White', role: 'PM', text: 'Our team shipped 2x faster with these components.' },
-  { name: 'Dave Brown', role: 'Founder', text: 'Best Vue component library I have used. Period.' },
-  { name: 'Eve Davis', role: 'Engineer', text: 'Clean API, great docs, and stunning animations.' },
-];
+  const testimonials: Testimonial[] = [
+    {
+      name: 'Sarah Chen',
+      username: 'sarahchen',
+      text: 'This library has completely transformed how we build our UI. The animations are so smooth!',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=faces',
+    },
+    {
+      name: 'Alex Morgan',
+      username: 'alexm',
+      text: 'The best developer experience I\'ve had in years. Highly recommended for any Vue project.',
+      avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=150&h=150&fit=crop&crop=faces',
+    },
+    {
+      name: 'David Kim',
+      username: 'davidkim',
+      text: 'Incredible attention to detail. The micro-interactions are subtle but impactful.',
+      avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&h=150&fit=crop&crop=faces',
+    },
+    {
+      name: 'Emily Watson',
+      username: 'emilyw',
+      text: 'Just copy and paste instantly. It\'s like magic for your frontend workflow.',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=faces',
+    },
+    {
+      name: 'James Wilson',
+      username: 'jamesw',
+      text: 'I\'ve tried many UI libraries, but nxui stands out for its premium feel.',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=faces',
+    },
+    {
+      name: 'Lisa Park',
+      username: 'lisap',
+      text: 'The Vue component quality is unmatched. Every animation feels intentional.',
+      avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=faces',
+    },
+  ];
 </script>
 
 <template>
-  <ComponentDemo class="p-0">
-    <TestimonialMarquee class="py-6">
-      <div
-        v-for="t in testimonials"
-        :key="t.name"
-        class="mx-2 w-72 shrink-0 rounded-xl border bg-card p-4 shadow-sm"
-      >
-        <p class="mb-3 text-sm text-muted-foreground">"{{ t.text }}"</p>
-        <div class="text-sm font-medium">{{ t.name }}</div>
-        <div class="text-xs text-muted-foreground">{{ t.role }}</div>
-      </div>
-    </TestimonialMarquee>
+  <ComponentDemo
+    full-width
+    :code="`<script setup lang=&quot;ts&quot;>
+  import TestimonialMarquee from '~/components/ui/TestimonialMarquee.vue';
+
+  const items = [
+    { name: 'Sarah Chen', text: 'Amazing library!', avatar: '/avatars/sarah.jpg' },
+    { name: 'Alex Morgan', text: 'Best DX ever.', avatar: '/avatars/alex.jpg' },
+  ];
+</script>
+
+<template>
+  <TestimonialMarquee :items=&quot;items&quot; :speed=&quot;30&quot; />
+</template>`"
+  >
+    <TestimonialMarquee :items="testimonials" :speed="30" />
   </ComponentDemo>
 </template>

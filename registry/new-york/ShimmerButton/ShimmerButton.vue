@@ -6,6 +6,7 @@
       shimmerColor?: string;
       shimmerSize?: string;
       shimmerDuration?: string;
+      borderRadius?: string;
       background?: string;
       class?: string;
     }>(),
@@ -13,7 +14,8 @@
       shimmerColor: '#ffffff',
       shimmerSize: '0.05em',
       shimmerDuration: '3s',
-      background: 'rgba(0, 0, 0, 1)',
+      borderRadius: '100px',
+      background: 'var(--primary)',
       class: '',
     },
   );
@@ -22,38 +24,56 @@
 <template>
   <button
     :class="cn(
-      'group relative inline-flex h-10 cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap rounded-md border border-white/5 px-6 py-2 text-sm font-medium text-white shadow-2xl transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-[0_0_40px_8px_rgba(62,61,117,0.3)] dark:bg-[rgba(255,255,255,0.1)]',
+      'group relative z-0 inline-flex h-11 cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap px-6 py-2 text-sm font-medium text-primary-foreground transition-all duration-300 ease-[cubic-bezier(0.6,0.6,0,1)] hover:scale-105 active:scale-95',
       $props.class,
     )"
-    :style="{
-      '--shimmer-color': shimmerColor,
-      '--shimmer-size': shimmerSize,
-      '--shimmer-duration': shimmerDuration,
-      '--bg': background,
-    }"
+    :style="{ borderRadius }"
   >
+    <!-- spark container -->
     <span
-      class="absolute inset-0 overflow-hidden rounded-[inherit]"
-      :style="{ background: 'var(--bg)' }"
+      class="absolute inset-0 overflow-hidden"
+      :style="{ borderRadius }"
     >
       <span
-        class="absolute inset-[-100%] animate-[shimmer-slide_var(--shimmer-duration)_ease-in-out_infinite]"
+        class="absolute inset-0"
+        :style="{ background }"
+      />
+      <span
+        class="absolute inset-[-100%] animate-[shimmer-spin_var(--shimmer-duration)_linear_infinite]"
         :style="{
-          background: `conic-gradient(from 0deg, transparent 0%, var(--shimmer-color) 10%, transparent 20%)`,
+          '--shimmer-duration': shimmerDuration,
+          background: `conic-gradient(from 0deg, transparent 0 340deg, ${shimmerColor} 360deg)`,
         }"
-      ></span>
+      />
     </span>
+
+    <!-- backdrop -->
     <span
-      class="absolute inset-[var(--shimmer-size)] rounded-[inherit] bg-[var(--bg)]"
-    ></span>
-    <span class="relative z-10">
+      class="absolute overflow-hidden"
+      :style="{
+        inset: shimmerSize,
+        borderRadius,
+        background,
+      }"
+    />
+
+    <!-- content -->
+    <span class="relative z-10 flex items-center gap-2">
       <slot>Shimmer Button</slot>
     </span>
+
+    <!-- highlight -->
+    <span
+      class="absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2 opacity-70"
+      :style="{
+        background: `linear-gradient(90deg, transparent, ${shimmerColor}40, transparent)`,
+      }"
+    />
   </button>
 </template>
 
 <style scoped>
-  @keyframes shimmer-slide {
+  @keyframes shimmer-spin {
     to {
       transform: rotate(360deg);
     }

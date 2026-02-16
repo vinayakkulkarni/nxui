@@ -65,11 +65,6 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'A canvas-based noise texture overlay for adding grain and texture to backgrounds.',
     deps: ['@vueuse/core'],
   },
-  'pulsating-button': {
-    title: 'Pulsating Button',
-    description: 'A button with a subtle pulsating glow animation.',
-    deps: [],
-  },
   'shimmer-button': {
     title: 'Shimmer Button',
     description: 'A button with a shimmer/shine animation effect.',
@@ -125,15 +120,10 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'A swirling 3D particle galaxy effect that responds to mouse movement.',
     deps: ['@vueuse/core'],
   },
-  'hero-geometric': {
-    title: 'Hero Geometric',
-    description: 'A hero section with animated floating geometric shapes background.',
+  'node-diagram': {
+    title: 'Node Diagram',
+    description: 'An animated node diagram with glowing data pulses flowing through connections.',
     deps: ['@vueuse/core', 'motion-v'],
-  },
-  'circuit-board': {
-    title: 'Circuit Board',
-    description: 'An animated circuit board pattern with glowing data pulses.',
-    deps: ['@vueuse/core'],
   },
   'auth-modal': {
     title: 'Auth Modal',
@@ -155,15 +145,43 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'A GitHub-style contribution heatmap calendar.',
     deps: ['@vueuse/core'],
   },
-  'collection-surfer': {
-    title: 'Collection Surfer',
-    description: 'A draggable carousel with spring physics snapping.',
-    deps: ['@vueuse/core', 'motion-v'],
-  },
   'magnetic-dock': {
     title: 'Magnetic Dock',
     description: 'A macOS-style dock with magnetic hover magnification effect.',
     deps: ['@vueuse/core', 'motion-v'],
+  },
+  'collection-surfer': {
+    title: 'Collection Surfer',
+    description: 'A scroll-driven card carousel with parallax depth and momentum-based navigation.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'hero-geometric': {
+    title: 'Hero Geometric',
+    description: 'A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering.',
+    deps: ['three', 'motion-v', '@vueuse/core'],
+  },
+  'dither-prism-hero': {
+    title: 'Dither Prism Hero',
+    description:
+      'A prismatic dithered hero section with advanced WebGL shaders featuring ordered dithering, holographic iridescence, and floating particles.',
+    deps: ['three', 'motion-v', '@vueuse/core'],
+  },
+  'webgl-liquid': {
+    title: 'WebGL Liquid',
+    description:
+      'A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.',
+    deps: ['@vueuse/core'],
+  },
+  'closing-plasma': {
+    title: 'Closing Plasma',
+    description:
+      'A premium footer-ready plasma background with atmospheric noise and smooth pointer-driven flow.',
+    deps: ['@vueuse/core'],
+  },
+  'pulsating-button': {
+    title: 'Pulsating Button',
+    description: 'A button with a pulsating ring animation that draws attention.',
+    deps: [],
   },
 };
 
@@ -252,7 +270,7 @@ function main() {
   const registryIndex: RegistryIndex = {
     $schema: 'https://shadcn-vue.com/schema/registry.json',
     name: 'nxui',
-    homepage: 'https://nxui.dev',
+    homepage: 'https://nxui.geoql.in',
     items: indexItems,
   };
 

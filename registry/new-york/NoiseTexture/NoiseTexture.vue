@@ -46,7 +46,10 @@
   });
 
   onMounted(() => {
-    if (canvasRef.value) {
+    if (canvasRef.value && containerRef.value) {
+      const { width, height } = containerRef.value.getBoundingClientRect();
+      canvasRef.value.width = width;
+      canvasRef.value.height = height;
       generateNoise(canvasRef.value);
     }
   });

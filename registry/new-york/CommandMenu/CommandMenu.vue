@@ -8,11 +8,15 @@
     defineProps<{
       items?: CommandItem[];
       placeholder?: string;
+      emptyMessage?: string;
+      brandName?: string;
       class?: string;
     }>(),
     {
       items: () => [],
-      placeholder: 'Type a command or search...',
+      placeholder: 'Search...',
+      emptyMessage: 'No results found',
+      brandName: 'Demo App',
       class: '',
     },
   );
@@ -47,47 +51,107 @@
     open.value = false;
     search.value = '';
   }
+
+  watch(open, (val) => {
+    if (!val) search.value = '';
+  });
 </script>
 
 <template>
   <Teleport to="body">
     <AnimatePresence>
-      <div v-if="open" class="fixed inset-0 z-50 flex items-start justify-center pt-[20vh]">
-        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm" @click="open = false" ></div>
+      <div v-if="open" class="fixed inset-0 z-50">
+        <component
+          :is="motion.div"
+          :initial="{ opacity: 0 }"
+          :animate="{ opacity: 1 }"
+          :exit="{ opacity: 0 }"
+          :transition="{ duration: 0.15 }"
+          class="fixed inset-0 bg-black/50 backdrop-blur-sm"
+          @click="open = false"
+        />
         <component
           :is="motion.div"
           :initial="{ opacity: 0, scale: 0.96 }"
           :animate="{ opacity: 1, scale: 1 }"
           :exit="{ opacity: 0, scale: 0.96 }"
-          :transition="{ duration: 0.15 }"
-          :class="cn('relative z-10 w-full max-w-lg overflow-hidden rounded-xl border bg-popover shadow-2xl', props.class)"
+          :transition="{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }"
+          :class="cn('fixed left-1/2 top-1/2 z-50 w-full max-w-[680px] -translate-x-1/2 -translate-y-1/2 p-4', props.class)"
         >
-          <div class="flex items-center border-b px-3">
-            <Icon name="lucide:search" class="mr-2 size-4 shrink-0 text-muted-foreground" />
-            <input
-              v-model="search"
-              :placeholder="props.placeholder"
-              class="flex h-11 w-full bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground"
-            />
-          </div>
-          <div class="max-h-80 overflow-y-auto p-2">
-            <div v-if="filteredItems.length === 0" class="py-6 text-center text-sm text-muted-foreground">
-              No results found.
-            </div>
-            <div v-for="[group, groupItems] in groups" :key="group" class="mb-2">
-              <p class="mb-1 px-2 text-xs font-medium text-muted-foreground">{{ group }}</p>
-              <button
-                v-for="item in groupItems"
-                :key="item.label"
-                class="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-sm hover:bg-accent hover:text-accent-foreground"
-                @click="selectItem(item)"
+          <div class="overflow-hidden rounded-2xl border border-border/50 bg-popover/95 shadow-2xl shadow-black/20 backdrop-blur-xl">
+            <!-- Search header -->
+            <div class="flex items-center gap-3 border-b border-border/50 px-4 py-3">
+              <div class="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5">
+                <Icon name="lucide:search" class="size-4 text-primary" />
+              </div>
+              <input
+                v-model="search"
+                :placeholder="placeholder"
+                class="flex-1 bg-transparent text-base font-normal outline-none placeholder:text-muted-foreground/60"
+                autofocus
+              />
+              <component
+                :is="motion.button"
+                v-if="search"
+                :initial="{ opacity: 0, scale: 0.8 }"
+                :animate="{ opacity: 1, scale: 1 }"
+                class="rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+                @click="search = ''"
               >
-                <Icon v-if="item.icon" :name="item.icon" class="size-4 text-muted-foreground" />
-                <span class="flex-1 text-left">{{ item.label }}</span>
-                <kbd v-if="item.shortcut" class="pointer-events-none ml-auto hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 text-[10px] font-medium opacity-100 sm:flex">
-                  {{ item.shortcut }}
-                </kbd>
-              </button>
+                Clear
+              </component>
+              <kbd class="hidden h-6 select-none items-center gap-1 rounded-md border bg-muted/50 px-2 font-mono text-[10px] font-medium text-muted-foreground sm:inline-flex">
+                ESC
+              </kbd>
+            </div>
+
+            <!-- Items list -->
+            <div class="max-h-[400px] overflow-y-auto overscroll-contain p-2">
+              <div v-if="filteredItems.length === 0" class="flex flex-col items-center justify-center py-14 text-center">
+                <div class="mb-3 flex size-12 items-center justify-center rounded-full bg-muted/50">
+                  <Icon name="lucide:search" class="size-5 text-muted-foreground/50" />
+                </div>
+                <p class="text-sm text-muted-foreground">{{ emptyMessage }}</p>
+                <p class="text-xs text-muted-foreground/60">Try searching for something else</p>
+              </div>
+              <div v-for="[group, groupItems] in groups" :key="group" class="mb-2">
+                <p class="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground/60">
+                  {{ group }}
+                </p>
+                <button
+                  v-for="item in groupItems"
+                  :key="item.label"
+                  class="group flex w-full cursor-pointer select-none items-center gap-3 rounded-xl px-3 py-2.5 text-sm outline-none transition-colors hover:bg-accent/70 hover:text-accent-foreground"
+                  @click="selectItem(item)"
+                >
+                  <div class="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted/50 text-muted-foreground transition-colors group-hover:bg-primary/10 group-hover:text-primary">
+                    <Icon v-if="item.icon" :name="item.icon" class="size-4" />
+                  </div>
+                  <div class="flex flex-1 flex-col gap-0.5">
+                    <span class="text-left font-medium">{{ item.label }}</span>
+                    <span class="text-left text-xs text-muted-foreground/60">{{ group }}</span>
+                  </div>
+                  <Icon
+                    name="lucide:arrow-right"
+                    class="size-4 -translate-x-2 text-muted-foreground opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex items-center justify-between border-t border-border/50 bg-muted/30 px-4 py-2.5">
+              <div class="flex items-center gap-4 text-xs text-muted-foreground/60">
+                <span class="flex items-center gap-1.5">
+                  <kbd class="rounded border bg-background/80 px-1.5 py-0.5 font-mono text-[10px]">&#8593;&#8595;</kbd>
+                  Navigate
+                </span>
+                <span class="flex items-center gap-1.5">
+                  <kbd class="rounded border bg-background/80 px-1.5 py-0.5 font-mono text-[10px]">&#8629;</kbd>
+                  Select
+                </span>
+              </div>
+              <span class="text-xs text-muted-foreground/40">{{ brandName }}</span>
             </div>
           </div>
         </component>
