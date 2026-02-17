@@ -40,7 +40,7 @@ const tabs: {
     iconSize: 56,
     maxScale: 1.5,
     magneticDistance: 150,
-    code: `<script setup lang="ts">
+    code: `\x3cscript setup lang="ts">
   import MagneticDock from "~/components/ui/MagneticDock/MagneticDock.vue";
   import type { MagneticDockItemData } from "~/types/components";
 
@@ -53,11 +53,11 @@ const tabs: {
     { icon: "lucide:settings", label: "Settings" },
     { icon: "lucide:trash", label: "Trash" },
   ];
-</script>
+\x3c/script>
 
-<template>
-  <MagneticDock :items="items" />
-</template>`,
+\x3ctemplate>
+  \x3cMagneticDock :items="items" />
+\x3c/template>`,
   },
   {
     label: 'Solid Variant',
@@ -66,7 +66,7 @@ const tabs: {
     iconSize: 56,
     maxScale: 1.5,
     magneticDistance: 150,
-    code: `<script setup lang="ts">
+    code: `\x3cscript setup lang="ts">
   import MagneticDock from "~/components/ui/MagneticDock/MagneticDock.vue";
 
   const items = [
@@ -75,11 +75,11 @@ const tabs: {
     { icon: "lucide:folder", label: "Finder" },
     { icon: "lucide:settings", label: "Settings" },
   ];
-</script>
+\x3c/script>
 
-<template>
-  <MagneticDock :items="items" variant="solid" />
-</template>`,
+\x3ctemplate>
+  \x3cMagneticDock :items="items" variant="solid" />
+\x3c/template>`,
   },
   {
     label: 'Large Scale Effect',
@@ -88,7 +88,7 @@ const tabs: {
     iconSize: 48,
     maxScale: 2,
     magneticDistance: 200,
-    code: `<script setup lang="ts">
+    code: `\x3cscript setup lang="ts">
   import MagneticDock from "~/components/ui/MagneticDock/MagneticDock.vue";
 
   const items = [
@@ -97,16 +97,16 @@ const tabs: {
     { icon: "lucide:folder", label: "Finder" },
     { icon: "lucide:settings", label: "Settings" },
   ];
-</script>
+\x3c/script>
 
-<template>
-  <MagneticDock
+\x3ctemplate>
+  \x3cMagneticDock
     :items="items"
     :icon-size="48"
     :max-scale="2"
     :magnetic-distance="200"
   />
-</template>`,
+\x3c/template>`,
   },
 ];
 

@@ -16,7 +16,7 @@ const tabs = [
       darkColorB: '#1a1a4e',
       darkColorC: '#6366f1',
     },
-    code: `<ClosingPlasma darkColorA="#0a0a1e" darkColorB="#1a1a4e" darkColorC="#6366f1" class="h-[400px]" />`,
+    code: `<ClosingPlasma dark-color-a="#0a0a1e" dark-color-b="#1a1a4e" dark-color-c="#6366f1" class="h-[400px]" />`,
   },
   {
     label: 'High Turbulence',

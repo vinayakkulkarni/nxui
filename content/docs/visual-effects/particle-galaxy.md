@@ -17,8 +17,8 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/particle-galaxy.json"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| particleCount | `number` | `1500` | Number of particles to render. |
-| color | `string` | `'#8b5cf6'` | Color of the particles. |
-| mouseInfluence | `number` | `0.3` | Strength of mouse interaction (0-1). |
-| speed | `number` | `0.5` | Animation speed multiplier. |
-| class | `string` | - | Additional CSS classes for the container. |
+| `particle-count` | `number` | `1500` | Number of particles to render |
+| `color` | `string` | `'#8b5cf6'` | Color of the particles |
+| `mouse-influence` | `number` | `0.3` | Strength of mouse interaction (0-1) |
+| `speed` | `number` | `0.5` | Animation speed multiplier |
+| `class` | `string` | — | Additional CSS classes for the container |

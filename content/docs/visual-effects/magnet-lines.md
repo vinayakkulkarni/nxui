@@ -17,8 +17,8 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/magnet-lines.json"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| lineCount | `number` | `40` | Number of vertical lines to render. |
-| lineColor | `string` | `'currentColor'` | Color of the lines. |
-| lineWidth | `number` | `1` | Width of each line in pixels. |
-| magnetStrength | `number` | `0.5` | Strength of the magnetic effect (0-1). |
-| class | `string` | - | Additional CSS classes for the container. |
+| `line-count` | `number` | `40` | Number of vertical lines to render |
+| `line-color` | `string` | `'currentColor'` | Color of the lines |
+| `line-width` | `number` | `1` | Width of each line in pixels |
+| `magnet-strength` | `number` | `0.5` | Strength of the magnetic effect (0-1) |
+| `class` | `string` | — | Additional CSS classes for the container |

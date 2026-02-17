@@ -26,10 +26,10 @@ Focus follows mouse hover instead of auto-cycling.
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| sentence | `string` | `'True Focus'` | The text content to display and animate through. |
-| manualMode | `boolean` | `false` | If true, focus follows mouse hover. If false, it auto-cycles. |
-| blurAmount | `number` | `5` | The blur radius (in px) for non-focused words. |
-| borderColor | `string` | `'green'` | Color of the focus bracket border. |
-| glowColor | `string` | `'rgba(0, 255, 0, 0.6)'` | Color of the focus bracket glow/shadow. |
-| animationDuration | `number` | `0.5` | Duration of the focus transition in seconds. |
-| pauseBetweenAnimations | `number` | `1` | Pause time in seconds between auto-cycle steps. |
+| `sentence` | `string` | `'True Focus'` | The text content to display and animate through |
+| `manual-mode` | `boolean` | `false` | If true, focus follows mouse hover. If false, it auto-cycles |
+| `blur-amount` | `number` | `5` | The blur radius (in px) for non-focused words |
+| `border-color` | `string` | `'green'` | Color of the focus bracket border |
+| `glow-color` | `string` | `'rgba(0, 255, 0, 0.6)'` | Color of the focus bracket glow/shadow |
+| `animation-duration` | `number` | `0.5` | Duration of the focus transition in seconds |
+| `pause-between-animations` | `number` | `1` | Pause time in seconds between auto-cycle steps |

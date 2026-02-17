@@ -4,6 +4,7 @@ import FlightStatusCardLight from '@registry/new-york/FlightStatusCard/FlightSta
 
 <template>
   <ComponentDemo
+    class="min-h-0 p-4"
     :code="`<script setup lang=&quot;ts&quot;>
   import FlightStatusCardLight from '~/components/ui/FlightStatusCard/FlightStatusCardLight.vue';
 </script>

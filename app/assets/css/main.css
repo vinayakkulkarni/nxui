@@ -168,111 +168,119 @@
   }
 }
 
-/* Prose typography for @nuxt/content rendered markdown */
-main h1 {
-  @apply text-4xl md:text-5xl font-bold tracking-tight mb-4;
-}
+@layer base {
+  main h1 {
+    @apply text-4xl md:text-5xl font-bold tracking-tight mb-4;
+  }
 
-main h2 {
-  @apply text-2xl font-semibold tracking-tight mt-12 mb-4 pb-2 border-b border-border/50 scroll-mt-20;
-}
+  main h2 {
+    @apply text-2xl font-semibold tracking-tight mt-12 mb-4 pb-2 border-b border-border/50 scroll-mt-20;
+  }
 
-main h2 a {
-  @apply no-underline text-foreground hover:text-foreground;
-}
+  main h2 a {
+    @apply no-underline text-foreground hover:text-foreground;
+  }
 
-main h3 {
-  @apply text-xl font-semibold tracking-tight mt-8 mb-3 scroll-mt-20;
-}
+  main h3 {
+    @apply text-xl font-semibold tracking-tight mt-8 mb-3 scroll-mt-20;
+  }
 
-main h3 a {
-  @apply no-underline text-foreground hover:text-foreground;
-}
+  main h3 a {
+    @apply no-underline text-foreground hover:text-foreground;
+  }
 
-main h4 {
-  @apply text-lg font-semibold tracking-tight mt-6 mb-2;
-}
+  main h4 {
+    @apply text-lg font-semibold tracking-tight mt-6 mb-2;
+  }
 
-main p {
-  @apply leading-7 text-muted-foreground mb-4;
-}
+  main p {
+    @apply leading-7 text-muted-foreground mb-4;
+  }
 
-main > div > p:first-child {
-  @apply text-lg leading-relaxed text-muted-foreground max-w-2xl;
-}
+  main > div > p:first-child {
+    @apply text-lg leading-relaxed text-muted-foreground max-w-2xl;
+  }
 
-main ul {
-  @apply my-4 ml-6 list-disc space-y-2;
-}
+  main ul {
+    @apply my-4 ml-6 list-disc space-y-2;
+  }
 
-main ol {
-  @apply my-4 ml-6 list-decimal space-y-2;
-}
+  main ol {
+    @apply my-4 ml-6 list-decimal space-y-2;
+  }
 
-main li {
-  @apply text-muted-foreground leading-7;
-}
+  main li {
+    @apply text-muted-foreground leading-7;
+  }
 
-main li strong {
-  @apply text-foreground;
-}
+  main li strong {
+    @apply text-foreground;
+  }
 
-main :is(p, li, td, blockquote) a:not([class]) {
-  @apply text-foreground underline underline-offset-4 hover:text-foreground/80 transition-colors;
-}
+  main :is(p, li, td, blockquote) a:not([class]) {
+    @apply text-foreground underline underline-offset-4 hover:text-foreground/80 transition-colors;
+  }
 
-main code:not(pre code) {
-  @apply text-xs bg-muted px-1.5 py-0.5 rounded font-mono text-foreground;
-}
+  main code:not(pre code) {
+    @apply text-xs bg-muted px-1.5 py-0.5 rounded font-mono text-foreground;
+  }
 
-main blockquote {
-  @apply border-l-2 border-border pl-6 italic text-muted-foreground my-6;
-}
+  main blockquote {
+    @apply border-l-2 border-border pl-6 italic text-muted-foreground my-6;
+  }
 
-main hr {
-  @apply my-8 border-border/50;
-}
+  main hr {
+    @apply my-8 border-border/50;
+  }
 
-main table {
-  @apply w-full text-left text-sm my-6 overflow-hidden rounded-lg border border-separate;
-  border-spacing: 0;
-}
+  main table {
+    @apply w-full text-left text-sm my-6 overflow-hidden rounded-lg border border-separate;
+    border-spacing: 0;
+  }
 
-main thead {
-  @apply bg-muted/50;
-}
+  main thead {
+    @apply bg-muted/50;
+  }
 
-main th {
-  @apply h-12 px-4 text-left align-middle font-medium text-muted-foreground;
-}
+  main th {
+    @apply h-12 px-4 text-left align-middle font-medium text-muted-foreground;
+  }
 
-main td {
-  @apply p-4 align-middle text-muted-foreground;
-}
+  main td {
+    @apply p-4 align-middle text-muted-foreground;
+  }
 
-main tr {
-  @apply border-b transition-colors hover:bg-muted/50;
-}
+  main tr {
+    @apply border-b transition-colors hover:bg-muted/50;
+  }
 
-main tbody tr:last-child {
-  @apply border-0;
-}
+  main tbody tr:last-child {
+    @apply border-0;
+  }
 
-main pre {
-  @apply relative rounded-xl text-sm w-full border border-border overflow-hidden bg-zinc-100 dark:bg-zinc-900/50 my-4;
-}
+  main pre {
+    @apply relative rounded-xl text-sm w-full border border-border overflow-hidden bg-zinc-100 dark:bg-zinc-900/50 my-4;
+  }
 
-main pre code {
-  @apply block overflow-x-auto p-4;
-}
+  main pre code {
+    @apply block overflow-x-auto p-4;
+  }
 
-/* Reset pre styles inside ComponentDemo (not-prose) */
-main .not-prose pre {
-  @apply rounded-none border-0 bg-transparent m-0;
-}
+  main .not-prose :is(h1, h2, h3, h4) {
+    @apply border-0 m-0 p-0 scroll-m-0;
+  }
 
-main .not-prose pre code {
-  @apply p-0;
+  main .not-prose :is(p, ul, ol, li) {
+    @apply m-0 p-0;
+  }
+
+  main .not-prose pre {
+    @apply rounded-none border-0 bg-transparent m-0;
+  }
+
+  main .not-prose pre code {
+    @apply p-0;
+  }
 }
 
 /* Shiki code block styles */

@@ -19,8 +19,8 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/github-calendar.json"
 |------|------|---------|-------------|
 | `username` | `string` | - | GitHub username to fetch contributions for (required) |
 | `variant` | `'default' \| 'city-lights' \| 'minimal'` | `'default'` | Visual style variant |
-| `colorSchema` | `'green' \| 'blue' \| 'purple' \| 'orange' \| 'gray'` | `'green'` | Color scheme for cells |
-| `showTotal` | `boolean` | `true` | Show total contributions header |
+| `color-schema` | `'green' \| 'blue' \| 'purple' \| 'orange' \| 'gray'` | `'green'` | Color scheme for cells |
+| `show-total` | `boolean` | `true` | Show total contributions header |
 | `shape` | `'square' \| 'rounded' \| 'circle' \| 'squircle'` | `'rounded'` | Cell shape |
-| `glowIntensity` | `number` | `5` | Glow intensity for city-lights variant |
+| `glow-intensity` | `number` | `5` | Glow intensity for city-lights variant |
 | `class` | `string` | `''` | Additional CSS classes |

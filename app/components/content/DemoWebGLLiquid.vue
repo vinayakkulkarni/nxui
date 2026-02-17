@@ -18,7 +18,7 @@ const tabs = [
       title: 'Emerald',
       subtitle: 'Flow',
     },
-    code: `<WebGLLiquid colorDeep="#020b06" colorMid="#065f46" colorHighlight="#6ee7b7" title="Emerald" subtitle="Flow" />`,
+    code: `<WebGLLiquid color-deep="#020b06" color-mid="#065f46" color-highlight="#6ee7b7" title="Emerald" subtitle="Flow" />`,
   },
   {
     label: 'Sunset',
@@ -29,7 +29,7 @@ const tabs = [
       title: 'Warm',
       subtitle: 'Glow',
     },
-    code: `<WebGLLiquid colorDeep="#1a0505" colorMid="#c2410c" colorHighlight="#fbbf24" title="Warm" subtitle="Glow" />`,
+    code: `<WebGLLiquid color-deep="#1a0505" color-mid="#c2410c" color-highlight="#fbbf24" title="Warm" subtitle="Glow" />`,
   },
 ];
 

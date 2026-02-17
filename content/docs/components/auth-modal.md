@@ -17,7 +17,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/auth-modal.json"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `triggerText` | `string` | `'Sign up / Sign in'` | Text on the trigger button |
+| `trigger-text` | `string` | `'Sign up / Sign in'` | Text on the trigger button |
 | `class` | `string` | `''` | Additional CSS classes for the trigger button |
 
 ## Events

@@ -39,10 +39,10 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/text-animate.json"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `string` | - | The text content to animate. |
-| animation | `AnimationType` | `'fade-in'` | fade-in, blur-in, blur-in-up, blur-in-down, slide-up, slide-down, slide-left, slide-right, scale-up, scale-down |
-| by | `'text' \| 'word' \| 'character'` | `'word'` | How to split the text. |
-| startOnView | `boolean` | `true` | Whether to start animation when element enters viewport. |
-| once | `boolean` | `true` | Whether to run animation only once. |
-| duration | `number` | `0.3` | Duration of the animation per segment in seconds. |
-| delay | `number` | `0` | Delay before starting the animation in seconds. |
+| `text` | `string` | — | The text content to animate |
+| `animation` | `AnimationType` | `'fade-in'` | fade-in, blur-in, blur-in-up, blur-in-down, slide-up, slide-down, slide-left, slide-right, scale-up, scale-down |
+| `by` | `'text' \| 'word' \| 'character'` | `'word'` | How to split the text |
+| `start-on-view` | `boolean` | `true` | Whether to start animation when element enters viewport |
+| `once` | `boolean` | `true` | Whether to run animation only once |
+| `duration` | `number` | `0.3` | Duration of the animation per segment in seconds |
+| `delay` | `number` | `0` | Delay before starting the animation in seconds |

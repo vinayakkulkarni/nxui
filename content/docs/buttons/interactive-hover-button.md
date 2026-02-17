@@ -17,4 +17,4 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/interactive-hover-button.json
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| class | `string` | - | Additional CSS classes. |
+| `class` | `string` | — | Additional CSS classes |

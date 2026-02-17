@@ -17,7 +17,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/matrix-rain.json"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| color | `string` | `'#0f0'` | Color of the falling characters. |
-| fontSize | `number` | `14` | Font size of the characters in pixels. |
-| speed | `number` | `1` | Animation speed multiplier. |
-| class | `string` | - | Additional CSS classes for the container. |
+| `color` | `string` | `'#0f0'` | Color of the falling characters |
+| `font-size` | `number` | `14` | Font size of the characters in pixels |
+| `speed` | `number` | `1` | Animation speed multiplier |
+| `class` | `string` | — | Additional CSS classes for the container |

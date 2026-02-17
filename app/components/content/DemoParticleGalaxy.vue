@@ -13,13 +13,13 @@ const tabs = [
   {
     label: 'Default',
     props: {},
-    code: `<script setup lang="ts">
+    code: `\x3cscript setup lang="ts">
   import ParticleGalaxyRenderer from '~/components/ui/ParticleGalaxy/ParticleGalaxyRenderer.vue';
-</script>
+\x3c/script>
 
-<template>
-  <ParticleGalaxyRenderer class="h-[400px] w-full" />
-</template>`,
+\x3ctemplate>
+  \x3cParticleGalaxyRenderer class="h-[400px] w-full" />
+\x3c/template>`,
   },
   {
     label: 'Custom Colors',

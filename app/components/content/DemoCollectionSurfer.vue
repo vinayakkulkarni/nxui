@@ -26,7 +26,7 @@ const variants: {
   {
     label: 'Magnetic',
     variant: 'magnetic',
-    code: `<script setup lang="ts">
+    code: `\x3cscript setup lang="ts">
   import CollectionSurfer from '~/components/ui/CollectionSurfer.vue';
   import type { CollectionSurferItem } from '~/types/components';
 
@@ -35,16 +35,16 @@ const variants: {
     { id: 2, image: '/images/heritage-02.jpg', title: 'HERITAGE 02' },
     // ...
   ];
-</script>
+\x3c/script>
 
-<template>
-  <CollectionSurfer :items="items" variant="magnetic" class="h-[600px]" />
-</template>`,
+\x3ctemplate>
+  \x3cCollectionSurfer :items="items" variant="magnetic" class="h-[600px]" />
+\x3c/template>`,
   },
   {
     label: 'Uplift',
     variant: 'uplift',
-    code: `<script setup lang="ts">
+    code: `\x3cscript setup lang="ts">
   import CollectionSurfer from '~/components/ui/CollectionSurfer.vue';
   import type { CollectionSurferItem } from '~/types/components';
 
@@ -52,16 +52,16 @@ const variants: {
     { id: 1, image: '/images/heritage-01.jpg', title: 'HERITAGE 01' },
     // ...
   ];
-</script>
+\x3c/script>
 
-<template>
-  <CollectionSurfer :items="items" variant="uplift" class="h-[600px]" />
-</template>`,
+\x3ctemplate>
+  \x3cCollectionSurfer :items="items" variant="uplift" class="h-[600px]" />
+\x3c/template>`,
   },
   {
     label: 'Simple',
     variant: 'simple',
-    code: `<script setup lang="ts">
+    code: `\x3cscript setup lang="ts">
   import CollectionSurfer from '~/components/ui/CollectionSurfer.vue';
   import type { CollectionSurferItem } from '~/types/components';
 
@@ -69,11 +69,11 @@ const variants: {
     { id: 1, image: '/images/heritage-01.jpg', title: 'HERITAGE 01' },
     // ...
   ];
-</script>
+\x3c/script>
 
-<template>
-  <CollectionSurfer :items="items" variant="simple" class="h-[600px]" />
-</template>`,
+\x3ctemplate>
+  \x3cCollectionSurfer :items="items" variant="simple" class="h-[600px]" />
+\x3c/template>`,
   },
 ];
 

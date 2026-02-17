@@ -22,9 +22,9 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/dither-prism-hero.json"
 | `color2` | `string` | `'#6366f1'` | Secondary color (mid) |
 | `color3` | `string` | `'#ec4899'` | Tertiary color (light/accent) |
 | `speed` | `number` | `1` | Animation speed multiplier |
-| `ditherIntensity` | `number` | `0.15` | Dithering intensity (0–1) |
-| `prismIntensity` | `number` | `0.5` | Prismatic refraction intensity (0–1) |
-| `particleCount` | `number` | `50` | Number of floating particles |
-| `showParticles` | `boolean` | `true` | Show floating particles |
-| `particleColor` | `string` | `'#ffffff'` | Particle color |
+| `dither-intensity` | `number` | `0.15` | Dithering intensity (0–1) |
+| `prism-intensity` | `number` | `0.5` | Prismatic refraction intensity (0–1) |
+| `particle-count` | `number` | `50` | Number of floating particles |
+| `show-particles` | `boolean` | `true` | Show floating particles |
+| `particle-color` | `string` | `'#ffffff'` | Particle color |
 | `class` | `string` | — | Additional CSS classes |

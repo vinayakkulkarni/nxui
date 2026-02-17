@@ -177,6 +177,22 @@ All demo components use `<ComponentDemo>`. Pass a `code` prop for the two-part c
 
 This is an EXACT replica of componentry.fun but for Vue. Port React/Framer Motion → Vue/motion-v. No React.
 
+### Rule 15: kebab-case Props in Templates
+
+Always use kebab-case for multi-word props in `<template>` and in `code` snippet strings shown to users. Vue auto-maps kebab-case to camelCase props.
+
+```vue
+<!-- ❌ WRONG -->
+<ClosingPlasma darkColorA="#0a0a1e" />
+<WebGLLiquid colorDeep="#020b06" colorMid="#065f46" />
+
+<!-- ✅ CORRECT -->
+<ClosingPlasma dark-color-a="#0a0a1e" />
+<WebGLLiquid color-deep="#020b06" color-mid="#065f46" />
+```
+
+This applies everywhere: live `<template>` usage, `code` prop strings in demos, and documentation examples. `defineProps` in `<script setup>` stays camelCase — only the template/HTML side uses kebab-case.
+
 ---
 
 ## CSS & Styling

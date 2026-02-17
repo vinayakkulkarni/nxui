@@ -17,7 +17,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/testimonial-marquee.json"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `pauseOnHover` | `boolean` | `true` | Pause animation when hovering |
+| `pause-on-hover` | `boolean` | `true` | Pause animation when hovering |
 | `speed` | `number` | `40` | Animation speed in pixels per second |
 | `direction` | `'left' \| 'right'` | `'left'` | Direction of marquee animation |
 | `class` | `string` | `''` | Additional CSS classes for styling |

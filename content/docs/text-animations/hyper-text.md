@@ -17,7 +17,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/hyper-text.json"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| text | `string` | - | The text content to be animated. |
-| duration | `number` | `800` | Total animation duration in milliseconds. |
-| animateOnLoad | `boolean` | `true` | Whether to start the animation automatically on mount. |
-| class | `string` | - | Additional CSS classes for styling. |
+| `text` | `string` | — | The text content to be animated |
+| `duration` | `number` | `800` | Total animation duration in milliseconds |
+| `animate-on-load` | `boolean` | `true` | Whether to start the animation automatically on mount |
+| `class` | `string` | — | Additional CSS classes for styling |

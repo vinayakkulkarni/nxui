@@ -17,8 +17,8 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/spotlight-card.json"
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `spotlightColor` | `string` | `'rgba(120, 119, 198, 0.3)'` | Color of the spotlight effect |
-| `borderWidth` | `number` | `1` | Width of the border in pixels |
-| `borderRadius` | `number` | `16` | Border radius in pixels |
-| `glowIntensity` | `number` | `0.15` | Intensity of the glow effect |
+| `spotlight-color` | `string` | `'rgba(120, 119, 198, 0.3)'` | Color of the spotlight effect |
+| `border-width` | `number` | `1` | Width of the border in pixels |
+| `border-radius` | `number` | `16` | Border radius in pixels |
+| `glow-intensity` | `number` | `0.15` | Intensity of the glow effect |
 | `class` | `string` | `''` | Additional CSS classes for styling |

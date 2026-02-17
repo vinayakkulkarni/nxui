@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { useMouseInElement } from '@vueuse/core';
+  import { motion } from 'motion-v';
   import type { ShowcaseCardProps } from '~/types/components';
   import { cn } from '~/lib/utils';
 
@@ -15,6 +16,9 @@
   const emit = defineEmits<{
     ctaClick: [];
   }>();
+
+  const colorMode = useColorMode();
+  const isDark = computed(() => colorMode.value === 'dark');
 
   const cardRef = ref<HTMLElement>();
   const isHovered = ref(false);
@@ -57,8 +61,11 @@
   const glowStyle = computed(() => {
     const gx = (mouseNormX.value + 0.5) * 100;
     const gy = (mouseNormY.value + 0.5) * 100;
+    const glowColor = isDark.value
+      ? 'rgba(255,255,255,0.08)'
+      : 'rgba(0,0,0,0.04)';
     return {
-      background: `radial-gradient(circle at ${gx}% ${gy}%, rgba(255,255,255,0.08) 0%, transparent 50%)`,
+      background: `radial-gradient(circle at ${gx}% ${gy}%, ${glowColor} 0%, transparent 50%)`,
       opacity: isHovered.value ? 1 : 0,
       transition: 'opacity 0.3s',
     };
@@ -69,7 +76,7 @@
   <div
     ref="cardRef"
     :class="cn(
-      'relative w-full max-w-[400px] cursor-pointer select-none overflow-hidden rounded-3xl bg-white dark:bg-neutral-950 shadow-2xl shadow-black/10 dark:shadow-black/20 transition-shadow duration-300 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]',
+      'relative w-full max-w-[400px] cursor-pointer select-none overflow-hidden rounded-3xl bg-neutral-50 ring-1 ring-neutral-200/80 shadow-xl shadow-neutral-300/40 transition-all duration-300 hover:shadow-2xl hover:shadow-neutral-400/30 dark:bg-neutral-950 dark:ring-white/[0.06] dark:shadow-black/40 dark:hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]',
       props.class,
     )"
     :style="cardStyle"
@@ -86,9 +93,9 @@
     <div class="relative aspect-[4/3] overflow-hidden">
       <div
         v-if="tagline"
-        class="absolute left-4 top-4 z-20 sm:left-6 sm:top-6"
+        class="absolute left-4 top-4 z-20 drop-shadow-md sm:left-6 sm:top-6"
       >
-        <span class="text-sm font-medium tracking-tight text-neutral-900/90 dark:text-white/90 sm:text-base">
+        <span class="text-sm font-medium tracking-tight text-white/90 sm:text-base">
           {{ tagline }}
         </span>
       </div>
@@ -101,12 +108,12 @@
         >
       </div>
 
-      <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-neutral-950 via-transparent to-transparent opacity-60" />
+      <div class="absolute inset-0 bg-gradient-to-t from-neutral-50 via-neutral-50/20 to-transparent opacity-90 dark:from-neutral-950 dark:via-transparent dark:opacity-60" />
     </div>
 
     <!-- Content section -->
     <div class="relative z-10 -mt-8 px-4 pb-4 sm:px-6 sm:pb-6">
-      <h2 class="mb-2 text-2xl font-medium leading-tight tracking-tight text-neutral-900 dark:text-white sm:mb-3 sm:text-3xl lg:text-4xl">
+      <h2 class="mb-2 border-0 text-2xl font-medium leading-tight tracking-tight text-neutral-900 dark:text-white sm:mb-3 sm:text-3xl lg:text-4xl">
         {{ heading }}
       </h2>
 
@@ -117,36 +124,62 @@
         {{ description }}
       </p>
 
-      <button
+      <component
         v-if="ctaText"
-        class="relative overflow-hidden rounded-full border border-neutral-300/50 dark:border-neutral-700/50 bg-neutral-100/80 dark:bg-neutral-800/80 px-4 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 transition-colors duration-300 hover:scale-105 hover:border-neutral-400/80 dark:hover:border-neutral-600/80 active:scale-95 sm:px-5 sm:py-2.5"
+        :is="motion.button"
+        class="relative overflow-hidden rounded-full border border-neutral-300/50 bg-neutral-100/80 px-4 py-2 text-sm font-medium text-neutral-700 transition-colors duration-300 hover:border-neutral-400/80 dark:border-neutral-700/50 dark:bg-neutral-800/80 dark:text-neutral-200 dark:hover:border-neutral-600/80 sm:px-5 sm:py-2.5"
+        :while-hover="{ scale: 1.05 }"
+        :while-tap="{ scale: 0.98 }"
         @click="emit('ctaClick')"
       >
-        {{ ctaText }}
-      </button>
+        <component
+          :is="motion.span"
+          class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-black/[0.06] to-transparent dark:via-white/10"
+          :animate="isHovered ? { translateX: '200%' } : { translateX: '-100%' }"
+          :transition="{ duration: 0.6, ease: 'easeInOut' }"
+        />
+        <span class="relative z-10">{{ ctaText }}</span>
+      </component>
     </div>
 
     <!-- Footer section -->
     <div
       v-if="brandName || services.length > 0"
-      class="flex flex-wrap items-center justify-between gap-2 border-t border-neutral-200/50 dark:border-neutral-800/50 px-4 py-4 sm:px-6 sm:py-5"
+      class="flex flex-wrap items-center justify-between gap-2 border-t border-neutral-200 px-4 py-4 dark:border-neutral-800/50 sm:px-6 sm:py-5"
     >
-      <span
+      <component
         v-if="brandName"
-        class="text-xs font-medium text-neutral-500 dark:text-neutral-400 sm:text-sm"
+        :is="motion.span"
+        class="text-xs font-medium text-neutral-500 sm:text-sm cursor-default transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
+        :while-hover="{ scale: 1.02 }"
+        :transition="{ duration: 0.2 }"
       >
         {{ brandName }}
-      </span>
+      </component>
 
       <div
         v-if="services.length > 0"
         class="flex flex-wrap items-center gap-2 sm:gap-3"
       >
         <template v-for="(service, index) in services" :key="service">
-          <span class="text-xs text-neutral-400 dark:text-neutral-500 sm:text-sm">{{ service }}</span>
-          <span v-if="index < services.length - 1" class="text-neutral-300 dark:text-neutral-600">
+          <component
+            :is="motion.span"
+            class="text-xs text-neutral-400 sm:text-sm cursor-default transition-colors hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white"
+            :while-hover="{ scale: 1.05 }"
+            :transition="{ duration: 0.2 }"
+          >
+            {{ service }}
+          </component>
+          <component
+            v-if="index < services.length - 1"
+            :is="motion.span"
+            class="inline-block text-neutral-300 dark:text-neutral-600"
+            :initial="{ rotate: 0 }"
+            :while-hover="{ rotate: 90 }"
+            :transition="{ duration: 0.3 }"
+          >
             &#10022;
-          </span>
+          </component>
         </template>
       </div>
     </div>
@@ -156,8 +189,8 @@
       class="pointer-events-none absolute inset-0 rounded-3xl transition-shadow duration-300"
       :style="{
         boxShadow: isHovered
-          ? 'inset 0 0 0 1px rgba(255,255,255,0.1)'
-          : 'inset 0 0 0 1px rgba(255,255,255,0.05)',
+          ? `inset 0 0 0 1px ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.06)'}`
+          : `inset 0 0 0 1px ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)'}`,
       }"
     />
   </div>
