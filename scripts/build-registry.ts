@@ -558,6 +558,31 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'OGL-powered curved image gallery with drag/scroll navigation and wave deformation.',
     deps: ['ogl', '@vueuse/core'],
   },
+  'counter': {
+    title: 'Counter',
+    description: 'Animated number counter with spring-physics digit rolling and gradient fade overlays.',
+    deps: [],
+  },
+  'animated-list': {
+    title: 'Animated List',
+    description: 'Scroll-triggered list with scale entrance, keyboard navigation, and gradient edges.',
+    deps: ['@vueuse/core'],
+  },
+  'folder': {
+    title: 'Folder',
+    description: 'Pure CSS 3D folder with open/close animation and magnetic paper hover.',
+    deps: [],
+  },
+  'glass-icons': {
+    title: 'Glass Icons',
+    description: 'Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover.',
+    deps: [],
+  },
+  'gooey-nav': {
+    title: 'Gooey Nav',
+    description: 'Particle-burst navigation with SVG gooey filter effect and spring animation.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

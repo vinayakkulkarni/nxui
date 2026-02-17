@@ -626,6 +626,36 @@
       "type": "registry:ui",
       "title": "Circular Gallery",
       "description": "OGL-powered curved image gallery with drag/scroll navigation and wave deformation."
+    },
+    {
+      "name": "counter",
+      "type": "registry:ui",
+      "title": "Counter",
+      "description": "Animated number counter with spring-physics digit rolling and gradient fade overlays."
+    },
+    {
+      "name": "animated-list",
+      "type": "registry:ui",
+      "title": "Animated List",
+      "description": "Scroll-triggered list with scale entrance, keyboard navigation, and gradient edges."
+    },
+    {
+      "name": "folder",
+      "type": "registry:ui",
+      "title": "Folder",
+      "description": "Pure CSS 3D folder with open/close animation and magnetic paper hover."
+    },
+    {
+      "name": "glass-icons",
+      "type": "registry:ui",
+      "title": "Glass Icons",
+      "description": "Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover."
+    },
+    {
+      "name": "gooey-nav",
+      "type": "registry:ui",
+      "title": "Gooey Nav",
+      "description": "Particle-burst navigation with SVG gooey filter effect and spring animation."
     }
   ]
 }

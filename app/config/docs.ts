@@ -61,6 +61,10 @@ export const docsNav: NavGroup[] = [
   {
     title: 'Components',
     items: [
+      {
+        title: 'Animated List',
+        path: '/docs/components/animated-list',
+      },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
       { title: 'Carousel', path: '/docs/components/carousel' },
@@ -73,6 +77,7 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/collection-surfer',
       },
       { title: 'Command Menu', path: '/docs/components/command-menu' },
+      { title: 'Counter', path: '/docs/components/counter' },
       { title: 'Decay Card', path: '/docs/components/decay-card' },
       {
         title: 'Elastic Slider',
@@ -90,7 +95,10 @@ export const docsNav: NavGroup[] = [
         title: 'Flying Posters',
         path: '/docs/components/flying-posters',
       },
+      { title: 'Folder', path: '/docs/components/folder' },
       { title: 'GitHub Calendar', path: '/docs/components/github-calendar' },
+      { title: 'Glass Icons', path: '/docs/components/glass-icons' },
+      { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },
       { title: 'Pixel Card', path: '/docs/components/pixel-card' },
