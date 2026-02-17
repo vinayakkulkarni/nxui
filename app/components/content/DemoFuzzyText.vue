@@ -1,0 +1,19 @@
+<script setup lang="ts">
+  import FuzzyText from '@registry/new-york/FuzzyText/FuzzyText.vue';
+</script>
+
+<template>
+  <ComponentDemo
+    :code="`<script setup lang=&quot;ts&quot;>
+  import FuzzyText from '~/components/ui/FuzzyText/FuzzyText.vue';
+</script>
+
+<template>
+  <FuzzyText text=&quot;Fuzzy&quot; :base-intensity=&quot;0.2&quot; :hover-intensity=&quot;0.6&quot; />
+</template>`"
+  >
+    <div class="flex h-[300px] w-full items-center justify-center overflow-hidden bg-background">
+      <FuzzyText text="Fuzzy" :base-intensity="0.2" :hover-intensity="0.6" />
+    </div>
+  </ComponentDemo>
+</template>

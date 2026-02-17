@@ -162,6 +162,11 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    scrollbar-color: oklch(0.7 0 0) transparent;
+    scrollbar-width: thin;
+  }
+  .dark * {
+    scrollbar-color: oklch(0.3 0.005 270) transparent;
   }
   body {
     @apply bg-background text-foreground;

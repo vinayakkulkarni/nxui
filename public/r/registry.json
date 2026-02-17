@@ -176,6 +176,78 @@
       "type": "registry:ui",
       "title": "Pulsating Button",
       "description": "A button with a pulsating ring animation that draws attention."
+    },
+    {
+      "name": "glitch-text",
+      "type": "registry:ui",
+      "title": "Glitch Text",
+      "description": "RGB split and distortion glitch effect with jitter animations and optional hover trigger."
+    },
+    {
+      "name": "circular-text",
+      "type": "registry:ui",
+      "title": "Circular Text",
+      "description": "Characters positioned around a circle with continuous spin animation."
+    },
+    {
+      "name": "shuffle",
+      "type": "registry:ui",
+      "title": "Shuffle",
+      "description": "Random character shuffle that reveals text left-to-right."
+    },
+    {
+      "name": "shiny-text",
+      "type": "registry:ui",
+      "title": "Shiny Text",
+      "description": "A metallic sheen sweep effect across text with theme-aware gradients."
+    },
+    {
+      "name": "gradient-text",
+      "type": "registry:ui",
+      "title": "Gradient Text",
+      "description": "Animated flowing gradient across text with customizable colors and speed."
+    },
+    {
+      "name": "count-up",
+      "type": "registry:ui",
+      "title": "Count Up",
+      "description": "Animated number counter with easeOutExpo easing, triggered on scroll into view."
+    },
+    {
+      "name": "split-text",
+      "type": "registry:ui",
+      "title": "Split Text",
+      "description": "Staggered character or word entrance animation triggered on scroll into view."
+    },
+    {
+      "name": "blur-text",
+      "type": "registry:ui",
+      "title": "Blur Text",
+      "description": "Words or letters animate from blurred to clear with a staggered entrance."
+    },
+    {
+      "name": "rotating-text",
+      "type": "registry:ui",
+      "title": "Rotating Text",
+      "description": "Cycle through an array of text phrases with staggered character transitions."
+    },
+    {
+      "name": "text-type",
+      "type": "registry:ui",
+      "title": "Text Type",
+      "description": "Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor."
+    },
+    {
+      "name": "fuzzy-text",
+      "type": "registry:ui",
+      "title": "Fuzzy Text",
+      "description": "Canvas-based vibrating fuzzy text with horizontal displacement that intensifies on hover."
+    },
+    {
+      "name": "decrypted-text",
+      "type": "registry:ui",
+      "title": "Decrypted Text",
+      "description": "Hacker-style text decryption effect that scrambles characters before revealing the original text."
     }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "rotating-text",
+  "type": "registry:ui",
+  "title": "Rotating Text",
+  "description": "Cycle through an array of text phrases with staggered character transitions.",
+  "dependencies": [
+    "@vueuse/core",
+    "motion-v"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/RotatingText/RotatingText.vue",
+      "content": "<script setup lang=\"ts\">\n  import { useIntervalFn } from '@vueuse/core';\n  import { motion, AnimatePresence } from 'motion-v';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      texts: string[];\n      rotationInterval?: number;\n      staggerDuration?: number;\n      staggerFrom?: 'first' | 'last' | 'center';\n      loop?: boolean;\n      auto?: boolean;\n      splitBy?: 'characters' | 'words';\n      class?: string;\n    }>(),\n    {\n      rotationInterval: 2000,\n      staggerDuration: 0.03,\n      staggerFrom: 'first',\n      loop: true,\n      auto: true,\n      splitBy: 'characters',\n      class: '',\n    },\n  );\n\n  const currentIndex = ref(0);\n\n  function next() {\n    if (currentIndex.value === props.texts.length - 1) {\n      if (props.loop) currentIndex.value = 0;\n    } else {\n      currentIndex.value++;\n    }\n  }\n\n  if (props.auto) {\n    useIntervalFn(next, () => props.rotationInterval);\n  }\n\n  const elements = computed(() => {\n    const text = props.texts[currentIndex.value] ?? '';\n    if (props.splitBy === 'words') {\n      return text.split(' ').map((word, i, arr) => ({\n        characters: [word],\n        needsSpace: i < arr.length - 1,\n      }));\n    }\n    return text.split(' ').map((word, i, arr) => ({\n      characters: word.split(''),\n      needsSpace: i < arr.length - 1,\n    }));\n  });\n\n  function getStaggerDelay(index: number, total: number): number {\n    if (props.staggerFrom === 'last') {\n      return (total - 1 - index) * props.staggerDuration;\n    }\n    if (props.staggerFrom === 'center') {\n      const center = Math.floor(total / 2);\n      return Math.abs(center - index) * props.staggerDuration;\n    }\n    return index * props.staggerDuration;\n  }\n</script>\n\n<template>\n  <span :class=\"cn('flex flex-wrap whitespace-pre-wrap relative overflow-hidden', props.class)\">\n    <span class=\"sr-only\">{{ texts[currentIndex] }}</span>\n    <AnimatePresence mode=\"wait\">\n      <component\n        :is=\"motion.span\"\n        :key=\"currentIndex\"\n        class=\"flex flex-wrap whitespace-pre-wrap relative\"\n        aria-hidden=\"true\"\n      >\n        <span v-for=\"(word, wi) in elements\" :key=\"wi\" class=\"inline-flex\">\n          <component\n            :is=\"motion.span\"\n            v-for=\"(char, ci) in word.characters\"\n            :key=\"ci\"\n            class=\"inline-block\"\n            :initial=\"{ y: '100%', opacity: 0 }\"\n            :animate=\"{ y: 0, opacity: 1 }\"\n            :exit=\"{ y: '-120%', opacity: 0 }\"\n            :transition=\"{\n              type: 'spring',\n              damping: 25,\n              stiffness: 300,\n              delay: getStaggerDelay(\n                elements.slice(0, wi).reduce((s, w) => s + w.characters.length, 0) + ci,\n                elements.reduce((s, w) => s + w.characters.length, 0),\n              ),\n            }\"\n          >\n            {{ char }}\n          </component>\n          <span v-if=\"word.needsSpace\" class=\"whitespace-pre\">&nbsp;</span>\n        </span>\n      </component>\n    </AnimatePresence>\n  </span>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/RotatingText/RotatingText.vue"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "shiny-text",
+  "type": "registry:ui",
+  "title": "Shiny Text",
+  "description": "A metallic sheen sweep effect across text with theme-aware gradients.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/ShinyText/ShinyText.vue",
+      "content": "<script setup lang=\"ts\">\n  import { computed } from 'vue';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      text: string;\n      disabled?: boolean;\n      speed?: number;\n      class?: string;\n    }>(),\n    {\n      disabled: false,\n      speed: 5,\n      class: '',\n    },\n  );\n\n  const animationDuration = computed(() => `${props.speed}s`);\n</script>\n\n<template>\n  <span\n    :class=\"\n      cn(\n        'shiny-text inline-block bg-clip-text text-transparent bg-[length:200%_100%]',\n        !disabled && 'animate-[shiny-sweep_var(--shiny-speed)_linear_infinite]',\n        props.class,\n      )\n    \"\n    :style=\"{\n      '--shiny-speed': animationDuration,\n      backgroundImage:\n        'linear-gradient(120deg, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%)',\n    }\"\n  >\n    {{ text }}\n  </span>\n</template>\n\n<style scoped>\n  @keyframes shiny-sweep {\n    0% {\n      background-position: 200% 0;\n    }\n    100% {\n      background-position: -200% 0;\n    }\n  }\n\n  .shiny-text {\n    animation: shiny-sweep var(--shiny-speed, 5s) linear infinite;\n  }\n\n  :root {\n    .shiny-text {\n      background-image: linear-gradient(\n        120deg,\n        oklch(0.3 0 0) 40%,\n        oklch(0.7 0 0) 50%,\n        oklch(0.3 0 0) 60%\n      );\n    }\n  }\n\n  .dark .shiny-text {\n    background-image: linear-gradient(\n      120deg,\n      oklch(0.6 0 0) 40%,\n      oklch(1 0 0) 50%,\n      oklch(0.6 0 0) 60%\n    );\n  }\n</style>\n",
+      "type": "registry:ui",
+      "target": "components/ui/ShinyText/ShinyText.vue"
+    }
+  ]
+}

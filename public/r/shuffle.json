@@ -1,0 +1,18 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "shuffle",
+  "type": "registry:ui",
+  "title": "Shuffle",
+  "description": "Random character shuffle that reveals text left-to-right.",
+  "dependencies": [
+    "@vueuse/core"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/Shuffle/Shuffle.vue",
+      "content": "<script setup lang=\"ts\">\n  import { useIntervalFn } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      text: string;\n      duration?: number;\n      characters?: string;\n      class?: string;\n    }>(),\n    {\n      duration: 800,\n      characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*',\n      class: '',\n    },\n  );\n\n  const displayText = ref(\n    props.text.split('').map(() => randomChar()),\n  );\n  const revealed = ref(0);\n  const isComplete = ref(false);\n\n  function randomChar(): string {\n    return props.characters[\n      Math.floor(Math.random() * props.characters.length)\n    ];\n  }\n\n  const intervalMs = computed(() =>\n    Math.max(16, props.duration / (props.text.length * 6)),\n  );\n\n  const { pause } = useIntervalFn(\n    () => {\n      if (revealed.value >= props.text.length) {\n        isComplete.value = true;\n        pause();\n        return;\n      }\n\n      displayText.value = props.text.split('').map((char, i) => {\n        if (char === ' ') return ' ';\n        if (i < revealed.value) return props.text[i] ?? '';\n        return randomChar();\n      });\n\n      revealed.value += 0.3;\n    },\n    intervalMs,\n    { immediate: true },\n  );\n</script>\n\n<template>\n  <span :class=\"cn('inline-flex font-mono', props.class)\">\n    <span\n      v-for=\"(char, i) in displayText\"\n      :key=\"i\"\n      class=\"inline-block min-w-[0.1em] text-foreground transition-opacity duration-150\"\n      :class=\"i < revealed ? 'opacity-100' : 'opacity-70'\"\n    >\n      {{ char }}\n    </span>\n  </span>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/Shuffle/Shuffle.vue"
+    }
+  ]
+}

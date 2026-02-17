@@ -183,6 +183,66 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'A button with a pulsating ring animation that draws attention.',
     deps: [],
   },
+  'glitch-text': {
+    title: 'Glitch Text',
+    description: 'RGB split and distortion glitch effect with jitter animations and optional hover trigger.',
+    deps: [],
+  },
+  'circular-text': {
+    title: 'Circular Text',
+    description: 'Characters positioned around a circle with continuous spin animation.',
+    deps: [],
+  },
+  'shuffle': {
+    title: 'Shuffle',
+    description: 'Random character shuffle that reveals text left-to-right.',
+    deps: ['@vueuse/core'],
+  },
+  'shiny-text': {
+    title: 'Shiny Text',
+    description: 'A metallic sheen sweep effect across text with theme-aware gradients.',
+    deps: [],
+  },
+  'gradient-text': {
+    title: 'Gradient Text',
+    description: 'Animated flowing gradient across text with customizable colors and speed.',
+    deps: [],
+  },
+  'count-up': {
+    title: 'Count Up',
+    description: 'Animated number counter with easeOutExpo easing, triggered on scroll into view.',
+    deps: ['@vueuse/core'],
+  },
+  'split-text': {
+    title: 'Split Text',
+    description: 'Staggered character or word entrance animation triggered on scroll into view.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'blur-text': {
+    title: 'Blur Text',
+    description: 'Words or letters animate from blurred to clear with a staggered entrance.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'rotating-text': {
+    title: 'Rotating Text',
+    description: 'Cycle through an array of text phrases with staggered character transitions.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'text-type': {
+    title: 'Text Type',
+    description: 'Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor.',
+    deps: ['@vueuse/core'],
+  },
+  'fuzzy-text': {
+    title: 'Fuzzy Text',
+    description: 'Canvas-based vibrating fuzzy text with horizontal displacement that intensifies on hover.',
+    deps: ['@vueuse/core'],
+  },
+  'decrypted-text': {
+    title: 'Decrypted Text',
+    description: 'Hacker-style text decryption effect that scrambles characters before revealing the original text.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

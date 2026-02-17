@@ -8,13 +8,31 @@ export const docsNav: NavGroup[] = [
   {
     title: 'Text Animations',
     items: [
+      { title: 'Blur Text', path: '/docs/text-animations/blur-text' },
+      { title: 'Circular Text', path: '/docs/text-animations/circular-text' },
+      { title: 'Count Up', path: '/docs/text-animations/count-up' },
+      {
+        title: 'Decrypted Text',
+        path: '/docs/text-animations/decrypted-text',
+      },
+      { title: 'Fuzzy Text', path: '/docs/text-animations/fuzzy-text' },
+      { title: 'Glitch Text', path: '/docs/text-animations/glitch-text' },
+      { title: 'Gradient Text', path: '/docs/text-animations/gradient-text' },
       { title: 'Hyper Text', path: '/docs/text-animations/hyper-text' },
-      { title: 'Text Animate', path: '/docs/text-animations/text-animate' },
-      { title: 'True Focus', path: '/docs/text-animations/true-focus' },
+      {
+        title: 'Rotating Text',
+        path: '/docs/text-animations/rotating-text',
+      },
       {
         title: 'Scroll Based Velocity',
         path: '/docs/text-animations/scroll-based-velocity',
       },
+      { title: 'Shiny Text', path: '/docs/text-animations/shiny-text' },
+      { title: 'Shuffle', path: '/docs/text-animations/shuffle' },
+      { title: 'Split Text', path: '/docs/text-animations/split-text' },
+      { title: 'Text Animate', path: '/docs/text-animations/text-animate' },
+      { title: 'Text Type', path: '/docs/text-animations/text-type' },
+      { title: 'True Focus', path: '/docs/text-animations/true-focus' },
     ],
   },
   {
