@@ -15,7 +15,6 @@ export default defineNuxtConfig({
     ],
     '@vueuse/nuxt',
     'motion-v/nuxt',
-    'nuxt-og-image',
   ],
 
   colorMode: {
@@ -43,16 +42,6 @@ export default defineNuxtConfig({
 
   alias: {
     '@registry': '../registry',
-  },
-
-  ogImage: {
-    zeroRuntime: true,
-    fonts: ['Inter:400', 'Inter:700', 'Inter:800'],
-    defaults: {
-      component: 'NxuiDoc',
-      width: 1200,
-      height: 630,
-    },
   },
 
   site: {
