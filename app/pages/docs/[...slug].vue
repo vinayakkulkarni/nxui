@@ -32,9 +32,10 @@ useSeoMeta({
 });
 
 if (import.meta.server) {
-  defineOgImageComponent('NxuiDoc', {
-    title: page.value?.title,
-    description: page.value?.description,
+  defineOgImage({
+    component: 'NxuiDoc',
+    title: page.value?.title ?? 'nxui',
+    description: page.value?.description ?? '',
     category: formattedCategory,
   });
 }
