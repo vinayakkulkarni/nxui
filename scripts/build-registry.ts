@@ -463,6 +463,26 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Layered backdrop-filter blur gradient overlay for smooth edge fading.',
     deps: [],
   },
+  'glare-hover': {
+    title: 'Glare Hover',
+    description: 'A glare sweep animation on hover with configurable angle, size, and color.',
+    deps: [],
+  },
+  'ribbons': {
+    title: 'Ribbons',
+    description: 'Interactive OGL ribbon lines that follow mouse movement with spring physics.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'pixel-transition': {
+    title: 'Pixel Transition',
+    description: 'Pixelated grid transition that reveals a second content layer on hover.',
+    deps: [],
+  },
+  'electric-border': {
+    title: 'Electric Border',
+    description: 'Animated electric border with noise-driven distortion and glow effects.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

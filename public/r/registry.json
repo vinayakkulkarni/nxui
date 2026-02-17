@@ -512,6 +512,30 @@
       "type": "registry:ui",
       "title": "Gradual Blur",
       "description": "Layered backdrop-filter blur gradient overlay for smooth edge fading."
+    },
+    {
+      "name": "glare-hover",
+      "type": "registry:ui",
+      "title": "Glare Hover",
+      "description": "A glare sweep animation on hover with configurable angle, size, and color."
+    },
+    {
+      "name": "ribbons",
+      "type": "registry:ui",
+      "title": "Ribbons",
+      "description": "Interactive OGL ribbon lines that follow mouse movement with spring physics."
+    },
+    {
+      "name": "pixel-transition",
+      "type": "registry:ui",
+      "title": "Pixel Transition",
+      "description": "Pixelated grid transition that reveals a second content layer on hover."
+    },
+    {
+      "name": "electric-border",
+      "type": "registry:ui",
+      "title": "Electric Border",
+      "description": "Animated electric border with noise-driven distortion and glow effects."
     }
   ]
 }
