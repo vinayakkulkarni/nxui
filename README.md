@@ -1,22 +1,66 @@
-# nxui
+<div align="center">
 
-[![Deploy App](https://github.com/vinayakkulkarni/nxui/actions/workflows/deploy-app.yml/badge.svg)](https://github.com/vinayakkulkarni/nxui/actions/workflows/deploy-app.yml)
-[![Nuxt](https://img.shields.io/badge/Nuxt-4-00DC82?logo=nuxt.js&logoColor=white)](https://nuxt.com)
-[![Vue](https://img.shields.io/badge/Vue-3.5-4FC08D?logo=vue.js&logoColor=white)](https://vuejs.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![License](https://img.shields.io/github/license/vinayakkulkarni/nxui?color=blue)](./LICENSE)
+<h1>nxui</h1>
 
-Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. Copy, paste, and ship.
+<p>
+  <strong>Beautiful, interactive UI components you can copy and paste into your Vue apps.</strong>
+</p>
 
-## Features
+<p>
+  Crafted with Vue 3, Tailwind CSS, and motion-v. Open source. Free forever.
+</p>
 
-- **29 Animated Components** — Buttons, cards, visual effects, text animations, hero backgrounds
-- **Vue 3 + Nuxt 4** — Composition API with `<script setup>`, fully typed
-- **motion-v** — Production-grade animation library for smooth transitions
-- **Tailwind CSS v4** — Modern oklch color system with light/dark mode
-- **shadcn-vue CLI** — Copy and paste components into your project
-- **Cloudflare Pages** — Edge-deployed for fast global access
+<p>
+  <a href="https://nxui.geoql.in">Documentation</a> ·
+  <a href="https://nxui.geoql.in/docs/components">Components</a> ·
+  <a href="https://github.com/vinayakkulkarni/nxui/issues">Report Bug</a> ·
+  <a href="https://github.com/vinayakkulkarni/nxui/issues">Request Feature</a>
+</p>
+
+<p>
+  <a href="https://github.com/vinayakkulkarni/nxui/actions/workflows/deploy-app.yml">
+    <img src="https://github.com/vinayakkulkarni/nxui/actions/workflows/deploy-app.yml/badge.svg" alt="Deploy" />
+  </a>
+  <a href="https://nuxt.com">
+    <img src="https://img.shields.io/badge/Nuxt-4-00DC82?logo=nuxt.js&logoColor=white" alt="Nuxt" />
+  </a>
+  <a href="https://vuejs.org">
+    <img src="https://img.shields.io/badge/Vue-3.5-4FC08D?logo=vue.js&logoColor=white" alt="Vue" />
+  </a>
+  <a href="https://tailwindcss.com">
+    <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
+  </a>
+  <a href="https://www.typescriptlang.org">
+    <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+  </a>
+  <a href="./LICENSE">
+    <img src="https://img.shields.io/github/license/vinayakkulkarni/nxui?color=blue" alt="License" />
+  </a>
+</p>
+
+</div>
+
+---
+
+## Introduction
+
+nxui is a collection of beautifully designed, interactive UI components built with Vue 3 and Tailwind CSS. Just run the CLI command, add the component to your project, and start building.
+
+### Why nxui?
+
+- **Copy & Paste** — Not a dependency. You own the code.
+- **Interactive** — Cursor-following effects, 3D transforms, and smooth animations.
+- **Customizable** — Built with Tailwind CSS. Easy to modify.
+- **Dark Mode** — All components support light and dark modes.
+- **TypeScript** — Fully typed for the best developer experience.
+
+## Quick Start
+
+The fastest way to add components is using the shadcn-vue CLI:
+
+```bash
+npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
+```
 
 ## Components
 
@@ -76,56 +120,84 @@ Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. Cop
 
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Framework | [Nuxt 4](https://nuxt.com) |
-| UI | [Vue 3](https://vuejs.org) Composition API |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com) |
-| Animation | [motion-v](https://github.com/motiondivision/motion-vue) |
-| Utilities | [VueUse](https://vueuse.org) |
-| Content | [@nuxt/content](https://content.nuxt.com) |
-| Icons | [@nuxt/icon](https://nuxt.com/modules/icon) (Iconify) |
-| Headless UI | [reka-ui](https://reka-ui.com) |
-| 3D | [Three.js](https://threejs.org) |
-| Deploy | [Cloudflare Pages](https://pages.cloudflare.com) |
+- **Framework**: [Nuxt 4](https://nuxt.com)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com)
+- **Components**: [Vue 3](https://vuejs.org)
+- **Animation**: [motion-v](https://github.com/motiondivision/motion-vue)
+- **Package Manager**: [Bun](https://bun.sh)
 
 ## Development
 
+### Prerequisites
+
+- [Bun 1.3+](https://bun.sh)
+
+### Setup
+
 ```bash
+# Clone the repository
+git clone https://github.com/vinayakkulkarni/nxui.git
+cd nxui
+
 # Install dependencies
 bun install
 
-# Start dev server
+# Start development server
 bun run dev
-
-# Build for production
-bun run build
-
-# Lint
-bun run lint
-
-# Format
-bun run format
-
-# Build registry JSONs
-bun run build:registry
 ```
+
+### Available Scripts
+
+| Command | Description |
+|---------|-------------|
+| `bun run dev` | Start development server |
+| `bun run build` | Build for production |
+| `bun run lint` | Run oxlint + eslint |
+| `bun run format` | Format with oxfmt |
+| `bun run build:registry` | Build registry JSONs |
 
 ## Contributing
 
-1. Fork it ([https://github.com/vinayakkulkarni/nxui/fork](https://github.com/vinayakkulkarni/nxui/fork))
+We welcome contributions! Whether it's:
+
+- Reporting a bug
+- Submitting a fix
+- Proposing new features
+- Creating new components
+
+### How to Contribute
+
+1. Fork the repository
 2. Create your feature branch (`git checkout -b feat/new-component`)
 3. Commit your changes (`git commit -Sam 'feat: add component'`)
 4. Push to the branch (`git push origin feat/new-component`)
-5. Create a new [Pull Request](https://github.com/vinayakkulkarni/nxui/compare)
+5. Open a [Pull Request](https://github.com/vinayakkulkarni/nxui/compare)
 
-## Author
+### Component Guidelines
 
-**nxui** &copy; [Vinayak](https://vinayakkulkarni.dev), Released under the [MIT](./LICENSE) License.
+When creating new components:
 
-> [vinayakkulkarni.dev](https://vinayakkulkarni.dev) &middot; GitHub [@vinayakkulkarni](https://github.com/vinayakkulkarni) &middot; Twitter [@_vinayak_k](https://twitter.com/_vinayak_k)
+- Use TypeScript with proper type definitions
+- Support both light and dark modes
+- Include comprehensive props with sensible defaults
+- Add smooth transitions and animations
+- Write clear documentation with examples
+- Follow existing code style and patterns
 
-## Credits
+## License
 
-- [shadcn-vue](https://www.shadcn-vue.com) — Vue port of shadcn/ui
+MIT License — feel free to use these components in personal and commercial projects.
+
+See [LICENSE](./LICENSE) for more information.
+
+## Acknowledgments
+
+- [shadcn-vue](https://www.shadcn-vue.com/) — Vue port of shadcn/ui
 - [motion-v](https://github.com/motiondivision/motion-vue) — Vue animation library
+- [VueUse](https://vueuse.org/) — Collection of Vue composition utilities
+
+---
+
+<p align="center">
+  Made with care by <a href="https://vinayakkulkarni.dev">Vinayak Kulkarni</a>
+</p>
