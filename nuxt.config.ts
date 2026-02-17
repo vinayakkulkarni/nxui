@@ -5,6 +5,14 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/icon',
     '@nuxtjs/color-mode',
+    [
+      '@nuxtjs/plausible',
+      {
+        domain: 'nxui.geoql.in',
+        apiHost: 'https://analytics.geoql.in',
+        autoOutboundTracking: true,
+      },
+    ],
     '@vueuse/nuxt',
     'motion-v/nuxt',
   ],
