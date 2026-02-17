@@ -19,12 +19,12 @@
     )"
   >
     <span
-      class="inline-block translate-x-1 text-foreground transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0"
+      class="relative z-10 inline-block translate-x-1 text-foreground transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0"
     >
       <slot>Hover Me</slot>
     </span>
     <div
-      class="absolute inset-0 flex -translate-x-full items-center justify-center gap-2 text-primary-foreground transition-all duration-300 group-hover:translate-x-0"
+      class="absolute inset-0 z-10 flex -translate-x-full items-center justify-center gap-2 text-primary-foreground transition-all duration-300 group-hover:translate-x-0"
     >
       <Icon name="lucide:arrow-right" class="size-4" />
       <slot name="hover">
@@ -32,7 +32,7 @@
       </slot>
     </div>
     <span
-      class="absolute inset-0 -z-10 scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100"
+      class="absolute inset-0 z-0 scale-x-0 rounded-full bg-primary transition-transform duration-300 group-hover:scale-x-100"
     ></span>
   </button>
 </template>

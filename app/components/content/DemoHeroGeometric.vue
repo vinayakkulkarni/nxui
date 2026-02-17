@@ -30,7 +30,7 @@ function handleTabClick(index: number) {
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative w-full">
+    <div class="relative w-full overflow-hidden">
       <ClientOnly>
         <HeroGeometric
           :key="activeTab"
