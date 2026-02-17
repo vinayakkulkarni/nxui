@@ -378,6 +378,36 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: '3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction.',
     deps: ['three', '@vueuse/core'],
   },
+  'light-rays': {
+    title: 'Light Rays',
+    description: 'Animated light rays emanating from a configurable origin with mouse following and color controls.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'ripple-grid': {
+    title: 'Ripple Grid',
+    description: 'Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'pixel-snow': {
+    title: 'Pixel Snow',
+    description: '3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'prismatic-burst': {
+    title: 'Prismatic Burst',
+    description: 'WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'liquid-ether': {
+    title: 'Liquid Ether',
+    description: 'Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'pixel-blast': {
+    title: 'Pixel Blast',
+    description: 'Dithered pixel pattern with Bayer matrix, FBM noise, click ripples, and configurable shapes.',
+    deps: ['three', '@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

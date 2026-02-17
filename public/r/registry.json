@@ -410,6 +410,42 @@
       "type": "registry:ui",
       "title": "Light Pillar",
       "description": "3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction."
+    },
+    {
+      "name": "light-rays",
+      "type": "registry:ui",
+      "title": "Light Rays",
+      "description": "Animated light rays emanating from a configurable origin with mouse following and color controls."
+    },
+    {
+      "name": "ripple-grid",
+      "type": "registry:ui",
+      "title": "Ripple Grid",
+      "description": "Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette."
+    },
+    {
+      "name": "pixel-snow",
+      "type": "registry:ui",
+      "title": "Pixel Snow",
+      "description": "3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction."
+    },
+    {
+      "name": "prismatic-burst",
+      "type": "registry:ui",
+      "title": "Prismatic Burst",
+      "description": "WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes."
+    },
+    {
+      "name": "liquid-ether",
+      "type": "registry:ui",
+      "title": "Liquid Ether",
+      "description": "Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette."
+    },
+    {
+      "name": "pixel-blast",
+      "type": "registry:ui",
+      "title": "Pixel Blast",
+      "description": "Dithered pixel pattern with Bayer matrix, FBM noise, click ripples, and configurable shapes."
     }
   ]
 }

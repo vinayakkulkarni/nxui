@@ -147,12 +147,27 @@ export const docsNav: NavGroup[] = [
         path: '/docs/backgrounds/letter-glitch',
       },
       { title: 'Light Pillar', path: '/docs/backgrounds/light-pillar' },
+      { title: 'Light Rays', path: '/docs/backgrounds/light-rays' },
       { title: 'Lightning', path: '/docs/backgrounds/lightning' },
       {
         title: 'Liquid Chrome',
         path: '/docs/backgrounds/liquid-chrome',
       },
+      {
+        title: 'Liquid Ether',
+        path: '/docs/backgrounds/liquid-ether',
+      },
       { title: 'Orb', path: '/docs/backgrounds/orb' },
+      { title: 'Pixel Blast', path: '/docs/backgrounds/pixel-blast' },
+      { title: 'Pixel Snow', path: '/docs/backgrounds/pixel-snow' },
+      {
+        title: 'Prismatic Burst',
+        path: '/docs/backgrounds/prismatic-burst',
+      },
+      {
+        title: 'Ripple Grid',
+        path: '/docs/backgrounds/ripple-grid',
+      },
       { title: 'Silk', path: '/docs/backgrounds/silk' },
       { title: 'Squares', path: '/docs/backgrounds/squares' },
       { title: 'Threads', path: '/docs/backgrounds/threads' },

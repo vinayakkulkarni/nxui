@@ -1,0 +1,18 @@
+<script setup lang="ts">
+  import LightRays from '@registry/new-york/LightRays/LightRays.vue';
+</script>
+
+<template>
+  <ComponentDemo
+    :code="`<LightRays rays-color='#ffffff' :rays-speed='1' :light-spread='1' :ray-length='2' />`"
+  >
+    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+      <LightRays
+        rays-color="#ffffff"
+        :rays-speed="1"
+        :light-spread="1"
+        :ray-length="2"
+      />
+    </div>
+  </ComponentDemo>
+</template>

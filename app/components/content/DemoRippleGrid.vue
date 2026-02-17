@@ -1,0 +1,17 @@
+<script setup lang="ts">
+  import RippleGrid from '@registry/new-york/RippleGrid/RippleGrid.vue';
+</script>
+
+<template>
+  <ComponentDemo
+    :code="`<RippleGrid grid-color='#ffffff' :ripple-intensity='0.05' :grid-size='10' />`"
+  >
+    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+      <RippleGrid
+        grid-color="#ffffff"
+        :ripple-intensity="0.05"
+        :grid-size="10"
+      />
+    </div>
+  </ComponentDemo>
+</template>
