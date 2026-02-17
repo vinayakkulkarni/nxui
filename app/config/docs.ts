@@ -62,24 +62,33 @@ export const docsNav: NavGroup[] = [
     title: 'Components',
     items: [
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
-      { title: 'Node Diagram', path: '/docs/components/node-diagram' },
+      { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
       {
         title: 'Collection Surfer',
         path: '/docs/components/collection-surfer',
       },
       { title: 'Command Menu', path: '/docs/components/command-menu' },
+      { title: 'Decay Card', path: '/docs/components/decay-card' },
+      {
+        title: 'Elastic Slider',
+        path: '/docs/components/elastic-slider',
+      },
       {
         title: 'Flight Status Card',
         path: '/docs/components/flight-status-card',
       },
       { title: 'GitHub Calendar', path: '/docs/components/github-calendar' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
+      { title: 'Node Diagram', path: '/docs/components/node-diagram' },
+      { title: 'Pixel Card', path: '/docs/components/pixel-card' },
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
       { title: 'Spotlight Card', path: '/docs/components/spotlight-card' },
+      { title: 'Stack', path: '/docs/components/stack' },
       {
         title: 'Testimonial Marquee',
         path: '/docs/components/testimonial-marquee',
       },
+      { title: 'Tilted Card', path: '/docs/components/tilted-card' },
     ],
   },
 

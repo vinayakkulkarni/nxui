@@ -1,0 +1,13 @@
+<script setup lang="ts">
+  import ElasticSlider from '@registry/new-york/ElasticSlider/ElasticSlider.vue';
+</script>
+
+<template>
+  <ComponentDemo
+    :code="`<ElasticSlider :default-value='50' :starting-value='0' :max-value='100' />`"
+  >
+    <div class="flex h-[200px] w-full items-center justify-center rounded-lg">
+      <ElasticSlider :default-value="50" :starting-value="0" :max-value="100" />
+    </div>
+  </ComponentDemo>
+</template>

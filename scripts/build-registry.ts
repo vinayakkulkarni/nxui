@@ -503,6 +503,36 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'SDF shape with cursor-reactive blur distortion rendered via Three.js shaders.',
     deps: ['three', '@vueuse/core'],
   },
+  'stack': {
+    title: 'Stack',
+    description: 'Draggable card stack with spring animations and send-to-back gesture.',
+    deps: ['@vueuse/core'],
+  },
+  'tilted-card': {
+    title: 'Tilted Card',
+    description: '3D tilting card that follows cursor with spring damping and tooltip caption.',
+    deps: ['@vueuse/core'],
+  },
+  'decay-card': {
+    title: 'Decay Card',
+    description: 'SVG displacement map card that warps on cursor movement with lerp physics.',
+    deps: ['@vueuse/core'],
+  },
+  'elastic-slider': {
+    title: 'Elastic Slider',
+    description: 'Draggable slider with elastic overflow bounce and animated icons.',
+    deps: [],
+  },
+  'bounce-cards': {
+    title: 'Bounce Cards',
+    description: 'Fan of image cards with staggered entrance and hover push animation.',
+    deps: [],
+  },
+  'pixel-card': {
+    title: 'Pixel Card',
+    description: 'Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {
