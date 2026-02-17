@@ -273,6 +273,16 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Proximity-based character scrambling effect.',
     deps: ['@vueuse/core'],
   },
+  'curved-loop': {
+    title: 'Curved Loop',
+    description: 'Text scrolling along a curved SVG path with drag interaction.',
+    deps: [],
+  },
+  'logo-loop': {
+    title: 'Logo Loop',
+    description: 'Infinite scrolling logo marquee with smooth animation and fade edges.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

@@ -284,6 +284,18 @@
       "type": "registry:ui",
       "title": "Scrambled Text",
       "description": "Proximity-based character scrambling effect."
+    },
+    {
+      "name": "curved-loop",
+      "type": "registry:ui",
+      "title": "Curved Loop",
+      "description": "Text scrolling along a curved SVG path with drag interaction."
+    },
+    {
+      "name": "logo-loop",
+      "type": "registry:ui",
+      "title": "Logo Loop",
+      "description": "Infinite scrolling logo marquee with smooth animation and fade edges."
     }
   ]
 }

@@ -11,6 +11,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Blur Text', path: '/docs/text-animations/blur-text' },
       { title: 'Circular Text', path: '/docs/text-animations/circular-text' },
       { title: 'Count Up', path: '/docs/text-animations/count-up' },
+      { title: 'Curved Loop', path: '/docs/text-animations/curved-loop' },
       {
         title: 'Decrypted Text',
         path: '/docs/text-animations/decrypted-text',
@@ -19,6 +20,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Glitch Text', path: '/docs/text-animations/glitch-text' },
       { title: 'Gradient Text', path: '/docs/text-animations/gradient-text' },
       { title: 'Hyper Text', path: '/docs/text-animations/hyper-text' },
+      { title: 'Logo Loop', path: '/docs/text-animations/logo-loop' },
       {
         title: 'Rotating Text',
         path: '/docs/text-animations/rotating-text',
