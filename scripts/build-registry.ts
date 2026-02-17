@@ -348,6 +348,36 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: '3D light beam planes with Perlin noise deformation and directional lighting.',
     deps: ['three', '@vueuse/core'],
   },
+  'dark-veil': {
+    title: 'Dark Veil',
+    description: 'CPPN neural network shader background with hue shift, scanlines, and warp distortion.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'grainient': {
+    title: 'Grainient',
+    description: 'Animated gradient background with noise grain and smooth color blending.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'faulty-terminal': {
+    title: 'Faulty Terminal',
+    description: 'Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'gradient-blinds': {
+    title: 'Gradient Blinds',
+    description: 'Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'color-bends': {
+    title: 'Color Bends',
+    description: 'Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'light-pillar': {
+    title: 'Light Pillar',
+    description: '3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction.',
+    deps: ['three', '@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

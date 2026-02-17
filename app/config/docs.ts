@@ -126,15 +126,27 @@ export const docsNav: NavGroup[] = [
       { title: 'Aurora', path: '/docs/backgrounds/aurora' },
       { title: 'Balatro', path: '/docs/backgrounds/balatro' },
       { title: 'Beams', path: '/docs/backgrounds/beams' },
+      { title: 'Color Bends', path: '/docs/backgrounds/color-bends' },
+      { title: 'Dark Veil', path: '/docs/backgrounds/dark-veil' },
+      {
+        title: 'Faulty Terminal',
+        path: '/docs/backgrounds/faulty-terminal',
+      },
       {
         title: 'Floating Lines',
         path: '/docs/backgrounds/floating-lines',
       },
+      {
+        title: 'Gradient Blinds',
+        path: '/docs/backgrounds/gradient-blinds',
+      },
+      { title: 'Grainient', path: '/docs/backgrounds/grainient' },
       { title: 'Iridescence', path: '/docs/backgrounds/iridescence' },
       {
         title: 'Letter Glitch',
         path: '/docs/backgrounds/letter-glitch',
       },
+      { title: 'Light Pillar', path: '/docs/backgrounds/light-pillar' },
       { title: 'Lightning', path: '/docs/backgrounds/lightning' },
       {
         title: 'Liquid Chrome',

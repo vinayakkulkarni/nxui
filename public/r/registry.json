@@ -374,6 +374,42 @@
       "type": "registry:ui",
       "title": "Beams",
       "description": "3D light beam planes with Perlin noise deformation and directional lighting."
+    },
+    {
+      "name": "dark-veil",
+      "type": "registry:ui",
+      "title": "Dark Veil",
+      "description": "CPPN neural network shader background with hue shift, scanlines, and warp distortion."
+    },
+    {
+      "name": "grainient",
+      "type": "registry:ui",
+      "title": "Grainient",
+      "description": "Animated gradient background with noise grain and smooth color blending."
+    },
+    {
+      "name": "faulty-terminal",
+      "type": "registry:ui",
+      "title": "Faulty Terminal",
+      "description": "Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration."
+    },
+    {
+      "name": "gradient-blinds",
+      "type": "registry:ui",
+      "title": "Gradient Blinds",
+      "description": "Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops."
+    },
+    {
+      "name": "color-bends",
+      "type": "registry:ui",
+      "title": "Color Bends",
+      "description": "Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors."
+    },
+    {
+      "name": "light-pillar",
+      "type": "registry:ui",
+      "title": "Light Pillar",
+      "description": "3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction."
     }
   ]
 }
