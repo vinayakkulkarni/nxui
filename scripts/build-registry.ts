@@ -283,6 +283,36 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Infinite scrolling logo marquee with smooth animation and fade edges.',
     deps: ['@vueuse/core'],
   },
+  'aurora': {
+    title: 'Aurora',
+    description: 'WebGL aurora borealis effect with simplex noise and configurable color stops.',
+    deps: ['ogl'],
+  },
+  'squares': {
+    title: 'Squares',
+    description: 'Animated grid of squares with directional movement and hover interaction.',
+    deps: ['@vueuse/core'],
+  },
+  'letter-glitch': {
+    title: 'Letter Glitch',
+    description: 'A grid of random characters with color glitching and vignette overlays.',
+    deps: ['@vueuse/core'],
+  },
+  'lightning': {
+    title: 'Lightning',
+    description: 'WebGL-powered lightning bolt effect with fbm noise and customizable hue.',
+    deps: ['@vueuse/core'],
+  },
+  'iridescence': {
+    title: 'Iridescence',
+    description: 'Mesmerizing iridescent color waves with mouse-reactive distortion.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'liquid-chrome': {
+    title: 'Liquid Chrome',
+    description: 'Interactive liquid chrome effect with ripple distortion and mouse tracking.',
+    deps: ['ogl', '@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

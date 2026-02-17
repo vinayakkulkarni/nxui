@@ -121,6 +121,23 @@ export const docsNav: NavGroup[] = [
     ],
   },
   {
+    title: 'Backgrounds',
+    items: [
+      { title: 'Aurora', path: '/docs/backgrounds/aurora' },
+      { title: 'Iridescence', path: '/docs/backgrounds/iridescence' },
+      {
+        title: 'Letter Glitch',
+        path: '/docs/backgrounds/letter-glitch',
+      },
+      { title: 'Lightning', path: '/docs/backgrounds/lightning' },
+      {
+        title: 'Liquid Chrome',
+        path: '/docs/backgrounds/liquid-chrome',
+      },
+      { title: 'Squares', path: '/docs/backgrounds/squares' },
+    ],
+  },
+  {
     title: 'Hero Backgrounds',
     items: [
       {
