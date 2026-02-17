@@ -344,6 +344,36 @@
       "type": "registry:ui",
       "title": "Waves",
       "description": "Animated Perlin noise wave lines with configurable colors, amplitude, and density."
+    },
+    {
+      "name": "threads",
+      "type": "registry:ui",
+      "title": "Threads",
+      "description": "Animated Perlin noise thread lines with mouse-reactive distortion."
+    },
+    {
+      "name": "orb",
+      "type": "registry:ui",
+      "title": "Orb",
+      "description": "Glowing orb with hue-shifted noise, hover distortion, and optional rotation."
+    },
+    {
+      "name": "silk",
+      "type": "registry:ui",
+      "title": "Silk",
+      "description": "Silky fabric-like shader background with flowing noise patterns."
+    },
+    {
+      "name": "floating-lines",
+      "type": "registry:ui",
+      "title": "Floating Lines",
+      "description": "Multi-layered glowing wave lines with cursor-reactive bending."
+    },
+    {
+      "name": "beams",
+      "type": "registry:ui",
+      "title": "Beams",
+      "description": "3D light beam planes with Perlin noise deformation and directional lighting."
     }
   ]
 }

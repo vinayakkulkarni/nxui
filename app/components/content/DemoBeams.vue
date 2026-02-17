@@ -1,0 +1,19 @@
+<script setup lang="ts">
+  import Beams from '@registry/new-york/Beams/Beams.vue';
+</script>
+
+<template>
+  <ComponentDemo
+    :code="`<Beams :beam-width='2' :beam-height='15' :beam-number='12' light-color='#ffffff' :speed='2' />`"
+  >
+    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+      <Beams
+        :beam-width="2"
+        :beam-height="15"
+        :beam-number="12"
+        light-color="#ffffff"
+        :speed="2"
+      />
+    </div>
+  </ComponentDemo>
+</template>

@@ -323,6 +323,31 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Animated Perlin noise wave lines with configurable colors, amplitude, and density.',
     deps: ['@vueuse/core'],
   },
+  'threads': {
+    title: 'Threads',
+    description: 'Animated Perlin noise thread lines with mouse-reactive distortion.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'orb': {
+    title: 'Orb',
+    description: 'Glowing orb with hue-shifted noise, hover distortion, and optional rotation.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'silk': {
+    title: 'Silk',
+    description: 'Silky fabric-like shader background with flowing noise patterns.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'floating-lines': {
+    title: 'Floating Lines',
+    description: 'Multi-layered glowing wave lines with cursor-reactive bending.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'beams': {
+    title: 'Beams',
+    description: '3D light beam planes with Perlin noise deformation and directional lighting.',
+    deps: ['three', '@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {
