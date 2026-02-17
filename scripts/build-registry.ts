@@ -583,6 +583,26 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Particle-burst navigation with SVG gooey filter effect and spring animation.',
     deps: ['@vueuse/core'],
   },
+  'bubble-menu': {
+    title: 'Bubble Menu',
+    description: 'Animated full-screen pill navigation with staggered scale-in and rotation.',
+    deps: [],
+  },
+  'card-swap': {
+    title: 'Card Swap',
+    description: 'Stacked card carousel that cycles the front card to the back with 3D transforms.',
+    deps: [],
+  },
+  'chroma-grid': {
+    title: 'Chroma Grid',
+    description: 'Profile card grid with mouse-tracking spotlight reveal and per-card hover glow.',
+    deps: ['@vueuse/core'],
+  },
+  'masonry': {
+    title: 'Masonry',
+    description: 'Responsive masonry image grid with blur-to-focus entrance animation and hover scaling.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

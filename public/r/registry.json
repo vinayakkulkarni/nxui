@@ -656,6 +656,30 @@
       "type": "registry:ui",
       "title": "Gooey Nav",
       "description": "Particle-burst navigation with SVG gooey filter effect and spring animation."
+    },
+    {
+      "name": "bubble-menu",
+      "type": "registry:ui",
+      "title": "Bubble Menu",
+      "description": "Animated full-screen pill navigation with staggered scale-in and rotation."
+    },
+    {
+      "name": "card-swap",
+      "type": "registry:ui",
+      "title": "Card Swap",
+      "description": "Stacked card carousel that cycles the front card to the back with 3D transforms."
+    },
+    {
+      "name": "chroma-grid",
+      "type": "registry:ui",
+      "title": "Chroma Grid",
+      "description": "Profile card grid with mouse-tracking spotlight reveal and per-card hover glow."
+    },
+    {
+      "name": "masonry",
+      "type": "registry:ui",
+      "title": "Masonry",
+      "description": "Responsive masonry image grid with blur-to-focus entrance animation and hover scaling."
     }
   ]
 }

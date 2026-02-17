@@ -67,7 +67,19 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
+      {
+        title: 'Bubble Menu',
+        path: '/docs/components/bubble-menu',
+      },
+      {
+        title: 'Card Swap',
+        path: '/docs/components/card-swap',
+      },
       { title: 'Carousel', path: '/docs/components/carousel' },
+      {
+        title: 'Chroma Grid',
+        path: '/docs/components/chroma-grid',
+      },
       {
         title: 'Circular Gallery',
         path: '/docs/components/circular-gallery',
@@ -100,6 +112,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Glass Icons', path: '/docs/components/glass-icons' },
       { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
+      { title: 'Masonry', path: '/docs/components/masonry' },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },
       { title: 'Pixel Card', path: '/docs/components/pixel-card' },
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
