@@ -15,6 +15,7 @@ export default defineNuxtConfig({
     ],
     '@vueuse/nuxt',
     'motion-v/nuxt',
+    'nuxt-og-image',
   ],
 
   colorMode: {

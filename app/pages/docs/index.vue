@@ -21,11 +21,14 @@ useSeoMeta({
   ogType: 'website',
   ogUrl: 'https://nxui.geoql.in/docs',
   ogSiteName: 'nxui',
-  ogImage: 'https://nxui.geoql.in/og.png',
   twitterCard: 'summary_large_image',
   twitterTitle: page.value?.title,
   twitterDescription: page.value?.description,
-  twitterImage: 'https://nxui.geoql.in/og.png',
+});
+
+defineOgImage('NxuiDoc', {
+  title: page.value?.title ?? 'nxui',
+  description: page.value?.description ?? '',
 });
 </script>
 
