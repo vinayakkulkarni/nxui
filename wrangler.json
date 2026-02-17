@@ -7,8 +7,8 @@
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "nxui-docs-db",
-      "database_id": ""
+      "database_name": "nxui-db",
+      "database_id": "aa53f821-5591-4516-83c4-837095d0adcd"
     }
   ]
 }
