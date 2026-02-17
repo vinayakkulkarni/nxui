@@ -408,6 +408,26 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Dithered pixel pattern with Bayer matrix, FBM noise, click ripples, and configurable shapes.',
     deps: ['three', '@vueuse/core'],
   },
+  'ballpit': {
+    title: 'Ballpit',
+    description: '3D physics-based ball pit with instanced meshes, subsurface scattering, and cursor interaction.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'dot-grid': {
+    title: 'Dot Grid',
+    description: 'Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return.',
+    deps: ['@vueuse/core'],
+  },
+  'grid-distortion': {
+    title: 'Grid Distortion',
+    description: 'Three.js shader-based image distortion that warps a texture in response to mouse movement.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'grid-motion': {
+    title: 'Grid Motion',
+    description: 'A rotated grid of items that shifts horizontally based on cursor position with smooth easing.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

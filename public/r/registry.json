@@ -446,6 +446,30 @@
       "type": "registry:ui",
       "title": "Pixel Blast",
       "description": "Dithered pixel pattern with Bayer matrix, FBM noise, click ripples, and configurable shapes."
+    },
+    {
+      "name": "ballpit",
+      "type": "registry:ui",
+      "title": "Ballpit",
+      "description": "3D physics-based ball pit with instanced meshes, subsurface scattering, and cursor interaction."
+    },
+    {
+      "name": "dot-grid",
+      "type": "registry:ui",
+      "title": "Dot Grid",
+      "description": "Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return."
+    },
+    {
+      "name": "grid-distortion",
+      "type": "registry:ui",
+      "title": "Grid Distortion",
+      "description": "Three.js shader-based image distortion that warps a texture in response to mouse movement."
+    },
+    {
+      "name": "grid-motion",
+      "type": "registry:ui",
+      "title": "Grid Motion",
+      "description": "A rotated grid of items that shifts horizontally based on cursor position with smooth easing."
     }
   ]
 }

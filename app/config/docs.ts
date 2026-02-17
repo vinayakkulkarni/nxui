@@ -125,9 +125,11 @@ export const docsNav: NavGroup[] = [
     items: [
       { title: 'Aurora', path: '/docs/backgrounds/aurora' },
       { title: 'Balatro', path: '/docs/backgrounds/balatro' },
+      { title: 'Ballpit', path: '/docs/backgrounds/ballpit' },
       { title: 'Beams', path: '/docs/backgrounds/beams' },
       { title: 'Color Bends', path: '/docs/backgrounds/color-bends' },
       { title: 'Dark Veil', path: '/docs/backgrounds/dark-veil' },
+      { title: 'Dot Grid', path: '/docs/backgrounds/dot-grid' },
       {
         title: 'Faulty Terminal',
         path: '/docs/backgrounds/faulty-terminal',
@@ -141,6 +143,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/backgrounds/gradient-blinds',
       },
       { title: 'Grainient', path: '/docs/backgrounds/grainient' },
+      {
+        title: 'Grid Distortion',
+        path: '/docs/backgrounds/grid-distortion',
+      },
+      { title: 'Grid Motion', path: '/docs/backgrounds/grid-motion' },
       { title: 'Iridescence', path: '/docs/backgrounds/iridescence' },
       {
         title: 'Letter Glitch',

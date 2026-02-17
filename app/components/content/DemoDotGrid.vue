@@ -1,0 +1,17 @@
+<script setup lang="ts">
+  import DotGrid from '@registry/new-york/DotGrid/DotGrid.vue';
+</script>
+
+<template>
+  <ComponentDemo :code="`<DotGrid :dot-size='16' :gap='32' base-color='#5227FF' active-color='#5227FF' :proximity='150' />`">
+    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+      <DotGrid
+        :dot-size="16"
+        :gap="32"
+        base-color="#5227FF"
+        active-color="#5227FF"
+        :proximity="150"
+      />
+    </div>
+  </ComponentDemo>
+</template>
