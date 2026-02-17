@@ -67,7 +67,7 @@
     :class="cn($props.class)"
     :style="{
       transform: isVisible
-        ? 'translateY(0) scale(1)'
+        ? `translate${axis}(0) scale(1)`
         : `translate${axis}(${offset}px) scale(${props.scale})`,
       opacity: isVisible ? '1' : animateOpacity ? String(initialOpacity) : '1',
       transition: `transform ${duration}s ${ease} ${delay}s, opacity ${duration}s ${ease} ${delay}s`,

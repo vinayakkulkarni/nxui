@@ -17,7 +17,6 @@
   :enable-spotlight='true'
   :enable-border-glow='true'
   :enable-particles='true'
-  :enable-magnetism='true'
   :click-effect='true'
 />`"
   >
@@ -27,7 +26,6 @@
         :enable-spotlight="true"
         :enable-border-glow="true"
         :enable-particles="true"
-        :enable-magnetism="true"
         :click-effect="true"
       />
     </div>

@@ -24,7 +24,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/magic-bento.json"
 | `enable-border-glow` | `boolean`          | `true`          | Enable border glow on proximity           |
 | `enable-particles`   | `boolean`          | `true`          | Enable floating particles on hover        |
 | `enable-tilt`        | `boolean`          | `false`         | Enable 3D tilt on hover                   |
-| `enable-magnetism`   | `boolean`          | `true`          | Enable slight magnetic pull toward cursor |
+| `enable-magnetism`   | `boolean`          | `false`         | Enable slight magnetic pull toward cursor |
 | `click-effect`       | `boolean`          | `true`          | Enable ripple effect on click             |
 | `text-auto-hide`     | `boolean`          | `true`          | Clamp title/description overflow          |
 

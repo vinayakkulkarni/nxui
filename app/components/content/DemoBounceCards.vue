@@ -20,6 +20,7 @@
 
 <template>
   <ComponentDemo
+    refreshable
     :code="`<BounceCards :images='images' :container-width='500' :container-height='300' :enable-hover='true' />`"
   >
     <div

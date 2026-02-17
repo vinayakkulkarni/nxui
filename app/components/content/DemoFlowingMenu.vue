@@ -27,15 +27,17 @@
 
 <template>
   <ComponentDemo
-    :code="`<FlowingMenu :items='menuItems' text-color='#fff' bg-color='#060010' marquee-bg-color='#fff' marquee-text-color='#060010' />`"
+    :code="`<FlowingMenu :items='menuItems' text-color='#fff' bg-color='#000' marquee-bg-color='#fff' marquee-text-color='#000' />`"
+    full-width
+    class="p-0"
   >
-    <div class="h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="h-[500px] w-full">
       <FlowingMenu
         :items="menuItems"
         text-color="#fff"
-        bg-color="#060010"
+        bg-color="#000"
         marquee-bg-color="#fff"
-        marquee-text-color="#060010"
+        marquee-text-color="#000"
       />
     </div>
   </ComponentDemo>

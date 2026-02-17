@@ -1,7 +1,18 @@
 <script setup lang="ts">
-  import { ref, computed, onMounted, onBeforeUnmount, useSlots } from 'vue';
-  import { useMediaQuery, useEventListener } from '@vueuse/core';
+  import {
+    type VNode,
+    ref,
+    computed,
+    onMounted,
+    onBeforeUnmount,
+    useSlots,
+    Fragment,
+  } from 'vue';
+  import { motion } from 'motion-v';
+  import { useMediaQuery } from '@vueuse/core';
+  import type { StackAnimationConfig } from '~/types/components';
   import { cn } from '~/lib/utils';
+  import StackCardRotate from './StackCardRotate.vue';
 
   const props = withDefaults(
     defineProps<{
@@ -12,6 +23,7 @@
       autoplay?: boolean;
       autoplayDelay?: number;
       pauseOnHover?: boolean;
+      animationConfig?: StackAnimationConfig;
       class?: string;
     }>(),
     {
@@ -22,6 +34,7 @@
       autoplay: false,
       autoplayDelay: 3000,
       pauseOnHover: false,
+      animationConfig: () => ({ stiffness: 260, damping: 20 }),
       class: '',
     },
   );
@@ -30,10 +43,21 @@
   const isPaused = ref(false);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
-  const cardCount = computed(() => {
+  // Flatten Fragment VNodes (needed for v-for in slot content)
+  function flattenVNodes(vnodes: VNode[]): VNode[] {
+    return vnodes.flatMap((vnode) =>
+      vnode.type === Fragment
+        ? flattenVNodes(vnode.children as VNode[])
+        : [vnode],
+    );
+  }
+
+  const flatSlots = computed(() => {
     const slot = slots.default?.();
-    return slot ? slot.length : 0;
+    return slot ? flattenVNodes(slot) : [];
   });
+
+  const cardCount = computed(() => flatSlots.value.length);
 
   const order = ref<number[]>([]);
 
@@ -68,72 +92,24 @@
   onMounted(() => startAutoplay());
   onBeforeUnmount(() => stopAutoplay());
 
-  // Drag handling
-  const dragState = ref<{
-    active: boolean;
-    cardIdx: number;
-    startX: number;
-    startY: number;
-    dx: number;
-    dy: number;
-  } | null>(null);
+  const shouldDisableDrag = computed(() => isMobile.value);
+  const shouldEnableClick = computed(
+    () => props.sendToBackOnClick || isMobile.value,
+  );
 
-  function onPointerDown(e: PointerEvent, idx: number) {
-    if (isMobile.value) return;
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    dragState.value = {
-      active: true,
-      cardIdx: idx,
-      startX: e.clientX,
-      startY: e.clientY,
-      dx: 0,
-      dy: 0,
-    };
-  }
-
-  useEventListener('pointermove', (e: PointerEvent) => {
-    if (!dragState.value?.active) return;
-    dragState.value.dx = e.clientX - dragState.value.startX;
-    dragState.value.dy = e.clientY - dragState.value.startY;
-  });
-
-  useEventListener('pointerup', () => {
-    if (!dragState.value?.active) return;
-    const { dx, dy, cardIdx } = dragState.value;
-    if (Math.abs(dx) > props.sensitivity || Math.abs(dy) > props.sensitivity) {
-      sendToBack(cardIdx);
-    }
-    dragState.value = null;
-  });
-
-  function getCardStyle(slotIdx: number) {
-    const stackPos = order.value.indexOf(slotIdx);
-    const fromTop = order.value.length - 1 - stackPos;
+  function getRotation(arrayIndex: number) {
+    const fromTop = order.value.length - 1 - arrayIndex;
     const randomRot = props.randomRotation ? Math.random() * 10 - 5 : 0;
-    const rotation = fromTop * 4 + randomRot;
-    const scale = 1 + stackPos * 0.06 - order.value.length * 0.06;
-
-    let tx = 0;
-    let ty = 0;
-    if (dragState.value?.active && dragState.value.cardIdx === slotIdx) {
-      tx = dragState.value.dx;
-      ty = dragState.value.dy;
-    }
-
-    return {
-      transform: `translate(${tx}px, ${ty}px) rotate(${rotation}deg) scale(${scale})`,
-      transformOrigin: '90% 90%',
-      zIndex: stackPos,
-      transition:
-        dragState.value?.active && dragState.value.cardIdx === slotIdx
-          ? 'none'
-          : 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
-    };
+    return fromTop * 4 + randomRot;
   }
 
-  function handleClick(idx: number) {
-    if (props.sendToBackOnClick || isMobile.value) {
-      sendToBack(idx);
+  function getScale(arrayIndex: number) {
+    return 1 + arrayIndex * 0.06 - order.value.length * 0.06;
+  }
+
+  function handleClick(slotIdx: number) {
+    if (shouldEnableClick.value) {
+      sendToBack(slotIdx);
     }
   }
 </script>
@@ -145,15 +121,39 @@
     @mouseenter="isPaused = pauseOnHover ? true : isPaused"
     @mouseleave="isPaused = pauseOnHover ? false : isPaused"
   >
-    <div
-      v-for="slotIdx in order"
+    <StackCardRotate
+      v-for="(slotIdx, arrayIndex) in order"
       :key="slotIdx"
-      class="absolute size-full cursor-grab select-none"
-      :style="getCardStyle(slotIdx)"
-      @pointerdown="(e) => onPointerDown(e, slotIdx)"
-      @click="handleClick(slotIdx)"
+      :sensitivity="sensitivity"
+      :disable-drag="shouldDisableDrag"
+      @send-to-back="sendToBack(slotIdx)"
     >
-      <component :is="$slots.default?.()[slotIdx]" />
-    </div>
+      <component
+        :is="motion.div"
+        class="stack-card flex size-full items-center justify-center overflow-hidden rounded-2xl"
+        :animate="{
+          rotateZ: getRotation(arrayIndex),
+          scale: getScale(arrayIndex),
+        }"
+        :initial="false"
+        :transition="{
+          type: 'spring',
+          stiffness: animationConfig.stiffness,
+          damping: animationConfig.damping,
+        }"
+        style="transform-origin: 90% 90%"
+        @click="handleClick(slotIdx)"
+      >
+        <component :is="flatSlots[slotIdx]" />
+      </component>
+    </StackCardRotate>
   </div>
 </template>
+
+<style scoped>
+  :deep(.stack-card img) {
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+</style>

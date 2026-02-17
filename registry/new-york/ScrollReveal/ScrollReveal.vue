@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useIntersectionObserver } from '@vueuse/core';
+  import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -9,6 +9,7 @@
       baseOpacity?: number;
       baseRotation?: number;
       blurStrength?: number;
+      scrollContainer?: HTMLElement | null;
       class?: string;
     }>(),
     {
@@ -16,44 +17,49 @@
       baseOpacity: 0.1,
       baseRotation: 3,
       blurStrength: 4,
+      scrollContainer: undefined,
       class: '',
     },
   );
 
   const el = ref<HTMLElement>();
   const progress = ref(0);
-  const hasEntered = ref(false);
 
   const words = computed(() =>
     props.text.split(/(\s+)/).filter((w) => w.trim().length > 0),
   );
 
-  useIntersectionObserver(
-    el,
-    ([entry]) => {
-      if (entry?.isIntersecting) {
-        hasEntered.value = true;
-      }
-    },
-    { threshold: 0.1 },
+  const scrollTarget = computed<EventTarget>(
+    () => props.scrollContainer ?? window,
   );
 
-  function handleScroll() {
-    if (!el.value || !hasEntered.value) return;
-    const rect = el.value.getBoundingClientRect();
-    const viewH = window.innerHeight;
-    const raw = 1 - rect.top / viewH;
+  function calculateProgress() {
+    if (!el.value) return;
+
+    let viewTop: number;
+    let viewHeight: number;
+
+    if (props.scrollContainer) {
+      const containerRect = props.scrollContainer.getBoundingClientRect();
+      viewTop = containerRect.top;
+      viewHeight = containerRect.height;
+    } else {
+      viewTop = 0;
+      viewHeight = window.innerHeight;
+    }
+
+    const elRect = el.value.getBoundingClientRect();
+    const elTopRelative = elRect.top - viewTop;
+
+    const raw = 1 - elTopRelative / viewHeight;
     progress.value = Math.min(Math.max(raw, 0), 1);
   }
 
-  onMounted(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+  useEventListener(scrollTarget, 'scroll', calculateProgress, {
+    passive: true,
   });
 
-  onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
-  });
+  watch(scrollTarget, () => nextTick(calculateProgress), { immediate: true });
 
   function getWordStyle(index: number) {
     const total = words.value.length;

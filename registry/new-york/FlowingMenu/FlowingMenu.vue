@@ -99,19 +99,20 @@
 
 <template>
   <div
-    :class="cn('w-full', $props.class)"
+    :class="cn('size-full overflow-hidden', $props.class)"
     :style="{ backgroundColor: bgColor }"
   >
-    <nav>
+    <nav class="flex h-full flex-col">
       <div
         v-for="(item, idx) in items"
         :key="idx"
-        class="flowing-item relative overflow-hidden border-t"
+        class="flowing-item relative flex-1 overflow-hidden text-center"
+        :class="{ 'border-t': idx > 0 }"
         :style="{ borderColor }"
       >
         <a
           :href="item.link"
-          class="relative z-10 block px-6 py-8 text-4xl font-black no-underline transition-colors"
+          class="relative z-10 flex h-full items-center justify-center text-[4vh] font-semibold uppercase no-underline transition-colors"
           :style="{ color: textColor }"
           @mouseenter="(e) => handleEnter(e, idx)"
           @mouseleave="(e) => handleLeave(e, idx)"
@@ -129,22 +130,25 @@
           }"
         >
           <div
-            class="flex h-full items-center whitespace-nowrap"
+            class="flex h-full w-fit items-center"
             :style="{
               transform: `translateY(${getMarqueeState(idx).innerY})`,
               transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
               animation: `marquee-scroll ${speed}s linear infinite`,
+              willChange: 'transform',
             }"
           >
             <div
               v-for="rep in 6"
               :key="rep"
-              class="flex shrink-0 items-center gap-6 px-4 text-4xl font-black"
+              class="flex shrink-0 items-center px-[1vw] text-[4vh] font-normal uppercase"
               :style="{ color: marqueeTextColor }"
             >
-              <span>{{ item.text }}</span>
+              <span class="whitespace-nowrap leading-none">{{
+                item.text
+              }}</span>
               <div
-                class="size-12 shrink-0 rounded-full bg-cover bg-center"
+                class="mx-[2vw] my-[2em] h-[7vh] w-[200px] shrink-0 rounded-[50px] bg-cover bg-center"
                 :style="{ backgroundImage: `url(${item.image})` }"
               ></div>
             </div>

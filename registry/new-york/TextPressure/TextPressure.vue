@@ -1,5 +1,10 @@
 <script setup lang="ts">
-  import { useRafFn, useEventListener, useResizeObserver } from '@vueuse/core';
+  import {
+    useRafFn,
+    useEventListener,
+    useResizeObserver,
+    useStyleTag,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -46,6 +51,18 @@
 
   const chars = computed(() => props.text.split(''));
 
+  // Load variable font via @font-face
+  const fontCss = computed(
+    () => `
+    @font-face {
+      font-family: '${props.fontFamily}';
+      src: url('${props.fontUrl}');
+      font-style: normal;
+    }
+  `,
+  );
+  useStyleTag(fontCss);
+
   useEventListener(window, 'mousemove', (e: MouseEvent) => {
     cursor.value = { x: e.clientX, y: e.clientY };
   });
@@ -62,8 +79,20 @@
     fontSize.value = Math.max(cw / (chars.value.length / 2), props.minFontSize);
   }
 
+  function initMouseCenter() {
+    if (!containerEl.value) return;
+    const { left, top, width, height } =
+      containerEl.value.getBoundingClientRect();
+    const center = { x: left + width / 2, y: top + height / 2 };
+    cursor.value = { ...center };
+    mouse.value = { ...center };
+  }
+
   useResizeObserver(containerEl, setSize);
-  onMounted(setSize);
+  onMounted(() => {
+    setSize();
+    initMouseCenter();
+  });
 
   function dist(a: { x: number; y: number }, b: { x: number; y: number }) {
     return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2);
@@ -122,7 +151,10 @@
   >
     <h1
       ref="titleEl"
-      :class="[flex ? 'flex justify-between' : '', 'uppercase text-center']"
+      :class="[
+        flex ? 'flex justify-between' : '',
+        'w-full whitespace-nowrap uppercase text-center select-none',
+      ]"
       :style="{
         fontFamily,
         fontSize: `${fontSize}px`,

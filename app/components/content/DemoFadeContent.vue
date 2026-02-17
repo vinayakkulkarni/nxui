@@ -3,7 +3,10 @@
 </script>
 
 <template>
-  <ComponentDemo :code="`<FadeContent :blur='true' :duration='1' />`">
+  <ComponentDemo
+    refreshable
+    :code="`<FadeContent :blur='true' :duration='1' />`"
+  >
     <div class="flex h-[200px] w-full items-center justify-center">
       <FadeContent :blur="true" :duration="1">
         <p class="text-2xl font-bold text-foreground">

@@ -68,7 +68,7 @@
 
   const grid = computed(() => {
     if (!containerWidth.value || !props.items.length) return [];
-    const colHeights = new Array(columns.value).fill(0);
+    const colHeights = Array.from<number>({ length: columns.value }).fill(0);
     const colWidth = containerWidth.value / columns.value;
 
     return props.items.map((item) => {
@@ -106,14 +106,8 @@
       v-for="(item, index) in grid"
       :key="item.id"
       class="absolute cursor-pointer p-1.5"
-      :class="[
-        scaleOnHover
-          ? 'hover:scale-[var(--hover-scale)] transition-transform duration-300'
-          : '',
-        isVisible ? 'masonry-item--visible' : 'masonry-item--hidden',
-      ]"
+      :class="[isVisible ? 'masonry-item--visible' : 'masonry-item--hidden']"
       :style="{
-        '--hover-scale': hoverScale,
         '--delay': `${index * 50}ms`,
         transform: `translate(${item.x}px, ${item.y}px)`,
         width: `${item.w}px`,
@@ -123,7 +117,15 @@
     >
       <div
         class="size-full rounded-lg bg-cover bg-center shadow-lg"
-        :style="{ backgroundImage: `url(${item.img})` }"
+        :class="
+          scaleOnHover
+            ? 'transition-transform duration-300 hover:scale-[var(--hover-scale)]'
+            : ''
+        "
+        :style="{
+          '--hover-scale': hoverScale,
+          backgroundImage: `url(${item.img})`,
+        }"
       ></div>
     </div>
   </div>

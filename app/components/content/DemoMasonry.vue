@@ -17,11 +17,9 @@
 <template>
   <ComponentDemo
     :code="`<Masonry :items='items' :scale-on-hover='true' :hover-scale='0.95' :blur-to-focus='true' />`"
+    full-width
   >
-    <div
-      class="relative w-full overflow-hidden rounded-lg"
-      style="min-height: 500px"
-    >
+    <div class="relative w-full" style="min-height: 500px">
       <Masonry
         :items="items"
         :scale-on-hover="true"

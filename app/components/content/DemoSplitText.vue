@@ -4,6 +4,7 @@
 
 <template>
   <ComponentDemo
+    refreshable
     :code="`<script setup lang=&quot;ts&quot;>
   import SplitText from '~/components/ui/SplitText/SplitText.vue';
 </script>

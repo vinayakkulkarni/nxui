@@ -106,8 +106,8 @@
     50, 45, 127, 4, 150, 254, 138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243,
     141, 128, 195, 78, 66, 215, 61, 156, 180,
   ];
-  const perm = new Array(512);
-  const gradP = new Array(512);
+  const perm = Array.from<number>({ length: 512 });
+  const gradP = Array.from<number>({ length: 512 });
 
   function seedNoise(seed: number) {
     if (seed > 0 && seed < 1) seed *= 65536;

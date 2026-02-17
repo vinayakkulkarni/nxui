@@ -4,9 +4,10 @@
 
 <template>
   <ComponentDemo
-    :code="`<ChromaGrid :radius='300' :columns='3' :damping='0.12' />`"
+    full-width
+    :code="`<ChromaGrid :radius=&quot;300&quot; :columns=&quot;3&quot; :damping=&quot;0.12&quot; />`"
   >
-    <div class="relative w-full overflow-hidden rounded-lg bg-black p-4">
+    <div class="relative w-full overflow-hidden bg-black py-6">
       <ChromaGrid :radius="300" :columns="3" :damping="0.12" />
     </div>
   </ComponentDemo>

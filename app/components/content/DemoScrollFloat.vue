@@ -1,21 +1,45 @@
 <script setup lang="ts">
   import ScrollFloat from '@registry/new-york/ScrollFloat/ScrollFloat.vue';
+
+  const scrollContainer = useTemplateRef<HTMLElement>('scrollContainer');
 </script>
 
 <template>
   <ComponentDemo
     :code="`<script setup lang=&quot;ts&quot;>
   import ScrollFloat from '~/components/ui/ScrollFloat/ScrollFloat.vue';
+
+  const scrollContainer = useTemplateRef&lt;HTMLElement&gt;('scrollContainer');
 </script>
 
 <template>
-  <ScrollFloat text=&quot;Scroll Float&quot; :stagger=&quot;0.03&quot; />
+  <div ref=&quot;scrollContainer&quot; class=&quot;h-[400px] overflow-y-auto overscroll-contain&quot;>
+    <div class=&quot;pt-[600px] pb-[300px] flex justify-center px-8&quot;>
+      <ScrollFloat
+        text=&quot;Scroll Float&quot;
+        :scroll-container=&quot;scrollContainer&quot;
+        :stagger=&quot;0.03&quot;
+      />
+    </div>
+  </div>
 </template>`"
   >
     <div
-      class="flex h-[300px] w-full items-center justify-center overflow-y-auto p-8"
+      ref="scrollContainer"
+      class="relative h-[400px] w-full overflow-y-auto overscroll-contain"
     >
-      <ScrollFloat text="Scroll Float" :stagger="0.03" />
+      <p
+        class="pointer-events-none sticky top-[85%] z-10 text-center text-sm text-muted-foreground/30"
+      >
+        ↓ Scroll to reveal
+      </p>
+      <div class="flex justify-center px-8 pt-[500px] pb-[300px]">
+        <ScrollFloat
+          text="Scroll Float"
+          :scroll-container="scrollContainer"
+          :stagger="0.03"
+        />
+      </div>
     </div>
   </ComponentDemo>
 </template>

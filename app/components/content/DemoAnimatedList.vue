@@ -17,6 +17,7 @@
 
 <template>
   <ComponentDemo
+    refreshable
     :code="`<AnimatedList :items='items' :show-gradients='true' :enable-arrow-navigation='true' />`"
   >
     <div class="flex h-[400px] w-full items-center justify-center rounded-lg">

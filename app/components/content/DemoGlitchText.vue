@@ -17,7 +17,7 @@
 </template>`"
   >
     <div
-      class="flex h-[300px] w-full items-center justify-center rounded-lg bg-background"
+      class="flex h-[300px] w-full items-center justify-center overflow-hidden rounded-lg bg-background"
     >
       <GlitchText text="Glitch Text" />
     </div>

@@ -8,12 +8,18 @@
       class?: string;
       fullWidth?: boolean;
       code?: string;
+      refreshable?: boolean;
     }>(),
-    { class: '', fullWidth: false },
+    { class: '', fullWidth: false, refreshable: false },
   );
 
   const codeExpanded = ref(true);
+  const refreshKey = ref(0);
   const { copy, copied } = useClipboard({ source: () => props.code ?? '' });
+
+  function replay() {
+    refreshKey.value++;
+  }
 
   const codeRef = computed(() => props.code);
   const langRef = computed(() => 'vue');
@@ -41,7 +47,19 @@
         )
       "
     >
-      <slot></slot>
+      <!-- Refresh button for animation demos -->
+      <button
+        v-if="refreshable"
+        class="absolute top-4 right-4 z-10 grid size-9 place-items-center rounded-md border border-border bg-background/50 text-muted-foreground transition-all hover:bg-background hover:text-foreground"
+        aria-label="Replay animation"
+        @click="replay"
+      >
+        <Icon name="lucide:rotate-ccw" class="size-4" />
+      </button>
+      <div v-if="refreshable" :key="refreshKey" class="contents">
+        <slot></slot>
+      </div>
+      <slot v-else></slot>
     </div>
 
     <!-- Code footer -->

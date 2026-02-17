@@ -4,6 +4,7 @@
 
 <template>
   <ComponentDemo
+    refreshable
     :code="`<script setup lang=&quot;ts&quot;>
   import CountUp from '~/components/ui/CountUp/CountUp.vue';
 </script>

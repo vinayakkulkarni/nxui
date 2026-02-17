@@ -192,7 +192,7 @@
     position: relative;
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(var(--cols, 3), 320px);
+    grid-template-columns: repeat(var(--cols, 3), 1fr);
     justify-content: center;
     gap: 0.75rem;
     max-width: 1200px;
@@ -202,9 +202,9 @@
     --y: 50%;
   }
 
-  @media (max-width: 1124px) {
+  @media (max-width: 768px) {
     .chroma-grid {
-      grid-template-columns: repeat(auto-fit, minmax(280px, 320px));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
   }
 
@@ -212,7 +212,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 320px;
+    width: 100%;
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid #333;

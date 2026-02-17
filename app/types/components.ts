@@ -263,3 +263,8 @@ export interface ClosingPlasmaProps {
 }
 
 export type ParticleGalaxyBlendMode = 'additive' | 'normal';
+
+export interface StackAnimationConfig {
+  stiffness: number;
+  damping: number;
+}

@@ -4,6 +4,7 @@
 
 <template>
   <ComponentDemo
+    refreshable
     :code="`<script setup lang=&quot;ts&quot;>
   import BlurText from '~/components/ui/BlurText/BlurText.vue';
 </script>

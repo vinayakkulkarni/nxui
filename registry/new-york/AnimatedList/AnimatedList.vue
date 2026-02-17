@@ -42,7 +42,9 @@
   }
 
   onMounted(() => {
-    itemVisible.value = new Array(props.items.length).fill(false);
+    itemVisible.value = Array.from<boolean>({
+      length: props.items.length,
+    }).fill(false);
 
     // Set up intersection observers for each item
     itemRefs.value.forEach((el, index) => {

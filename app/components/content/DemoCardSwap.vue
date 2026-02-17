@@ -4,34 +4,77 @@
 
 <template>
   <ComponentDemo
-    :code="`<CardSwap :card-distance='60' :vertical-distance='70' :delay='5000' :pause-on-hover='true'>\n  <div class='flex items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 p-8 text-white'>Card 1</div>\n  <div class='flex items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 p-8 text-white'>Card 2</div>\n  <div class='flex items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-8 text-white'>Card 3</div>\n</CardSwap>`"
+    full-width
+    :code="`<CardSwap :card-distance=&quot;60&quot; :vertical-distance=&quot;70&quot; :delay=&quot;5000&quot; :pause-on-hover=&quot;true&quot;>
+  <div class=&quot;flex h-[300px] w-[400px] flex-col overflow-hidden rounded-xl&quot;>
+    <div class=&quot;flex shrink-0 items-center gap-2 border-b border-white px-3 py-2 text-sm&quot;>
+      <Icon name=&quot;lucide:circle&quot; class=&quot;size-3.5&quot; />
+      Smooth
+    </div>
+    <div class=&quot;flex-1 bg-gradient-to-br from-purple-900 via-violet-800 to-cyan-900&quot; />
+  </div>
+  &lt;!-- more cards --&gt;
+</CardSwap>`"
   >
-    <div
-      class="relative flex h-[450px] w-full items-center justify-center overflow-visible rounded-lg bg-black/5 dark:bg-white/5"
-    >
-      <CardSwap
-        :card-distance="60"
-        :vertical-distance="70"
-        :delay="5000"
-        :pause-on-hover="true"
-        class="w-[300px] h-[250px]"
+    <div class="flex h-[500px] w-full flex-col overflow-hidden lg:flex-row">
+      <div
+        class="flex w-full flex-col items-center justify-center px-6 py-8 text-center lg:w-1/2 lg:items-start lg:pl-24 lg:text-left"
       >
-        <div
-          class="flex size-full items-center justify-center rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 p-8 text-xl font-bold text-white"
+        <h3 class="mb-4 text-3xl font-medium leading-tight">
+          Card stacks have never
+          <span class="lg:block">looked so good</span>
+        </h3>
+        <p class="text-xl text-muted-foreground">Just look at it go!</p>
+      </div>
+      <div class="relative h-[400px] w-full lg:h-full lg:w-1/2">
+        <CardSwap
+          :card-distance="60"
+          :vertical-distance="70"
+          :delay="5000"
+          :pause-on-hover="true"
+          class="size-full"
         >
-          Card 1
-        </div>
-        <div
-          class="flex size-full items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 p-8 text-xl font-bold text-white"
-        >
-          Card 2
-        </div>
-        <div
-          class="flex size-full items-center justify-center rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 p-8 text-xl font-bold text-white"
-        >
-          Card 3
-        </div>
-      </CardSwap>
+          <div
+            class="flex h-[300px] w-[400px] flex-col overflow-hidden rounded-xl"
+          >
+            <div
+              class="flex shrink-0 items-center gap-2 border-b border-white bg-gradient-to-t from-[#0D0716] to-[#060606] px-3 py-2 text-sm"
+            >
+              <Icon name="lucide:circle" class="size-3.5" />
+              <span>Smooth</span>
+            </div>
+            <div
+              class="flex-1 bg-gradient-to-br from-purple-900 via-violet-800 to-cyan-900"
+            ></div>
+          </div>
+          <div
+            class="flex h-[300px] w-[400px] flex-col overflow-hidden rounded-xl"
+          >
+            <div
+              class="flex shrink-0 items-center gap-2 border-b border-white bg-gradient-to-t from-[#0D0716] to-[#060606] px-3 py-2 text-sm"
+            >
+              <Icon name="lucide:code" class="size-3.5" />
+              <span>Reliable</span>
+            </div>
+            <div
+              class="flex-1 bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-900"
+            ></div>
+          </div>
+          <div
+            class="flex h-[300px] w-[400px] flex-col overflow-hidden rounded-xl"
+          >
+            <div
+              class="flex shrink-0 items-center gap-2 border-b border-white bg-gradient-to-t from-[#0D0716] to-[#060606] px-3 py-2 text-sm"
+            >
+              <Icon name="lucide:sliders-horizontal" class="size-3.5" />
+              <span>Customizable</span>
+            </div>
+            <div
+              class="flex-1 bg-gradient-to-br from-teal-900 via-emerald-800 to-violet-900"
+            ></div>
+          </div>
+        </CardSwap>
+      </div>
     </div>
   </ComponentDemo>
 </template>

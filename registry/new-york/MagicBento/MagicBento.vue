@@ -71,7 +71,7 @@
       enableBorderGlow: true,
       enableParticles: true,
       enableTilt: false,
-      enableMagnetism: true,
+      enableMagnetism: false,
       clickEffect: true,
       textAutoHide: true,
       class: '',
@@ -257,7 +257,7 @@
     const card = cardEls.value[idx];
     if (!card) return;
     card.style.transform = '';
-    card.style.transition = 'transform .3s cubic-bezier(.22,1,.36,1)';
+    card.style.transition = '';
   }
 
   function onMove(idx: number, e: MouseEvent) {
@@ -392,7 +392,7 @@
     border: 1px solid #392e4e;
     font-weight: 300;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.3s ease;
 
     --glow-x: 50%;
     --glow-y: 50%;
@@ -401,9 +401,7 @@
   }
 
   .magic-bento-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    z-index: 2;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 8px 25px;
   }
 
   .magic-bento-card__header,
@@ -461,12 +459,12 @@
     content: '';
     position: absolute;
     inset: 0;
-    padding: 1px;
+    padding: 6px;
     background: radial-gradient(
       var(--glow-radius) circle at var(--glow-x) var(--glow-y),
-      rgba(var(--glow-color), calc(var(--glow-intensity) * 0.6)) 0%,
-      rgba(var(--glow-color), calc(var(--glow-intensity) * 0.2)) 40%,
-      transparent 70%
+      rgba(var(--glow-color), calc(var(--glow-intensity) * 0.8)) 0%,
+      rgba(var(--glow-color), calc(var(--glow-intensity) * 0.4)) 30%,
+      transparent 60%
     );
     border-radius: inherit;
     -webkit-mask:
@@ -474,17 +472,18 @@
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask:
-      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0) content-box exclude,
       linear-gradient(#fff 0 0);
-    mask-composite: exclude;
     pointer-events: none;
+    opacity: 1;
+    transition: opacity 0.3s;
     z-index: 1;
   }
 
   .magic-bento-card--border-glow:hover {
     box-shadow:
-      0 8px 24px rgba(46, 24, 78, 0.3),
-      0 0 20px rgba(var(--glow-color), 0.1);
+      0 4px 20px rgba(46, 24, 78, 0.4),
+      0 0 30px rgba(var(--glow-color), 0.2);
   }
 
   /* Responsive */
