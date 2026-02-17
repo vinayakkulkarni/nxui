@@ -598,6 +598,11 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Profile card grid with mouse-tracking spotlight reveal and per-card hover glow.',
     deps: ['@vueuse/core'],
   },
+  'magic-bento': {
+    title: 'Magic Bento',
+    description: 'Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism.',
+    deps: ['@vueuse/core'],
+  },
   'masonry': {
     title: 'Masonry',
     description: 'Responsive masonry image grid with blur-to-focus entrance animation and hover scaling.',

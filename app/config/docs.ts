@@ -119,6 +119,7 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/glass-surface',
       },
       { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
+      { title: 'Magic Bento', path: '/docs/components/magic-bento' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
       { title: 'Masonry', path: '/docs/components/masonry' },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },

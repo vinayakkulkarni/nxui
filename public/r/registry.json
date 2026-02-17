@@ -676,6 +676,12 @@
       "description": "Profile card grid with mouse-tracking spotlight reveal and per-card hover glow."
     },
     {
+      "name": "magic-bento",
+      "type": "registry:ui",
+      "title": "Magic Bento",
+      "description": "Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism."
+    },
+    {
       "name": "masonry",
       "type": "registry:ui",
       "title": "Masonry",

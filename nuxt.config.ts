@@ -45,6 +45,16 @@ export default defineNuxtConfig({
     '@registry': '../registry',
   },
 
+  ogImage: {
+    zeroRuntime: true,
+    fonts: ['Inter:400', 'Inter:700', 'Inter:800'],
+    defaults: {
+      component: 'NxuiDoc',
+      width: 1200,
+      height: 630,
+    },
+  },
+
   site: {
     name: 'nxui',
     description: 'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v.',
@@ -80,6 +90,10 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'cloudflare-pages',
+    prerender: {
+      crawlLinks: true,
+      routes: ['/'],
+    },
     cloudflare: {
       nodeCompat: true,
     },
