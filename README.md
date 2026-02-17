@@ -9,13 +9,11 @@
 
 Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. Copy, paste, and ship.
 
-An exact Vue port of [componentry.fun](https://www.componentry.fun) — all the same stunning components, zero React.
-
 ## Features
 
 - **29 Animated Components** — Buttons, cards, visual effects, text animations, hero backgrounds
 - **Vue 3 + Nuxt 4** — Composition API with `<script setup>`, fully typed
-- **motion-v** — Vue equivalent of Framer Motion for smooth animations
+- **motion-v** — Production-grade animation library for smooth transitions
 - **Tailwind CSS v4** — Modern oklch color system with light/dark mode
 - **shadcn-vue CLI** — Copy and paste components into your project
 - **Cloudflare Pages** — Edge-deployed for fast global access
@@ -83,7 +81,7 @@ An exact Vue port of [componentry.fun](https://www.componentry.fun) — all the 
 | Framework | [Nuxt 4](https://nuxt.com) |
 | UI | [Vue 3](https://vuejs.org) Composition API |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) |
-| Animation | [motion-v](https://github.com/motiondivision/motion-v) |
+| Animation | [motion-v](https://github.com/motiondivision/motion-vue) |
 | Utilities | [VueUse](https://vueuse.org) |
 | Content | [@nuxt/content](https://content.nuxt.com) |
 | Icons | [@nuxt/icon](https://nuxt.com/modules/icon) (Iconify) |
@@ -129,6 +127,5 @@ bun run build:registry
 
 ## Credits
 
-- [componentry.fun](https://www.componentry.fun) — Original React component library (reference implementation)
 - [shadcn-vue](https://www.shadcn-vue.com) — Vue port of shadcn/ui
-- [motion-v](https://github.com/motiondivision/motion-v) — Vue animation library (Framer Motion equivalent)
+- [motion-v](https://github.com/motiondivision/motion-vue) — Vue animation library
