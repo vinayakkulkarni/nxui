@@ -152,7 +152,10 @@ void main() {
     const gl = renderer.gl;
     gl.canvas.style.width = `${w}px`;
     gl.canvas.style.height = `${h}px`;
-    program.uniforms.iResolution.value.set(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height);
+    const res = program.uniforms.iResolution.value as Float32Array;
+    res[0] = gl.canvas.width;
+    res[1] = gl.canvas.height;
+    res[2] = gl.canvas.width / gl.canvas.height;
   }
 
   useResizeObserver(containerRef, resize);
@@ -187,12 +190,12 @@ void main() {
       fragment: fragmentShader,
       uniforms: {
         iTime: { value: 0 },
-        iResolution: { value: { set: (x: number, y: number, z: number) => { program!.uniforms.iResolution.value = { x, y, z, set: program!.uniforms.iResolution.value.set }; }, x: gl.canvas.width, y: gl.canvas.height, z: gl.canvas.width / gl.canvas.height } },
+        iResolution: { value: new Float32Array([gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height]) },
         hue: { value: props.hue },
         hover: { value: 0 },
         rot: { value: 0 },
         hoverIntensity: { value: props.hoverIntensity },
-        backgroundColor: { value: bgColor },
+        backgroundColor: { value: new Float32Array(bgColor) },
       },
     });
     mesh = new Mesh(gl, { geometry, program });
@@ -205,7 +208,9 @@ void main() {
       program.uniforms.iTime.value = t * 0.001;
       program.uniforms.hue.value = props.hue;
       program.uniforms.hoverIntensity.value = props.hoverIntensity;
-      program.uniforms.backgroundColor.value = hexToVec3(props.backgroundColor);
+      const bg = hexToVec3(props.backgroundColor);
+      const bgArr = program.uniforms.backgroundColor.value as Float32Array;
+      bgArr[0] = bg[0]; bgArr[1] = bg[1]; bgArr[2] = bg[2];
       const effectiveHover = props.forceHoverState ? 1 : targetHover;
       program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
       if (props.rotateOnHover && effectiveHover > 0.5) currentRot += dt * 0.3;

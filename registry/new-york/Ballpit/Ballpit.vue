@@ -454,7 +454,7 @@ RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometr
       timeInfo.delta = clockRef.getDelta();
       timeInfo.elapsed += timeInfo.delta;
 
-      updatePhysics(timeInfo);
+      updatePhysics(timeInfo.delta);
       updateMesh();
       rendererRef.render(sceneRef, cameraRef);
     }

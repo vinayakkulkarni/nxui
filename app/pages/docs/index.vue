@@ -26,10 +26,12 @@ useSeoMeta({
   twitterDescription: page.value?.description,
 });
 
-defineOgImageComponent('NxuiDoc', {
-  title: page.value?.title,
-  description: page.value?.description,
-});
+if (import.meta.server) {
+  defineOgImageComponent('NxuiDoc', {
+    title: page.value?.title,
+    description: page.value?.description,
+  });
+}
 </script>
 
 <template>
