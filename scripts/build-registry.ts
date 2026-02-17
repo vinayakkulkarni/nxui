@@ -533,6 +533,31 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.',
     deps: ['@vueuse/core'],
   },
+  'stepper': {
+    title: 'Stepper',
+    description: 'Multi-step wizard with animated step indicators and slide transitions.',
+    deps: [],
+  },
+  'carousel': {
+    title: 'Carousel',
+    description: 'Draggable card carousel with 3D perspective rotation and dot indicators.',
+    deps: ['@vueuse/core'],
+  },
+  'flowing-menu': {
+    title: 'Flowing Menu',
+    description: 'Hover-activated marquee menu with edge-aware slide-in animation.',
+    deps: [],
+  },
+  'flying-posters': {
+    title: 'Flying Posters',
+    description: 'OGL-powered vertical scroll gallery with rotating poster distortion.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'circular-gallery': {
+    title: 'Circular Gallery',
+    description: 'OGL-powered curved image gallery with drag/scroll navigation and wave deformation.',
+    deps: ['ogl', '@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

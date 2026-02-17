@@ -63,6 +63,11 @@ export const docsNav: NavGroup[] = [
     items: [
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
+      { title: 'Carousel', path: '/docs/components/carousel' },
+      {
+        title: 'Circular Gallery',
+        path: '/docs/components/circular-gallery',
+      },
       {
         title: 'Collection Surfer',
         path: '/docs/components/collection-surfer',
@@ -77,6 +82,14 @@ export const docsNav: NavGroup[] = [
         title: 'Flight Status Card',
         path: '/docs/components/flight-status-card',
       },
+      {
+        title: 'Flowing Menu',
+        path: '/docs/components/flowing-menu',
+      },
+      {
+        title: 'Flying Posters',
+        path: '/docs/components/flying-posters',
+      },
       { title: 'GitHub Calendar', path: '/docs/components/github-calendar' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },
@@ -84,6 +97,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
       { title: 'Spotlight Card', path: '/docs/components/spotlight-card' },
       { title: 'Stack', path: '/docs/components/stack' },
+      { title: 'Stepper', path: '/docs/components/stepper' },
       {
         title: 'Testimonial Marquee',
         path: '/docs/components/testimonial-marquee',

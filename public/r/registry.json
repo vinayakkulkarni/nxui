@@ -596,6 +596,36 @@
       "type": "registry:ui",
       "title": "Pixel Card",
       "description": "Canvas pixel shimmer card with hover-activated sparkle effect and preset variants."
+    },
+    {
+      "name": "stepper",
+      "type": "registry:ui",
+      "title": "Stepper",
+      "description": "Multi-step wizard with animated step indicators and slide transitions."
+    },
+    {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Draggable card carousel with 3D perspective rotation and dot indicators."
+    },
+    {
+      "name": "flowing-menu",
+      "type": "registry:ui",
+      "title": "Flowing Menu",
+      "description": "Hover-activated marquee menu with edge-aware slide-in animation."
+    },
+    {
+      "name": "flying-posters",
+      "type": "registry:ui",
+      "title": "Flying Posters",
+      "description": "OGL-powered vertical scroll gallery with rotating poster distortion."
+    },
+    {
+      "name": "circular-gallery",
+      "type": "registry:ui",
+      "title": "Circular Gallery",
+      "description": "OGL-powered curved image gallery with drag/scroll navigation and wave deformation."
     }
   ]
 }
