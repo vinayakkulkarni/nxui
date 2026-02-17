@@ -103,6 +103,13 @@ export default defineNuxtConfig({
     cloudflare: {
       nodeCompat: true,
     },
+    experimental: {
+      wasm: true,
+    },
+    wasm: {
+      esmImport: true,
+      lazy: true,
+    },
     rollupConfig: {
       output: {
         generatedCode: {
