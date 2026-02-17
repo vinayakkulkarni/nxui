@@ -470,6 +470,48 @@
       "type": "registry:ui",
       "title": "Grid Motion",
       "description": "A rotated grid of items that shifts horizontally based on cursor position with smooth easing."
+    },
+    {
+      "name": "animated-content",
+      "type": "registry:ui",
+      "title": "Animated Content",
+      "description": "Scroll-triggered entrance animation with configurable direction, distance, and easing."
+    },
+    {
+      "name": "fade-content",
+      "type": "registry:ui",
+      "title": "Fade Content",
+      "description": "Scroll-triggered fade-in with optional blur effect."
+    },
+    {
+      "name": "click-spark",
+      "type": "registry:ui",
+      "title": "Click Spark",
+      "description": "Click-triggered spark burst animation rendered on canvas."
+    },
+    {
+      "name": "star-border",
+      "type": "registry:ui",
+      "title": "Star Border",
+      "description": "Animated glowing border effect with dual radial gradient beams."
+    },
+    {
+      "name": "magnet",
+      "type": "registry:ui",
+      "title": "Magnet",
+      "description": "Element that magnetically pulls toward the cursor when nearby."
+    },
+    {
+      "name": "crosshair",
+      "type": "registry:ui",
+      "title": "Crosshair",
+      "description": "Smooth crosshair cursor replacement with horizontal and vertical lines."
+    },
+    {
+      "name": "gradual-blur",
+      "type": "registry:ui",
+      "title": "Gradual Blur",
+      "description": "Layered backdrop-filter blur gradient overlay for smooth edge fading."
     }
   ]
 }

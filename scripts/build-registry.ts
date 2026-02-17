@@ -428,6 +428,41 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'A rotated grid of items that shifts horizontally based on cursor position with smooth easing.',
     deps: ['@vueuse/core'],
   },
+  'animated-content': {
+    title: 'Animated Content',
+    description: 'Scroll-triggered entrance animation with configurable direction, distance, and easing.',
+    deps: ['@vueuse/core'],
+  },
+  'fade-content': {
+    title: 'Fade Content',
+    description: 'Scroll-triggered fade-in with optional blur effect.',
+    deps: ['@vueuse/core'],
+  },
+  'click-spark': {
+    title: 'Click Spark',
+    description: 'Click-triggered spark burst animation rendered on canvas.',
+    deps: ['@vueuse/core'],
+  },
+  'star-border': {
+    title: 'Star Border',
+    description: 'Animated glowing border effect with dual radial gradient beams.',
+    deps: [],
+  },
+  'magnet': {
+    title: 'Magnet',
+    description: 'Element that magnetically pulls toward the cursor when nearby.',
+    deps: ['@vueuse/core'],
+  },
+  'crosshair': {
+    title: 'Crosshair',
+    description: 'Smooth crosshair cursor replacement with horizontal and vertical lines.',
+    deps: ['@vueuse/core'],
+  },
+  'gradual-blur': {
+    title: 'Gradual Blur',
+    description: 'Layered backdrop-filter blur gradient overlay for smooth edge fading.',
+    deps: [],
+  },
 };
 
 function slugToPascal(slug: string): string {

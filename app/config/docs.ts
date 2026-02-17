@@ -121,6 +121,21 @@ export const docsNav: NavGroup[] = [
     ],
   },
   {
+    title: 'Animations',
+    items: [
+      {
+        title: 'Animated Content',
+        path: '/docs/animations/animated-content',
+      },
+      { title: 'Click Spark', path: '/docs/animations/click-spark' },
+      { title: 'Crosshair', path: '/docs/animations/crosshair' },
+      { title: 'Fade Content', path: '/docs/animations/fade-content' },
+      { title: 'Gradual Blur', path: '/docs/animations/gradual-blur' },
+      { title: 'Magnet', path: '/docs/animations/magnet' },
+      { title: 'Star Border', path: '/docs/animations/star-border' },
+    ],
+  },
+  {
     title: 'Backgrounds',
     items: [
       { title: 'Aurora', path: '/docs/backgrounds/aurora' },
