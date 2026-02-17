@@ -127,7 +127,9 @@ export const docsNav: NavGroup[] = [
         title: 'Animated Content',
         path: '/docs/animations/animated-content',
       },
+      { title: 'Blob Cursor', path: '/docs/animations/blob-cursor' },
       { title: 'Click Spark', path: '/docs/animations/click-spark' },
+      { title: 'Cubes', path: '/docs/animations/cubes' },
       { title: 'Crosshair', path: '/docs/animations/crosshair' },
       {
         title: 'Electric Border',
@@ -137,6 +139,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Glare Hover', path: '/docs/animations/glare-hover' },
       { title: 'Gradual Blur', path: '/docs/animations/gradual-blur' },
       { title: 'Magnet', path: '/docs/animations/magnet' },
+      { title: 'Meta Balls', path: '/docs/animations/meta-balls' },
       {
         title: 'Pixel Transition',
         path: '/docs/animations/pixel-transition',

@@ -483,6 +483,21 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Animated electric border with noise-driven distortion and glow effects.',
     deps: ['@vueuse/core'],
   },
+  'meta-balls': {
+    title: 'Meta Balls',
+    description: 'WebGL 2 metaball shader with cursor-reactive ball and configurable colors.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'blob-cursor': {
+    title: 'Blob Cursor',
+    description: 'Gooey blob cursor trail with SVG filter and configurable appearance.',
+    deps: ['@vueuse/core'],
+  },
+  'cubes': {
+    title: 'Cubes',
+    description: 'Interactive 3D CSS cube grid that tilts toward cursor with auto-animation.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

@@ -536,6 +536,24 @@
       "type": "registry:ui",
       "title": "Electric Border",
       "description": "Animated electric border with noise-driven distortion and glow effects."
+    },
+    {
+      "name": "meta-balls",
+      "type": "registry:ui",
+      "title": "Meta Balls",
+      "description": "WebGL 2 metaball shader with cursor-reactive ball and configurable colors."
+    },
+    {
+      "name": "blob-cursor",
+      "type": "registry:ui",
+      "title": "Blob Cursor",
+      "description": "Gooey blob cursor trail with SVG filter and configurable appearance."
+    },
+    {
+      "name": "cubes",
+      "type": "registry:ui",
+      "title": "Cubes",
+      "description": "Interactive 3D CSS cube grid that tilts toward cursor with auto-animation."
     }
   ]
 }
