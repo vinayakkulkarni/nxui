@@ -72,6 +72,10 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/bubble-menu',
       },
       {
+        title: 'Card Nav',
+        path: '/docs/components/card-nav',
+      },
+      {
         title: 'Card Swap',
         path: '/docs/components/card-swap',
       },
@@ -110,11 +114,23 @@ export const docsNav: NavGroup[] = [
       { title: 'Folder', path: '/docs/components/folder' },
       { title: 'GitHub Calendar', path: '/docs/components/github-calendar' },
       { title: 'Glass Icons', path: '/docs/components/glass-icons' },
+      {
+        title: 'Glass Surface',
+        path: '/docs/components/glass-surface',
+      },
       { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
       { title: 'Masonry', path: '/docs/components/masonry' },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },
       { title: 'Pixel Card', path: '/docs/components/pixel-card' },
+      {
+        title: 'Profile Card',
+        path: '/docs/components/profile-card',
+      },
+      {
+        title: 'Reflective Card',
+        path: '/docs/components/reflective-card',
+      },
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
       { title: 'Spotlight Card', path: '/docs/components/spotlight-card' },
       { title: 'Stack', path: '/docs/components/stack' },

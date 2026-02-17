@@ -680,6 +680,30 @@
       "type": "registry:ui",
       "title": "Masonry",
       "description": "Responsive masonry image grid with blur-to-focus entrance animation and hover scaling."
+    },
+    {
+      "name": "card-nav",
+      "type": "registry:ui",
+      "title": "Card Nav",
+      "description": "Expandable navbar with staggered card reveal, hamburger toggle, and color-coded panels."
+    },
+    {
+      "name": "glass-surface",
+      "type": "registry:ui",
+      "title": "Glass Surface",
+      "description": "SVG displacement-based glass distortion with chromatic aberration and frosted backdrop filter."
+    },
+    {
+      "name": "profile-card",
+      "type": "registry:ui",
+      "title": "Profile Card",
+      "description": "Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax."
+    },
+    {
+      "name": "reflective-card",
+      "type": "registry:ui",
+      "title": "Reflective Card",
+      "description": "Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration."
     }
   ]
 }

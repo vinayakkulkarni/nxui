@@ -603,6 +603,26 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Responsive masonry image grid with blur-to-focus entrance animation and hover scaling.',
     deps: ['@vueuse/core'],
   },
+  'card-nav': {
+    title: 'Card Nav',
+    description: 'Expandable navbar with staggered card reveal, hamburger toggle, and color-coded panels.',
+    deps: ['@vueuse/core'],
+  },
+  'glass-surface': {
+    title: 'Glass Surface',
+    description: 'SVG displacement-based glass distortion with chromatic aberration and frosted backdrop filter.',
+    deps: ['@vueuse/core'],
+  },
+  'profile-card': {
+    title: 'Profile Card',
+    description: 'Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax.',
+    deps: ['@vueuse/core'],
+  },
+  'reflective-card': {
+    title: 'Reflective Card',
+    description: 'Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.',
+    deps: [],
+  },
 };
 
 function slugToPascal(slug: string): string {
