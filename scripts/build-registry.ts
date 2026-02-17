@@ -498,6 +498,11 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Interactive 3D CSS cube grid that tilts toward cursor with auto-animation.',
     deps: ['@vueuse/core'],
   },
+  'shape-blur': {
+    title: 'Shape Blur',
+    description: 'SDF shape with cursor-reactive blur distortion rendered via Three.js shaders.',
+    deps: ['three', '@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

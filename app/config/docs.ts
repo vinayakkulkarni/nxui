@@ -145,6 +145,7 @@ export const docsNav: NavGroup[] = [
         path: '/docs/animations/pixel-transition',
       },
       { title: 'Ribbons', path: '/docs/animations/ribbons' },
+      { title: 'Shape Blur', path: '/docs/animations/shape-blur' },
       { title: 'Star Border', path: '/docs/animations/star-border' },
     ],
   },
