@@ -155,7 +155,9 @@
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) return;
     gl.useProgram(program);
 
-    const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1]);
+    const vertices = new Float32Array([
+      -1, -1, 1, -1, -1, 1, -1, 1, 1, -1, 1, 1,
+    ]);
     const vertexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
@@ -199,5 +201,5 @@
 </script>
 
 <template>
-  <canvas ref="canvasRef" :class="cn('size-full', $props.class)" />
+  <canvas ref="canvasRef" :class="cn('size-full', $props.class)"></canvas>
 </template>

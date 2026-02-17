@@ -13,7 +13,12 @@
 </template>`"
   >
     <div class="flex h-[200px] w-full items-center justify-center">
-      <SplitText text="Hello, Split Text!" by="chars" :delay="50" class="text-4xl font-bold" />
+      <SplitText
+        text="Hello, Split Text!"
+        by="chars"
+        :delay="50"
+        class="text-4xl font-bold"
+      />
     </div>
   </ComponentDemo>
 </template>

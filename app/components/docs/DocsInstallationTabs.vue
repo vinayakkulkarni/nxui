@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { cn } from '~/lib/utils';
+  import { cn } from '~/lib/utils';
 
-const method = ref<'cli' | 'manual'>('cli');
+  const method = ref<'cli' | 'manual'>('cli');
 </script>
 
 <template>
@@ -37,10 +37,10 @@ const method = ref<'cli' | 'manual'>('cli');
 
     <div class="min-h-[100px]">
       <div v-show="method === 'cli'">
-        <slot name="cli" />
+        <slot name="cli"></slot>
       </div>
       <div v-show="method === 'manual'">
-        <slot name="manual" />
+        <slot name="manual"></slot>
       </div>
     </div>
   </div>

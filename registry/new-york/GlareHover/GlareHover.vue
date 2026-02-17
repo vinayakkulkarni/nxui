@@ -35,16 +35,16 @@
 
   const rgba = computed(() => {
     const hex = props.glareColor.replace('#', '');
-    if (/^[0-9A-Fa-f]{6}$/.test(hex)) {
-      const r = parseInt(hex.slice(0, 2), 16);
-      const g = parseInt(hex.slice(2, 4), 16);
-      const b = parseInt(hex.slice(4, 6), 16);
+    if (/^[0-9A-F]{6}$/i.test(hex)) {
+      const r = Number.parseInt(hex.slice(0, 2), 16);
+      const g = Number.parseInt(hex.slice(2, 4), 16);
+      const b = Number.parseInt(hex.slice(4, 6), 16);
       return `rgba(${r}, ${g}, ${b}, ${props.glareOpacity})`;
     }
-    if (/^[0-9A-Fa-f]{3}$/.test(hex)) {
-      const r = parseInt(hex[0] + hex[0], 16);
-      const g = parseInt(hex[1] + hex[1], 16);
-      const b = parseInt(hex[2] + hex[2], 16);
+    if (/^[0-9A-F]{3}$/i.test(hex)) {
+      const r = Number.parseInt(hex[0] + hex[0], 16);
+      const g = Number.parseInt(hex[1] + hex[1], 16);
+      const b = Number.parseInt(hex[2] + hex[2], 16);
       return `rgba(${r}, ${g}, ${b}, ${props.glareOpacity})`;
     }
     return props.glareColor;
@@ -65,10 +65,16 @@
 
 <template>
   <div
-    :class="cn('glare-hover-wrap', playOnce ? 'glare-hover--play-once' : '', $props.class)"
+    :class="
+      cn(
+        'glare-hover-wrap',
+        playOnce ? 'glare-hover--play-once' : '',
+        $props.class,
+      )
+    "
     :style="cssVars"
   >
-    <slot />
+    <slot></slot>
   </div>
 </template>
 

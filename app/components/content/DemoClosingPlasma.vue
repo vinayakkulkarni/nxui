@@ -1,35 +1,35 @@
 <script setup lang="ts">
-import ClosingPlasma from '@registry/new-york/ClosingPlasma/ClosingPlasma.vue';
+  import ClosingPlasma from '@registry/new-york/ClosingPlasma/ClosingPlasma.vue';
 
-const activeTab = ref(0);
+  const activeTab = ref(0);
 
-const tabs = [
-  {
-    label: 'Default',
-    props: {},
-    code: `<ClosingPlasma class="h-[400px]" />`,
-  },
-  {
-    label: 'Custom Colors',
-    props: {
-      darkColorA: '#0a0a1e',
-      darkColorB: '#1a1a4e',
-      darkColorC: '#6366f1',
+  const tabs = [
+    {
+      label: 'Default',
+      props: {},
+      code: `<ClosingPlasma class="h-[400px]" />`,
     },
-    code: `<ClosingPlasma dark-color-a="#0a0a1e" dark-color-b="#1a1a4e" dark-color-c="#6366f1" class="h-[400px]" />`,
-  },
-  {
-    label: 'High Turbulence',
-    props: { turbulence: 2, speed: 1.5 },
-    code: `<ClosingPlasma :turbulence="2" :speed="1.5" class="h-[400px]" />`,
-  },
-];
+    {
+      label: 'Custom Colors',
+      props: {
+        darkColorA: '#0a0a1e',
+        darkColorB: '#1a1a4e',
+        darkColorC: '#6366f1',
+      },
+      code: `<ClosingPlasma dark-color-a="#0a0a1e" dark-color-b="#1a1a4e" dark-color-c="#6366f1" class="h-[400px]" />`,
+    },
+    {
+      label: 'High Turbulence',
+      props: { turbulence: 2, speed: 1.5 },
+      code: `<ClosingPlasma :turbulence="2" :speed="1.5" class="h-[400px]" />`,
+    },
+  ];
 
-const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]);
 
-function handleTabClick(index: number) {
-  activeTab.value = index;
-}
+  function handleTabClick(index: number) {
+    activeTab.value = index;
+  }
 </script>
 
 <template>
@@ -48,12 +48,16 @@ function handleTabClick(index: number) {
           </div>
         </ClosingPlasma>
         <template #fallback>
-          <div class="flex h-[400px] w-full items-center justify-center rounded-lg bg-zinc-900">
+          <div
+            class="flex h-[400px] w-full items-center justify-center rounded-lg bg-zinc-900"
+          >
             <span class="text-sm text-white/50">Loading plasma...</span>
           </div>
         </template>
       </ClientOnly>
-      <div class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2">
+      <div
+        class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2"
+      >
         <button
           v-for="(tab, index) in tabs"
           :key="tab.label"

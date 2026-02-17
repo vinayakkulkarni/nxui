@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
+  import { ref, computed, onMounted, nextTick } from 'vue';
   import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
@@ -101,9 +101,12 @@
       nextTick(() => {
         navHeight.value = `${calculateHeight()}px`;
         displayedItems.value.forEach((_, i) => {
-          setTimeout(() => {
-            cardVisible.value[i] = true;
-          }, 80 * i + 100);
+          setTimeout(
+            () => {
+              cardVisible.value[i] = true;
+            },
+            80 * i + 100,
+          );
         });
       });
     } else {
@@ -147,19 +150,27 @@
           @click="toggle"
           @keydown.enter="toggle"
         >
-          <div class="cn-line" />
-          <div class="cn-line" />
+          <div class="cn-line"></div>
+          <div class="cn-line"></div>
         </div>
 
         <div class="cn-logo">
-          <img v-if="props.logo" :src="props.logo" :alt="props.logoAlt" class="cn-logo-img" />
+          <img
+            v-if="props.logo"
+            :src="props.logo"
+            :alt="props.logoAlt"
+            class="cn-logo-img"
+          />
           <span v-else class="cn-logo-text">Logo</span>
         </div>
 
         <button
           type="button"
           class="cn-cta"
-          :style="{ backgroundColor: props.buttonBgColor, color: props.buttonTextColor }"
+          :style="{
+            backgroundColor: props.buttonBgColor,
+            color: props.buttonTextColor,
+          }"
         >
           Get Started
         </button>

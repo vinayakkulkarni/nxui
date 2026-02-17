@@ -1,18 +1,25 @@
 <script setup lang="ts">
   import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
-  import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
-  const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
+  const DEFAULT_INNER_GRADIENT =
+    'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
   const INITIAL_DURATION = 1200;
   const INITIAL_X_OFFSET = 70;
   const INITIAL_Y_OFFSET = 60;
   const ENTER_TRANSITION_MS = 180;
 
-  const clamp = (v: number, min = 0, max = 100) => Math.min(Math.max(v, min), max);
-  const round = (v: number, precision = 3) => parseFloat(v.toFixed(precision));
-  const adjust = (v: number, fMin: number, fMax: number, tMin: number, tMax: number) =>
-    round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
+  const clamp = (v: number, min = 0, max = 100) =>
+    Math.min(Math.max(v, min), max);
+  const round = (v: number, precision = 3) =>
+    Number.parseFloat(v.toFixed(precision));
+  const adjust = (
+    v: number,
+    fMin: number,
+    fMax: number,
+    tMin: number,
+    tMax: number,
+  ) => round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
 
   const props = withDefaults(
     defineProps<{
@@ -31,7 +38,8 @@
       class?: string;
     }>(),
     {
-      avatarUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop',
+      avatarUrl:
+        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop',
       innerGradient: DEFAULT_INNER_GRADIENT,
       behindGlowEnabled: true,
       behindGlowColor: 'rgba(125, 190, 255, 0.67)',
@@ -90,7 +98,10 @@
     s.setProperty('--pointer-y', `${percentY}%`);
     s.setProperty('--background-x', `${adjust(percentX, 0, 100, 35, 65)}%`);
     s.setProperty('--background-y', `${adjust(percentY, 0, 100, 35, 65)}%`);
-    s.setProperty('--pointer-from-center', `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`);
+    s.setProperty(
+      '--pointer-from-center',
+      `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
+    );
     s.setProperty('--pointer-from-top', `${percentY / 100}`);
     s.setProperty('--pointer-from-left', `${percentX / 100}`);
     s.setProperty('--rotate-x', `${round(-(centerX / 5))}deg`);
@@ -110,7 +121,9 @@
     currentY += (targetY - currentY) * k;
     setVarsFromXY(currentX, currentY);
 
-    const stillFar = Math.abs(targetX - currentX) > 0.05 || Math.abs(targetY - currentY) > 0.05;
+    const stillFar =
+      Math.abs(targetX - currentX) > 0.05 ||
+      Math.abs(targetY - currentY) > 0.05;
     if (stillFar || document.hasFocus()) {
       rafId = requestAnimationFrame(step);
     } else {
@@ -210,16 +223,12 @@
 </script>
 
 <template>
-  <div
-    ref="wrapRef"
-    :class="cn('pc-wrapper', props.class)"
-    :style="cardStyle"
-  >
+  <div ref="wrapRef" :class="cn('pc-wrapper', props.class)" :style="cardStyle">
     <div
       v-if="props.behindGlowEnabled"
       class="pc-behind"
       :style="{ opacity: 0.8 * cardOpacity }"
-    />
+    ></div>
     <div
       ref="shellRef"
       class="pc-shell"
@@ -229,8 +238,8 @@
     >
       <section :class="['pc-card', { active: isActive, entering: isEntering }]">
         <div class="pc-inside">
-          <div class="pc-shine" />
-          <div class="pc-glare" />
+          <div class="pc-shine"></div>
+          <div class="pc-glare"></div>
           <div class="pc-avatar-content">
             <img
               class="pc-avatar"
@@ -248,9 +257,7 @@
                   />
                 </div>
                 <div class="pc-user-text">
-                  <div class="pc-handle">
-                    @{{ props.handle }}
-                  </div>
+                  <div class="pc-handle">@{{ props.handle }}</div>
                   <div class="pc-status">
                     {{ props.status }}
                   </div>
@@ -443,7 +450,11 @@
         var(--sunpillar-2),
         var(--sunpillar-3)
       ),
-      radial-gradient(circle at var(--pointer-x) var(--pointer-y), hsl(0, 0%, 70%) 0%, hsla(0, 0%, 30%, 0.2) 90%);
+      radial-gradient(
+        circle at var(--pointer-x) var(--pointer-y),
+        hsl(0, 0%, 70%) 0%,
+        hsla(0, 0%, 30%, 0.2) 90%
+      );
     background-size:
       250% 250%,
       100% 100%;
@@ -451,7 +462,8 @@
       var(--pointer-x) var(--pointer-y),
       center;
     background-blend-mode: color-dodge;
-    filter: brightness(calc(2 - var(--pointer-from-center))) contrast(calc(var(--pointer-from-center) + 2))
+    filter: brightness(calc(2 - var(--pointer-from-center)))
+      contrast(calc(var(--pointer-from-center) + 2))
       saturate(calc(0.5 + var(--pointer-from-center)));
     mix-blend-mode: luminosity;
   }
@@ -494,8 +506,8 @@
     position: absolute;
     left: 50%;
     transform-origin: 50% 100%;
-    transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px)) translateZ(0)
-      scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02))
+    transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px))
+      translateZ(0) scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02))
       scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
     bottom: -1px;
     backface-visibility: hidden;
@@ -519,7 +531,9 @@
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: calc(max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias)));
+    border-radius: calc(
+      max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias))
+    );
     padding: 12px 14px;
     pointer-events: auto;
   }
@@ -635,13 +649,27 @@
   }
 
   @keyframes glow-bg {
-    0% { --bgrotate: 0deg; }
-    100% { --bgrotate: 360deg; }
+    0% {
+      --bgrotate: 0deg;
+    }
+    100% {
+      --bgrotate: 360deg;
+    }
   }
 
   @keyframes holo-bg {
-    0% { background-position: 0 var(--background-y), 0 0, center; }
-    100% { background-position: 0 var(--background-y), 90% 90%, center; }
+    0% {
+      background-position:
+        0 var(--background-y),
+        0 0,
+        center;
+    }
+    100% {
+      background-position:
+        0 var(--background-y),
+        90% 90%,
+        center;
+    }
   }
 
   @media (max-width: 768px) {
@@ -649,14 +677,35 @@
       height: 70svh;
       max-height: 450px;
     }
-    .pc-details { top: 2em; }
-    .pc-details h3 { font-size: min(4svh, 2.5em); }
-    .pc-details p { font-size: 14px; }
-    .pc-user-info { --ui-inset: 15px; padding: 10px 12px; }
-    .pc-mini-avatar { width: 28px; height: 28px; }
-    .pc-user-details { gap: 10px; }
-    .pc-handle { font-size: 13px; }
-    .pc-status { font-size: 10px; }
-    .pc-contact-btn { padding: 6px 12px; font-size: 11px; }
+    .pc-details {
+      top: 2em;
+    }
+    .pc-details h3 {
+      font-size: min(4svh, 2.5em);
+    }
+    .pc-details p {
+      font-size: 14px;
+    }
+    .pc-user-info {
+      --ui-inset: 15px;
+      padding: 10px 12px;
+    }
+    .pc-mini-avatar {
+      width: 28px;
+      height: 28px;
+    }
+    .pc-user-details {
+      gap: 10px;
+    }
+    .pc-handle {
+      font-size: 13px;
+    }
+    .pc-status {
+      font-size: 10px;
+    }
+    .pc-contact-btn {
+      padding: 6px 12px;
+      font-size: 11px;
+    }
   }
 </style>

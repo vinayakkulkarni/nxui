@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { cn } from '~/lib/utils';
+  import { cn } from '~/lib/utils';
 
-withDefaults(
-  defineProps<{
-    align?: 'center' | 'start' | 'end';
-    class?: string;
-  }>(),
-  { align: 'center' },
-);
+  withDefaults(
+    defineProps<{
+      align?: 'center' | 'start' | 'end';
+      class?: string;
+    }>(),
+    { align: 'center' },
+  );
 </script>
 
 <template>
@@ -23,7 +23,7 @@ withDefaults(
     "
   >
     <div class="min-w-fit">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

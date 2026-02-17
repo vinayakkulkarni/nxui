@@ -11,14 +11,13 @@
     }>(),
     {
       duration: 800,
-      characters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*',
+      characters:
+        'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*',
       class: '',
     },
   );
 
-  const displayText = ref(
-    props.text.split('').map(() => randomChar()),
-  );
+  const displayText = ref(props.text.split('').map(() => randomChar()));
   const revealed = ref(0);
   const isComplete = ref(false);
 

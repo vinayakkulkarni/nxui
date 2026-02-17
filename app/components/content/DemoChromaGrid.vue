@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <ComponentDemo :code="`<ChromaGrid :radius='300' :columns='3' :damping='0.12' />`">
+  <ComponentDemo
+    :code="`<ChromaGrid :radius='300' :columns='3' :damping='0.12' />`"
+  >
     <div class="relative w-full overflow-hidden rounded-lg bg-black p-4">
       <ChromaGrid :radius="300" :columns="3" :damping="0.12" />
     </div>

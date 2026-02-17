@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MatrixRain from '@registry/new-york/MatrixRain/MatrixRain.vue';
+  import MatrixRain from '@registry/new-york/MatrixRain/MatrixRain.vue';
 </script>
 
 <template>

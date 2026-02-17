@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import type { NavItem } from '~/types/docs';
+  import type { NavItem } from '~/types/docs';
 
-defineProps<{
-  title: string;
-  items: NavItem[];
-  activeHref: string | null;
-}>();
+  defineProps<{
+    title: string;
+    items: NavItem[];
+    activeHref: string | null;
+  }>();
 
-const emit = defineEmits<{
-  close: [];
-}>();
+  const emit = defineEmits<{
+    close: [];
+  }>();
 </script>
 
 <template>
@@ -32,7 +32,7 @@ const emit = defineEmits<{
           <span
             v-if="activeHref === item.path"
             class="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-[2px] rounded-full bg-foreground"
-          />
+          ></span>
           {{ item.title }}
         </NuxtLink>
       </li>

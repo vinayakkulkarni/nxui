@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import TextAnimate from '@registry/new-york/TextAnimate/TextAnimate.vue';
+  import TextAnimate from '@registry/new-york/TextAnimate/TextAnimate.vue';
 
-const animKey = ref(0);
+  const animKey = ref(0);
 
-function replay() {
-  animKey.value++;
-}
+  function replay() {
+    animKey.value++;
+  }
 </script>
 
 <template>
@@ -25,6 +25,12 @@ function replay() {
     >
       <Icon name="lucide:rotate-ccw" class="size-4" />
     </button>
-    <TextAnimate :key="animKey" text="Blur In Up By Word" animation="blur-in-up" by="word" class="text-4xl font-bold" />
+    <TextAnimate
+      :key="animKey"
+      text="Blur In Up By Word"
+      animation="blur-in-up"
+      by="word"
+      class="text-4xl font-bold"
+    />
   </ComponentDemo>
 </template>

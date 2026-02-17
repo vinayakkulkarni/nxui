@@ -3,6 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "description": "Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. Copy, paste, and ship.",
+  "license": "MIT",
+  "author": {
+    "name": "Vinayak Kulkarni",
+    "email": "inbox.vinayak@gmail.com",
+    "url": "https://vinayakkulkarni.dev"
+  },
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
@@ -24,6 +30,7 @@
     "@nuxt/icon": "^1.12.0",
     "@nuxtjs/color-mode": "^4.0.0",
     "@nuxtjs/plausible": "^3.0.1",
+    "@resvg/resvg-wasm": "^2.6.2",
     "@vueuse/core": "^14.2.1",
     "@vueuse/nuxt": "^14.2.1",
     "class-variance-authority": "^0.7.1",
@@ -33,6 +40,7 @@
     "nuxt-og-image": "^6.0.0-beta.32",
     "ogl": "^1.0.11",
     "reka-ui": "^2.8.0",
+    "satori": "^0.19.2",
     "shiki": "^3.21.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7",
@@ -53,18 +61,12 @@
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
     "lint-staged": "^16.1.0",
-    "oxfmt": "^0.10.0",
+    "oxfmt": "^0.33.0",
     "oxlint": "^1.2.0",
     "tailwindcss": "^4.1.18",
     "typescript": "^5.8.0",
     "vue": "^3.5.16",
     "wrangler": "^4.59.2"
   },
-  "packageManager": "bun@1.3.9",
-  "author": {
-    "name": "Vinayak Kulkarni",
-    "email": "inbox.vinayak@gmail.com",
-    "url": "https://vinayakkulkarni.dev"
-  },
-  "license": "MIT"
+  "packageManager": "bun@1.3.9"
 }

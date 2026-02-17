@@ -33,7 +33,10 @@ export function useGalaxyInteractions(
   };
 
   const onMouseLeave = () => {
-    if (!state.isDragging) { state.mouse.x = 0; state.mouse.y = 0; }
+    if (!state.isDragging) {
+      state.mouse.x = 0;
+      state.mouse.y = 0;
+    }
   };
 
   const onMouseDown = (e: MouseEvent) => {
@@ -48,7 +51,10 @@ export function useGalaxyInteractions(
     if (!state.isDragging || !options.enableDrag) return;
     state.targetRotation.y += (e.clientX - state.previousMouse.x) * 0.005;
     state.targetRotation.x += (e.clientY - state.previousMouse.y) * 0.005;
-    state.targetRotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, state.targetRotation.x));
+    state.targetRotation.x = Math.max(
+      -Math.PI / 2,
+      Math.min(Math.PI / 2, state.targetRotation.x),
+    );
     state.previousMouse.x = e.clientX;
     state.previousMouse.y = e.clientY;
   };
@@ -63,7 +69,10 @@ export function useGalaxyInteractions(
     if (!options.enableZoom) return;
     e.preventDefault();
     state.targetZoom += e.deltaY * 0.001;
-    state.targetZoom = Math.max(options.minZoom, Math.min(options.maxZoom, state.targetZoom));
+    state.targetZoom = Math.max(
+      options.minZoom,
+      Math.min(options.maxZoom, state.targetZoom),
+    );
   };
 
   const getTouchDist = (ts: TouchList) => {
@@ -90,18 +99,33 @@ export function useGalaxyInteractions(
     if (e.touches.length === 2 && options.enableZoom) {
       e.preventDefault();
       const d = getTouchDist(e.touches);
-      state.targetZoom = Math.max(options.minZoom, Math.min(options.maxZoom, touchStartZoom * (touchStartDistance / d)));
-    } else if (e.touches.length === 1 && state.isDragging && options.enableDrag) {
-      state.targetRotation.y += (e.touches[0]!.clientX - state.previousMouse.x) * 0.005;
-      state.targetRotation.x += (e.touches[0]!.clientY - state.previousMouse.y) * 0.005;
-      state.targetRotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, state.targetRotation.x));
+      state.targetZoom = Math.max(
+        options.minZoom,
+        Math.min(options.maxZoom, touchStartZoom * (touchStartDistance / d)),
+      );
+    } else if (
+      e.touches.length === 1 &&
+      state.isDragging &&
+      options.enableDrag
+    ) {
+      state.targetRotation.y +=
+        (e.touches[0]!.clientX - state.previousMouse.x) * 0.005;
+      state.targetRotation.x +=
+        (e.touches[0]!.clientY - state.previousMouse.y) * 0.005;
+      state.targetRotation.x = Math.max(
+        -Math.PI / 2,
+        Math.min(Math.PI / 2, state.targetRotation.x),
+      );
       state.previousMouse.x = e.touches[0]!.clientX;
       state.previousMouse.y = e.touches[0]!.clientY;
     }
   };
 
   const onTouchEnd = () => {
-    if (options.enableTouch) { state.isDragging = false; touchStartDistance = 0; }
+    if (options.enableTouch) {
+      state.isDragging = false;
+      touchStartDistance = 0;
+    }
   };
 
   el.addEventListener('mousemove', onMouseMove);

@@ -13,7 +13,12 @@
 </template>`"
   >
     <div class="flex h-[200px] w-full items-center justify-center">
-      <CountUp :to="10000" separator="," :duration="2" class="text-5xl font-bold tabular-nums" />
+      <CountUp
+        :to="10000"
+        separator=","
+        :duration="2"
+        class="text-5xl font-bold tabular-nums"
+      />
     </div>
   </ComponentDemo>
 </template>

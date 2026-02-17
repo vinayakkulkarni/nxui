@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import SpotlightCard from '@registry/new-york/SpotlightCard/SpotlightCard.vue';
+  import SpotlightCard from '@registry/new-york/SpotlightCard/SpotlightCard.vue';
 </script>
 
 <template>

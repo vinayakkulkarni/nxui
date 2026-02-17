@@ -14,11 +14,11 @@ Components that use browser-only APIs (window, document, localStorage, etc.) mus
 ```vue
 <!-- ❌ WRONG - This crashes on server -->
 <script setup>
-// window is not defined on server!
-const width = ref(window.innerWidth)
+  // window is not defined on server!
+  const width = ref(window.innerWidth);
 
-// localStorage doesn't exist on server!
-const saved = localStorage.getItem('settings')
+  // localStorage doesn't exist on server!
+  const saved = localStorage.getItem('settings');
 </script>
 ```
 
@@ -37,7 +37,7 @@ const saved = localStorage.getItem('settings')
   <!-- Wrap browser-only components -->
   <ClientOnly>
     <ChartComponent :data="data" />
-    
+
     <template #fallback>
       <div class="chart-placeholder">Loading chart...</div>
     </template>
@@ -57,13 +57,13 @@ components/
 ```vue
 <!-- Chart.client.vue - automatically client-only -->
 <script setup>
-// Safe to use browser APIs here
-const canvas = ref<HTMLCanvasElement>()
+  // Safe to use browser APIs here
+  const canvas = ref<HTMLCanvasElement>()
 
-onMounted(() => {
-  const ctx = canvas.value?.getContext('2d')
-  // Initialize chart...
-})
+  onMounted(() => {
+    const ctx = canvas.value?.getContext('2d')
+    // Initialize chart...
+  })
 </script>
 ```
 
@@ -71,20 +71,20 @@ onMounted(() => {
 
 ```vue
 <script setup>
-// ✅ CORRECT - Check for client before using browser APIs
-const width = ref(0)
-const savedSettings = ref<Settings | null>(null)
+  // ✅ CORRECT - Check for client before using browser APIs
+  const width = ref(0);
+  const savedSettings = (ref < Settings) | (null > null);
 
-onMounted(() => {
-  // This only runs on client
-  width.value = window.innerWidth
-  savedSettings.value = JSON.parse(localStorage.getItem('settings') || '{}')
-})
+  onMounted(() => {
+    // This only runs on client
+    width.value = window.innerWidth;
+    savedSettings.value = JSON.parse(localStorage.getItem('settings') || '{}');
+  });
 
-// Or use import.meta.client
-if (import.meta.client) {
-  // Browser-only code
-}
+  // Or use import.meta.client
+  if (import.meta.client) {
+    // Browser-only code
+  }
 </script>
 ```
 
@@ -92,35 +92,35 @@ if (import.meta.client) {
 
 ```vue
 <script setup>
-import { useWindowSize, useLocalStorage, useMediaQuery } from '@vueuse/core'
+  import { useWindowSize, useLocalStorage, useMediaQuery } from '@vueuse/core';
 
-// These are SSR-safe!
-const { width, height } = useWindowSize()
-const settings = useLocalStorage('settings', { theme: 'light' })
-const isMobile = useMediaQuery('(max-width: 768px)')
+  // These are SSR-safe!
+  const { width, height } = useWindowSize();
+  const settings = useLocalStorage('settings', { theme: 'light' });
+  const isMobile = useMediaQuery('(max-width: 768px)');
 </script>
 ```
 
 **Common browser-only scenarios:**
 
-| Scenario | Solution |
-|----------|----------|
-| Charts (Chart.js, ECharts) | `<ClientOnly>` or `.client.vue` |
-| Maps (MapLibre, Leaflet) | `<ClientOnly>` or `.client.vue` |
-| Rich text editors | `<ClientOnly>` |
-| Canvas/WebGL | `<ClientOnly>` or `onMounted` |
-| localStorage/sessionStorage | `useLocalStorage` from VueUse |
-| window.matchMedia | `useMediaQuery` from VueUse |
-| IntersectionObserver | `useIntersectionObserver` from VueUse |
+| Scenario                    | Solution                              |
+| --------------------------- | ------------------------------------- |
+| Charts (Chart.js, ECharts)  | `<ClientOnly>` or `.client.vue`       |
+| Maps (MapLibre, Leaflet)    | `<ClientOnly>` or `.client.vue`       |
+| Rich text editors           | `<ClientOnly>`                        |
+| Canvas/WebGL                | `<ClientOnly>` or `onMounted`         |
+| localStorage/sessionStorage | `useLocalStorage` from VueUse         |
+| window.matchMedia           | `useMediaQuery` from VueUse           |
+| IntersectionObserver        | `useIntersectionObserver` from VueUse |
 
 **Lazy loading client-only components:**
 
 ```vue
 <script setup>
-// Lazy load heavy client-only component
-const HeavyChart = defineAsyncComponent(() => 
-  import('~/components/HeavyChart.client.vue')
-)
+  // Lazy load heavy client-only component
+  const HeavyChart = defineAsyncComponent(
+    () => import('~/components/HeavyChart.client.vue'),
+  );
 </script>
 
 <template>

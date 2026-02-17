@@ -43,7 +43,9 @@
   const hasWebcam = ref(false);
 
   const baseFrequency = computed(() => 0.03 / Math.max(0.1, props.noiseScale));
-  const saturation = computed(() => 1 - Math.max(0, Math.min(1, props.grayscale)));
+  const saturation = computed(
+    () => 1 - Math.max(0, Math.min(1, props.grayscale)),
+  );
 
   const cssVars = computed(() => ({
     '--blur-strength': `${props.blurStrength}px`,
@@ -59,7 +61,11 @@
   async function startWebcam() {
     try {
       stream = await navigator.mediaDevices.getUserMedia({
-        video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: 'user' },
+        video: {
+          width: { ideal: 640 },
+          height: { ideal: 480 },
+          facingMode: 'user',
+        },
       });
       if (videoRef.value) {
         videoRef.value.srcObject = stream;
@@ -87,8 +93,17 @@
     <svg class="rc-svg-filters" aria-hidden="true">
       <defs>
         <filter :id="filterId" x="-20%" y="-20%" width="140%" height="140%">
-          <feTurbulence type="turbulence" :baseFrequency="baseFrequency" numOctaves="2" result="noise" />
-          <feColorMatrix in="noise" type="luminanceToAlpha" result="noiseAlpha" />
+          <feTurbulence
+            type="turbulence"
+            :baseFrequency="baseFrequency"
+            numOctaves="2"
+            result="noise"
+          />
+          <feColorMatrix
+            in="noise"
+            type="luminanceToAlpha"
+            result="noiseAlpha"
+          />
           <feDisplacementMap
             in="SourceGraphic"
             in2="noise"
@@ -107,16 +122,35 @@
           >
             <fePointLight x="0" y="0" z="300" />
           </feSpecularLighting>
-          <feComposite in="light" in2="rippled" operator="in" result="light-effect" />
-          <feBlend in="light-effect" in2="rippled" mode="screen" result="metallic-result" />
+          <feComposite
+            in="light"
+            in2="rippled"
+            operator="in"
+            result="light-effect"
+          />
+          <feBlend
+            in="light-effect"
+            in2="rippled"
+            mode="screen"
+            result="metallic-result"
+          />
           <feColorMatrix
             in="SourceAlpha"
             type="matrix"
             values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0"
             result="solidAlpha"
           />
-          <feMorphology in="solidAlpha" operator="erode" radius="45" result="erodedAlpha" />
-          <feGaussianBlur in="erodedAlpha" stdDeviation="10" result="blurredMap" />
+          <feMorphology
+            in="solidAlpha"
+            operator="erode"
+            radius="45"
+            result="erodedAlpha"
+          />
+          <feGaussianBlur
+            in="erodedAlpha"
+            stdDeviation="10"
+            result="blurredMap"
+          />
           <feComponentTransfer in="blurredMap" result="glassMap">
             <feFuncA type="linear" slope="0.5" intercept="0" />
           </feComponentTransfer>
@@ -138,14 +172,16 @@
       playsinline
       muted
       :class="['rc-video', { 'rc-video--active': hasWebcam }]"
-      :style="{ filter: `saturate(${saturation}) contrast(120%) brightness(110%) blur(${props.blurStrength}px) url(#${filterId})` }"
-    />
+      :style="{
+        filter: `saturate(${saturation}) contrast(120%) brightness(110%) blur(${props.blurStrength}px) url(#${filterId})`,
+      }"
+    ></video>
 
-    <div v-if="!hasWebcam" class="rc-fallback-bg" />
+    <div v-if="!hasWebcam" class="rc-fallback-bg"></div>
 
-    <div class="rc-noise" />
-    <div class="rc-sheen" />
-    <div class="rc-border" />
+    <div class="rc-noise"></div>
+    <div class="rc-sheen"></div>
+    <div class="rc-border"></div>
 
     <div class="rc-content">
       <div class="rc-header">
@@ -222,8 +258,16 @@
     inset: 0;
     z-index: 0;
     background:
-      radial-gradient(ellipse at 30% 20%, rgba(100, 120, 200, 0.4), transparent 60%),
-      radial-gradient(ellipse at 70% 80%, rgba(60, 80, 160, 0.3), transparent 50%),
+      radial-gradient(
+        ellipse at 30% 20%,
+        rgba(100, 120, 200, 0.4),
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse at 70% 80%,
+        rgba(60, 80, 160, 0.3),
+        transparent 50%
+      ),
       linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
     filter: blur(8px) saturate(0.5);
   }

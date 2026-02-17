@@ -56,11 +56,8 @@
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('relative overflow-hidden', props.class)"
-  >
-    <slot ></slot>
+  <div ref="containerRef" :class="cn('relative overflow-hidden', props.class)">
+    <slot></slot>
     <canvas
       ref="canvasRef"
       class="pointer-events-none absolute inset-0 size-full"

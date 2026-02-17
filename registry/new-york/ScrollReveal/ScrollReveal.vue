@@ -61,11 +61,8 @@
       Math.max((progress.value * total - index) / 1, 0),
       1,
     );
-    const opacity =
-      props.baseOpacity + (1 - props.baseOpacity) * wordProgress;
-    const blur = props.enableBlur
-      ? props.blurStrength * (1 - wordProgress)
-      : 0;
+    const opacity = props.baseOpacity + (1 - props.baseOpacity) * wordProgress;
+    const blur = props.enableBlur ? props.blurStrength * (1 - wordProgress) : 0;
     return {
       opacity,
       filter: blur > 0.1 ? `blur(${blur}px)` : 'none',
@@ -88,7 +85,8 @@
         :key="i"
         class="inline-block mr-[0.25em]"
         :style="getWordStyle(i)"
-      >{{ word }}</span>
+        >{{ word }}</span
+      >
     </p>
   </h2>
 </template>

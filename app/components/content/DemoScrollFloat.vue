@@ -12,7 +12,9 @@
   <ScrollFloat text=&quot;Scroll Float&quot; :stagger=&quot;0.03&quot; />
 </template>`"
   >
-    <div class="flex h-[300px] w-full items-center justify-center overflow-y-auto p-8">
+    <div
+      class="flex h-[300px] w-full items-center justify-center overflow-y-auto p-8"
+    >
       <ScrollFloat text="Scroll Float" :stagger="0.03" />
     </div>
   </ComponentDemo>

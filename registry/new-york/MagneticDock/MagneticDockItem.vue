@@ -1,10 +1,5 @@
 <script setup lang="ts">
-  import {
-    motion,
-    AnimatePresence,
-    useTransform,
-    useSpring,
-  } from 'motion-v';
+  import { motion, AnimatePresence, useTransform, useSpring } from 'motion-v';
   import type { MotionValue } from 'framer-motion/dom';
   import type { MagneticDockItemData } from '~/types/components';
   import { cn } from '~/lib/utils';
@@ -54,15 +49,9 @@
 
   const smoothScale = useSpring(scale, springConfig);
 
-  const size = useTransform(
-    smoothScale,
-    (s: number) => s * props.iconSize,
-  );
+  const size = useTransform(smoothScale, (s: number) => s * props.iconSize);
 
-  const y = useTransform(
-    smoothScale,
-    (s: number) => (s - 1) * -10,
-  );
+  const y = useTransform(smoothScale, (s: number) => (s - 1) * -10);
   const smoothY = useSpring(y, springConfig);
 
   // MotionValues are NOT reactive in Vue :style — subscribe manually
@@ -91,9 +80,7 @@
     :style="{
       width: sizeVal,
       height: sizeVal,
-      transform: isVertical
-        ? `translateX(${yVal}px)`
-        : `translateY(${yVal}px)`,
+      transform: isVertical ? `translateX(${yVal}px)` : `translateY(${yVal}px)`,
     }"
     :while-tap="{ scale: 0.9 }"
     @click="item.onClick?.()"
@@ -214,7 +201,7 @@
               'border-r border-b border-neutral-200 dark:border-white/10',
             )
           "
-        />
+        ></div>
       </component>
     </AnimatePresence>
 

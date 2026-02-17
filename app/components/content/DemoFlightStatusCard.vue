@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import FlightStatusCardLight from '@registry/new-york/FlightStatusCard/FlightStatusCardLight.vue';
+  import FlightStatusCardLight from '@registry/new-york/FlightStatusCard/FlightStatusCardLight.vue';
 </script>
 
 <template>

@@ -51,7 +51,10 @@
     simTarget.y = Math.random() * props.gridSize;
 
     // Target rotations for smooth lerping
-    const targetRots: { x: number; y: number }[] = rots.map(() => ({ x: 0, y: 0 }));
+    const targetRots: { x: number; y: number }[] = rots.map(() => ({
+      x: 0,
+      y: 0,
+    }));
 
     function tiltAt(rowCenter: number, colCenter: number) {
       for (let r = 0; r < props.gridSize; r++) {
@@ -85,8 +88,10 @@
       // Lerp current toward target
       const lerpFactor = 0.15;
       for (let i = 0; i < cubeRotations.value.length; i++) {
-        cubeRotations.value[i].x += (targetRots[i].x - cubeRotations.value[i].x) * lerpFactor;
-        cubeRotations.value[i].y += (targetRots[i].y - cubeRotations.value[i].y) * lerpFactor;
+        cubeRotations.value[i].x +=
+          (targetRots[i].x - cubeRotations.value[i].x) * lerpFactor;
+        cubeRotations.value[i].y +=
+          (targetRots[i].y - cubeRotations.value[i].y) * lerpFactor;
       }
     }
     animationId = requestAnimationFrame(update);
@@ -148,12 +153,12 @@
           transform: `rotateX(${rot.x}deg) rotateY(${rot.y}deg)`,
         }"
       >
-        <div class="cube-face cube-face--top" />
-        <div class="cube-face cube-face--bottom" />
-        <div class="cube-face cube-face--left" />
-        <div class="cube-face cube-face--right" />
-        <div class="cube-face cube-face--front" />
-        <div class="cube-face cube-face--back" />
+        <div class="cube-face cube-face--top"></div>
+        <div class="cube-face cube-face--bottom"></div>
+        <div class="cube-face cube-face--left"></div>
+        <div class="cube-face cube-face--right"></div>
+        <div class="cube-face cube-face--front"></div>
+        <div class="cube-face cube-face--back"></div>
       </div>
     </div>
   </div>

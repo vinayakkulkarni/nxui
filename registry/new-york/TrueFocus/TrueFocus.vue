@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useIntervalFn, useElementSize } from '@vueuse/core';
+  import { useIntervalFn } from '@vueuse/core';
   import { motion } from 'motion-v';
 
   const props = withDefaults(
@@ -51,8 +51,7 @@
 
   const { pause, resume } = useIntervalFn(
     () => {
-      currentIndex.value =
-        (currentIndex.value + 1) % words.value.length;
+      currentIndex.value = (currentIndex.value + 1) % words.value.length;
     },
     intervalMs,
     { immediate: false },
@@ -108,10 +107,7 @@
       :ref="(el) => setWordRef(el as HTMLSpanElement | null, index)"
       class="relative cursor-pointer text-5xl font-black"
       :style="{
-        filter:
-          index === currentIndex
-            ? 'blur(0px)'
-            : `blur(${blurAmount}px)`,
+        filter: index === currentIndex ? 'blur(0px)' : `blur(${blurAmount}px)`,
         transition: `filter ${animationDuration}s ease`,
       }"
       @mouseenter="handleMouseEnter(index)"

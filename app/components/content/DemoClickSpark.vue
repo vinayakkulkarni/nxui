@@ -3,7 +3,9 @@
 </script>
 
 <template>
-  <ComponentDemo :code="`<ClickSpark spark-color='#fff' :spark-size='10' :spark-count='8' />`">
+  <ComponentDemo
+    :code="`<ClickSpark spark-color='#fff' :spark-size='10' :spark-count='8' />`"
+  >
     <div class="relative h-[300px] w-full overflow-hidden rounded-lg bg-black">
       <ClickSpark spark-color="#fff" :spark-size="10" :spark-count="8">
         <div class="flex size-full items-center justify-center">

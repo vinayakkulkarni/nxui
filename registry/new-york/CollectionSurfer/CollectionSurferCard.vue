@@ -97,7 +97,7 @@
     />
     <div
       class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
-    />
+    ></div>
     <div class="absolute bottom-4 left-4 right-4 z-10">
       <p class="text-sm font-medium tracking-wide text-white">
         {{ item.title }}

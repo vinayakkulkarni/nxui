@@ -26,7 +26,10 @@
   function darkenColor(hex: string, percent: number): string {
     let color = hex.startsWith('#') ? hex.slice(1) : hex;
     if (color.length === 3) {
-      color = color.split('').map((c) => c + c).join('');
+      color = color
+        .split('')
+        .map((c) => c + c)
+        .join('');
     }
     const num = Number.parseInt(color, 16);
     let r = (num >> 16) & 0xff;
@@ -43,7 +46,11 @@
   function handleClick() {
     open.value = !open.value;
     if (!open.value) {
-      paperOffsets.value = [{ x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }];
+      paperOffsets.value = [
+        { x: 0, y: 0 },
+        { x: 0, y: 0 },
+        { x: 0, y: 0 },
+      ];
     }
   }
 
@@ -92,14 +99,21 @@
           :key="i"
           class="folder-paper"
           :class="`paper-${i + 1}`"
-          :style="open ? { '--magnet-x': `${paperOffsets[i]?.x ?? 0}px`, '--magnet-y': `${paperOffsets[i]?.y ?? 0}px` } : {}"
+          :style="
+            open
+              ? {
+                  '--magnet-x': `${paperOffsets[i]?.x ?? 0}px`,
+                  '--magnet-y': `${paperOffsets[i]?.y ?? 0}px`,
+                }
+              : {}
+          "
           @mousemove="(e) => handlePaperMouseMove(e, i)"
           @mouseleave="handlePaperMouseLeave(i)"
         >
           <span v-if="item" class="text-xs text-neutral-700">{{ item }}</span>
         </div>
-        <div class="folder-front" />
-        <div class="folder-front folder-front-right" />
+        <div class="folder-front"></div>
+        <div class="folder-front folder-front-right"></div>
       </div>
     </div>
   </div>
@@ -192,29 +206,35 @@
   }
 
   .folder-open .folder-paper:nth-child(1) {
-    transform: translate(-120%, -70%) rotateZ(-15deg) translate(var(--magnet-x, 0), var(--magnet-y, 0));
+    transform: translate(-120%, -70%) rotateZ(-15deg)
+      translate(var(--magnet-x, 0), var(--magnet-y, 0));
   }
 
   .folder-open .folder-paper:nth-child(1):hover {
-    transform: translate(-120%, -70%) rotateZ(-15deg) scale(1.1) translate(var(--magnet-x, 0), var(--magnet-y, 0));
+    transform: translate(-120%, -70%) rotateZ(-15deg) scale(1.1)
+      translate(var(--magnet-x, 0), var(--magnet-y, 0));
   }
 
   .folder-open .folder-paper:nth-child(2) {
-    transform: translate(10%, -70%) rotateZ(15deg) translate(var(--magnet-x, 0), var(--magnet-y, 0));
+    transform: translate(10%, -70%) rotateZ(15deg)
+      translate(var(--magnet-x, 0), var(--magnet-y, 0));
     height: 80%;
   }
 
   .folder-open .folder-paper:nth-child(2):hover {
-    transform: translate(10%, -70%) rotateZ(15deg) scale(1.1) translate(var(--magnet-x, 0), var(--magnet-y, 0));
+    transform: translate(10%, -70%) rotateZ(15deg) scale(1.1)
+      translate(var(--magnet-x, 0), var(--magnet-y, 0));
   }
 
   .folder-open .folder-paper:nth-child(3) {
-    transform: translate(-50%, -100%) rotateZ(5deg) translate(var(--magnet-x, 0), var(--magnet-y, 0));
+    transform: translate(-50%, -100%) rotateZ(5deg)
+      translate(var(--magnet-x, 0), var(--magnet-y, 0));
     height: 80%;
   }
 
   .folder-open .folder-paper:nth-child(3):hover {
-    transform: translate(-50%, -100%) rotateZ(5deg) scale(1.1) translate(var(--magnet-x, 0), var(--magnet-y, 0));
+    transform: translate(-50%, -100%) rotateZ(5deg) scale(1.1)
+      translate(var(--magnet-x, 0), var(--magnet-y, 0));
   }
 
   .folder-open .folder-front {

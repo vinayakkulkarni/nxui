@@ -27,15 +27,20 @@ export function createGalaxyParticles(config: ParticleConfig) {
 
   for (let i = 0; i < config.particleCount; i++) {
     const i3 = i * 3;
-    const radius = Math.pow(Math.random(), config.centerConcentration) * config.spread;
+    const radius =
+      Math.pow(Math.random(), config.centerConcentration) * config.spread;
     const spin = radius * config.spiralArms;
-    const branch = ((i % config.spiralArms) / config.spiralArms) * Math.PI * 2 + spin;
-    positions[i3] = Math.cos(branch) * radius + Math.pow(Math.random(), 3) * rSign() * rStr;
+    const branch =
+      ((i % config.spiralArms) / config.spiralArms) * Math.PI * 2 + spin;
+    positions[i3] =
+      Math.cos(branch) * radius + Math.pow(Math.random(), 3) * rSign() * rStr;
     positions[i3 + 1] = Math.pow(Math.random(), 3) * rSign() * rStr;
-    positions[i3 + 2] = Math.sin(branch) * radius + Math.pow(Math.random(), 3) * rSign() * rStr;
+    positions[i3 + 2] =
+      Math.sin(branch) * radius + Math.pow(Math.random(), 3) * rSign() * rStr;
     const mixed = palette[i % 3]!.clone();
     const cd = radius / config.spread;
-    if (config.blendMode === 'normal') mixed.lerp(new THREE.Color('#000000'), cd * 0.5);
+    if (config.blendMode === 'normal')
+      mixed.lerp(new THREE.Color('#000000'), cd * 0.5);
     else mixed.lerp(new THREE.Color('#ffffff'), 1 - cd);
     colors[i3] = mixed.r;
     colors[i3 + 1] = mixed.g;
@@ -61,7 +66,10 @@ export function createGalaxyParticles(config: ParticleConfig) {
     transparent: true,
     depthWrite: false,
     vertexColors: true,
-    blending: config.blendMode === 'additive' ? THREE.AdditiveBlending : THREE.NormalBlending,
+    blending:
+      config.blendMode === 'additive'
+        ? THREE.AdditiveBlending
+        : THREE.NormalBlending,
   });
 
   const points = new THREE.Points(geometry, material);

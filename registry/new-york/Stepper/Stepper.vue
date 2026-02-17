@@ -74,26 +74,51 @@
 </script>
 
 <template>
-  <div :class="cn('flex min-h-full flex-1 flex-col items-center justify-center p-4', $props.class)">
-    <div class="mx-auto w-full max-w-md rounded-2xl border border-border shadow-xl">
+  <div
+    :class="
+      cn(
+        'flex min-h-full flex-1 flex-col items-center justify-center p-4',
+        $props.class,
+      )
+    "
+  >
+    <div
+      class="mx-auto w-full max-w-md rounded-2xl border border-border shadow-xl"
+    >
       <!-- Step indicators -->
       <div class="flex w-full items-center p-8">
         <template v-for="step in totalSteps" :key="step">
-          <div class="relative cursor-pointer outline-none" @click="goToStep(step)">
+          <div
+            class="relative cursor-pointer outline-none"
+            @click="goToStep(step)"
+          >
             <div
               class="flex size-8 items-center justify-center rounded-full font-semibold transition-all duration-300"
               :class="{
-                'bg-primary text-primary-foreground': stepStatus(step) === 'active' || stepStatus(step) === 'complete',
-                'bg-muted text-muted-foreground': stepStatus(step) === 'inactive',
+                'bg-primary text-primary-foreground':
+                  stepStatus(step) === 'active' ||
+                  stepStatus(step) === 'complete',
+                'bg-muted text-muted-foreground':
+                  stepStatus(step) === 'inactive',
               }"
             >
               <template v-if="stepStatus(step) === 'complete'">
-                <svg class="size-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                <svg
+                  class="size-4"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M5 13l4 4L19 7"
+                  />
                 </svg>
               </template>
               <template v-else-if="stepStatus(step) === 'active'">
-                <div class="size-3 rounded-full bg-primary-foreground" />
+                <div class="size-3 rounded-full bg-primary-foreground"></div>
               </template>
               <template v-else>
                 <span class="text-sm">{{ step }}</span>
@@ -107,7 +132,7 @@
             <div
               class="absolute inset-y-0 left-0 bg-primary transition-all duration-400"
               :style="{ width: currentStep > step ? '100%' : '0%' }"
-            />
+            ></div>
           </div>
         </template>
       </div>
@@ -121,7 +146,10 @@
 
       <!-- Footer -->
       <div v-if="!isCompleted" class="px-8 pb-8">
-        <div class="mt-10 flex" :class="currentStep !== 1 ? 'justify-between' : 'justify-end'">
+        <div
+          class="mt-10 flex"
+          :class="currentStep !== 1 ? 'justify-between' : 'justify-end'"
+        >
           <button
             v-if="currentStep !== 1"
             class="cursor-pointer rounded px-2 py-1 text-muted-foreground transition-colors hover:text-foreground"

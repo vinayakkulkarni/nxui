@@ -58,10 +58,33 @@
   const mouse = new Vector2(0, 0);
 
   function getSettings(q: string) {
-    const settings: Record<string, { iterations: number; waveIterations: number; pixelRatio: number; stepMult: number }> = {
-      low: { iterations: 24, waveIterations: 1, pixelRatio: 0.5, stepMult: 1.5 },
-      medium: { iterations: 40, waveIterations: 2, pixelRatio: 0.65, stepMult: 1.2 },
-      high: { iterations: 80, waveIterations: 4, pixelRatio: Math.min(window.devicePixelRatio, 2), stepMult: 1.0 },
+    const settings: Record<
+      string,
+      {
+        iterations: number;
+        waveIterations: number;
+        pixelRatio: number;
+        stepMult: number;
+      }
+    > = {
+      low: {
+        iterations: 24,
+        waveIterations: 1,
+        pixelRatio: 0.5,
+        stepMult: 1.5,
+      },
+      medium: {
+        iterations: 40,
+        waveIterations: 2,
+        pixelRatio: 0.65,
+        stepMult: 1.2,
+      },
+      high: {
+        iterations: 80,
+        waveIterations: 4,
+        pixelRatio: Math.min(window.devicePixelRatio, 2),
+        stepMult: 1.0,
+      },
     };
     return settings[q] || settings.medium;
   }
@@ -127,7 +150,10 @@ void main(){
   function onMouseMove(e: MouseEvent) {
     if (!containerRef.value || !props.interactive) return;
     const rect = containerRef.value.getBoundingClientRect();
-    mouse.set(((e.clientX - rect.left) / rect.width) * 2 - 1, -((e.clientY - rect.top) / rect.height) * 2 + 1);
+    mouse.set(
+      ((e.clientX - rect.left) / rect.width) * 2 - 1,
+      -((e.clientY - rect.top) / rect.height) * 2 + 1,
+    );
   }
 
   useEventListener(containerRef, 'mousemove', onMouseMove);
@@ -149,7 +175,11 @@ void main(){
     const s = getSettings(props.quality);
     const pillarRotRad = (props.pillarRotation * Math.PI) / 180;
 
-    webglRenderer = new WebGLRenderer({ antialias: false, alpha: true, precision: 'highp' });
+    webglRenderer = new WebGLRenderer({
+      antialias: false,
+      alpha: true,
+      precision: 'highp',
+    });
     webglRenderer.setPixelRatio(s.pixelRatio);
     webglRenderer.domElement.style.width = '100%';
     webglRenderer.domElement.style.height = '100%';
@@ -161,7 +191,12 @@ void main(){
       fragmentShader: buildFragmentShader(props.quality),
       uniforms: {
         uTime: { value: 0 },
-        uResolution: { value: new Vector2(containerRef.value.clientWidth, containerRef.value.clientHeight) },
+        uResolution: {
+          value: new Vector2(
+            containerRef.value.clientWidth,
+            containerRef.value.clientHeight,
+          ),
+        },
         uMouse: { value: mouse },
         uTopColor: { value: parseColor(props.topColor) },
         uBottomColor: { value: parseColor(props.bottomColor) },
@@ -223,5 +258,5 @@ void main(){
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

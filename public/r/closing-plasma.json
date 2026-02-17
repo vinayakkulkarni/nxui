@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Closing Plasma",
   "description": "A premium footer-ready plasma background with atmospheric noise and smooth pointer-driven flow.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/ClosingPlasma/ClosingPlasma.vue",

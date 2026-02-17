@@ -66,7 +66,14 @@
 </script>
 
 <template>
-  <span :class="cn('flex flex-wrap whitespace-pre-wrap relative overflow-hidden', props.class)">
+  <span
+    :class="
+      cn(
+        'flex flex-wrap whitespace-pre-wrap relative overflow-hidden',
+        props.class,
+      )
+    "
+  >
     <span class="sr-only">{{ texts[currentIndex] }}</span>
     <AnimatePresence mode="wait">
       <component
@@ -89,7 +96,9 @@
               damping: 25,
               stiffness: 300,
               delay: getStaggerDelay(
-                elements.slice(0, wi).reduce((s, w) => s + w.characters.length, 0) + ci,
+                elements
+                  .slice(0, wi)
+                  .reduce((s, w) => s + w.characters.length, 0) + ci,
                 elements.reduce((s, w) => s + w.characters.length, 0),
               ),
             }"

@@ -30,9 +30,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
 
   devtools: { enabled: true },
@@ -45,9 +43,16 @@ export default defineNuxtConfig({
     '@registry': '../registry',
   },
 
+  ogImage: {
+    defaults: {
+      component: 'NxuiDoc',
+    },
+  },
+
   site: {
     name: 'nxui',
-    description: 'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v.',
+    description:
+      'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v.',
     url: 'https://nxui.geoql.in',
   },
 
@@ -66,7 +71,18 @@ export default defineNuxtConfig({
             default: 'material-theme',
             dark: 'material-theme-palenight',
           },
-          langs: ['bash', 'json', 'js', 'ts', 'html', 'css', 'vue', 'shell', 'md', 'yaml'],
+          langs: [
+            'bash',
+            'json',
+            'js',
+            'ts',
+            'html',
+            'css',
+            'vue',
+            'shell',
+            'md',
+            'yaml',
+          ],
         },
       },
     },

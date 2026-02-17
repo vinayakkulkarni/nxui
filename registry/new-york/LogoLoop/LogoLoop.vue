@@ -45,7 +45,9 @@
   const copyCount = ref(MIN_COPIES);
   const isHovered = ref(false);
 
-  const isVertical = computed(() => props.direction === 'up' || props.direction === 'down');
+  const isVertical = computed(
+    () => props.direction === 'up' || props.direction === 'down',
+  );
 
   const effectiveHoverSpeed = computed(() => {
     if (props.hoverSpeed !== undefined) return props.hoverSpeed;
@@ -71,7 +73,9 @@
     ...(props.fadeOutColor ? { '--ll-fade': props.fadeOutColor } : {}),
   }));
 
-  const copies = computed(() => Array.from({ length: copyCount.value }, (_, i) => i));
+  const copies = computed(() =>
+    Array.from({ length: copyCount.value }, (_, i) => i),
+  );
 
   /* ---------- sizing ---------- */
   function updateDimensions(): void {
@@ -88,11 +92,17 @@
       if (sh > 0) {
         seqHeight.value = Math.ceil(sh);
         const viewport = containerRef.value?.clientHeight ?? parentH ?? sh;
-        copyCount.value = Math.max(MIN_COPIES, Math.ceil(viewport / sh) + COPY_HEADROOM);
+        copyCount.value = Math.max(
+          MIN_COPIES,
+          Math.ceil(viewport / sh) + COPY_HEADROOM,
+        );
       }
     } else if (sw > 0) {
       seqWidth.value = Math.ceil(sw);
-      copyCount.value = Math.max(MIN_COPIES, Math.ceil(containerWidth / sw) + COPY_HEADROOM);
+      copyCount.value = Math.max(
+        MIN_COPIES,
+        Math.ceil(containerWidth / sw) + COPY_HEADROOM,
+      );
     }
   }
 
@@ -157,13 +167,15 @@
 <template>
   <div
     ref="containerRef"
-    :class="cn(
-      'relative overflow-hidden',
-      isVertical ? 'inline-block h-full' : 'w-full',
-      fadeOut && 'logo-loop-fade',
-      scaleOnHover && 'logo-loop-scale',
-      props.class,
-    )"
+    :class="
+      cn(
+        'relative overflow-hidden',
+        isVertical ? 'inline-block h-full' : 'w-full',
+        fadeOut && 'logo-loop-fade',
+        scaleOnHover && 'logo-loop-scale',
+        props.class,
+      )
+    "
     :style="cssVars"
     role="region"
     :aria-label="ariaLabel"
@@ -178,13 +190,22 @@
       <div
         v-for="c in copies"
         :key="c"
+        :ref="
+          (el: unknown) => {
+            if (c === 0) seqRef = el as HTMLElement;
+          }
+        "
         class="flex items-center shrink-0"
         :class="isVertical ? 'flex-col' : ''"
-        :style="{ gap: `${gap}px`, fontSize: `${logoHeight}px`, lineHeight: '1', [isVertical ? 'paddingBottom' : 'paddingRight']: `${gap}px` }"
+        :style="{
+          gap: `${gap}px`,
+          fontSize: `${logoHeight}px`,
+          lineHeight: '1',
+          [isVertical ? 'paddingBottom' : 'paddingRight']: `${gap}px`,
+        }"
         :aria-hidden="c > 0 || undefined"
-        :ref="(el: unknown) => { if (c === 0) seqRef = el as HTMLElement; }"
       >
-        <slot />
+        <slot></slot>
       </div>
     </div>
   </div>
@@ -203,11 +224,19 @@
   }
   .logo-loop-fade::before {
     left: 0;
-    background: linear-gradient(to right, var(--ll-fade, var(--background)) 0%, transparent 100%);
+    background: linear-gradient(
+      to right,
+      var(--ll-fade, var(--background)) 0%,
+      transparent 100%
+    );
   }
   .logo-loop-fade::after {
     right: 0;
-    background: linear-gradient(to left, var(--ll-fade, var(--background)) 0%, transparent 100%);
+    background: linear-gradient(
+      to left,
+      var(--ll-fade, var(--background)) 0%,
+      transparent 100%
+    );
   }
   .logo-loop-scale :deep(li):hover > * {
     transform: scale(1.2);

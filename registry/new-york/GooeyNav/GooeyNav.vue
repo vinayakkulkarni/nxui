@@ -41,13 +41,23 @@
     return n / 2 - Math.random() * n;
   }
 
-  function getXY(distance: number, pointIndex: number, totalPoints: number): [number, number] {
-    const angle = ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
+  function getXY(
+    distance: number,
+    pointIndex: number,
+    totalPoints: number,
+  ): [number, number] {
+    const angle =
+      ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
     return [distance * Math.cos(angle), distance * Math.sin(angle)];
   }
 
-  function createParticle(i: number, t: number, d: [number, number], r: number) {
-    let rotate = noise(r / 10);
+  function createParticle(
+    i: number,
+    t: number,
+    d: [number, number],
+    r: number,
+  ) {
+    const rotate = noise(r / 10);
     return {
       start: getXY(d[0], props.particleCount - i, props.particleCount),
       end: getXY(d[1] + noise(7), props.particleCount - i, props.particleCount),
@@ -111,7 +121,7 @@
     };
     Object.assign(filterRef.value.style, styles);
     Object.assign(textRef.value.style, styles);
-    textRef.value.innerText = element.innerText;
+    textRef.value.textContent = element.textContent;
   }
 
   function handleClick(e: Event, index: number) {
@@ -161,7 +171,10 @@
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('gooey-nav-container relative', $props.class)">
+  <div
+    ref="containerRef"
+    :class="cn('gooey-nav-container relative', $props.class)"
+  >
     <nav>
       <ul ref="navRef" class="gooey-nav-list">
         <li
@@ -175,8 +188,8 @@
         </li>
       </ul>
     </nav>
-    <span ref="filterRef" class="gooey-effect gooey-filter" />
-    <span ref="textRef" class="gooey-effect gooey-text" />
+    <span ref="filterRef" class="gooey-effect gooey-filter"></span>
+    <span ref="textRef" class="gooey-effect gooey-text"></span>
   </div>
 </template>
 
@@ -332,16 +345,19 @@
       animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
     }
     70% {
-      transform: rotate(calc(var(--rotate) * 0.5)) translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
+      transform: rotate(calc(var(--rotate) * 0.5))
+        translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
       opacity: 1;
       animation-timing-function: ease;
     }
     85% {
-      transform: rotate(calc(var(--rotate) * 0.66)) translate(var(--end-x), var(--end-y));
+      transform: rotate(calc(var(--rotate) * 0.66))
+        translate(var(--end-x), var(--end-y));
       opacity: 1;
     }
     100% {
-      transform: rotate(calc(var(--rotate) * 1.2)) translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
+      transform: rotate(calc(var(--rotate) * 1.2))
+        translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
       opacity: 1;
     }
   }

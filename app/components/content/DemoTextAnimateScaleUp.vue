@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import TextAnimate from '@registry/new-york/TextAnimate/TextAnimate.vue';
+  import TextAnimate from '@registry/new-york/TextAnimate/TextAnimate.vue';
 
-const animKey = ref(0);
+  const animKey = ref(0);
 
-function replay() {
-  animKey.value++;
-}
+  function replay() {
+    animKey.value++;
+  }
 </script>
 
 <template>
@@ -25,6 +25,12 @@ function replay() {
     >
       <Icon name="lucide:rotate-ccw" class="size-4" />
     </button>
-    <TextAnimate :key="animKey" text="Scale Up!" animation="scale-up" by="text" class="text-5xl font-black" />
+    <TextAnimate
+      :key="animKey"
+      text="Scale Up!"
+      animation="scale-up"
+      by="text"
+      class="text-5xl font-black"
+    />
   </ComponentDemo>
 </template>

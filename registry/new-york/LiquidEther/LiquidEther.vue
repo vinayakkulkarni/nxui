@@ -224,7 +224,12 @@ void main(){
 
   /* --- Helper classes --- */
   function makePaletteTexture(stops: string[]) {
-    const arr = stops.length <= 1 ? (stops.length === 1 ? [stops[0], stops[0]] : ['#ffffff', '#ffffff']) : stops;
+    const arr =
+      stops.length <= 1
+        ? stops.length === 1
+          ? [stops[0], stops[0]]
+          : ['#ffffff', '#ffffff']
+        : stops;
     const w = arr.length;
     const data = new Uint8Array(w * 4);
     for (let i = 0; i < w; i++) {
@@ -245,7 +250,7 @@ void main(){
   }
 
   function getFloatType() {
-    const isIOS = /(iPad|iPhone|iPod)/i.test(navigator.userAgent);
+    const isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent);
     return isIOS ? THREE.HalfFloatType : THREE.FloatType;
   }
 
@@ -269,7 +274,14 @@ void main(){
     output: THREE.WebGLRenderTarget | null;
     uniforms: Record<string, THREE.IUniform>;
 
-    constructor(matProps?: { vertexShader: string; fragmentShader: string; uniforms: Record<string, THREE.IUniform> }, output?: THREE.WebGLRenderTarget | null) {
+    constructor(
+      matProps?: {
+        vertexShader: string;
+        fragmentShader: string;
+        uniforms: Record<string, THREE.IUniform>;
+      },
+      output?: THREE.WebGLRenderTarget | null,
+    ) {
       this.scene = new THREE.Scene();
       this.camera = new THREE.Camera();
       this.output = output ?? null;
@@ -348,8 +360,14 @@ void main(){
     };
 
     constructor(container: HTMLElement) {
-      this.width = Math.max(1, Math.floor(container.getBoundingClientRect().width));
-      this.height = Math.max(1, Math.floor(container.getBoundingClientRect().height));
+      this.width = Math.max(
+        1,
+        Math.floor(container.getBoundingClientRect().width),
+      );
+      this.height = Math.max(
+        1,
+        Math.floor(container.getBoundingClientRect().height),
+      );
       this.paletteTex = makePaletteTexture(props.colors);
       this.bgVec4 = new THREE.Vector4(0, 0, 0, 0);
       this.autoIntensityVal = props.autoIntensity;
@@ -372,7 +390,10 @@ void main(){
       };
 
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-      this.threeRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+      this.threeRenderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha: true,
+      });
       this.threeRenderer.autoClear = false;
       this.threeRenderer.setClearColor(new THREE.Color(0x000000), 0);
       this.threeRenderer.setPixelRatio(pixelRatio);
@@ -400,10 +421,13 @@ void main(){
       this.boundarySpace = new THREE.Vector2();
 
       this.fbos = {
-        vel_0: createFBO(w, h), vel_1: createFBO(w, h),
-        vel_viscous0: createFBO(w, h), vel_viscous1: createFBO(w, h),
+        vel_0: createFBO(w, h),
+        vel_1: createFBO(w, h),
+        vel_viscous0: createFBO(w, h),
+        vel_viscous1: createFBO(w, h),
         div: createFBO(w, h),
-        pressure_0: createFBO(w, h), pressure_1: createFBO(w, h),
+        pressure_0: createFBO(w, h),
+        pressure_1: createFBO(w, h),
       };
 
       // Advection pass
@@ -415,12 +439,26 @@ void main(){
         dt: { value: this.simOptions.dt },
         isBFECC: { value: true },
       };
-      this.advection = new ShaderPass({ vertexShader: face_vert, fragmentShader: advection_frag, uniforms: advUniforms }, this.fbos.vel_1);
+      this.advection = new ShaderPass(
+        {
+          vertexShader: face_vert,
+          fragmentShader: advection_frag,
+          uniforms: advUniforms,
+        },
+        this.fbos.vel_1,
+      );
       // Boundary lines
-      const bverts = new Float32Array([-1,-1,0, -1,1,0, -1,1,0, 1,1,0, 1,1,0, 1,-1,0, 1,-1,0, -1,-1,0]);
+      const bverts = new Float32Array([
+        -1, -1, 0, -1, 1, 0, -1, 1, 0, 1, 1, 0, 1, 1, 0, 1, -1, 0, 1, -1, 0, -1,
+        -1, 0,
+      ]);
       const boundG = new THREE.BufferGeometry();
       boundG.setAttribute('position', new THREE.BufferAttribute(bverts, 3));
-      const boundM = new THREE.RawShaderMaterial({ vertexShader: line_vert, fragmentShader: advection_frag, uniforms: advUniforms });
+      const boundM = new THREE.RawShaderMaterial({
+        vertexShader: line_vert,
+        fragmentShader: advection_frag,
+        uniforms: advUniforms,
+      });
       const boundLine = new THREE.LineSegments(boundG, boundM);
       this.advection.scene.add(boundLine);
 
@@ -436,62 +474,79 @@ void main(){
           px: { value: this.cellScale },
           force: { value: new THREE.Vector2(0, 0) },
           center: { value: new THREE.Vector2(0, 0) },
-          scale: { value: new THREE.Vector2(this.simOptions.cursor_size, this.simOptions.cursor_size) },
+          scale: {
+            value: new THREE.Vector2(
+              this.simOptions.cursor_size,
+              this.simOptions.cursor_size,
+            ),
+          },
         },
       });
       this.externalForceMouse = new THREE.Mesh(mouseG, mouseM);
       this.externalForce.scene.add(this.externalForceMouse);
 
       // Viscous pass
-      this.viscousPass = new ShaderPass({
-        vertexShader: face_vert,
-        fragmentShader: viscous_frag,
-        uniforms: {
-          boundarySpace: { value: this.boundarySpace },
-          velocity: { value: this.fbos.vel_1.texture },
-          velocity_new: { value: this.fbos.vel_viscous0.texture },
-          v: { value: this.simOptions.viscous },
-          px: { value: this.cellScale },
-          dt: { value: this.simOptions.dt },
+      this.viscousPass = new ShaderPass(
+        {
+          vertexShader: face_vert,
+          fragmentShader: viscous_frag,
+          uniforms: {
+            boundarySpace: { value: this.boundarySpace },
+            velocity: { value: this.fbos.vel_1.texture },
+            velocity_new: { value: this.fbos.vel_viscous0.texture },
+            v: { value: this.simOptions.viscous },
+            px: { value: this.cellScale },
+            dt: { value: this.simOptions.dt },
+          },
         },
-      }, this.fbos.vel_viscous1);
+        this.fbos.vel_viscous1,
+      );
 
       // Divergence pass
-      this.divergencePass = new ShaderPass({
-        vertexShader: face_vert,
-        fragmentShader: divergence_frag,
-        uniforms: {
-          boundarySpace: { value: this.boundarySpace },
-          velocity: { value: this.fbos.vel_viscous0.texture },
-          px: { value: this.cellScale },
-          dt: { value: this.simOptions.dt },
+      this.divergencePass = new ShaderPass(
+        {
+          vertexShader: face_vert,
+          fragmentShader: divergence_frag,
+          uniforms: {
+            boundarySpace: { value: this.boundarySpace },
+            velocity: { value: this.fbos.vel_viscous0.texture },
+            px: { value: this.cellScale },
+            dt: { value: this.simOptions.dt },
+          },
         },
-      }, this.fbos.div);
+        this.fbos.div,
+      );
 
       // Poisson pass
-      this.poissonPass = new ShaderPass({
-        vertexShader: face_vert,
-        fragmentShader: poisson_frag,
-        uniforms: {
-          boundarySpace: { value: this.boundarySpace },
-          pressure: { value: this.fbos.pressure_0.texture },
-          divergence: { value: this.fbos.div.texture },
-          px: { value: this.cellScale },
+      this.poissonPass = new ShaderPass(
+        {
+          vertexShader: face_vert,
+          fragmentShader: poisson_frag,
+          uniforms: {
+            boundarySpace: { value: this.boundarySpace },
+            pressure: { value: this.fbos.pressure_0.texture },
+            divergence: { value: this.fbos.div.texture },
+            px: { value: this.cellScale },
+          },
         },
-      }, this.fbos.pressure_1);
+        this.fbos.pressure_1,
+      );
 
       // Pressure pass
-      this.pressurePass = new ShaderPass({
-        vertexShader: face_vert,
-        fragmentShader: pressure_frag,
-        uniforms: {
-          boundarySpace: { value: this.boundarySpace },
-          pressure: { value: this.fbos.pressure_0.texture },
-          velocity: { value: this.fbos.vel_viscous0.texture },
-          px: { value: this.cellScale },
-          dt: { value: this.simOptions.dt },
+      this.pressurePass = new ShaderPass(
+        {
+          vertexShader: face_vert,
+          fragmentShader: pressure_frag,
+          uniforms: {
+            boundarySpace: { value: this.boundarySpace },
+            pressure: { value: this.fbos.pressure_0.texture },
+            velocity: { value: this.fbos.vel_viscous0.texture },
+            px: { value: this.cellScale },
+            dt: { value: this.simOptions.dt },
+          },
         },
-      }, this.fbos.vel_0);
+        this.fbos.vel_0,
+      );
     }
 
     initOutput() {
@@ -519,18 +574,27 @@ void main(){
       const onMove = (e: MouseEvent) => {
         const rect = container.getBoundingClientRect();
         if (rect.width === 0 || rect.height === 0) return;
-        const inside = e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+        const inside =
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom;
         this.mouseHover = inside;
         if (!inside) return;
         this.lastUserInteraction = performance.now();
-        if (this.autoActive) { this.autoActive = false; this.isAutoActive = false; }
+        if (this.autoActive) {
+          this.autoActive = false;
+          this.isAutoActive = false;
+        }
         this.hasUserControl = true;
         const nx = (e.clientX - rect.left) / rect.width;
         const ny = (e.clientY - rect.top) / rect.height;
         this.mouseCoords.set(nx * 2 - 1, -(ny * 2 - 1));
         this.mouseMovedRecently = true;
       };
-      const onLeave = () => { this.mouseHover = false; };
+      const onLeave = () => {
+        this.mouseHover = false;
+      };
       window.addEventListener('mousemove', onMove);
       container.ownerDocument?.addEventListener('mouseleave', onLeave);
 
@@ -543,7 +607,10 @@ void main(){
     }
 
     pickNewAutoTarget() {
-      this.autoTarget.set((Math.random() * 2 - 1) * 0.8, (Math.random() * 2 - 1) * 0.8);
+      this.autoTarget.set(
+        (Math.random() * 2 - 1) * 0.8,
+        (Math.random() * 2 - 1) * 0.8,
+      );
     }
 
     updateAutoDriver() {
@@ -551,11 +618,17 @@ void main(){
       const now = performance.now();
       const idle = now - this.lastUserInteraction;
       if (idle < this.autoResumeDelayVal) {
-        if (this.autoActive) { this.autoActive = false; this.isAutoActive = false; }
+        if (this.autoActive) {
+          this.autoActive = false;
+          this.isAutoActive = false;
+        }
         return;
       }
       if (this.mouseHover) {
-        if (this.autoActive) { this.autoActive = false; this.isAutoActive = false; }
+        if (this.autoActive) {
+          this.autoActive = false;
+          this.isAutoActive = false;
+        }
         return;
       }
       if (!this.autoActive) {
@@ -568,13 +641,22 @@ void main(){
       let dtSec = (now - this.autoLastTime) / 1000;
       this.autoLastTime = now;
       if (dtSec > 0.2) dtSec = 0.016;
-      const dir = new THREE.Vector2().subVectors(this.autoTarget, this.autoCurrent);
+      const dir = new THREE.Vector2().subVectors(
+        this.autoTarget,
+        this.autoCurrent,
+      );
       const dist = dir.length();
-      if (dist < 0.01) { this.pickNewAutoTarget(); return; }
+      if (dist < 0.01) {
+        this.pickNewAutoTarget();
+        return;
+      }
       dir.normalize();
       let ramp = 1;
       if (this.autoRampMs > 0) {
-        const t = Math.min(1, (now - this.autoActivationTime) / this.autoRampMs);
+        const t = Math.min(
+          1,
+          (now - this.autoActivationTime) / this.autoRampMs,
+        );
         ramp = t * t * (3 - 2 * t);
       }
       const move = Math.min(this.autoSpeedVal * dtSec * ramp, dist);
@@ -586,8 +668,10 @@ void main(){
     updateMouse() {
       this.mouseDiff.subVectors(this.mouseCoords, this.mouseCoordsOld);
       this.mouseCoordsOld.copy(this.mouseCoords);
-      if (this.mouseCoordsOld.x === 0 && this.mouseCoordsOld.y === 0) this.mouseDiff.set(0, 0);
-      if (this.isAutoActive) this.mouseDiff.multiplyScalar(this.autoIntensityVal);
+      if (this.mouseCoordsOld.x === 0 && this.mouseCoordsOld.y === 0)
+        this.mouseDiff.set(0, 0);
+      if (this.isAutoActive)
+        this.mouseDiff.multiplyScalar(this.autoIntensityVal);
     }
 
     updateSimulation() {
@@ -601,17 +685,28 @@ void main(){
       // Advection
       this.advection.uniforms.dt.value = opts.dt;
       this.advection.uniforms.isBFECC.value = opts.BFECC;
-      this.advection.scene.children.forEach(c => { if (c instanceof THREE.LineSegments) c.visible = opts.isBounce; });
+      this.advection.scene.children.forEach((c) => {
+        if (c instanceof THREE.LineSegments) c.visible = opts.isBounce;
+      });
       this.advection.render(this.threeRenderer);
 
       // External force
       const mu = this.externalForceMouse.material as THREE.RawShaderMaterial;
-      mu.uniforms.force.value.set((this.mouseDiff.x / 2) * opts.mouse_force, (this.mouseDiff.y / 2) * opts.mouse_force);
+      mu.uniforms.force.value.set(
+        (this.mouseDiff.x / 2) * opts.mouse_force,
+        (this.mouseDiff.y / 2) * opts.mouse_force,
+      );
       const csx = opts.cursor_size * this.cellScale.x;
       const csy = opts.cursor_size * this.cellScale.y;
       mu.uniforms.center.value.set(
-        Math.min(Math.max(this.mouseCoords.x, -1 + csx + this.cellScale.x * 2), 1 - csx - this.cellScale.x * 2),
-        Math.min(Math.max(this.mouseCoords.y, -1 + csy + this.cellScale.y * 2), 1 - csy - this.cellScale.y * 2),
+        Math.min(
+          Math.max(this.mouseCoords.x, -1 + csx + this.cellScale.x * 2),
+          1 - csx - this.cellScale.x * 2,
+        ),
+        Math.min(
+          Math.max(this.mouseCoords.y, -1 + csy + this.cellScale.y * 2),
+          1 - csy - this.cellScale.y * 2,
+        ),
       );
       mu.uniforms.scale.value.set(opts.cursor_size, opts.cursor_size);
       this.externalForce.render(this.threeRenderer);
@@ -625,7 +720,8 @@ void main(){
         let fboOut: THREE.WebGLRenderTarget;
         for (let i = 0; i < opts.iterations_viscous; i++) {
           fboIn = i % 2 === 0 ? this.fbos.vel_viscous0 : this.fbos.vel_viscous1;
-          fboOut = i % 2 === 0 ? this.fbos.vel_viscous1 : this.fbos.vel_viscous0;
+          fboOut =
+            i % 2 === 0 ? this.fbos.vel_viscous1 : this.fbos.vel_viscous0;
           this.viscousPass.uniforms.velocity_new.value = fboIn.texture;
           this.viscousPass.output = fboOut;
           this.viscousPass.render(this.threeRenderer);
@@ -658,8 +754,14 @@ void main(){
       this.height = Math.max(1, h);
       this.threeRenderer.setSize(this.width, this.height, false);
       // Resize FBOs
-      const fw = Math.max(1, Math.round(this.simOptions.resolution * this.width));
-      const fh = Math.max(1, Math.round(this.simOptions.resolution * this.height));
+      const fw = Math.max(
+        1,
+        Math.round(this.simOptions.resolution * this.width),
+      );
+      const fh = Math.max(
+        1,
+        Math.round(this.simOptions.resolution * this.height),
+      );
       this.fboSize.set(fw, fh);
       this.cellScale.set(1.0 / fw, 1.0 / fh);
       for (const key of Object.keys(this.fbos)) {
@@ -715,5 +817,8 @@ void main(){
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative size-full overflow-hidden', $props.class)" />
+  <div
+    ref="containerRef"
+    :class="cn('relative size-full overflow-hidden', $props.class)"
+  ></div>
 </template>

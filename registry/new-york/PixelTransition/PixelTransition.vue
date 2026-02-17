@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, onMounted, watch, nextTick } from 'vue';
+  import { ref, onMounted, watch } from 'vue';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -55,9 +55,15 @@
     isActive.value = activate;
 
     const grid = pixelGridRef.value;
-    if (!grid) { animating = false; return; }
+    if (!grid) {
+      animating = false;
+      return;
+    }
     const pixels = Array.from(grid.children) as HTMLElement[];
-    if (pixels.length === 0) { animating = false; return; }
+    if (pixels.length === 0) {
+      animating = false;
+      return;
+    }
 
     // Shuffle array for random stagger
     const shuffled = [...pixels].sort(() => Math.random() - 0.5);
@@ -66,7 +72,9 @@
 
     // Phase 1: show pixels
     shuffled.forEach((px, i) => {
-      setTimeout(() => { px.style.display = 'block'; }, i * stagger);
+      setTimeout(() => {
+        px.style.display = 'block';
+      }, i * stagger);
     });
 
     // Flip content at midpoint
@@ -77,7 +85,12 @@
     // Phase 2: hide pixels
     const shuffled2 = [...pixels].sort(() => Math.random() - 0.5);
     shuffled2.forEach((px, i) => {
-      setTimeout(() => { px.style.display = 'none'; }, totalDuration + i * stagger);
+      setTimeout(
+        () => {
+          px.style.display = 'none';
+        },
+        totalDuration + i * stagger,
+      );
     });
 
     setTimeout(() => {
@@ -97,27 +110,30 @@
 <template>
   <div
     :class="cn('pixel-transition-wrap', $props.class)"
+    tabindex="0"
     @mouseenter="handleEnter"
     @mouseleave="handleLeave"
-    tabindex="0"
     @focus="handleEnter"
     @blur="handleLeave"
   >
-    <div :style="{ paddingTop: aspectRatio }" />
+    <div :style="{ paddingTop: aspectRatio }"></div>
     <div
       class="absolute inset-0 flex items-center justify-center"
       :aria-hidden="isActive"
     >
-      <slot name="first" />
+      <slot name="first"></slot>
     </div>
     <div
       class="absolute inset-0 flex items-center justify-center"
-      :style="{ display: showSecond ? 'flex' : 'none', pointerEvents: showSecond ? 'none' : '' }"
+      :style="{
+        display: showSecond ? 'flex' : 'none',
+        pointerEvents: showSecond ? 'none' : '',
+      }"
       :aria-hidden="!isActive"
     >
-      <slot name="second" />
+      <slot name="second"></slot>
     </div>
-    <div ref="pixelGridRef" class="pointer-events-none absolute inset-0" />
+    <div ref="pixelGridRef" class="pointer-events-none absolute inset-0"></div>
   </div>
 </template>
 

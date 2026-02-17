@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Grainient",
   "description": "Animated gradient background with noise grain and smooth color blending.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/Grainient/Grainient.vue",

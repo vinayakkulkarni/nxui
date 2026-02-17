@@ -13,10 +13,12 @@
 
 <template>
   <button
-    :class="cn(
-      'group relative cursor-pointer overflow-hidden rounded-full border bg-background px-6 py-2 text-center font-semibold',
-      $props.class,
-    )"
+    :class="
+      cn(
+        'group relative cursor-pointer overflow-hidden rounded-full border bg-background px-6 py-2 text-center font-semibold',
+        $props.class,
+      )
+    "
   >
     <span
       class="relative z-10 inline-block translate-x-1 text-foreground transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0"

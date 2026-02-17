@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import type { NavGroup, NavItem } from '~/types/docs';
+  import type { NavGroup, NavItem } from '~/types/docs';
 
-defineProps<{
-  query: string;
-  filteredGroups: NavGroup[];
-  flatItems: NavItem[];
-  selectedIndex: number;
-  inputRef: HTMLInputElement | null;
-}>();
+  defineProps<{
+    query: string;
+    filteredGroups: NavGroup[];
+    flatItems: NavItem[];
+    selectedIndex: number;
+    inputRef: HTMLInputElement | null;
+  }>();
 
-const emit = defineEmits<{
-  'update:query': [value: string];
-  'update:input-ref': [el: HTMLInputElement | null];
-  select: [path: string];
-  keydown: [e: KeyboardEvent];
-  close: [];
-}>();
+  const emit = defineEmits<{
+    'update:query': [value: string];
+    'update:input-ref': [el: HTMLInputElement | null];
+    select: [path: string];
+    keydown: [e: KeyboardEvent];
+    close: [];
+  }>();
 
-const localInputRef = ref<HTMLInputElement | null>(null);
+  const localInputRef = ref<HTMLInputElement | null>(null);
 
-onMounted(() => {
-  emit('update:input-ref', localInputRef.value);
-  nextTick(() => localInputRef.value?.focus());
-});
+  onMounted(() => {
+    emit('update:input-ref', localInputRef.value);
+    nextTick(() => localInputRef.value?.focus());
+  });
 </script>
 
 <template>
@@ -33,9 +33,7 @@ onMounted(() => {
       class="overflow-hidden rounded-2xl border border-border/80 bg-popover shadow-2xl shadow-black/10 dark:shadow-black/30 backdrop-blur-2xl dark:border-white/[0.08]"
       @keydown="emit('keydown', $event)"
     >
-      <div
-        class="flex items-center gap-3 border-b border-border/50 px-4 py-3"
-      >
+      <div class="flex items-center gap-3 border-b border-border/50 px-4 py-3">
         <div
           class="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5"
         >
@@ -139,9 +137,7 @@ onMounted(() => {
       <div
         class="flex items-center justify-between border-t border-border bg-muted/50 px-4 py-2.5"
       >
-        <div
-          class="flex items-center gap-4 text-xs text-muted-foreground"
-        >
+        <div class="flex items-center gap-4 text-xs text-muted-foreground">
           <span class="flex items-center gap-1.5">
             <kbd
               class="rounded border bg-background/80 px-1.5 py-0.5 font-mono text-[10px]"

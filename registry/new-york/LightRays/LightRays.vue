@@ -6,7 +6,15 @@
 
   const props = withDefaults(
     defineProps<{
-      raysOrigin?: 'top-center' | 'top-left' | 'top-right' | 'left' | 'right' | 'bottom-left' | 'bottom-center' | 'bottom-right';
+      raysOrigin?:
+        | 'top-center'
+        | 'top-left'
+        | 'top-right'
+        | 'left'
+        | 'right'
+        | 'bottom-left'
+        | 'bottom-center'
+        | 'bottom-right';
       raysColor?: string;
       raysSpeed?: number;
       lightSpread?: number;
@@ -40,7 +48,11 @@
   function hexToRgb(hex: string): [number, number, number] {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return m
-      ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255]
+      ? [
+          Number.parseInt(m[1], 16) / 255,
+          Number.parseInt(m[2], 16) / 255,
+          Number.parseInt(m[3], 16) / 255,
+        ]
       : [1, 1, 1];
   }
 
@@ -177,7 +189,10 @@ void main() {
     const container = containerRef.value;
     if (!container) return;
 
-    renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), alpha: true });
+    renderer = new Renderer({
+      dpr: Math.min(window.devicePixelRatio, 2),
+      alpha: true,
+    });
     const gl = renderer.gl;
     glContext = gl;
     gl.canvas.style.width = '100%';
@@ -233,8 +248,10 @@ void main() {
 
       if (props.followMouse && props.mouseInfluence > 0) {
         const smoothing = 0.92;
-        smoothMouse.x = smoothMouse.x * smoothing + targetMouse.x * (1 - smoothing);
-        smoothMouse.y = smoothMouse.y * smoothing + targetMouse.y * (1 - smoothing);
+        smoothMouse.x =
+          smoothMouse.x * smoothing + targetMouse.x * (1 - smoothing);
+        smoothMouse.y =
+          smoothMouse.y * smoothing + targetMouse.y * (1 - smoothing);
         programRef.uniforms.mousePos.value = [smoothMouse.x, smoothMouse.y];
       }
 
@@ -254,5 +271,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

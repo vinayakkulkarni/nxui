@@ -55,7 +55,7 @@
       const dist = Math.sqrt(dx * dx + dy * dy);
       if (dist >= props.spacing) {
         const angle = props.followMouseDirection
-          ? ((Math.atan2(dy, dx) * 180) / Math.PI + 360) % 360 - 180
+          ? (((Math.atan2(dy, dx) * 180) / Math.PI + 360) % 360) - 180
           : 0;
         const steps = Math.floor(dist / props.spacing);
         const newItems: TrailItem[] = [];
@@ -69,9 +69,10 @@
           });
         }
         const combined = [...prev, ...newItems];
-        trail.value = combined.length > props.maxPoints
-          ? combined.slice(combined.length - props.maxPoints)
-          : combined;
+        trail.value =
+          combined.length > props.maxPoints
+            ? combined.slice(combined.length - props.maxPoints)
+            : combined;
       }
     }
     lastMoveTime.value = Date.now();
@@ -110,6 +111,6 @@
         </component>
       </AnimatePresence>
     </div>
-    <slot />
+    <slot></slot>
   </div>
 </template>

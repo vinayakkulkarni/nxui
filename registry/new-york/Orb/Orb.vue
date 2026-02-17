@@ -25,7 +25,11 @@
 
   function hexToVec3(color: string): [number, number, number] {
     const hex = color.startsWith('#') ? color.slice(1) : color;
-    return [parseInt(hex.slice(0, 2), 16) / 255, parseInt(hex.slice(2, 4), 16) / 255, parseInt(hex.slice(4, 6), 16) / 255];
+    return [
+      Number.parseInt(hex.slice(0, 2), 16) / 255,
+      Number.parseInt(hex.slice(2, 4), 16) / 255,
+      Number.parseInt(hex.slice(4, 6), 16) / 255,
+    ];
   }
 
   const containerRef = ref<HTMLDivElement>();
@@ -190,7 +194,13 @@ void main() {
       fragment: fragmentShader,
       uniforms: {
         iTime: { value: 0 },
-        iResolution: { value: new Float32Array([gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height]) },
+        iResolution: {
+          value: new Float32Array([
+            gl.canvas.width,
+            gl.canvas.height,
+            gl.canvas.width / gl.canvas.height,
+          ]),
+        },
         hue: { value: props.hue },
         hover: { value: 0 },
         rot: { value: 0 },
@@ -210,9 +220,12 @@ void main() {
       program.uniforms.hoverIntensity.value = props.hoverIntensity;
       const bg = hexToVec3(props.backgroundColor);
       const bgArr = program.uniforms.backgroundColor.value as Float32Array;
-      bgArr[0] = bg[0]; bgArr[1] = bg[1]; bgArr[2] = bg[2];
+      bgArr[0] = bg[0];
+      bgArr[1] = bg[1];
+      bgArr[2] = bg[2];
       const effectiveHover = props.forceHoverState ? 1 : targetHover;
-      program.uniforms.hover.value += (effectiveHover - program.uniforms.hover.value) * 0.1;
+      program.uniforms.hover.value +=
+        (effectiveHover - program.uniforms.hover.value) * 0.1;
       if (props.rotateOnHover && effectiveHover > 0.5) currentRot += dt * 0.3;
       program.uniforms.rot.value = currentRot;
       renderer.render({ scene: mesh });
@@ -225,12 +238,13 @@ void main() {
     cancelAnimationFrame(rafId);
     if (renderer && containerRef.value) {
       const gl = renderer.gl;
-      if (containerRef.value.contains(gl.canvas)) containerRef.value.removeChild(gl.canvas);
+      if (containerRef.value.contains(gl.canvas))
+        containerRef.value.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     }
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

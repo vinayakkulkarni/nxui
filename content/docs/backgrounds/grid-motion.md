@@ -14,7 +14,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/grid-motion.json"
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `items` | `string[]` | `[]` | Up to 28 items (text or image URLs) |
-| `gradient-color` | `string` | `'black'` | Radial gradient overlay color |
+| Prop             | Type       | Default   | Description                         |
+| ---------------- | ---------- | --------- | ----------------------------------- |
+| `items`          | `string[]` | `[]`      | Up to 28 items (text or image URLs) |
+| `gradient-color` | `string`   | `'black'` | Radial gradient overlay color       |

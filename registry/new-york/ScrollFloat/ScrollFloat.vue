@@ -57,9 +57,10 @@
       ),
       1,
     );
-    const eased = charProgress < 0.5
-      ? 4 * charProgress * charProgress * charProgress
-      : 1 - (-2 * charProgress + 2) ** 3 / 2;
+    const eased =
+      charProgress < 0.5
+        ? 4 * charProgress * charProgress * charProgress
+        : 1 - (-2 * charProgress + 2) ** 3 / 2;
 
     return {
       opacity: eased,
@@ -78,7 +79,8 @@
         :key="i"
         class="inline-block will-change-[transform,opacity]"
         :style="getCharStyle(i)"
-      >{{ char === ' ' ? '\u00A0' : char }}</span>
+        >{{ char === ' ' ? '\u00A0' : char }}</span
+      >
     </span>
   </h2>
 </template>

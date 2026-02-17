@@ -17,20 +17,21 @@ export default defineNuxtConfig({
   runtimeConfig: {
     oauth: {
       google: {
-        clientId: process.env.GOOGLE_CLIENT_ID,  // NO!
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET  // NO!
-      }
-    }
-  }
-})
+        clientId: process.env.GOOGLE_CLIENT_ID, // NO!
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET, // NO!
+      },
+    },
+  },
+});
 
 // ❌ WRONG - server/utils/auth.ts
-if (process.env.GOOGLE_CLIENT_ID) {  // NO!
+if (process.env.GOOGLE_CLIENT_ID) {
+  // NO!
   // ...
 }
 
 // ❌ WRONG - anywhere in server code
-const apiKey = process.env.STRIPE_SECRET_KEY  // NO!
+const apiKey = process.env.STRIPE_SECRET_KEY; // NO!
 ```
 
 **Correct (useRuntimeConfig):**
@@ -43,25 +44,25 @@ export default defineNuxtConfig({
     // Private keys (server only) - maps from NUXT_*
     oauth: {
       google: {
-        clientId: '',      // ← NUXT_OAUTH_GOOGLE_CLIENT_ID
-        clientSecret: ''   // ← NUXT_OAUTH_GOOGLE_CLIENT_SECRET
-      }
+        clientId: '', // ← NUXT_OAUTH_GOOGLE_CLIENT_ID
+        clientSecret: '', // ← NUXT_OAUTH_GOOGLE_CLIENT_SECRET
+      },
     },
     stripe: {
-      secretKey: ''        // ← NUXT_STRIPE_SECRET_KEY
+      secretKey: '', // ← NUXT_STRIPE_SECRET_KEY
     },
     // Public keys (exposed to client)
     public: {
-      baseUrl: '',         // ← NUXT_PUBLIC_BASE_URL
-      apiVersion: 'v1'
-    }
-  }
-})
+      baseUrl: '', // ← NUXT_PUBLIC_BASE_URL
+      apiVersion: 'v1',
+    },
+  },
+});
 ```
 
 ```typescript
 // ✅ CORRECT - server/utils/auth.ts
-const config = useRuntimeConfig()
+const config = useRuntimeConfig();
 
 if (config.oauth.google.clientId) {
   // Fully typed configuration access
@@ -69,28 +70,28 @@ if (config.oauth.google.clientId) {
 
 // ✅ CORRECT - server/api/payment.ts
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig()
-  const stripe = new Stripe(config.stripe.secretKey)
+  const config = useRuntimeConfig();
+  const stripe = new Stripe(config.stripe.secretKey);
   // ...
-})
+});
 ```
 
 **Environment variable naming convention:**
 
-| runtimeConfig Path | Environment Variable |
-|-------------------|---------------------|
+| runtimeConfig Path                    | Environment Variable          |
+| ------------------------------------- | ----------------------------- |
 | `runtimeConfig.oauth.google.clientId` | `NUXT_OAUTH_GOOGLE_CLIENT_ID` |
-| `runtimeConfig.stripe.secretKey` | `NUXT_STRIPE_SECRET_KEY` |
-| `runtimeConfig.database.url` | `NUXT_DATABASE_URL` |
-| `runtimeConfig.public.baseUrl` | `NUXT_PUBLIC_BASE_URL` |
+| `runtimeConfig.stripe.secretKey`      | `NUXT_STRIPE_SECRET_KEY`      |
+| `runtimeConfig.database.url`          | `NUXT_DATABASE_URL`           |
+| `runtimeConfig.public.baseUrl`        | `NUXT_PUBLIC_BASE_URL`        |
 
 **Client-side access (public only):**
 
 ```vue
 <script setup>
-// Client can only access public config
-const config = useRuntimeConfig()
-const apiUrl = config.public.baseUrl
+  // Client can only access public config
+  const config = useRuntimeConfig();
+  const apiUrl = config.public.baseUrl;
 </script>
 ```
 
@@ -102,29 +103,29 @@ declare module 'nuxt/schema' {
   interface RuntimeConfig {
     oauth: {
       google: {
-        clientId: string
-        clientSecret: string
-      }
-    }
+        clientId: string;
+        clientSecret: string;
+      };
+    };
     stripe: {
-      secretKey: string
-    }
+      secretKey: string;
+    };
   }
   interface PublicRuntimeConfig {
-    baseUrl: string
-    apiVersion: string
+    baseUrl: string;
+    apiVersion: string;
   }
 }
 ```
 
 **Why not process.env?**
 
-| Feature | process.env | useRuntimeConfig |
-|---------|------------|------------------|
-| Type safety | ❌ | ✅ |
-| Consistent access | ❌ | ✅ |
-| Auto env mapping | ❌ | ✅ |
-| Client/server split | ❌ | ✅ |
-| Default values | Manual | Built-in |
+| Feature             | process.env | useRuntimeConfig |
+| ------------------- | ----------- | ---------------- |
+| Type safety         | ❌          | ✅               |
+| Consistent access   | ❌          | ✅               |
+| Auto env mapping    | ❌          | ✅               |
+| Client/server split | ❌          | ✅               |
+| Default values      | Manual      | Built-in         |
 
 Reference: [Nuxt Runtime Config](https://nuxt.com/docs/guide/going-further/runtime-config)

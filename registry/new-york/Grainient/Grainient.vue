@@ -14,13 +14,25 @@
       contrast?: number;
       class?: string;
     }>(),
-    { color1: '#FF9FFC', color2: '#5227FF', color3: '#B19EEF', speed: 0.25, grainAmount: 0.1, contrast: 1.5, class: '' },
+    {
+      color1: '#FF9FFC',
+      color2: '#5227FF',
+      color3: '#B19EEF',
+      speed: 0.25,
+      grainAmount: 0.1,
+      contrast: 1.5,
+      class: '',
+    },
   );
 
   function hexToRgb(hex: string): Float32Array {
     const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!r) return new Float32Array([1, 1, 1]);
-    return new Float32Array([parseInt(r[1], 16) / 255, parseInt(r[2], 16) / 255, parseInt(r[3], 16) / 255]);
+    return new Float32Array([
+      Number.parseInt(r[1], 16) / 255,
+      Number.parseInt(r[2], 16) / 255,
+      Number.parseInt(r[3], 16) / 255,
+    ]);
   }
 
   const containerRef = ref<HTMLDivElement>();
@@ -73,7 +85,12 @@ void main(){
 
   onMounted(() => {
     if (!containerRef.value) return;
-    renderer = new Renderer({ webgl: 2, alpha: true, antialias: false, dpr: Math.min(window.devicePixelRatio, 2) });
+    renderer = new Renderer({
+      webgl: 2,
+      alpha: true,
+      antialias: false,
+      dpr: Math.min(window.devicePixelRatio, 2),
+    });
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;
     canvas.style.width = '100%';
@@ -118,11 +135,12 @@ void main(){
     cancelAnimationFrame(rafId);
     if (renderer && containerRef.value) {
       const canvas = renderer.gl.canvas as HTMLCanvasElement;
-      if (containerRef.value.contains(canvas)) containerRef.value.removeChild(canvas);
+      if (containerRef.value.contains(canvas))
+        containerRef.value.removeChild(canvas);
     }
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

@@ -38,7 +38,8 @@
     const ctx = cvs.getContext('2d');
     if (!ctx) return;
 
-    const computedFont = window.getComputedStyle(cvs).fontFamily || 'sans-serif';
+    const computedFont =
+      window.getComputedStyle(cvs).fontFamily || 'sans-serif';
     const fontString = `${props.fontWeight} ${props.fontSize} ${computedFont}`;
 
     offscreen = document.createElement('canvas');
@@ -52,9 +53,10 @@
     const actualLeft = metrics.actualBoundingBoxLeft ?? 0;
     const actualRight = metrics.actualBoundingBoxRight ?? metrics.width;
     const actualAscent =
-      metrics.actualBoundingBoxAscent ?? parseFloat(props.fontSize);
+      metrics.actualBoundingBoxAscent ?? Number.parseFloat(props.fontSize);
     const actualDescent =
-      metrics.actualBoundingBoxDescent ?? parseFloat(props.fontSize) * 0.2;
+      metrics.actualBoundingBoxDescent ??
+      Number.parseFloat(props.fontSize) * 0.2;
 
     offscreenWidth = Math.ceil(actualLeft + actualRight) + 10;
     tightHeight = Math.ceil(actualAscent + actualDescent);
@@ -97,7 +99,9 @@
         : props.baseIntensity;
 
     for (let j = 0; j < tightHeight; j++) {
-      const dx = Math.floor(intensity * (Math.random() - 0.5) * props.fuzzRange);
+      const dx = Math.floor(
+        intensity * (Math.random() - 0.5) * props.fuzzRange,
+      );
       ctx.drawImage(
         offscreen,
         0,
@@ -118,5 +122,5 @@
     ref="canvas"
     :class="cn('block', props.class)"
     :style="{ fontSize, fontWeight }"
-  />
+  ></canvas>
 </template>

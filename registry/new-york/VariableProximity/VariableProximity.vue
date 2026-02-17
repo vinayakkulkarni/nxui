@@ -44,7 +44,10 @@
         .map((s) => s.trim())
         .map((s) => {
           const [name, value] = s.split(' ');
-          return [(name ?? '').replace(/['"]/g, ''), parseFloat(value ?? '0')];
+          return [
+            (name ?? '').replace(/['"]/g, ''),
+            Number.parseFloat(value ?? '0'),
+          ];
         }),
     );
   }
@@ -100,21 +103,29 @@
 
   const words = computed(() => props.label.split(' '));
 
-  function setLetterRef(index: number, el: Element | ComponentPublicInstance | null) {
+  function setLetterRef(
+    index: number,
+    el: Element | ComponentPublicInstance | null,
+  ) {
     letterRefs.value[index] = el as HTMLSpanElement | null;
   }
 </script>
 
 <template>
   <span :class="cn('inline', props.class)">
-    <span v-for="(word, wi) in words" :key="wi" class="inline-block whitespace-nowrap">
+    <span
+      v-for="(word, wi) in words"
+      :key="wi"
+      class="inline-block whitespace-nowrap"
+    >
       <span
         v-for="(letter, li) in word.split('')"
         :key="li"
         :ref="(el) => setLetterRef(words.slice(0, wi).join('').length + li, el)"
         class="inline-block"
         aria-hidden="true"
-      >{{ letter }}</span>
+        >{{ letter }}</span
+      >
       <span v-if="wi < words.length - 1" class="inline-block">&nbsp;</span>
     </span>
     <span class="sr-only">{{ label }}</span>

@@ -17,7 +17,11 @@
   >
     <div class="flex h-[400px] w-full items-center justify-center rounded-lg">
       <div class="relative size-[200px]">
-        <Stack :sensitivity="200" :send-to-back-on-click="true" :card-dimensions="{ width: 200, height: 200 }">
+        <Stack
+          :sensitivity="200"
+          :send-to-back-on-click="true"
+          :card-dimensions="{ width: 200, height: 200 }"
+        >
           <img
             v-for="src in images"
             :key="src"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, computed, watch, onMounted, onBeforeUnmount, useId } from 'vue';
+  import { ref, computed, watch, onMounted, useId } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
@@ -107,7 +107,10 @@
     ];
     for (const { ref: chRef, offset } of channels) {
       if (chRef.value) {
-        chRef.value.setAttribute('scale', String(props.distortionScale + offset));
+        chRef.value.setAttribute(
+          'scale',
+          String(props.distortionScale + offset),
+        );
         chRef.value.setAttribute('xChannelSelector', props.xChannel);
         chRef.value.setAttribute('yChannelSelector', props.yChannel);
       }
@@ -117,7 +120,8 @@
 
   const containerStyle = computed(() => ({
     width: typeof props.width === 'number' ? `${props.width}px` : props.width,
-    height: typeof props.height === 'number' ? `${props.height}px` : props.height,
+    height:
+      typeof props.height === 'number' ? `${props.height}px` : props.height,
     borderRadius: `${props.borderRadius}px`,
     '--glass-frost': props.backgroundOpacity,
     '--glass-saturation': props.saturation,
@@ -134,10 +138,21 @@
 
   watch(
     () => [
-      props.width, props.height, props.borderRadius, props.borderWidth,
-      props.brightness, props.opacity, props.blur, props.displace,
-      props.distortionScale, props.redOffset, props.greenOffset, props.blueOffset,
-      props.xChannel, props.yChannel, props.mixBlendMode,
+      props.width,
+      props.height,
+      props.borderRadius,
+      props.borderWidth,
+      props.brightness,
+      props.opacity,
+      props.blur,
+      props.displace,
+      props.distortionScale,
+      props.redOffset,
+      props.greenOffset,
+      props.blueOffset,
+      props.xChannel,
+      props.yChannel,
+      props.mixBlendMode,
     ],
     () => {
       updateDisplacementMap();
@@ -157,17 +172,37 @@
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="containerClass"
-    :style="containerStyle"
-  >
-    <svg class="gs-filter" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <div ref="containerRef" :class="containerClass" :style="containerStyle">
+    <svg
+      class="gs-filter"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
       <defs>
-        <filter :id="filterId" color-interpolation-filters="sRGB" x="0%" y="0%" width="100%" height="100%">
-          <feImage ref="feImageRef" x="0" y="0" width="100%" height="100%" preserveAspectRatio="none" result="map" />
+        <filter
+          :id="filterId"
+          color-interpolation-filters="sRGB"
+          x="0%"
+          y="0%"
+          width="100%"
+          height="100%"
+        >
+          <feImage
+            ref="feImageRef"
+            x="0"
+            y="0"
+            width="100%"
+            height="100%"
+            preserveAspectRatio="none"
+            result="map"
+          />
 
-          <feDisplacementMap ref="redChannelRef" in="SourceGraphic" in2="map" result="dispRed" />
+          <feDisplacementMap
+            ref="redChannelRef"
+            in="SourceGraphic"
+            in2="map"
+            result="dispRed"
+          />
           <feColorMatrix
             in="dispRed"
             type="matrix"
@@ -175,7 +210,12 @@
             result="red"
           />
 
-          <feDisplacementMap ref="greenChannelRef" in="SourceGraphic" in2="map" result="dispGreen" />
+          <feDisplacementMap
+            ref="greenChannelRef"
+            in="SourceGraphic"
+            in2="map"
+            result="dispGreen"
+          />
           <feColorMatrix
             in="dispGreen"
             type="matrix"
@@ -183,7 +223,12 @@
             result="green"
           />
 
-          <feDisplacementMap ref="blueChannelRef" in="SourceGraphic" in2="map" result="dispBlue" />
+          <feDisplacementMap
+            ref="blueChannelRef"
+            in="SourceGraphic"
+            in2="map"
+            result="dispBlue"
+          />
           <feColorMatrix
             in="dispBlue"
             type="matrix"
@@ -193,13 +238,17 @@
 
           <feBlend in="red" in2="green" mode="screen" result="rg" />
           <feBlend in="rg" in2="blue" mode="screen" result="output" />
-          <feGaussianBlur ref="gaussianBlurRef" in="output" stdDeviation="0.7" />
+          <feGaussianBlur
+            ref="gaussianBlurRef"
+            in="output"
+            stdDeviation="0.7"
+          />
         </filter>
       </defs>
     </svg>
 
     <div class="gs-content">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

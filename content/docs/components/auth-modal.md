@@ -12,16 +12,15 @@ description: An authentication modal with social login buttons and email form.
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/auth-modal.json"
 ```
 
-
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `trigger-text` | `string` | `'Sign up / Sign in'` | Text on the trigger button |
-| `class` | `string` | `''` | Additional CSS classes for the trigger button |
+| Prop           | Type     | Default               | Description                                   |
+| -------------- | -------- | --------------------- | --------------------------------------------- |
+| `trigger-text` | `string` | `'Sign up / Sign in'` | Text on the trigger button                    |
+| `class`        | `string` | `''`                  | Additional CSS classes for the trigger button |
 
 ## Events
 
-| Event | Payload | Description |
-|-------|---------|-------------|
+| Event   | Payload  | Description                                                                                                     |
+| ------- | -------- | --------------------------------------------------------------------------------------------------------------- |
 | `login` | `string` | Emitted when a social provider or email is selected. Payload is the provider name (e.g. `'Google'`, `'email'`). |

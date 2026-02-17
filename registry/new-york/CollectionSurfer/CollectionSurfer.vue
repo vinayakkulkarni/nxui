@@ -1,10 +1,5 @@
 <script setup lang="ts">
-  import {
-    useScroll,
-    useTransform,
-    useSpring,
-    useMotionValue,
-  } from 'motion-v';
+  import { useMotionValue } from 'motion-v';
   import { useElementSize } from '@vueuse/core';
   import type {
     CollectionSurferItem,
@@ -104,9 +99,7 @@
     mouseY.set(-10000);
   }
 
-  const viewportHeight = computed(() =>
-    Math.max(containerHeight.value, 400),
-  );
+  const viewportHeight = computed(() => Math.max(containerHeight.value, 400));
 
   onBeforeUnmount(() => {
     cancelAnimationFrame(animFrame);
@@ -166,19 +159,29 @@
         </div>
 
         <!-- UI Overlays -->
-        <div class="pointer-events-none absolute left-[3vw] top-[3vw] z-50 dark:mix-blend-difference">
-          <h1 class="ml-[4vw] text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter text-neutral-900 dark:text-white">
+        <div
+          class="pointer-events-none absolute left-[3vw] top-[3vw] z-50 dark:mix-blend-difference"
+        >
+          <h1
+            class="ml-[4vw] text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter text-neutral-900 dark:text-white"
+          >
             HERITAGE FW25/26
           </h1>
-          <h1 class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter text-neutral-900 dark:text-white">
+          <h1
+            class="text-[clamp(2rem,6vw,5rem)] font-bold leading-[0.9] tracking-tighter text-neutral-900 dark:text-white"
+          >
             COLLECTION
-            <span class="relative top-[0.6em] ml-2 align-top font-mono text-[0.4em] tabular-nums">
+            <span
+              class="relative top-[0.6em] ml-2 align-top font-mono text-[0.4em] tabular-nums"
+            >
               ({{ props.items.length }})
             </span>
           </h1>
         </div>
 
-        <div class="pointer-events-none absolute bottom-[3vw] right-[3vw] z-50 font-mono text-xs uppercase tracking-wider text-neutral-500 dark:text-white/70">
+        <div
+          class="pointer-events-none absolute bottom-[3vw] right-[3vw] z-50 font-mono text-xs uppercase tracking-wider text-neutral-500 dark:text-white/70"
+        >
           scroll to surf
         </div>
       </div>

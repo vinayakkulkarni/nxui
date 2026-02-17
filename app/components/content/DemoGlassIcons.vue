@@ -12,9 +12,7 @@
 </script>
 
 <template>
-  <ComponentDemo
-    :code="`<GlassIcons :items='items' />`"
-  >
+  <ComponentDemo :code="`<GlassIcons :items='items' />`">
     <div class="flex h-[400px] w-full items-center justify-center rounded-lg">
       <GlassIcons :items="items" />
     </div>

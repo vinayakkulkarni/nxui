@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Matrix Rain",
   "description": "The iconic Matrix digital rain effect rendered on canvas.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/MatrixRain/MatrixRain.vue",

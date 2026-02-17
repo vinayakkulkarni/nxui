@@ -1,7 +1,15 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
-  import { Renderer, Program, Mesh, Triangle, Transform, Vec3, Camera } from 'ogl';
+  import {
+    Renderer,
+    Program,
+    Mesh,
+    Triangle,
+    Transform,
+    Vec3,
+    Camera,
+  } from 'ogl';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -35,24 +43,38 @@
 
   function parseHex(hex: string): [number, number, number] {
     const c = hex.replace('#', '');
-    return [parseInt(c.slice(0, 2), 16) / 255, parseInt(c.slice(2, 4), 16) / 255, parseInt(c.slice(4, 6), 16) / 255];
+    return [
+      Number.parseInt(c.slice(0, 2), 16) / 255,
+      Number.parseInt(c.slice(2, 4), 16) / 255,
+      Number.parseInt(c.slice(4, 6), 16) / 255,
+    ];
   }
 
   function fract(x: number) {
     return x - Math.floor(x);
   }
   function hash31(p: number): number[] {
-    let r = [p * 0.1031, p * 0.103, p * 0.0973].map(fract);
+    const r = [p * 0.1031, p * 0.103, p * 0.0973].map(fract);
     const yzx = [r[1], r[2], r[0]];
-    const d = r[0] * (yzx[0] + 33.33) + r[1] * (yzx[1] + 33.33) + r[2] * (yzx[2] + 33.33);
+    const d =
+      r[0] * (yzx[0] + 33.33) +
+      r[1] * (yzx[1] + 33.33) +
+      r[2] * (yzx[2] + 33.33);
     return r.map((v) => fract(v + d));
   }
   function hash33(v: number[]): number[] {
     let p = [v[0] * 0.1031, v[1] * 0.103, v[2] * 0.0973].map(fract);
     const yxz = [p[1], p[0], p[2]];
-    const d = p[0] * (yxz[0] + 33.33) + p[1] * (yxz[1] + 33.33) + p[2] * (yxz[2] + 33.33);
+    const d =
+      p[0] * (yxz[0] + 33.33) +
+      p[1] * (yxz[1] + 33.33) +
+      p[2] * (yxz[2] + 33.33);
     p = p.map((val) => fract(val + d));
-    return [(p[0] + p[1]) * p[2], (p[0] + p[0]) * p[1], (p[1] + p[0]) * p[0]].map(fract);
+    return [
+      (p[0] + p[1]) * p[2],
+      (p[0] + p[0]) * p[1],
+      (p[1] + p[0]) * p[0],
+    ].map(fract);
   }
 
   const VERT = `#version 300 es
@@ -108,7 +130,8 @@ void main() {
   const mouseBallPos = { x: 0, y: 0 };
 
   useEventListener(containerRef, 'pointermove', (e: PointerEvent) => {
-    if (!props.enableMouseInteraction || !containerRef.value || !glContext) return;
+    if (!props.enableMouseInteraction || !containerRef.value || !glContext)
+      return;
     const rect = containerRef.value.getBoundingClientRect();
     const canvas = glContext.canvas as HTMLCanvasElement;
     pointerX = ((e.clientX - rect.left) / rect.width) * canvas.width;
@@ -125,7 +148,12 @@ void main() {
     const container = containerRef.value;
     if (!container) return;
 
-    rendererRef = new Renderer({ dpr: 1, alpha: true, premultipliedAlpha: false, webgl: 2 });
+    rendererRef = new Renderer({
+      dpr: 1,
+      alpha: true,
+      premultipliedAlpha: false,
+      webgl: 2,
+    });
     const gl = rendererRef.gl;
     glContext = gl;
     gl.clearColor(0, 0, 0, props.enableTransparency ? 0 : 1);
@@ -136,7 +164,14 @@ void main() {
     gl.canvas.style.height = '100%';
     container.appendChild(gl.canvas as HTMLCanvasElement);
 
-    const camera = new Camera(gl, { left: -1, right: 1, top: 1, bottom: -1, near: 0.1, far: 10 });
+    const camera = new Camera(gl, {
+      left: -1,
+      right: 1,
+      top: 1,
+      bottom: -1,
+      near: 0.1,
+      far: 10,
+    });
     camera.position.z = 1;
     const scene = new Transform();
     const geometry = new Triangle(gl);
@@ -169,7 +204,13 @@ void main() {
     mesh.setParent(scene);
 
     const effectiveBallCount = Math.min(props.ballCount, 50);
-    const ballParams: { st: number; dtFactor: number; baseScale: number; toggle: number; radius: number }[] = [];
+    const ballParams: {
+      st: number;
+      dtFactor: number;
+      baseScale: number;
+      toggle: number;
+      radius: number;
+    }[] = [];
     for (let i = 0; i < effectiveBallCount; i++) {
       const h1 = hash31(i + 1);
       const h2 = hash33(h1);
@@ -189,7 +230,11 @@ void main() {
       rendererRef.setSize(w, h);
       (gl.canvas as HTMLCanvasElement).style.width = `${w}px`;
       (gl.canvas as HTMLCanvasElement).style.height = `${h}px`;
-      program.uniforms.iResolution.value.set(gl.canvas.width, gl.canvas.height, 0);
+      program.uniforms.iResolution.value.set(
+        gl.canvas.width,
+        gl.canvas.height,
+        0,
+      );
     }
     resize();
     useResizeObserver(containerRef, resize);
@@ -244,5 +289,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('relative size-full', $props.class)"></div>
 </template>

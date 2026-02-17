@@ -43,11 +43,6 @@
     },
   );
 
-  function hexToRgb(hex: string): [number, number, number] {
-    const h = hex.replace('#', '');
-    return [parseInt(h.slice(0, 2), 16) / 255, parseInt(h.slice(2, 4), 16) / 255, parseInt(h.slice(4, 6), 16) / 255];
-  }
-
   const containerRef = ref<HTMLDivElement>();
   let renderer: WebGLRenderer | null = null;
   let rafId = 0;
@@ -87,7 +82,11 @@ float cnoise(vec3 P){
   return mix(n_yz.x,n_yz.y,fade_xyz.x)*2.2;
 }`;
 
-  function createStackedPlanesGeometry(n: number, width: number, height: number): BufferGeometry {
+  function createStackedPlanesGeometry(
+    n: number,
+    width: number,
+    height: number,
+  ): BufferGeometry {
     const segs = 100;
     const numVerts = n * (segs + 1) * 2;
     const numFaces = n * segs * 2;
@@ -110,7 +109,10 @@ float cnoise(vec3 P){
         const uvV = j / segs;
         uvs.set([uvX, uvV + uvY, uvX + 1, uvV + uvY], uvOff);
         if (j < segs) {
-          indices.set([vOff, vOff + 1, vOff + 2, vOff + 2, vOff + 1, vOff + 3], iOff);
+          indices.set(
+            [vOff, vOff + 1, vOff + 2, vOff + 2, vOff + 1, vOff + 3],
+            iOff,
+          );
           iOff += 6;
         }
         vOff += 2;
@@ -139,7 +141,12 @@ float cnoise(vec3 P){
     if (!containerRef.value) return;
     const scene = new Scene();
     scene.background = new Color('#000000');
-    const camera = new PerspectiveCamera(30, containerRef.value.clientWidth / containerRef.value.clientHeight, 0.1, 100);
+    const camera = new PerspectiveCamera(
+      30,
+      containerRef.value.clientWidth / containerRef.value.clientHeight,
+      0.1,
+      100,
+    );
     camera.position.set(0, 0, 20);
 
     renderer = new WebGLRenderer({ antialias: true });
@@ -150,7 +157,10 @@ float cnoise(vec3 P){
 
     const physical = ShaderLib.physical;
     const baseUniforms = UniformsUtils.clone(physical.uniforms);
-    const defaults = new MeshStandardMaterial({ roughness: 0.3, metalness: 0.3 });
+    const defaults = new MeshStandardMaterial({
+      roughness: 0.3,
+      metalness: 0.3,
+    });
     baseUniforms.diffuse.value = new Color(0, 0, 0);
     baseUniforms.roughness.value = defaults.roughness;
     baseUniforms.metalness.value = defaults.metalness;
@@ -181,12 +191,21 @@ vec3 getNormal(vec3 pos) {
 
     let vert = `${header}\n${vertHeader}\n${physical.vertexShader}`;
     let frag = `${header}\n${physical.fragmentShader}`;
-    vert = vert.replace('#include <begin_vertex>', '#include <begin_vertex>\ntransformed.z += getPos(transformed.xyz);');
-    vert = vert.replace('#include <beginnormal_vertex>', '#include <beginnormal_vertex>\nobjectNormal = getNormal(position.xyz);');
-    frag = frag.replace('#include <dithering_fragment>', `#include <dithering_fragment>\nfloat randomNoise = noise(gl_FragCoord.xy);\ngl_FragColor.rgb -= randomNoise / 15. * uNoiseIntensity;`);
+    vert = vert.replace(
+      '#include <begin_vertex>',
+      '#include <begin_vertex>\ntransformed.z += getPos(transformed.xyz);',
+    );
+    vert = vert.replace(
+      '#include <beginnormal_vertex>',
+      '#include <beginnormal_vertex>\nobjectNormal = getNormal(position.xyz);',
+    );
+    frag = frag.replace(
+      '#include <dithering_fragment>',
+      `#include <dithering_fragment>\nfloat randomNoise = noise(gl_FragCoord.xy);\ngl_FragColor.rgb -= randomNoise / 15. * uNoiseIntensity;`,
+    );
 
     const material = new ShaderMaterial({
-      defines: { ...(physical.defines ?? {}) },
+      defines: { ...physical.defines },
       uniforms: {
         ...baseUniforms,
         time: { value: 0 },
@@ -200,7 +219,11 @@ vec3 getNormal(vec3 pos) {
       lights: true,
     });
 
-    const geometry = createStackedPlanesGeometry(props.beamNumber, props.beamWidth, props.beamHeight);
+    const geometry = createStackedPlanesGeometry(
+      props.beamNumber,
+      props.beamWidth,
+      props.beamHeight,
+    );
     const mesh = new Mesh(geometry, material);
     const rotRad = (props.rotation * Math.PI) / 180;
     mesh.rotation.z = rotRad;
@@ -244,5 +267,5 @@ vec3 getNormal(vec3 pos) {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

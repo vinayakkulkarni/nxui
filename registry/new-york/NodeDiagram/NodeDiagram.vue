@@ -1,5 +1,8 @@
 <script setup lang="ts">
-  import type { NodeDiagramNodeData, NodeDiagramConnectionData } from '~/types/components';
+  import type {
+    NodeDiagramNodeData,
+    NodeDiagramConnectionData,
+  } from '~/types/components';
   import NodeDiagramNode from './NodeDiagramNode.vue';
   import NodeDiagramTrace from './NodeDiagramTrace.vue';
   import { cn } from '~/lib/utils';
@@ -56,8 +59,12 @@
     };
   });
 
-  const computedTraceColor = computed(() => props.traceColor ?? colors.value.trace);
-  const computedPulseColor = computed(() => props.pulseColor ?? colors.value.pulse);
+  const computedTraceColor = computed(
+    () => props.traceColor ?? colors.value.trace,
+  );
+  const computedPulseColor = computed(
+    () => props.pulseColor ?? colors.value.pulse,
+  );
 
   const nodeMap = computed(() => {
     const map = new Map<string, NodeDiagramNodeData>();
@@ -80,10 +87,14 @@
 
   function getStatusColor(status?: NodeDiagramNodeData['status']): string {
     switch (status) {
-      case 'active': return colors.value.active;
-      case 'processing': return colors.value.processing;
-      case 'error': return colors.value.error;
-      default: return colors.value.node;
+      case 'active':
+        return colors.value.active;
+      case 'processing':
+        return colors.value.processing;
+      case 'error':
+        return colors.value.error;
+      default:
+        return colors.value.node;
     }
   }
 </script>
@@ -106,10 +117,20 @@
           :height="gridSize"
           patternUnits="userSpaceOnUse"
         >
-          <circle :cx="gridSize / 2" :cy="gridSize / 2" r="0.5" :fill="colors.grid" />
+          <circle
+            :cx="gridSize / 2"
+            :cy="gridSize / 2"
+            r="0.5"
+            :fill="colors.grid"
+          />
         </pattern>
       </defs>
-      <rect v-if="showGrid" width="100%" height="100%" fill="url(#circuitGrid)" />
+      <rect
+        v-if="showGrid"
+        width="100%"
+        height="100%"
+        fill="url(#circuitGrid)"
+      />
       <NodeDiagramTrace
         v-for="resolved in resolvedConnections"
         :key="`${resolved.conn.from}-${resolved.conn.to}`"
@@ -131,7 +152,7 @@
       :status-color="getStatusColor(node.status)"
     />
     <div class="absolute inset-0 z-20">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

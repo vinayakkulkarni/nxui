@@ -49,7 +49,7 @@
       for (let x = 0; x < width; x++) {
         const nx = x / width - 0.5;
         const ny = y / height - 0.5;
-        const t = Math.max(0, Math.min(1, (nx * cos + ny * sin + 0.5)));
+        const t = Math.max(0, Math.min(1, nx * cos + ny * sin + 0.5));
 
         const r = from[0] + (to[0] - from[0]) * t;
         const g = from[1] + (to[1] - from[1]) * t;
@@ -84,13 +84,10 @@
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('relative overflow-hidden', props.class)"
-  >
-    <canvas ref="canvasRef" class="size-full" ></canvas>
+  <div ref="containerRef" :class="cn('relative overflow-hidden', props.class)">
+    <canvas ref="canvasRef" class="size-full"></canvas>
     <div class="absolute inset-0 z-10">
-      <slot ></slot>
+      <slot></slot>
     </div>
   </div>
 </template>

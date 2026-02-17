@@ -41,7 +41,7 @@
         )
       "
     >
-      <slot />
+      <slot></slot>
     </div>
 
     <!-- Code footer -->
@@ -65,10 +65,7 @@
       </button>
 
       <!-- Code block -->
-      <div
-        v-show="codeExpanded"
-        class="relative border-t border-border/30"
-      >
+      <div v-show="codeExpanded" class="relative border-t border-border/30">
         <!-- Copy button -->
         <button
           class="absolute right-2 top-2 z-10 grid size-8 place-items-center rounded-md text-muted-foreground/50 transition-colors hover:bg-muted hover:text-foreground"
@@ -86,7 +83,7 @@
         <div
           class="shiki-wrapper max-h-[400px] overflow-auto text-sm [&_pre]:!m-0 [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent [&_pre]:px-4 [&_pre]:py-4 [&_code]:!text-[13px] [&_code]:!leading-relaxed"
           v-html="highlightedHtml"
-        />
+        ></div>
       </div>
     </div>
   </component>

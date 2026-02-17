@@ -50,7 +50,9 @@
   }
 
   function getRandomColor(): string {
-    return props.glitchColors[Math.floor(Math.random() * props.glitchColors.length)];
+    return props.glitchColors[
+      Math.floor(Math.random() * props.glitchColors.length)
+    ];
   }
 
   function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
@@ -58,7 +60,11 @@
     hex = hex.replace(shorthandRegex, (_m, r, g, b) => r + r + g + g + b + b);
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
-      ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) }
+      ? {
+          r: Number.parseInt(result[1], 16),
+          g: Number.parseInt(result[2], 16),
+          b: Number.parseInt(result[3], 16),
+        }
       : null;
   }
 
@@ -152,7 +158,11 @@
         const startRgb = hexToRgb(letter.color);
         const endRgb = hexToRgb(letter.targetColor);
         if (startRgb && endRgb) {
-          letter.color = interpolateColor(startRgb, endRgb, letter.colorProgress);
+          letter.color = interpolateColor(
+            startRgb,
+            endRgb,
+            letter.colorProgress,
+          );
           needsRedraw = true;
         }
       }
@@ -189,17 +199,32 @@
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative size-full overflow-hidden bg-black', $props.class)">
-    <canvas ref="canvasRef" class="block size-full" />
+  <div
+    ref="containerRef"
+    :class="cn('relative size-full overflow-hidden bg-black', $props.class)"
+  >
+    <canvas ref="canvasRef" class="block size-full"></canvas>
     <div
       v-if="outerVignette"
       class="pointer-events-none absolute inset-0"
-      style="background: radial-gradient(circle, rgba(0,0,0,0) 60%, rgba(0,0,0,1) 100%)"
-    />
+      style="
+        background: radial-gradient(
+          circle,
+          rgba(0, 0, 0, 0) 60%,
+          rgba(0, 0, 0, 1) 100%
+        );
+      "
+    ></div>
     <div
       v-if="centerVignette"
       class="pointer-events-none absolute inset-0"
-      style="background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 60%)"
-    />
+      style="
+        background: radial-gradient(
+          circle,
+          rgba(0, 0, 0, 0.8) 0%,
+          rgba(0, 0, 0, 0) 60%
+        );
+      "
+    ></div>
   </div>
 </template>

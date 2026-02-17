@@ -41,7 +41,11 @@
 
   function hexToRgb(hex: string): [number, number, number] {
     const h = hex.replace('#', '');
-    return [parseInt(h.slice(0, 2), 16) / 255, parseInt(h.slice(2, 4), 16) / 255, parseInt(h.slice(4, 6), 16) / 255];
+    return [
+      Number.parseInt(h.slice(0, 2), 16) / 255,
+      Number.parseInt(h.slice(2, 4), 16) / 255,
+      Number.parseInt(h.slice(4, 6), 16) / 255,
+    ];
   }
 
   const containerRef = ref<HTMLDivElement>();
@@ -164,7 +168,10 @@ void main(){
 
   function resize() {
     if (!containerRef.value || !renderer) return;
-    renderer.setSize(containerRef.value.clientWidth, containerRef.value.clientHeight);
+    renderer.setSize(
+      containerRef.value.clientWidth,
+      containerRef.value.clientHeight,
+    );
   }
 
   useResizeObserver(containerRef, resize);
@@ -183,7 +190,13 @@ void main(){
       fragment,
       uniforms: {
         iTime: { value: 0 },
-        iResolution: { value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height) },
+        iResolution: {
+          value: new Color(
+            gl.canvas.width,
+            gl.canvas.height,
+            gl.canvas.width / gl.canvas.height,
+          ),
+        },
         uScale: { value: props.scale },
         uGridMul: { value: new Float32Array(props.gridMul) },
         uDigitSize: { value: props.digitSize },
@@ -209,7 +222,11 @@ void main(){
       if (loadStart === 0) loadStart = t;
       const elapsed = (t * 0.001 + timeOffset) * props.speed;
       program.uniforms.iTime.value = elapsed;
-      program.uniforms.iResolution.value = new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height);
+      program.uniforms.iResolution.value = new Color(
+        gl.canvas.width,
+        gl.canvas.height,
+        gl.canvas.width / gl.canvas.height,
+      );
       program.uniforms.uScale.value = props.scale;
       program.uniforms.uDigitSize.value = props.digitSize;
       program.uniforms.uScanlineIntensity.value = props.scanlineIntensity;
@@ -241,12 +258,13 @@ void main(){
     cancelAnimationFrame(rafId);
     if (renderer && containerRef.value) {
       const gl = renderer.gl;
-      if (containerRef.value.contains(gl.canvas)) containerRef.value.removeChild(gl.canvas);
+      if (containerRef.value.contains(gl.canvas))
+        containerRef.value.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     }
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

@@ -12,9 +12,8 @@ description: A button with a slide-and-reveal hover effect that transitions cont
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/interactive-hover-button.json"
 ```
 
-
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `class` | `string` | — | Additional CSS classes |
+| Prop    | Type     | Default | Description            |
+| ------- | -------- | ------- | ---------------------- |
+| `class` | `string` | —       | Additional CSS classes |

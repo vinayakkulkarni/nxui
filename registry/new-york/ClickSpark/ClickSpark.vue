@@ -40,10 +40,14 @@
 
   function easeFn(t: number): number {
     switch (props.easing) {
-      case 'linear': return t;
-      case 'ease-in': return t * t;
-      case 'ease-in-out': return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-      default: return t * (2 - t);
+      case 'linear':
+        return t;
+      case 'ease-in':
+        return t * t;
+      case 'ease-in-out':
+        return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+      default:
+        return t * (2 - t);
     }
   }
 
@@ -68,7 +72,12 @@
     const y = e.clientY - rect.top;
     const now = performance.now();
     for (let i = 0; i < props.sparkCount; i++) {
-      sparks.push({ x, y, angle: (2 * Math.PI * i) / props.sparkCount, startTime: now });
+      sparks.push({
+        x,
+        y,
+        angle: (2 * Math.PI * i) / props.sparkCount,
+        startTime: now,
+      });
     }
   }
 
@@ -128,7 +137,7 @@
       ref="canvasRef"
       class="pointer-events-none absolute inset-0 block select-none"
       style="width: 100%; height: 100%"
-    />
-    <slot />
+    ></canvas>
+    <slot></slot>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+  import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useIntersectionObserver, useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
@@ -62,7 +62,8 @@
     const { scrollTop, scrollHeight, clientHeight } = target;
     topGradientOpacity.value = Math.min(scrollTop / 50, 1);
     const bottomDistance = scrollHeight - (scrollTop + clientHeight);
-    bottomGradientOpacity.value = scrollHeight <= clientHeight ? 0 : Math.min(bottomDistance / 50, 1);
+    bottomGradientOpacity.value =
+      scrollHeight <= clientHeight ? 0 : Math.min(bottomDistance / 50, 1);
   }
 
   function handleItemClick(item: string, index: number) {
@@ -77,13 +78,19 @@
     if (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey)) {
       e.preventDefault();
       keyboardNav.value = true;
-      selectedIndex.value = Math.min(selectedIndex.value + 1, props.items.length - 1);
+      selectedIndex.value = Math.min(
+        selectedIndex.value + 1,
+        props.items.length - 1,
+      );
     } else if (e.key === 'ArrowUp' || (e.key === 'Tab' && e.shiftKey)) {
       e.preventDefault();
       keyboardNav.value = true;
       selectedIndex.value = Math.max(selectedIndex.value - 1, 0);
     } else if (e.key === 'Enter') {
-      if (selectedIndex.value >= 0 && selectedIndex.value < props.items.length) {
+      if (
+        selectedIndex.value >= 0 &&
+        selectedIndex.value < props.items.length
+      ) {
         e.preventDefault();
         emit('select', props.items[selectedIndex.value], selectedIndex.value);
       }
@@ -91,10 +98,12 @@
   });
 
   // Scroll selected into view on keyboard nav
-  const scrollIntoView = computed(() => {
+  function scrollIntoView() {
     if (!keyboardNav.value || selectedIndex.value < 0 || !listRef.value) return;
     const container = listRef.value;
-    const selectedItem = container.querySelector(`[data-index="${selectedIndex.value}"]`) as HTMLElement | null;
+    const selectedItem = container.querySelector(
+      `[data-index="${selectedIndex.value}"]`,
+    ) as HTMLElement | null;
     if (selectedItem) {
       const extraMargin = 50;
       const containerScrollTop = container.scrollTop;
@@ -103,17 +112,22 @@
       const itemBottom = itemTop + selectedItem.offsetHeight;
       if (itemTop < containerScrollTop + extraMargin) {
         container.scrollTo({ top: itemTop - extraMargin, behavior: 'smooth' });
-      } else if (itemBottom > containerScrollTop + containerHeight - extraMargin) {
-        container.scrollTo({ top: itemBottom - containerHeight + extraMargin, behavior: 'smooth' });
+      } else if (
+        itemBottom >
+        containerScrollTop + containerHeight - extraMargin
+      ) {
+        container.scrollTo({
+          top: itemBottom - containerHeight + extraMargin,
+          behavior: 'smooth',
+        });
       }
     }
     keyboardNav.value = false;
-    return null;
-  });
+  }
 
-  // Trigger the computed when selectedIndex changes
+  // Trigger scroll when selectedIndex changes
   onMounted(() => {
-    void scrollIntoView.value;
+    scrollIntoView();
   });
 
   onBeforeUnmount(() => {
@@ -145,7 +159,9 @@
       >
         <div
           class="rounded-lg p-4 transition-colors"
-          :class="selectedIndex === index ? 'bg-muted-foreground/20' : 'bg-muted/50'"
+          :class="
+            selectedIndex === index ? 'bg-muted-foreground/20' : 'bg-muted/50'
+          "
         >
           <p class="m-0 text-foreground">{{ item }}</p>
         </div>
@@ -155,13 +171,13 @@
       <div
         class="pointer-events-none absolute left-0 right-0 top-0 h-[50px] bg-gradient-to-b from-background to-transparent transition-opacity duration-300"
         :style="{ opacity: topGradientOpacity }"
-      />
+      ></div>
       <div
         class="pointer-events-none absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-background to-transparent transition-opacity duration-300"
         :style="{ opacity: bottomGradientOpacity }"
-      />
+      ></div>
     </template>
     <!-- Trigger scroll into view -->
-    <span v-if="scrollIntoView" class="hidden" />
+    <span v-if="scrollIntoView" class="hidden"></span>
   </div>
 </template>

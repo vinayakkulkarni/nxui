@@ -27,13 +27,13 @@
   const mouseNormX = computed(() => {
     if (isOutside.value || !cardRef.value) return 0;
     const rect = cardRef.value.getBoundingClientRect();
-    return (elementX.value / rect.width) - 0.5;
+    return elementX.value / rect.width - 0.5;
   });
 
   const mouseNormY = computed(() => {
     if (isOutside.value || !cardRef.value) return 0;
     const rect = cardRef.value.getBoundingClientRect();
-    return (elementY.value / rect.height) - 0.5;
+    return elementY.value / rect.height - 0.5;
   });
 
   const cardStyle = computed(() => {
@@ -75,10 +75,12 @@
 <template>
   <div
     ref="cardRef"
-    :class="cn(
-      'relative w-full max-w-[400px] cursor-pointer select-none overflow-hidden rounded-3xl bg-neutral-50 ring-1 ring-neutral-200/80 shadow-xl shadow-neutral-300/40 transition-all duration-300 hover:shadow-2xl hover:shadow-neutral-400/30 dark:bg-neutral-950 dark:ring-white/[0.06] dark:shadow-black/40 dark:hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]',
-      props.class,
-    )"
+    :class="
+      cn(
+        'relative w-full max-w-[400px] cursor-pointer select-none overflow-hidden rounded-3xl bg-neutral-50 ring-1 ring-neutral-200/80 shadow-xl shadow-neutral-300/40 transition-all duration-300 hover:shadow-2xl hover:shadow-neutral-400/30 dark:bg-neutral-950 dark:ring-white/[0.06] dark:shadow-black/40 dark:hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]',
+        props.class,
+      )
+    "
     :style="cardStyle"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
@@ -87,7 +89,7 @@
     <div
       class="pointer-events-none absolute inset-0 z-10"
       :style="glowStyle"
-    />
+    ></div>
 
     <!-- Image section -->
     <div class="relative aspect-[4/3] overflow-hidden">
@@ -95,25 +97,27 @@
         v-if="tagline"
         class="absolute left-4 top-4 z-20 drop-shadow-md sm:left-6 sm:top-6"
       >
-        <span class="text-sm font-medium tracking-tight text-white/90 sm:text-base">
+        <span
+          class="text-sm font-medium tracking-tight text-white/90 sm:text-base"
+        >
           {{ tagline }}
         </span>
       </div>
 
       <div class="absolute inset-0" :style="parallaxStyle">
-        <img
-          :src="imageUrl"
-          :alt="imageAlt"
-          class="size-full object-cover"
-        >
+        <img :src="imageUrl" :alt="imageAlt" class="size-full object-cover" />
       </div>
 
-      <div class="absolute inset-0 bg-gradient-to-t from-neutral-50 via-neutral-50/20 to-transparent opacity-90 dark:from-neutral-950 dark:via-transparent dark:opacity-60" />
+      <div
+        class="absolute inset-0 bg-gradient-to-t from-neutral-50 via-neutral-50/20 to-transparent opacity-90 dark:from-neutral-950 dark:via-transparent dark:opacity-60"
+      ></div>
     </div>
 
     <!-- Content section -->
     <div class="relative z-10 -mt-8 px-4 pb-4 sm:px-6 sm:pb-6">
-      <h2 class="mb-2 border-0 text-2xl font-medium leading-tight tracking-tight text-neutral-900 dark:text-white sm:mb-3 sm:text-3xl lg:text-4xl">
+      <h2
+        class="mb-2 border-0 text-2xl font-medium leading-tight tracking-tight text-neutral-900 dark:text-white sm:mb-3 sm:text-3xl lg:text-4xl"
+      >
         {{ heading }}
       </h2>
 
@@ -125,8 +129,8 @@
       </p>
 
       <component
-        v-if="ctaText"
         :is="motion.button"
+        v-if="ctaText"
         class="relative overflow-hidden rounded-full border border-neutral-300/50 bg-neutral-100/80 px-4 py-2 text-sm font-medium text-neutral-700 transition-colors duration-300 hover:border-neutral-400/80 dark:border-neutral-700/50 dark:bg-neutral-800/80 dark:text-neutral-200 dark:hover:border-neutral-600/80 sm:px-5 sm:py-2.5"
         :while-hover="{ scale: 1.05 }"
         :while-tap="{ scale: 0.98 }"
@@ -135,7 +139,9 @@
         <component
           :is="motion.span"
           class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-black/[0.06] to-transparent dark:via-white/10"
-          :animate="isHovered ? { translateX: '200%' } : { translateX: '-100%' }"
+          :animate="
+            isHovered ? { translateX: '200%' } : { translateX: '-100%' }
+          "
           :transition="{ duration: 0.6, ease: 'easeInOut' }"
         />
         <span class="relative z-10">{{ ctaText }}</span>
@@ -148,8 +154,8 @@
       class="flex flex-wrap items-center justify-between gap-2 border-t border-neutral-200 px-4 py-4 dark:border-neutral-800/50 sm:px-6 sm:py-5"
     >
       <component
-        v-if="brandName"
         :is="motion.span"
+        v-if="brandName"
         class="text-xs font-medium text-neutral-500 sm:text-sm cursor-default transition-colors hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white"
         :while-hover="{ scale: 1.02 }"
         :transition="{ duration: 0.2 }"
@@ -171,8 +177,8 @@
             {{ service }}
           </component>
           <component
-            v-if="index < services.length - 1"
             :is="motion.span"
+            v-if="index < services.length - 1"
             class="inline-block text-neutral-300 dark:text-neutral-600"
             :initial="{ rotate: 0 }"
             :while-hover="{ rotate: 90 }"
@@ -192,6 +198,6 @@
           ? `inset 0 0 0 1px ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.06)'}`
           : `inset 0 0 0 1px ${isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)'}`,
       }"
-    />
+    ></div>
   </div>
 </template>

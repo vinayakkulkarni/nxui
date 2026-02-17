@@ -32,21 +32,21 @@ bun run build:registry # Build registry JSONs → public/r/
 
 ## Tech Stack
 
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| Framework | Nuxt 4 | v4.2.2 (`future.compatibilityVersion: 4`) |
-| UI | Vue 3 Composition API | v3.5+ |
-| Styling | Tailwind CSS v4 | via `@tailwindcss/vite` (NOT PostCSS) |
-| Animation | motion-v | v1.9.0 (Vue Framer Motion equivalent) |
-| Utilities | VueUse | v14.2.1 |
-| Content | @nuxt/content | v3 |
-| Icons | @nuxt/icon (Iconify) | v1.12.0 (lucide:*, simple-icons:*) |
-| Color Mode | @nuxtjs/color-mode | v4 |
-| Headless UI | reka-ui | v2.8.0 |
-| Highlighting | shiki | v3.21.0 |
-| Class Utils | class-variance-authority + clsx + tailwind-merge | |
-| Types | TypeScript | v5.8+ strict |
-| Package Manager | Bun | v1.3.9 |
+| Layer           | Technology                                       | Version                                   |
+| --------------- | ------------------------------------------------ | ----------------------------------------- |
+| Framework       | Nuxt 4                                           | v4.2.2 (`future.compatibilityVersion: 4`) |
+| UI              | Vue 3 Composition API                            | v3.5+                                     |
+| Styling         | Tailwind CSS v4                                  | via `@tailwindcss/vite` (NOT PostCSS)     |
+| Animation       | motion-v                                         | v1.9.0 (Vue Framer Motion equivalent)     |
+| Utilities       | VueUse                                           | v14.2.1                                   |
+| Content         | @nuxt/content                                    | v3                                        |
+| Icons           | @nuxt/icon (Iconify)                             | v1.12.0 (lucide:_, simple-icons:_)        |
+| Color Mode      | @nuxtjs/color-mode                               | v4                                        |
+| Headless UI     | reka-ui                                          | v2.8.0                                    |
+| Highlighting    | shiki                                            | v3.21.0                                   |
+| Class Utils     | class-variance-authority + clsx + tailwind-merge |                                           |
+| Types           | TypeScript                                       | v5.8+ strict                              |
+| Package Manager | Bun                                              | v1.3.9                                    |
 
 ---
 
@@ -96,10 +96,14 @@ NEVER define `interface` or `type` inside `.vue` files or composables. ALL types
 
 ```typescript
 // ❌ WRONG — inside a .vue file
-interface MyProps { name: string }
+interface MyProps {
+  name: string;
+}
 
 // ✅ CORRECT — in app/types/components.ts
-export interface MyProps { name: string }
+export interface MyProps {
+  name: string;
+}
 // Import: import type { MyProps } from '~/types/components';
 ```
 
@@ -114,15 +118,19 @@ Always `<script setup lang="ts">`. Never Options API. Never `defineComponent()`.
 ### Rule 4: `size-*` for Square Elements
 
 ```vue
-<!-- ❌ --> <Icon class="w-4 h-4" />
-<!-- ✅ --> <Icon class="size-4" />
+<!-- ❌ -->
+<Icon class="w-4 h-4" />
+<!-- ✅ -->
+<Icon class="size-4" />
 ```
 
 ### Rule 5: @nuxt/icon — No Inline SVGs
 
 ```vue
-<!-- ❌ --> <svg>...</svg>
-<!-- ✅ --> <Icon name="lucide:check" class="size-4" />
+<!-- ❌ -->
+<svg>...</svg>
+<!-- ✅ -->
+<Icon name="lucide:check" class="size-4" />
 ```
 
 ### Rule 6: Vue Components Under 100 Lines
@@ -132,8 +140,10 @@ Exception: registry components (self-contained). Extract sub-components or compo
 ### Rule 7: No Inline Arrow Functions with Multiple Params in Templates
 
 ```vue
-<!-- ❌ --> @click="(a, b) => doThing(a, b)"
-<!-- ✅ --> @click="handleClick"
+<!-- ❌ -->
+@click="(a, b) => doThing(a, b)"
+<!-- ✅ -->
+@click="handleClick"
 ```
 
 ### Rule 8: No Inline `import()` in Type Annotations
@@ -154,8 +164,10 @@ Prefer VueUse over manual implementations: `useEventListener`, `useMediaQuery`, 
 ### Rule 11: Tailwind v4 oklch — NOT hsl
 
 ```css
-/* ❌ WRONG */ background: hsl(var(--primary));
-/* ✅ CORRECT */ background: var(--primary);
+/* ❌ WRONG */
+background: hsl(var(--primary));
+/* ✅ CORRECT */
+background: var(--primary);
 ```
 
 Dark mode uses oklch with hue 270. Dark variant: `@custom-variant dark (&:is(.dark *));`
@@ -166,7 +178,7 @@ Components in `registry/new-york/` are NOT auto-imported by Nuxt. Sub-components
 
 ```typescript
 // Inside registry/new-york/NodeDiagram/NodeDiagram.vue:
-import NodeDiagramNode from './NodeDiagramNode.vue';  // ✅ Explicit
+import NodeDiagramNode from './NodeDiagramNode.vue'; // ✅ Explicit
 ```
 
 ### Rule 13: ComponentDemo Wrapper
@@ -236,6 +248,7 @@ Light mode: neutral oklch (no hue). Dark mode: oklch with hue 270 (purple tint).
 ## Registry Architecture
 
 Each registry component: `registry/new-york/ComponentName/`
+
 - Main file: `ComponentName.vue`
 - Sub-components: `ComponentNamePart.vue`
 - Types: imported from `~/types/components`
@@ -250,7 +263,7 @@ Build: `bun run scripts/build-registry.ts` → generates `public/r/*.json` for `
 
 ```vue
 <script setup lang="ts">
-import { motion } from 'motion-v';
+  import { motion } from 'motion-v';
 </script>
 
 <template>
@@ -285,38 +298,38 @@ import { motion } from 'motion-v';
 
 Design principles to follow when building components and interactions.
 
-| # | Law | Description |
-|---|-----|-------------|
-| 1 | **Aesthetic-Usability Effect** | Users perceive aesthetically pleasing design as more usable |
-| 2 | **Choice Overload** | People get overwhelmed with too many options |
-| 3 | **Chunking** | Break information into meaningful groups |
-| 4 | **Cognitive Bias** | Systematic errors in thinking influence perception and decisions |
-| 5 | **Cognitive Load** | Minimize mental resources needed to interact with an interface |
-| 6 | **Doherty Threshold** | Keep interactions under 400ms so neither user nor system waits |
-| 7 | **Fitts's Law** | Time to reach a target depends on distance and size — make targets large and close |
-| 8 | **Flow** | Design for full immersion — minimize interruptions |
-| 9 | **Goal-Gradient Effect** | Motivation increases with proximity to a goal — show progress |
-| 10 | **Hick's Law** | Decision time increases with number and complexity of choices |
-| 11 | **Jakob's Law** | Users prefer your site to work like sites they already know |
-| 12 | **Law of Common Region** | Elements sharing a boundary are perceived as grouped |
-| 13 | **Law of Proximity** | Objects near each other are perceived as grouped |
-| 14 | **Law of Prägnanz** | People interpret complex images as the simplest form possible |
-| 15 | **Law of Similarity** | Similar elements are perceived as a group |
-| 16 | **Law of Uniform Connectedness** | Visually connected elements are perceived as more related |
-| 17 | **Mental Model** | Users carry expectations about how systems work |
-| 18 | **Miller's Law** | Working memory holds 7 (±2) items — chunk information accordingly |
-| 19 | **Occam's Razor** | Prefer the simplest solution with fewest assumptions |
-| 20 | **Paradox of the Active User** | Users never read manuals — they start using immediately |
-| 21 | **Pareto Principle** | 80% of effects come from 20% of causes — focus on high-impact work |
-| 22 | **Parkinson's Law** | Tasks expand to fill available time — set constraints |
-| 23 | **Peak-End Rule** | Experiences are judged by their peak moment and ending |
-| 24 | **Postel's Law** | Be liberal in what you accept, conservative in what you send |
-| 25 | **Selective Attention** | Users focus on stimuli related to their goals |
-| 26 | **Serial Position Effect** | First and last items in a series are remembered best |
-| 27 | **Tesler's Law** | Every system has irreducible complexity — put it in the right place |
-| 28 | **Von Restorff Effect** | The item that differs from the rest is most memorable |
-| 29 | **Working Memory** | Cognitive system that temporarily holds info for tasks |
-| 30 | **Zeigarnik Effect** | Incomplete tasks are remembered better than complete ones |
+| #   | Law                              | Description                                                                        |
+| --- | -------------------------------- | ---------------------------------------------------------------------------------- |
+| 1   | **Aesthetic-Usability Effect**   | Users perceive aesthetically pleasing design as more usable                        |
+| 2   | **Choice Overload**              | People get overwhelmed with too many options                                       |
+| 3   | **Chunking**                     | Break information into meaningful groups                                           |
+| 4   | **Cognitive Bias**               | Systematic errors in thinking influence perception and decisions                   |
+| 5   | **Cognitive Load**               | Minimize mental resources needed to interact with an interface                     |
+| 6   | **Doherty Threshold**            | Keep interactions under 400ms so neither user nor system waits                     |
+| 7   | **Fitts's Law**                  | Time to reach a target depends on distance and size — make targets large and close |
+| 8   | **Flow**                         | Design for full immersion — minimize interruptions                                 |
+| 9   | **Goal-Gradient Effect**         | Motivation increases with proximity to a goal — show progress                      |
+| 10  | **Hick's Law**                   | Decision time increases with number and complexity of choices                      |
+| 11  | **Jakob's Law**                  | Users prefer your site to work like sites they already know                        |
+| 12  | **Law of Common Region**         | Elements sharing a boundary are perceived as grouped                               |
+| 13  | **Law of Proximity**             | Objects near each other are perceived as grouped                                   |
+| 14  | **Law of Prägnanz**              | People interpret complex images as the simplest form possible                      |
+| 15  | **Law of Similarity**            | Similar elements are perceived as a group                                          |
+| 16  | **Law of Uniform Connectedness** | Visually connected elements are perceived as more related                          |
+| 17  | **Mental Model**                 | Users carry expectations about how systems work                                    |
+| 18  | **Miller's Law**                 | Working memory holds 7 (±2) items — chunk information accordingly                  |
+| 19  | **Occam's Razor**                | Prefer the simplest solution with fewest assumptions                               |
+| 20  | **Paradox of the Active User**   | Users never read manuals — they start using immediately                            |
+| 21  | **Pareto Principle**             | 80% of effects come from 20% of causes — focus on high-impact work                 |
+| 22  | **Parkinson's Law**              | Tasks expand to fill available time — set constraints                              |
+| 23  | **Peak-End Rule**                | Experiences are judged by their peak moment and ending                             |
+| 24  | **Postel's Law**                 | Be liberal in what you accept, conservative in what you send                       |
+| 25  | **Selective Attention**          | Users focus on stimuli related to their goals                                      |
+| 26  | **Serial Position Effect**       | First and last items in a series are remembered best                               |
+| 27  | **Tesler's Law**                 | Every system has irreducible complexity — put it in the right place                |
+| 28  | **Von Restorff Effect**          | The item that differs from the rest is most memorable                              |
+| 29  | **Working Memory**               | Cognitive system that temporarily holds info for tasks                             |
+| 30  | **Zeigarnik Effect**             | Incomplete tasks are remembered better than complete ones                          |
 
 ---
 
@@ -326,29 +339,29 @@ From Butterick's Practical Typography — rules for the docs site.
 
 ### Core Rules
 
-| Rule | Guideline |
-|------|-----------|
-| Body text size | 19–22px for web, 1.4–1.6 line height |
-| Line length | 45–90 characters per line (2–3 lowercase alphabets) |
-| Quotes | Curly quotes, not straight |
-| Sentence spacing | One space between sentences, not two |
-| Underlining | Only for links — never for emphasis |
+| Rule             | Guideline                                           |
+| ---------------- | --------------------------------------------------- |
+| Body text size   | 19–22px for web, 1.4–1.6 line height                |
+| Line length      | 45–90 characters per line (2–3 lowercase alphabets) |
+| Quotes           | Curly quotes, not straight                          |
+| Sentence spacing | One space between sentences, not two                |
+| Underlining      | Only for links — never for emphasis                 |
 
 ### Web Typography
 
-| Rule | Guideline |
-|------|-----------|
-| Font families | Max 2 families (system stack or well-chosen web fonts) |
-| Minimum size | Body text never smaller than 16px |
-| Alignment | Left-align body text — avoid centered body text |
-| Emphasis | Bold or italic, not ALL CAPS |
-| Contrast | Sufficient contrast between text and background |
-| Headings | Visually distinct via size/weight, not just bold |
-| Paragraphs | Use either indents OR space between — not both |
-| Letter-spacing | Don't letterspace lowercase text |
-| Tables | Minimize borders; numbers right-aligned, text left-aligned |
-| Color | Use sparingly for semantics, not decoration |
-| Max line width | ~80 characters |
+| Rule           | Guideline                                                  |
+| -------------- | ---------------------------------------------------------- |
+| Font families  | Max 2 families (system stack or well-chosen web fonts)     |
+| Minimum size   | Body text never smaller than 16px                          |
+| Alignment      | Left-align body text — avoid centered body text            |
+| Emphasis       | Bold or italic, not ALL CAPS                               |
+| Contrast       | Sufficient contrast between text and background            |
+| Headings       | Visually distinct via size/weight, not just bold           |
+| Paragraphs     | Use either indents OR space between — not both             |
+| Letter-spacing | Don't letterspace lowercase text                           |
+| Tables         | Minimize borders; numbers right-aligned, text left-aligned |
+| Color          | Use sparingly for semantics, not decoration                |
+| Max line width | ~80 characters                                             |
 
 ---
 
@@ -360,12 +373,12 @@ This project uses `.agents/skills/vue-best-practices/` and `.agents/skills/nuxt-
 
 ### Known Conflicts (CLAUDE.md Wins)
 
-| Skill Says | CLAUDE.md Says (Use This) |
-|------------|---------------------------|
+| Skill Says                             | CLAUDE.md Says (Use This)                          |
+| -------------------------------------- | -------------------------------------------------- |
 | Use `useFetch`/`useAsyncData` for data | Static docs site — no dynamic data fetching needed |
-| Use Pinia for state management | No Pinia — use `ref`/`reactive` + composables |
-| Use `#shared` imports | No `shared/` directory — use `~/types/` |
-| Create barrel exports | Only if truly needed for auto-import |
+| Use Pinia for state management         | No Pinia — use `ref`/`reactive` + composables      |
+| Use `#shared` imports                  | No `shared/` directory — use `~/types/`            |
+| Create barrel exports                  | Only if truly needed for auto-import               |
 
 ### What Skills Add (Not Covered Here)
 

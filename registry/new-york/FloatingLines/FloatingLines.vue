@@ -35,7 +35,11 @@
 
   function hexToVec3(hex: string): Vector3 {
     const h = hex.replace('#', '');
-    return new Vector3(parseInt(h.slice(0, 2), 16) / 255, parseInt(h.slice(2, 4), 16) / 255, parseInt(h.slice(4, 6), 16) / 255);
+    return new Vector3(
+      Number.parseInt(h.slice(0, 2), 16) / 255,
+      Number.parseInt(h.slice(2, 4), 16) / 255,
+      Number.parseInt(h.slice(4, 6), 16) / 255,
+    );
   }
 
   const containerRef = ref<HTMLDivElement>();
@@ -157,7 +161,10 @@ void main() {
     if (!renderer) return;
     const rect = renderer.domElement.getBoundingClientRect();
     const dpr = renderer.getPixelRatio();
-    targetMouse.set((e.clientX - rect.left) * dpr, (rect.height - (e.clientY - rect.top)) * dpr);
+    targetMouse.set(
+      (e.clientX - rect.left) * dpr,
+      (rect.height - (e.clientY - rect.top)) * dpr,
+    );
     targetInfluence = 1.0;
   }
 
@@ -180,7 +187,10 @@ void main() {
     renderer.domElement.style.height = '100%';
     containerRef.value.appendChild(renderer.domElement);
 
-    const gradientValues = Array.from({ length: 8 }, () => new Vector3(1, 1, 1));
+    const gradientValues = Array.from(
+      { length: 8 },
+      () => new Vector3(1, 1, 1),
+    );
     const stops = (props.linesGradient ?? []).slice(0, 8);
     stops.forEach((hex, i) => {
       const c = hexToVec3(hex);
@@ -200,7 +210,11 @@ void main() {
       lineGradientCount: { value: stops.length },
     };
 
-    const material = new ShaderMaterial({ uniforms, vertexShader, fragmentShader });
+    const material = new ShaderMaterial({
+      uniforms,
+      vertexShader,
+      fragmentShader,
+    });
     const geometry = new PlaneGeometry(2, 2);
     scene.add(new Mesh(geometry, material));
 
@@ -236,5 +250,9 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" style="mix-blend-mode: screen" />
+  <div
+    ref="containerRef"
+    :class="cn('size-full', $props.class)"
+    style="mix-blend-mode: screen"
+  ></div>
 </template>

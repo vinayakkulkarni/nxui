@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { docsNav } from '~/config/docs';
+  import { docsNav } from '~/config/docs';
 
-const route = useRoute();
-const isOpen = ref(false);
+  const route = useRoute();
+  const isOpen = ref(false);
 
-function handleClose() {
-  isOpen.value = false;
-}
-
-if (import.meta.client) {
-  const isLocked = useScrollLock(document.body);
-  watch(isOpen, (val) => {
-    isLocked.value = val;
-  });
-}
-
-watch(
-  () => route.path,
-  () => handleClose(),
-);
-
-const activeHrefByGroup = computed(() => {
-  const result: Record<string, string | null> = {};
-  for (const group of docsNav) {
-    const activeItem = group.items.find((item) => route.path === item.path);
-    result[group.title] = activeItem?.path ?? null;
+  function handleClose() {
+    isOpen.value = false;
   }
-  return result;
-});
+
+  if (import.meta.client) {
+    const isLocked = useScrollLock(document.body);
+    watch(isOpen, (val) => {
+      isLocked.value = val;
+    });
+  }
+
+  watch(
+    () => route.path,
+    () => handleClose(),
+  );
+
+  const activeHrefByGroup = computed(() => {
+    const result: Record<string, string | null> = {};
+    for (const group of docsNav) {
+      const activeItem = group.items.find((item) => route.path === item.path);
+      result[group.title] = activeItem?.path ?? null;
+    }
+    return result;
+  });
 </script>
 
 <template>
@@ -46,7 +46,7 @@ const activeHrefByGroup = computed(() => {
           v-if="isOpen"
           class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
           @click="handleClose"
-        />
+        ></div>
       </Transition>
 
       <Transition name="slide-left">
@@ -103,21 +103,21 @@ const activeHrefByGroup = computed(() => {
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.15s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.15s ease;
+  }
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
 
-.slide-left-enter-active,
-.slide-left-leave-active {
-  transition: transform 0.2s ease-out;
-}
-.slide-left-enter-from,
-.slide-left-leave-to {
-  transform: translateX(-100%);
-}
+  .slide-left-enter-active,
+  .slide-left-leave-active {
+    transition: transform 0.2s ease-out;
+  }
+  .slide-left-enter-from,
+  .slide-left-leave-to {
+    transform: translateX(-100%);
+  }
 </style>

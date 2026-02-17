@@ -140,7 +140,9 @@ void main() {
     const uniforms = {
       time: { value: 0 },
       resolution: { value: new Vector4() },
-      uTexture: { value: null as InstanceType<typeof import('three').Texture> | null },
+      uTexture: {
+        value: null as InstanceType<typeof import('three').Texture> | null,
+      },
       uDataTexture: { value: dataTexture },
     };
 
@@ -220,5 +222,8 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full overflow-hidden', $props.class)" />
+  <div
+    ref="containerRef"
+    :class="cn('size-full overflow-hidden', $props.class)"
+  ></div>
 </template>

@@ -15,7 +15,9 @@
   />
 </template>`"
   >
-    <div class="flex h-[300px] w-full items-center justify-center overflow-y-auto p-8">
+    <div
+      class="flex h-[300px] w-full items-center justify-center overflow-y-auto p-8"
+    >
       <ScrollReveal
         text="Scroll down to reveal this text word by word with a blur effect."
         :enable-blur="true"

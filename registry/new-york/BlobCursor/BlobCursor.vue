@@ -48,7 +48,9 @@
   let mouseY = 0;
   let animationId = 0;
 
-  const filterId = computed(() => `blob-filter-${Math.random().toString(36).slice(2, 8)}`);
+  const filterId = computed(
+    () => `blob-filter-${Math.random().toString(36).slice(2, 8)}`,
+  );
 
   onMounted(() => {
     const positions: { x: number; y: number }[] = [];
@@ -91,11 +93,21 @@
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative size-full overflow-hidden', $props.class)">
+  <div
+    ref="containerRef"
+    :class="cn('relative size-full overflow-hidden', $props.class)"
+  >
     <svg v-if="useFilter" class="absolute" style="width: 0; height: 0">
       <filter :id="filterId">
-        <feGaussianBlur in="SourceGraphic" result="blur" :stdDeviation="filterStdDeviation" />
-        <feColorMatrix in="blur" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 35 -10" />
+        <feGaussianBlur
+          in="SourceGraphic"
+          result="blur"
+          :stdDeviation="filterStdDeviation"
+        />
+        <feColorMatrix
+          in="blur"
+          values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 35 -10"
+        />
       </filter>
     </svg>
     <div
@@ -126,9 +138,9 @@
             backgroundColor: innerColor,
             borderRadius: blobType === 'circle' ? '50%' : '0%',
           }"
-        />
+        ></div>
       </div>
     </div>
-    <slot />
+    <slot></slot>
   </div>
 </template>

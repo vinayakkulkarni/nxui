@@ -4,50 +4,62 @@
 
   const activeTab = ref(0);
 
-  const variants: { label: string; props: Record<string, unknown>; code: string }[] = [
+  const variants: {
+    label: string;
+    props: Record<string, unknown>;
+    code: string;
+  }[] = [
     {
       label: 'Default',
       props: { username: 'vinayakkulkarni' },
-      code: `\x3cscript setup lang="ts">
+      code: `\x3Cscript setup lang="ts">
   import GithubCalendar from '~/components/ui/GithubCalendar.vue';
-\x3c/script>
+\x3C/script>
 
-\x3ctemplate>
-  \x3cGithubCalendar username="vinayakkulkarni" />
-\x3c/template>`,
+\x3Ctemplate>
+  \x3CGithubCalendar username="vinayakkulkarni" />
+\x3C/template>`,
     },
     {
       label: 'Grayscale',
       props: { username: 'vinayakkulkarni', colorSchema: 'gray' },
-      code: `\x3cscript setup lang="ts">
+      code: `\x3Cscript setup lang="ts">
   import GithubCalendar from '~/components/ui/GithubCalendar.vue';
-\x3c/script>
+\x3C/script>
 
-\x3ctemplate>
-  \x3cGithubCalendar username="vinayakkulkarni" color-schema="gray" />
-\x3c/template>`,
+\x3Ctemplate>
+  \x3CGithubCalendar username="vinayakkulkarni" color-schema="gray" />
+\x3C/template>`,
     },
     {
       label: 'Minimal',
-      props: { username: 'vinayakkulkarni', variant: 'minimal', colorSchema: 'blue' },
-      code: `\x3cscript setup lang="ts">
+      props: {
+        username: 'vinayakkulkarni',
+        variant: 'minimal',
+        colorSchema: 'blue',
+      },
+      code: `\x3Cscript setup lang="ts">
   import GithubCalendar from '~/components/ui/GithubCalendar.vue';
-\x3c/script>
+\x3C/script>
 
-\x3ctemplate>
-  \x3cGithubCalendar username="vinayakkulkarni" variant="minimal" color-schema="blue" />
-\x3c/template>`,
+\x3Ctemplate>
+  \x3CGithubCalendar username="vinayakkulkarni" variant="minimal" color-schema="blue" />
+\x3C/template>`,
     },
     {
       label: 'Orange',
-      props: { username: 'vinayakkulkarni', colorSchema: 'orange', showTotal: false },
-      code: `\x3cscript setup lang="ts">
+      props: {
+        username: 'vinayakkulkarni',
+        colorSchema: 'orange',
+        showTotal: false,
+      },
+      code: `\x3Cscript setup lang="ts">
   import GithubCalendar from '~/components/ui/GithubCalendar.vue';
-\x3c/script>
+\x3C/script>
 
-\x3ctemplate>
-  \x3cGithubCalendar username="vinayakkulkarni" color-schema="orange" :show-total="false" />
-\x3c/template>`,
+\x3Ctemplate>
+  \x3CGithubCalendar username="vinayakkulkarni" color-schema="orange" :show-total="false" />
+\x3C/template>`,
     },
   ];
 

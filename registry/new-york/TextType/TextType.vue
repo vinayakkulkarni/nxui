@@ -69,7 +69,8 @@
         timeout = setTimeout(tick, props.typingSpeed);
       } else {
         if (textArray.value.length === 1 && !props.loop) return;
-        if (!props.loop && textIndex.value === textArray.value.length - 1) return;
+        if (!props.loop && textIndex.value === textArray.value.length - 1)
+          return;
         timeout = setTimeout(() => {
           isDeleting.value = true;
           tick();

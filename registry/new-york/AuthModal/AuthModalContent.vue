@@ -28,8 +28,14 @@
     </button>
   </div>
 
-  <component :is="motion.div" v-bind="staggeredEntry(0)" class="mb-8 text-center">
-    <h2 class="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50">
+  <component
+    :is="motion.div"
+    v-bind="staggeredEntry(0)"
+    class="mb-8 text-center"
+  >
+    <h2
+      class="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-50"
+    >
       Welcome back
     </h2>
     <p class="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
@@ -43,7 +49,7 @@
 
   <component :is="motion.div" v-bind="staggeredEntry(2)" class="relative mb-8">
     <div class="absolute inset-0 flex items-center">
-      <span class="w-full border-t border-zinc-200 dark:border-zinc-800" />
+      <span class="w-full border-t border-zinc-200 dark:border-zinc-800"></span>
     </div>
     <div class="relative flex justify-center text-xs uppercase">
       <span class="bg-white px-2 text-zinc-400 dark:bg-zinc-950">
@@ -56,12 +62,20 @@
     <AuthModalEmail v-model:email="email" @submit="handleLogin('email')" />
   </component>
 
-  <component :is="motion.div" v-bind="staggeredEntry(4)" class="mt-8 text-center">
+  <component
+    :is="motion.div"
+    v-bind="staggeredEntry(4)"
+    class="mt-8 text-center"
+  >
     <p class="text-xs text-zinc-400">
       By clicking continue, you agree to our
-      <a href="#" class="underline hover:text-zinc-900 dark:hover:text-zinc-50">Terms of Service</a>
+      <a href="#" class="underline hover:text-zinc-900 dark:hover:text-zinc-50"
+        >Terms of Service</a
+      >
       and
-      <a href="#" class="underline hover:text-zinc-900 dark:hover:text-zinc-50">Privacy Policy</a>
+      <a href="#" class="underline hover:text-zinc-900 dark:hover:text-zinc-50"
+        >Privacy Policy</a
+      >
     </p>
   </component>
 </template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount, watch, computed } from 'vue';
+  import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
   import { useResizeObserver, useMediaQuery } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
@@ -22,11 +22,44 @@
     },
   );
 
-  const VARIANTS: Record<string, { activeColor: string | null; gap: number; speed: number; colors: string; noFocus: boolean }> = {
-    default: { activeColor: null, gap: 5, speed: 35, colors: '#f8fafc,#f1f5f9,#cbd5e1', noFocus: false },
-    blue: { activeColor: '#e0f2fe', gap: 10, speed: 25, colors: '#e0f2fe,#7dd3fc,#0ea5e9', noFocus: false },
-    yellow: { activeColor: '#fef08a', gap: 3, speed: 20, colors: '#fef08a,#fde047,#eab308', noFocus: false },
-    pink: { activeColor: '#fecdd3', gap: 6, speed: 80, colors: '#fecdd3,#fda4af,#e11d48', noFocus: true },
+  const VARIANTS: Record<
+    string,
+    {
+      activeColor: string | null;
+      gap: number;
+      speed: number;
+      colors: string;
+      noFocus: boolean;
+    }
+  > = {
+    default: {
+      activeColor: null,
+      gap: 5,
+      speed: 35,
+      colors: '#f8fafc,#f1f5f9,#cbd5e1',
+      noFocus: false,
+    },
+    blue: {
+      activeColor: '#e0f2fe',
+      gap: 10,
+      speed: 25,
+      colors: '#e0f2fe,#7dd3fc,#0ea5e9',
+      noFocus: false,
+    },
+    yellow: {
+      activeColor: '#fef08a',
+      gap: 3,
+      speed: 20,
+      colors: '#fef08a,#fde047,#eab308',
+      noFocus: false,
+    },
+    pink: {
+      activeColor: '#fecdd3',
+      gap: 6,
+      speed: 80,
+      colors: '#fecdd3,#fda4af,#e11d48',
+      noFocus: true,
+    },
   };
 
   const cfg = computed(() => VARIANTS[props.variant] ?? VARIANTS.default);
@@ -61,13 +94,23 @@
     isShimmer = false;
     ctx: CanvasRenderingContext2D;
 
-    constructor(ctx: CanvasRenderingContext2D, w: number, h: number, x: number, y: number, color: string, speed: number, delay: number) {
+    constructor(
+      ctx: CanvasRenderingContext2D,
+      w: number,
+      h: number,
+      x: number,
+      y: number,
+      color: string,
+      speed: number,
+      delay: number,
+    ) {
       this.ctx = ctx;
       this.x = x;
       this.y = y;
       this.color = color;
       this.speed = (Math.random() * 0.8 + 0.1) * speed;
-      this.maxSize = Math.random() * (this.maxSizeInt - this.minSize) + this.minSize;
+      this.maxSize =
+        Math.random() * (this.maxSizeInt - this.minSize) + this.minSize;
       this.delay = delay;
       this.counterStep = Math.random() * 4 + (w + h) * 0.01;
     }
@@ -175,8 +218,12 @@
     animationId = requestAnimationFrame(loop);
   }
 
-  function onEnter() { doAnimate('appear'); }
-  function onLeave() { doAnimate('disappear'); }
+  function onEnter() {
+    doAnimate('appear');
+  }
+  function onLeave() {
+    doAnimate('disappear');
+  }
 
   onMounted(() => initPixels());
   useResizeObserver(containerRef, () => initPixels());
@@ -186,16 +233,21 @@
 <template>
   <div
     ref="containerRef"
-    :class="cn('relative grid aspect-[4/5] h-[400px] w-[300px] select-none place-items-center overflow-hidden rounded-[25px] border border-zinc-800 isolate', $props.class)"
+    :class="
+      cn(
+        'relative grid aspect-[4/5] h-[400px] w-[300px] select-none place-items-center overflow-hidden rounded-[25px] border border-zinc-800 isolate',
+        $props.class,
+      )
+    "
     :tabindex="finalNoFocus ? -1 : 0"
     @mouseenter="onEnter"
     @mouseleave="onLeave"
     @focus.self="onEnter"
     @blur.self="onLeave"
   >
-    <canvas ref="canvasRef" class="block size-full" />
+    <canvas ref="canvasRef" class="block size-full"></canvas>
     <div class="absolute inset-0 z-10 grid place-items-center">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

@@ -84,20 +84,26 @@
 
     switch (direction) {
       case 'right':
-        gridOffset.x = (gridOffset.x - effectiveSpeed + squareSize) % squareSize;
+        gridOffset.x =
+          (gridOffset.x - effectiveSpeed + squareSize) % squareSize;
         break;
       case 'left':
-        gridOffset.x = (gridOffset.x + effectiveSpeed + squareSize) % squareSize;
+        gridOffset.x =
+          (gridOffset.x + effectiveSpeed + squareSize) % squareSize;
         break;
       case 'up':
-        gridOffset.y = (gridOffset.y + effectiveSpeed + squareSize) % squareSize;
+        gridOffset.y =
+          (gridOffset.y + effectiveSpeed + squareSize) % squareSize;
         break;
       case 'down':
-        gridOffset.y = (gridOffset.y - effectiveSpeed + squareSize) % squareSize;
+        gridOffset.y =
+          (gridOffset.y - effectiveSpeed + squareSize) % squareSize;
         break;
       case 'diagonal':
-        gridOffset.x = (gridOffset.x - effectiveSpeed + squareSize) % squareSize;
-        gridOffset.y = (gridOffset.y - effectiveSpeed + squareSize) % squareSize;
+        gridOffset.x =
+          (gridOffset.x - effectiveSpeed + squareSize) % squareSize;
+        gridOffset.y =
+          (gridOffset.y - effectiveSpeed + squareSize) % squareSize;
         break;
     }
 
@@ -142,5 +148,5 @@
 </script>
 
 <template>
-  <canvas ref="canvasRef" :class="cn('size-full', $props.class)" />
+  <canvas ref="canvasRef" :class="cn('size-full', $props.class)"></canvas>
 </template>

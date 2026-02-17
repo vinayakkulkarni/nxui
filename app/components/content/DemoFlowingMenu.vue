@@ -2,10 +2,26 @@
   import FlowingMenu from '@registry/new-york/FlowingMenu/FlowingMenu.vue';
 
   const menuItems = [
-    { link: '#', text: 'Animations', image: 'https://picsum.photos/seed/1/600/400' },
-    { link: '#', text: 'Components', image: 'https://picsum.photos/seed/2/600/400' },
-    { link: '#', text: 'Backgrounds', image: 'https://picsum.photos/seed/3/600/400' },
-    { link: '#', text: 'Text Effects', image: 'https://picsum.photos/seed/4/600/400' },
+    {
+      link: '#',
+      text: 'Animations',
+      image: 'https://picsum.photos/seed/1/600/400',
+    },
+    {
+      link: '#',
+      text: 'Components',
+      image: 'https://picsum.photos/seed/2/600/400',
+    },
+    {
+      link: '#',
+      text: 'Backgrounds',
+      image: 'https://picsum.photos/seed/3/600/400',
+    },
+    {
+      link: '#',
+      text: 'Text Effects',
+      image: 'https://picsum.photos/seed/4/600/400',
+    },
   ];
 </script>
 

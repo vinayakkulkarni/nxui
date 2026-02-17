@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Variable Proximity",
   "description": "Text that changes font variation settings based on cursor proximity.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/VariableProximity/VariableProximity.vue",

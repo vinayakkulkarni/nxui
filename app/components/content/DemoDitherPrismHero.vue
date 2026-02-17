@@ -1,56 +1,72 @@
 <script setup lang="ts">
-import DitherPrismHero from '@registry/new-york/DitherPrismHero/DitherPrismHero.vue';
+  import DitherPrismHero from '@registry/new-york/DitherPrismHero/DitherPrismHero.vue';
 
-const activeTab = ref(0);
+  const activeTab = ref(0);
 
-const tabs = [
-  {
-    label: 'Default',
-    props: { title1: 'Experience', title2: 'The Future' },
-    code: `<DitherPrismHero title1="Experience" title2="The Future" />`,
-  },
-  {
-    label: 'Cyberpunk',
-    props: {
-      color1: '#0a0a0a', color2: '#00ff88', color3: '#00ffff',
-      title1: 'Cyber', title2: 'Punk',
-      ditherIntensity: 0.25, prismIntensity: 0.7,
+  const tabs = [
+    {
+      label: 'Default',
+      props: { title1: 'Experience', title2: 'The Future' },
+      code: `<DitherPrismHero title1="Experience" title2="The Future" />`,
     },
-    code: `<DitherPrismHero color1="#0a0a0a" color2="#00ff88" color3="#00ffff" title1="Cyber" title2="Punk" :dither-intensity="0.25" :prism-intensity="0.7" />`,
-  },
-  {
-    label: 'Sunset',
-    props: {
-      color1: '#1a0a0a', color2: '#ff6b35', color3: '#ffd93d',
-      title1: 'Golden', title2: 'Hour',
-      ditherIntensity: 0.12, prismIntensity: 0.4,
+    {
+      label: 'Cyberpunk',
+      props: {
+        color1: '#0a0a0a',
+        color2: '#00ff88',
+        color3: '#00ffff',
+        title1: 'Cyber',
+        title2: 'Punk',
+        ditherIntensity: 0.25,
+        prismIntensity: 0.7,
+      },
+      code: `<DitherPrismHero color1="#0a0a0a" color2="#00ff88" color3="#00ffff" title1="Cyber" title2="Punk" :dither-intensity="0.25" :prism-intensity="0.7" />`,
     },
-    code: `<DitherPrismHero color1="#1a0a0a" color2="#ff6b35" color3="#ffd93d" title1="Golden" title2="Hour" :dither-intensity="0.12" :prism-intensity="0.4" />`,
-  },
-  {
-    label: 'Ocean',
-    props: {
-      color1: '#0a1628', color2: '#0ea5e9', color3: '#22d3ee',
-      title1: 'Deep', title2: 'Ocean',
-      speed: 0.7, showParticles: true, particleCount: 100,
+    {
+      label: 'Sunset',
+      props: {
+        color1: '#1a0a0a',
+        color2: '#ff6b35',
+        color3: '#ffd93d',
+        title1: 'Golden',
+        title2: 'Hour',
+        ditherIntensity: 0.12,
+        prismIntensity: 0.4,
+      },
+      code: `<DitherPrismHero color1="#1a0a0a" color2="#ff6b35" color3="#ffd93d" title1="Golden" title2="Hour" :dither-intensity="0.12" :prism-intensity="0.4" />`,
     },
-    code: `<DitherPrismHero color1="#0a1628" color2="#0ea5e9" color3="#22d3ee" title1="Deep" title2="Ocean" :speed="0.7" :particle-count="100" />`,
-  },
-  {
-    label: 'Maximum Impact',
-    props: {
-      ditherIntensity: 0.3, prismIntensity: 0.9, speed: 1.5,
-      title1: 'Maximum', title2: 'Impact',
+    {
+      label: 'Ocean',
+      props: {
+        color1: '#0a1628',
+        color2: '#0ea5e9',
+        color3: '#22d3ee',
+        title1: 'Deep',
+        title2: 'Ocean',
+        speed: 0.7,
+        showParticles: true,
+        particleCount: 100,
+      },
+      code: `<DitherPrismHero color1="#0a1628" color2="#0ea5e9" color3="#22d3ee" title1="Deep" title2="Ocean" :speed="0.7" :particle-count="100" />`,
     },
-    code: `<DitherPrismHero :dither-intensity="0.3" :prism-intensity="0.9" :speed="1.5" title1="Maximum" title2="Impact" />`,
-  },
-];
+    {
+      label: 'Maximum Impact',
+      props: {
+        ditherIntensity: 0.3,
+        prismIntensity: 0.9,
+        speed: 1.5,
+        title1: 'Maximum',
+        title2: 'Impact',
+      },
+      code: `<DitherPrismHero :dither-intensity="0.3" :prism-intensity="0.9" :speed="1.5" title1="Maximum" title2="Impact" />`,
+    },
+  ];
 
-const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]);
 
-function handleTabClick(index: number) {
-  activeTab.value = index;
-}
+  function handleTabClick(index: number) {
+    activeTab.value = index;
+  }
 </script>
 
 <template>
@@ -63,12 +79,16 @@ function handleTabClick(index: number) {
           class="aspect-video min-h-[400px]"
         />
         <template #fallback>
-          <div class="flex aspect-video min-h-[400px] w-full items-center justify-center bg-[#0f0f23]">
+          <div
+            class="flex aspect-video min-h-[400px] w-full items-center justify-center bg-[#0f0f23]"
+          >
             <span class="text-sm text-white/50">Loading dither prism...</span>
           </div>
         </template>
       </ClientOnly>
-      <div class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex flex-wrap justify-center gap-2">
+      <div
+        class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex flex-wrap justify-center gap-2"
+      >
         <button
           v-for="(tab, index) in tabs"
           :key="tab.label"

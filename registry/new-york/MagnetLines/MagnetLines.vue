@@ -55,7 +55,8 @@
     // Initialize with center angle
     nextTick(() => {
       if (!containerRef.value) return;
-      const items = containerRef.value.querySelectorAll<HTMLSpanElement>('span');
+      const items =
+        containerRef.value.querySelectorAll<HTMLSpanElement>('span');
       if (items.length) {
         const mid = Math.floor(items.length / 2);
         const rect = items[mid].getBoundingClientRect();
@@ -91,6 +92,6 @@
         willChange: 'transform',
         transition: 'transform 0.15s ease-out',
       }"
-    />
+    ></span>
   </div>
 </template>

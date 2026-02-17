@@ -14,8 +14,8 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/pulsating-button.json"
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `pulse-color` | `string` | `'#0096ff'` | Color of the pulse ring animation |
-| `duration` | `string` | `'1.5s'` | Duration of one pulse cycle |
-| `class` | `string` | `''` | Additional CSS classes for styling |
+| Prop          | Type     | Default     | Description                        |
+| ------------- | -------- | ----------- | ---------------------------------- |
+| `pulse-color` | `string` | `'#0096ff'` | Color of the pulse ring animation  |
+| `duration`    | `string` | `'1.5s'`    | Duration of one pulse cycle        |
+| `class`       | `string` | `''`        | Additional CSS classes for styling |

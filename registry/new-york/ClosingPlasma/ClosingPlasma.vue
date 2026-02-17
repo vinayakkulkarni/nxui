@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-  import { useResizeObserver, useEventListener } from '@vueuse/core';
+  import { useResizeObserver } from '@vueuse/core';
   import type { ClosingPlasmaProps } from '~/types/components';
   import { cn } from '~/lib/utils';
 
@@ -102,9 +102,13 @@ void main(){
   gl_FragColor=vec4(clamp(col,0.0,1.0),u_opacity);
 }`;
 
-  const HEX_RE = /^#?[0-9a-fA-F]{6}$/;
-  const DA = '#0d0d14'; const DB = '#1f2540'; const DC = '#4a6191';
-  const LA = '#f0f2f7'; const LB = '#d7dceb'; const LC = '#bcc5e0';
+  const HEX_RE = /^#?[0-9a-f]{6}$/i;
+  const DA = '#0d0d14';
+  const DB = '#1f2540';
+  const DC = '#4a6191';
+  const LA = '#f0f2f7';
+  const LB = '#d7dceb';
+  const LC = '#bcc5e0';
 
   function sanitizeHex(v: string, fb: string): string {
     const t = v.trim();
@@ -115,9 +119,9 @@ void main(){
   function hexToRgb(hex: string, fb: string): [number, number, number] {
     const n = sanitizeHex(hex, fb).replace('#', '');
     return [
-      parseInt(n.slice(0, 2), 16) / 255,
-      parseInt(n.slice(2, 4), 16) / 255,
-      parseInt(n.slice(4, 6), 16) / 255,
+      Number.parseInt(n.slice(0, 2), 16) / 255,
+      Number.parseInt(n.slice(2, 4), 16) / 255,
+      Number.parseInt(n.slice(4, 6), 16) / 255,
     ];
   }
 
@@ -139,14 +143,21 @@ void main(){
   const targetMouse = { x: 0.5, y: 0.5 };
 
   type Uniforms = Record<string, WebGLUniformLocation>;
-  let uniforms: Uniforms = {};
+  const uniforms: Uniforms = {};
 
-  function compileShader(ctx: WebGLRenderingContext, type: number, src: string): WebGLShader | null {
+  function compileShader(
+    ctx: WebGLRenderingContext,
+    type: number,
+    src: string,
+  ): WebGLShader | null {
     const s = ctx.createShader(type);
     if (!s) return null;
     ctx.shaderSource(s, src);
     ctx.compileShader(s);
-    if (!ctx.getShaderParameter(s, ctx.COMPILE_STATUS)) { ctx.deleteShader(s); return null; }
+    if (!ctx.getShaderParameter(s, ctx.COMPILE_STATUS)) {
+      ctx.deleteShader(s);
+      return null;
+    }
     return s;
   }
 
@@ -169,7 +180,12 @@ void main(){
     canvasRef.value.width = Math.max(1, Math.floor(width * dpr));
     canvasRef.value.height = Math.max(1, Math.floor(height * dpr));
     gl.viewport(0, 0, canvasRef.value.width, canvasRef.value.height);
-    if (uniforms.u_res) gl.uniform2f(uniforms.u_res, canvasRef.value.width, canvasRef.value.height);
+    if (uniforms.u_res)
+      gl.uniform2f(
+        uniforms.u_res,
+        canvasRef.value.width,
+        canvasRef.value.height,
+      );
   }
 
   useResizeObserver(containerRef, resize);
@@ -220,16 +236,32 @@ void main(){
     const posLoc = gl.getAttribLocation(program, 'position');
     buffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+      gl.STATIC_DRAW,
+    );
     gl.enableVertexAttribArray(posLoc);
     gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
 
     const names = [
-      'u_res', 'u_time', 'u_mouse', 'u_isDark',
-      'u_speed', 'u_turbulence', 'u_mouseInfluence',
-      'u_grain', 'u_sparkle', 'u_vignette', 'u_opacity',
-      'u_darkA', 'u_darkB', 'u_darkC',
-      'u_lightA', 'u_lightB', 'u_lightC',
+      'u_res',
+      'u_time',
+      'u_mouse',
+      'u_isDark',
+      'u_speed',
+      'u_turbulence',
+      'u_mouseInfluence',
+      'u_grain',
+      'u_sparkle',
+      'u_vignette',
+      'u_opacity',
+      'u_darkA',
+      'u_darkB',
+      'u_darkC',
+      'u_lightA',
+      'u_lightB',
+      'u_lightC',
     ];
     for (const n of names) {
       const loc = gl.getUniformLocation(program, n);
@@ -279,9 +311,9 @@ void main(){
       aria-hidden="true"
       class="absolute inset-0 size-full"
       style="display: block"
-    />
+    ></canvas>
     <div v-if="$slots.default" class="relative z-10 size-full">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

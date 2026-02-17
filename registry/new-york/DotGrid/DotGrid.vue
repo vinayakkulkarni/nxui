@@ -48,7 +48,11 @@
   function hexToRgb(hex: string) {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!m) return { r: 0, g: 0, b: 0 };
-    return { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) };
+    return {
+      r: Number.parseInt(m[1], 16),
+      g: Number.parseInt(m[2], 16),
+      b: Number.parseInt(m[3], 16),
+    };
   }
 
   const baseRgb = computed(() => hexToRgb(props.baseColor));
@@ -60,7 +64,16 @@
   let animationId = 0;
   let circlePath: Path2D | null = null;
 
-  const pointer = { x: 0, y: 0, vx: 0, vy: 0, speed: 0, lastX: 0, lastY: 0, lastTime: 0 };
+  const pointer = {
+    x: 0,
+    y: 0,
+    vx: 0,
+    vy: 0,
+    speed: 0,
+    lastX: 0,
+    lastY: 0,
+    lastTime: 0,
+  };
 
   function buildGrid() {
     const canvas = canvasRef.value;
@@ -105,7 +118,7 @@
 
   function elasticOut(t: number): number {
     if (t === 0 || t === 1) return t;
-    return 2 ** (-10 * t) * Math.sin((t - 0.075) * (2 * Math.PI) / 0.3) + 1;
+    return 2 ** (-10 * t) * Math.sin(((t - 0.075) * (2 * Math.PI)) / 0.3) + 1;
   }
 
   useResizeObserver(containerRef, buildGrid);
@@ -197,7 +210,11 @@
         dot.yOffset += dot.vy * dt;
 
         // When velocity is low, start elastic return
-        if (Math.abs(dot.vx) < 0.5 && Math.abs(dot.vy) < 0.5 && (Math.abs(dot.xOffset) > 0.1 || Math.abs(dot.yOffset) > 0.1)) {
+        if (
+          Math.abs(dot.vx) < 0.5 &&
+          Math.abs(dot.vy) < 0.5 &&
+          (Math.abs(dot.xOffset) > 0.1 || Math.abs(dot.yOffset) > 0.1)
+        ) {
           if (!dot.returning) {
             dot.returning = true;
             dot.returnT = 0;
@@ -233,9 +250,15 @@
         if (dsq <= proxSq) {
           const dist = Math.sqrt(dsq);
           const t = 1 - dist / props.proximity;
-          const r = Math.round(baseRgb.value.r + (activeRgb.value.r - baseRgb.value.r) * t);
-          const g = Math.round(baseRgb.value.g + (activeRgb.value.g - baseRgb.value.g) * t);
-          const b = Math.round(baseRgb.value.b + (activeRgb.value.b - baseRgb.value.b) * t);
+          const r = Math.round(
+            baseRgb.value.r + (activeRgb.value.r - baseRgb.value.r) * t,
+          );
+          const g = Math.round(
+            baseRgb.value.g + (activeRgb.value.g - baseRgb.value.g) * t,
+          );
+          const b = Math.round(
+            baseRgb.value.b + (activeRgb.value.b - baseRgb.value.b) * t,
+          );
           fillStyle = `rgb(${r},${g},${b})`;
         }
 
@@ -256,9 +279,16 @@
 </script>
 
 <template>
-  <div :class="cn('relative flex size-full items-center justify-center', $props.class)">
+  <div
+    :class="
+      cn('relative flex size-full items-center justify-center', $props.class)
+    "
+  >
     <div ref="containerRef" class="relative size-full">
-      <canvas ref="canvasRef" class="pointer-events-none absolute inset-0 size-full" />
+      <canvas
+        ref="canvasRef"
+        class="pointer-events-none absolute inset-0 size-full"
+      ></canvas>
     </div>
   </div>
 </template>

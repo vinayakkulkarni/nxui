@@ -51,8 +51,16 @@
     const h = hex.replace('#', '').trim();
     const vals =
       h.length === 3
-        ? [parseInt(h[0] + h[0], 16), parseInt(h[1] + h[1], 16), parseInt(h[2] + h[2], 16)]
-        : [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)];
+        ? [
+            Number.parseInt(h[0] + h[0], 16),
+            Number.parseInt(h[1] + h[1], 16),
+            Number.parseInt(h[2] + h[2], 16),
+          ]
+        : [
+            Number.parseInt(h.slice(0, 2), 16),
+            Number.parseInt(h.slice(2, 4), 16),
+            Number.parseInt(h.slice(4, 6), 16),
+          ];
     return new Vector3(vals[0] / 255, vals[1] / 255, vals[2] / 255);
   }
 
@@ -60,7 +68,6 @@
   let webglRenderer: WebGLRenderer | null = null;
   let mat: ShaderMaterial | null = null;
   let rafId = 0;
-  let currentRot = 0;
   const pointerTarget = new Vector2(0, 0);
   const pointerCurrent = new Vector2(0, 0);
 
@@ -167,11 +174,18 @@ void main(){
     const scene = new Scene();
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-    const uColorsArray = Array.from({ length: MAX_COLORS }, () => new Vector3(0, 0, 0));
-    const colorsArr = (props.colors || []).filter(Boolean).slice(0, MAX_COLORS).map(hexToVec3);
-    for (let i = 0; i < colorsArr.length && i < MAX_COLORS; i++) uColorsArray[i].copy(colorsArr[i]);
+    const uColorsArray = Array.from(
+      { length: MAX_COLORS },
+      () => new Vector3(0, 0, 0),
+    );
+    const colorsArr = (props.colors || [])
+      .filter(Boolean)
+      .slice(0, MAX_COLORS)
+      .map(hexToVec3);
+    for (let i = 0; i < colorsArr.length && i < MAX_COLORS; i++)
+      uColorsArray[i].copy(colorsArr[i]);
 
-    const deg = (props.rotation % 360) * Math.PI / 180;
+    const deg = ((props.rotation % 360) * Math.PI) / 180;
     mat = new ShaderMaterial({
       vertexShader: vert,
       fragmentShader: frag,
@@ -199,7 +213,11 @@ void main(){
     const mesh = new Mesh(geometry, mat);
     scene.add(mesh);
 
-    webglRenderer = new WebGLRenderer({ antialias: false, alpha: true, powerPreference: 'high-performance' });
+    webglRenderer = new WebGLRenderer({
+      antialias: false,
+      alpha: true,
+      powerPreference: 'high-performance',
+    });
     webglRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     webglRenderer.setClearColor(0x000000, props.transparent ? 0 : 1);
     webglRenderer.domElement.style.width = '100%';
@@ -229,7 +247,10 @@ void main(){
       const rad = (totalDeg * Math.PI) / 180;
       mat.uniforms.uRot.value.set(Math.cos(rad), Math.sin(rad));
 
-      const updatedColors = (props.colors || []).filter(Boolean).slice(0, MAX_COLORS).map(hexToVec3);
+      const updatedColors = (props.colors || [])
+        .filter(Boolean)
+        .slice(0, MAX_COLORS)
+        .map(hexToVec3);
       for (let i = 0; i < MAX_COLORS; i++) {
         if (i < updatedColors.length) uColorsArray[i].copy(updatedColors[i]);
         else uColorsArray[i].set(0, 0, 0);
@@ -258,5 +279,5 @@ void main(){
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

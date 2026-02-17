@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from "vue"
-import { cn } from "@/lib/utils"
+  import type { HTMLAttributes } from 'vue';
+  import { cn } from '@/lib/utils';
 
-const props = defineProps<{
-  class?: HTMLAttributes["class"]
-}>()
+  const props = defineProps<{
+    class?: HTMLAttributes['class'];
+  }>();
 </script>
 
 <template>
@@ -12,6 +12,6 @@ const props = defineProps<{
     data-slot="card-description"
     :class="cn('text-muted-foreground text-sm', props.class)"
   >
-    <slot ></slot>
+    <slot></slot>
   </p>
 </template>

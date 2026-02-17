@@ -42,7 +42,8 @@
       : `conic-gradient(from 225deg, rgba(120, 119, 198, 0.9), rgba(120, 119, 198, 0.1) 25%, rgba(255, 255, 255, 0.15) 50%, rgba(120, 119, 198, 0.1) 75%, rgba(120, 119, 198, 0.9))`,
     mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
     maskComposite: 'exclude',
-    WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+    WebkitMask:
+      'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
     WebkitMaskComposite: 'xor',
     opacity: isHovered.value ? 1 : 0.5,
   }));
@@ -51,10 +52,12 @@
 <template>
   <div
     ref="containerRef"
-    :class="cn(
-      'relative overflow-hidden bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-950 dark:to-neutral-900 transition-all duration-500',
-      props.class,
-    )"
+    :class="
+      cn(
+        'relative overflow-hidden bg-gradient-to-b from-neutral-50 to-white dark:from-neutral-950 dark:to-neutral-900 transition-all duration-500',
+        props.class,
+      )
+    "
     :style="{ borderRadius: `${borderRadius}px` }"
   >
     <div
@@ -70,11 +73,12 @@
       :style="{
         borderRadius: `${borderRadius}px`,
         opacity: isHovered ? 0.5 : 0,
-        boxShadow: 'inset 0 0 30px rgba(120, 119, 198, 0.1), 0 0 30px rgba(120, 119, 198, 0.1)',
+        boxShadow:
+          'inset 0 0 30px rgba(120, 119, 198, 0.1), 0 0 30px rgba(120, 119, 198, 0.1)',
       }"
     ></div>
     <div class="relative z-10">
-      <slot ></slot>
+      <slot></slot>
     </div>
   </div>
 </template>

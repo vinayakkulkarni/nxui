@@ -39,11 +39,18 @@
 
   function hexToRgb(hex: string): [number, number, number] {
     const c = hex.replace('#', '').padEnd(6, '0');
-    return [parseInt(c.slice(0, 2), 16) / 255, parseInt(c.slice(2, 4), 16) / 255, parseInt(c.slice(4, 6), 16) / 255];
+    return [
+      Number.parseInt(c.slice(0, 2), 16) / 255,
+      Number.parseInt(c.slice(2, 4), 16) / 255,
+      Number.parseInt(c.slice(4, 6), 16) / 255,
+    ];
   }
 
   function prepStops(stops: string[]) {
-    const base = (stops.length ? stops : ['#FF9FFC', '#5227FF']).slice(0, MAX_COLORS);
+    const base = (stops.length ? stops : ['#FF9FFC', '#5227FF']).slice(
+      0,
+      MAX_COLORS,
+    );
     if (base.length === 1) base.push(base[0]);
     while (base.length < MAX_COLORS) base.push(base[base.length - 1]);
     const arr: Array<[number, number, number]> = [];
@@ -149,7 +156,11 @@ void main(){vec4 color;mainImage(color,vUv*iResolution.xy);gl_FragColor=color;}`
 
   onMounted(() => {
     if (!containerRef.value) return;
-    renderer = new Renderer({ dpr: window.devicePixelRatio || 1, alpha: true, antialias: true });
+    renderer = new Renderer({
+      dpr: window.devicePixelRatio || 1,
+      alpha: true,
+      antialias: true,
+    });
     const gl = renderer.gl;
     const canvas = gl.canvas as HTMLCanvasElement;
     canvas.style.width = '100%';
@@ -157,11 +168,17 @@ void main(){vec4 color;mainImage(color,vUv*iResolution.xy);gl_FragColor=color;}`
     canvas.style.display = 'block';
     containerRef.value.appendChild(canvas);
 
-    const { arr: colorArr, count: colorCount } = prepStops(props.gradientColors);
+    const { arr: colorArr, count: colorCount } = prepStops(
+      props.gradientColors,
+    );
     const geometry = new Triangle(gl);
     const uniforms: Record<string, { value: unknown }> = {
-      iResolution: { value: [gl.drawingBufferWidth, gl.drawingBufferHeight, 1] },
-      iMouse: { value: [gl.drawingBufferWidth / 2, gl.drawingBufferHeight / 2] },
+      iResolution: {
+        value: [gl.drawingBufferWidth, gl.drawingBufferHeight, 1],
+      },
+      iMouse: {
+        value: [gl.drawingBufferWidth / 2, gl.drawingBufferHeight / 2],
+      },
       iTime: { value: 0 },
       uAngle: { value: (props.angle * Math.PI) / 180 },
       uNoise: { value: props.noise },
@@ -181,14 +198,22 @@ void main(){vec4 color;mainImage(color,vUv*iResolution.xy);gl_FragColor=color;}`
     const program = new Program(gl, { vertex, fragment, uniforms });
     const mesh = new Mesh(gl, { geometry, program });
     resize();
-    uniforms.iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1];
+    uniforms.iResolution.value = [
+      gl.drawingBufferWidth,
+      gl.drawingBufferHeight,
+      1,
+    ];
     mouseTarget[0] = gl.drawingBufferWidth / 2;
     mouseTarget[1] = gl.drawingBufferHeight / 2;
 
     function update(t: number) {
       rafId = requestAnimationFrame(update);
       uniforms.iTime.value = t * 0.001;
-      uniforms.iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1];
+      uniforms.iResolution.value = [
+        gl.drawingBufferWidth,
+        gl.drawingBufferHeight,
+        1,
+      ];
       uniforms.uAngle.value = (props.angle * Math.PI) / 180;
       uniforms.uNoise.value = props.noise;
       uniforms.uBlindCount.value = Math.max(1, props.blindCount);
@@ -200,7 +225,8 @@ void main(){vec4 color;mainImage(color,vUv*iResolution.xy);gl_FragColor=color;}`
       uniforms.uShineFlip.value = props.shineDirection === 'right' ? 1 : 0;
       const { arr, count } = prepStops(props.gradientColors);
       uniforms.uColorCount.value = count;
-      for (let i = 0; i < MAX_COLORS; i++) uniforms[`uColor${i}`].value = arr[i];
+      for (let i = 0; i < MAX_COLORS; i++)
+        uniforms[`uColor${i}`].value = arr[i];
       if (props.mouseDampening > 0) {
         if (!lastTime) lastTime = t;
         const dt = (t - lastTime) / 1000;
@@ -220,11 +246,12 @@ void main(){vec4 color;mainImage(color,vUv*iResolution.xy);gl_FragColor=color;}`
     cancelAnimationFrame(rafId);
     if (renderer && containerRef.value) {
       const canvas = renderer.gl.canvas as HTMLCanvasElement;
-      if (containerRef.value.contains(canvas)) containerRef.value.removeChild(canvas);
+      if (containerRef.value.contains(canvas))
+        containerRef.value.removeChild(canvas);
     }
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

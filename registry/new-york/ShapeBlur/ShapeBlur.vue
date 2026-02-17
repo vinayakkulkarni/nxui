@@ -214,5 +214,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('relative size-full', $props.class)"></div>
 </template>

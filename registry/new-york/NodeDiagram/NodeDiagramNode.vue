@@ -59,7 +59,7 @@
     <div
       class="absolute inset-0 rounded-lg border-2"
       :style="{ borderColor: statusColor }"
-    />
+    ></div>
     <component
       :is="motion.div"
       v-if="node.status === 'active'"

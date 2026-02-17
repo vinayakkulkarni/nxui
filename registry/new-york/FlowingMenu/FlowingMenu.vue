@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+  import { ref } from 'vue';
   import { cn } from '~/lib/utils';
 
   interface FlowingMenuItem {
@@ -8,7 +8,7 @@
     image: string;
   }
 
-  const props = withDefaults(
+  withDefaults(
     defineProps<{
       items?: FlowingMenuItem[];
       textColor?: string;
@@ -32,18 +32,24 @@
   );
 
   // Each menu item has its own marquee state
-  const marqueeStates = ref<Map<number, { show: boolean; y: string; innerY: string }>>(new Map());
+  const marqueeStates = ref<
+    Map<number, { show: boolean; y: string; innerY: string }>
+  >(new Map());
 
   function distMetric(x: number, y: number, x2: number, y2: number) {
     return (x - x2) ** 2 + (y - y2) ** 2;
   }
 
   function findClosestEdge(mx: number, my: number, w: number, h: number) {
-    return distMetric(mx, my, w / 2, 0) < distMetric(mx, my, w / 2, h) ? 'top' : 'bottom';
+    return distMetric(mx, my, w / 2, 0) < distMetric(mx, my, w / 2, h)
+      ? 'top'
+      : 'bottom';
   }
 
   function handleEnter(e: MouseEvent, idx: number) {
-    const el = (e.currentTarget as HTMLElement).closest('.flowing-item') as HTMLElement;
+    const el = (e.currentTarget as HTMLElement).closest(
+      '.flowing-item',
+    ) as HTMLElement;
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const mx = e.clientX - rect.left;
@@ -65,7 +71,9 @@
   }
 
   function handleLeave(e: MouseEvent, idx: number) {
-    const el = (e.currentTarget as HTMLElement).closest('.flowing-item') as HTMLElement;
+    const el = (e.currentTarget as HTMLElement).closest(
+      '.flowing-item',
+    ) as HTMLElement;
     if (!el) return;
     const rect = el.getBoundingClientRect();
     const mx = e.clientX - rect.left;
@@ -79,12 +87,21 @@
   }
 
   function getMarqueeState(idx: number) {
-    return marqueeStates.value.get(idx) ?? { show: false, y: '-101%', innerY: '101%' };
+    return (
+      marqueeStates.value.get(idx) ?? {
+        show: false,
+        y: '-101%',
+        innerY: '101%',
+      }
+    );
   }
 </script>
 
 <template>
-  <div :class="cn('w-full', $props.class)" :style="{ backgroundColor: bgColor }">
+  <div
+    :class="cn('w-full', $props.class)"
+    :style="{ backgroundColor: bgColor }"
+  >
     <nav>
       <div
         v-for="(item, idx) in items"
@@ -129,7 +146,7 @@
               <div
                 class="size-12 shrink-0 rounded-full bg-cover bg-center"
                 :style="{ backgroundImage: `url(${item.image})` }"
-              />
+              ></div>
             </div>
           </div>
         </div>

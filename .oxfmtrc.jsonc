@@ -17,6 +17,6 @@
     "coverage",
     "*.min.js",
     "*.min.css",
-    "bun.lock"
-  ]
+    "bun.lock",
+  ],
 }

@@ -13,16 +13,16 @@ All Vue component emits MUST use kebab-case consistently across `defineEmits`, `
 
 ```vue
 <script setup lang="ts">
-// ❌ WRONG - camelCase in defineEmits
-const emit = defineEmits<{
-  manageSubscription: []  // NO! Use kebab-case
-  toggleVisibility: [id: string, visible: boolean]  // NO!
-  updateValue: [value: number]  // NO!
-}>()
+  // ❌ WRONG - camelCase in defineEmits
+  const emit = defineEmits<{
+    manageSubscription: []; // NO! Use kebab-case
+    toggleVisibility: [id: string, visible: boolean]; // NO!
+    updateValue: [value: number]; // NO!
+  }>();
 
-// Inconsistent emit calls
-emit('manageSubscription')
-emit('toggleVisibility', id, true)
+  // Inconsistent emit calls
+  emit('manageSubscription');
+  emit('toggleVisibility', id, true);
 </script>
 ```
 
@@ -30,17 +30,17 @@ emit('toggleVisibility', id, true)
 
 ```vue
 <script setup lang="ts">
-// ✅ CORRECT - kebab-case with quotes in defineEmits
-const emit = defineEmits<{
-  'manage-subscription': []
-  'toggle-visibility': [id: string, visible: boolean]
-  'update-value': [value: number]
-}>()
+  // ✅ CORRECT - kebab-case with quotes in defineEmits
+  const emit = defineEmits<{
+    'manage-subscription': [];
+    'toggle-visibility': [id: string, visible: boolean];
+    'update-value': [value: number];
+  }>();
 
-// Consistent emit calls
-emit('manage-subscription')
-emit('toggle-visibility', id, true)
-emit('update-value', 42)
+  // Consistent emit calls
+  emit('manage-subscription');
+  emit('toggle-visibility', id, true);
+  emit('update-value', 42);
 </script>
 ```
 
@@ -57,17 +57,17 @@ emit('update-value', 42)
 </template>
 
 <script setup lang="ts">
-function handleManageSubscription() {
-  // ...
-}
+  function handleManageSubscription() {
+    // ...
+  }
 
-function handleToggleVisibility(id: string, visible: boolean) {
-  // ...
-}
+  function handleToggleVisibility(id: string, visible: boolean) {
+    // ...
+  }
 
-function handleUpdateValue(value: number) {
-  // ...
-}
+  function handleUpdateValue(value: number) {
+    // ...
+  }
 </script>
 ```
 
@@ -76,18 +76,18 @@ function handleUpdateValue(value: number) {
 ```vue
 <!-- Child component -->
 <script setup lang="ts">
-const props = defineProps<{
-  modelValue: string
-}>()
+  const props = defineProps<{
+    modelValue: string;
+  }>();
 
-// v-model emits use 'update:modelValue' pattern
-const emit = defineEmits<{
-  'update:model-value': [value: string]  // kebab-case
-}>()
+  // v-model emits use 'update:modelValue' pattern
+  const emit = defineEmits<{
+    'update:model-value': [value: string]; // kebab-case
+  }>();
 
-function updateValue(newValue: string) {
-  emit('update:model-value', newValue)
-}
+  function updateValue(newValue: string) {
+    emit('update:model-value', newValue);
+  }
 </script>
 
 <!-- Parent usage -->
@@ -104,15 +104,17 @@ function updateValue(newValue: string) {
 <!-- ❌ WRONG - Inline arrow with multiple params -->
 <template>
   <LayerTree
-    @toggle-visibility="(layerId, visible) => emit('toggle-layer-visibility', layerId, visible)"
+    @toggle-visibility="
+      (layerId, visible) => emit('toggle-layer-visibility', layerId, visible)
+    "
   />
 </template>
 
 <!-- ✅ CORRECT - Named function -->
 <script setup>
-function handleToggleVisibility(layerId: string, visible: boolean) {
-  emit('toggle-layer-visibility', layerId, visible)
-}
+  function handleToggleVisibility(layerId: string, visible: boolean) {
+    emit('toggle-layer-visibility', layerId, visible)
+  }
 </script>
 
 <template>
@@ -122,11 +124,11 @@ function handleToggleVisibility(layerId: string, visible: boolean) {
 
 **The pattern summary:**
 
-| Location | Format | Example |
-|----------|--------|---------|
-| `defineEmits` type | `'kebab-case'` (quoted) | `'manage-subscription': []` |
-| `emit()` call | `'kebab-case'` | `emit('manage-subscription')` |
-| Template `@event` | `@kebab-case` | `@manage-subscription="handler"` |
+| Location           | Format                  | Example                          |
+| ------------------ | ----------------------- | -------------------------------- |
+| `defineEmits` type | `'kebab-case'` (quoted) | `'manage-subscription': []`      |
+| `emit()` call      | `'kebab-case'`          | `emit('manage-subscription')`    |
+| Template `@event`  | `@kebab-case`           | `@manage-subscription="handler"` |
 
 **Why kebab-case?**
 

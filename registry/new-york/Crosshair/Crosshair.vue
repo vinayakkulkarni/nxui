@@ -3,7 +3,7 @@
   import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
-  const props = withDefaults(
+  withDefaults(
     defineProps<{
       color?: string;
       class?: string;
@@ -57,8 +57,10 @@
       smoothX = lerp(smoothX, mouseX, 0.15);
       smoothY = lerp(smoothY, mouseY, 0.15);
 
-      if (lineVRef.value) lineVRef.value.style.transform = `translateX(${smoothX}px)`;
-      if (lineHRef.value) lineHRef.value.style.transform = `translateY(${smoothY}px)`;
+      if (lineVRef.value)
+        lineVRef.value.style.transform = `translateX(${smoothX}px)`;
+      if (lineHRef.value)
+        lineHRef.value.style.transform = `translateY(${smoothY}px)`;
     }
     animationId = requestAnimationFrame(render);
   });
@@ -74,18 +76,28 @@
     :class="cn('relative size-full', $props.class)"
     style="cursor: none"
   >
-    <slot />
+    <slot></slot>
     <div class="pointer-events-none absolute inset-0 z-[10000]">
       <div
         ref="lineHRef"
         class="absolute w-full"
-        :style="{ height: '1px', background: color, opacity: 0, transition: 'opacity 0.3s ease-out' }"
-      />
+        :style="{
+          height: '1px',
+          background: color,
+          opacity: 0,
+          transition: 'opacity 0.3s ease-out',
+        }"
+      ></div>
       <div
         ref="lineVRef"
         class="absolute h-full"
-        :style="{ width: '1px', background: color, opacity: 0, transition: 'opacity 0.3s ease-out' }"
-      />
+        :style="{
+          width: '1px',
+          background: color,
+          opacity: 0,
+          transition: 'opacity 0.3s ease-out',
+        }"
+      ></div>
     </div>
   </div>
 </template>

@@ -30,9 +30,7 @@
     isAnimating.value = true;
   }
 
-  const intervalMs = computed(
-    () => props.duration / (props.text.length * 10),
-  );
+  const intervalMs = computed(() => props.duration / (props.text.length * 10));
 
   const { pause, resume } = useIntervalFn(
     () => {
@@ -70,13 +68,11 @@
 <template>
   <div
     ref="el"
-    :class="cn('flex cursor-default overflow-hidden py-2 font-mono', props.class)"
+    :class="
+      cn('flex cursor-default overflow-hidden py-2 font-mono', props.class)
+    "
   >
-    <span
-      v-for="(letter, i) in displayText"
-      :key="i"
-      class="min-w-[0.1em]"
-    >
+    <span v-for="(letter, i) in displayText" :key="i" class="min-w-[0.1em]">
       {{ letter }}
     </span>
   </div>

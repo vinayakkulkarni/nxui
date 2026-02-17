@@ -69,7 +69,12 @@
     return Math.sqrt((b.x - a.x) ** 2 + (b.y - a.y) ** 2);
   }
 
-  function getAttr(distance: number, maxDist: number, min: number, max: number) {
+  function getAttr(
+    distance: number,
+    maxDist: number,
+    min: number,
+    max: number,
+  ) {
     return Math.max(min, max - Math.abs((max * distance) / maxDist) + min);
   }
 
@@ -84,11 +89,16 @@
     spanRefs.value.forEach((span) => {
       if (!span) return;
       const rect = span.getBoundingClientRect();
-      const center = { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
+      const center = {
+        x: rect.x + rect.width / 2,
+        y: rect.y + rect.height / 2,
+      };
       const d = dist(mouse.value, center);
 
       const wdth = props.width ? Math.floor(getAttr(d, maxDist, 5, 200)) : 100;
-      const wght = props.weight ? Math.floor(getAttr(d, maxDist, 100, 900)) : 400;
+      const wght = props.weight
+        ? Math.floor(getAttr(d, maxDist, 100, 900))
+        : 400;
       const ital = props.italic ? getAttr(d, maxDist, 0, 1).toFixed(2) : '0';
 
       span.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${ital}`;
@@ -106,7 +116,9 @@
 <template>
   <div
     ref="containerEl"
-    :class="cn('relative size-full overflow-hidden bg-transparent', props.class)"
+    :class="
+      cn('relative size-full overflow-hidden bg-transparent', props.class)
+    "
   >
     <h1
       ref="titleEl"
@@ -125,7 +137,8 @@
         :key="i"
         :ref="(el) => setSpanRef(i, el)"
         class="inline-block"
-      >{{ char }}</span>
+        >{{ char }}</span
+      >
     </h1>
   </div>
 </template>

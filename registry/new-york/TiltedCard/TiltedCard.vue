@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue';
-  import { useEventListener, useMediaQuery } from '@vueuse/core';
+  import { useMediaQuery } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -110,13 +110,22 @@
 <template>
   <figure
     ref="figureRef"
-    :class="cn('relative flex flex-col items-center justify-center', $props.class)"
-    :style="{ height: containerHeight, width: containerWidth, perspective: '800px' }"
+    :class="
+      cn('relative flex flex-col items-center justify-center', $props.class)
+    "
+    :style="{
+      height: containerHeight,
+      width: containerWidth,
+      perspective: '800px',
+    }"
     @mousemove="handleMouseMove"
     @mouseenter="handleMouseEnter"
     @mouseleave="handleMouseLeave"
   >
-    <div v-if="showMobileWarning && isMobile" class="absolute top-4 text-center text-sm text-muted-foreground">
+    <div
+      v-if="showMobileWarning && isMobile"
+      class="absolute top-4 text-center text-sm text-muted-foreground"
+    >
       This effect is not optimized for mobile. Check on desktop.
     </div>
 
@@ -127,7 +136,7 @@
         class="absolute inset-0 size-full rounded-[15px] object-cover"
         :style="{ width: imageWidth, height: imageHeight }"
       />
-      <slot />
+      <slot></slot>
     </div>
 
     <figcaption

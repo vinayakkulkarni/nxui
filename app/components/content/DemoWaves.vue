@@ -15,7 +15,12 @@
 </template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
-      <Waves line-color="#fff" background-color="#000" :wave-speed-x="0.02" :wave-amp-x="40" />
+      <Waves
+        line-color="#fff"
+        background-color="#000"
+        :wave-speed-x="0.02"
+        :wave-amp-x="40"
+      />
     </div>
   </ComponentDemo>
 </template>

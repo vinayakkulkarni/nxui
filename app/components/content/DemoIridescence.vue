@@ -15,7 +15,12 @@
 </template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
-      <Iridescence :color="[1, 1, 1]" :speed="1.0" :amplitude="0.1" mouse-react />
+      <Iridescence
+        :color="[1, 1, 1]"
+        :speed="1.0"
+        :amplitude="0.1"
+        mouse-react
+      />
     </div>
   </ComponentDemo>
 </template>

@@ -28,16 +28,16 @@
         background: `radial-gradient(circle, ${color}, transparent 10%)`,
         animationDuration: speed,
       }"
-    />
+    ></div>
     <div
       class="star-border-gradient-top"
       :style="{
         background: `radial-gradient(circle, ${color}, transparent 10%)`,
         animationDuration: speed,
       }"
-    />
+    ></div>
     <div class="star-border-inner">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

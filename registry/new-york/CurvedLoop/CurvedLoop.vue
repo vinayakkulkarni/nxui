@@ -36,11 +36,17 @@
   let animFrame = 0;
 
   const text = computed(() => {
-    const hasTrailing = /\s|\u00A0$/.test(props.marqueeText);
-    return (hasTrailing ? props.marqueeText.replace(/\s+$/, '') : props.marqueeText) + '\u00A0';
+    const hasTrailing = /\s/.test(props.marqueeText);
+    return (
+      (hasTrailing
+        ? props.marqueeText.replace(/\s+$/, '')
+        : props.marqueeText) + '\u00A0'
+    );
   });
 
-  const pathD = computed(() => `M-100,40 Q500,${40 + props.curveAmount} 1540,40`);
+  const pathD = computed(
+    () => `M-100,40 Q500,${40 + props.curveAmount} 1540,40`,
+  );
 
   const totalText = computed(() => {
     if (!spacing.value) return text.value;
@@ -71,8 +77,11 @@
 
   function step(): void {
     if (!dragging.value && textPathRef.value && spacing.value) {
-      const delta = currentDirection.value === 'right' ? props.speed : -props.speed;
-      const current = parseFloat(textPathRef.value.getAttribute('startOffset') || '0');
+      const delta =
+        currentDirection.value === 'right' ? props.speed : -props.speed;
+      const current = Number.parseFloat(
+        textPathRef.value.getAttribute('startOffset') || '0',
+      );
       const next = wrapOffset(current + delta);
       textPathRef.value.setAttribute('startOffset', `${next}px`);
       offset.value = next;
@@ -93,7 +102,9 @@
     const dx = e.clientX - lastX.value;
     lastX.value = e.clientX;
     velocity.value = dx;
-    const current = parseFloat(textPathRef.value.getAttribute('startOffset') || '0');
+    const current = Number.parseFloat(
+      textPathRef.value.getAttribute('startOffset') || '0',
+    );
     const next = wrapOffset(current + dx);
     textPathRef.value.setAttribute('startOffset', `${next}px`);
     offset.value = next;
@@ -151,18 +162,9 @@
         {{ text }}
       </text>
       <defs>
-        <path
-          :id="pathId"
-          :d="pathD"
-          fill="none"
-          stroke="transparent"
-        />
+        <path :id="pathId" :d="pathD" fill="none" stroke="transparent" />
       </defs>
-      <text
-        v-if="ready"
-        font-weight="bold"
-        xml:space="preserve"
-      >
+      <text v-if="ready" font-weight="bold" xml:space="preserve">
         <textPath
           ref="textPathRef"
           :href="`#${pathId}`"

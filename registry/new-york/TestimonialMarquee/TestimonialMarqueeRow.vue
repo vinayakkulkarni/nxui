@@ -18,7 +18,9 @@
 
   const durationStyle = computed(() => ({ '--duration': `${props.speed}s` }));
   const animClass = computed(() =>
-    props.direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right',
+    props.direction === 'left'
+      ? 'animate-marquee-left'
+      : 'animate-marquee-right',
   );
   const hoverClass = computed(() =>
     props.pauseOnHover ? 'group-hover:[animation-play-state:paused]' : '',
@@ -28,29 +30,49 @@
 <template>
   <div :class="cn('group flex overflow-hidden p-2 [--gap:1rem]', props.class)">
     <div
-      :class="cn('flex shrink-0 justify-start [gap:var(--gap)] min-w-full pr-[var(--gap)] will-change-transform [backface-visibility:hidden]', animClass, hoverClass)"
+      :class="
+        cn(
+          'flex shrink-0 justify-start [gap:var(--gap)] min-w-full pr-[var(--gap)] will-change-transform [backface-visibility:hidden]',
+          animClass,
+          hoverClass,
+        )
+      "
       :style="durationStyle"
     >
-      <slot />
+      <slot></slot>
     </div>
     <div
       aria-hidden="true"
-      :class="cn('flex shrink-0 justify-start [gap:var(--gap)] min-w-full pr-[var(--gap)] will-change-transform [backface-visibility:hidden]', animClass, hoverClass)"
+      :class="
+        cn(
+          'flex shrink-0 justify-start [gap:var(--gap)] min-w-full pr-[var(--gap)] will-change-transform [backface-visibility:hidden]',
+          animClass,
+          hoverClass,
+        )
+      "
       :style="durationStyle"
     >
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>
 
 <style scoped>
   @keyframes marquee-left {
-    from { transform: translate3d(0, 0, 0); }
-    to { transform: translate3d(-100%, 0, 0); }
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-100%, 0, 0);
+    }
   }
   @keyframes marquee-right {
-    from { transform: translate3d(-100%, 0, 0); }
-    to { transform: translate3d(0, 0, 0); }
+    from {
+      transform: translate3d(-100%, 0, 0);
+    }
+    to {
+      transform: translate3d(0, 0, 0);
+    }
   }
   .animate-marquee-left {
     animation: marquee-left var(--duration) linear infinite;

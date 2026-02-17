@@ -20,13 +20,12 @@
   const canvasRef = ref<HTMLCanvasElement>();
   const containerRef = ref<HTMLElement>();
   const columns = ref<number[]>([]);
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+  const chars =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
 
   function initColumns(width: number) {
     const numCols = Math.floor(width / props.fontSize);
-    columns.value = Array.from({ length: numCols }, () =>
-      Math.random() * -100,
-    );
+    columns.value = Array.from({ length: numCols }, () => Math.random() * -100);
   }
 
   useResizeObserver(containerRef, (entries) => {
@@ -73,8 +72,7 @@
 
   onMounted(() => {
     if (canvasRef.value && containerRef.value) {
-      const { width, height } =
-        containerRef.value.getBoundingClientRect();
+      const { width, height } = containerRef.value.getBoundingClientRect();
       canvasRef.value.width = width;
       canvasRef.value.height = height;
       initColumns(width);
@@ -87,9 +85,9 @@
     ref="containerRef"
     :class="cn('relative overflow-hidden bg-black', props.class)"
   >
-    <canvas ref="canvasRef" class="size-full" ></canvas>
+    <canvas ref="canvasRef" class="size-full"></canvas>
     <div class="absolute inset-0 z-10">
-      <slot ></slot>
+      <slot></slot>
     </div>
   </div>
 </template>

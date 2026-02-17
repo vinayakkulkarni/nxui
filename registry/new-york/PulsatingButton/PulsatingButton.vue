@@ -17,10 +17,12 @@
 
 <template>
   <button
-    :class="cn(
-      'relative inline-flex cursor-pointer items-center justify-center rounded-lg bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground',
-      $props.class,
-    )"
+    :class="
+      cn(
+        'relative inline-flex cursor-pointer items-center justify-center rounded-lg bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground',
+        $props.class,
+      )
+    "
     :style="{
       '--pulse-color': pulseColor,
       '--duration': duration,
@@ -29,7 +31,9 @@
     <div class="relative z-10">
       <slot>Pulsating Button</slot>
     </div>
-    <div class="absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-lg bg-inherit" ></div>
+    <div
+      class="absolute left-1/2 top-1/2 size-full -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-lg bg-inherit"
+    ></div>
   </button>
 </template>
 

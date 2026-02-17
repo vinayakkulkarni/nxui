@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Cubes",
   "description": "Interactive 3D CSS cube grid that tilts toward cursor with auto-animation.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/Cubes/Cubes.vue",

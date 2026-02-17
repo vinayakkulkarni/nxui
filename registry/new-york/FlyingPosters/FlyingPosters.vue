@@ -1,7 +1,15 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
-  import { Renderer, Camera, Transform, Plane, Program, Mesh, Texture } from 'ogl';
+  import {
+    Renderer,
+    Camera,
+    Transform,
+    Plane,
+    Program,
+    Mesh,
+    Texture,
+  } from 'ogl';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -83,14 +91,22 @@ void main() {
   gl_FragColor = texture2D(tMap, uv);
 }`;
 
-  function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
-  function mapRange(x: number, a: number, b: number, c: number, d: number) { return ((x - a) * (d - c)) / (b - a) + c; }
+  function lerp(a: number, b: number, t: number) {
+    return a + (b - a) * t;
+  }
+  function mapRange(x: number, a: number, b: number, c: number, d: number) {
+    return ((x - a) * (d - c)) / (b - a) + c;
+  }
 
   onMounted(() => {
     const container = containerRef.value;
     if (!container || props.items.length === 0) return;
 
-    renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio, 2) });
+    renderer = new Renderer({
+      alpha: true,
+      antialias: true,
+      dpr: Math.min(window.devicePixelRatio, 2),
+    });
     const gl = renderer.gl;
     container.appendChild(gl.canvas);
 
@@ -100,7 +116,10 @@ void main() {
 
     const scene = new Transform();
 
-    const screen = { width: container.clientWidth, height: container.clientHeight };
+    const screen = {
+      width: container.clientWidth,
+      height: container.clientHeight,
+    };
     renderer.setSize(screen.width, screen.height);
     camera.perspective({ aspect: gl.canvas.width / gl.canvas.height });
 
@@ -127,8 +146,11 @@ void main() {
     for (let i = 0; i < props.items.length; i++) {
       const tex = new Texture(gl, { generateMipmaps: false });
       const program = new Program(gl, {
-        depthTest: false, depthWrite: false, cullFace: false,
-        vertex: VERT, fragment: FRAG,
+        depthTest: false,
+        depthWrite: false,
+        cullFace: false,
+        vertex: VERT,
+        fragment: FRAG,
         uniforms: {
           tMap: { value: tex },
           uPosition: { value: 0 },
@@ -143,7 +165,10 @@ void main() {
       img.src = props.items[i];
       img.onload = () => {
         tex.image = img;
-        program.uniforms.uImageSize.value = [img.naturalWidth, img.naturalHeight];
+        program.uniforms.uImageSize.value = [
+          img.naturalWidth,
+          img.naturalHeight,
+        ];
       };
 
       const plane = new Mesh(gl, { geometry, program });
@@ -158,7 +183,14 @@ void main() {
       const total = h * props.items.length;
       const y = -total / 2 + (i + 0.5) * h;
 
-      medias.push({ plane, program, y, height: h, heightTotal: total, extra: 0 });
+      medias.push({
+        plane,
+        program,
+        y,
+        height: h,
+        heightTotal: total,
+        extra: 0,
+      });
     }
 
     const scroll = { current: 0, target: 0, last: 0 };
@@ -166,10 +198,15 @@ void main() {
     let startY = 0;
     let scrollPos = 0;
 
-    useEventListener(container, 'wheel', (e: WheelEvent) => {
-      e.preventDefault();
-      scroll.target += e.deltaY * 0.005;
-    }, { passive: false });
+    useEventListener(
+      container,
+      'wheel',
+      (e: WheelEvent) => {
+        e.preventDefault();
+        scroll.target += e.deltaY * 0.005;
+      },
+      { passive: false },
+    );
 
     useEventListener(container, 'pointerdown', (e: PointerEvent) => {
       isDown = true;
@@ -180,7 +217,9 @@ void main() {
       if (!isDown) return;
       scroll.target = scrollPos + (startY - e.clientY) * 0.1;
     });
-    useEventListener(window, 'pointerup', () => { isDown = false; });
+    useEventListener(window, 'pointerup', () => {
+      isDown = false;
+    });
 
     function update() {
       rafId = requestAnimationFrame(update);
@@ -190,12 +229,20 @@ void main() {
 
       for (const m of medias) {
         m.plane.position.y = m.y - scroll.current - m.extra;
-        const pos = mapRange(m.plane.position.y, -viewport.height, viewport.height, 5, 15);
+        const pos = mapRange(
+          m.plane.position.y,
+          -viewport.height,
+          viewport.height,
+          5,
+          15,
+        );
         m.program.uniforms.uPosition.value = pos;
 
         const half = m.plane.scale.y / 2;
-        if (m.plane.position.y + half < -viewport.height / 2) m.extra -= m.heightTotal;
-        else if (m.plane.position.y - half > viewport.height / 2) m.extra += m.heightTotal;
+        if (m.plane.position.y + half < -viewport.height / 2)
+          m.extra -= m.heightTotal;
+        else if (m.plane.position.y - half > viewport.height / 2)
+          m.extra += m.heightTotal;
       }
 
       renderer.render({ scene, camera });
@@ -222,5 +269,8 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative size-full touch-none', $props.class)" />
+  <div
+    ref="containerRef"
+    :class="cn('relative size-full touch-none', $props.class)"
+  ></div>
 </template>

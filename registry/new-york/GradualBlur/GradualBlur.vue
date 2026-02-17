@@ -30,11 +30,17 @@
     bezier: (p: number) => p * p * (3 - 2 * p),
     'ease-in': (p: number) => p * p,
     'ease-out': (p: number) => 1 - (1 - p) ** 2,
-    'ease-in-out': (p: number) => (p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2),
+    'ease-in-out': (p: number) =>
+      p < 0.5 ? 2 * p * p : 1 - (-2 * p + 2) ** 2 / 2,
   };
 
   function getGradientDirection(pos: string): string {
-    const map: Record<string, string> = { top: 'to top', bottom: 'to bottom', left: 'to left', right: 'to right' };
+    const map: Record<string, string> = {
+      top: 'to top',
+      bottom: 'to bottom',
+      left: 'to left',
+      right: 'to right',
+    };
     return map[pos] || 'to bottom';
   }
 
@@ -107,7 +113,7 @@
 <template>
   <div :class="cn($props.class)" :style="containerStyle">
     <div class="relative size-full">
-      <div v-for="div in blurDivs" :key="div.key" :style="div.style" />
+      <div v-for="div in blurDivs" :key="div.key" :style="div.style"></div>
     </div>
   </div>
 </template>

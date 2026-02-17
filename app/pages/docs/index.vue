@@ -1,35 +1,35 @@
 <script setup lang="ts">
-definePageMeta({ layout: 'docs' });
+  definePageMeta({ layout: 'docs' });
 
-const { data: page } = await useAsyncData('docs-intro', () =>
-  queryCollection('docs').path('/docs').first(),
-);
+  const { data: page } = await useAsyncData('docs-intro', () =>
+    queryCollection('docs').path('/docs').first(),
+  );
 
-if (!page.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Page not found',
-    fatal: true,
+  if (!page.value) {
+    throw createError({
+      statusCode: 404,
+      statusMessage: 'Page not found',
+      fatal: true,
+    });
+  }
+
+  useSeoMeta({
+    title: page.value?.title,
+    description: page.value?.description,
+    ogTitle: page.value?.title,
+    ogDescription: page.value?.description,
+    ogType: 'website',
+    ogUrl: 'https://nxui.geoql.in/docs',
+    ogSiteName: 'nxui',
+    twitterCard: 'summary_large_image',
+    twitterTitle: page.value?.title,
+    twitterDescription: page.value?.description,
   });
-}
 
-useSeoMeta({
-  title: page.value?.title,
-  description: page.value?.description,
-  ogTitle: page.value?.title,
-  ogDescription: page.value?.description,
-  ogType: 'website',
-  ogUrl: 'https://nxui.geoql.in/docs',
-  ogSiteName: 'nxui',
-  twitterCard: 'summary_large_image',
-  twitterTitle: page.value?.title,
-  twitterDescription: page.value?.description,
-});
-
-defineOgImage('NxuiDoc', {
-  title: page.value?.title ?? 'nxui',
-  description: page.value?.description ?? '',
-});
+  defineOgImage('NxuiDoc', {
+    title: page.value?.title ?? 'nxui',
+    description: page.value?.description ?? '',
+  });
 </script>
 
 <template>

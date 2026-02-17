@@ -127,7 +127,10 @@ void main() {
     const container = containerRef.value;
     if (!container) return;
 
-    rendererRef = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), alpha: true });
+    rendererRef = new Renderer({
+      dpr: Math.min(window.devicePixelRatio, 2),
+      alpha: true,
+    });
     const gl = rendererRef.gl;
     glContext = gl;
 
@@ -176,7 +179,14 @@ void main() {
       });
       polyline.mesh.setParent(scene);
 
-      lines.push({ spring, friction, mouseVelocity: new Vec3(), mouseOffset, points, polyline });
+      lines.push({
+        spring,
+        friction,
+        mouseVelocity: new Vec3(),
+        mouseOffset,
+        points,
+        polyline,
+      });
     }
 
     function resize() {
@@ -198,14 +208,21 @@ void main() {
       lastTime = now;
 
       for (const line of lines) {
-        tmp.copy(mouse).add(line.mouseOffset).sub(line.points[0]).multiply(line.spring);
+        tmp
+          .copy(mouse)
+          .add(line.mouseOffset)
+          .sub(line.points[0])
+          .multiply(line.spring);
         line.mouseVelocity.add(tmp).multiply(line.friction);
         line.points[0].add(line.mouseVelocity);
 
         for (let i = 1; i < line.points.length; i++) {
-          if (isFinite(props.maxAge) && props.maxAge > 0) {
+          if (Number.isFinite(props.maxAge) && props.maxAge > 0) {
             const segmentDelay = props.maxAge / (line.points.length - 1);
-            const alpha = Math.min(1, (dt * props.speedMultiplier) / segmentDelay);
+            const alpha = Math.min(
+              1,
+              (dt * props.speedMultiplier) / segmentDelay,
+            );
             line.points[i].lerp(line.points[i - 1], alpha);
           } else {
             line.points[i].lerp(line.points[i - 1], 0.9);
@@ -234,5 +251,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('relative size-full', $props.class)"></div>
 </template>

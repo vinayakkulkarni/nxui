@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import PulsatingButton from '@registry/new-york/PulsatingButton/PulsatingButton.vue';
+  import PulsatingButton from '@registry/new-york/PulsatingButton/PulsatingButton.vue';
 </script>
 
 <template>

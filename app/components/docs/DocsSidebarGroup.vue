@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { NavItem } from '~/types/docs';
+  import type { NavItem } from '~/types/docs';
 
-defineProps<{
-  title: string;
-  items: NavItem[];
-  activeHref: string | null;
-}>();
+  defineProps<{
+    title: string;
+    items: NavItem[];
+    activeHref: string | null;
+  }>();
 
-const isExpanded = ref(true);
+  const isExpanded = ref(true);
 
-function toggle() {
-  isExpanded.value = !isExpanded.value;
-}
+  function toggle() {
+    isExpanded.value = !isExpanded.value;
+  }
 </script>
 
 <template>

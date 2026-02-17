@@ -17,7 +17,12 @@
   import { cn } from '~/lib/utils';
 
   const MAX_CLICKS = 10;
-  const SHAPE_MAP: Record<string, number> = { square: 0, circle: 1, triangle: 2, diamond: 3 };
+  const SHAPE_MAP: Record<string, number> = {
+    square: 0,
+    circle: 1,
+    triangle: 2,
+    diamond: 3,
+  };
 
   const props = withDefaults(
     defineProps<{
@@ -222,8 +227,12 @@ void main(){
     const w = containerRef.value.clientWidth || 1;
     const h = containerRef.value.clientHeight || 1;
     webglRenderer.setSize(w, h, false);
-    mat.uniforms.uResolution.value.set(webglRenderer.domElement.width, webglRenderer.domElement.height);
-    mat.uniforms.uPixelSize.value = props.pixelSize * webglRenderer.getPixelRatio();
+    mat.uniforms.uResolution.value.set(
+      webglRenderer.domElement.width,
+      webglRenderer.domElement.height,
+    );
+    mat.uniforms.uPixelSize.value =
+      props.pixelSize * webglRenderer.getPixelRatio();
   }
 
   useResizeObserver(containerRef, resize);
@@ -236,7 +245,8 @@ void main(){
     const fx = (e.clientX - rect.left) * scaleX;
     const fy = (rect.height - (e.clientY - rect.top)) * scaleY;
     (mat.uniforms.uClickPos.value as Vector2[])[clickIx].set(fx, fy);
-    (mat.uniforms.uClickTimes.value as Float32Array)[clickIx] = mat.uniforms.uTime.value as number;
+    (mat.uniforms.uClickTimes.value as Float32Array)[clickIx] = mat.uniforms
+      .uTime.value as number;
     clickIx = (clickIx + 1) % MAX_CLICKS;
   });
 
@@ -245,7 +255,11 @@ void main(){
     const scene = new Scene();
     const camera = new OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-    webglRenderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
+    webglRenderer = new WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance',
+    });
     webglRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     webglRenderer.setClearColor(0x000000, 0);
     webglRenderer.domElement.style.width = '100%';
@@ -260,7 +274,9 @@ void main(){
         uResolution: { value: new Vector2(0, 0) },
         uTime: { value: 0 },
         uColor: { value: new Vector3(c.r, c.g, c.b) },
-        uClickPos: { value: Array.from({ length: MAX_CLICKS }, () => new Vector2(-1, -1)) },
+        uClickPos: {
+          value: Array.from({ length: MAX_CLICKS }, () => new Vector2(-1, -1)),
+        },
         uClickTimes: { value: new Float32Array(MAX_CLICKS) },
         uShapeType: { value: SHAPE_MAP[props.variant] ?? 0 },
         uPixelSize: { value: props.pixelSize * webglRenderer.getPixelRatio() },
@@ -290,7 +306,8 @@ void main(){
       rafId = requestAnimationFrame(update);
       if (!webglRenderer || !mat || !clock) return;
 
-      mat.uniforms.uTime.value = timeOffset + clock.getElapsedTime() * props.speed;
+      mat.uniforms.uTime.value =
+        timeOffset + clock.getElapsedTime() * props.speed;
       mat.uniforms.uShapeType.value = SHAPE_MAP[props.variant] ?? 0;
       mat.uniforms.uScale.value = props.patternScale;
       mat.uniforms.uDensity.value = props.patternDensity;
@@ -321,5 +338,5 @@ void main(){
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

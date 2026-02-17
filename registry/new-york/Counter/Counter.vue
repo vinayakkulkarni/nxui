@@ -103,7 +103,7 @@
 
   function getDigitOffset(digitValue: number, num: number): number {
     const placeValue = digitValue % 10;
-    let offset = (10 + num - placeValue) % 10;
+    const offset = (10 + num - placeValue) % 10;
     const memo = offset * height.value;
     if (offset > 5) {
       return memo - 10 * height.value;
@@ -130,7 +130,10 @@
         v-for="(place, idx) in places"
         :key="idx"
         class="relative font-[tabular-nums]"
-        :style="{ height: `${height}px`, width: place === '.' ? 'fit-content' : '1ch' }"
+        :style="{
+          height: `${height}px`,
+          width: place === '.' ? 'fit-content' : '1ch',
+        }"
       >
         <template v-if="place === '.'">.</template>
         <template v-else>
@@ -138,7 +141,9 @@
             v-for="num in 10"
             :key="num - 1"
             class="absolute inset-0 flex items-center justify-center"
-            :style="{ transform: `translateY(${getDigitOffset(digitValues[idx] ?? 0, num - 1)}px)` }"
+            :style="{
+              transform: `translateY(${getDigitOffset(digitValues[idx] ?? 0, num - 1)}px)`,
+            }"
           >
             {{ num - 1 }}
           </span>
@@ -148,12 +153,18 @@
     <span class="pointer-events-none absolute inset-0">
       <span
         class="absolute top-0 w-full"
-        :style="{ height: `${gradientHeight}px`, background: `linear-gradient(to bottom, ${gradientFrom}, ${gradientTo})` }"
-      />
+        :style="{
+          height: `${gradientHeight}px`,
+          background: `linear-gradient(to bottom, ${gradientFrom}, ${gradientTo})`,
+        }"
+      ></span>
       <span
         class="absolute bottom-0 w-full"
-        :style="{ height: `${gradientHeight}px`, background: `linear-gradient(to top, ${gradientFrom}, ${gradientTo})` }"
-      />
+        :style="{
+          height: `${gradientHeight}px`,
+          background: `linear-gradient(to top, ${gradientFrom}, ${gradientTo})`,
+        }"
+      ></span>
     </span>
   </span>
 </template>

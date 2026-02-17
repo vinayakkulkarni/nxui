@@ -48,7 +48,11 @@
   );
 
   const variantValue = computed(() => {
-    return props.variant === 'round' ? 1.0 : props.variant === 'snowflake' ? 2.0 : 0.0;
+    return props.variant === 'round'
+      ? 1.0
+      : props.variant === 'snowflake'
+        ? 2.0
+        : 0.0;
   });
 
   const colorVector = computed(() => {
@@ -225,7 +229,10 @@ void main() {
       depth: false,
     });
     webglRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    webglRenderer.setSize(containerRef.value.clientWidth, containerRef.value.clientHeight);
+    webglRenderer.setSize(
+      containerRef.value.clientWidth,
+      containerRef.value.clientHeight,
+    );
     webglRenderer.setClearColor(0x000000, 0);
     webglRenderer.domElement.style.width = '100%';
     webglRenderer.domElement.style.height = '100%';
@@ -237,7 +244,12 @@ void main() {
       fragmentShader,
       uniforms: {
         uTime: { value: 0 },
-        uResolution: { value: new Vector2(containerRef.value.clientWidth, containerRef.value.clientHeight) },
+        uResolution: {
+          value: new Vector2(
+            containerRef.value.clientWidth,
+            containerRef.value.clientHeight,
+          ),
+        },
         uFlakeSize: { value: props.flakeSize },
         uMinFlakeSize: { value: props.minFlakeSize },
         uPixelResolution: { value: props.pixelResolution },
@@ -294,5 +306,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

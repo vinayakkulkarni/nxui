@@ -1,6 +1,10 @@
 <script setup lang="ts">
-  import { ref, computed, onMounted, watch } from 'vue';
-  import { useMediaQuery, useResizeObserver, useIntersectionObserver } from '@vueuse/core';
+  import { ref, computed, onMounted } from 'vue';
+  import {
+    useMediaQuery,
+    useResizeObserver,
+    useIntersectionObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   interface MasonryItem {
@@ -51,12 +55,16 @@
     if (entry) containerWidth.value = entry.contentRect.width;
   });
 
-  useIntersectionObserver(containerRef, ([entry]) => {
-    if (entry?.isIntersecting && !hasAnimated.value) {
-      isVisible.value = true;
-      hasAnimated.value = true;
-    }
-  }, { threshold: 0.1 });
+  useIntersectionObserver(
+    containerRef,
+    ([entry]) => {
+      if (entry?.isIntersecting && !hasAnimated.value) {
+        isVisible.value = true;
+        hasAnimated.value = true;
+      }
+    },
+    { threshold: 0.1 },
+  );
 
   const grid = computed(() => {
     if (!containerWidth.value || !props.items.length) return [];
@@ -83,7 +91,8 @@
   }
 
   onMounted(() => {
-    if (containerRef.value) containerWidth.value = containerRef.value.clientWidth;
+    if (containerRef.value)
+      containerWidth.value = containerRef.value.clientWidth;
   });
 </script>
 
@@ -98,7 +107,9 @@
       :key="item.id"
       class="absolute cursor-pointer p-1.5"
       :class="[
-        scaleOnHover ? 'hover:scale-[var(--hover-scale)] transition-transform duration-300' : '',
+        scaleOnHover
+          ? 'hover:scale-[var(--hover-scale)] transition-transform duration-300'
+          : '',
         isVisible ? 'masonry-item--visible' : 'masonry-item--hidden',
       ]"
       :style="{
@@ -113,20 +124,23 @@
       <div
         class="size-full rounded-lg bg-cover bg-center shadow-lg"
         :style="{ backgroundImage: `url(${item.img})` }"
-      />
+      ></div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.masonry-item--hidden {
-  opacity: 0;
-  filter: blur(10px);
-}
+  .masonry-item--hidden {
+    opacity: 0;
+    filter: blur(10px);
+  }
 
-.masonry-item--visible {
-  opacity: 1;
-  filter: blur(0);
-  transition: opacity 0.8s ease-out var(--delay), filter 0.8s ease-out var(--delay), transform 0.6s ease-out;
-}
+  .masonry-item--visible {
+    opacity: 1;
+    filter: blur(0);
+    transition:
+      opacity 0.8s ease-out var(--delay),
+      filter 0.8s ease-out var(--delay),
+      transform 0.6s ease-out;
+  }
 </style>

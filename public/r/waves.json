@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Waves",
   "description": "Animated Perlin noise wave lines with configurable colors, amplitude, and density.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/Waves/Waves.vue",

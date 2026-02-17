@@ -14,6 +14,6 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/crosshair.json"
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+| Prop    | Type     | Default   | Description                  |
+| ------- | -------- | --------- | ---------------------------- |
 | `color` | `string` | `'white'` | Color of the crosshair lines |

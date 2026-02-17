@@ -47,10 +47,10 @@
 
   function hexToVec4(hex: string): [number, number, number, number] {
     const h = hex.replace('#', '');
-    const r = parseInt(h.slice(0, 2), 16) / 255;
-    const g = parseInt(h.slice(2, 4), 16) / 255;
-    const b = parseInt(h.slice(4, 6), 16) / 255;
-    const a = h.length === 8 ? parseInt(h.slice(6, 8), 16) / 255 : 1;
+    const r = Number.parseInt(h.slice(0, 2), 16) / 255;
+    const g = Number.parseInt(h.slice(2, 4), 16) / 255;
+    const b = Number.parseInt(h.slice(4, 6), 16) / 255;
+    const a = h.length === 8 ? Number.parseInt(h.slice(6, 8), 16) / 255 : 1;
     return [r, g, b, a];
   }
 
@@ -127,7 +127,8 @@ void main() {
     programRef.uniforms.iResolution.value = [
       (gl.canvas as HTMLCanvasElement).width,
       (gl.canvas as HTMLCanvasElement).height,
-      (gl.canvas as HTMLCanvasElement).width / (gl.canvas as HTMLCanvasElement).height,
+      (gl.canvas as HTMLCanvasElement).width /
+        (gl.canvas as HTMLCanvasElement).height,
     ];
   });
 
@@ -159,7 +160,8 @@ void main() {
           value: [
             (gl.canvas as HTMLCanvasElement).width,
             (gl.canvas as HTMLCanvasElement).height,
-            (gl.canvas as HTMLCanvasElement).width / (gl.canvas as HTMLCanvasElement).height,
+            (gl.canvas as HTMLCanvasElement).width /
+              (gl.canvas as HTMLCanvasElement).height,
           ],
         },
         uSpinRotation: { value: props.spinRotation },
@@ -200,5 +202,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

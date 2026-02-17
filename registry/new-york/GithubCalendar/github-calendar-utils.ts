@@ -2,7 +2,13 @@ import type { GithubCalendarColorSchema } from '~/types/components';
 
 export const colorSchemas: Record<
   GithubCalendarColorSchema,
-  { level0: string; level1: string; level2: string; level3: string; level4: string }
+  {
+    level0: string;
+    level1: string;
+    level2: string;
+    level3: string;
+    level4: string;
+  }
 > = {
   gray: {
     level0: 'bg-zinc-100 dark:bg-zinc-900',
@@ -49,23 +55,35 @@ const glowColorMap: Record<GithubCalendarColorSchema, string> = {
   gray: '#71717a',
 };
 
-export function getLevelClass(level: string, schema: GithubCalendarColorSchema = 'green') {
+export function getLevelClass(
+  level: string,
+  schema: GithubCalendarColorSchema = 'green',
+) {
   const s = colorSchemas[schema];
   switch (level) {
-    case 'FIRST_QUARTILE': return s.level1;
-    case 'SECOND_QUARTILE': return s.level2;
-    case 'THIRD_QUARTILE': return s.level3;
-    case 'FOURTH_QUARTILE': return s.level4;
-    default: return s.level0;
+    case 'FIRST_QUARTILE':
+      return s.level1;
+    case 'SECOND_QUARTILE':
+      return s.level2;
+    case 'THIRD_QUARTILE':
+      return s.level3;
+    case 'FOURTH_QUARTILE':
+      return s.level4;
+    default:
+      return s.level0;
   }
 }
 
 export function getShapeClass(shape: string) {
   switch (shape) {
-    case 'circle': return 'rounded-full';
-    case 'square': return 'rounded-none';
-    case 'squircle': return 'rounded-sm';
-    default: return 'rounded-[2px]';
+    case 'circle':
+      return 'rounded-full';
+    case 'square':
+      return 'rounded-none';
+    case 'squircle':
+      return 'rounded-sm';
+    default:
+      return 'rounded-[2px]';
   }
 }
 

@@ -14,20 +14,20 @@ In Nuxt, `useState` is SSR-safe and handles hydration correctly. Using plain `re
 ```typescript
 // ❌ WRONG - composables/useCounter.ts
 // This state is shared across ALL requests on the server!
-const count = ref(0)
+const count = ref(0);
 
 export function useCounter() {
   function increment() {
-    count.value++
+    count.value++;
   }
-  return { count, increment }
+  return { count, increment };
 }
 ```
 
 ```typescript
 // ❌ WRONG - State in module scope
 // shared-state.ts
-export const globalUser = ref<User | null>(null)  // Leaks between requests!
+export const globalUser = ref<User | null>(null); // Leaks between requests!
 ```
 
 **Correct (useState for shared state):**
@@ -37,57 +37,57 @@ export const globalUser = ref<User | null>(null)  // Leaks between requests!
 export function useCounter() {
   // useState creates request-scoped state on server
   // and hydrates correctly on client
-  const count = useState<number>('counter', () => 0)
-  
+  const count = useState<number>('counter', () => 0);
+
   function increment() {
-    count.value++
+    count.value++;
   }
-  
-  return { count, increment }
+
+  return { count, increment };
 }
 ```
 
 ```typescript
 // ✅ CORRECT - Shared user state
 export function useUser() {
-  const user = useState<User | null>('user', () => null)
-  
+  const user = useState<User | null>('user', () => null);
+
   async function fetchUser() {
-    const { data } = await useFetch('/api/me')
-    user.value = data.value
+    const { data } = await useFetch('/api/me');
+    user.value = data.value;
   }
-  
-  return { user, fetchUser }
+
+  return { user, fetchUser };
 }
 ```
 
 **useState vs ref:**
 
-| Scenario | Use | Why |
-|----------|-----|-----|
-| Component-local state | `ref()` | Scoped to component instance |
-| Shared state (cross-component) | `useState()` | SSR-safe, request-scoped |
-| Composable internal state | `ref()` if not shared | Tied to composable call |
-| Global app state | `useState()` | Prevents server state leakage |
+| Scenario                       | Use                   | Why                           |
+| ------------------------------ | --------------------- | ----------------------------- |
+| Component-local state          | `ref()`               | Scoped to component instance  |
+| Shared state (cross-component) | `useState()`          | SSR-safe, request-scoped      |
+| Composable internal state      | `ref()` if not shared | Tied to composable call       |
+| Global app state               | `useState()`          | Prevents server state leakage |
 
 **Named state with unique keys:**
 
 ```typescript
 export function useCart() {
   // Key must be unique across the app
-  const items = useState<CartItem[]>('cart-items', () => [])
-  const total = computed(() => 
-    items.value.reduce((sum, item) => sum + item.price, 0)
-  )
-  
-  return { items, total }
+  const items = useState<CartItem[]>('cart-items', () => []);
+  const total = computed(() =>
+    items.value.reduce((sum, item) => sum + item.price, 0),
+  );
+
+  return { items, total };
 }
 
 export function useTheme() {
   // Different key for different state
-  const theme = useState<'light' | 'dark'>('app-theme', () => 'light')
-  
-  return { theme }
+  const theme = useState<'light' | 'dark'>('app-theme', () => 'light');
+
+  return { theme };
 }
 ```
 
@@ -95,16 +95,16 @@ export function useTheme() {
 
 ```typescript
 export function useAuth() {
-  const user = useState<User | null>('auth-user', () => null)
-  
+  const user = useState<User | null>('auth-user', () => null);
+
   async function logout() {
-    await $fetch('/api/logout', { method: 'POST' })
-    user.value = null
+    await $fetch('/api/logout', { method: 'POST' });
+    user.value = null;
     // Or clear all state
-    clearNuxtState('auth-user')
+    clearNuxtState('auth-user');
   }
-  
-  return { user, logout }
+
+  return { user, logout };
 }
 ```
 
@@ -114,18 +114,18 @@ export function useAuth() {
 // stores/user.ts
 export const useUserStore = defineStore('user', () => {
   // Pinia handles SSR automatically in Nuxt
-  const user = ref<User | null>(null)
-  const isLoggedIn = computed(() => !!user.value)
-  
+  const user = ref<User | null>(null);
+  const isLoggedIn = computed(() => !!user.value);
+
   async function login(credentials: Credentials) {
     user.value = await $fetch('/api/login', {
       method: 'POST',
-      body: credentials
-    })
+      body: credentials,
+    });
   }
-  
-  return { user, isLoggedIn, login }
-})
+
+  return { user, isLoggedIn, login };
+});
 ```
 
 Reference: [Nuxt State Management](https://nuxt.com/docs/getting-started/state-management)

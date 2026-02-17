@@ -46,11 +46,11 @@
     :class="cn($props.class)"
     :style="{
       opacity: isVisible ? '1' : String(initialOpacity),
-      filter: isVisible ? 'blur(0px)' : (blur ? 'blur(10px)' : 'blur(0px)'),
+      filter: isVisible ? 'blur(0px)' : blur ? 'blur(10px)' : 'blur(0px)',
       transition: `opacity ${duration}s ${ease} ${delay}s, filter ${duration}s ${ease} ${delay}s`,
       willChange: 'opacity, filter',
     }"
   >
-    <slot />
+    <slot></slot>
   </div>
 </template>

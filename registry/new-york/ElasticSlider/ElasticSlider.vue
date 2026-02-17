@@ -49,7 +49,9 @@
     isDragging.value = true;
     const { left, right, width } = sliderRef.value.getBoundingClientRect();
 
-    let newVal = props.startingValue + ((e.clientX - left) / width) * (props.maxValue - props.startingValue);
+    let newVal =
+      props.startingValue +
+      ((e.clientX - left) / width) * (props.maxValue - props.startingValue);
     if (props.isStepped) {
       newVal = Math.round(newVal / props.stepSize) * props.stepSize;
     }
@@ -84,38 +86,62 @@
   const scaleMultiplier = computed(() => (isHovered.value ? 1.2 : 1));
 
   const trackStyle = computed(() => {
-    const scX = sliderRef.value ? 1 + overflow.value / sliderRef.value.getBoundingClientRect().width : 1;
+    const scX = sliderRef.value
+      ? 1 + overflow.value / sliderRef.value.getBoundingClientRect().width
+      : 1;
     const scY = 1 - (overflow.value / MAX_OVERFLOW) * 0.2;
     const h = isHovered.value ? 12 : 6;
     return {
       transform: `scaleX(${scX}) scaleY(${scY})`,
       height: `${h}px`,
-      transition: isDragging.value ? 'none' : 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.2s ease',
+      transition: isDragging.value
+        ? 'none'
+        : 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.2s ease',
     };
   });
 
   const leftIconStyle = computed(() => ({
-    transform: region.value === 'left' ? `translateX(${-overflow.value / scaleMultiplier.value}px)` : 'none',
+    transform:
+      region.value === 'left'
+        ? `translateX(${-overflow.value / scaleMultiplier.value}px)`
+        : 'none',
     transition: 'transform 0.3s ease',
   }));
 
   const rightIconStyle = computed(() => ({
-    transform: region.value === 'right' ? `translateX(${overflow.value / scaleMultiplier.value}px)` : 'none',
+    transform:
+      region.value === 'right'
+        ? `translateX(${overflow.value / scaleMultiplier.value}px)`
+        : 'none',
     transition: 'transform 0.3s ease',
   }));
 </script>
 
 <template>
-  <div :class="cn('flex w-48 flex-col items-center justify-center gap-4', $props.class)">
+  <div
+    :class="
+      cn('flex w-48 flex-col items-center justify-center gap-4', $props.class)
+    "
+  >
     <div
       class="flex w-full touch-none select-none items-center justify-center gap-4"
-      :style="{ transform: `scale(${scaleMultiplier})`, opacity: isHovered ? 1 : 0.7, transition: 'transform 0.2s ease, opacity 0.2s ease' }"
+      :style="{
+        transform: `scale(${scaleMultiplier})`,
+        opacity: isHovered ? 1 : 0.7,
+        transition: 'transform 0.2s ease, opacity 0.2s ease',
+      }"
       @mouseenter="isHovered = true"
       @mouseleave="isHovered = false"
     >
       <div :style="leftIconStyle">
         <slot name="left-icon">
-          <svg class="size-5 text-muted-foreground" viewBox="0 0 24 24" fill="currentColor"><path d="M13 7.22L9.6 10H6v4h3.6L13 16.78V7.22z" /></svg>
+          <svg
+            class="size-5 text-muted-foreground"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path d="M13 7.22L9.6 10H6v4h3.6L13 16.78V7.22z" />
+          </svg>
         </slot>
       </div>
 
@@ -128,15 +154,28 @@
         @pointerup="handlePointerUp"
       >
         <div class="flex grow" :style="trackStyle">
-          <div class="relative h-full grow overflow-hidden rounded-full bg-muted-foreground/40">
-            <div class="absolute h-full rounded-full bg-muted-foreground" :style="{ width: `${getRangePercent()}%` }" />
+          <div
+            class="relative h-full grow overflow-hidden rounded-full bg-muted-foreground/40"
+          >
+            <div
+              class="absolute h-full rounded-full bg-muted-foreground"
+              :style="{ width: `${getRangePercent()}%` }"
+            ></div>
           </div>
         </div>
       </div>
 
       <div :style="rightIconStyle">
         <slot name="right-icon">
-          <svg class="size-5 text-muted-foreground" viewBox="0 0 24 24" fill="currentColor"><path d="M13 7.22L9.6 10H6v4h3.6L13 16.78V7.22zM15.54 8.46a5.76 5.76 0 010 7.08l1.42 1.42a7.77 7.77 0 000-9.92l-1.42 1.42z" /></svg>
+          <svg
+            class="size-5 text-muted-foreground"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+          >
+            <path
+              d="M13 7.22L9.6 10H6v4h3.6L13 16.78V7.22zM15.54 8.46a5.76 5.76 0 010 7.08l1.42 1.42a7.77 7.77 0 000-9.92l-1.42 1.42z"
+            />
+          </svg>
         </slot>
       </div>
     </div>

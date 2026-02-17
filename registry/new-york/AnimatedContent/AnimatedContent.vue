@@ -54,7 +54,9 @@
     if (!containerRef.value) return;
     // Set initial state
     containerRef.value.style.transform = `translate${axis}(${offset}px) scale(${props.scale})`;
-    containerRef.value.style.opacity = props.animateOpacity ? String(props.initialOpacity) : '1';
+    containerRef.value.style.opacity = props.animateOpacity
+      ? String(props.initialOpacity)
+      : '1';
     containerRef.value.style.willChange = 'transform, opacity';
   });
 </script>
@@ -64,12 +66,14 @@
     ref="containerRef"
     :class="cn($props.class)"
     :style="{
-      transform: isVisible ? 'translateY(0) scale(1)' : `translate${axis}(${offset}px) scale(${props.scale})`,
-      opacity: isVisible ? '1' : (animateOpacity ? String(initialOpacity) : '1'),
+      transform: isVisible
+        ? 'translateY(0) scale(1)'
+        : `translate${axis}(${offset}px) scale(${props.scale})`,
+      opacity: isVisible ? '1' : animateOpacity ? String(initialOpacity) : '1',
       transition: `transform ${duration}s ${ease} ${delay}s, opacity ${duration}s ${ease} ${delay}s`,
       willChange: 'transform, opacity',
     }"
   >
-    <slot />
+    <slot></slot>
   </div>
 </template>

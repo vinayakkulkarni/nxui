@@ -40,7 +40,11 @@
   function hexToRgb(hex: string): [number, number, number] {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return m
-      ? [parseInt(m[1], 16) / 255, parseInt(m[2], 16) / 255, parseInt(m[3], 16) / 255]
+      ? [
+          Number.parseInt(m[1], 16) / 255,
+          Number.parseInt(m[2], 16) / 255,
+          Number.parseInt(m[3], 16) / 255,
+        ]
       : [1, 1, 1];
   }
 
@@ -179,7 +183,10 @@ void main() {
     const container = containerRef.value;
     if (!container) return;
 
-    renderer = new Renderer({ dpr: Math.min(window.devicePixelRatio, 2), alpha: true });
+    renderer = new Renderer({
+      dpr: Math.min(window.devicePixelRatio, 2),
+      alpha: true,
+    });
     const gl = renderer.gl;
     glContext = gl;
     gl.enable(gl.BLEND);
@@ -231,14 +238,20 @@ void main() {
       programRef.uniforms.opacity.value = props.opacity;
       programRef.uniforms.gridRotation.value = props.gridRotation;
       programRef.uniforms.mouseInteraction.value = props.mouseInteraction;
-      programRef.uniforms.mouseInteractionRadius.value = props.mouseInteractionRadius;
+      programRef.uniforms.mouseInteractionRadius.value =
+        props.mouseInteractionRadius;
 
       const lerpFactor = 0.1;
       mousePosition.x += (targetMouse.x - mousePosition.x) * lerpFactor;
       mousePosition.y += (targetMouse.y - mousePosition.y) * lerpFactor;
-      const currentInfluence = programRef.uniforms.mouseInfluence.value as number;
-      programRef.uniforms.mouseInfluence.value = currentInfluence + (mouseInfluence - currentInfluence) * 0.05;
-      programRef.uniforms.mousePosition.value = [mousePosition.x, mousePosition.y];
+      const currentInfluence = programRef.uniforms.mouseInfluence
+        .value as number;
+      programRef.uniforms.mouseInfluence.value =
+        currentInfluence + (mouseInfluence - currentInfluence) * 0.05;
+      programRef.uniforms.mousePosition.value = [
+        mousePosition.x,
+        mousePosition.y,
+      ];
 
       renderer.render({ scene: meshRef });
     }
@@ -256,5 +269,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

@@ -14,13 +14,13 @@ Never define interfaces or types inline in components, composables, or API files
 ```vue
 <!-- ❌ WRONG - app/components/auth/OAuthButtons.vue -->
 <script setup lang="ts">
-// NO! Types don't belong in components!
-interface ProviderConfig {
-  icon: string
-  buttonClass: string
-}
+  // NO! Types don't belong in components!
+  interface ProviderConfig {
+    icon: string
+    buttonClass: string
+  }
 
-const providers: ProviderConfig[] = [...]
+  const providers: ProviderConfig[] = [...]
 </script>
 ```
 
@@ -38,7 +38,7 @@ export function useBilling() { ... }
 ```typescript
 // ❌ WRONG - server/utils/auth.ts
 // NO! Shared types go in shared/types/
-export type OAuthProviderId = 'google' | 'github'
+export type OAuthProviderId = 'google' | 'github';
 ```
 
 **Correct (dedicated type directories):**
@@ -65,25 +65,25 @@ project/
 
 ```typescript
 // Frontend types (from app/types/)
-import type { OAuthProviderUIConfig } from '~/types/auth'
-import type { TierInfo } from '~/types/billing'
+import type { OAuthProviderUIConfig } from '~/types/auth';
+import type { TierInfo } from '~/types/billing';
 
 // Shared types (from shared/types/)
-import type { User, Session } from '#shared/types/auth'
-import type { ApiToken } from '#shared/types/token'
+import type { User, Session } from '#shared/types/auth';
+import type { ApiToken } from '#shared/types/token';
 
 // Server types (from server/types/)
-import type { InternalConfig } from '~~/server/types/internal'
+import type { InternalConfig } from '~~/server/types/internal';
 ```
 
 **Type location decision table:**
 
-| Type Category | Location | Import Path | Examples |
-|--------------|----------|-------------|----------|
-| UI component props | `app/types/` | `~/types/...` | Form state, display config |
-| API request/response | `shared/types/` | `#shared/types/...` | User, ApiToken, responses |
-| Database entities | `shared/types/` | `#shared/types/...` | DB models used by both |
-| Server internals | `server/types/` | `~~/server/types/...` | Middleware context, internal config |
+| Type Category        | Location        | Import Path           | Examples                            |
+| -------------------- | --------------- | --------------------- | ----------------------------------- |
+| UI component props   | `app/types/`    | `~/types/...`         | Form state, display config          |
+| API request/response | `shared/types/` | `#shared/types/...`   | User, ApiToken, responses           |
+| Database entities    | `shared/types/` | `#shared/types/...`   | DB models used by both              |
+| Server internals     | `server/types/` | `~~/server/types/...` | Middleware context, internal config |
 
 **Why this matters:**
 

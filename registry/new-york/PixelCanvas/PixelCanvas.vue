@@ -1,6 +1,9 @@
 <script setup lang="ts">
   import { useResizeObserver, useEventListener } from '@vueuse/core';
-  import type { PixelCanvasPixel, PixelCanvasVariant } from '~/types/components';
+  import type {
+    PixelCanvasPixel,
+    PixelCanvasVariant,
+  } from '~/types/components';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -34,7 +37,11 @@
   function hexToRgb(hex: string) {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return m
-      ? { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) }
+      ? {
+          r: Number.parseInt(m[1], 16),
+          g: Number.parseInt(m[2], 16),
+          b: Number.parseInt(m[3], 16),
+        }
       : null;
   }
 
@@ -77,7 +84,9 @@
       for (let j = 0; j < rows; j++) {
         const old = prev[i]?.[j];
         row.push({
-          x: i * sz, y: j * sz, size: sz - 1,
+          x: i * sz,
+          y: j * sz,
+          size: sz - 1,
           intensity: old?.intensity ?? 0,
           targetIntensity: 0,
           colorPhase: Math.random(),
@@ -90,7 +99,10 @@
   function draw(ts: number) {
     const canvas = canvasRef.value;
     const container = containerRef.value;
-    if (!canvas || !container) { frameId = requestAnimationFrame(draw); return; }
+    if (!canvas || !container) {
+      frameId = requestAnimationFrame(draw);
+      return;
+    }
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
     const dt = ts - lastTime;
@@ -157,14 +169,19 @@
         mouse.x = -1000;
         mouse.y = -1000;
       });
-      useEventListener(el, 'touchmove', (e: TouchEvent) => {
-        const t = e.touches[0];
-        if (t) {
-          const r = el.getBoundingClientRect();
-          mouse.x = t.clientX - r.left;
-          mouse.y = t.clientY - r.top;
-        }
-      }, { passive: true });
+      useEventListener(
+        el,
+        'touchmove',
+        (e: TouchEvent) => {
+          const t = e.touches[0];
+          if (t) {
+            const r = el.getBoundingClientRect();
+            mouse.x = t.clientX - r.left;
+            mouse.y = t.clientY - r.top;
+          }
+        },
+        { passive: true },
+      );
       useEventListener(el, 'touchend', () => {
         mouse.x = -1000;
         mouse.y = -1000;
@@ -178,11 +195,16 @@
 <template>
   <div
     ref="containerRef"
-    :class="cn('relative cursor-crosshair overflow-hidden bg-neutral-950', props.class)"
+    :class="
+      cn(
+        'relative cursor-crosshair overflow-hidden bg-neutral-950',
+        props.class,
+      )
+    "
   >
-    <canvas ref="canvasRef" class="block size-full" />
+    <canvas ref="canvasRef" class="block size-full"></canvas>
     <div class="pointer-events-none absolute inset-0 z-10">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

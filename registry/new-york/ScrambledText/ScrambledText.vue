@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useRafFn, useEventListener } from '@vueuse/core';
+  import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -82,10 +82,7 @@
   <div
     ref="el"
     :class="
-      cn(
-        'font-mono text-[clamp(14px,4vw,32px)] cursor-default',
-        props.class,
-      )
+      cn('font-mono text-[clamp(14px,4vw,32px)] cursor-default', props.class)
     "
   >
     <span
@@ -93,6 +90,7 @@
       :key="i"
       :ref="(el) => setCharRef(i, el)"
       class="inline-block will-change-[transform]"
-    >{{ char === ' ' ? '\u00A0' : char }}</span>
+      >{{ char === ' ' ? '\u00A0' : char }}</span
+    >
   </div>
 </template>

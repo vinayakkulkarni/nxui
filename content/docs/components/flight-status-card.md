@@ -12,10 +12,9 @@ description: An animated card displaying real-time flight information with progr
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/flight-status-card.json"
 ```
 
-
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
+| Prop     | Type         | Default  | Description                                               |
+| -------- | ------------ | -------- | --------------------------------------------------------- |
 | `flight` | `FlightInfo` | required | Flight information object with airline, route, and status |
-| `class` | `string` | `''` | Additional CSS classes for styling |
+| `class`  | `string`     | `''`     | Additional CSS classes for styling                        |

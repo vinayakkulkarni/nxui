@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { PropItem } from '~/types/docs';
+  import type { PropItem } from '~/types/docs';
 
-defineProps<{
-  props: PropItem[];
-}>();
+  defineProps<{
+    props: PropItem[];
+  }>();
 </script>
 
 <template>
@@ -41,9 +41,7 @@ defineProps<{
           :key="prop.name"
           class="border-b transition-colors data-[state=selected]:bg-muted"
         >
-          <td
-            class="p-4 align-middle font-mono font-semibold text-foreground"
-          >
+          <td class="p-4 align-middle font-mono font-semibold text-foreground">
             {{ prop.name }}
           </td>
           <td class="p-4 align-middle font-mono text-muted-foreground">

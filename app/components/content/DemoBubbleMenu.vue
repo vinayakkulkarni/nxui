@@ -3,8 +3,12 @@
 </script>
 
 <template>
-  <ComponentDemo :code="`<BubbleMenu :stagger-delay='80' :animation-duration='500' />`">
-    <div class="relative h-[500px] w-full overflow-hidden rounded-lg bg-black/90">
+  <ComponentDemo
+    :code="`<BubbleMenu :stagger-delay='80' :animation-duration='500' />`"
+  >
+    <div
+      class="relative h-[500px] w-full overflow-hidden rounded-lg bg-black/90"
+    >
       <BubbleMenu />
     </div>
   </ComponentDemo>

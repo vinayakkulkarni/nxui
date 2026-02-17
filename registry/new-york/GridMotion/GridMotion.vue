@@ -21,8 +21,13 @@
   const COLS = 7;
 
   const combinedItems = computed(() => {
-    const defaults = Array.from({ length: TOTAL_ITEMS }, (_, i) => `Item ${i + 1}`);
-    return props.items.length > 0 ? props.items.slice(0, TOTAL_ITEMS) : defaults;
+    const defaults = Array.from(
+      { length: TOTAL_ITEMS },
+      (_, i) => `Item ${i + 1}`,
+    );
+    return props.items.length > 0
+      ? props.items.slice(0, TOTAL_ITEMS)
+      : defaults;
   });
 
   const rowRefs = ref<Array<HTMLDivElement | null>>([]);
@@ -63,8 +68,10 @@
 
       for (let i = 0; i < ROWS; i++) {
         const direction = i % 2 === 0 ? 1 : -1;
-        const target = ((mouseX.value / w) * MAX_MOVE - MAX_MOVE / 2) * direction;
-        const factor = EASE_SPEED / (1 + inertiaFactors[i % inertiaFactors.length]);
+        const target =
+          ((mouseX.value / w) * MAX_MOVE - MAX_MOVE / 2) * direction;
+        const factor =
+          EASE_SPEED / (1 + inertiaFactors[i % inertiaFactors.length]);
         rowPositions.value[i] += (target - rowPositions.value[i]) * factor;
 
         const row = rowRefs.value[i];
@@ -85,13 +92,22 @@
   <div :class="cn('size-full overflow-hidden', $props.class)">
     <section
       class="relative flex size-full items-center justify-center overflow-hidden"
-      :style="{ background: `radial-gradient(circle, ${props.gradientColor} 0%, transparent 100%)` }"
+      :style="{
+        background: `radial-gradient(circle, ${props.gradientColor} 0%, transparent 100%)`,
+      }"
     >
-      <div class="relative z-[2] grid w-[150vw] flex-none origin-center -rotate-[15deg] grid-rows-4 gap-4" style="height: 150vh">
+      <div
+        class="relative z-[2] grid w-[150vw] flex-none origin-center -rotate-[15deg] grid-rows-4 gap-4"
+        style="height: 150vh"
+      >
         <div
           v-for="(row, rowIndex) in getRows()"
           :key="rowIndex"
-          :ref="(el) => { rowRefs[rowIndex] = el as HTMLDivElement | null }"
+          :ref="
+            (el) => {
+              rowRefs[rowIndex] = el as HTMLDivElement | null;
+            }
+          "
           class="grid grid-cols-7 gap-4 will-change-transform"
         >
           <div
@@ -99,12 +115,14 @@
             :key="itemIndex"
             class="relative"
           >
-            <div class="relative flex size-full items-center justify-center overflow-hidden rounded-[10px] bg-[#111] text-2xl text-white">
+            <div
+              class="relative flex size-full items-center justify-center overflow-hidden rounded-[10px] bg-[#111] text-2xl text-white"
+            >
               <div
                 v-if="isImageUrl(content)"
                 class="absolute inset-0 bg-cover bg-center"
                 :style="{ backgroundImage: `url(${content})` }"
-              />
+              ></div>
               <div v-else class="relative z-[1] p-4 text-center">
                 {{ content }}
               </div>

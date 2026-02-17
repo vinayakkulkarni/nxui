@@ -28,7 +28,12 @@
 
 <template>
   <span
-    :class="cn('inline-block animate-[gradient-flow_var(--speed)_linear_infinite]', props.class)"
+    :class="
+      cn(
+        'inline-block animate-[gradient-flow_var(--speed)_linear_infinite]',
+        props.class,
+      )
+    "
     :style="{ ...gradientStyle, '--speed': `${speed}s` }"
   >
     {{ text }}

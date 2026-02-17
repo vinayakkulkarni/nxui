@@ -88,7 +88,9 @@ void main() {
     const resUniform = programRef.uniforms.uResolution.value as Float32Array;
     resUniform[0] = (gl.canvas as HTMLCanvasElement).width;
     resUniform[1] = (gl.canvas as HTMLCanvasElement).height;
-    resUniform[2] = (gl.canvas as HTMLCanvasElement).width / (gl.canvas as HTMLCanvasElement).height;
+    resUniform[2] =
+      (gl.canvas as HTMLCanvasElement).width /
+      (gl.canvas as HTMLCanvasElement).height;
   });
 
   useEventListener(containerRef, 'mousemove', (e: MouseEvent) => {
@@ -100,7 +102,13 @@ void main() {
   });
 
   useEventListener(containerRef, 'touchmove', (e: TouchEvent) => {
-    if (!props.interactive || !containerRef.value || !programRef || e.touches.length === 0) return;
+    if (
+      !props.interactive ||
+      !containerRef.value ||
+      !programRef ||
+      e.touches.length === 0
+    )
+      return;
     const touch = e.touches[0];
     const rect = containerRef.value.getBoundingClientRect();
     const mouseUniform = programRef.uniforms.uMouse.value as Float32Array;
@@ -128,7 +136,8 @@ void main() {
           value: new Float32Array([
             (gl.canvas as HTMLCanvasElement).width,
             (gl.canvas as HTMLCanvasElement).height,
-            (gl.canvas as HTMLCanvasElement).width / (gl.canvas as HTMLCanvasElement).height,
+            (gl.canvas as HTMLCanvasElement).width /
+              (gl.canvas as HTMLCanvasElement).height,
           ]),
         },
         uBaseColor: { value: new Float32Array(props.baseColor) },
@@ -163,5 +172,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

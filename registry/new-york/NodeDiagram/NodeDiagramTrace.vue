@@ -1,6 +1,9 @@
 <script setup lang="ts">
   import { motion } from 'motion-v';
-  import type { NodeDiagramNodeData, NodeDiagramConnectionData } from '~/types/components';
+  import type {
+    NodeDiagramNodeData,
+    NodeDiagramConnectionData,
+  } from '~/types/components';
 
   const props = withDefaults(
     defineProps<{
@@ -74,7 +77,12 @@
       :stroke-dasharray="dashArray"
       :initial="{ strokeDashoffset: PATH_LENGTH }"
       :animate="{ strokeDashoffset: -PATH_LENGTH }"
-      :transition="{ duration: pulseSpeed, repeat: Infinity, ease: 'linear', delay: index * 0.3 }"
+      :transition="{
+        duration: pulseSpeed,
+        repeat: Infinity,
+        ease: 'linear',
+        delay: index * 0.3,
+      }"
     />
     <component
       :is="motion.path"
@@ -89,7 +97,12 @@
       :stroke-dasharray="dashArray"
       :initial="{ strokeDashoffset: -PATH_LENGTH }"
       :animate="{ strokeDashoffset: PATH_LENGTH }"
-      :transition="{ duration: pulseSpeed, repeat: Infinity, ease: 'linear', delay: index * 0.3 + pulseSpeed / 2 }"
+      :transition="{
+        duration: pulseSpeed,
+        repeat: Infinity,
+        ease: 'linear',
+        delay: index * 0.3 + pulseSpeed / 2,
+      }"
     />
   </g>
 </template>

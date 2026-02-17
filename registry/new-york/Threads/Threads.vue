@@ -150,7 +150,13 @@ void main() {
       fragment: fragmentShader,
       uniforms: {
         iTime: { value: 0 },
-        iResolution: { value: new Color(gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height) },
+        iResolution: {
+          value: new Color(
+            gl.canvas.width,
+            gl.canvas.height,
+            gl.canvas.width / gl.canvas.height,
+          ),
+        },
         uColor: { value: new Color(...props.color) },
         uAmplitude: { value: props.amplitude },
         uDistance: { value: props.distance },
@@ -182,12 +188,13 @@ void main() {
     cancelAnimationFrame(rafId);
     if (renderer && containerRef.value) {
       const gl = renderer.gl;
-      if (containerRef.value.contains(gl.canvas)) containerRef.value.removeChild(gl.canvas);
+      if (containerRef.value.contains(gl.canvas))
+        containerRef.value.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     }
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

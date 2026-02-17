@@ -3,7 +3,7 @@
   import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
-  const props = withDefaults(
+  withDefaults(
     defineProps<{
       width?: number;
       height?: number;
@@ -69,7 +69,11 @@
       const dx = cached.x - cursor.x;
       const dy = cached.y - cursor.y;
       const dist = Math.hypot(dx, dy);
-      displacementScale = lerp(displacementScale, mapRange(Math.min(dist, 200), 0, 200, 0, 400), 0.06);
+      displacementScale = lerp(
+        displacementScale,
+        mapRange(Math.min(dist, 200), 0, 200, 0, 400),
+        0.06,
+      );
 
       if (displacementRef.value) {
         displacementRef.value.setAttribute('scale', String(displacementScale));
@@ -91,7 +95,11 @@
     :class="cn('relative will-change-transform', $props.class)"
     :style="{ width: `${width}px`, height: `${height}px` }"
   >
-    <svg viewBox="-60 -75 720 900" preserveAspectRatio="xMidYMid slice" class="relative block size-full">
+    <svg
+      viewBox="-60 -75 720 900"
+      preserveAspectRatio="xMidYMid slice"
+      class="relative block size-full"
+    >
       <filter id="imgFilter">
         <feTurbulence
           type="turbulence"
@@ -131,8 +139,10 @@
         />
       </g>
     </svg>
-    <div class="absolute bottom-[1.2em] left-4 text-[2.5rem] font-black leading-[1.5em]">
-      <slot />
+    <div
+      class="absolute bottom-[1.2em] left-4 text-[2.5rem] font-black leading-[1.5em]"
+    >
+      <slot></slot>
     </div>
   </div>
 </template>

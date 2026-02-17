@@ -1,4 +1,11 @@
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'node:fs';
+import {
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+  readdirSync,
+  statSync,
+  existsSync,
+} from 'node:fs';
 import { join } from 'node:path';
 
 const ROOT = join(import.meta.dirname, '..');
@@ -34,35 +41,44 @@ interface RegistryIndex {
   }>;
 }
 
-const COMPONENTS: Record<string, { title: string; description: string; deps: string[] }> = {
+const COMPONENTS: Record<
+  string,
+  { title: string; description: string; deps: string[] }
+> = {
   'hyper-text': {
     title: 'Hyper Text',
-    description: 'A text component that scrambles letters before revealing the final text on hover or load.',
+    description:
+      'A text component that scrambles letters before revealing the final text on hover or load.',
     deps: ['@vueuse/core'],
   },
   'text-animate': {
     title: 'Text Animate',
-    description: 'Versatile text animation component with multiple animation types and split modes.',
+    description:
+      'Versatile text animation component with multiple animation types and split modes.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'true-focus': {
     title: 'True Focus',
-    description: 'A text component that highlights words in sequence with a glowing focus effect.',
+    description:
+      'A text component that highlights words in sequence with a glowing focus effect.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'scroll-based-velocity': {
     title: 'Scroll Based Velocity',
-    description: 'Text that scrolls horizontally with velocity based on scroll speed.',
+    description:
+      'Text that scrolls horizontally with velocity based on scroll speed.',
     deps: ['@vueuse/core'],
   },
   'border-beam': {
     title: 'Border Beam',
-    description: 'A moving gradient beam that travels along the border of its container.',
+    description:
+      'A moving gradient beam that travels along the border of its container.',
     deps: ['motion-v'],
   },
   'noise-texture': {
     title: 'Noise Texture',
-    description: 'A canvas-based noise texture overlay for adding grain and texture to backgrounds.',
+    description:
+      'A canvas-based noise texture overlay for adding grain and texture to backgrounds.',
     deps: ['@vueuse/core'],
   },
   'shimmer-button': {
@@ -72,7 +88,8 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
   },
   'interactive-hover-button': {
     title: 'Interactive Hover Button',
-    description: 'A button with an interactive hover state that reveals a secondary layer.',
+    description:
+      'A button with an interactive hover state that reveals a secondary layer.',
     deps: [],
   },
   'spotlight-card': {
@@ -117,17 +134,20 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
   },
   'particle-galaxy': {
     title: 'Particle Galaxy',
-    description: 'A swirling 3D particle galaxy effect that responds to mouse movement.',
+    description:
+      'A swirling 3D particle galaxy effect that responds to mouse movement.',
     deps: ['@vueuse/core'],
   },
   'node-diagram': {
     title: 'Node Diagram',
-    description: 'An animated node diagram with glowing data pulses flowing through connections.',
+    description:
+      'An animated node diagram with glowing data pulses flowing through connections.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'auth-modal': {
     title: 'Auth Modal',
-    description: 'An animated authentication modal with sign in and sign up tabs.',
+    description:
+      'An animated authentication modal with sign in and sign up tabs.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'command-menu': {
@@ -152,12 +172,14 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
   },
   'collection-surfer': {
     title: 'Collection Surfer',
-    description: 'A scroll-driven card carousel with parallax depth and momentum-based navigation.',
+    description:
+      'A scroll-driven card carousel with parallax depth and momentum-based navigation.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'hero-geometric': {
     title: 'Hero Geometric',
-    description: 'A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering.',
+    description:
+      'A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering.',
     deps: ['three', 'motion-v', '@vueuse/core'],
   },
   'dither-prism-hero': {
@@ -180,77 +202,91 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
   },
   'pulsating-button': {
     title: 'Pulsating Button',
-    description: 'A button with a pulsating ring animation that draws attention.',
+    description:
+      'A button with a pulsating ring animation that draws attention.',
     deps: [],
   },
   'glitch-text': {
     title: 'Glitch Text',
-    description: 'RGB split and distortion glitch effect with jitter animations and optional hover trigger.',
+    description:
+      'RGB split and distortion glitch effect with jitter animations and optional hover trigger.',
     deps: [],
   },
   'circular-text': {
     title: 'Circular Text',
-    description: 'Characters positioned around a circle with continuous spin animation.',
+    description:
+      'Characters positioned around a circle with continuous spin animation.',
     deps: [],
   },
-  'shuffle': {
+  shuffle: {
     title: 'Shuffle',
     description: 'Random character shuffle that reveals text left-to-right.',
     deps: ['@vueuse/core'],
   },
   'shiny-text': {
     title: 'Shiny Text',
-    description: 'A metallic sheen sweep effect across text with theme-aware gradients.',
+    description:
+      'A metallic sheen sweep effect across text with theme-aware gradients.',
     deps: [],
   },
   'gradient-text': {
     title: 'Gradient Text',
-    description: 'Animated flowing gradient across text with customizable colors and speed.',
+    description:
+      'Animated flowing gradient across text with customizable colors and speed.',
     deps: [],
   },
   'count-up': {
     title: 'Count Up',
-    description: 'Animated number counter with easeOutExpo easing, triggered on scroll into view.',
+    description:
+      'Animated number counter with easeOutExpo easing, triggered on scroll into view.',
     deps: ['@vueuse/core'],
   },
   'split-text': {
     title: 'Split Text',
-    description: 'Staggered character or word entrance animation triggered on scroll into view.',
+    description:
+      'Staggered character or word entrance animation triggered on scroll into view.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'blur-text': {
     title: 'Blur Text',
-    description: 'Words or letters animate from blurred to clear with a staggered entrance.',
+    description:
+      'Words or letters animate from blurred to clear with a staggered entrance.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'rotating-text': {
     title: 'Rotating Text',
-    description: 'Cycle through an array of text phrases with staggered character transitions.',
+    description:
+      'Cycle through an array of text phrases with staggered character transitions.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'text-type': {
     title: 'Text Type',
-    description: 'Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor.',
+    description:
+      'Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor.',
     deps: ['@vueuse/core'],
   },
   'fuzzy-text': {
     title: 'Fuzzy Text',
-    description: 'Canvas-based vibrating fuzzy text with horizontal displacement that intensifies on hover.',
+    description:
+      'Canvas-based vibrating fuzzy text with horizontal displacement that intensifies on hover.',
     deps: ['@vueuse/core'],
   },
   'decrypted-text': {
     title: 'Decrypted Text',
-    description: 'Hacker-style text decryption effect that scrambles characters before revealing the original text.',
+    description:
+      'Hacker-style text decryption effect that scrambles characters before revealing the original text.',
     deps: ['@vueuse/core'],
   },
   'variable-proximity': {
     title: 'Variable Proximity',
-    description: 'Text that changes font variation settings based on cursor proximity.',
+    description:
+      'Text that changes font variation settings based on cursor proximity.',
     deps: ['@vueuse/core'],
   },
   'text-pressure': {
     title: 'Text Pressure',
-    description: 'Variable font text responding to cursor with weight, width, italic changes.',
+    description:
+      'Variable font text responding to cursor with weight, width, italic changes.',
     deps: ['@vueuse/core'],
   },
   'scroll-reveal': {
@@ -275,162 +311,194 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
   },
   'curved-loop': {
     title: 'Curved Loop',
-    description: 'Text scrolling along a curved SVG path with drag interaction.',
+    description:
+      'Text scrolling along a curved SVG path with drag interaction.',
     deps: [],
   },
   'logo-loop': {
     title: 'Logo Loop',
-    description: 'Infinite scrolling logo marquee with smooth animation and fade edges.',
+    description:
+      'Infinite scrolling logo marquee with smooth animation and fade edges.',
     deps: ['@vueuse/core'],
   },
-  'aurora': {
+  aurora: {
     title: 'Aurora',
-    description: 'WebGL aurora borealis effect with simplex noise and configurable color stops.',
+    description:
+      'WebGL aurora borealis effect with simplex noise and configurable color stops.',
     deps: ['ogl'],
   },
-  'squares': {
+  squares: {
     title: 'Squares',
-    description: 'Animated grid of squares with directional movement and hover interaction.',
+    description:
+      'Animated grid of squares with directional movement and hover interaction.',
     deps: ['@vueuse/core'],
   },
   'letter-glitch': {
     title: 'Letter Glitch',
-    description: 'A grid of random characters with color glitching and vignette overlays.',
+    description:
+      'A grid of random characters with color glitching and vignette overlays.',
     deps: ['@vueuse/core'],
   },
-  'lightning': {
+  lightning: {
     title: 'Lightning',
-    description: 'WebGL-powered lightning bolt effect with fbm noise and customizable hue.',
+    description:
+      'WebGL-powered lightning bolt effect with fbm noise and customizable hue.',
     deps: ['@vueuse/core'],
   },
-  'iridescence': {
+  iridescence: {
     title: 'Iridescence',
-    description: 'Mesmerizing iridescent color waves with mouse-reactive distortion.',
+    description:
+      'Mesmerizing iridescent color waves with mouse-reactive distortion.',
     deps: ['ogl', '@vueuse/core'],
   },
   'liquid-chrome': {
     title: 'Liquid Chrome',
-    description: 'Interactive liquid chrome effect with ripple distortion and mouse tracking.',
+    description:
+      'Interactive liquid chrome effect with ripple distortion and mouse tracking.',
     deps: ['ogl', '@vueuse/core'],
   },
-  'balatro': {
+  balatro: {
     title: 'Balatro',
-    description: 'Psychedelic spin-paint background with configurable colors and animation speed.',
+    description:
+      'Psychedelic spin-paint background with configurable colors and animation speed.',
     deps: ['ogl', '@vueuse/core'],
   },
-  'waves': {
+  waves: {
     title: 'Waves',
-    description: 'Animated Perlin noise wave lines with configurable colors, amplitude, and density.',
+    description:
+      'Animated Perlin noise wave lines with configurable colors, amplitude, and density.',
     deps: ['@vueuse/core'],
   },
-  'threads': {
+  threads: {
     title: 'Threads',
-    description: 'Animated Perlin noise thread lines with mouse-reactive distortion.',
+    description:
+      'Animated Perlin noise thread lines with mouse-reactive distortion.',
     deps: ['ogl', '@vueuse/core'],
   },
-  'orb': {
+  orb: {
     title: 'Orb',
-    description: 'Glowing orb with hue-shifted noise, hover distortion, and optional rotation.',
+    description:
+      'Glowing orb with hue-shifted noise, hover distortion, and optional rotation.',
     deps: ['ogl', '@vueuse/core'],
   },
-  'silk': {
+  silk: {
     title: 'Silk',
-    description: 'Silky fabric-like shader background with flowing noise patterns.',
+    description:
+      'Silky fabric-like shader background with flowing noise patterns.',
     deps: ['three', '@vueuse/core'],
   },
   'floating-lines': {
     title: 'Floating Lines',
-    description: 'Multi-layered glowing wave lines with cursor-reactive bending.',
+    description:
+      'Multi-layered glowing wave lines with cursor-reactive bending.',
     deps: ['three', '@vueuse/core'],
   },
-  'beams': {
+  beams: {
     title: 'Beams',
-    description: '3D light beam planes with Perlin noise deformation and directional lighting.',
+    description:
+      '3D light beam planes with Perlin noise deformation and directional lighting.',
     deps: ['three', '@vueuse/core'],
   },
   'dark-veil': {
     title: 'Dark Veil',
-    description: 'CPPN neural network shader background with hue shift, scanlines, and warp distortion.',
+    description:
+      'CPPN neural network shader background with hue shift, scanlines, and warp distortion.',
     deps: ['ogl', '@vueuse/core'],
   },
-  'grainient': {
+  grainient: {
     title: 'Grainient',
-    description: 'Animated gradient background with noise grain and smooth color blending.',
+    description:
+      'Animated gradient background with noise grain and smooth color blending.',
     deps: ['ogl', '@vueuse/core'],
   },
   'faulty-terminal': {
     title: 'Faulty Terminal',
-    description: 'Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration.',
+    description:
+      'Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration.',
     deps: ['ogl', '@vueuse/core'],
   },
   'gradient-blinds': {
     title: 'Gradient Blinds',
-    description: 'Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops.',
+    description:
+      'Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops.',
     deps: ['ogl', '@vueuse/core'],
   },
   'color-bends': {
     title: 'Color Bends',
-    description: 'Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors.',
+    description:
+      'Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors.',
     deps: ['three', '@vueuse/core'],
   },
   'light-pillar': {
     title: 'Light Pillar',
-    description: '3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction.',
+    description:
+      '3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction.',
     deps: ['three', '@vueuse/core'],
   },
   'light-rays': {
     title: 'Light Rays',
-    description: 'Animated light rays emanating from a configurable origin with mouse following and color controls.',
+    description:
+      'Animated light rays emanating from a configurable origin with mouse following and color controls.',
     deps: ['ogl', '@vueuse/core'],
   },
   'ripple-grid': {
     title: 'Ripple Grid',
-    description: 'Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette.',
+    description:
+      'Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette.',
     deps: ['ogl', '@vueuse/core'],
   },
   'pixel-snow': {
     title: 'Pixel Snow',
-    description: '3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction.',
+    description:
+      '3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction.',
     deps: ['three', '@vueuse/core'],
   },
   'prismatic-burst': {
     title: 'Prismatic Burst',
-    description: 'WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes.',
+    description:
+      'WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes.',
     deps: ['ogl', '@vueuse/core'],
   },
   'liquid-ether': {
     title: 'Liquid Ether',
-    description: 'Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette.',
+    description:
+      'Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette.',
     deps: ['three', '@vueuse/core'],
   },
   'pixel-blast': {
     title: 'Pixel Blast',
-    description: 'Dithered pixel pattern with Bayer matrix, FBM noise, click ripples, and configurable shapes.',
+    description:
+      'Dithered pixel pattern with Bayer matrix, FBM noise, click ripples, and configurable shapes.',
     deps: ['three', '@vueuse/core'],
   },
-  'ballpit': {
+  ballpit: {
     title: 'Ballpit',
-    description: '3D physics-based ball pit with instanced meshes, subsurface scattering, and cursor interaction.',
+    description:
+      '3D physics-based ball pit with instanced meshes, subsurface scattering, and cursor interaction.',
     deps: ['three', '@vueuse/core'],
   },
   'dot-grid': {
     title: 'Dot Grid',
-    description: 'Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return.',
+    description:
+      'Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return.',
     deps: ['@vueuse/core'],
   },
   'grid-distortion': {
     title: 'Grid Distortion',
-    description: 'Three.js shader-based image distortion that warps a texture in response to mouse movement.',
+    description:
+      'Three.js shader-based image distortion that warps a texture in response to mouse movement.',
     deps: ['three', '@vueuse/core'],
   },
   'grid-motion': {
     title: 'Grid Motion',
-    description: 'A rotated grid of items that shifts horizontally based on cursor position with smooth easing.',
+    description:
+      'A rotated grid of items that shifts horizontally based on cursor position with smooth easing.',
     deps: ['@vueuse/core'],
   },
   'animated-content': {
     title: 'Animated Content',
-    description: 'Scroll-triggered entrance animation with configurable direction, distance, and easing.',
+    description:
+      'Scroll-triggered entrance animation with configurable direction, distance, and easing.',
     deps: ['@vueuse/core'],
   },
   'fade-content': {
@@ -445,187 +513,224 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
   },
   'star-border': {
     title: 'Star Border',
-    description: 'Animated glowing border effect with dual radial gradient beams.',
+    description:
+      'Animated glowing border effect with dual radial gradient beams.',
     deps: [],
   },
-  'magnet': {
+  magnet: {
     title: 'Magnet',
-    description: 'Element that magnetically pulls toward the cursor when nearby.',
+    description:
+      'Element that magnetically pulls toward the cursor when nearby.',
     deps: ['@vueuse/core'],
   },
-  'crosshair': {
+  crosshair: {
     title: 'Crosshair',
-    description: 'Smooth crosshair cursor replacement with horizontal and vertical lines.',
+    description:
+      'Smooth crosshair cursor replacement with horizontal and vertical lines.',
     deps: ['@vueuse/core'],
   },
   'gradual-blur': {
     title: 'Gradual Blur',
-    description: 'Layered backdrop-filter blur gradient overlay for smooth edge fading.',
+    description:
+      'Layered backdrop-filter blur gradient overlay for smooth edge fading.',
     deps: [],
   },
   'glare-hover': {
     title: 'Glare Hover',
-    description: 'A glare sweep animation on hover with configurable angle, size, and color.',
+    description:
+      'A glare sweep animation on hover with configurable angle, size, and color.',
     deps: [],
   },
-  'ribbons': {
+  ribbons: {
     title: 'Ribbons',
-    description: 'Interactive OGL ribbon lines that follow mouse movement with spring physics.',
+    description:
+      'Interactive OGL ribbon lines that follow mouse movement with spring physics.',
     deps: ['ogl', '@vueuse/core'],
   },
   'pixel-transition': {
     title: 'Pixel Transition',
-    description: 'Pixelated grid transition that reveals a second content layer on hover.',
+    description:
+      'Pixelated grid transition that reveals a second content layer on hover.',
     deps: [],
   },
   'electric-border': {
     title: 'Electric Border',
-    description: 'Animated electric border with noise-driven distortion and glow effects.',
+    description:
+      'Animated electric border with noise-driven distortion and glow effects.',
     deps: ['@vueuse/core'],
   },
   'meta-balls': {
     title: 'Meta Balls',
-    description: 'WebGL 2 metaball shader with cursor-reactive ball and configurable colors.',
+    description:
+      'WebGL 2 metaball shader with cursor-reactive ball and configurable colors.',
     deps: ['ogl', '@vueuse/core'],
   },
   'blob-cursor': {
     title: 'Blob Cursor',
-    description: 'Gooey blob cursor trail with SVG filter and configurable appearance.',
+    description:
+      'Gooey blob cursor trail with SVG filter and configurable appearance.',
     deps: ['@vueuse/core'],
   },
-  'cubes': {
+  cubes: {
     title: 'Cubes',
-    description: 'Interactive 3D CSS cube grid that tilts toward cursor with auto-animation.',
+    description:
+      'Interactive 3D CSS cube grid that tilts toward cursor with auto-animation.',
     deps: ['@vueuse/core'],
   },
   'shape-blur': {
     title: 'Shape Blur',
-    description: 'SDF shape with cursor-reactive blur distortion rendered via Three.js shaders.',
+    description:
+      'SDF shape with cursor-reactive blur distortion rendered via Three.js shaders.',
     deps: ['three', '@vueuse/core'],
   },
-  'stack': {
+  stack: {
     title: 'Stack',
-    description: 'Draggable card stack with spring animations and send-to-back gesture.',
+    description:
+      'Draggable card stack with spring animations and send-to-back gesture.',
     deps: ['@vueuse/core'],
   },
   'tilted-card': {
     title: 'Tilted Card',
-    description: '3D tilting card that follows cursor with spring damping and tooltip caption.',
+    description:
+      '3D tilting card that follows cursor with spring damping and tooltip caption.',
     deps: ['@vueuse/core'],
   },
   'decay-card': {
     title: 'Decay Card',
-    description: 'SVG displacement map card that warps on cursor movement with lerp physics.',
+    description:
+      'SVG displacement map card that warps on cursor movement with lerp physics.',
     deps: ['@vueuse/core'],
   },
   'elastic-slider': {
     title: 'Elastic Slider',
-    description: 'Draggable slider with elastic overflow bounce and animated icons.',
+    description:
+      'Draggable slider with elastic overflow bounce and animated icons.',
     deps: [],
   },
   'bounce-cards': {
     title: 'Bounce Cards',
-    description: 'Fan of image cards with staggered entrance and hover push animation.',
+    description:
+      'Fan of image cards with staggered entrance and hover push animation.',
     deps: [],
   },
   'pixel-card': {
     title: 'Pixel Card',
-    description: 'Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.',
+    description:
+      'Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.',
     deps: ['@vueuse/core'],
   },
-  'stepper': {
+  stepper: {
     title: 'Stepper',
-    description: 'Multi-step wizard with animated step indicators and slide transitions.',
+    description:
+      'Multi-step wizard with animated step indicators and slide transitions.',
     deps: [],
   },
-  'carousel': {
+  carousel: {
     title: 'Carousel',
-    description: 'Draggable card carousel with 3D perspective rotation and dot indicators.',
+    description:
+      'Draggable card carousel with 3D perspective rotation and dot indicators.',
     deps: ['@vueuse/core'],
   },
   'flowing-menu': {
     title: 'Flowing Menu',
-    description: 'Hover-activated marquee menu with edge-aware slide-in animation.',
+    description:
+      'Hover-activated marquee menu with edge-aware slide-in animation.',
     deps: [],
   },
   'flying-posters': {
     title: 'Flying Posters',
-    description: 'OGL-powered vertical scroll gallery with rotating poster distortion.',
+    description:
+      'OGL-powered vertical scroll gallery with rotating poster distortion.',
     deps: ['ogl', '@vueuse/core'],
   },
   'circular-gallery': {
     title: 'Circular Gallery',
-    description: 'OGL-powered curved image gallery with drag/scroll navigation and wave deformation.',
+    description:
+      'OGL-powered curved image gallery with drag/scroll navigation and wave deformation.',
     deps: ['ogl', '@vueuse/core'],
   },
-  'counter': {
+  counter: {
     title: 'Counter',
-    description: 'Animated number counter with spring-physics digit rolling and gradient fade overlays.',
+    description:
+      'Animated number counter with spring-physics digit rolling and gradient fade overlays.',
     deps: [],
   },
   'animated-list': {
     title: 'Animated List',
-    description: 'Scroll-triggered list with scale entrance, keyboard navigation, and gradient edges.',
+    description:
+      'Scroll-triggered list with scale entrance, keyboard navigation, and gradient edges.',
     deps: ['@vueuse/core'],
   },
-  'folder': {
+  folder: {
     title: 'Folder',
-    description: 'Pure CSS 3D folder with open/close animation and magnetic paper hover.',
+    description:
+      'Pure CSS 3D folder with open/close animation and magnetic paper hover.',
     deps: [],
   },
   'glass-icons': {
     title: 'Glass Icons',
-    description: 'Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover.',
+    description:
+      'Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover.',
     deps: [],
   },
   'gooey-nav': {
     title: 'Gooey Nav',
-    description: 'Particle-burst navigation with SVG gooey filter effect and spring animation.',
+    description:
+      'Particle-burst navigation with SVG gooey filter effect and spring animation.',
     deps: ['@vueuse/core'],
   },
   'bubble-menu': {
     title: 'Bubble Menu',
-    description: 'Animated full-screen pill navigation with staggered scale-in and rotation.',
+    description:
+      'Animated full-screen pill navigation with staggered scale-in and rotation.',
     deps: [],
   },
   'card-swap': {
     title: 'Card Swap',
-    description: 'Stacked card carousel that cycles the front card to the back with 3D transforms.',
+    description:
+      'Stacked card carousel that cycles the front card to the back with 3D transforms.',
     deps: [],
   },
   'chroma-grid': {
     title: 'Chroma Grid',
-    description: 'Profile card grid with mouse-tracking spotlight reveal and per-card hover glow.',
+    description:
+      'Profile card grid with mouse-tracking spotlight reveal and per-card hover glow.',
     deps: ['@vueuse/core'],
   },
   'magic-bento': {
     title: 'Magic Bento',
-    description: 'Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism.',
+    description:
+      'Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism.',
     deps: ['@vueuse/core'],
   },
-  'masonry': {
+  masonry: {
     title: 'Masonry',
-    description: 'Responsive masonry image grid with blur-to-focus entrance animation and hover scaling.',
+    description:
+      'Responsive masonry image grid with blur-to-focus entrance animation and hover scaling.',
     deps: ['@vueuse/core'],
   },
   'card-nav': {
     title: 'Card Nav',
-    description: 'Expandable navbar with staggered card reveal, hamburger toggle, and color-coded panels.',
+    description:
+      'Expandable navbar with staggered card reveal, hamburger toggle, and color-coded panels.',
     deps: ['@vueuse/core'],
   },
   'glass-surface': {
     title: 'Glass Surface',
-    description: 'SVG displacement-based glass distortion with chromatic aberration and frosted backdrop filter.',
+    description:
+      'SVG displacement-based glass distortion with chromatic aberration and frosted backdrop filter.',
     deps: ['@vueuse/core'],
   },
   'profile-card': {
     title: 'Profile Card',
-    description: 'Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax.',
+    description:
+      'Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax.',
     deps: ['@vueuse/core'],
   },
   'reflective-card': {
     title: 'Reflective Card',
-    description: 'Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.',
+    description:
+      'Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.',
     deps: [],
   },
 };

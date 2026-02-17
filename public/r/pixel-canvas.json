@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Pixel Canvas",
   "description": "An interactive pixel grid that responds to mouse movement.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/PixelCanvas/PixelCanvas.vue",

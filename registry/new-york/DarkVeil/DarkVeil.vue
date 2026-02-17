@@ -14,7 +14,15 @@
       warpAmount?: number;
       class?: string;
     }>(),
-    { hueShift: 0, noiseIntensity: 0, scanlineIntensity: 0, speed: 0.5, scanlineFrequency: 0, warpAmount: 0, class: '' },
+    {
+      hueShift: 0,
+      noiseIntensity: 0,
+      scanlineIntensity: 0,
+      speed: 0.5,
+      scanlineFrequency: 0,
+      warpAmount: 0,
+      class: '',
+    },
   );
 
   const containerRef = ref<HTMLDivElement>();
@@ -89,7 +97,9 @@ void main(){
       fragment,
       uniforms: {
         uTime: { value: 0 },
-        uResolution: { value: new Float32Array([gl.canvas.width, gl.canvas.height]) },
+        uResolution: {
+          value: new Float32Array([gl.canvas.width, gl.canvas.height]),
+        },
         uHueShift: { value: props.hueShift },
         uNoise: { value: props.noiseIntensity },
         uScan: { value: props.scanlineIntensity },
@@ -102,7 +112,8 @@ void main(){
 
     const start = performance.now();
     function update() {
-      program.uniforms.uTime.value = ((performance.now() - start) / 1000) * props.speed;
+      program.uniforms.uTime.value =
+        ((performance.now() - start) / 1000) * props.speed;
       program.uniforms.uHueShift.value = props.hueShift;
       program.uniforms.uNoise.value = props.noiseIntensity;
       program.uniforms.uScan.value = props.scanlineIntensity;
@@ -118,12 +129,13 @@ void main(){
     cancelAnimationFrame(rafId);
     if (renderer && containerRef.value) {
       const gl = renderer.gl;
-      if (containerRef.value.contains(gl.canvas)) containerRef.value.removeChild(gl.canvas);
+      if (containerRef.value.contains(gl.canvas))
+        containerRef.value.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     }
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

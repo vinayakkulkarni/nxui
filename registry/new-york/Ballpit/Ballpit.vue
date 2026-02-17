@@ -95,7 +95,6 @@
   // Pointer state
   const pointerPos = new Vector2();
   const pointerNPos = new Vector2();
-  let pointerHover = false;
   const raycaster = new Raycaster();
   const planeHelper = new Plane(new Vector3(0, 0, 1), 0);
   const intersectPoint = new Vector3();
@@ -126,8 +125,8 @@
 
     for (let i = 1; i < props.count; i++) {
       const base = 3 * i;
-      positionData[base] = randFloatSpread(2 * sizeInfo.wWidth / 2);
-      positionData[base + 1] = randFloatSpread(2 * sizeInfo.wHeight / 2);
+      positionData[base] = randFloatSpread((2 * sizeInfo.wWidth) / 2);
+      positionData[base + 1] = randFloatSpread((2 * sizeInfo.wHeight) / 2);
       positionData[base + 2] = randFloatSpread(2 * 2);
     }
 
@@ -185,7 +184,10 @@
 
         if (dist < sumRadius) {
           const overlap = sumRadius - dist;
-          tmpF.copy(tmpE).normalize().multiplyScalar(0.5 * overlap);
+          tmpF
+            .copy(tmpE)
+            .normalize()
+            .multiplyScalar(0.5 * overlap);
           tmpG.copy(tmpF).multiplyScalar(Math.max(tmpB.length(), 1));
           tmpH.copy(tmpF).multiplyScalar(Math.max(tmpD.length(), 1));
 
@@ -282,7 +284,9 @@
     const cameraMaxAspect = 1.5;
     if (cameraRef.aspect > cameraMaxAspect) {
       const origFov = 50;
-      const t = Math.tan(MathUtils.degToRad(origFov / 2)) / (cameraRef.aspect / cameraMaxAspect);
+      const t =
+        Math.tan(MathUtils.degToRad(origFov / 2)) /
+        (cameraRef.aspect / cameraMaxAspect);
       cameraRef.fov = 2 * MathUtils.radToDeg(Math.atan(t));
     } else {
       cameraRef.fov = 50;
@@ -297,7 +301,10 @@
     if (!canvas || !cameraRef) return;
     const rect = canvas.getBoundingClientRect();
     pointerPos.set(e.clientX - rect.left, e.clientY - rect.top);
-    pointerNPos.set((pointerPos.x / rect.width) * 2 - 1, -(pointerPos.y / rect.height) * 2 + 1);
+    pointerNPos.set(
+      (pointerPos.x / rect.width) * 2 - 1,
+      -(pointerPos.y / rect.height) * 2 + 1,
+    );
     pointerHover = true;
 
     raycaster.setFromCamera(pointerNPos, cameraRef);
@@ -390,7 +397,10 @@ void main() {`,
         `RE_Direct( directLight, geometryPosition, geometryNormal, geometryViewDir, geometryClearcoatNormal, material, reflectedLight );
 RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometryViewDir, geometryClearcoatNormal, reflectedLight);`,
       );
-      shader.fragmentShader = shader.fragmentShader.replace('#include <lights_fragment_begin>', lightsReplace);
+      shader.fragmentShader = shader.fragmentShader.replace(
+        '#include <lights_fragment_begin>',
+        lightsReplace,
+      );
     };
 
     // Create instanced mesh
@@ -423,9 +433,15 @@ RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometr
     }
 
     // Lights
-    const ambient = new AmbientLight(props.ambientColor, props.ambientIntensity);
+    const ambient = new AmbientLight(
+      props.ambientColor,
+      props.ambientIntensity,
+    );
     sphereMesh.add(ambient);
-    pointLight = new PointLight(props.colors[0] ?? 0xffffff, props.lightIntensity);
+    pointLight = new PointLight(
+      props.colors[0] ?? 0xffffff,
+      props.lightIntensity,
+    );
     sphereMesh.add(pointLight);
 
     // Touch handling
@@ -493,7 +509,8 @@ RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometr
   onBeforeUnmount(() => {
     const canvas = containerRef.value;
     if (canvas) {
-      const cleanup = (canvas as unknown as Record<string, unknown>).__cleanupBallpit;
+      const cleanup = (canvas as unknown as Record<string, unknown>)
+        .__cleanupBallpit;
       if (typeof cleanup === 'function') cleanup();
     }
     if (resizeTimeout) clearTimeout(resizeTimeout);
@@ -502,6 +519,6 @@ RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometr
 
 <template>
   <div :class="cn('size-full', $props.class)">
-    <canvas ref="containerRef" class="block size-full" />
+    <canvas ref="containerRef" class="block size-full"></canvas>
   </div>
 </template>

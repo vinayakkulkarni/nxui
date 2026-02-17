@@ -34,7 +34,11 @@
   function hexToRgb(hex: string): { r: number; g: number; b: number } {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
-      ? { r: parseInt(result[1], 16), g: parseInt(result[2], 16), b: parseInt(result[3], 16) }
+      ? {
+          r: Number.parseInt(result[1], 16),
+          g: Number.parseInt(result[2], 16),
+          b: Number.parseInt(result[3], 16),
+        }
       : { r: 139, g: 92, b: 246 };
   }
 
@@ -44,10 +48,12 @@
       const arm = Math.floor(Math.random() * ARM_COUNT);
       const armOffset = (arm / ARM_COUNT) * Math.PI * 2;
       const radius = Math.random() * MAX_RADIUS + 10;
-      const angle = armOffset + Math.log(radius) * 1.2 + (Math.random() - 0.5) * 0.3;
+      const angle =
+        armOffset + Math.log(radius) * 1.2 + (Math.random() - 0.5) * 0.3;
 
       ps.push({
-        x: 0, y: 0,
+        x: 0,
+        y: 0,
         z: (Math.random() - 0.5) * 200,
         angle,
         radius,
@@ -93,8 +99,12 @@
 
     rotation += 0.002 * props.speed;
 
-    const mx = isOutside.value ? 0 : (elementX.value - cx) * props.mouseInfluence * 0.002;
-    const my = isOutside.value ? 0 : (elementY.value - cy) * props.mouseInfluence * 0.002;
+    const mx = isOutside.value
+      ? 0
+      : (elementX.value - cx) * props.mouseInfluence * 0.002;
+    const my = isOutside.value
+      ? 0
+      : (elementY.value - cy) * props.mouseInfluence * 0.002;
 
     const baseRgb = hexToRgb(props.color);
 
@@ -137,10 +147,13 @@
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative overflow-hidden bg-black', props.class)">
-    <canvas ref="canvasRef" class="size-full" />
+  <div
+    ref="containerRef"
+    :class="cn('relative overflow-hidden bg-black', props.class)"
+  >
+    <canvas ref="canvasRef" class="size-full"></canvas>
     <div class="absolute inset-0 z-10">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

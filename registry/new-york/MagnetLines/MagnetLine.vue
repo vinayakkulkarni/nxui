@@ -32,8 +32,7 @@
     const distanceX = e.clientX - centerX;
     const distanceY = e.clientY - centerY;
 
-    const angle =
-      (Math.atan2(distanceY, distanceX) * 180) / Math.PI;
+    const angle = (Math.atan2(distanceY, distanceX) * 180) / Math.PI;
     rotate.value = angle + props.baseAngle;
   }
 

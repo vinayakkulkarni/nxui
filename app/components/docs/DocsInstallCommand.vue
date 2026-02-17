@@ -1,41 +1,39 @@
 <script setup lang="ts">
-const props = defineProps<{
-  component: string;
-}>();
+  const props = defineProps<{
+    component: string;
+  }>();
 
-type PackageManager = 'npm' | 'pnpm' | 'yarn' | 'bun';
+  type PackageManager = 'npm' | 'pnpm' | 'yarn' | 'bun';
 
-const PACKAGE_MANAGERS: PackageManager[] = ['npm', 'pnpm', 'yarn', 'bun'];
+  const PACKAGE_MANAGERS: PackageManager[] = ['npm', 'pnpm', 'yarn', 'bun'];
 
-const COMMANDS: Record<PackageManager, string> = {
-  npm: 'npx shadcn@latest add',
-  pnpm: 'pnpm dlx shadcn@latest add',
-  yarn: 'yarn dlx shadcn@latest add',
-  bun: 'bunx shadcn@latest add',
-};
-
-const selected = ref<PackageManager>('npm');
-
-const baseUrl = useRuntimeConfig().public?.siteUrl ?? 'https://nxui.geoql.in';
-const componentUrl = computed(
-  () => `${baseUrl}/r/${props.component}.json`,
-);
-const command = computed(
-  () => `${COMMANDS[selected.value]} "${componentUrl.value}"`,
-);
-const prefix = computed(() => {
-  const map: Record<PackageManager, string> = {
-    npm: 'npx',
-    pnpm: 'pnpm dlx',
-    yarn: 'yarn dlx',
-    bun: 'bunx',
+  const COMMANDS: Record<PackageManager, string> = {
+    npm: 'npx shadcn@latest add',
+    pnpm: 'pnpm dlx shadcn@latest add',
+    yarn: 'yarn dlx shadcn@latest add',
+    bun: 'bunx shadcn@latest add',
   };
-  return map[selected.value];
-});
 
-function selectPm(pm: PackageManager) {
-  selected.value = pm;
-}
+  const selected = ref<PackageManager>('npm');
+
+  const baseUrl = useRuntimeConfig().public?.siteUrl ?? 'https://nxui.geoql.in';
+  const componentUrl = computed(() => `${baseUrl}/r/${props.component}.json`);
+  const command = computed(
+    () => `${COMMANDS[selected.value]} "${componentUrl.value}"`,
+  );
+  const prefix = computed(() => {
+    const map: Record<PackageManager, string> = {
+      npm: 'npx',
+      pnpm: 'pnpm dlx',
+      yarn: 'yarn dlx',
+      bun: 'bunx',
+    };
+    return map[selected.value];
+  });
+
+  function selectPm(pm: PackageManager) {
+    selected.value = pm;
+  }
 </script>
 
 <template>
@@ -49,10 +47,7 @@ function selectPm(pm: PackageManager) {
         <div
           class="flex size-8 items-center justify-center rounded-md border border-border/10 bg-white dark:bg-zinc-800/50 shadow-sm dark:shadow-none"
         >
-          <Icon
-            name="lucide:terminal"
-            class="size-3.5 text-muted-foreground"
-          />
+          <Icon name="lucide:terminal" class="size-3.5 text-muted-foreground" />
         </div>
         <div
           class="flex items-center gap-1 rounded-md bg-zinc-200/50 dark:bg-zinc-950 p-1 ring-1 ring-border/10"

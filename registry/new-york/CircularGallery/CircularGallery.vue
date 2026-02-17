@@ -1,7 +1,15 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
-  import { Camera, Mesh, Plane, Program, Renderer, Texture, Transform } from 'ogl';
+  import {
+    Camera,
+    Mesh,
+    Plane,
+    Program,
+    Renderer,
+    Texture,
+    Transform,
+  } from 'ogl';
   import { cn } from '~/lib/utils';
 
   interface GalleryItem {
@@ -21,12 +29,30 @@
     }>(),
     {
       items: () => [
-        { image: 'https://picsum.photos/seed/1/800/600?grayscale', text: 'Bridge' },
-        { image: 'https://picsum.photos/seed/2/800/600?grayscale', text: 'Setup' },
-        { image: 'https://picsum.photos/seed/3/800/600?grayscale', text: 'Falls' },
-        { image: 'https://picsum.photos/seed/4/800/600?grayscale', text: 'Berries' },
-        { image: 'https://picsum.photos/seed/5/800/600?grayscale', text: 'Diving' },
-        { image: 'https://picsum.photos/seed/6/800/600?grayscale', text: 'Tracks' },
+        {
+          image: 'https://picsum.photos/seed/1/800/600?grayscale',
+          text: 'Bridge',
+        },
+        {
+          image: 'https://picsum.photos/seed/2/800/600?grayscale',
+          text: 'Setup',
+        },
+        {
+          image: 'https://picsum.photos/seed/3/800/600?grayscale',
+          text: 'Falls',
+        },
+        {
+          image: 'https://picsum.photos/seed/4/800/600?grayscale',
+          text: 'Berries',
+        },
+        {
+          image: 'https://picsum.photos/seed/5/800/600?grayscale',
+          text: 'Diving',
+        },
+        {
+          image: 'https://picsum.photos/seed/6/800/600?grayscale',
+          text: 'Tracks',
+        },
       ],
       bend: 3,
       textColor: '#ffffff',
@@ -41,13 +67,19 @@
   let renderer: InstanceType<typeof Renderer> | null = null;
   let rafId = 0;
 
-  function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
+  function lerp(a: number, b: number, t: number) {
+    return a + (b - a) * t;
+  }
 
   onMounted(() => {
     const container = containerRef.value;
     if (!container) return;
 
-    renderer = new Renderer({ alpha: true, antialias: true, dpr: Math.min(window.devicePixelRatio, 2) });
+    renderer = new Renderer({
+      alpha: true,
+      antialias: true,
+      dpr: Math.min(window.devicePixelRatio, 2),
+    });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
     container.appendChild(gl.canvas);
@@ -59,7 +91,10 @@
     const scene = new Transform();
     const geometry = new Plane(gl, { heightSegments: 50, widthSegments: 100 });
 
-    let screen = { width: container.clientWidth, height: container.clientHeight };
+    let screen = {
+      width: container.clientWidth,
+      height: container.clientHeight,
+    };
     renderer.setSize(screen.width, screen.height);
     camera.perspective({ aspect: screen.width / screen.height });
 
@@ -86,7 +121,9 @@
       const data = doubled[i];
       const tex = new Texture(gl, { generateMipmaps: true });
       const program = new Program(gl, {
-        depthTest: false, depthWrite: false, transparent: true,
+        depthTest: false,
+        depthWrite: false,
+        transparent: true,
         vertex: `precision highp float;
 attribute vec3 position; attribute vec2 uv;
 uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix;
@@ -130,7 +167,10 @@ void main() {
       img.src = data.image;
       img.onload = () => {
         tex.image = img;
-        program.uniforms.uImageSizes.value = [img.naturalWidth, img.naturalHeight];
+        program.uniforms.uImageSizes.value = [
+          img.naturalWidth,
+          img.naturalHeight,
+        ];
       };
 
       const plane = new Mesh(gl, { geometry, program });
@@ -145,7 +185,15 @@ void main() {
       const w = plane.scale.x + pad;
       const wTotal = w * doubled.length;
 
-      medias.push({ plane, program, x: w * i, width: w, widthTotal: wTotal, extra: 0, scale: sc });
+      medias.push({
+        plane,
+        program,
+        x: w * i,
+        width: w,
+        widthTotal: wTotal,
+        extra: 0,
+        scale: sc,
+      });
     }
 
     const scroll = { current: 0, target: 0, last: 0 };
@@ -153,11 +201,17 @@ void main() {
     let startX = 0;
     let scrollPos = 0;
 
-    useEventListener(container, 'wheel', (e: WheelEvent) => {
-      e.preventDefault();
-      const delta = e.deltaY || e.deltaX;
-      scroll.target += (delta > 0 ? props.scrollSpeed : -props.scrollSpeed) * 0.2;
-    }, { passive: false });
+    useEventListener(
+      container,
+      'wheel',
+      (e: WheelEvent) => {
+        e.preventDefault();
+        const delta = e.deltaY || e.deltaX;
+        scroll.target +=
+          (delta > 0 ? props.scrollSpeed : -props.scrollSpeed) * 0.2;
+      },
+      { passive: false },
+    );
 
     useEventListener(container, 'pointerdown', (e: PointerEvent) => {
       isDown = true;
@@ -166,9 +220,12 @@ void main() {
     });
     useEventListener(window, 'pointermove', (e: PointerEvent) => {
       if (!isDown) return;
-      scroll.target = scrollPos + (startX - e.clientX) * (props.scrollSpeed * 0.025);
+      scroll.target =
+        scrollPos + (startX - e.clientX) * (props.scrollSpeed * 0.025);
     });
-    useEventListener(window, 'pointerup', () => { isDown = false; });
+    useEventListener(window, 'pointerup', () => {
+      isDown = false;
+    });
 
     function update() {
       rafId = requestAnimationFrame(update);
@@ -230,7 +287,10 @@ void main() {
         m.scale = screen.height / 1500;
         m.plane.scale.y = (viewport.height * (900 * m.scale)) / screen.height;
         m.plane.scale.x = (viewport.width * (700 * m.scale)) / screen.width;
-        m.program.uniforms.uPlaneSizes.value = [m.plane.scale.x, m.plane.scale.y];
+        m.program.uniforms.uPlaneSizes.value = [
+          m.plane.scale.x,
+          m.plane.scale.y,
+        ];
         const pad = 2;
         m.width = m.plane.scale.x + pad;
         m.widthTotal = m.width * doubled.length;
@@ -248,5 +308,8 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('relative size-full touch-none', $props.class)" />
+  <div
+    ref="containerRef"
+    :class="cn('relative size-full touch-none', $props.class)"
+  ></div>
 </template>

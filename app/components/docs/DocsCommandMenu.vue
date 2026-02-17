@@ -1,69 +1,69 @@
 <script setup lang="ts">
-import { docsNav } from '~/config/docs';
+  import { docsNav } from '~/config/docs';
 
-const router = useRouter();
-const isOpen = ref(false);
-const query = ref('');
-const inputRef = ref<HTMLInputElement | null>(null);
-const selectedIndex = ref(0);
+  const router = useRouter();
+  const isOpen = ref(false);
+  const query = ref('');
+  const inputRef = ref<HTMLInputElement | null>(null);
+  const selectedIndex = ref(0);
 
-const { meta_k, ctrl_k, escape } = useMagicKeys();
+  const { meta_k, ctrl_k, escape } = useMagicKeys();
 
-watch([meta_k, ctrl_k], ([mk, ck]) => {
-  if (mk || ck) isOpen.value = !isOpen.value;
-});
+  watch([meta_k, ctrl_k], ([mk, ck]) => {
+    if (mk || ck) isOpen.value = !isOpen.value;
+  });
 
-watch(escape, (val) => {
-  if (val) isOpen.value = false;
-});
+  watch(escape, (val) => {
+    if (val) isOpen.value = false;
+  });
 
-watch(isOpen, (val) => {
-  if (val) {
-    query.value = '';
-    selectedIndex.value = 0;
-    nextTick(() => inputRef.value?.focus());
+  watch(isOpen, (val) => {
+    if (val) {
+      query.value = '';
+      selectedIndex.value = 0;
+      nextTick(() => inputRef.value?.focus());
+    }
+  });
+
+  const filteredGroups = computed(() => {
+    const q = query.value.toLowerCase();
+    if (!q) return docsNav;
+    return docsNav
+      .map((group) => ({
+        ...group,
+        items: group.items.filter(
+          (item) =>
+            item.title.toLowerCase().includes(q) ||
+            group.title.toLowerCase().includes(q),
+        ),
+      }))
+      .filter((group) => group.items.length > 0);
+  });
+
+  const flatItems = computed(() =>
+    filteredGroups.value.flatMap((g) => g.items),
+  );
+
+  function handleSelect(path: string) {
+    isOpen.value = false;
+    router.push(path);
   }
-});
 
-const filteredGroups = computed(() => {
-  const q = query.value.toLowerCase();
-  if (!q) return docsNav;
-  return docsNav
-    .map((group) => ({
-      ...group,
-      items: group.items.filter(
-        (item) =>
-          item.title.toLowerCase().includes(q) ||
-          group.title.toLowerCase().includes(q),
-      ),
-    }))
-    .filter((group) => group.items.length > 0);
-});
-
-const flatItems = computed(() =>
-  filteredGroups.value.flatMap((g) => g.items),
-);
-
-function handleSelect(path: string) {
-  isOpen.value = false;
-  router.push(path);
-}
-
-function handleKeydown(e: KeyboardEvent) {
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    selectedIndex.value = Math.min(
-      selectedIndex.value + 1,
-      flatItems.value.length - 1,
-    );
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    selectedIndex.value = Math.max(selectedIndex.value - 1, 0);
-  } else if (e.key === 'Enter' && flatItems.value[selectedIndex.value]) {
-    e.preventDefault();
-    handleSelect(flatItems.value[selectedIndex.value]!.path);
+  function handleKeydown(e: KeyboardEvent) {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      selectedIndex.value = Math.min(
+        selectedIndex.value + 1,
+        flatItems.value.length - 1,
+      );
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      selectedIndex.value = Math.max(selectedIndex.value - 1, 0);
+    } else if (e.key === 'Enter' && flatItems.value[selectedIndex.value]) {
+      e.preventDefault();
+      handleSelect(flatItems.value[selectedIndex.value]!.path);
+    }
   }
-}
 </script>
 
 <template>
@@ -90,7 +90,7 @@ function handleKeydown(e: KeyboardEvent) {
         v-if="isOpen"
         class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
         @click="isOpen = false"
-      />
+      ></div>
     </Transition>
 
     <Transition name="scale">
@@ -112,28 +112,28 @@ function handleKeydown(e: KeyboardEvent) {
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.12s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.12s ease;
+  }
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
 
-.scale-enter-active,
-.scale-leave-active {
-  transition:
-    opacity 0.15s ease,
-    transform 0.15s ease;
-}
-.scale-enter-from,
-.scale-leave-to {
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.96);
-}
-.scale-enter-to,
-.scale-leave-from {
-  transform: translate(-50%, -50%) scale(1);
-}
+  .scale-enter-active,
+  .scale-leave-active {
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+  .scale-enter-from,
+  .scale-leave-to {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+  .scale-enter-to,
+  .scale-leave-from {
+    transform: translate(-50%, -50%) scale(1);
+  }
 </style>

@@ -43,10 +43,25 @@
     const d = pseudoRandom(i + 1 + (j + 1) * 57);
     const ux = fx * fx * (3 - 2 * fx);
     const uy = fy * fy * (3 - 2 * fy);
-    return a * (1 - ux) * (1 - uy) + b * ux * (1 - uy) + c * (1 - ux) * uy + d * ux * uy;
+    return (
+      a * (1 - ux) * (1 - uy) +
+      b * ux * (1 - uy) +
+      c * (1 - ux) * uy +
+      d * ux * uy
+    );
   }
 
-  function octavedNoise(x: number, octaves: number, lac: number, gain: number, amp: number, freq: number, time: number, seed: number, flat: number): number {
+  function octavedNoise(
+    x: number,
+    octaves: number,
+    lac: number,
+    gain: number,
+    amp: number,
+    freq: number,
+    time: number,
+    seed: number,
+    flat: number,
+  ): number {
     let y = 0;
     let amplitude = amp;
     let frequency = freq;
@@ -59,12 +74,26 @@
     return y;
   }
 
-  function getCornerPoint(cx: number, cy: number, r: number, startA: number, arcLen: number, prog: number) {
+  function getCornerPoint(
+    cx: number,
+    cy: number,
+    r: number,
+    startA: number,
+    arcLen: number,
+    prog: number,
+  ) {
     const angle = startA + prog * arcLen;
     return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
   }
 
-  function getRoundedRectPoint(t: number, left: number, top: number, w: number, h: number, r: number) {
+  function getRoundedRectPoint(
+    t: number,
+    left: number,
+    top: number,
+    w: number,
+    h: number,
+    r: number,
+  ) {
     const sw = w - 2 * r;
     const sh = h - 2 * r;
     const ca = (Math.PI * r) / 2;
@@ -72,21 +101,56 @@
     const dist = t * total;
     let acc = 0;
 
-    if (dist <= acc + sw) return { x: left + r + ((dist - acc) / sw) * sw, y: top };
+    if (dist <= acc + sw)
+      return { x: left + r + ((dist - acc) / sw) * sw, y: top };
     acc += sw;
-    if (dist <= acc + ca) return getCornerPoint(left + w - r, top + r, r, -Math.PI / 2, Math.PI / 2, (dist - acc) / ca);
+    if (dist <= acc + ca)
+      return getCornerPoint(
+        left + w - r,
+        top + r,
+        r,
+        -Math.PI / 2,
+        Math.PI / 2,
+        (dist - acc) / ca,
+      );
     acc += ca;
-    if (dist <= acc + sh) return { x: left + w, y: top + r + ((dist - acc) / sh) * sh };
+    if (dist <= acc + sh)
+      return { x: left + w, y: top + r + ((dist - acc) / sh) * sh };
     acc += sh;
-    if (dist <= acc + ca) return getCornerPoint(left + w - r, top + h - r, r, 0, Math.PI / 2, (dist - acc) / ca);
+    if (dist <= acc + ca)
+      return getCornerPoint(
+        left + w - r,
+        top + h - r,
+        r,
+        0,
+        Math.PI / 2,
+        (dist - acc) / ca,
+      );
     acc += ca;
-    if (dist <= acc + sw) return { x: left + w - r - ((dist - acc) / sw) * sw, y: top + h };
+    if (dist <= acc + sw)
+      return { x: left + w - r - ((dist - acc) / sw) * sw, y: top + h };
     acc += sw;
-    if (dist <= acc + ca) return getCornerPoint(left + r, top + h - r, r, Math.PI / 2, Math.PI / 2, (dist - acc) / ca);
+    if (dist <= acc + ca)
+      return getCornerPoint(
+        left + r,
+        top + h - r,
+        r,
+        Math.PI / 2,
+        Math.PI / 2,
+        (dist - acc) / ca,
+      );
     acc += ca;
-    if (dist <= acc + sh) return { x: left, y: top + h - r - ((dist - acc) / sh) * sh };
+    if (dist <= acc + sh)
+      return { x: left, y: top + h - r - ((dist - acc) / sh) * sh };
     acc += sh;
-    return getCornerPoint(left + r, top + r, r, Math.PI, Math.PI / 2, (dist - acc) / ca);
+    return getCornerPoint(
+      left + r,
+      top + r,
+      r,
+      Math.PI,
+      Math.PI / 2,
+      (dist - acc) / ca,
+    );
   }
 
   let canvasWidth = 0;
@@ -145,9 +209,36 @@
       ctx.beginPath();
       for (let i = 0; i <= samples; i++) {
         const progress = i / samples;
-        const pt = getRoundedRectPoint(progress, BORDER_OFFSET, BORDER_OFFSET, bw, bh, r);
-        const xn = octavedNoise(progress * 8, 10, 1.6, 0.7, props.chaos, 10, timeVal, 0, 0);
-        const yn = octavedNoise(progress * 8, 10, 1.6, 0.7, props.chaos, 10, timeVal, 1, 0);
+        const pt = getRoundedRectPoint(
+          progress,
+          BORDER_OFFSET,
+          BORDER_OFFSET,
+          bw,
+          bh,
+          r,
+        );
+        const xn = octavedNoise(
+          progress * 8,
+          10,
+          1.6,
+          0.7,
+          props.chaos,
+          10,
+          timeVal,
+          0,
+          0,
+        );
+        const yn = octavedNoise(
+          progress * 8,
+          10,
+          1.6,
+          0.7,
+          props.chaos,
+          10,
+          timeVal,
+          1,
+          0,
+        );
         const dx = pt.x + xn * scale;
         const dy = pt.y + yn * scale;
         if (i === 0) ctx.moveTo(dx, dy);
@@ -173,14 +264,14 @@
     :style="{ '--eb-color': color, borderRadius: `${borderRadius}px` }"
   >
     <div class="eb-canvas-container">
-      <canvas ref="canvasRef" class="eb-canvas" />
+      <canvas ref="canvasRef" class="eb-canvas"></canvas>
     </div>
     <div class="eb-layers">
-      <div class="eb-glow-1" />
-      <div class="eb-glow-2" />
+      <div class="eb-glow-1"></div>
+      <div class="eb-glow-2"></div>
     </div>
     <div class="eb-content">
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

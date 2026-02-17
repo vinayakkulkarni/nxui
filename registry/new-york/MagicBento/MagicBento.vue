@@ -1,5 +1,11 @@
 <script setup lang="ts">
-  import { type ComponentPublicInstance, ref, computed, onMounted, onBeforeUnmount } from 'vue';
+  import {
+    type ComponentPublicInstance,
+    ref,
+    computed,
+    onMounted,
+    onBeforeUnmount,
+  } from 'vue';
   import { useEventListener, useMediaQuery } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
@@ -27,12 +33,36 @@
     }>(),
     {
       items: () => [
-        { title: 'Analytics', description: 'Track user behavior', label: 'Insights' },
-        { title: 'Dashboard', description: 'Centralized data view', label: 'Overview' },
-        { title: 'Collaboration', description: 'Work together seamlessly', label: 'Teamwork' },
-        { title: 'Automation', description: 'Streamline workflows', label: 'Efficiency' },
-        { title: 'Integration', description: 'Connect favorite tools', label: 'Connectivity' },
-        { title: 'Security', description: 'Enterprise-grade protection', label: 'Protection' },
+        {
+          title: 'Analytics',
+          description: 'Track user behavior',
+          label: 'Insights',
+        },
+        {
+          title: 'Dashboard',
+          description: 'Centralized data view',
+          label: 'Overview',
+        },
+        {
+          title: 'Collaboration',
+          description: 'Work together seamlessly',
+          label: 'Teamwork',
+        },
+        {
+          title: 'Automation',
+          description: 'Streamline workflows',
+          label: 'Efficiency',
+        },
+        {
+          title: 'Integration',
+          description: 'Connect favorite tools',
+          label: 'Connectivity',
+        },
+        {
+          title: 'Security',
+          description: 'Enterprise-grade protection',
+          label: 'Protection',
+        },
       ],
       glowColor: '132, 0, 255',
       particleCount: 12,
@@ -87,7 +117,9 @@
 
     if (!inside) {
       if (spotlightEl.value) spotlightEl.value.style.opacity = '0';
-      cardEls.value.forEach((c) => c?.style.setProperty('--glow-intensity', '0'));
+      cardEls.value.forEach((c) =>
+        c?.style.setProperty('--glow-intensity', '0'),
+      );
       return;
     }
 
@@ -107,11 +139,17 @@
       const cy = cr.top + cr.height / 2;
       const dist = Math.max(
         0,
-        Math.hypot(e.clientX - cx, e.clientY - cy) - Math.max(cr.width, cr.height) / 2,
+        Math.hypot(e.clientX - cx, e.clientY - cy) -
+          Math.max(cr.width, cr.height) / 2,
       );
       minDist = Math.min(minDist, dist);
 
-      const intensity = dist <= proximity ? 1 : dist <= fade ? (fade - dist) / (fade - proximity) : 0;
+      const intensity =
+        dist <= proximity
+          ? 1
+          : dist <= fade
+            ? (fade - dist) / (fade - proximity)
+            : 0;
       const relX = ((e.clientX - cr.left) / cr.width) * 100;
       const relY = ((e.clientY - cr.top) / cr.height) * 100;
 
@@ -175,7 +213,8 @@
         particles.push(el);
 
         requestAnimationFrame(() => {
-          el.style.transition = 'transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s ease';
+          el.style.transition =
+            'transform .3s cubic-bezier(.34,1.56,.64,1),opacity .3s ease';
           el.style.transform = 'scale(1)';
           el.style.opacity = '1';
           setTimeout(() => {
@@ -195,7 +234,8 @@
     timeoutsByCard.get(idx)?.forEach(clearTimeout);
     timeoutsByCard.delete(idx);
     particlesByCard.get(idx)?.forEach((el) => {
-      el.style.transition = 'transform .3s cubic-bezier(.36,0,.66,-.56),opacity .3s ease';
+      el.style.transition =
+        'transform .3s cubic-bezier(.36,0,.66,-.56),opacity .3s ease';
       el.style.transform = 'scale(0)';
       el.style.opacity = '0';
       setTimeout(() => el.remove(), 400);
@@ -292,10 +332,7 @@
 </script>
 
 <template>
-  <div
-    ref="gridRef"
-    :class="cn('magic-bento-grid', $props.class)"
-  >
+  <div ref="gridRef" :class="cn('magic-bento-grid', $props.class)">
     <div
       v-for="(item, index) in items"
       :key="index"

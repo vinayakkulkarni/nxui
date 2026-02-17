@@ -34,7 +34,8 @@
       particleSize: 0.02,
       rotationSpeed: 0.001,
       spiralArms: 3,
-      colors: () => ['#4f46e5', '#8b5cf6', '#ec4899'] as [string, string, string],
+      colors: () =>
+        ['#4f46e5', '#8b5cf6', '#ec4899'] as [string, string, string],
       mouseInfluence: 0.5,
       autoRotate: true,
       blendMode: 'additive',
@@ -92,19 +93,29 @@
       const elapsed = clock.getElapsedTime();
       if (material) material.uniforms.uTime.value = elapsed;
       if (particles) {
-        state.currentRotation.x += (state.targetRotation.x - state.currentRotation.x) * props.damping;
-        state.currentRotation.y += (state.targetRotation.y - state.currentRotation.y) * props.damping;
-        if (props.autoRotate && !state.isDragging) state.targetRotation.y += props.rotationSpeed;
+        state.currentRotation.x +=
+          (state.targetRotation.x - state.currentRotation.x) * props.damping;
+        state.currentRotation.y +=
+          (state.targetRotation.y - state.currentRotation.y) * props.damping;
+        if (props.autoRotate && !state.isDragging)
+          state.targetRotation.y += props.rotationSpeed;
         const td = 0.05;
-        const tx = !state.isDragging && props.mouseInfluence > 0 ? state.mouse.y * props.mouseInfluence * 0.3 : 0;
-        const ty = !state.isDragging && props.mouseInfluence > 0 ? state.mouse.x * props.mouseInfluence * 0.3 : 0;
+        const tx =
+          !state.isDragging && props.mouseInfluence > 0
+            ? state.mouse.y * props.mouseInfluence * 0.3
+            : 0;
+        const ty =
+          !state.isDragging && props.mouseInfluence > 0
+            ? state.mouse.x * props.mouseInfluence * 0.3
+            : 0;
         state.currentTilt.x += (tx - state.currentTilt.x) * td;
         state.currentTilt.y += (ty - state.currentTilt.y) * td;
         particles.rotation.x = state.currentRotation.x + state.currentTilt.x;
         particles.rotation.y = state.currentRotation.y + state.currentTilt.y;
       }
       if (camera) {
-        state.currentZoom += (state.targetZoom - state.currentZoom) * props.damping;
+        state.currentZoom +=
+          (state.targetZoom - state.currentZoom) * props.damping;
         camera.position.z = state.currentZoom;
         if (props.cameraMovement && !state.isDragging) {
           camera.position.x = Math.sin(elapsed * 0.1) * 0.2;
@@ -138,13 +149,20 @@
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.z = 3;
-    renderer = new THREE.WebGLRenderer({ canvas: canvasRef.value, alpha: true, antialias: true });
+    renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.value,
+      alpha: true,
+      antialias: true,
+    });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     initParticles();
     cleanupInteractions = useGalaxyInteractions(containerRef.value, state, {
-      enableDrag: props.enableDrag, enableZoom: props.enableZoom,
-      enableTouch: props.enableTouch, minZoom: props.minZoom, maxZoom: props.maxZoom,
+      enableDrag: props.enableDrag,
+      enableZoom: props.enableZoom,
+      enableTouch: props.enableTouch,
+      minZoom: props.minZoom,
+      maxZoom: props.maxZoom,
     });
     animate();
   });
@@ -160,6 +178,6 @@
 
 <template>
   <div ref="containerRef" class="relative size-full">
-    <canvas ref="canvasRef" class="size-full" />
+    <canvas ref="canvasRef" class="size-full"></canvas>
   </div>
 </template>

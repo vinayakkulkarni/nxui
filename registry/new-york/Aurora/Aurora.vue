@@ -109,7 +109,11 @@ void main() {
     const container = containerRef.value;
     if (!container) return;
 
-    renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true });
+    renderer = new Renderer({
+      alpha: true,
+      premultipliedAlpha: true,
+      antialias: true,
+    });
     const gl = renderer.gl;
     glContext = gl;
     gl.clearColor(0, 0, 0, 0);
@@ -170,5 +174,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

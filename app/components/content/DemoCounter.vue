@@ -13,7 +13,9 @@
   <ComponentDemo
     :code="`<Counter :value='1234' :font-size='80' :gradient-from='var(--background)' />`"
   >
-    <div class="flex h-[300px] w-full flex-col items-center justify-center gap-6 rounded-lg">
+    <div
+      class="flex h-[300px] w-full flex-col items-center justify-center gap-6 rounded-lg"
+    >
       <Counter
         :value="value"
         :font-size="80"

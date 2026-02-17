@@ -22,7 +22,7 @@
   const prevScrollY = ref(0);
 
   const x = computed(() => {
-    const wrapped = ((baseX.value % 12.5) + 12.5) % 12.5 - 12.5;
+    const wrapped = (((baseX.value % 12.5) + 12.5) % 12.5) - 12.5;
     return `${wrapped}%`;
   });
 
@@ -43,8 +43,7 @@
       directionFactor.value = 1;
     }
 
-    let moveBy =
-      directionFactor.value * props.baseVelocity * (delta / 1000);
+    let moveBy = directionFactor.value * props.baseVelocity * (delta / 1000);
     moveBy += directionFactor.value * moveBy * velocityFactor;
 
     baseX.value += moveBy;
@@ -57,11 +56,7 @@
       :class="cn('flex whitespace-nowrap', props.class)"
       :style="{ transform: `translateX(${x})` }"
     >
-      <span
-        v-for="i in repeats"
-        :key="i"
-        class="mr-10 block last:mr-10"
-      >
+      <span v-for="i in repeats" :key="i" class="mr-10 block last:mr-10">
         {{ text }}
       </span>
     </div>

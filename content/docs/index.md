@@ -27,11 +27,11 @@ Or browse the component docs and copy the source code directly.
 
 ## Tech Stack
 
-| Library | Purpose |
-|---------|---------|
-| [Vue 3](https://vuejs.org) | UI framework |
-| [Nuxt 4](https://nuxt.com) | SSR/SSG framework |
-| [Tailwind CSS v4](https://tailwindcss.com) | Utility-first styling |
-| [motion-v](https://motion-v.vercel.app) | Animation library (Vue port of Framer Motion) |
-| [VueUse](https://vueuse.org) | Composition utilities |
-| [reka-ui](https://reka-ui.com) | Headless UI primitives |
+| Library                                    | Purpose                                       |
+| ------------------------------------------ | --------------------------------------------- |
+| [Vue 3](https://vuejs.org)                 | UI framework                                  |
+| [Nuxt 4](https://nuxt.com)                 | SSR/SSG framework                             |
+| [Tailwind CSS v4](https://tailwindcss.com) | Utility-first styling                         |
+| [motion-v](https://motion-v.vercel.app)    | Animation library (Vue port of Framer Motion) |
+| [VueUse](https://vueuse.org)               | Composition utilities                         |
+| [reka-ui](https://reka-ui.com)             | Headless UI primitives                        |

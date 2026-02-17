@@ -186,8 +186,10 @@ void main(){
           const phase = particlePhases[i] ?? 0;
           const yIdx = i * 3 + 1;
           const xIdx = i * 3;
-          positions[yIdx] = (positions[yIdx] ?? 0) + Math.sin(t + phase) * 0.001;
-          positions[xIdx] = (positions[xIdx] ?? 0) + Math.cos(t * 0.5 + phase) * 0.0005;
+          positions[yIdx] =
+            (positions[yIdx] ?? 0) + Math.sin(t + phase) * 0.001;
+          positions[xIdx] =
+            (positions[xIdx] ?? 0) + Math.cos(t * 0.5 + phase) * 0.0005;
           if ((positions[yIdx] ?? 0) > 2) positions[yIdx] = -2;
           if ((positions[yIdx] ?? 0) < -2) positions[yIdx] = 2;
         }
@@ -203,7 +205,11 @@ void main(){
     if (!canvasRef.value || !containerRef.value) return;
     const { width, height } = containerRef.value.getBoundingClientRect();
 
-    renderer = new THREE.WebGLRenderer({ canvas: canvasRef.value, antialias: false, alpha: true });
+    renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.value,
+      antialias: false,
+      alpha: true,
+    });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(width, height);
 
@@ -247,7 +253,10 @@ void main(){
         particlePhases[i] = Math.random() * Math.PI * 2;
       }
       pointsGeo = new THREE.BufferGeometry();
-      pointsGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+      pointsGeo.setAttribute(
+        'position',
+        new THREE.BufferAttribute(positions, 3),
+      );
       pointsMat = new THREE.PointsMaterial({
         color: new THREE.Color(props.particleColor),
         size: 0.02,
@@ -277,10 +286,18 @@ void main(){
 <template>
   <div
     ref="containerRef"
-    :class="cn('relative flex min-h-screen w-full flex-col items-center overflow-hidden text-gray-900', props.class)"
+    :class="
+      cn(
+        'relative flex min-h-screen w-full flex-col items-center overflow-hidden text-gray-900',
+        props.class,
+      )
+    "
     :style="{ containerType: 'size' }"
   >
-    <canvas ref="canvasRef" class="pointer-events-none absolute inset-0 z-0 size-full" />
+    <canvas
+      ref="canvasRef"
+      class="pointer-events-none absolute inset-0 z-0 size-full"
+    ></canvas>
 
     <div
       v-if="props.title1 || props.title2 || $slots.default"
@@ -307,7 +324,11 @@ void main(){
               :is="motion.h1"
               :initial="{ y: '100%', opacity: 0 }"
               :animate="{ y: '0%', opacity: 1 }"
-              :transition="{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.35 }"
+              :transition="{
+                duration: 1,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.35,
+              }"
               :class="HEADLINE"
             >
               {{ props.title2 }}
@@ -321,7 +342,7 @@ void main(){
           :animate="{ opacity: 1, y: 0 }"
           :transition="{ duration: 0.8, delay: 0.7, ease: 'easeOut' }"
         >
-          <slot />
+          <slot></slot>
         </component>
       </div>
     </div>

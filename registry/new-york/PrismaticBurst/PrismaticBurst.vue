@@ -33,9 +33,13 @@
     let h = hex.trim();
     if (h.startsWith('#')) h = h.slice(1);
     if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
-    const intVal = parseInt(h, 16);
+    const intVal = Number.parseInt(h, 16);
     if (Number.isNaN(intVal)) return [1, 1, 1];
-    return [((intVal >> 16) & 255) / 255, ((intVal >> 8) & 255) / 255, (intVal & 255) / 255];
+    return [
+      ((intVal >> 16) & 255) / 255,
+      ((intVal >> 8) & 255) / 255,
+      (intVal & 255) / 255,
+    ];
   }
 
   const containerRef = ref<HTMLDivElement>();
@@ -257,8 +261,14 @@ void main(){
   useEventListener(containerRef, 'pointermove', (e: PointerEvent) => {
     if (!containerRef.value) return;
     const rect = containerRef.value.getBoundingClientRect();
-    mouseTarget[0] = Math.min(Math.max((e.clientX - rect.left) / Math.max(rect.width, 1), 0), 1);
-    mouseTarget[1] = Math.min(Math.max((e.clientY - rect.top) / Math.max(rect.height, 1), 0), 1);
+    mouseTarget[0] = Math.min(
+      Math.max((e.clientX - rect.left) / Math.max(rect.width, 1), 0),
+      1,
+    );
+    mouseTarget[1] = Math.min(
+      Math.max((e.clientY - rect.top) / Math.max(rect.height, 1), 0),
+      1,
+    );
   });
 
   useResizeObserver(containerRef, () => {
@@ -266,7 +276,10 @@ void main(){
     const w = containerRef.value.clientWidth || 1;
     const h = containerRef.value.clientHeight || 1;
     renderer.setSize(w, h);
-    programRef.uniforms.uResolution.value = [renderer.gl.drawingBufferWidth, renderer.gl.drawingBufferHeight];
+    programRef.uniforms.uResolution.value = [
+      renderer.gl.drawingBufferWidth,
+      renderer.gl.drawingBufferHeight,
+    ];
   });
 
   onMounted(() => {
@@ -298,7 +311,11 @@ void main(){
     gradTexRef.wrapS = gl.CLAMP_TO_EDGE;
     gradTexRef.wrapT = gl.CLAMP_TO_EDGE;
 
-    const animTypeMap: Record<string, number> = { rotate: 0, rotate3d: 1, hover: 2 };
+    const animTypeMap: Record<string, number> = {
+      rotate: 0,
+      rotate3d: 1,
+      hover: 2,
+    };
 
     const geometry = new Triangle(gl);
     programRef = new Program(gl, {
@@ -338,7 +355,11 @@ void main(){
       mouseSmooth[0] += (mouseTarget[0] - mouseSmooth[0]) * alpha;
       mouseSmooth[1] += (mouseTarget[1] - mouseSmooth[1]) * alpha;
 
-      const animMap: Record<string, number> = { rotate: 0, rotate3d: 1, hover: 2 };
+      const animMap: Record<string, number> = {
+        rotate: 0,
+        rotate3d: 1,
+        hover: 2,
+      };
       programRef.uniforms.uMouse.value = mouseSmooth;
       programRef.uniforms.uTime.value = accumTime;
       programRef.uniforms.uIntensity.value = props.intensity;
@@ -359,7 +380,13 @@ void main(){
       const canvas = glContext.canvas as HTMLCanvasElement;
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
       if (gradTexRef) {
-        try { glContext.deleteTexture((gradTexRef as unknown as { texture: WebGLTexture }).texture); } catch { /* ignore */ }
+        try {
+          glContext.deleteTexture(
+            (gradTexRef as unknown as { texture: WebGLTexture }).texture,
+          );
+        } catch {
+          /* ignore */
+        }
       }
       glContext.getExtension('WEBGL_lose_context')?.loseContext();
     }
@@ -367,5 +394,5 @@ void main(){
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

@@ -61,16 +61,60 @@
   };
 
   const itemVariantsMap: Record<AnimationType, Record<string, unknown>> = {
-    'fade-in': { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: props.duration } } },
-    'blur-in': { hidden: { opacity: 0, filter: 'blur(10px)' }, show: { opacity: 1, filter: 'blur(0px)', transition: { duration: props.duration } } },
-    'blur-in-up': { hidden: { opacity: 0, filter: 'blur(10px)', y: 20 }, show: { opacity: 1, filter: 'blur(0px)', y: 0, transition: { duration: props.duration } } },
-    'blur-in-down': { hidden: { opacity: 0, filter: 'blur(10px)', y: -20 }, show: { opacity: 1, filter: 'blur(0px)', y: 0, transition: { duration: props.duration } } },
-    'slide-up': { hidden: { y: 20, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: props.duration } } },
-    'slide-down': { hidden: { y: -20, opacity: 0 }, show: { y: 0, opacity: 1, transition: { duration: props.duration } } },
-    'slide-left': { hidden: { x: 20, opacity: 0 }, show: { x: 0, opacity: 1, transition: { duration: props.duration } } },
-    'slide-right': { hidden: { x: -20, opacity: 0 }, show: { x: 0, opacity: 1, transition: { duration: props.duration } } },
-    'scale-up': { hidden: { scale: 0.5, opacity: 0 }, show: { scale: 1, opacity: 1, transition: { duration: props.duration } } },
-    'scale-down': { hidden: { scale: 1.5, opacity: 0 }, show: { scale: 1, opacity: 1, transition: { duration: props.duration } } },
+    'fade-in': {
+      hidden: { opacity: 0 },
+      show: { opacity: 1, transition: { duration: props.duration } },
+    },
+    'blur-in': {
+      hidden: { opacity: 0, filter: 'blur(10px)' },
+      show: {
+        opacity: 1,
+        filter: 'blur(0px)',
+        transition: { duration: props.duration },
+      },
+    },
+    'blur-in-up': {
+      hidden: { opacity: 0, filter: 'blur(10px)', y: 20 },
+      show: {
+        opacity: 1,
+        filter: 'blur(0px)',
+        y: 0,
+        transition: { duration: props.duration },
+      },
+    },
+    'blur-in-down': {
+      hidden: { opacity: 0, filter: 'blur(10px)', y: -20 },
+      show: {
+        opacity: 1,
+        filter: 'blur(0px)',
+        y: 0,
+        transition: { duration: props.duration },
+      },
+    },
+    'slide-up': {
+      hidden: { y: 20, opacity: 0 },
+      show: { y: 0, opacity: 1, transition: { duration: props.duration } },
+    },
+    'slide-down': {
+      hidden: { y: -20, opacity: 0 },
+      show: { y: 0, opacity: 1, transition: { duration: props.duration } },
+    },
+    'slide-left': {
+      hidden: { x: 20, opacity: 0 },
+      show: { x: 0, opacity: 1, transition: { duration: props.duration } },
+    },
+    'slide-right': {
+      hidden: { x: -20, opacity: 0 },
+      show: { x: 0, opacity: 1, transition: { duration: props.duration } },
+    },
+    'scale-up': {
+      hidden: { scale: 0.5, opacity: 0 },
+      show: { scale: 1, opacity: 1, transition: { duration: props.duration } },
+    },
+    'scale-down': {
+      hidden: { scale: 1.5, opacity: 0 },
+      show: { scale: 1, opacity: 1, transition: { duration: props.duration } },
+    },
   };
 
   const itemVariants = computed(() => itemVariantsMap[props.animation]);
@@ -93,7 +137,12 @@
         :class="cn('inline-block', segmentClass)"
         :variants="itemVariants"
       >
-        {{ segment }}<span v-if="by === 'word' && i < segments.length - 1" class="inline-block">&nbsp;</span>
+        {{ segment
+        }}<span
+          v-if="by === 'word' && i < segments.length - 1"
+          class="inline-block"
+          >&nbsp;</span
+        >
       </component>
     </component>
   </AnimatePresence>

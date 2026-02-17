@@ -34,14 +34,18 @@
       return;
     }
 
-    const { left, top, width, height } = magnetRef.value.getBoundingClientRect();
+    const { left, top, width, height } =
+      magnetRef.value.getBoundingClientRect();
     const centerX = left + width / 2;
     const centerY = top + height / 2;
 
     const distX = Math.abs(centerX - e.clientX);
     const distY = Math.abs(centerY - e.clientY);
 
-    if (distX < width / 2 + props.padding && distY < height / 2 + props.padding) {
+    if (
+      distX < width / 2 + props.padding &&
+      distY < height / 2 + props.padding
+    ) {
       isActive.value = true;
       position.value = {
         x: (e.clientX - centerX) / props.magnetStrength,
@@ -68,7 +72,7 @@
         willChange: 'transform',
       }"
     >
-      <slot />
+      <slot></slot>
     </div>
   </div>
 </template>

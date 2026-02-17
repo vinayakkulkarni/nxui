@@ -15,7 +15,9 @@
   />
 </template>`"
   >
-    <div class="flex h-[200px] w-full items-center justify-center gap-2 text-4xl font-bold">
+    <div
+      class="flex h-[200px] w-full items-center justify-center gap-2 text-4xl font-bold"
+    >
       <span>Make it</span>
       <RotatingText
         :texts="['Creative', 'Dynamic', 'Animated', 'Beautiful']"

@@ -69,7 +69,9 @@
         :transition="{
           duration,
           delay: getDelay(
-            words.slice(0, wi).reduce((sum, w) => sum + w.characters.length, 0) + ci,
+            words
+              .slice(0, wi)
+              .reduce((sum, w) => sum + w.characters.length, 0) + ci,
           ),
           type: 'spring',
           damping: 25,

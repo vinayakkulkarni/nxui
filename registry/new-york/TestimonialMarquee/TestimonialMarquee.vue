@@ -39,26 +39,66 @@
 
 <template>
   <!-- Dual row variant -->
-  <div v-if="variant === 'dual'" :class="cn('flex flex-col gap-4 overflow-hidden py-8', props.class)">
-    <TestimonialMarqueeRow :speed="speed" direction="left" :pause-on-hover="pauseOnHover">
-      <TestimonialMarqueeCard v-for="(item, i) in firstHalf" :key="`r1-${i}`" :item="item" />
+  <div
+    v-if="variant === 'dual'"
+    :class="cn('flex flex-col gap-4 overflow-hidden py-8', props.class)"
+  >
+    <TestimonialMarqueeRow
+      :speed="speed"
+      direction="left"
+      :pause-on-hover="pauseOnHover"
+    >
+      <TestimonialMarqueeCard
+        v-for="(item, i) in firstHalf"
+        :key="`r1-${i}`"
+        :item="item"
+      />
     </TestimonialMarqueeRow>
-    <TestimonialMarqueeRow :speed="speed" direction="right" :pause-on-hover="pauseOnHover">
-      <TestimonialMarqueeCard v-for="(item, i) in secondHalf" :key="`r2-${i}`" :item="item" />
+    <TestimonialMarqueeRow
+      :speed="speed"
+      direction="right"
+      :pause-on-hover="pauseOnHover"
+    >
+      <TestimonialMarqueeCard
+        v-for="(item, i) in secondHalf"
+        :key="`r2-${i}`"
+        :item="item"
+      />
     </TestimonialMarqueeRow>
   </div>
 
   <!-- Flush variant -->
-  <div v-else-if="variant === 'flush'" :class="cn('overflow-hidden py-8', props.class)">
-    <TestimonialMarqueeRow :speed="speed" direction="left" :pause-on-hover="pauseOnHover" class="[--gap:0]">
-      <TestimonialMarqueeCard v-for="(item, i) in displayItems" :key="`f-${i}`" :item="item" variant="flush" />
+  <div
+    v-else-if="variant === 'flush'"
+    :class="cn('overflow-hidden py-8', props.class)"
+  >
+    <TestimonialMarqueeRow
+      :speed="speed"
+      direction="left"
+      :pause-on-hover="pauseOnHover"
+      class="[--gap:0]"
+    >
+      <TestimonialMarqueeCard
+        v-for="(item, i) in displayItems"
+        :key="`f-${i}`"
+        :item="item"
+        variant="flush"
+      />
     </TestimonialMarqueeRow>
   </div>
 
   <!-- Default single row -->
   <div v-else :class="cn('overflow-hidden py-8', props.class)">
-    <TestimonialMarqueeRow :speed="speed" direction="left" :pause-on-hover="pauseOnHover">
-      <TestimonialMarqueeCard v-for="(item, i) in displayItems" :key="`d-${i}`" :item="item" />
+    <TestimonialMarqueeRow
+      :speed="speed"
+      direction="left"
+      :pause-on-hover="pauseOnHover"
+    >
+      <TestimonialMarqueeCard
+        v-for="(item, i) in displayItems"
+        :key="`d-${i}`"
+        :item="item"
+      />
     </TestimonialMarqueeRow>
   </div>
 </template>

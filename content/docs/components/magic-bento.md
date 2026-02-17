@@ -14,19 +14,19 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/magic-bento.json"
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `items` | `MagicBentoItem[]` | 6 default cards | Array of card data objects |
-| `glow-color` | `string` | `'132, 0, 255'` | RGB values for glow effects |
-| `particle-count` | `number` | `12` | Number of particles per card on hover |
-| `spotlight-radius` | `number` | `300` | Radius of the cursor spotlight in px |
-| `enable-spotlight` | `boolean` | `true` | Enable global cursor spotlight |
-| `enable-border-glow` | `boolean` | `true` | Enable border glow on proximity |
-| `enable-particles` | `boolean` | `true` | Enable floating particles on hover |
-| `enable-tilt` | `boolean` | `false` | Enable 3D tilt on hover |
-| `enable-magnetism` | `boolean` | `true` | Enable slight magnetic pull toward cursor |
-| `click-effect` | `boolean` | `true` | Enable ripple effect on click |
-| `text-auto-hide` | `boolean` | `true` | Clamp title/description overflow |
+| Prop                 | Type               | Default         | Description                               |
+| -------------------- | ------------------ | --------------- | ----------------------------------------- |
+| `items`              | `MagicBentoItem[]` | 6 default cards | Array of card data objects                |
+| `glow-color`         | `string`           | `'132, 0, 255'` | RGB values for glow effects               |
+| `particle-count`     | `number`           | `12`            | Number of particles per card on hover     |
+| `spotlight-radius`   | `number`           | `300`           | Radius of the cursor spotlight in px      |
+| `enable-spotlight`   | `boolean`          | `true`          | Enable global cursor spotlight            |
+| `enable-border-glow` | `boolean`          | `true`          | Enable border glow on proximity           |
+| `enable-particles`   | `boolean`          | `true`          | Enable floating particles on hover        |
+| `enable-tilt`        | `boolean`          | `false`         | Enable 3D tilt on hover                   |
+| `enable-magnetism`   | `boolean`          | `true`          | Enable slight magnetic pull toward cursor |
+| `click-effect`       | `boolean`          | `true`          | Enable ripple effect on click             |
+| `text-auto-hide`     | `boolean`          | `true`          | Clamp title/description overflow          |
 
 ## Item Interface
 

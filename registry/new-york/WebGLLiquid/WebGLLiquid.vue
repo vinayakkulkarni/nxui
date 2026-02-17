@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+  import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
   import type { WebGLLiquidProps } from '~/types/components';
   import { cn } from '~/lib/utils';
@@ -84,7 +84,7 @@ void main(){
   gl_FragColor=vec4(clamp(col,0.0,1.0),clamp(alpha,0.0,1.0));
 }`;
 
-  const HEX_RE = /^#?[0-9a-fA-F]{6}$/;
+  const HEX_RE = /^#?[0-9a-f]{6}$/i;
   const FB_DEEP = '#04050b';
   const FB_MID = '#134d93';
   const FB_HL = '#8cecff';
@@ -98,9 +98,9 @@ void main(){
   function hexToRgb(hex: string, fb: string): [number, number, number] {
     const n = sanitizeHex(hex, fb).replace('#', '');
     return [
-      parseInt(n.slice(0, 2), 16) / 255,
-      parseInt(n.slice(2, 4), 16) / 255,
-      parseInt(n.slice(4, 6), 16) / 255,
+      Number.parseInt(n.slice(0, 2), 16) / 255,
+      Number.parseInt(n.slice(2, 4), 16) / 255,
+      Number.parseInt(n.slice(4, 6), 16) / 255,
     ];
   }
 
@@ -119,9 +119,13 @@ void main(){
   let startTime = 0;
 
   type Uniforms = Record<string, WebGLUniformLocation>;
-  let uniforms: Uniforms = {};
+  const uniforms: Uniforms = {};
 
-  function compileShader(ctx: WebGLRenderingContext, type: number, src: string): WebGLShader | null {
+  function compileShader(
+    ctx: WebGLRenderingContext,
+    type: number,
+    src: string,
+  ): WebGLShader | null {
     const s = ctx.createShader(type);
     if (!s) return null;
     ctx.shaderSource(s, src);
@@ -140,7 +144,12 @@ void main(){
     canvasRef.value.width = Math.max(1, Math.floor(width * dpr));
     canvasRef.value.height = Math.max(1, Math.floor(height * dpr));
     gl.viewport(0, 0, canvasRef.value.width, canvasRef.value.height);
-    if (uniforms.u_res) gl.uniform2f(uniforms.u_res, canvasRef.value.width, canvasRef.value.height);
+    if (uniforms.u_res)
+      gl.uniform2f(
+        uniforms.u_res,
+        canvasRef.value.width,
+        canvasRef.value.height,
+      );
   }
 
   useResizeObserver(hostRef, resize);
@@ -195,13 +204,26 @@ void main(){
     const posLoc = gl.getAttribLocation(program, 'position');
     quadBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]),
+      gl.STATIC_DRAW,
+    );
     gl.enableVertexAttribArray(posLoc);
     gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
 
     const names = [
-      'u_res', 'u_time', 'u_colorDeep', 'u_colorMid', 'u_colorHighlight',
-      'u_speed', 'u_flowStrength', 'u_grain', 'u_contrast', 'u_opacity', 'u_reveal',
+      'u_res',
+      'u_time',
+      'u_colorDeep',
+      'u_colorMid',
+      'u_colorHighlight',
+      'u_speed',
+      'u_flowStrength',
+      'u_grain',
+      'u_contrast',
+      'u_opacity',
+      'u_reveal',
     ];
     for (const n of names) {
       const loc = gl.getUniformLocation(program, n);
@@ -231,7 +253,12 @@ void main(){
 <template>
   <div
     ref="hostRef"
-    :class="cn('relative flex min-h-screen w-full items-center overflow-hidden bg-[#02040b] text-white', props.class)"
+    :class="
+      cn(
+        'relative flex min-h-screen w-full items-center overflow-hidden bg-[#02040b] text-white',
+        props.class,
+      )
+    "
     :style="{ containerType: 'size' }"
   >
     <canvas
@@ -239,12 +266,18 @@ void main(){
       aria-hidden="true"
       class="pointer-events-none absolute inset-0 size-full"
       style="display: block"
-    />
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent" />
-    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_40%,rgba(255,255,255,0.16),transparent_45%)]" />
+    ></canvas>
+    <div
+      class="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent"
+    ></div>
+    <div
+      class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_40%,rgba(255,255,255,0.16),transparent_45%)]"
+    ></div>
 
     <div
-      v-if="props.title || props.subtitle || props.description || $slots.default"
+      v-if="
+        props.title || props.subtitle || props.description || $slots.default
+      "
       class="relative z-10 mx-auto w-full max-w-[1240px] px-6 py-20 md:px-10 md:py-28"
     >
       <div class="max-w-[760px]">
@@ -262,7 +295,7 @@ void main(){
           {{ props.description }}
         </p>
         <div v-if="$slots.default" class="mt-10">
-          <slot />
+          <slot></slot>
         </div>
       </div>
     </div>

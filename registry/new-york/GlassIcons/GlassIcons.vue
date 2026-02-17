@@ -42,7 +42,10 @@
       :aria-label="item.label"
       type="button"
     >
-      <span class="glass-icon-btn__back" :style="getBackgroundStyle(item.color)" />
+      <span
+        class="glass-icon-btn__back"
+        :style="getBackgroundStyle(item.color)"
+      ></span>
       <span class="glass-icon-btn__front">
         <span class="glass-icon-btn__icon" aria-hidden="true">
           <Icon :name="item.icon" class="size-6" />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LiquidBlob from '@registry/new-york/LiquidBlob/LiquidBlob.vue';
+  import LiquidBlob from '@registry/new-york/LiquidBlob/LiquidBlob.vue';
 </script>
 
 <template>
@@ -13,9 +13,13 @@ import LiquidBlob from '@registry/new-york/LiquidBlob/LiquidBlob.vue';
   <LiquidBlob class=&quot;h-[300px] w-full rounded-xl bg-neutral-100 dark:bg-zinc-900&quot; />
 </template>`"
   >
-    <LiquidBlob class="h-[300px] w-full rounded-xl bg-neutral-100 dark:bg-zinc-900">
+    <LiquidBlob
+      class="h-[300px] w-full rounded-xl bg-neutral-100 dark:bg-zinc-900"
+    >
       <div class="flex h-full items-center justify-center">
-        <p class="text-lg font-medium text-neutral-800/80 dark:text-white/80">Move your cursor</p>
+        <p class="text-lg font-medium text-neutral-800/80 dark:text-white/80">
+          Move your cursor
+        </p>
       </div>
     </LiquidBlob>
   </ComponentDemo>

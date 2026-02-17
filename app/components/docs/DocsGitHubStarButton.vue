@@ -1,27 +1,27 @@
 <script setup lang="ts">
-const stars = useLocalStorage<number | null>('github-stars-count', null);
-const cacheTimestamp = useLocalStorage<number>('github-stars-ts', 0);
+  const stars = useLocalStorage<number | null>('github-stars-count', null);
+  const cacheTimestamp = useLocalStorage<number>('github-stars-ts', 0);
 
-const CACHE_TTL = 15 * 60 * 1000;
+  const CACHE_TTL = 15 * 60 * 1000;
 
-onMounted(async () => {
-  const isFresh = Date.now() - cacheTimestamp.value < CACHE_TTL;
-  if (stars.value !== null && isFresh) return;
+  onMounted(async () => {
+    const isFresh = Date.now() - cacheTimestamp.value < CACHE_TTL;
+    if (stars.value !== null && isFresh) return;
 
-  try {
-    const res = await fetch(
-      'https://api.github.com/repos/vinayakkulkarni/nxui',
-    );
-    if (!res.ok) return;
-    const data = await res.json();
-    if (typeof data.stargazers_count === 'number') {
-      stars.value = data.stargazers_count;
-      cacheTimestamp.value = Date.now();
+    try {
+      const res = await fetch(
+        'https://api.github.com/repos/vinayakkulkarni/nxui',
+      );
+      if (!res.ok) return;
+      const data = await res.json();
+      if (typeof data.stargazers_count === 'number') {
+        stars.value = data.stargazers_count;
+        cacheTimestamp.value = Date.now();
+      }
+    } catch {
+      // keep stale cache on failure
     }
-  } catch {
-    // keep stale cache on failure
-  }
-});
+  });
 </script>
 
 <template>
@@ -38,7 +38,7 @@ onMounted(async () => {
       <span class="font-medium">Star</span>
     </div>
     <template v-if="stars !== null">
-      <div class="h-4 w-px bg-yellow-500/15" />
+      <div class="h-4 w-px bg-yellow-500/15"></div>
       <span
         class="font-mono text-xs opacity-70 transition-opacity group-hover:opacity-100"
       >

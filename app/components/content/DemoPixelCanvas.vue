@@ -1,73 +1,73 @@
 <script setup lang="ts">
-import PixelCanvas from '@registry/new-york/PixelCanvas/PixelCanvas.vue';
-import type { PixelCanvasVariant } from '~/types/components';
+  import PixelCanvas from '@registry/new-york/PixelCanvas/PixelCanvas.vue';
+  import type { PixelCanvasVariant } from '~/types/components';
 
-const activeTab = ref(0);
+  const activeTab = ref(0);
 
-const tabs: {
-  label: string;
-  variant: PixelCanvasVariant;
-  colors: string[];
-  gap: number;
-  speed: number;
-  code: string;
-}[] = [
-  {
-    label: 'Default',
-    variant: 'default',
-    colors: ['#e879f9', '#a78bfa', '#38bdf8', '#22d3ee'],
-    gap: 6,
-    speed: 0.02,
-    code: `<PixelCanvas
+  const tabs: {
+    label: string;
+    variant: PixelCanvasVariant;
+    colors: string[];
+    gap: number;
+    speed: number;
+    code: string;
+  }[] = [
+    {
+      label: 'Default',
+      variant: 'default',
+      colors: ['#e879f9', '#a78bfa', '#38bdf8', '#22d3ee'],
+      gap: 6,
+      speed: 0.02,
+      code: `<PixelCanvas
   :colors="['#e879f9', '#a78bfa', '#38bdf8', '#22d3ee']"
   class="h-[400px]"
 />`,
-  },
-  {
-    label: 'Trail Variant',
-    variant: 'trail',
-    colors: ['#f97316', '#fb923c', '#fbbf24', '#facc15'],
-    gap: 8,
-    speed: 0.015,
-    code: `<PixelCanvas
+    },
+    {
+      label: 'Trail Variant',
+      variant: 'trail',
+      colors: ['#f97316', '#fb923c', '#fbbf24', '#facc15'],
+      gap: 8,
+      speed: 0.015,
+      code: `<PixelCanvas
   variant="trail"
   :colors="['#f97316', '#fb923c', '#fbbf24', '#facc15']"
   :gap="8"
   :speed="0.015"
 />`,
-  },
-  {
-    label: 'Glow Variant',
-    variant: 'glow',
-    colors: ['#22c55e', '#10b981', '#14b8a6', '#06b6d4'],
-    gap: 10,
-    speed: 0.01,
-    code: `<PixelCanvas
+    },
+    {
+      label: 'Glow Variant',
+      variant: 'glow',
+      colors: ['#22c55e', '#10b981', '#14b8a6', '#06b6d4'],
+      gap: 10,
+      speed: 0.01,
+      code: `<PixelCanvas
   variant="glow"
   :colors="['#22c55e', '#10b981', '#14b8a6', '#06b6d4']"
   :gap="10"
   :speed="0.01"
 />`,
-  },
-  {
-    label: 'Subtle Monochrome',
-    variant: 'default',
-    colors: ['#525252', '#a3a3a3', '#737373'],
-    gap: 5,
-    speed: 0.03,
-    code: `<PixelCanvas
+    },
+    {
+      label: 'Subtle Monochrome',
+      variant: 'default',
+      colors: ['#525252', '#a3a3a3', '#737373'],
+      gap: 5,
+      speed: 0.03,
+      code: `<PixelCanvas
   :colors="['#525252', '#a3a3a3', '#737373']"
   :gap="5"
   :speed="0.03"
 />`,
-  },
-];
+    },
+  ];
 
-const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]);
 
-function handleTabClick(index: number) {
-  activeTab.value = index;
-}
+  function handleTabClick(index: number) {
+    activeTab.value = index;
+  }
 </script>
 
 <template>
@@ -87,7 +87,9 @@ function handleTabClick(index: number) {
           </p>
         </div>
       </PixelCanvas>
-      <div class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2">
+      <div
+        class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2"
+      >
         <button
           v-for="(tab, index) in tabs"
           :key="tab.label"

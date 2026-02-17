@@ -1,31 +1,36 @@
 <script setup lang="ts">
-import HeroGeometric from '@registry/new-york/HeroGeometric/HeroGeometric.vue';
+  import HeroGeometric from '@registry/new-york/HeroGeometric/HeroGeometric.vue';
 
-const activeTab = ref(0);
+  const activeTab = ref(0);
 
-const tabs = [
-  {
-    label: 'Default',
-    props: { title1: 'Elevate', title2: 'Your Brand' },
-    code: `<HeroGeometric title1="Elevate" title2="Your Brand" />`,
-  },
-  {
-    label: 'Warm Palette',
-    props: { color1: '#EA580C', color2: '#FFF7ED', title1: 'Warm', title2: 'Palette' },
-    code: `<HeroGeometric color1="#EA580C" color2="#FFF7ED" title1="Warm" title2="Palette" />`,
-  },
-  {
-    label: 'High Velocity',
-    props: { speed: 2, title1: 'High', title2: 'Velocity' },
-    code: `<HeroGeometric :speed="2" title1="High" title2="Velocity" />`,
-  },
-];
+  const tabs = [
+    {
+      label: 'Default',
+      props: { title1: 'Elevate', title2: 'Your Brand' },
+      code: `<HeroGeometric title1="Elevate" title2="Your Brand" />`,
+    },
+    {
+      label: 'Warm Palette',
+      props: {
+        color1: '#EA580C',
+        color2: '#FFF7ED',
+        title1: 'Warm',
+        title2: 'Palette',
+      },
+      code: `<HeroGeometric color1="#EA580C" color2="#FFF7ED" title1="Warm" title2="Palette" />`,
+    },
+    {
+      label: 'High Velocity',
+      props: { speed: 2, title1: 'High', title2: 'Velocity' },
+      code: `<HeroGeometric :speed="2" title1="High" title2="Velocity" />`,
+    },
+  ];
 
-const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]);
 
-function handleTabClick(index: number) {
-  activeTab.value = index;
-}
+  function handleTabClick(index: number) {
+    activeTab.value = index;
+  }
 </script>
 
 <template>
@@ -38,12 +43,16 @@ function handleTabClick(index: number) {
           class="min-h-[500px]"
         />
         <template #fallback>
-          <div class="flex min-h-[500px] w-full items-center justify-center bg-blue-50">
+          <div
+            class="flex min-h-[500px] w-full items-center justify-center bg-blue-50"
+          >
             <span class="text-sm text-blue-400">Loading hero...</span>
           </div>
         </template>
       </ClientOnly>
-      <div class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2">
+      <div
+        class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2"
+      >
         <button
           v-for="(tab, index) in tabs"
           :key="tab.label"

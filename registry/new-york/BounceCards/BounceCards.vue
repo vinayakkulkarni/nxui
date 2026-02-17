@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, onMounted, computed } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -54,11 +54,6 @@
     );
   });
 
-  function getTranslateX(transform: string): number {
-    const match = transform.match(/translate\(([-\d.]+)px\)/);
-    return match ? Number.parseFloat(match[1]) : 0;
-  }
-
   function getNoRotation(transform: string): string {
     if (/rotate\(/.test(transform)) {
       return transform.replace(/rotate\([^)]*\)/, 'rotate(0deg)');
@@ -70,7 +65,10 @@
     const match = transform.match(/translate\(([-\d.]+)px\)/);
     if (match) {
       const cur = Number.parseFloat(match[1]);
-      return transform.replace(/translate\([^)]*\)/, `translate(${cur + offset}px)`);
+      return transform.replace(
+        /translate\([^)]*\)/,
+        `translate(${cur + offset}px)`,
+      );
     }
     return `${transform} translate(${offset}px)`;
   }
@@ -90,7 +88,9 @@
 
     return {
       transform: `${t} scale(${cardScales.value[idx] ?? 0})`,
-      transition: isAnimated.value ? 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transition: isAnimated.value
+        ? 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)'
+        : 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
   }
 </script>

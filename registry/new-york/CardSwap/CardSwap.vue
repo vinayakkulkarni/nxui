@@ -58,7 +58,10 @@
 
     const [front, ...rest] = order;
     const frontEl = cardRefs.value[front];
-    if (!frontEl) { isAnimating = false; return; }
+    if (!frontEl) {
+      isAnimating = false;
+      return;
+    }
 
     // Drop front card down
     frontEl.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
@@ -78,11 +81,17 @@
 
     // Move front to back
     setTimeout(() => {
-      const backSlot = getSlot(cardRefs.value.length - 1, cardRefs.value.length);
-      frontEl.style.transition = 'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
+      const backSlot = getSlot(
+        cardRefs.value.length - 1,
+        cardRefs.value.length,
+      );
+      frontEl.style.transition =
+        'transform 0.8s cubic-bezier(0.22, 1, 0.36, 1)';
       applySlot(frontEl, backSlot);
       order = [...rest, front];
-      setTimeout(() => { isAnimating = false; }, 800);
+      setTimeout(() => {
+        isAnimating = false;
+      }, 800);
     }, 600);
   }
 
@@ -127,11 +136,19 @@
     @mouseleave="onMouseLeave"
   >
     <div
-      v-for="(_, i) in (slots.default?.() ?? [])"
+      v-for="(_, i) in slots.default?.() ?? []"
       :key="i"
-      :ref="(el) => { if (el) cardRefs[i] = el as HTMLDivElement }"
+      :ref="
+        (el) => {
+          if (el) cardRefs[i] = el as HTMLDivElement;
+        }
+      "
       class="absolute left-1/2 top-1/2 rounded-xl border border-white/20 bg-black"
-      style="transform-style: preserve-3d; will-change: transform; backface-visibility: hidden"
+      style="
+        transform-style: preserve-3d;
+        will-change: transform;
+        backface-visibility: hidden;
+      "
     >
       <component :is="(slots.default?.() ?? [])[i]" />
     </div>

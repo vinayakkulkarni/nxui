@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { FlightStatusCardProps } from '~/types/components';
-import FlightStatusCard from './FlightStatusCard.vue';
-import FlightStatusCardLight from './FlightStatusCardLight.vue';
+  import type { FlightStatusCardProps } from '~/types/components';
+  import FlightStatusCard from './FlightStatusCard.vue';
+  import FlightStatusCardLight from './FlightStatusCardLight.vue';
 
-const props = defineProps<FlightStatusCardProps>();
+  const props = defineProps<FlightStatusCardProps>();
 </script>
 
 <template>

@@ -81,7 +81,14 @@
   function onPointerDown(e: PointerEvent, idx: number) {
     if (isMobile.value) return;
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-    dragState.value = { active: true, cardIdx: idx, startX: e.clientX, startY: e.clientY, dx: 0, dy: 0 };
+    dragState.value = {
+      active: true,
+      cardIdx: idx,
+      startX: e.clientX,
+      startY: e.clientY,
+      dx: 0,
+      dy: 0,
+    };
   }
 
   useEventListener('pointermove', (e: PointerEvent) => {
@@ -117,7 +124,10 @@
       transform: `translate(${tx}px, ${ty}px) rotate(${rotation}deg) scale(${scale})`,
       transformOrigin: '90% 90%',
       zIndex: stackPos,
-      transition: dragState.value?.active && dragState.value.cardIdx === slotIdx ? 'none' : 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
+      transition:
+        dragState.value?.active && dragState.value.cardIdx === slotIdx
+          ? 'none'
+          : 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
     };
   }
 
@@ -136,7 +146,7 @@
     @mouseleave="isPaused = pauseOnHover ? false : isPaused"
   >
     <div
-      v-for="(slotIdx, _i) in order"
+      v-for="slotIdx in order"
       :key="slotIdx"
       class="absolute size-full cursor-grab select-none"
       :style="getCardStyle(slotIdx)"

@@ -18,7 +18,7 @@
 
   const FALLBACK_1 = '#3B82F6';
   const FALLBACK_2 = '#F0F9FF';
-  const HEX_RE = /^#?[0-9a-fA-F]{6}$/;
+  const HEX_RE = /^#?[0-9a-f]{6}$/i;
 
   function sanitizeHex(value: string, fallback: string): string {
     const t = value.trim();
@@ -124,7 +124,11 @@ void main(){
     if (!canvasRef.value || !containerRef.value) return;
     const { width, height } = containerRef.value.getBoundingClientRect();
 
-    renderer = new THREE.WebGLRenderer({ canvas: canvasRef.value, antialias: false, alpha: true });
+    renderer = new THREE.WebGLRenderer({
+      canvas: canvasRef.value,
+      antialias: false,
+      alpha: true,
+    });
     renderer.setPixelRatio(1);
     renderer.setSize(width, height);
 
@@ -165,17 +169,27 @@ void main(){
 <template>
   <div
     ref="containerRef"
-    :class="cn('relative flex min-h-screen w-full flex-col items-center overflow-hidden bg-white text-black', props.class)"
+    :class="
+      cn(
+        'relative flex min-h-screen w-full flex-col items-center overflow-hidden bg-white text-black',
+        props.class,
+      )
+    "
     :style="{ containerType: 'size' }"
   >
-    <canvas ref="canvasRef" class="pointer-events-none absolute inset-0 size-full" />
+    <canvas
+      ref="canvasRef"
+      class="pointer-events-none absolute inset-0 size-full"
+    ></canvas>
 
     <div
       v-if="props.title1 || props.title2 || props.description"
       class="relative z-10 flex w-full flex-1 flex-col items-center justify-center pb-8 pt-8 md:pb-20 md:pt-20"
     >
       <div class="flex w-full max-w-[1200px] flex-col items-center px-6">
-        <div class="mb-8 flex flex-col items-center gap-2 text-center md:mb-12 md:gap-4">
+        <div
+          class="mb-8 flex flex-col items-center gap-2 text-center md:mb-12 md:gap-4"
+        >
           <div v-if="props.title1" class="overflow-hidden">
             <component
               :is="motion.h1"
@@ -192,7 +206,11 @@ void main(){
               :is="motion.h1"
               :initial="{ y: '100%', opacity: 0 }"
               :animate="{ y: '0%', opacity: 1 }"
-              :transition="{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.35 }"
+              :transition="{
+                duration: 1,
+                ease: [0.16, 1, 0.3, 1],
+                delay: 0.35,
+              }"
               :class="HEADLINE"
             >
               {{ props.title2 }}

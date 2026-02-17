@@ -12,9 +12,8 @@ description: A card with 3D tilt effect that responds to mouse movement for show
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/showcase-card.json"
 ```
 
-
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `class` | `string` | `''` | Additional CSS classes for styling |
+| Prop    | Type     | Default | Description                        |
+| ------- | -------- | ------- | ---------------------------------- |
+| `class` | `string` | `''`    | Additional CSS classes for styling |

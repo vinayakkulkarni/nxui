@@ -70,7 +70,8 @@ void main() {
     programRef.uniforms.uResolution.value = new Color(
       (renderer.gl.canvas as HTMLCanvasElement).width,
       (renderer.gl.canvas as HTMLCanvasElement).height,
-      (renderer.gl.canvas as HTMLCanvasElement).width / (renderer.gl.canvas as HTMLCanvasElement).height,
+      (renderer.gl.canvas as HTMLCanvasElement).width /
+        (renderer.gl.canvas as HTMLCanvasElement).height,
     );
   });
 
@@ -104,7 +105,8 @@ void main() {
           value: new Color(
             (gl.canvas as HTMLCanvasElement).width,
             (gl.canvas as HTMLCanvasElement).height,
-            (gl.canvas as HTMLCanvasElement).width / (gl.canvas as HTMLCanvasElement).height,
+            (gl.canvas as HTMLCanvasElement).width /
+              (gl.canvas as HTMLCanvasElement).height,
           ),
         },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
@@ -137,5 +139,5 @@ void main() {
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)" />
+  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
 </template>

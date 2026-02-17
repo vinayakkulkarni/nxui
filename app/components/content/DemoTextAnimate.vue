@@ -12,6 +12,10 @@
   <TextAnimate text=&quot;Beautiful Animations&quot; animation=&quot;blur-in-up&quot; class=&quot;text-4xl font-bold&quot; />
 </template>`"
   >
-    <TextAnimate text="Beautiful Animations" animation="blur-in-up" class="text-4xl font-bold" />
+    <TextAnimate
+      text="Beautiful Animations"
+      animation="blur-in-up"
+      class="text-4xl font-bold"
+    />
   </ComponentDemo>
 </template>

@@ -138,12 +138,9 @@
       <span
         v-for="(char, i) in displayText"
         :key="i"
-        :class="
-          revealedIndices.has(i) || !isScrambling
-            ? ''
-            : encryptedClass
-        "
-      >{{ char }}</span>
+        :class="revealedIndices.has(i) || !isScrambling ? '' : encryptedClass"
+        >{{ char }}</span
+      >
     </span>
   </span>
 </template>

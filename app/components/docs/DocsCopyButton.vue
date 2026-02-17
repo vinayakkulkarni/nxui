@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const props = defineProps<{
-  code: string;
-}>();
+  const props = defineProps<{
+    code: string;
+  }>();
 
-const { copy, copied } = useClipboard({ source: () => props.code });
+  const { copy, copied } = useClipboard({ source: () => props.code });
 </script>
 
 <template>

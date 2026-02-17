@@ -13,7 +13,12 @@
 </template>`"
   >
     <div class="flex h-[200px] w-full items-center justify-center">
-      <BlurText text="Blur Text Effect" by="words" :delay="200" class="text-4xl font-bold" />
+      <BlurText
+        text="Blur Text Effect"
+        by="words"
+        :delay="200"
+        class="text-4xl font-bold"
+      />
     </div>
   </ComponentDemo>
 </template>

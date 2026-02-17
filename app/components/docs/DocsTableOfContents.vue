@@ -1,94 +1,94 @@
 <script setup lang="ts">
-import type { TocHeading } from '~/types/docs';
+  import type { TocHeading } from '~/types/docs';
 
-const route = useRoute();
-const headings = ref<TocHeading[]>([]);
-const activeId = ref('');
-const navRef = ref<HTMLElement | null>(null);
-const isScrolling = ref(false);
+  const route = useRoute();
+  const headings = ref<TocHeading[]>([]);
+  const activeId = ref('');
+  const navRef = ref<HTMLElement | null>(null);
+  const isScrolling = ref(false);
 
-function slugify(text: string): string {
-  return text
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-}
+  function slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .trim()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/[\s_-]+/g, '-')
+      .replace(/^-+|-+$/g, '');
+  }
 
-function extractHeadings() {
-  const elements = document.querySelectorAll('main h2, main h3');
-  const items: TocHeading[] = [];
-  const seenIds = new Set<string>();
+  function extractHeadings() {
+    const elements = document.querySelectorAll('main h2, main h3');
+    const items: TocHeading[] = [];
+    const seenIds = new Set<string>();
 
-  elements.forEach((elem) => {
-    const text = (elem.textContent ?? '').trim();
-    if (!text) return;
+    elements.forEach((elem) => {
+      const text = (elem.textContent ?? '').trim();
+      if (!text) return;
 
-    if (!elem.id) {
-      let id = slugify(text);
-      let counter = 1;
-      while (seenIds.has(id)) {
-        id = `${slugify(text)}-${counter++}`;
+      if (!elem.id) {
+        let id = slugify(text);
+        let counter = 1;
+        while (seenIds.has(id)) {
+          id = `${slugify(text)}-${counter++}`;
+        }
+        elem.id = id;
       }
-      elem.id = id;
-    }
 
-    if (!seenIds.has(elem.id)) {
-      seenIds.add(elem.id);
-      const level = elem.tagName === 'H2' ? 2 : 3;
-      items.push({ id: elem.id, text, level });
+      if (!seenIds.has(elem.id)) {
+        seenIds.add(elem.id);
+        const level = elem.tagName === 'H2' ? 2 : 3;
+        items.push({ id: elem.id, text, level });
+      }
+    });
+
+    headings.value = items;
+    if (items.length > 0) {
+      activeId.value = items[0]!.id;
     }
+  }
+
+  function handleClick(e: Event, headingId: string) {
+    e.preventDefault();
+    isScrolling.value = true;
+    activeId.value = headingId;
+    document.getElementById(headingId)?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      isScrolling.value = false;
+    }, 600);
+  }
+
+  function findActiveHeading() {
+    if (isScrolling.value) return;
+    let active = '';
+    for (const heading of headings.value) {
+      const el = document.getElementById(heading.id);
+      if (!el) continue;
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= 120) {
+        active = heading.id;
+      }
+    }
+    if (active) {
+      activeId.value = active;
+    } else if (headings.value.length > 0) {
+      activeId.value = headings.value[0]!.id;
+    }
+  }
+
+  onMounted(() => {
+    setTimeout(() => extractHeadings(), 500);
+
+    watch(
+      () => route.path,
+      () => setTimeout(() => extractHeadings(), 500),
+    );
+
+    window.addEventListener('scroll', findActiveHeading, { passive: true });
   });
 
-  headings.value = items;
-  if (items.length > 0) {
-    activeId.value = items[0]!.id;
-  }
-}
-
-function handleClick(e: Event, headingId: string) {
-  e.preventDefault();
-  isScrolling.value = true;
-  activeId.value = headingId;
-  document.getElementById(headingId)?.scrollIntoView({ behavior: 'smooth' });
-  setTimeout(() => {
-    isScrolling.value = false;
-  }, 600);
-}
-
-function findActiveHeading() {
-  if (isScrolling.value) return;
-  let active = '';
-  for (const heading of headings.value) {
-    const el = document.getElementById(heading.id);
-    if (!el) continue;
-    const rect = el.getBoundingClientRect();
-    if (rect.top <= 120) {
-      active = heading.id;
-    }
-  }
-  if (active) {
-    activeId.value = active;
-  } else if (headings.value.length > 0) {
-    activeId.value = headings.value[0]!.id;
-  }
-}
-
-onMounted(() => {
-  setTimeout(() => extractHeadings(), 500);
-
-  watch(
-    () => route.path,
-    () => setTimeout(() => extractHeadings(), 500),
-  );
-
-  window.addEventListener('scroll', findActiveHeading, { passive: true });
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', findActiveHeading);
-});
+  onUnmounted(() => {
+    window.removeEventListener('scroll', findActiveHeading);
+  });
 </script>
 
 <template>
@@ -108,7 +108,7 @@ onUnmounted(() => {
         <nav ref="navRef" class="relative flex flex-col">
           <div
             class="absolute bottom-0 left-0 top-0 w-px bg-border/50 dark:bg-white/[0.06]"
-          />
+          ></div>
           <a
             v-for="heading in headings"
             :key="heading.id"
@@ -125,7 +125,7 @@ onUnmounted(() => {
             <div
               v-if="activeId === heading.id"
               class="absolute left-0 top-1/2 h-4 w-[2px] -translate-y-1/2 rounded-full bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.5)]"
-            />
+            ></div>
             {{ heading.text }}
           </a>
         </nav>
