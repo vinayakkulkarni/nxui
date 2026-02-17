@@ -24,15 +24,36 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/rotating-text',
       },
       {
+        title: 'Scrambled Text',
+        path: '/docs/text-animations/scrambled-text',
+      },
+      {
         title: 'Scroll Based Velocity',
         path: '/docs/text-animations/scroll-based-velocity',
+      },
+      {
+        title: 'Scroll Float',
+        path: '/docs/text-animations/scroll-float',
+      },
+      {
+        title: 'Scroll Reveal',
+        path: '/docs/text-animations/scroll-reveal',
       },
       { title: 'Shiny Text', path: '/docs/text-animations/shiny-text' },
       { title: 'Shuffle', path: '/docs/text-animations/shuffle' },
       { title: 'Split Text', path: '/docs/text-animations/split-text' },
       { title: 'Text Animate', path: '/docs/text-animations/text-animate' },
+      { title: 'Text Cursor', path: '/docs/text-animations/text-cursor' },
+      {
+        title: 'Text Pressure',
+        path: '/docs/text-animations/text-pressure',
+      },
       { title: 'Text Type', path: '/docs/text-animations/text-type' },
       { title: 'True Focus', path: '/docs/text-animations/true-focus' },
+      {
+        title: 'Variable Proximity',
+        path: '/docs/text-animations/variable-proximity',
+      },
     ],
   },
   {

@@ -248,6 +248,42 @@
       "type": "registry:ui",
       "title": "Decrypted Text",
       "description": "Hacker-style text decryption effect that scrambles characters before revealing the original text."
+    },
+    {
+      "name": "variable-proximity",
+      "type": "registry:ui",
+      "title": "Variable Proximity",
+      "description": "Text that changes font variation settings based on cursor proximity."
+    },
+    {
+      "name": "text-pressure",
+      "type": "registry:ui",
+      "title": "Text Pressure",
+      "description": "Variable font text responding to cursor with weight, width, italic changes."
+    },
+    {
+      "name": "scroll-reveal",
+      "type": "registry:ui",
+      "title": "Scroll Reveal",
+      "description": "Text revealed word by word on scroll with optional blur."
+    },
+    {
+      "name": "scroll-float",
+      "type": "registry:ui",
+      "title": "Scroll Float",
+      "description": "Characters float up with scale distortion on scroll."
+    },
+    {
+      "name": "text-cursor",
+      "type": "registry:ui",
+      "title": "Text Cursor",
+      "description": "Cursor trail that drops text along the mouse path."
+    },
+    {
+      "name": "scrambled-text",
+      "type": "registry:ui",
+      "title": "Scrambled Text",
+      "description": "Proximity-based character scrambling effect."
     }
   ]
 }

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "text-cursor",
+  "type": "registry:ui",
+  "title": "Text Cursor",
+  "description": "Cursor trail that drops text along the mouse path.",
+  "dependencies": [
+    "@vueuse/core",
+    "motion-v"
+  ],
+  "files": [
+    {
+      "path": "registry/new-york/TextCursor/TextCursor.vue",
+      "content": "<script setup lang=\"ts\">\n  import { useEventListener } from '@vueuse/core';\n  import { motion, AnimatePresence } from 'motion-v';\n  import { cn } from '~/lib/utils';\n\n  interface TrailItem {\n    id: number;\n    x: number;\n    y: number;\n    angle: number;\n  }\n\n  const props = withDefaults(\n    defineProps<{\n      text?: string;\n      spacing?: number;\n      followMouseDirection?: boolean;\n      randomFloat?: boolean;\n      exitDuration?: number;\n      removalInterval?: number;\n      maxPoints?: number;\n      class?: string;\n    }>(),\n    {\n      text: '⚛️',\n      spacing: 100,\n      followMouseDirection: true,\n      randomFloat: true,\n      exitDuration: 0.5,\n      removalInterval: 30,\n      maxPoints: 5,\n      class: '',\n    },\n  );\n\n  const containerEl = ref<HTMLElement>();\n  const trail = ref<TrailItem[]>([]);\n  const lastMoveTime = ref(Date.now());\n  let idCounter = 0;\n\n  useEventListener(containerEl, 'mousemove', (e: MouseEvent) => {\n    if (!containerEl.value) return;\n    const rect = containerEl.value.getBoundingClientRect();\n    const mx = e.clientX - rect.left;\n    const my = e.clientY - rect.top;\n\n    const prev = trail.value;\n    if (prev.length === 0) {\n      trail.value = [{ id: idCounter++, x: mx, y: my, angle: 0 }];\n    } else {\n      const last = prev[prev.length - 1];\n      if (!last) return;\n      const dx = mx - last.x;\n      const dy = my - last.y;\n      const dist = Math.sqrt(dx * dx + dy * dy);\n      if (dist >= props.spacing) {\n        const angle = props.followMouseDirection\n          ? ((Math.atan2(dy, dx) * 180) / Math.PI + 360) % 360 - 180\n          : 0;\n        const steps = Math.floor(dist / props.spacing);\n        const newItems: TrailItem[] = [];\n        for (let i = 1; i <= steps; i++) {\n          const t = (props.spacing * i) / dist;\n          newItems.push({\n            id: idCounter++,\n            x: last.x + dx * t,\n            y: last.y + dy * t,\n            angle,\n          });\n        }\n        const combined = [...prev, ...newItems];\n        trail.value = combined.length > props.maxPoints\n          ? combined.slice(combined.length - props.maxPoints)\n          : combined;\n      }\n    }\n    lastMoveTime.value = Date.now();\n  });\n\n  let intervalId: ReturnType<typeof setInterval>;\n  onMounted(() => {\n    intervalId = setInterval(() => {\n      if (Date.now() - lastMoveTime.value > 100 && trail.value.length > 0) {\n        trail.value = trail.value.slice(1);\n      }\n    }, props.removalInterval);\n  });\n\n  onUnmounted(() => {\n    clearInterval(intervalId);\n  });\n</script>\n\n<template>\n  <div ref=\"containerEl\" :class=\"cn('relative size-full', props.class)\">\n    <div class=\"absolute inset-0 pointer-events-none\">\n      <AnimatePresence>\n        <component\n          :is=\"motion.div\"\n          v-for=\"item in trail\"\n          :key=\"item.id\"\n          class=\"absolute select-none whitespace-nowrap text-3xl\"\n          :style=\"{ left: `${item.x}px`, top: `${item.y}px` }\"\n          :initial=\"{ opacity: 0, scale: 1, rotate: item.angle }\"\n          :animate=\"{ opacity: 1, scale: 1, rotate: item.angle }\"\n          :exit=\"{ opacity: 0, scale: 0 }\"\n          :transition=\"{ opacity: { duration: exitDuration } }\"\n        >\n          {{ text }}\n        </component>\n      </AnimatePresence>\n    </div>\n    <slot />\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/TextCursor/TextCursor.vue"
+    }
+  ]
+}

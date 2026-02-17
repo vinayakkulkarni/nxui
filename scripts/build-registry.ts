@@ -243,6 +243,36 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Hacker-style text decryption effect that scrambles characters before revealing the original text.',
     deps: ['@vueuse/core'],
   },
+  'variable-proximity': {
+    title: 'Variable Proximity',
+    description: 'Text that changes font variation settings based on cursor proximity.',
+    deps: ['@vueuse/core'],
+  },
+  'text-pressure': {
+    title: 'Text Pressure',
+    description: 'Variable font text responding to cursor with weight, width, italic changes.',
+    deps: ['@vueuse/core'],
+  },
+  'scroll-reveal': {
+    title: 'Scroll Reveal',
+    description: 'Text revealed word by word on scroll with optional blur.',
+    deps: ['@vueuse/core'],
+  },
+  'scroll-float': {
+    title: 'Scroll Float',
+    description: 'Characters float up with scale distortion on scroll.',
+    deps: ['@vueuse/core'],
+  },
+  'text-cursor': {
+    title: 'Text Cursor',
+    description: 'Cursor trail that drops text along the mouse path.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'scrambled-text': {
+    title: 'Scrambled Text',
+    description: 'Proximity-based character scrambling effect.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {
