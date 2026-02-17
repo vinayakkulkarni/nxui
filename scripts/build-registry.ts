@@ -313,6 +313,16 @@ const COMPONENTS: Record<string, { title: string; description: string; deps: str
     description: 'Interactive liquid chrome effect with ripple distortion and mouse tracking.',
     deps: ['ogl', '@vueuse/core'],
   },
+  'balatro': {
+    title: 'Balatro',
+    description: 'Psychedelic spin-paint background with configurable colors and animation speed.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'waves': {
+    title: 'Waves',
+    description: 'Animated Perlin noise wave lines with configurable colors, amplitude, and density.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

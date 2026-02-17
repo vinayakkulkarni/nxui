@@ -15,9 +15,26 @@ if (!page.value) {
   });
 }
 
+const category = route.path.split('/')[2] ?? '';
+const formattedCategory = category.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+
 useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
+  ogTitle: page.value?.title,
+  ogDescription: page.value?.description,
+  ogType: 'website',
+  ogUrl: `https://nxui.geoql.in${route.path}`,
+  ogSiteName: 'nxui',
+  twitterCard: 'summary_large_image',
+  twitterTitle: page.value?.title,
+  twitterDescription: page.value?.description,
+});
+
+defineOgImageComponent('NxuiDoc', {
+  title: page.value?.title,
+  description: page.value?.description,
+  category: formattedCategory,
 });
 </script>
 

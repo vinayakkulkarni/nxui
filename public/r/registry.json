@@ -332,6 +332,18 @@
       "type": "registry:ui",
       "title": "Liquid Chrome",
       "description": "Interactive liquid chrome effect with ripple distortion and mouse tracking."
+    },
+    {
+      "name": "balatro",
+      "type": "registry:ui",
+      "title": "Balatro",
+      "description": "Psychedelic spin-paint background with configurable colors and animation speed."
+    },
+    {
+      "name": "waves",
+      "type": "registry:ui",
+      "title": "Waves",
+      "description": "Animated Perlin noise wave lines with configurable colors, amplitude, and density."
     }
   ]
 }

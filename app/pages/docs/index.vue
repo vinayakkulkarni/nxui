@@ -16,6 +16,19 @@ if (!page.value) {
 useSeoMeta({
   title: page.value?.title,
   description: page.value?.description,
+  ogTitle: page.value?.title,
+  ogDescription: page.value?.description,
+  ogType: 'website',
+  ogUrl: 'https://nxui.geoql.in/docs',
+  ogSiteName: 'nxui',
+  twitterCard: 'summary_large_image',
+  twitterTitle: page.value?.title,
+  twitterDescription: page.value?.description,
+});
+
+defineOgImageComponent('NxuiDoc', {
+  title: page.value?.title,
+  description: page.value?.description,
 });
 </script>
 
