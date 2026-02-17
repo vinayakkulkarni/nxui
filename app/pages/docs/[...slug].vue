@@ -2,9 +2,13 @@
   definePageMeta({ layout: 'docs' });
 
   const route = useRoute();
+  const path =
+    route.path.endsWith('/') && route.path !== '/'
+      ? route.path.slice(0, -1)
+      : route.path;
 
-  const { data: page } = await useAsyncData(`page-${route.path}`, () =>
-    queryCollection('docs').path(route.path).first(),
+  const { data: page } = await useAsyncData(`page-${path}`, () =>
+    queryCollection('docs').path(path).first(),
   );
 
   if (!page.value) {
