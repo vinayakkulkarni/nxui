@@ -14,6 +14,9 @@
     isVertical: boolean;
   }>();
 
+  const colorMode = useColorMode();
+  const isDark = computed(() => colorMode.value === 'dark');
+
   const itemRef = ref<Record<string, unknown> | null>(null);
   const isHovered = ref(false);
 
@@ -104,8 +107,12 @@
       "
       :style="{
         boxShadow: isHovered
-          ? '0 8px 32px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.5)'
-          : '0 4px 12px rgba(0,0,0,0.08), inset 0 1px 0 rgba(255,255,255,0.3)',
+          ? isDark
+            ? '0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.5)'
+            : '0 8px 32px rgba(0,0,0,0.12), inset 0 1px 0 rgba(255,255,255,0.8)'
+          : isDark
+            ? '0 4px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3)'
+            : '0 4px 12px rgba(0,0,0,0.06), inset 0 1px 0 rgba(255,255,255,0.6)',
       }"
     >
       <div
@@ -211,8 +218,10 @@
       class="absolute inset-0 rounded-2xl pointer-events-none"
       :animate="{
         boxShadow: isHovered
-          ? '0 0 30px rgba(255,255,255,0.15)'
-          : '0 0 0px rgba(255,255,255,0)',
+          ? isDark
+            ? '0 0 30px rgba(255,255,255,0.15)'
+            : '0 0 30px rgba(0,0,0,0.08)'
+          : '0 0 0px rgba(0,0,0,0)',
       }"
       :transition="{ duration: 0.3 }"
     />

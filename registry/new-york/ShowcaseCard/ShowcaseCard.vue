@@ -131,7 +131,7 @@
       <component
         :is="motion.button"
         v-if="ctaText"
-        class="relative overflow-hidden rounded-full border border-neutral-300/50 bg-neutral-100/80 px-4 py-2 text-sm font-medium text-neutral-700 transition-colors duration-300 hover:border-neutral-400/80 dark:border-neutral-700/50 dark:bg-neutral-800/80 dark:text-neutral-200 dark:hover:border-neutral-600/80 sm:px-5 sm:py-2.5"
+        class="relative overflow-hidden rounded-full border border-neutral-300 bg-neutral-100 px-4 py-2 text-sm font-medium text-neutral-800 transition-colors duration-300 hover:border-neutral-400 hover:bg-neutral-200/80 dark:border-neutral-700/50 dark:bg-neutral-800/80 dark:text-neutral-200 dark:hover:border-neutral-600/80 sm:px-5 sm:py-2.5"
         :while-hover="{ scale: 1.05 }"
         :while-tap="{ scale: 0.98 }"
         @click="emit('ctaClick')"

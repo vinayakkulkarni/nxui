@@ -143,7 +143,7 @@
           if (el) cardRefs[i] = el as HTMLDivElement;
         }
       "
-      class="absolute left-1/2 top-1/2 rounded-xl border border-white/20 bg-black"
+      class="absolute left-1/2 top-1/2 rounded-xl border border-foreground/20 bg-black"
       style="
         transform-style: preserve-3d;
         will-change: transform;

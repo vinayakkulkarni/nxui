@@ -112,13 +112,19 @@
   }
 
   .glass-icon-btn__front {
-    background-color: oklch(1 0 0 / 0.15);
-    box-shadow: 0 0 0 0.1em oklch(1 0 0 / 0.3) inset;
+    background-color: color-mix(in oklch, var(--foreground), transparent 85%);
+    box-shadow: 0 0 0 0.1em
+      color-mix(in oklch, var(--foreground), transparent 70%) inset;
     backdrop-filter: blur(0.75em);
     -webkit-backdrop-filter: blur(0.75em);
     display: flex;
     transform-origin: 80% 50%;
     will-change: transform;
+  }
+
+  :is(.dark *) .glass-icon-btn__front {
+    background-color: oklch(1 0 0 / 0.15);
+    box-shadow: 0 0 0 0.1em oklch(1 0 0 / 0.3) inset;
   }
 
   .glass-icon-btn__icon {
@@ -128,6 +134,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--foreground);
+  }
+
+  :is(.dark *) .glass-icon-btn__icon {
     color: white;
   }
 

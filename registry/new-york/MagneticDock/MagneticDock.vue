@@ -39,9 +39,9 @@
   const variantStyles = computed(() => {
     const styles: Record<MagneticDockVariant, string> = {
       glass: cn(
-        'bg-white/80 dark:bg-neutral-900/80',
+        'bg-neutral-100/80 dark:bg-neutral-900/80',
         'backdrop-blur-xl backdrop-saturate-150',
-        'border border-neutral-200 dark:border-neutral-700',
+        'border border-neutral-200/80 dark:border-neutral-700',
       ),
       solid: cn(
         'bg-neutral-100 dark:bg-neutral-900',

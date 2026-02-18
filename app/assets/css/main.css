@@ -239,8 +239,12 @@
   }
 
   main table {
-    @apply w-full text-left text-sm my-6 overflow-hidden rounded-lg border border-separate;
+    @apply text-left text-sm my-6 rounded-lg border border-separate;
     border-spacing: 0;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
   }
 
   main thead {

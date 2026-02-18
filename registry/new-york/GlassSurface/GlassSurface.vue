@@ -297,13 +297,13 @@
   }
 
   .gs-surface--fallback {
-    background: rgba(255, 255, 255, 0.1);
+    background: color-mix(in oklch, var(--foreground), transparent 90%);
     backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
     -webkit-backdrop-filter: blur(12px) saturate(1.8) brightness(1.2);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid color-mix(in oklch, var(--foreground), transparent 80%);
     box-shadow:
-      inset 0 1px 0 0 rgba(255, 255, 255, 0.2),
-      inset 0 -1px 0 0 rgba(255, 255, 255, 0.1);
+      inset 0 1px 0 0 color-mix(in oklch, var(--foreground), transparent 80%),
+      inset 0 -1px 0 0 color-mix(in oklch, var(--foreground), transparent 90%);
   }
 
   .gs-surface:focus-visible {

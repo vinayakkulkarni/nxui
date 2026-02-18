@@ -96,8 +96,8 @@
           class="pointer-events-auto rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
           :class="
             activeTab === index
-              ? 'bg-white text-black'
-              : 'bg-white/20 text-white hover:bg-white/30'
+              ? 'bg-foreground text-background'
+              : 'bg-foreground/10 text-foreground hover:bg-foreground/20'
           "
           @click="handleTabClick(index)"
         >

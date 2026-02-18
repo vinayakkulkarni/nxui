@@ -14,7 +14,7 @@
   <ComponentDemo
     :code="`<FlyingPosters :items='images' :plane-width='320' :plane-height='320' :distortion='3' />`"
   >
-    <div class="relative h-[500px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-[500px] w-full overflow-hidden rounded-lg bg-black">
       <FlyingPosters
         :items="images"
         :plane-width="320"

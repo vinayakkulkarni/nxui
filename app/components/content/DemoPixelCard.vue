@@ -8,7 +8,9 @@
   <h3 class='text-xl font-bold text-white'>Hover Me</h3>
 </PixelCard>`"
   >
-    <div class="flex h-[500px] w-full items-center justify-center rounded-lg">
+    <div
+      class="flex h-[500px] w-full items-center justify-center rounded-lg bg-black"
+    >
       <PixelCard variant="blue">
         <h3 class="text-xl font-bold text-white">Hover Me</h3>
       </PixelCard>

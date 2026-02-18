@@ -8,7 +8,9 @@
   <p class='text-white'>Hover &amp; Move</p>
 </DecayCard>`"
   >
-    <div class="flex h-[500px] w-full items-center justify-center rounded-lg">
+    <div
+      class="flex h-[500px] w-full items-center justify-center rounded-lg bg-black"
+    >
       <DecayCard
         :width="300"
         :height="400"

@@ -98,7 +98,7 @@
                 'bg-primary text-primary-foreground':
                   stepStatus(step) === 'active' ||
                   stepStatus(step) === 'complete',
-                'bg-muted text-muted-foreground':
+                'bg-neutral-200 text-muted-foreground dark:bg-muted':
                   stepStatus(step) === 'inactive',
               }"
             >
@@ -127,7 +127,7 @@
           </div>
           <div
             v-if="step < totalSteps"
-            class="relative mx-2 h-0.5 flex-1 overflow-hidden rounded bg-muted"
+            class="relative mx-2 h-0.5 flex-1 overflow-hidden rounded bg-neutral-200 dark:bg-muted"
           >
             <div
               class="absolute inset-y-0 left-0 bg-primary transition-all duration-400"

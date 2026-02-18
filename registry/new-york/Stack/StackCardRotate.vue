@@ -49,9 +49,9 @@
     :while-tap="{ cursor: 'grabbing' }"
     @drag-end="handleDragEnd"
   >
-    <slot ></slot>
+    <slot></slot>
   </component>
   <div v-else class="absolute size-full cursor-pointer select-none">
-    <slot ></slot>
+    <slot></slot>
   </div>
 </template>
