@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<GridMotion :items='[&quot;Item 1&quot;, &quot;https://picsum.photos/200/300&quot;, &quot;Item 3&quot;]' gradient-color='black' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import GridMotion from '~/components/ui/GridMotion.vue';
+</script>
+
+<template>
+  <GridMotion :items=&quot;['Item 1', 'https://picsum.photos/200/300', 'Item 3']&quot; gradient-color=&quot;black&quot; />
+</template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
       <GridMotion

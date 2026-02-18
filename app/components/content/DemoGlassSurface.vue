@@ -19,7 +19,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<GlassSurface :width='320' :height='90' :border-radius='50' :displace='0.5' :background-opacity='0.1' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import GlassSurface from '~/components/ui/GlassSurface.vue';
+</script>
+
+<template>
+  <GlassSurface :width='320' :height='90' :border-radius='50' :displace='0.5' :background-opacity='0.1' />
+</template>`"
     full-width
     class="p-0"
   >

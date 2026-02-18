@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<StarBorder color='white' speed='6s' :thickness='1' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import StarBorder from '~/components/ui/StarBorder.vue';
+</script>
+
+<template>
+  <StarBorder color='white' speed='6s' :thickness='1' />
+</template>`"
   >
     <div
       class="flex h-[200px] w-full items-center justify-center bg-black rounded-lg"

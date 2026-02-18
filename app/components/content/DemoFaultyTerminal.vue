@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<FaultyTerminal :scale='1' :scanline-intensity='0.3' :curvature='0.2' :brightness='1' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import FaultyTerminal from '~/components/ui/FaultyTerminal.vue';
+</script>
+
+<template>
+  <FaultyTerminal :scale='1' :scanline-intensity='0.3' :curvature='0.2' :brightness='1' />
+</template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
       <FaultyTerminal

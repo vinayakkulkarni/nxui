@@ -16,7 +16,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<Masonry :items='items' :scale-on-hover='true' :hover-scale='0.95' :blur-to-focus='true' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import Masonry from '~/components/ui/Masonry.vue';
+</script>
+
+<template>
+  <Masonry :items='items' :scale-on-hover='true' :hover-scale='0.95' :blur-to-focus='true' />
+</template>`"
     full-width
   >
     <div class="relative w-full" style="min-height: 500px">

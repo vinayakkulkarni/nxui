@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<BlobCursor fill-color='#5227FF' :trail-count='3' blob-type='circle' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import BlobCursor from '~/components/ui/BlobCursor.vue';
+</script>
+
+<template>
+  <BlobCursor fill-color='#5227FF' :trail-count='3' blob-type='circle' />
+</template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
       <BlobCursor fill-color="#5227FF" :trail-count="3" blob-type="circle">

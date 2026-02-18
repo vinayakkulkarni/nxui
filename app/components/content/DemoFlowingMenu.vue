@@ -27,7 +27,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<FlowingMenu :items='menuItems' text-color='#fff' bg-color='#000' marquee-bg-color='#fff' marquee-text-color='#000' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import FlowingMenu from '~/components/ui/FlowingMenu.vue';
+</script>
+
+<template>
+  <FlowingMenu :items='menuItems' text-color='#fff' bg-color='#000' marquee-bg-color='#fff' marquee-text-color='#000' />
+</template>`"
     full-width
     class="p-0"
   >

@@ -4,7 +4,15 @@
 
 <template>
   <ComponentDemo
-    :code="`<ElectricBorder color='#5227FF' :speed='1' :chaos='0.12' :border-radius='24'>\n  <div class='p-8'>Content</div>\n</ElectricBorder>`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import ElectricBorder from '~/components/ui/ElectricBorder.vue';
+</script>
+
+<template>
+  <ElectricBorder color='#5227FF' :speed='1' :chaos='0.12' :border-radius='24'>
+    <div class='p-8'>Content</div>
+  </ElectricBorder>
+</template>`"
   >
     <div
       class="flex h-[300px] w-full items-center justify-center rounded-lg bg-black"

@@ -264,6 +264,13 @@ export interface ClosingPlasmaProps {
 
 export type ParticleGalaxyBlendMode = 'additive' | 'normal';
 
+export interface GlassIconItem {
+  icon: string;
+  label: string;
+  color?: string;
+  customClass?: string;
+}
+
 export interface StackAnimationConfig {
   stiffness: number;
   damping: number;

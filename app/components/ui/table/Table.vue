@@ -13,7 +13,7 @@
       data-slot="table"
       :class="cn('w-full caption-bottom text-sm', props.class)"
     >
-      <slot ></slot>
+      <slot></slot>
     </table>
   </div>
 </template>

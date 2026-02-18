@@ -14,6 +14,6 @@
       cn('bg-muted/50 border-t font-medium [&>tr]:last:border-b-0', props.class)
     "
   >
-    <slot ></slot>
+    <slot></slot>
   </tfoot>
 </template>

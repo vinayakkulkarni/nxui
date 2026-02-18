@@ -7,7 +7,13 @@
     {
       label: 'Default',
       props: { title1: 'Elevate', title2: 'Your Brand' },
-      code: `<HeroGeometric title1="Elevate" title2="Your Brand" />`,
+      code: `\x3Cscript setup lang="ts">
+  import HeroGeometric from '~/components/ui/HeroGeometric.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CHeroGeometric title1="Elevate" title2="Your Brand" />
+\x3C/template>`,
     },
     {
       label: 'Warm Palette',
@@ -17,12 +23,24 @@
         title1: 'Warm',
         title2: 'Palette',
       },
-      code: `<HeroGeometric color1="#EA580C" color2="#FFF7ED" title1="Warm" title2="Palette" />`,
+      code: `\x3Cscript setup lang="ts">
+  import HeroGeometric from '~/components/ui/HeroGeometric.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CHeroGeometric color1="#EA580C" color2="#FFF7ED" title1="Warm" title2="Palette" />
+\x3C/template>`,
     },
     {
       label: 'High Velocity',
       props: { speed: 2, title1: 'High', title2: 'Velocity' },
-      code: `<HeroGeometric :speed="2" title1="High" title2="Velocity" />`,
+      code: `\x3Cscript setup lang="ts">
+  import HeroGeometric from '~/components/ui/HeroGeometric.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CHeroGeometric :speed="2" title1="High" title2="Velocity" />
+\x3C/template>`,
     },
   ];
 

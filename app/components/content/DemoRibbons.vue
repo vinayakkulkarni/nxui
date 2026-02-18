@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<Ribbons :colors='[&quot;#FC8EAC&quot;, &quot;#A855F7&quot;, &quot;#3B82F6&quot;]' :base-thickness='30' :base-spring='0.03' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import Ribbons from '~/components/ui/Ribbons.vue';
+</script>
+
+<template>
+  <Ribbons :colors='[&quot;#FC8EAC&quot;, &quot;#A855F7&quot;, &quot;#3B82F6&quot;]' :base-thickness='30' :base-spring='0.03' />
+</template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
       <Ribbons

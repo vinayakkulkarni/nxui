@@ -7,7 +7,13 @@
     {
       label: 'Default',
       props: { title1: 'Experience', title2: 'The Future' },
-      code: `<DitherPrismHero title1="Experience" title2="The Future" />`,
+      code: `\x3Cscript setup lang="ts">
+  import DitherPrismHero from '~/components/ui/DitherPrismHero.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CDitherPrismHero title1="Experience" title2="The Future" />
+\x3C/template>`,
     },
     {
       label: 'Cyberpunk',
@@ -20,7 +26,13 @@
         ditherIntensity: 0.25,
         prismIntensity: 0.7,
       },
-      code: `<DitherPrismHero color1="#0a0a0a" color2="#00ff88" color3="#00ffff" title1="Cyber" title2="Punk" :dither-intensity="0.25" :prism-intensity="0.7" />`,
+      code: `\x3Cscript setup lang="ts">
+  import DitherPrismHero from '~/components/ui/DitherPrismHero.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CDitherPrismHero color1="#0a0a0a" color2="#00ff88" color3="#00ffff" title1="Cyber" title2="Punk" :dither-intensity="0.25" :prism-intensity="0.7" />
+\x3C/template>`,
     },
     {
       label: 'Sunset',
@@ -33,7 +45,13 @@
         ditherIntensity: 0.12,
         prismIntensity: 0.4,
       },
-      code: `<DitherPrismHero color1="#1a0a0a" color2="#ff6b35" color3="#ffd93d" title1="Golden" title2="Hour" :dither-intensity="0.12" :prism-intensity="0.4" />`,
+      code: `\x3Cscript setup lang="ts">
+  import DitherPrismHero from '~/components/ui/DitherPrismHero.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CDitherPrismHero color1="#1a0a0a" color2="#ff6b35" color3="#ffd93d" title1="Golden" title2="Hour" :dither-intensity="0.12" :prism-intensity="0.4" />
+\x3C/template>`,
     },
     {
       label: 'Ocean',
@@ -47,7 +65,13 @@
         showParticles: true,
         particleCount: 100,
       },
-      code: `<DitherPrismHero color1="#0a1628" color2="#0ea5e9" color3="#22d3ee" title1="Deep" title2="Ocean" :speed="0.7" :particle-count="100" />`,
+      code: `\x3Cscript setup lang="ts">
+  import DitherPrismHero from '~/components/ui/DitherPrismHero.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CDitherPrismHero color1="#0a1628" color2="#0ea5e9" color3="#22d3ee" title1="Deep" title2="Ocean" :speed="0.7" :particle-count="100" />
+\x3C/template>`,
     },
     {
       label: 'Maximum Impact',
@@ -58,7 +82,13 @@
         title1: 'Maximum',
         title2: 'Impact',
       },
-      code: `<DitherPrismHero :dither-intensity="0.3" :prism-intensity="0.9" :speed="1.5" title1="Maximum" title2="Impact" />`,
+      code: `\x3Cscript setup lang="ts">
+  import DitherPrismHero from '~/components/ui/DitherPrismHero.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CDitherPrismHero :dither-intensity="0.3" :prism-intensity="0.9" :speed="1.5" title1="Maximum" title2="Impact" />
+\x3C/template>`,
     },
   ];
 

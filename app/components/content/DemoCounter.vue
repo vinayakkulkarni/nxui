@@ -11,7 +11,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<Counter :value='1234' :font-size='80' :gradient-from='var(--background)' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import Counter from '~/components/ui/Counter.vue';
+</script>
+
+<template>
+  <Counter :value=&quot;1234&quot; :font-size=&quot;80&quot; :gradient-from=&quot;var(--background)&quot; />
+</template>`"
   >
     <div
       class="flex h-[300px] w-full flex-col items-center justify-center gap-6 rounded-lg"

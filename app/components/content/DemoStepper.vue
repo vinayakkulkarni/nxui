@@ -4,11 +4,17 @@
 
 <template>
   <ComponentDemo
-    :code="`<Stepper :initial-step='1'>
-  <div>Step 1: Enter your details</div>
-  <div>Step 2: Verify your email</div>
-  <div>Step 3: Complete setup</div>
-</Stepper>`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import Stepper from '~/components/ui/Stepper.vue';
+</script>
+
+<template>
+  <Stepper :initial-step='1'>
+    <div>Step 1: Enter your details</div>
+    <div>Step 2: Verify your email</div>
+    <div>Step 3: Complete setup</div>
+  </Stepper>
+</template>`"
   >
     <div class="flex h-[400px] w-full items-center justify-center rounded-lg">
       <Stepper :initial-step="1">

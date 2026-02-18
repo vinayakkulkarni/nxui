@@ -3,7 +3,15 @@
 </script>
 
 <template>
-  <ComponentDemo :code="`<Crosshair color='white' />`">
+  <ComponentDemo
+    :code="`<script setup lang=&quot;ts&quot;>
+  import Crosshair from '~/components/ui/Crosshair.vue';
+</script>
+
+<template>
+  <Crosshair color='white' />
+</template>`"
+  >
     <div class="relative h-[300px] w-full overflow-hidden rounded-lg bg-black">
       <Crosshair color="white">
         <div class="flex size-full items-center justify-center">

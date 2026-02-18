@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<GridDistortion image-src='https://picsum.photos/1200/800' :grid='15' :mouse='0.1' :strength='0.15' :relaxation='0.9' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import GridDistortion from '~/components/ui/GridDistortion.vue';
+</script>
+
+<template>
+  <GridDistortion image-src='https://picsum.photos/1200/800' :grid='15' :mouse='0.1' :strength='0.15' :relaxation='0.9' />
+</template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
       <GridDistortion

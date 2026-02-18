@@ -12,7 +12,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<FlyingPosters :items='images' :plane-width='320' :plane-height='320' :distortion='3' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import FlyingPosters from '~/components/ui/FlyingPosters.vue';
+</script>
+
+<template>
+  <FlyingPosters :items='images' :plane-width='320' :plane-height='320' :distortion='3' />
+</template>`"
   >
     <div class="relative h-[500px] w-full overflow-hidden rounded-lg bg-black">
       <FlyingPosters

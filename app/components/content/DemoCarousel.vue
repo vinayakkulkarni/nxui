@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<Carousel :base-width='300' :autoplay='true' :autoplay-delay='3000' :pause-on-hover='true' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import Carousel from '~/components/ui/Carousel.vue';
+</script>
+
+<template>
+  <Carousel :base-width='300' :autoplay='true' :autoplay-delay='3000' :pause-on-hover='true' />
+</template>`"
   >
     <div class="flex h-[400px] w-full items-center justify-center rounded-lg">
       <Carousel

@@ -17,6 +17,6 @@
       )
     "
   >
-    <slot ></slot>
+    <slot></slot>
   </th>
 </template>

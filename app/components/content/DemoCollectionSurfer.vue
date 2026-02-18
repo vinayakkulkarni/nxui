@@ -71,8 +71,8 @@
   import type { CollectionSurferItem } from '~/types/components';
 
   const items: CollectionSurferItem[] = [
-    { id: 1, image: '/images/heritage-01.jpg', title: 'HERITAGE 01' },
-    { id: 2, image: '/images/heritage-02.jpg', title: 'HERITAGE 02' },
+    { id: 1, image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80', title: 'HERITAGE 01' },
+    { id: 2, image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80', title: 'HERITAGE 02' },
     // ...
   ];
 \x3C/script>
@@ -89,7 +89,7 @@
   import type { CollectionSurferItem } from '~/types/components';
 
   const items: CollectionSurferItem[] = [
-    { id: 1, image: '/images/heritage-01.jpg', title: 'HERITAGE 01' },
+    { id: 1, image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80', title: 'HERITAGE 01' },
     // ...
   ];
 \x3C/script>
@@ -106,7 +106,7 @@
   import type { CollectionSurferItem } from '~/types/components';
 
   const items: CollectionSurferItem[] = [
-    { id: 1, image: '/images/heritage-01.jpg', title: 'HERITAGE 01' },
+    { id: 1, image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&q=80', title: 'HERITAGE 01' },
     // ...
   ];
 \x3C/script>

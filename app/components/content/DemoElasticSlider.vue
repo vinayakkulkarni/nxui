@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<ElasticSlider :default-value='50' :starting-value='0' :max-value='100' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import ElasticSlider from '~/components/ui/ElasticSlider.vue';
+</script>
+
+<template>
+  <ElasticSlider :default-value='50' :starting-value='0' :max-value='100' />
+</template>`"
   >
     <div class="flex h-[200px] w-full items-center justify-center rounded-lg">
       <ElasticSlider :default-value="50" :starting-value="0" :max-value="100" />

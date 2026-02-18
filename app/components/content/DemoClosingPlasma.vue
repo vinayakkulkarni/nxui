@@ -7,7 +7,13 @@
     {
       label: 'Default',
       props: {},
-      code: `<ClosingPlasma class="h-[400px]" />`,
+      code: `\x3Cscript setup lang="ts">
+  import ClosingPlasma from '~/components/ui/ClosingPlasma.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CClosingPlasma class="h-[400px]" />
+\x3C/template>`,
     },
     {
       label: 'Custom Colors',
@@ -16,12 +22,24 @@
         darkColorB: '#1a1a4e',
         darkColorC: '#6366f1',
       },
-      code: `<ClosingPlasma dark-color-a="#0a0a1e" dark-color-b="#1a1a4e" dark-color-c="#6366f1" class="h-[400px]" />`,
+      code: `\x3Cscript setup lang="ts">
+  import ClosingPlasma from '~/components/ui/ClosingPlasma.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CClosingPlasma dark-color-a="#0a0a1e" dark-color-b="#1a1a4e" dark-color-c="#6366f1" class="h-[400px]" />
+\x3C/template>`,
     },
     {
       label: 'High Turbulence',
       props: { turbulence: 2, speed: 1.5 },
-      code: `<ClosingPlasma :turbulence="2" :speed="1.5" class="h-[400px]" />`,
+      code: `\x3Cscript setup lang="ts">
+  import ClosingPlasma from '~/components/ui/ClosingPlasma.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CClosingPlasma :turbulence="2" :speed="1.5" class="h-[400px]" />
+\x3C/template>`,
     },
   ];
 

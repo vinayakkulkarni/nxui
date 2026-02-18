@@ -7,7 +7,13 @@
     {
       label: 'Default',
       props: {},
-      code: `<WebGLLiquid title="Fluid Motion" subtitle="Premium Presence" />`,
+      code: `\x3Cscript setup lang="ts">
+  import WebGLLiquid from '~/components/ui/WebGLLiquid.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CWebGLLiquid title="Fluid Motion" subtitle="Premium Presence" />
+\x3C/template>`,
     },
     {
       label: 'Emerald',
@@ -18,7 +24,13 @@
         title: 'Emerald',
         subtitle: 'Flow',
       },
-      code: `<WebGLLiquid color-deep="#020b06" color-mid="#065f46" color-highlight="#6ee7b7" title="Emerald" subtitle="Flow" />`,
+      code: `\x3Cscript setup lang="ts">
+  import WebGLLiquid from '~/components/ui/WebGLLiquid.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CWebGLLiquid color-deep="#020b06" color-mid="#065f46" color-highlight="#6ee7b7" title="Emerald" subtitle="Flow" />
+\x3C/template>`,
     },
     {
       label: 'Sunset',
@@ -29,7 +41,13 @@
         title: 'Warm',
         subtitle: 'Glow',
       },
-      code: `<WebGLLiquid color-deep="#1a0505" color-mid="#c2410c" color-highlight="#fbbf24" title="Warm" subtitle="Glow" />`,
+      code: `\x3Cscript setup lang="ts">
+  import WebGLLiquid from '~/components/ui/WebGLLiquid.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CWebGLLiquid color-deep="#1a0505" color-mid="#c2410c" color-highlight="#fbbf24" title="Warm" subtitle="Glow" />
+\x3C/template>`,
     },
   ];
 

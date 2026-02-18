@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<GradualBlur position='bottom' :strength='2' height='6rem' :div-count='5' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import GradualBlur from '~/components/ui/GradualBlur.vue';
+</script>
+
+<template>
+  <GradualBlur position=&quot;bottom&quot; :strength=&quot;2&quot; height=&quot;6rem&quot; :div-count=&quot;5&quot; />
+</template>`"
   >
     <div class="relative h-[300px] w-full overflow-hidden rounded-lg">
       <div class="size-full bg-gradient-to-b from-blue-500 to-purple-600 p-8">

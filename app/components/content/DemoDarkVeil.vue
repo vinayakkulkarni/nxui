@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<DarkVeil :hue-shift='120' :speed='0.5' :noise-intensity='0.05' :scanline-intensity='0.15' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import DarkVeil from '~/components/ui/DarkVeil.vue';
+</script>
+
+<template>
+  <DarkVeil :hue-shift='120' :speed='0.5' :noise-intensity='0.05' :scanline-intensity='0.15' />
+</template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
       <DarkVeil

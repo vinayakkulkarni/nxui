@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<Orb :hue='0' :hover-intensity='0.2' :rotate-on-hover='true' background-color='#000000' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import Orb from '~/components/ui/Orb.vue';
+</script>
+
+<template>
+  <Orb :hue='0' :hover-intensity='0.2' :rotate-on-hover='true' background-color='#000000' />
+</template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
       <Orb

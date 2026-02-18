@@ -1,12 +1,6 @@
 <script setup lang="ts">
   import { cn } from '~/lib/utils';
-
-  interface GlassIconItem {
-    icon: string;
-    label: string;
-    color?: string;
-    customClass?: string;
-  }
+  import type { GlassIconItem } from '~/types/components';
 
   withDefaults(
     defineProps<{

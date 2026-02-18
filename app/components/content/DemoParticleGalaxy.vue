@@ -29,12 +29,19 @@
         particleCount: 15000,
         spread: 3.5,
       },
-      code: `<ParticleGalaxyRenderer
-  :colors="['#10b981', '#06b6d4', '#3b82f6']"
-  :spiral-arms="5"
-  :particle-count="15000"
-  :spread="3.5"
-/>`,
+      code: `\x3Cscript setup lang="ts">
+  import ParticleGalaxyRenderer from '~/components/ui/ParticleGalaxy/ParticleGalaxyRenderer.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CParticleGalaxyRenderer
+    :colors="['#10b981', '#06b6d4', '#3b82f6']"
+    :spiral-arms="5"
+    :particle-count="15000"
+    :spread="3.5"
+    class="h-[400px] w-full"
+  />
+\x3C/template>`,
     },
     {
       label: 'Dense & Glowing',
@@ -47,15 +54,22 @@
         glow: 80,
         spread: 2,
       },
-      code: `<ParticleGalaxyRenderer
-  :colors="['#f97316', '#ef4444', '#ec4899']"
-  :particle-count="20000"
-  :particle-size="0.025"
-  :center-concentration="0.8"
-  :density="0.9"
-  :glow="80"
-  :spread="2"
-/>`,
+      code: `\x3Cscript setup lang="ts">
+  import ParticleGalaxyRenderer from '~/components/ui/ParticleGalaxy/ParticleGalaxyRenderer.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CParticleGalaxyRenderer
+    :colors="['#f97316', '#ef4444', '#ec4899']"
+    :particle-count="20000"
+    :particle-size="0.025"
+    :center-concentration="0.8"
+    :density="0.9"
+    :glow="80"
+    :spread="2"
+    class="h-[400px] w-full"
+  />
+\x3C/template>`,
     },
     {
       label: 'Slow & Interactive',
@@ -66,13 +80,20 @@
         cameraMovement: false,
         pulsate: false,
       },
-      code: `<ParticleGalaxyRenderer
-  :colors="['#8b5cf6', '#ec4899', '#f97316']"
-  :rotation-speed="0.0005"
-  :mouse-influence="0.8"
-  :camera-movement="false"
-  :pulsate="false"
-/>`,
+      code: `\x3Cscript setup lang="ts">
+  import ParticleGalaxyRenderer from '~/components/ui/ParticleGalaxy/ParticleGalaxyRenderer.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CParticleGalaxyRenderer
+    :colors="['#8b5cf6', '#ec4899', '#f97316']"
+    :rotation-speed="0.0005"
+    :mouse-influence="0.8"
+    :camera-movement="false"
+    :pulsate="false"
+    class="h-[400px] w-full"
+  />
+\x3C/template>`,
     },
   ];
 

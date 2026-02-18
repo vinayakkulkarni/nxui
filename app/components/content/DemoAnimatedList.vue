@@ -18,7 +18,13 @@
 <template>
   <ComponentDemo
     refreshable
-    :code="`<AnimatedList :items='items' :show-gradients='true' :enable-arrow-navigation='true' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import AnimatedList from '~/components/ui/AnimatedList.vue';
+</script>
+
+<template>
+  <AnimatedList :items='items' :show-gradients='true' :enable-arrow-navigation='true' />
+</template>`"
   >
     <div class="flex h-[400px] w-full items-center justify-center rounded-lg">
       <AnimatedList

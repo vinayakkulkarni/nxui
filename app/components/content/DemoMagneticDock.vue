@@ -41,17 +41,17 @@
       maxScale: 1.5,
       magneticDistance: 150,
       code: `\x3Cscript setup lang="ts">
-  import MagneticDock from "~/components/ui/MagneticDock/MagneticDock.vue";
-  import type { MagneticDockItemData } from "~/types/components";
+  import MagneticDock from '~/components/ui/MagneticDock/MagneticDock.vue';
+  import type { MagneticDockItemData } from '~/types/components';
 
   const items: MagneticDockItemData[] = [
-    { icon: "lucide:home", label: "Home", isActive: true },
-    { icon: "lucide:search", label: "Search" },
-    { icon: "lucide:folder", label: "Finder" },
-    { icon: "lucide:mail", label: "Mail", badge: 3 },
-    { icon: "lucide:music", label: "Music" },
-    { icon: "lucide:settings", label: "Settings" },
-    { icon: "lucide:trash", label: "Trash" },
+    { icon: 'lucide:home', label: 'Home', isActive: true },
+    { icon: 'lucide:search', label: 'Search' },
+    { icon: 'lucide:folder', label: 'Finder' },
+    { icon: 'lucide:mail', label: 'Mail', badge: 3 },
+    { icon: 'lucide:music', label: 'Music' },
+    { icon: 'lucide:settings', label: 'Settings' },
+    { icon: 'lucide:trash', label: 'Trash' },
   ];
 \x3C/script>
 
@@ -67,13 +67,13 @@
       maxScale: 1.5,
       magneticDistance: 150,
       code: `\x3Cscript setup lang="ts">
-  import MagneticDock from "~/components/ui/MagneticDock/MagneticDock.vue";
+  import MagneticDock from '~/components/ui/MagneticDock/MagneticDock.vue';
 
   const items = [
-    { icon: "lucide:home", label: "Home" },
-    { icon: "lucide:search", label: "Search" },
-    { icon: "lucide:folder", label: "Finder" },
-    { icon: "lucide:settings", label: "Settings" },
+    { icon: 'lucide:home', label: 'Home' },
+    { icon: 'lucide:search', label: 'Search' },
+    { icon: 'lucide:folder', label: 'Finder' },
+    { icon: 'lucide:settings', label: 'Settings' },
   ];
 \x3C/script>
 
@@ -89,13 +89,13 @@
       maxScale: 2,
       magneticDistance: 200,
       code: `\x3Cscript setup lang="ts">
-  import MagneticDock from "~/components/ui/MagneticDock/MagneticDock.vue";
+  import MagneticDock from '~/components/ui/MagneticDock/MagneticDock.vue';
 
   const items = [
-    { icon: "lucide:home", label: "Home" },
-    { icon: "lucide:search", label: "Search" },
-    { icon: "lucide:folder", label: "Finder" },
-    { icon: "lucide:settings", label: "Settings" },
+    { icon: 'lucide:home', label: 'Home' },
+    { icon: 'lucide:search', label: 'Search' },
+    { icon: 'lucide:folder', label: 'Finder' },
+    { icon: 'lucide:settings', label: 'Settings' },
   ];
 \x3C/script>
 

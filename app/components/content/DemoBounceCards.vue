@@ -21,7 +21,13 @@
 <template>
   <ComponentDemo
     refreshable
-    :code="`<BounceCards :images='images' :container-width='500' :container-height='300' :enable-hover='true' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import BounceCards from '~/components/ui/BounceCards.vue';
+</script>
+
+<template>
+  <BounceCards :images='images' :container-width='500' :container-height='300' :enable-hover='true' />
+</template>`"
   >
     <div
       class="flex h-[400px] w-full items-center justify-center overflow-hidden rounded-lg"

@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<CircularGallery :bend='3' text-color='#ffffff' :border-radius='0.05' :scroll-speed='2' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import CircularGallery from '~/components/ui/CircularGallery.vue';
+</script>
+
+<template>
+  <CircularGallery :bend='3' text-color='#ffffff' :border-radius='0.05' :scroll-speed='2' />
+</template>`"
   >
     <div class="relative h-[500px] w-full overflow-hidden rounded-lg">
       <CircularGallery

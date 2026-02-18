@@ -5,9 +5,15 @@
 <template>
   <ComponentDemo
     refreshable
-    :code="`<AnimatedContent :distance='100' direction='vertical' :duration='0.8'>
-  <p class='text-2xl font-bold'>Scroll to reveal this content</p>
-</AnimatedContent>`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import AnimatedContent from '~/components/ui/AnimatedContent.vue';
+</script>
+
+<template>
+  <AnimatedContent :distance='100' direction='vertical' :duration='0.8'>
+    <p class='text-2xl font-bold'>Scroll to reveal this content</p>
+  </AnimatedContent>
+</template>`"
   >
     <div class="flex h-[200px] w-full items-center justify-center">
       <AnimatedContent :distance="100" direction="vertical" :duration="0.8">

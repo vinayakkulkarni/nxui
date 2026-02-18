@@ -18,10 +18,16 @@
       colors: ['#e879f9', '#a78bfa', '#38bdf8', '#22d3ee'],
       gap: 6,
       speed: 0.02,
-      code: `<PixelCanvas
-  :colors="['#e879f9', '#a78bfa', '#38bdf8', '#22d3ee']"
-  class="h-[400px]"
-/>`,
+      code: `\x3Cscript setup lang="ts">
+  import PixelCanvas from '~/components/ui/PixelCanvas.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CPixelCanvas
+    :colors="['#e879f9', '#a78bfa', '#38bdf8', '#22d3ee']"
+    class="h-[400px]"
+  />
+\x3C/template>`,
     },
     {
       label: 'Trail Variant',
@@ -29,12 +35,18 @@
       colors: ['#f97316', '#fb923c', '#fbbf24', '#facc15'],
       gap: 8,
       speed: 0.015,
-      code: `<PixelCanvas
-  variant="trail"
-  :colors="['#f97316', '#fb923c', '#fbbf24', '#facc15']"
-  :gap="8"
-  :speed="0.015"
-/>`,
+      code: `\x3Cscript setup lang="ts">
+  import PixelCanvas from '~/components/ui/PixelCanvas.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CPixelCanvas
+    variant="trail"
+    :colors="['#f97316', '#fb923c', '#fbbf24', '#facc15']"
+    :gap="8"
+    :speed="0.015"
+  />
+\x3C/template>`,
     },
     {
       label: 'Glow Variant',
@@ -42,12 +54,18 @@
       colors: ['#22c55e', '#10b981', '#14b8a6', '#06b6d4'],
       gap: 10,
       speed: 0.01,
-      code: `<PixelCanvas
-  variant="glow"
-  :colors="['#22c55e', '#10b981', '#14b8a6', '#06b6d4']"
-  :gap="10"
-  :speed="0.01"
-/>`,
+      code: `\x3Cscript setup lang="ts">
+  import PixelCanvas from '~/components/ui/PixelCanvas.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CPixelCanvas
+    variant="glow"
+    :colors="['#22c55e', '#10b981', '#14b8a6', '#06b6d4']"
+    :gap="10"
+    :speed="0.01"
+  />
+\x3C/template>`,
     },
     {
       label: 'Subtle Monochrome',
@@ -55,11 +73,17 @@
       colors: ['#525252', '#a3a3a3', '#737373'],
       gap: 5,
       speed: 0.03,
-      code: `<PixelCanvas
-  :colors="['#525252', '#a3a3a3', '#737373']"
-  :gap="5"
-  :speed="0.03"
-/>`,
+      code: `\x3Cscript setup lang="ts">
+  import PixelCanvas from '~/components/ui/PixelCanvas.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CPixelCanvas
+    :colors="['#525252', '#a3a3a3', '#737373']"
+    :gap="5"
+    :speed="0.03"
+  />
+\x3C/template>`,
     },
   ];
 

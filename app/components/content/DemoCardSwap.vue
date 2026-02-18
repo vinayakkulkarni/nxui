@@ -5,16 +5,22 @@
 <template>
   <ComponentDemo
     full-width
-    :code="`<CardSwap :card-distance=&quot;60&quot; :vertical-distance=&quot;70&quot; :delay=&quot;5000&quot; :pause-on-hover=&quot;true&quot;>
-  <div class=&quot;flex h-[300px] w-[400px] flex-col overflow-hidden rounded-xl&quot;>
-    <div class=&quot;flex shrink-0 items-center gap-2 border-b border-white px-3 py-2 text-sm&quot;>
-      <Icon name=&quot;lucide:circle&quot; class=&quot;size-3.5&quot; />
-      Smooth
+    :code="`<script setup lang=&quot;ts&quot;>
+  import CardSwap from '~/components/ui/CardSwap.vue';
+</script>
+
+<template>
+  <CardSwap :card-distance=&quot;60&quot; :vertical-distance=&quot;70&quot; :delay=&quot;5000&quot; :pause-on-hover=&quot;true&quot;>
+    <div class=&quot;flex h-[300px] w-[400px] flex-col overflow-hidden rounded-xl&quot;>
+      <div class=&quot;flex shrink-0 items-center gap-2 border-b border-white px-3 py-2 text-sm&quot;>
+        <Icon name=&quot;lucide:circle&quot; class=&quot;size-3.5&quot; />
+        Smooth
+      </div>
+      <div class=&quot;flex-1 bg-gradient-to-br from-purple-900 via-violet-800 to-cyan-900&quot; />
     </div>
-    <div class=&quot;flex-1 bg-gradient-to-br from-purple-900 via-violet-800 to-cyan-900&quot; />
-  </div>
-  &lt;!-- more cards --&gt;
-</CardSwap>`"
+    &lt;!-- more cards --&gt;
+  </CardSwap>
+</template>`"
   >
     <div class="flex h-[500px] w-full flex-col overflow-hidden lg:flex-row">
       <div

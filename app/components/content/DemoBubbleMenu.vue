@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<BubbleMenu :stagger-delay='80' :animation-duration='500' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import BubbleMenu from '~/components/ui/BubbleMenu.vue';
+</script>
+
+<template>
+  <BubbleMenu :stagger-delay='80' :animation-duration='500' />
+</template>`"
   >
     <div
       class="relative h-[500px] w-full overflow-hidden rounded-lg bg-black/90"

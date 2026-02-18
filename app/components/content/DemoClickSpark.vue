@@ -4,7 +4,13 @@
 
 <template>
   <ComponentDemo
-    :code="`<ClickSpark spark-color='#fff' :spark-size='10' :spark-count='8' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import ClickSpark from '~/components/ui/ClickSpark.vue';
+</script>
+
+<template>
+  <ClickSpark spark-color='#fff' :spark-size='10' :spark-count='8' />
+</template>`"
   >
     <div class="relative h-[300px] w-full overflow-hidden rounded-lg bg-black">
       <ClickSpark spark-color="#fff" :spark-size="10" :spark-count="8">

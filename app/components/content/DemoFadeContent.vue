@@ -5,7 +5,13 @@
 <template>
   <ComponentDemo
     refreshable
-    :code="`<FadeContent :blur='true' :duration='1' />`"
+    :code="`<script setup lang=&quot;ts&quot;>
+  import FadeContent from '~/components/ui/FadeContent.vue';
+</script>
+
+<template>
+  <FadeContent :blur='true' :duration='1' />
+</template>`"
   >
     <div class="flex h-[200px] w-full items-center justify-center">
       <FadeContent :blur="true" :duration="1">
