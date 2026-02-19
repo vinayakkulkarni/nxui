@@ -153,7 +153,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Testimonial Marquee](https://nxui.geoql.in/docs/components/testimonial-marquee) | Scrolling testimonials          |
 | [Tilted Card](https://nxui.geoql.in/docs/components/tilted-card)                 | 3D cursor-following tilt card   |
 
-### Backgrounds (28)
+### Backgrounds (29)
 
 | Component                                                                 | Description                   |
 | ------------------------------------------------------------------------- | ----------------------------- |
