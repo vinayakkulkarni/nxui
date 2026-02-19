@@ -119,16 +119,14 @@
     <div :style="{ paddingTop: aspectRatio }"></div>
     <div
       class="absolute inset-0 flex items-center justify-center"
+      :style="{ display: showSecond ? 'none' : 'flex' }"
       :aria-hidden="isActive"
     >
       <slot name="first"></slot>
     </div>
     <div
       class="absolute inset-0 flex items-center justify-center"
-      :style="{
-        display: showSecond ? 'flex' : 'none',
-        pointerEvents: showSecond ? 'none' : '',
-      }"
+      :style="{ display: showSecond ? 'flex' : 'none' }"
       :aria-hidden="!isActive"
     >
       <slot name="second"></slot>

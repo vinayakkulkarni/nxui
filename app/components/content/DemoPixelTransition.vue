@@ -15,13 +15,12 @@
   </PixelTransition>
 </template>`"
   >
-    <div
-      class="flex h-[300px] w-full items-center justify-center rounded-lg bg-black"
-    >
+    <div class="relative h-[300px] w-full overflow-hidden rounded-lg bg-black">
       <PixelTransition
         :grid-size="12"
         pixel-color="#a855f7"
         :animation-step-duration="0.4"
+        class="size-full"
       >
         <template #first>
           <div class="flex size-full items-center justify-center">
