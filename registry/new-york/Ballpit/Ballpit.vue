@@ -305,8 +305,6 @@
       (pointerPos.x / rect.width) * 2 - 1,
       -(pointerPos.y / rect.height) * 2 + 1,
     );
-    pointerHover = true;
-
     raycaster.setFromCamera(pointerNPos, cameraRef);
     cameraRef.getWorldDirection(planeHelper.normal);
     raycaster.ray.intersectPlane(planeHelper, intersectPoint);
@@ -315,7 +313,6 @@
   });
 
   useEventListener(containerRef, 'pointerleave', () => {
-    pointerHover = false;
     controlSphere0 = false;
   });
 
@@ -383,7 +380,7 @@ uniform float thicknessAttenuation;
   vec3 scatteringHalf = normalize(directLight.direction + (geometryNormal * thicknessDistortion));
   float scatteringDot = pow(saturate(dot(geometryViewDir, -scatteringHalf)), thicknessPower) * thicknessScale;
   #ifdef USE_COLOR
-    vec3 scatteringIllu = (scatteringDot + thicknessAmbient) * vColor;
+    vec3 scatteringIllu = (scatteringDot + thicknessAmbient) * vColor.rgb;
   #else
     vec3 scatteringIllu = (scatteringDot + thicknessAmbient) * diffuse;
   #endif
