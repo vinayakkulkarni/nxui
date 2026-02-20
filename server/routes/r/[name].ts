@@ -17,6 +17,12 @@ export default defineEventHandler((event) => {
     });
   }
 
+  trackPlausibleEvent(event, {
+    eventName: 'Registry Download',
+    url: `https://nxui.geoql.in/r/${slug}`,
+    props: { component: slug },
+  }).catch(() => {});
+
   const content = readFileSync(filePath, 'utf-8');
   setResponseHeader(event, 'content-type', 'application/json');
   return JSON.parse(content);

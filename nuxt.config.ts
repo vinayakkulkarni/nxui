@@ -1,5 +1,3 @@
-import tailwindcss from '@tailwindcss/vite';
-
 export default defineNuxtConfig({
   modules: [
     '@nuxt/content',
@@ -13,6 +11,7 @@ export default defineNuxtConfig({
         autoOutboundTracking: true,
       },
     ],
+    '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     'motion-v/nuxt',
     'nuxt-og-image',
@@ -28,10 +27,6 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
-
-  vite: {
-    plugins: [tailwindcss()],
-  },
 
   devtools: { enabled: true },
 
