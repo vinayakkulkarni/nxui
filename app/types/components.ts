@@ -173,6 +173,8 @@ export interface NodeDiagramConnectionData {
   pulseColor?: string;
 }
 
+export type NodeDiagramPattern = 'data-flow' | 'network' | 'processor' | 'tree';
+
 export interface GithubContributionDay {
   color: string;
   contributionCount: number;
