@@ -305,7 +305,7 @@ void main(){
 
   class WebGLManager {
     threeRenderer: THREE.WebGLRenderer;
-    clock: THREE.Clock;
+    timer: THREE.Timer;
     width: number;
     height: number;
     paletteTex: THREE.DataTexture;
@@ -403,8 +403,7 @@ void main(){
       this.threeRenderer.domElement.style.display = 'block';
       container.prepend(this.threeRenderer.domElement);
 
-      this.clock = new THREE.Clock();
-      this.clock.start();
+      this.timer = new THREE.Timer();
 
       this.initSimulation();
       this.initOutput();

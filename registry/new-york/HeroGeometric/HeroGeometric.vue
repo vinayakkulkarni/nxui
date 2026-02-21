@@ -98,7 +98,7 @@ void main(){
   let mat: THREE.ShaderMaterial | null = null;
   let geo: THREE.PlaneGeometry | null = null;
   let rafId = 0;
-  let clock: THREE.Clock | null = null;
+  let timer: THREE.Timer | null = null;
 
   function resize() {
     if (!renderer || !containerRef.value || !camera) return;
@@ -112,8 +112,9 @@ void main(){
   useResizeObserver(containerRef, resize);
 
   function loop() {
-    if (!renderer || !scene || !camera || !mat || !clock) return;
-    mat.uniforms.uTime.value = clock.getElapsedTime() * props.speed;
+    if (!renderer || !scene || !camera || !mat || !timer) return;
+    timer.update();
+    mat.uniforms.uTime.value = timer.getElapsed() * props.speed;
     mat.uniforms.uColor1.value.set(sanitizeHex(props.color1, FALLBACK_1));
     mat.uniforms.uColor2.value.set(sanitizeHex(props.color2, FALLBACK_2));
     renderer.render(scene, camera);
@@ -154,7 +155,7 @@ void main(){
     const mesh = new THREE.Mesh(geo, mat);
     mesh.scale.set(2, 2, 1);
     scene.add(mesh);
-    clock = new THREE.Clock();
+    timer = new THREE.Timer();
     loop();
   });
 

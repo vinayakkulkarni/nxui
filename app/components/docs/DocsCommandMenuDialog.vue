@@ -116,7 +116,15 @@
               />
             </div>
             <div class="flex flex-1 flex-col gap-0.5">
-              <span class="font-medium">{{ item.title }}</span>
+              <span class="flex items-center gap-1.5 font-medium">
+                {{ item.title }}
+                <span
+                  v-if="item.badge"
+                  class="inline-flex items-center rounded-full bg-violet-500/10 px-1.5 py-0.5 text-[10px] font-medium leading-none text-violet-500 dark:bg-violet-400/10 dark:text-violet-400"
+                >
+                  {{ item.badge }}
+                </span>
+              </span>
               <span class="text-xs text-muted-foreground">{{
                 group.title
               }}</span>

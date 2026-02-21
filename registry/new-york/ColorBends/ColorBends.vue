@@ -10,7 +10,7 @@
     ShaderMaterial,
     Vector2,
     Vector3,
-    Clock,
+    Timer,
   } from 'three';
   import { cn } from '~/lib/utils';
 
@@ -226,13 +226,14 @@ void main(){
     containerRef.value.appendChild(webglRenderer.domElement);
     resize();
 
-    const clock = new Clock();
+    const timer = new Timer();
     currentRot = props.rotation;
 
     function update() {
       if (!webglRenderer || !mat) return;
-      const dt = clock.getDelta();
-      const elapsed = clock.elapsedTime;
+      timer.update();
+      const dt = timer.getDelta();
+      const elapsed = timer.getElapsed();
       mat.uniforms.uTime.value = elapsed;
       mat.uniforms.uSpeed.value = props.speed;
       mat.uniforms.uScale.value = props.scale;

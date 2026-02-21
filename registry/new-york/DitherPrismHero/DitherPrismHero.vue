@@ -149,7 +149,7 @@ void main(){
   let planeGeo: THREE.PlaneGeometry | null = null;
   let pointsGeo: THREE.BufferGeometry | null = null;
   let pointsMat: THREE.PointsMaterial | null = null;
-  let clock: THREE.Clock | null = null;
+  let timer: THREE.Timer | null = null;
   let rafId = 0;
   let particlePhases: Float32Array | null = null;
 
@@ -165,8 +165,9 @@ void main(){
   useResizeObserver(containerRef, resize);
 
   function loop() {
-    if (!renderer || !scene || !camera || !planeMat || !clock) return;
-    const t = clock.getElapsedTime() * props.speed;
+    if (!renderer || !scene || !camera || !planeMat || !timer) return;
+    timer.update();
+    const t = timer.getElapsed() * props.speed;
     planeMat.uniforms.uTime.value = t;
     planeMat.uniforms.uMouse.value.set(0.5, 0.5);
     planeMat.uniforms.uMouseIntensity.value = 0.8;
@@ -269,7 +270,7 @@ void main(){
       scene.add(points);
     }
 
-    clock = new THREE.Clock();
+    timer = new THREE.Timer();
     loop();
   });
 

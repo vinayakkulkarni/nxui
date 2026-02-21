@@ -50,6 +50,7 @@
             :title="item.title"
             :path="item.path"
             :is-active="activeHref === item.path"
+            :badge="item.badge"
           />
         </div>
       </div>

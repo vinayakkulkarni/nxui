@@ -33,7 +33,13 @@
             v-if="activeHref === item.path"
             class="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-[2px] rounded-full bg-foreground"
           ></span>
-          {{ item.title }}
+          <span class="flex-1">{{ item.title }}</span>
+          <span
+            v-if="item.badge"
+            class="ml-auto inline-flex items-center rounded-full bg-violet-500/10 px-1.5 py-0.5 text-[10px] font-medium leading-none text-violet-500 dark:bg-violet-400/10 dark:text-violet-400"
+          >
+            {{ item.badge }}
+          </span>
         </NuxtLink>
       </li>
     </ul>

@@ -88,9 +88,10 @@
   }
 
   function animate() {
-    const clock = new THREE.Clock();
+    const timer = new THREE.Timer();
     const loop = () => {
-      const elapsed = clock.getElapsedTime();
+      timer.update();
+      const elapsed = timer.getElapsed();
       if (material) material.uniforms.uTime.value = elapsed;
       if (particles) {
         state.currentRotation.x +=

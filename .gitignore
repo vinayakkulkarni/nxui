@@ -33,3 +33,4 @@ logs
 !.vscode/settings.json
 
 tmp/*.*
+.sisyphus

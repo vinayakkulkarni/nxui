@@ -11,7 +11,7 @@
     Vector2,
     Vector3,
     Color,
-    Clock,
+    Timer,
     GLSL3,
   } from 'three';
   import { cn } from '~/lib/utils';
@@ -61,7 +61,7 @@
   let webglRenderer: WebGLRenderer | null = null;
   let mat: ShaderMaterial | null = null;
   let rafId = 0;
-  let clock: Clock | null = null;
+  let clock: Timer | null = null;
   let clickIx = 0;
   let timeOffset = 0;
 
@@ -298,7 +298,7 @@ void main(){
     const geometry = new PlaneGeometry(2, 2);
     scene.add(new Mesh(geometry, mat));
 
-    clock = new Clock();
+    clock = new Timer();
     timeOffset = Math.random() * 1000;
     resize();
 
@@ -306,8 +306,9 @@ void main(){
       rafId = requestAnimationFrame(update);
       if (!webglRenderer || !mat || !clock) return;
 
+      clock.update();
       mat.uniforms.uTime.value =
-        timeOffset + clock.getElapsedTime() * props.speed;
+        timeOffset + clock.getElapsed() * props.speed;
       mat.uniforms.uShapeType.value = SHAPE_MAP[props.variant] ?? 0;
       mat.uniforms.uScale.value = props.patternScale;
       mat.uniforms.uDensity.value = props.patternDensity;

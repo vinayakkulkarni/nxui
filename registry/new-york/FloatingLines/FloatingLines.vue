@@ -10,7 +10,7 @@
     ShaderMaterial,
     Vector3,
     Vector2,
-    Clock,
+    Timer,
   } from 'three';
   import { cn } from '~/lib/utils';
 
@@ -218,11 +218,12 @@ void main() {
     const geometry = new PlaneGeometry(2, 2);
     scene.add(new Mesh(geometry, material));
 
-    const clock = new Clock();
+    const timer = new Timer();
     resize();
 
     function update() {
-      uniforms.iTime.value = clock.getElapsedTime();
+      timer.update();
+      uniforms.iTime.value = timer.getElapsed();
       if (props.interactive) {
         currentMouse.lerp(targetMouse, damping);
         uniforms.iMouse.value.copy(currentMouse);

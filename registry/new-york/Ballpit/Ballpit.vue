@@ -2,7 +2,7 @@
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useEventListener } from '@vueuse/core';
   import {
-    Clock,
+    Timer,
     PerspectiveCamera,
     Scene,
     WebGLRenderer,
@@ -74,7 +74,7 @@
   let rendererRef: WebGLRenderer | null = null;
   let sceneRef: Scene | null = null;
   let cameraRef: PerspectiveCamera | null = null;
-  let clockRef: Clock | null = null;
+  let clockRef: Timer | null = null;
   let animationId = 0;
   let isVisible = true;
   let isRunning = false;
@@ -456,14 +456,15 @@ RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometr
       observer.observe(parent);
     }
 
-    // Clock
-    clockRef = new Clock();
+    // Timer
+    clockRef = new Timer();
     const timeInfo = { elapsed: 0, delta: 0 };
 
     function animate() {
       animationId = requestAnimationFrame(animate);
       if (!rendererRef || !sceneRef || !cameraRef || !clockRef) return;
 
+      clockRef.update();
       timeInfo.delta = clockRef.getDelta();
       timeInfo.elapsed += timeInfo.delta;
 
