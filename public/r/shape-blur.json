@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Shape Blur",
   "description": "SDF shape with cursor-reactive blur distortion rendered via Three.js shaders.",
-  "dependencies": [
-    "three",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/ShapeBlur/ShapeBlur.vue",

@@ -14,11 +14,11 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/image-trail.json"
 
 ## Props
 
-| Prop               | Type       | Default | Description                           |
-| ------------------ | ---------- | ------- | ------------------------------------- |
-| `images`           | `string[]` | `[]`    | Array of image URLs                   |
-| `image-width`      | `number`   | `190`   | Width of trail images                 |
-| `image-height`     | `number`   | `209`   | Height of trail images                |
-| `sensitivity`      | `number`   | `80`    | Mouse distance to spawn next image    |
-| `fade-out-duration` | `number`  | `1200`  | Fade out duration in ms               |
-| `rotation-range`   | `number`   | `15`    | Random rotation range in degrees      |
+| Prop                | Type       | Default | Description                        |
+| ------------------- | ---------- | ------- | ---------------------------------- |
+| `images`            | `string[]` | `[]`    | Array of image URLs                |
+| `image-width`       | `number`   | `190`   | Width of trail images              |
+| `image-height`      | `number`   | `209`   | Height of trail images             |
+| `sensitivity`       | `number`   | `80`    | Mouse distance to spawn next image |
+| `fade-out-duration` | `number`   | `1200`  | Fade out duration in ms            |
+| `rotation-range`    | `number`   | `15`    | Random rotation range in degrees   |

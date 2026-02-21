@@ -46,9 +46,7 @@
     const { pixelSize } = props;
     const snappedX = Math.floor(x / pixelSize) * pixelSize;
     const snappedY = Math.floor(y / pixelSize) * pixelSize;
-    const existing = pixels.find(
-      (p) => p.x === snappedX && p.y === snappedY,
-    );
+    const existing = pixels.find((p) => p.x === snappedX && p.y === snappedY);
     if (existing) {
       existing.birth = performance.now();
       return;
@@ -116,10 +114,7 @@
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('pixel-trail-container', $props.class)"
-  >
+  <div ref="containerRef" :class="cn('pixel-trail-container', $props.class)">
     <svg v-if="gooeyFilter" class="goo-filter-svg">
       <defs>
         <filter :id="filterId">
@@ -143,7 +138,7 @@
       class="pixel-canvas"
       :style="gooeyFilter ? { filter: `url(#${filterId})` } : {}"
     ></canvas>
-    <slot ></slot>
+    <slot></slot>
   </div>
 </template>
 

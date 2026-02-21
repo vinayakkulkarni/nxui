@@ -109,7 +109,9 @@
           (gltf) => resolve(gltf.scene.clone()),
           (progress) => {
             if (progress.total > 0) {
-              loadingProgress.value = Math.round((progress.loaded / progress.total) * 100);
+              loadingProgress.value = Math.round(
+                (progress.loaded / progress.total) * 100,
+              );
             }
           },
           reject,
@@ -121,7 +123,9 @@
           (fbx) => resolve(fbx.clone()),
           (progress) => {
             if (progress.total > 0) {
-              loadingProgress.value = Math.round((progress.loaded / progress.total) * 100);
+              loadingProgress.value = Math.round(
+                (progress.loaded / progress.total) * 100,
+              );
             }
           },
           reject,
@@ -133,7 +137,9 @@
           (obj) => resolve(obj.clone()),
           (progress) => {
             if (progress.total > 0) {
-              loadingProgress.value = Math.round((progress.loaded / progress.total) * 100);
+              loadingProgress.value = Math.round(
+                (progress.loaded / progress.total) * 100,
+              );
             }
           },
           reject,
@@ -154,7 +160,11 @@
     const sphere = box.getBoundingSphere(new THREE.Sphere());
     const s = 1 / (sphere.radius * 2);
 
-    innerGroup.position.set(-sphere.center.x, -sphere.center.y, -sphere.center.z);
+    innerGroup.position.set(
+      -sphere.center.x,
+      -sphere.center.y,
+      -sphere.center.z,
+    );
     innerGroup.scale.setScalar(s);
 
     innerGroup.traverse((child) => {
@@ -170,7 +180,11 @@
       }
     });
 
-    outerGroup.rotation.set(deg2rad(props.defaultRotationY), deg2rad(props.defaultRotationX), 0);
+    outerGroup.rotation.set(
+      deg2rad(props.defaultRotationY),
+      deg2rad(props.defaultRotationX),
+      0,
+    );
 
     if (props.autoFrame && camera.isPerspectiveCamera) {
       const fitR = sphere.radius * s;
@@ -188,7 +202,8 @@
         const v = Math.min(t, 1);
         innerGroup?.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
-            const mat = (child as THREE.Mesh).material as THREE.MeshStandardMaterial;
+            const mat = (child as THREE.Mesh)
+              .material as THREE.MeshStandardMaterial;
             mat.opacity = v;
           }
         });
@@ -270,7 +285,10 @@
     container.appendChild(renderer.domElement);
 
     // Camera
-    const camZ = Math.min(Math.max(props.defaultZoom, props.minZoomDistance), props.maxZoomDistance);
+    const camZ = Math.min(
+      Math.max(props.defaultZoom, props.minZoomDistance),
+      props.maxZoomDistance,
+    );
     camera = new THREE.PerspectiveCamera(50, width / height, 0.01, 100);
     camera.position.set(0, 0, camZ);
 
@@ -281,16 +299,25 @@
     const ambient = new THREE.AmbientLight(0xffffff, props.ambientIntensity);
     scene.add(ambient);
 
-    const keyLight = new THREE.DirectionalLight(0xffffff, props.keyLightIntensity);
+    const keyLight = new THREE.DirectionalLight(
+      0xffffff,
+      props.keyLightIntensity,
+    );
     keyLight.position.set(5, 5, 5);
     keyLight.castShadow = true;
     scene.add(keyLight);
 
-    const fillLight = new THREE.DirectionalLight(0xffffff, props.fillLightIntensity);
+    const fillLight = new THREE.DirectionalLight(
+      0xffffff,
+      props.fillLightIntensity,
+    );
     fillLight.position.set(-5, 2, 5);
     scene.add(fillLight);
 
-    const rimLight = new THREE.DirectionalLight(0xffffff, props.rimLightIntensity);
+    const rimLight = new THREE.DirectionalLight(
+      0xffffff,
+      props.rimLightIntensity,
+    );
     rimLight.position.set(0, 4, -5);
     scene.add(rimLight);
 
@@ -341,8 +368,10 @@
       if (controls) controls.update();
 
       // Parallax lerp
-      currentParallax.x += (targetParallax.x - currentParallax.x) * PARALLAX_EASE;
-      currentParallax.y += (targetParallax.y - currentParallax.y) * PARALLAX_EASE;
+      currentParallax.x +=
+        (targetParallax.x - currentParallax.x) * PARALLAX_EASE;
+      currentParallax.y +=
+        (targetParallax.y - currentParallax.y) * PARALLAX_EASE;
 
       // Hover lerp
       const phx = currentHover.x;
@@ -385,7 +414,10 @@
   function dispose(): void {
     if (animationId) cancelAnimationFrame(animationId);
     if (renderer) {
-      renderer.domElement.removeEventListener('pointerdown', onCanvasPointerDown);
+      renderer.domElement.removeEventListener(
+        'pointerdown',
+        onCanvasPointerDown,
+      );
     }
     window.removeEventListener('pointermove', onCanvasPointerMove);
     window.removeEventListener('pointerup', onCanvasPointerUp);

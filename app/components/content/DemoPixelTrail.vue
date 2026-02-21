@@ -13,7 +13,12 @@
 </template>`"
   >
     <div class="relative h-[300px] w-full overflow-hidden rounded-lg bg-black">
-      <PixelTrail :pixel-size="24" :fade-duration="500" color="#ffffff" :gooey-filter="true" />
+      <PixelTrail
+        :pixel-size="24"
+        :fade-duration="500"
+        color="#ffffff"
+        :gooey-filter="true"
+      />
     </div>
   </ComponentDemo>
 </template>

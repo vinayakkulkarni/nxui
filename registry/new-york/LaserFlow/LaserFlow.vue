@@ -290,9 +290,17 @@ void main(){
   function hexToRGB(hex: string) {
     let c = hex.trim();
     if (c[0] === '#') c = c.slice(1);
-    if (c.length === 3) c = c.split('').map((x) => x + x).join('');
+    if (c.length === 3)
+      c = c
+        .split('')
+        .map((x) => x + x)
+        .join('');
     const n = Number.parseInt(c, 16) || 0xffffff;
-    return { r: ((n >> 16) & 255) / 255, g: ((n >> 8) & 255) / 255, b: (n & 255) / 255 };
+    return {
+      r: ((n >> 16) & 255) / 255,
+      g: ((n >> 8) & 255) / 255,
+      b: (n & 255) / 255,
+    };
   }
 
   function init() {
@@ -321,7 +329,13 @@ void main(){
     camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
     const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array([-1, -1, 0, 3, -1, 0, -1, 3, 0]), 3));
+    geometry.setAttribute(
+      'position',
+      new THREE.BufferAttribute(
+        new Float32Array([-1, -1, 0, 3, -1, 0, -1, 3, 0]),
+        3,
+      ),
+    );
 
     const { r, g, b } = hexToRGB(props.color);
 
@@ -425,11 +439,22 @@ void main(){
 
   watch(
     () => [
-      props.wispDensity, props.mouseTiltStrength, props.horizontalBeamOffset,
-      props.verticalBeamOffset, props.flowSpeed, props.verticalSizing,
-      props.horizontalSizing, props.fogIntensity, props.fogScale,
-      props.wispSpeed, props.wispIntensity, props.flowStrength,
-      props.decay, props.falloffStart, props.fogFallSpeed, props.color,
+      props.wispDensity,
+      props.mouseTiltStrength,
+      props.horizontalBeamOffset,
+      props.verticalBeamOffset,
+      props.flowSpeed,
+      props.verticalSizing,
+      props.horizontalSizing,
+      props.fogIntensity,
+      props.fogScale,
+      props.wispSpeed,
+      props.wispIntensity,
+      props.flowStrength,
+      props.decay,
+      props.falloffStart,
+      props.fogFallSpeed,
+      props.color,
     ],
     () => {
       if (!material) return;
@@ -478,10 +503,7 @@ void main(){
 </script>
 
 <template>
-  <div
-    ref="mountRef"
-    :class="cn('laser-flow-container', $props.class)"
-  ></div>
+  <div ref="mountRef" :class="cn('laser-flow-container', $props.class)"></div>
 </template>
 
 <style scoped>

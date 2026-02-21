@@ -52,7 +52,9 @@
     if (!textRef.value) return;
     const words = props.text.split(' ');
     const spans = words.map((word) => {
-      const isHighlighted = props.highlightWords.some((hw) => word.startsWith(hw));
+      const isHighlighted = props.highlightWords.some((hw) =>
+        word.startsWith(hw),
+      );
       const cls = isHighlighted ? `word ${props.highlightClass}` : 'word';
       return `<span class="${cls}">${word}</span>`;
     });
@@ -60,7 +62,8 @@
   }
 
   function startPhysics() {
-    if (!containerRef.value || !textRef.value || !canvasContainerRef.value) return;
+    if (!containerRef.value || !textRef.value || !canvasContainerRef.value)
+      return;
 
     const containerRect = containerRef.value.getBoundingClientRect();
     const width = containerRect.width;
@@ -85,10 +88,34 @@
       isStatic: true,
       render: { fillStyle: 'transparent' },
     };
-    const floor = Matter.Bodies.rectangle(width / 2, height + 25, width, 50, boundaryOptions);
-    const leftWall = Matter.Bodies.rectangle(-25, height / 2, 50, height, boundaryOptions);
-    const rightWall = Matter.Bodies.rectangle(width + 25, height / 2, 50, height, boundaryOptions);
-    const ceiling = Matter.Bodies.rectangle(width / 2, -25, width, 50, boundaryOptions);
+    const floor = Matter.Bodies.rectangle(
+      width / 2,
+      height + 25,
+      width,
+      50,
+      boundaryOptions,
+    );
+    const leftWall = Matter.Bodies.rectangle(
+      -25,
+      height / 2,
+      50,
+      height,
+      boundaryOptions,
+    );
+    const rightWall = Matter.Bodies.rectangle(
+      width + 25,
+      height / 2,
+      50,
+      height,
+      boundaryOptions,
+    );
+    const ceiling = Matter.Bodies.rectangle(
+      width / 2,
+      -25,
+      width,
+      50,
+      boundaryOptions,
+    );
 
     const wordSpans = textRef.value.querySelectorAll('.word');
     wordBodies = [...wordSpans].map((elem) => {
@@ -200,7 +227,10 @@
   });
 
   function handleTrigger() {
-    if (!effectStarted.value && (props.trigger === 'click' || props.trigger === 'hover')) {
+    if (
+      !effectStarted.value &&
+      (props.trigger === 'click' || props.trigger === 'hover')
+    ) {
       effectStarted.value = true;
     }
   }
@@ -218,10 +248,7 @@
       class="falling-text-target"
       :style="{ fontSize, lineHeight: 1.4 }"
     ></div>
-    <div
-      ref="canvasContainerRef"
-      class="falling-text-canvas"
-    ></div>
+    <div ref="canvasContainerRef" class="falling-text-canvas"></div>
   </div>
 </template>
 

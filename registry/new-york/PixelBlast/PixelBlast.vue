@@ -307,8 +307,7 @@ void main(){
       if (!webglRenderer || !mat || !clock) return;
 
       clock.update();
-      mat.uniforms.uTime.value =
-        timeOffset + clock.getElapsed() * props.speed;
+      mat.uniforms.uTime.value = timeOffset + clock.getElapsed() * props.speed;
       mat.uniforms.uShapeType.value = SHAPE_MAP[props.variant] ?? 0;
       mat.uniforms.uScale.value = props.patternScale;
       mat.uniforms.uDensity.value = props.patternDensity;

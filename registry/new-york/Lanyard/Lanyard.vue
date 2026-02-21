@@ -88,7 +88,10 @@
 
     for (const node of ropeNodes) {
       if (node.fixed) continue;
-      const vel = node.position.clone().sub(node.prevPosition).multiplyScalar(dampFactor);
+      const vel = node.position
+        .clone()
+        .sub(node.prevPosition)
+        .multiplyScalar(dampFactor);
       node.prevPosition.copy(node.position);
       node.position.add(vel).add(gravity);
     }
@@ -139,7 +142,10 @@
       positions[i * 3 + 1] = points[i].y;
       positions[i * 3 + 2] = points[i].z;
     }
-    bandLine.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    bandLine.geometry.setAttribute(
+      'position',
+      new THREE.BufferAttribute(positions, 3),
+    );
     bandLine.geometry.attributes.position.needsUpdate = true;
   }
 
@@ -184,7 +190,11 @@
           const sphere = box.getBoundingSphere(new THREE.Sphere());
           const s = 1 / (sphere.radius * 2);
           model.scale.setScalar(s * 2.25);
-          model.position.set(-sphere.center.x * s, -sphere.center.y * s, -sphere.center.z * s);
+          model.position.set(
+            -sphere.center.x * s,
+            -sphere.center.y * s,
+            -sphere.center.z * s,
+          );
 
           model.traverse((child) => {
             if ((child as THREE.Mesh).isMesh) {
@@ -213,9 +223,13 @@
     if (intersects.length > 0) {
       isDragging = true;
       const cardNode = ropeNodes[ropeNodes.length - 1];
-      const vec = new THREE.Vector3(pointer.x, pointer.y, 0.5).unproject(camera);
+      const vec = new THREE.Vector3(pointer.x, pointer.y, 0.5).unproject(
+        camera,
+      );
       const dir = vec.sub(camera.position).normalize();
-      const point = camera.position.clone().add(dir.multiplyScalar(camera.position.length()));
+      const point = camera.position
+        .clone()
+        .add(dir.multiplyScalar(camera.position.length()));
       dragOffset.copy(point).sub(cardNode.position);
       (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
     }
@@ -228,9 +242,13 @@
     pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
     if (isDragging) {
-      const vec = new THREE.Vector3(pointer.x, pointer.y, 0.5).unproject(camera);
+      const vec = new THREE.Vector3(pointer.x, pointer.y, 0.5).unproject(
+        camera,
+      );
       const dir = vec.sub(camera.position).normalize();
-      const point = camera.position.clone().add(dir.multiplyScalar(camera.position.length()));
+      const point = camera.position
+        .clone()
+        .add(dir.multiplyScalar(camera.position.length()));
       const cardNode = ropeNodes[ropeNodes.length - 1];
       cardNode.position.copy(point.sub(dragOffset));
       cardNode.prevPosition.copy(cardNode.position);
@@ -270,7 +288,10 @@
     const height = container.clientHeight;
 
     // Renderer
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: props.transparent });
+    renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: props.transparent,
+    });
     renderer.setSize(width, height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     if (!props.transparent) {
@@ -280,7 +301,11 @@
 
     // Camera
     camera = new THREE.PerspectiveCamera(props.fov, width / height, 0.1, 1000);
-    camera.position.set(props.position[0], props.position[1], props.position[2]);
+    camera.position.set(
+      props.position[0],
+      props.position[1],
+      props.position[2],
+    );
 
     // Scene
     scene = new THREE.Scene();
@@ -423,6 +448,11 @@
 <template>
   <div
     ref="containerRef"
-    :class="cn('relative z-0 flex size-full items-center justify-center', $props.class)"
+    :class="
+      cn(
+        'relative z-0 flex size-full items-center justify-center',
+        $props.class,
+      )
+    "
   ></div>
 </template>

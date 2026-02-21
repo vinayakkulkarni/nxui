@@ -1,7 +1,8 @@
 <script setup lang="ts">
   import StickerPeel from '@registry/new-york/StickerPeel/StickerPeel.vue';
 
-  const stickerSrc = 'https://api.iconify.design/simple-icons:vuedotjs.svg?color=%234FC08D&width=200&height=200';
+  const stickerSrc =
+    'https://api.iconify.design/simple-icons:vuedotjs.svg?color=%234FC08D&width=200&height=200';
 </script>
 
 <template>
@@ -20,7 +21,9 @@
     <div
       class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950"
     >
-      <p class="pt-16 text-center text-2xl font-light text-white/20">Try dragging it!</p>
+      <p class="pt-16 text-center text-2xl font-light text-white/20">
+        Try dragging it!
+      </p>
       <StickerPeel
         :image-src="stickerSrc"
         :width="200"

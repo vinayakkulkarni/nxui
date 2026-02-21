@@ -13,8 +13,8 @@
       index: number;
       traceColor: string;
       pulseColor: string;
-      traceWidth: number;
-      pulseSpeed: number;
+      traceWidth?: number;
+      pulseSpeed?: number;
     }>(),
     { traceWidth: 2, pulseSpeed: 2 },
   );

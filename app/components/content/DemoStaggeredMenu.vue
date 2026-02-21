@@ -24,7 +24,9 @@
   <StaggeredMenu :items='items' :social-items='socialItems' position='right' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950">
+    <div
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950"
+    >
       <StaggeredMenu
         :items="items"
         :social-items="socialItems"

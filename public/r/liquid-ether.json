@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Liquid Ether",
   "description": "Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette.",
-  "dependencies": [
-    "three",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/LiquidEther/LiquidEther.vue",

@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Color Bends",
   "description": "Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors.",
-  "dependencies": [
-    "three",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/ColorBends/ColorBends.vue",

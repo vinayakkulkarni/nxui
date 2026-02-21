@@ -1,6 +1,9 @@
 import type { H3Event } from 'h3';
 import { getRequestHeader, getRequestIP } from 'h3';
-import type { PlausibleEventPayload, PlausibleTrackOptions } from '~/types/plausible';
+import type {
+  PlausibleEventPayload,
+  PlausibleTrackOptions,
+} from '~/types/plausible';
 
 /** Plausible Events API — server-side, since module composables are client-only. */
 export async function trackPlausibleEvent(

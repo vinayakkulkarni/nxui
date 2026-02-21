@@ -12,8 +12,16 @@
   <SplashCursor :splat-radius='0.2' :curl='3' :shading='true' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950" style="contain: paint">
-      <SplashCursor :splat-radius="0.2" :curl="3" :shading="true" class="!absolute !inset-0 !z-0 pointer-events-auto" />
+    <div
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950"
+      style="contain: paint"
+    >
+      <SplashCursor
+        :splat-radius="0.2"
+        :curl="3"
+        :shading="true"
+        class="!absolute !inset-0 !z-0 pointer-events-auto"
+      />
     </div>
   </ComponentDemo>
 </template>

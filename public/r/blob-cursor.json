@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Blob Cursor",
   "description": "Gooey blob cursor trail with SVG filter and configurable appearance.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/BlobCursor/BlobCursor.vue",

@@ -21,7 +21,9 @@
   <ImageTrail :images='images' :sensitivity='80' :fade-out-duration='1200' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950">
+    <div
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950"
+    >
       <ImageTrail :images="images" :sensitivity="80" :fade-out-duration="1200">
         <p class="text-lg text-white/50">Move your mouse around</p>
       </ImageTrail>

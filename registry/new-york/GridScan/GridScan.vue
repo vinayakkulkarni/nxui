@@ -2,7 +2,13 @@
   import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
   import * as THREE from 'three';
-  import { EffectComposer, RenderPass, EffectPass, BloomEffect, ChromaticAberrationEffect } from 'postprocessing';
+  import {
+    EffectComposer,
+    RenderPass,
+    EffectPass,
+    BloomEffect,
+    ChromaticAberrationEffect,
+  } from 'postprocessing';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -312,7 +318,14 @@ void main(){
   const lookCurrent = new THREE.Vector2(0, 0);
   const lookVel = new THREE.Vector2(0, 0);
 
-  function smoothDampVec2(current: THREE.Vector2, target: THREE.Vector2, vel: THREE.Vector2, smoothTime: number, maxSpeed: number, dt: number): THREE.Vector2 {
+  function smoothDampVec2(
+    current: THREE.Vector2,
+    target: THREE.Vector2,
+    vel: THREE.Vector2,
+    smoothTime: number,
+    maxSpeed: number,
+    dt: number,
+  ): THREE.Vector2 {
     const st = Math.max(0.0001, smoothTime);
     const omega = 2 / st;
     const x = omega * dt;
@@ -352,7 +365,13 @@ void main(){
     const yBoost = THREE.MathUtils.lerp(1.2, 1.6, s);
 
     const uniforms: Record<string, THREE.IUniform> = {
-      iResolution: { value: new THREE.Vector3(container.clientWidth, container.clientHeight, renderer.getPixelRatio()) },
+      iResolution: {
+        value: new THREE.Vector3(
+          container.clientWidth,
+          container.clientHeight,
+          renderer.getPixelRatio(),
+        ),
+      },
       iTime: { value: 0 },
       uSkew: { value: new THREE.Vector2(0, 0) },
       uTilt: { value: 0 },
@@ -361,7 +380,14 @@ void main(){
       uLinesColor: { value: srgbColor(props.linesColor) },
       uScanColor: { value: srgbColor(props.scanColor) },
       uGridScale: { value: props.gridScale },
-      uLineStyle: { value: props.lineStyle === 'dashed' ? 1 : props.lineStyle === 'dotted' ? 2 : 0 },
+      uLineStyle: {
+        value:
+          props.lineStyle === 'dashed'
+            ? 1
+            : props.lineStyle === 'dotted'
+              ? 2
+              : 0,
+      },
       uLineJitter: { value: Math.max(0, Math.min(1, props.lineJitter)) },
       uScanOpacity: { value: props.scanOpacity },
       uNoise: { value: props.noiseIntensity },
@@ -371,8 +397,15 @@ void main(){
       uPhaseTaper: { value: props.scanPhaseTaper },
       uScanDuration: { value: props.scanDuration },
       uScanDelay: { value: props.scanDelay },
-      uScanDirection: { value: props.scanDirection === 'backward' ? 1 : props.scanDirection === 'pingpong' ? 2 : 0 },
-      uScanStarts: { value: new Array(MAX_SCANS).fill(0) },
+      uScanDirection: {
+        value:
+          props.scanDirection === 'backward'
+            ? 1
+            : props.scanDirection === 'pingpong'
+              ? 2
+              : 0,
+      },
+      uScanStarts: { value: Array.from({ length: MAX_SCANS }, () => 0) },
       uScanCount: { value: 0 },
     };
 
@@ -404,7 +437,10 @@ void main(){
       bloomEffect.blendMode.opacity.value = Math.max(0, props.bloomIntensity);
 
       chromaEffect = new ChromaticAberrationEffect({
-        offset: new THREE.Vector2(props.chromaticAberration, props.chromaticAberration),
+        offset: new THREE.Vector2(
+          props.chromaticAberration,
+          props.chromaticAberration,
+        ),
         radialModulation: true,
         modulationOffset: 0.0,
       });
@@ -416,7 +452,10 @@ void main(){
 
     const _canvas = renderer.domElement;
     const onMove = (e: MouseEvent) => {
-      if (leaveTimer) { clearTimeout(leaveTimer); leaveTimer = null; }
+      if (leaveTimer) {
+        clearTimeout(leaveTimer);
+        leaveTimer = null;
+      }
       const rect = container.getBoundingClientRect();
       const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
       const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
@@ -424,7 +463,9 @@ void main(){
     };
     const onLeave = () => {
       if (leaveTimer) clearTimeout(leaveTimer);
-      leaveTimer = setTimeout(() => { lookTarget.set(0, 0); }, props.snapBackDelay);
+      leaveTimer = setTimeout(() => {
+        lookTarget.set(0, 0);
+      }, props.snapBackDelay);
     };
     const onClick = () => {
       if (props.scanOnClick) {
@@ -432,8 +473,9 @@ void main(){
         if (scanStarts.length >= MAX_SCANS) scanStarts.shift();
         scanStarts.push(nowSec);
         if (shaderMaterial) {
-          const buf = new Array(MAX_SCANS).fill(0);
-          for (let i = 0; i < scanStarts.length && i < MAX_SCANS; i++) buf[i] = scanStarts[i];
+          const buf = Array.from({ length: MAX_SCANS }, () => 0);
+          for (let i = 0; i < scanStarts.length && i < MAX_SCANS; i++)
+            buf[i] = scanStarts[i];
           shaderMaterial.uniforms.uScanStarts.value = buf;
           shaderMaterial.uniforms.uScanCount.value = scanStarts.length;
         }
@@ -454,9 +496,21 @@ void main(){
       const dt = Math.max(0, Math.min(0.1, (now - last) / 1000));
       last = now;
 
-      lookCurrent.copy(smoothDampVec2(lookCurrent, lookTarget, lookVel, smoothTime, Infinity, dt));
+      lookCurrent.copy(
+        smoothDampVec2(
+          lookCurrent,
+          lookTarget,
+          lookVel,
+          smoothTime,
+          Infinity,
+          dt,
+        ),
+      );
 
-      const skew = new THREE.Vector2(lookCurrent.x * skewScale, -lookCurrent.y * yBoost * skewScale);
+      const skew = new THREE.Vector2(
+        lookCurrent.x * skewScale,
+        -lookCurrent.y * yBoost * skewScale,
+      );
       shaderMaterial.uniforms.uSkew.value.set(skew.x, skew.y);
       shaderMaterial.uniforms.iTime.value = now / 1000;
 
@@ -475,17 +529,35 @@ void main(){
     const container = containerRef.value;
     if (!container || !renderer || !shaderMaterial) return;
     renderer.setSize(container.clientWidth, container.clientHeight);
-    shaderMaterial.uniforms.iResolution.value.set(container.clientWidth, container.clientHeight, renderer.getPixelRatio());
-    if (composer) composer.setSize(container.clientWidth, container.clientHeight);
+    shaderMaterial.uniforms.iResolution.value.set(
+      container.clientWidth,
+      container.clientHeight,
+      renderer.getPixelRatio(),
+    );
+    if (composer)
+      composer.setSize(container.clientWidth, container.clientHeight);
   });
 
   watch(
     () => [
-      props.lineThickness, props.linesColor, props.scanColor, props.gridScale,
-      props.lineStyle, props.lineJitter, props.bloomIntensity, props.noiseIntensity,
-      props.scanGlow, props.scanOpacity, props.scanDirection, props.scanSoftness,
-      props.scanPhaseTaper, props.scanDuration, props.scanDelay,
-      props.bloomThreshold, props.bloomSmoothing, props.chromaticAberration,
+      props.lineThickness,
+      props.linesColor,
+      props.scanColor,
+      props.gridScale,
+      props.lineStyle,
+      props.lineJitter,
+      props.bloomIntensity,
+      props.noiseIntensity,
+      props.scanGlow,
+      props.scanOpacity,
+      props.scanDirection,
+      props.scanSoftness,
+      props.scanPhaseTaper,
+      props.scanDuration,
+      props.scanDelay,
+      props.bloomThreshold,
+      props.bloomSmoothing,
+      props.chromaticAberration,
     ],
     () => {
       if (!shaderMaterial) return;
@@ -494,13 +566,19 @@ void main(){
       u.uLinesColor.value.copy(srgbColor(props.linesColor));
       u.uScanColor.value.copy(srgbColor(props.scanColor));
       u.uGridScale.value = props.gridScale;
-      u.uLineStyle.value = props.lineStyle === 'dashed' ? 1 : props.lineStyle === 'dotted' ? 2 : 0;
+      u.uLineStyle.value =
+        props.lineStyle === 'dashed' ? 1 : props.lineStyle === 'dotted' ? 2 : 0;
       u.uLineJitter.value = Math.max(0, Math.min(1, props.lineJitter));
       u.uBloomOpacity.value = Math.max(0, props.bloomIntensity);
       u.uNoise.value = Math.max(0, props.noiseIntensity);
       u.uScanGlow.value = props.scanGlow;
       u.uScanOpacity.value = Math.max(0, Math.min(1, props.scanOpacity));
-      u.uScanDirection.value = props.scanDirection === 'backward' ? 1 : props.scanDirection === 'pingpong' ? 2 : 0;
+      u.uScanDirection.value =
+        props.scanDirection === 'backward'
+          ? 1
+          : props.scanDirection === 'pingpong'
+            ? 2
+            : 0;
       u.uScanSoftness.value = props.scanSoftness;
       u.uPhaseTaper.value = props.scanPhaseTaper;
       u.uScanDuration.value = Math.max(0.05, props.scanDuration);
@@ -512,7 +590,10 @@ void main(){
         bloomEffect.luminanceMaterial.smoothing = props.bloomSmoothing;
       }
       if (chromaEffect) {
-        chromaEffect.offset.set(props.chromaticAberration, props.chromaticAberration);
+        chromaEffect.offset.set(
+          props.chromaticAberration,
+          props.chromaticAberration,
+        );
       }
     },
   );
@@ -520,7 +601,10 @@ void main(){
   function cleanup() {
     if (animFrame !== null) cancelAnimationFrame(animFrame);
     if (leaveTimer) clearTimeout(leaveTimer);
-    if (composer) { composer.dispose(); composer = null; }
+    if (composer) {
+      composer.dispose();
+      composer = null;
+    }
     if (renderer) {
       const canvas = renderer.domElement;
       canvas.parentElement?.removeChild(canvas);
@@ -533,15 +617,16 @@ void main(){
     chromaEffect = null;
   }
 
-  onMounted(() => { init(); });
-  onBeforeUnmount(() => { cleanup(); });
+  onMounted(() => {
+    init();
+  });
+  onBeforeUnmount(() => {
+    cleanup();
+  });
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('gridscan', $props.class)"
-  ></div>
+  <div ref="containerRef" :class="cn('gridscan', $props.class)"></div>
 </template>
 
 <style scoped>

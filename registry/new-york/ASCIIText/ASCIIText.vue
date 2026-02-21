@@ -74,9 +74,16 @@
   let centerPos = { x: 0, y: 0 };
   let hueAngle = 0;
 
-  const charset = ' .\'`^",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$';
+  const charset =
+    ' .\'`^",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$';
 
-  function mapRange(n: number, start: number, stop: number, start2: number, stop2: number) {
+  function mapRange(
+    n: number,
+    start: number,
+    stop: number,
+    start2: number,
+    stop2: number,
+  ) {
     return ((n - start) / (stop - start)) * (stop2 - start2) + start2;
   }
 
@@ -87,7 +94,10 @@
     ctx.font = font;
     const metrics = ctx.measureText(props.text);
     const tw = Math.ceil(metrics.width) + 20;
-    const th = Math.ceil(metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent) + 20;
+    const th =
+      Math.ceil(
+        metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent,
+      ) + 20;
     canvas.width = tw;
     canvas.height = th;
     ctx.clearRect(0, 0, tw, th);
@@ -131,13 +141,18 @@
     mesh = new THREE.Mesh(geometry, material);
     scene.add(mesh);
 
-    renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true, preserveDrawingBuffer: true });
+    renderer = new THREE.WebGLRenderer({
+      antialias: false,
+      alpha: true,
+      preserveDrawingBuffer: true,
+    });
     renderer.setPixelRatio(1);
     renderer.setClearColor(0x000000, 0);
 
     // ASCII filter setup
     const filterWrapper = document.createElement('div');
-    filterWrapper.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;';
+    filterWrapper.style.cssText =
+      'position:absolute;top:0;left:0;width:100%;height:100%;';
 
     preElement = document.createElement('pre');
     filterWrapper.appendChild(preElement);
@@ -161,14 +176,17 @@
   }
 
   function setSize(w: number, h: number) {
-    if (!renderer || !asciiCanvas || !asciiCtx || !preElement || !camera) return;
+    if (!renderer || !asciiCanvas || !asciiCtx || !preElement || !camera)
+      return;
     renderer.setSize(w, h);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
 
     asciiCtx.font = `${props.asciiFontSize}px monospace`;
     const charWidth = asciiCtx.measureText('A').width;
-    cols = Math.floor(w / (props.asciiFontSize * (charWidth / props.asciiFontSize)));
+    cols = Math.floor(
+      w / (props.asciiFontSize * (charWidth / props.asciiFontSize)),
+    );
     rows = Math.floor(h / props.asciiFontSize);
     asciiCanvas.width = cols;
     asciiCanvas.height = rows;
@@ -186,7 +204,10 @@
     if (e.touches.length > 0) {
       const bounds = containerRef.value?.getBoundingClientRect();
       if (bounds) {
-        mousePos = { x: e.touches[0].clientX - bounds.left, y: e.touches[0].clientY - bounds.top };
+        mousePos = {
+          x: e.touches[0].clientX - bounds.left,
+          y: e.touches[0].clientY - bounds.top,
+        };
       }
     }
   }
@@ -197,12 +218,25 @@
   }
 
   function render() {
-    if (!renderer || !scene || !camera || !mesh || !material || !asciiCanvas || !asciiCtx || !preElement) return;
+    if (
+      !renderer ||
+      !scene ||
+      !camera ||
+      !mesh ||
+      !material ||
+      !asciiCanvas ||
+      !asciiCtx ||
+      !preElement
+    )
+      return;
 
     const time = Date.now() * 0.001;
     material.uniforms.uTime.value = Math.sin(time);
 
-    const { width, height } = containerRef.value?.getBoundingClientRect() ?? { width: 0, height: 0 };
+    const { width, height } = containerRef.value?.getBoundingClientRect() ?? {
+      width: 0,
+      height: 0,
+    };
     const mx = mapRange(mousePos.y, 0, height, 0.5, -0.5);
     const my = mapRange(mousePos.x, 0, width, -0.5, 0.5);
     mesh.rotation.x += (mx - mesh.rotation.x) * 0.05;
@@ -243,7 +277,8 @@
     const deg = (Math.atan2(dy, dx) * 180) / Math.PI;
     hueAngle += (deg - hueAngle) * 0.075;
     if (containerRef.value?.firstElementChild) {
-      (containerRef.value.firstElementChild as HTMLElement).style.filter = `hue-rotate(${hueAngle.toFixed(1)}deg)`;
+      (containerRef.value.firstElementChild as HTMLElement).style.filter =
+        `hue-rotate(${hueAngle.toFixed(1)}deg)`;
     }
   }
 

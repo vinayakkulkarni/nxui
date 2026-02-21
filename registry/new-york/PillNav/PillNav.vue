@@ -59,14 +59,16 @@
     circleLayouts.value = props.items.map((_, i) => {
       const pill = pillRefs.value[i];
       const circle = circleRefs.value[i];
-      if (!pill || !circle) return { diameter: 0, delta: 0, originY: 0, pillHeight: 0 };
+      if (!pill || !circle)
+        return { diameter: 0, delta: 0, originY: 0, pillHeight: 0 };
 
       const rect = pill.getBoundingClientRect();
       const w = rect.width;
       const h = rect.height;
-      const R = (w * w / 4 + h * h) / (2 * h);
+      const R = ((w * w) / 4 + h * h) / (2 * h);
       const D = Math.ceil(2 * R) + 2;
-      const delta = Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
+      const delta =
+        Math.ceil(R - Math.sqrt(Math.max(0, R * R - (w * w) / 4))) + 1;
       const originY = D - delta;
 
       circle.style.width = `${D}px`;
@@ -154,28 +156,21 @@
     <nav
       :class="cn('pill-nav', $props.class)"
       aria-label="Primary"
-      :style="{
-        '--base': props.baseColor,
-        '--pill-bg': props.pillColor,
-        '--hover-text': props.hoveredPillTextColor,
-        '--pill-text': resolvedPillTextColor,
-      } as Record<string, string>"
+      :style="
+        {
+          '--base': props.baseColor,
+          '--pill-bg': props.pillColor,
+          '--hover-text': props.hoveredPillTextColor,
+          '--pill-text': resolvedPillTextColor,
+        } as Record<string, string>
+      "
     >
-      <span
-        v-if="$slots.logo"
-        class="pill-logo desktop-only"
-      >
+      <span v-if="$slots.logo" class="pill-logo desktop-only">
         <slot name="logo"></slot>
       </span>
 
-      <div
-        ref="navItemsRef"
-        class="pill-nav-items desktop-only"
-      >
-        <ul
-          class="pill-list"
-          role="menubar"
-        >
+      <div ref="navItemsRef" class="pill-nav-items desktop-only">
+        <ul class="pill-list" role="menubar">
           <li
             v-for="(item, i) in items"
             :key="item.href || `item-${i}`"
@@ -183,7 +178,11 @@
           >
             <a
               v-if="isExternalLink(item.href)"
-              :ref="(el) => { pillRefs[i] = el as HTMLElement }"
+              :ref="
+                (el) => {
+                  pillRefs[i] = el as HTMLElement;
+                }
+              "
               role="menuitem"
               :href="item.href"
               :class="['pill', { 'is-active': activeHref === item.href }]"
@@ -192,7 +191,11 @@
               @mouseleave="handleLeave(i)"
             >
               <span
-                :ref="(el) => { circleRefs[i] = el as HTMLElement }"
+                :ref="
+                  (el) => {
+                    circleRefs[i] = el as HTMLElement;
+                  }
+                "
                 class="hover-circle"
                 aria-hidden="true"
                 :style="{
@@ -203,7 +206,8 @@
                 <span
                   class="pill-label"
                   :style="{ transform: `translateY(${getLabelTranslateY(i)})` }"
-                >{{ item.label }}</span>
+                  >{{ item.label }}</span
+                >
                 <span
                   class="pill-label-hover"
                   aria-hidden="true"
@@ -211,12 +215,17 @@
                     transform: `translateY(${getHoverLabelTranslateY(i)})`,
                     opacity: getHoverLabelOpacity(i),
                   }"
-                >{{ item.label }}</span>
+                  >{{ item.label }}</span
+                >
               </span>
             </a>
             <NuxtLink
               v-else
-              :ref="(el) => { pillRefs[i] = (el as any)?.$el as HTMLElement }"
+              :ref="
+                (el) => {
+                  pillRefs[i] = (el as any)?.$el as HTMLElement;
+                }
+              "
               role="menuitem"
               :to="item.href"
               :class="['pill', { 'is-active': activeHref === item.href }]"
@@ -225,7 +234,11 @@
               @mouseleave="handleLeave(i)"
             >
               <span
-                :ref="(el) => { circleRefs[i] = el as HTMLElement }"
+                :ref="
+                  (el) => {
+                    circleRefs[i] = el as HTMLElement;
+                  }
+                "
                 class="hover-circle"
                 aria-hidden="true"
                 :style="{
@@ -236,7 +249,8 @@
                 <span
                   class="pill-label"
                   :style="{ transform: `translateY(${getLabelTranslateY(i)})` }"
-                >{{ item.label }}</span>
+                  >{{ item.label }}</span
+                >
                 <span
                   class="pill-label-hover"
                   aria-hidden="true"
@@ -244,7 +258,8 @@
                     transform: `translateY(${getHoverLabelTranslateY(i)})`,
                     opacity: getHoverLabelOpacity(i),
                   }"
-                >{{ item.label }}</span>
+                  >{{ item.label }}</span
+                >
               </span>
             </NuxtLink>
           </li>
@@ -259,13 +274,17 @@
         <span
           class="hamburger-line"
           :style="{
-            transform: isMobileMenuOpen ? 'rotate(45deg) translateY(3px)' : 'none',
+            transform: isMobileMenuOpen
+              ? 'rotate(45deg) translateY(3px)'
+              : 'none',
           }"
         ></span>
         <span
           class="hamburger-line"
           :style="{
-            transform: isMobileMenuOpen ? 'rotate(-45deg) translateY(-3px)' : 'none',
+            transform: isMobileMenuOpen
+              ? 'rotate(-45deg) translateY(-3px)'
+              : 'none',
           }"
         ></span>
       </button>
@@ -275,22 +294,24 @@
       <div
         v-if="isMobileMenuOpen"
         class="mobile-menu-popover mobile-only"
-        :style="{
-          '--base': props.baseColor,
-          '--pill-bg': props.pillColor,
-          '--hover-text': props.hoveredPillTextColor,
-          '--pill-text': resolvedPillTextColor,
-        } as Record<string, string>"
+        :style="
+          {
+            '--base': props.baseColor,
+            '--pill-bg': props.pillColor,
+            '--hover-text': props.hoveredPillTextColor,
+            '--pill-text': resolvedPillTextColor,
+          } as Record<string, string>
+        "
       >
         <ul class="mobile-menu-list">
-          <li
-            v-for="(item, i) in items"
-            :key="item.href || `mobile-item-${i}`"
-          >
+          <li v-for="(item, i) in items" :key="item.href || `mobile-item-${i}`">
             <a
               v-if="isExternalLink(item.href)"
               :href="item.href"
-              :class="['mobile-menu-link', { 'is-active': activeHref === item.href }]"
+              :class="[
+                'mobile-menu-link',
+                { 'is-active': activeHref === item.href },
+              ]"
               @click="closeMobileMenu"
             >
               {{ item.label }}
@@ -298,7 +319,10 @@
             <NuxtLink
               v-else
               :to="item.href"
-              :class="['mobile-menu-link', { 'is-active': activeHref === item.href }]"
+              :class="[
+                'mobile-menu-link',
+                { 'is-active': activeHref === item.href },
+              ]"
               @click="closeMobileMenu"
             >
               {{ item.label }}

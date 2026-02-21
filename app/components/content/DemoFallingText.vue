@@ -13,7 +13,9 @@
   <FallingText text='nxui makes beautiful components easy' :gravity='1' trigger='auto' />
 </template>`"
   >
-    <div class="relative h-[300px] w-full overflow-hidden rounded-lg bg-neutral-950">
+    <div
+      class="relative h-[300px] w-full overflow-hidden rounded-lg bg-neutral-950"
+    >
       <FallingText
         text="nxui makes beautiful components easy"
         :gravity="1"

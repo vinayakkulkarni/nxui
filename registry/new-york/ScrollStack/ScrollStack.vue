@@ -40,14 +40,14 @@
 
     cardRefs.value.forEach((cardEl, index) => {
       if (!cardEl) return;
-      const cardTop =
-        cardEl.offsetTop - scroller.offsetTop - props.stickyTop;
+      const cardTop = cardEl.offsetTop - scroller.offsetTop - props.stickyTop;
       const progress = Math.max(
         0,
         Math.min(1, (scrollTop - cardTop) / props.cardHeight),
       );
 
-      const scale = 1 - progress * props.scaleMultiplier * (cardRefs.value.length - index);
+      const scale =
+        1 - progress * props.scaleMultiplier * (cardRefs.value.length - index);
       const brightness = 1 - progress * 0.3;
       const translateY = -progress * props.cardGap;
 
@@ -84,7 +84,11 @@
       <div
         v-for="(card, index) in cards"
         :key="card.id"
-        :ref="(el) => { if (el) cardRefs[index] = el as HTMLDivElement }"
+        :ref="
+          (el) => {
+            if (el) cardRefs[index] = el as HTMLDivElement;
+          }
+        "
         class="scroll-stack-card"
         :style="{
           backgroundColor: card.color || `hsl(${index * 40 + 200}, 70%, 50%)`,
@@ -103,7 +107,7 @@
           </p>
         </slot>
       </div>
-      <div class="scroll-stack-end" ></div>
+      <div class="scroll-stack-end"></div>
     </div>
   </div>
 </template>

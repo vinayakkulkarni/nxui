@@ -48,7 +48,8 @@
 
   function getItemPosition(index: number) {
     const totalItems = props.images.length;
-    const angle = (index / totalItems) * Math.PI * 2 + (rotation.value * Math.PI) / 180;
+    const angle =
+      (index / totalItems) * Math.PI * 2 + (rotation.value * Math.PI) / 180;
     const x = Math.cos(angle) * rx.value;
     const y = Math.sin(angle) * ry.value;
     return { x, y };
@@ -98,11 +99,7 @@
         top: `${containerH / 2 + getItemPosition(index).y - itemSize / 2}px`,
       }"
     >
-      <img
-        :src="image.src"
-        :alt="image.alt || ''"
-        class="orbit-image"
-      />
+      <img :src="image.src" :alt="image.alt || ''" class="orbit-image" />
     </div>
 
     <div class="orbit-center-content">

@@ -13,7 +13,12 @@
 </template>`"
   >
     <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
-      <Galaxy :star-count="2000" :speed="0.5" :star-size="2" star-color="#ffffff" />
+      <Galaxy
+        :star-count="2000"
+        :speed="0.5"
+        :star-size="2"
+        star-color="#ffffff"
+      />
     </div>
   </ComponentDemo>
 </template>

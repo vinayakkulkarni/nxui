@@ -173,7 +173,8 @@
 
     const maxTrail = Math.max(1, Math.floor(props.trailLength));
     trailBuf.length = 0;
-    for (let i = 0; i < maxTrail; i++) trailBuf.push(new THREE.Vector2(0.5, 0.5));
+    for (let i = 0; i < maxTrail; i++)
+      trailBuf.push(new THREE.Vector2(0.5, 0.5));
     head = 0;
 
     const baseColor = new THREE.Color(props.color);
@@ -186,7 +187,9 @@
         iPrevMouse: { value: trailBuf.map((v) => v.clone()) },
         iOpacity: { value: 1.0 },
         iScale: { value: calculateScale(host) },
-        iBaseColor: { value: new THREE.Vector3(baseColor.r, baseColor.g, baseColor.b) },
+        iBaseColor: {
+          value: new THREE.Vector3(baseColor.r, baseColor.g, baseColor.b),
+        },
         iBrightness: { value: props.brightness },
         iEdgeIntensity: { value: props.edgeIntensity },
       },
@@ -203,7 +206,12 @@
     composer = new EffectComposer(renderer);
     composer.addPass(new RenderPass(scene, camera));
 
-    const bloomPass = new UnrealBloomPass(new THREE.Vector2(1, 1), props.bloomStrength, props.bloomRadius, props.bloomThreshold);
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(1, 1),
+      props.bloomStrength,
+      props.bloomRadius,
+      props.bloomThreshold,
+    );
     composer.addPass(bloomPass);
 
     filmPass = new ShaderPass({
@@ -233,13 +241,14 @@
     composer.addPass(filmPass);
 
     // Unpremultiply pass
-    composer.addPass(new ShaderPass({
-      uniforms: { tDiffuse: { value: null } },
-      vertexShader: `
+    composer.addPass(
+      new ShaderPass({
+        uniforms: { tDiffuse: { value: null } },
+        vertexShader: `
         varying vec2 vUv;
         void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
       `,
-      fragmentShader: `
+        fragmentShader: `
         uniform sampler2D tDiffuse;
         varying vec2 vUv;
         void main(){
@@ -248,7 +257,8 @@
           gl_FragColor = vec4(clamp(c.rgb / a, 0.0, 1.0), c.a);
         }
       `,
-    }));
+      }),
+    );
 
     resize();
     lastMoveTime = performance.now();
@@ -278,7 +288,10 @@
         }
         const dt = now - lastMoveTime;
         if (dt > props.fadeDelayMs) {
-          const k = Math.min(1, (dt - props.fadeDelayMs) / props.fadeDurationMs);
+          const k = Math.min(
+            1,
+            (dt - props.fadeDelayMs) / props.fadeDurationMs,
+          );
           fadeOpacity = Math.max(0, 1 - k);
         }
       }
@@ -315,8 +328,16 @@
     const host = containerRef.value;
     if (!host) return;
     const rect = host.getBoundingClientRect();
-    const x = THREE.MathUtils.clamp((e.clientX - rect.left) / Math.max(1, rect.width), 0, 1);
-    const y = THREE.MathUtils.clamp(1 - (e.clientY - rect.top) / Math.max(1, rect.height), 0, 1);
+    const x = THREE.MathUtils.clamp(
+      (e.clientX - rect.left) / Math.max(1, rect.width),
+      0,
+      1,
+    );
+    const y = THREE.MathUtils.clamp(
+      1 - (e.clientY - rect.top) / Math.max(1, rect.height),
+      0,
+      1,
+    );
     currentMouse.set(x, y);
     pointerActive = true;
     lastMoveTime = performance.now();
@@ -357,7 +378,10 @@
           }
           const dt = now - lastMoveTime;
           if (dt > props.fadeDelayMs) {
-            const k = Math.min(1, (dt - props.fadeDelayMs) / props.fadeDurationMs);
+            const k = Math.min(
+              1,
+              (dt - props.fadeDelayMs) / props.fadeDurationMs,
+            );
             fadeOpacity = Math.max(0, 1 - k);
           }
         }
@@ -393,7 +417,10 @@
     const rect = host.getBoundingClientRect();
     const w = Math.max(1, Math.floor(rect.width));
     const h = Math.max(1, Math.floor(rect.height));
-    const dpr = Math.min(window.devicePixelRatio || 1, props.maxDevicePixelRatio);
+    const dpr = Math.min(
+      window.devicePixelRatio || 1,
+      props.maxDevicePixelRatio,
+    );
     renderer.setPixelRatio(dpr);
     renderer.setSize(w, h, false);
     composer.setSize(w, h);
@@ -403,25 +430,42 @@
     shaderMaterial.uniforms.iScale.value = calculateScale(host);
   }
 
-  useResizeObserver(containerRef, () => { resize(); });
-
-  watch(() => props.color, () => {
-    if (!shaderMaterial) return;
-    const c = new THREE.Color(props.color);
-    shaderMaterial.uniforms.iBaseColor.value.set(c.r, c.g, c.b);
+  useResizeObserver(containerRef, () => {
+    resize();
   });
 
-  watch(() => props.brightness, () => {
-    if (shaderMaterial) shaderMaterial.uniforms.iBrightness.value = props.brightness;
-  });
+  watch(
+    () => props.color,
+    () => {
+      if (!shaderMaterial) return;
+      const c = new THREE.Color(props.color);
+      shaderMaterial.uniforms.iBaseColor.value.set(c.r, c.g, c.b);
+    },
+  );
 
-  watch(() => props.edgeIntensity, () => {
-    if (shaderMaterial) shaderMaterial.uniforms.iEdgeIntensity.value = props.edgeIntensity;
-  });
+  watch(
+    () => props.brightness,
+    () => {
+      if (shaderMaterial)
+        shaderMaterial.uniforms.iBrightness.value = props.brightness;
+    },
+  );
 
-  watch(() => props.grainIntensity, () => {
-    if (filmPass?.uniforms?.intensity) filmPass.uniforms.intensity.value = props.grainIntensity;
-  });
+  watch(
+    () => props.edgeIntensity,
+    () => {
+      if (shaderMaterial)
+        shaderMaterial.uniforms.iEdgeIntensity.value = props.edgeIntensity;
+    },
+  );
+
+  watch(
+    () => props.grainIntensity,
+    () => {
+      if (filmPass?.uniforms?.intensity)
+        filmPass.uniforms.intensity.value = props.grainIntensity;
+    },
+  );
 
   function cleanup() {
     if (animFrame !== null) cancelAnimationFrame(animFrame);
@@ -433,7 +477,10 @@
       parent.removeEventListener('pointerenter', onPointerEnter);
       parent.removeEventListener('pointerleave', onPointerLeave);
     }
-    if (composer) { composer.dispose(); composer = null; }
+    if (composer) {
+      composer.dispose();
+      composer = null;
+    }
     if (renderer) {
       renderer.domElement.parentElement?.removeChild(renderer.domElement);
       renderer.dispose();
@@ -444,15 +491,16 @@
     filmPass = null;
   }
 
-  onMounted(() => { init(); });
-  onBeforeUnmount(() => { cleanup(); });
+  onMounted(() => {
+    init();
+  });
+  onBeforeUnmount(() => {
+    cleanup();
+  });
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('ghost-cursor', $props.class)"
-  ></div>
+  <div ref="containerRef" :class="cn('ghost-cursor', $props.class)"></div>
 </template>
 
 <style scoped>

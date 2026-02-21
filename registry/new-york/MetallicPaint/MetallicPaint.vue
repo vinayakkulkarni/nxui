@@ -207,7 +207,11 @@ void main(){
   function hexToRgb(hex: string): [number, number, number] {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
-      ? [Number.parseInt(result[1], 16) / 255, Number.parseInt(result[2], 16) / 255, Number.parseInt(result[3], 16) / 255]
+      ? [
+          Number.parseInt(result[1], 16) / 255,
+          Number.parseInt(result[2], 16) / 255,
+          Number.parseInt(result[3], 16) / 255,
+        ]
       : [1, 1, 1];
   }
 
@@ -217,7 +221,12 @@ void main(){
     let width = img.naturalWidth || img.width;
     let height = img.naturalHeight || img.height;
 
-    if (width > MAX_SIZE || height > MAX_SIZE || width < MIN_SIZE || height < MIN_SIZE) {
+    if (
+      width > MAX_SIZE ||
+      height > MAX_SIZE ||
+      width < MIN_SIZE ||
+      height < MIN_SIZE
+    ) {
       const scale =
         width > height
           ? width > MAX_SIZE
@@ -253,7 +262,8 @@ void main(){
       const g = data[idx + 1];
       const b = data[idx + 2];
       const a = data[idx + 3];
-      const isBackground = (r > 250 && g > 250 && b > 250 && a === 255) || a < 5;
+      const isBackground =
+        (r > 250 && g > 250 && b > 250 && a === 255) || a < 5;
       alphaValues[i] = isBackground ? 0 : a / 255;
       shapeMask[i] = alphaValues[i] > 0.1 ? 1 : 0;
     }
@@ -316,7 +326,11 @@ void main(){
     return outData;
   }
 
-  function compileShader(ctx: WebGL2RenderingContext, src: string, type: number): WebGLShader | null {
+  function compileShader(
+    ctx: WebGL2RenderingContext,
+    src: string,
+    type: number,
+  ): WebGLShader | null {
     const s = ctx.createShader(type);
     if (!s) return null;
     ctx.shaderSource(s, src);
@@ -383,7 +397,17 @@ void main(){
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, imgData.width, imgData.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(imgData.data.buffer));
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      imgData.width,
+      imgData.height,
+      0,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      new Uint8Array(imgData.data.buffer),
+    );
     gl.uniform1i(uniforms.u_tex, 0);
 
     imgRatio = imgData.width / imgData.height;
@@ -473,11 +497,24 @@ void main(){
 
   watch(
     () => [
-      props.seed, props.scale, props.refraction, props.blur, props.liquid,
-      props.brightness, props.contrast, props.angle, props.fresnel,
-      props.lightColor, props.darkColor, props.patternSharpness,
-      props.waveAmplitude, props.noiseScale, props.chromaticSpread,
-      props.distortion, props.contour, props.tintColor,
+      props.seed,
+      props.scale,
+      props.refraction,
+      props.blur,
+      props.liquid,
+      props.brightness,
+      props.contrast,
+      props.angle,
+      props.fresnel,
+      props.lightColor,
+      props.darkColor,
+      props.patternSharpness,
+      props.waveAmplitude,
+      props.noiseScale,
+      props.chromaticSpread,
+      props.distortion,
+      props.contour,
+      props.tintColor,
     ],
     () => {
       if (gl && textureReady) {
@@ -487,9 +524,12 @@ void main(){
     },
   );
 
-  watch(() => props.imageSrc, (src) => {
-    if (gl && src) loadImage(src);
-  });
+  watch(
+    () => props.imageSrc,
+    (src) => {
+      if (gl && src) loadImage(src);
+    },
+  );
 
   onMounted(() => {
     if (!initGL()) return;

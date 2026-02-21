@@ -128,35 +128,19 @@
       },
       {
         x:
-          rect.right -
-          hostRect.left +
-          BORDER_WIDTH -
-          CORNER_SIZE -
-          smoothPos.x,
+          rect.right - hostRect.left + BORDER_WIDTH - CORNER_SIZE - smoothPos.x,
         y: rect.top - hostRect.top - BORDER_WIDTH - smoothPos.y,
       },
       {
         x:
-          rect.right -
-          hostRect.left +
-          BORDER_WIDTH -
-          CORNER_SIZE -
-          smoothPos.x,
+          rect.right - hostRect.left + BORDER_WIDTH - CORNER_SIZE - smoothPos.x,
         y:
-          rect.bottom -
-          hostRect.top +
-          BORDER_WIDTH -
-          CORNER_SIZE -
-          smoothPos.y,
+          rect.bottom - hostRect.top + BORDER_WIDTH - CORNER_SIZE - smoothPos.y,
       },
       {
         x: rect.left - hostRect.left - BORDER_WIDTH - smoothPos.x,
         y:
-          rect.bottom -
-          hostRect.top +
-          BORDER_WIDTH -
-          CORNER_SIZE -
-          smoothPos.y,
+          rect.bottom - hostRect.top + BORDER_WIDTH - CORNER_SIZE - smoothPos.y,
       },
     ];
 

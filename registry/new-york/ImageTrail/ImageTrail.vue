@@ -106,10 +106,7 @@
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('image-trail-content', $props.class)"
-  >
+  <div ref="containerRef" :class="cn('image-trail-content', $props.class)">
     <div
       v-for="(img, i) in activeImages"
       :key="`${img.birth}-${i}`"
@@ -125,7 +122,7 @@
         :style="{ backgroundImage: `url(${images[img.index]})` }"
       ></div>
     </div>
-    <slot ></slot>
+    <slot></slot>
   </div>
 </template>
 

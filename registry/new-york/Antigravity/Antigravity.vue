@@ -72,10 +72,14 @@
 
   function createGeometry(): THREE.BufferGeometry {
     switch (props.particleShape) {
-      case 'sphere': return new THREE.SphereGeometry(0.2, 16, 16);
-      case 'box': return new THREE.BoxGeometry(0.3, 0.3, 0.3);
-      case 'tetrahedron': return new THREE.TetrahedronGeometry(0.3);
-      default: return new THREE.CapsuleGeometry(0.1, 0.4, 4, 8);
+      case 'sphere':
+        return new THREE.SphereGeometry(0.2, 16, 16);
+      case 'box':
+        return new THREE.BoxGeometry(0.3, 0.3, 0.3);
+      case 'tetrahedron':
+        return new THREE.TetrahedronGeometry(0.3);
+      default:
+        return new THREE.CapsuleGeometry(0.1, 0.4, 4, 8);
     }
   }
 
@@ -116,9 +120,14 @@
       const randomRadiusOffset = (Math.random() - 0.5) * 2;
 
       particles.push({
-        t, speed,
-        mx: x, my: y, mz: z,
-        cx: x, cy: y, cz: z,
+        t,
+        speed,
+        mx: x,
+        my: y,
+        mz: z,
+        cx: x,
+        cy: y,
+        cz: z,
         randomRadiusOffset,
       });
     }
@@ -188,13 +197,17 @@
 
       if (dist < props.magnetRadius) {
         const angle = Math.atan2(dy, dx) + globalRotation;
-        const wave = Math.sin(p.t * props.waveSpeed + angle) * (0.5 * props.waveAmplitude);
-        const deviation = p.randomRadiusOffset * (5 / (props.fieldStrength + 0.1));
+        const wave =
+          Math.sin(p.t * props.waveSpeed + angle) * (0.5 * props.waveAmplitude);
+        const deviation =
+          p.randomRadiusOffset * (5 / (props.fieldStrength + 0.1));
         const currentRingRadius = props.ringRadius + wave + deviation;
 
         tpx = projectedTargetX + currentRingRadius * Math.cos(angle);
         tpy = projectedTargetY + currentRingRadius * Math.sin(angle);
-        tpz = p.mz * props.depthFactor + Math.sin(p.t) * props.waveAmplitude * props.depthFactor;
+        tpz =
+          p.mz * props.depthFactor +
+          Math.sin(p.t) * props.waveAmplitude * props.depthFactor;
       }
 
       p.cx += (tpx - p.cx) * props.lerpSpeed;
@@ -210,7 +223,11 @@
       );
       const distFromRing = Math.abs(currentDistToMouse - props.ringRadius);
       const scaleFactor = Math.max(0, Math.min(1, 1 - distFromRing / 10));
-      const finalScale = scaleFactor * (0.8 + Math.sin(p.t * props.pulseSpeed) * 0.2 * props.particleVariance) * props.particleSize;
+      const finalScale =
+        scaleFactor *
+        (0.8 +
+          Math.sin(p.t * props.pulseSpeed) * 0.2 * props.particleVariance) *
+        props.particleSize;
       dummy.scale.set(finalScale, finalScale, finalScale);
       dummy.updateMatrix();
       mesh.setMatrixAt(i, dummy.matrix);
@@ -246,8 +263,12 @@
     mesh = null;
   }
 
-  onMounted(() => { init(); });
-  onBeforeUnmount(() => { cleanup(); });
+  onMounted(() => {
+    init();
+  });
+  onBeforeUnmount(() => {
+    cleanup();
+  });
 </script>
 
 <template>

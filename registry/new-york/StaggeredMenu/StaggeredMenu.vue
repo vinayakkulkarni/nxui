@@ -57,7 +57,9 @@
   const toggleBtnRef = ref<HTMLElement | null>(null);
 
   const preLayerColors = computed(() => {
-    const raw = props.colors.length ? props.colors.slice(0, 4) : ['#1e1e22', '#35353c'];
+    const raw = props.colors.length
+      ? props.colors.slice(0, 4)
+      : ['#1e1e22', '#35353c'];
     const arr = [...raw];
     if (arr.length >= 3) {
       const mid = Math.floor(arr.length / 2);
@@ -66,7 +68,9 @@
     return arr;
   });
 
-  const offscreen = computed(() => (props.position === 'left' ? '-100%' : '100%'));
+  const offscreen = computed(() =>
+    props.position === 'left' ? '-100%' : '100%',
+  );
 
   const currentButtonColor = computed(() => {
     if (!props.changeMenuColorOnOpen) return props.menuButtonColor;
@@ -136,8 +140,10 @@
     if (!props.closeOnClickAway || !open.value) return;
     const target = e.target as HTMLElement;
     if (
-      panelRef.value && !panelRef.value.contains(target) &&
-      toggleBtnRef.value && !toggleBtnRef.value.contains(target)
+      panelRef.value &&
+      !panelRef.value.contains(target) &&
+      toggleBtnRef.value &&
+      !toggleBtnRef.value.contains(target)
     ) {
       closeMenu();
     }
@@ -156,15 +162,18 @@
 
 <template>
   <div
-    :class="cn('staggered-menu-wrapper', isFixed ? 'fixed-wrapper' : '', $props.class)"
-    :style="accentColor ? { '--sm-accent': accentColor } as Record<string, string> : undefined"
+    :class="
+      cn('staggered-menu-wrapper', isFixed ? 'fixed-wrapper' : '', $props.class)
+    "
+    :style="
+      accentColor
+        ? ({ '--sm-accent': accentColor } as Record<string, string>)
+        : undefined
+    "
     :data-position="position"
     :data-open="open || undefined"
   >
-    <div
-      class="sm-prelayers"
-      aria-hidden="true"
-    >
+    <div class="sm-prelayers" aria-hidden="true">
       <div
         v-for="(c, i) in preLayerColors"
         :key="i"
@@ -177,15 +186,9 @@
       ></div>
     </div>
 
-    <header
-      class="staggered-menu-header"
-      aria-label="Main navigation header"
-    >
-      <div
-        class="sm-logo"
-        aria-label="Logo"
-      >
-        <slot name="logo" ></slot>
+    <header class="staggered-menu-header" aria-label="Main navigation header">
+      <div class="sm-logo" aria-label="Logo">
+        <slot name="logo"></slot>
       </div>
       <button
         ref="toggleBtnRef"
@@ -197,19 +200,14 @@
         :style="{ color: currentButtonColor }"
         @click="toggleMenu"
       >
-        <span
-          class="sm-toggle-textWrap"
-          aria-hidden="true"
-        >
+        <span class="sm-toggle-textWrap" aria-hidden="true">
           <span
             class="sm-toggle-textInner"
             :style="{ transform: `translateY(-${textShift}%)` }"
           >
-            <span
-              v-for="(l, i) in textLines"
-              :key="i"
-              class="sm-toggle-line"
-            >{{ l }}</span>
+            <span v-for="(l, i) in textLines" :key="i" class="sm-toggle-line">{{
+              l
+            }}</span>
           </span>
         </span>
         <span
@@ -217,8 +215,8 @@
           aria-hidden="true"
           :style="{ transform: open ? 'rotate(225deg)' : 'rotate(0deg)' }"
         >
-          <span class="sm-icon-line" ></span>
-          <span class="sm-icon-line sm-icon-line-v" ></span>
+          <span class="sm-icon-line"></span>
+          <span class="sm-icon-line sm-icon-line-v"></span>
         </span>
       </button>
     </header>
@@ -253,17 +251,16 @@
               <span
                 class="sm-panel-itemLabel"
                 :style="{
-                  transform: open ? 'translateY(0) rotate(0deg)' : 'translateY(140%) rotate(10deg)',
+                  transform: open
+                    ? 'translateY(0) rotate(0deg)'
+                    : 'translateY(140%) rotate(10deg)',
                   transitionDelay: open ? `${idx * 100 + 150}ms` : '0ms',
                 }"
-              >{{ it.label }}</span>
+                >{{ it.label }}</span
+              >
             </a>
           </li>
-          <li
-            v-if="!items.length"
-            class="sm-panel-itemWrap"
-            aria-hidden="true"
-          >
+          <li v-if="!items.length" class="sm-panel-itemWrap" aria-hidden="true">
             <span class="sm-panel-item">
               <span class="sm-panel-itemLabel">No items</span>
             </span>
@@ -284,10 +281,7 @@
           >
             Socials
           </h3>
-          <ul
-            class="sm-socials-list"
-            role="list"
-          >
+          <ul class="sm-socials-list" role="list">
             <li
               v-for="(s, i) in socialItems"
               :key="s.label + i"

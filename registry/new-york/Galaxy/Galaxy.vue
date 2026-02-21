@@ -148,10 +148,7 @@
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('galaxy-container', $props.class)"
-  ></div>
+  <div ref="containerRef" :class="cn('galaxy-container', $props.class)"></div>
 </template>
 
 <style scoped>

@@ -175,7 +175,9 @@ void main() {
     }
 
     get vertexData(): Float32Array {
-      return new Float32Array(this.vertices.flatMap((v) => Array.from(v.position)));
+      return new Float32Array(
+        this.vertices.flatMap((v) => Array.from(v.position)),
+      );
     }
 
     get uvData(): Float32Array {
@@ -186,14 +188,23 @@ void main() {
       return new Uint16Array(this.faces.flatMap((f) => [f.a, f.b, f.c]));
     }
 
-    getMidPoint(ndxA: number, ndxB: number, cache: Record<string, number>): number {
+    getMidPoint(
+      ndxA: number,
+      ndxB: number,
+      cache: Record<string, number>,
+    ): number {
       const cacheKey = ndxA < ndxB ? `k_${ndxB}_${ndxA}` : `k_${ndxA}_${ndxB}`;
-      if (Object.prototype.hasOwnProperty.call(cache, cacheKey)) return cache[cacheKey];
+      if (Object.prototype.hasOwnProperty.call(cache, cacheKey))
+        return cache[cacheKey];
       const a = this.vertices[ndxA].position;
       const b = this.vertices[ndxB].position;
       const ndx = this.vertices.length;
       cache[cacheKey] = ndx;
-      this.addVertex((a[0] + b[0]) * 0.5, (a[1] + b[1]) * 0.5, (a[2] + b[2]) * 0.5);
+      this.addVertex(
+        (a[0] + b[0]) * 0.5,
+        (a[1] + b[1]) * 0.5,
+        (a[2] + b[2]) * 0.5,
+      );
       return ndx;
     }
   }
@@ -202,8 +213,106 @@ void main() {
     constructor() {
       super();
       const t = Math.sqrt(5) * 0.5 + 0.5;
-      this.addVertex(-1, t, 0, 1, t, 0, -1, -t, 0, 1, -t, 0, 0, -1, t, 0, 1, t, 0, -1, -t, 0, 1, -t, t, 0, -1, t, 0, 1, -t, 0, -1, -t, 0, 1);
-      this.addFace(0, 11, 5, 0, 5, 1, 0, 1, 7, 0, 7, 10, 0, 10, 11, 1, 5, 9, 5, 11, 4, 11, 10, 2, 10, 7, 6, 7, 1, 8, 3, 9, 4, 3, 4, 2, 3, 2, 6, 3, 6, 8, 3, 8, 9, 4, 9, 5, 2, 4, 11, 6, 2, 10, 8, 6, 7, 9, 8, 1);
+      this.addVertex(
+        -1,
+        t,
+        0,
+        1,
+        t,
+        0,
+        -1,
+        -t,
+        0,
+        1,
+        -t,
+        0,
+        0,
+        -1,
+        t,
+        0,
+        1,
+        t,
+        0,
+        -1,
+        -t,
+        0,
+        1,
+        -t,
+        t,
+        0,
+        -1,
+        t,
+        0,
+        1,
+        -t,
+        0,
+        -1,
+        -t,
+        0,
+        1,
+      );
+      this.addFace(
+        0,
+        11,
+        5,
+        0,
+        5,
+        1,
+        0,
+        1,
+        7,
+        0,
+        7,
+        10,
+        0,
+        10,
+        11,
+        1,
+        5,
+        9,
+        5,
+        11,
+        4,
+        11,
+        10,
+        2,
+        10,
+        7,
+        6,
+        7,
+        1,
+        8,
+        3,
+        9,
+        4,
+        3,
+        4,
+        2,
+        3,
+        2,
+        6,
+        3,
+        6,
+        8,
+        3,
+        8,
+        9,
+        4,
+        9,
+        5,
+        2,
+        4,
+        11,
+        6,
+        2,
+        10,
+        8,
+        6,
+        7,
+        9,
+        8,
+        1,
+      );
     }
   }
 
@@ -228,7 +337,11 @@ void main() {
   }
 
   // ---- WebGL helpers ----
-  function createShader(gl: WebGL2RenderingContext, type: number, source: string): WebGLShader | null {
+  function createShader(
+    gl: WebGL2RenderingContext,
+    type: number,
+    source: string,
+  ): WebGLShader | null {
     const shader = gl.createShader(type);
     if (!shader) return null;
     gl.shaderSource(shader, source);
@@ -263,7 +376,11 @@ void main() {
     return null;
   }
 
-  function makeBuffer(gl: WebGL2RenderingContext, data: ArrayBuffer | ArrayBufferView, usage: number): WebGLBuffer | null {
+  function makeBuffer(
+    gl: WebGL2RenderingContext,
+    data: ArrayBuffer | ArrayBufferView,
+    usage: number,
+  ): WebGLBuffer | null {
     const buf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, data, usage);
@@ -301,8 +418,12 @@ void main() {
         vec2.copy(this.previousPointerPos, this.pointerPos);
         this.isPointerDown = true;
       };
-      this.onPointerUpBound = () => { this.isPointerDown = false; };
-      this.onPointerLeaveBound = () => { this.isPointerDown = false; };
+      this.onPointerUpBound = () => {
+        this.isPointerDown = false;
+      };
+      this.onPointerLeaveBound = () => {
+        this.isPointerDown = false;
+      };
       this.onPointerMoveBound = (e: PointerEvent) => {
         if (this.isPointerDown) vec2.set(this.pointerPos, e.clientX, e.clientY);
       };
@@ -328,7 +449,11 @@ void main() {
       if (this.isPointerDown) {
         const INTENSITY = 0.3 * timeScale;
         const ANGLE_AMPLIFICATION = 5 / timeScale;
-        const midPointerPos = vec2.sub(vec2.create(), this.pointerPos, this.previousPointerPos);
+        const midPointerPos = vec2.sub(
+          vec2.create(),
+          this.pointerPos,
+          this.previousPointerPos,
+        );
         vec2.scale(midPointerPos, midPointerPos, INTENSITY);
 
         if (vec2.sqrLen(midPointerPos) > this.EPSILON) {
@@ -341,11 +466,21 @@ void main() {
           angleFactor *= ANGLE_AMPLIFICATION;
           this.quatFromVectors(a, b, this.pointerRotation, angleFactor);
         } else {
-          quat.slerp(this.pointerRotation, this.pointerRotation, this.IDENTITY_QUAT, INTENSITY);
+          quat.slerp(
+            this.pointerRotation,
+            this.pointerRotation,
+            this.IDENTITY_QUAT,
+            INTENSITY,
+          );
         }
       } else {
         const INTENSITY = 0.1 * timeScale;
-        quat.slerp(this.pointerRotation, this.pointerRotation, this.IDENTITY_QUAT, INTENSITY);
+        quat.slerp(
+          this.pointerRotation,
+          this.pointerRotation,
+          this.IDENTITY_QUAT,
+          INTENSITY,
+        );
         if (this.snapTargetDirection) {
           const SNAPPING_INTENSITY = 0.2;
           const a = this.snapTargetDirection;
@@ -357,15 +492,29 @@ void main() {
         }
       }
 
-      const combinedQuat = quat.multiply(quat.create(), snapRotation, this.pointerRotation);
-      this.orientation = quat.multiply(quat.create(), combinedQuat, this.orientation);
+      const combinedQuat = quat.multiply(
+        quat.create(),
+        snapRotation,
+        this.pointerRotation,
+      );
+      this.orientation = quat.multiply(
+        quat.create(),
+        combinedQuat,
+        this.orientation,
+      );
       quat.normalize(this.orientation, this.orientation);
 
       const RA_INTENSITY = 0.8 * timeScale;
-      quat.slerp(this._combinedQuat, this._combinedQuat, combinedQuat, RA_INTENSITY);
+      quat.slerp(
+        this._combinedQuat,
+        this._combinedQuat,
+        combinedQuat,
+        RA_INTENSITY,
+      );
       quat.normalize(this._combinedQuat, this._combinedQuat);
 
-      const rad = Math.acos(Math.min(1, Math.max(-1, this._combinedQuat[3]))) * 2.0;
+      const rad =
+        Math.acos(Math.min(1, Math.max(-1, this._combinedQuat[3]))) * 2.0;
       const s = Math.sin(rad / 2.0);
       let rv = 0;
       if (s > 0.000001) {
@@ -380,7 +529,12 @@ void main() {
       this.rotationVelocity = this._rotationVelocity / timeScale;
     }
 
-    quatFromVectors(a: vec3, b: vec3, out: quat, angleFactor: number = 1): void {
+    quatFromVectors(
+      a: vec3,
+      b: vec3,
+      out: quat,
+      angleFactor: number = 1,
+    ): void {
       const axis = vec3.cross(vec3.create(), a, b);
       vec3.normalize(axis, axis);
       const d = Math.max(-1, Math.min(1, vec3.dot(a, b)));
@@ -397,7 +551,8 @@ void main() {
       const y = (2 * pos[1] - h - 1) / sc;
       const xySq = x * x + y * y;
       const rSq = r * r;
-      const z = xySq <= rSq / 2.0 ? Math.sqrt(rSq - xySq) : rSq / Math.sqrt(xySq);
+      const z =
+        xySq <= rSq / 2.0 ? Math.sqrt(rSq - xySq) : rSq / Math.sqrt(xySq);
       return vec3.fromValues(-x, y, z);
     }
   }
@@ -418,7 +573,10 @@ void main() {
     private onMovementChange: (moving: boolean) => void;
     private control: ArcballControl;
     private discProgram: WebGLProgram | null = null;
-    private discLocations: Record<string, WebGLUniformLocation | number | null> = {};
+    private discLocations: Record<
+      string,
+      WebGLUniformLocation | number | null
+    > = {};
     private discVAO: WebGLVertexArrayObject | null = null;
     private discBufferIndices: Uint16Array = new Uint16Array(0);
     private instancePositions: vec3[] = [];
@@ -468,23 +626,42 @@ void main() {
       if (!gl) throw new Error('No WebGL 2 context!');
       this.gl = gl;
 
-      this.discProgram = createProgram(gl, [discVertShaderSource, discFragShaderSource], {
-        aModelPosition: 0,
-        aModelNormal: 1,
-        aModelUvs: 2,
-        aInstanceMatrix: 3,
-      });
+      this.discProgram = createProgram(
+        gl,
+        [discVertShaderSource, discFragShaderSource],
+        {
+          aModelPosition: 0,
+          aModelNormal: 1,
+          aModelUvs: 2,
+          aInstanceMatrix: 3,
+        },
+      );
 
       if (this.discProgram) {
         this.discLocations = {
-          aModelPosition: gl.getAttribLocation(this.discProgram, 'aModelPosition'),
+          aModelPosition: gl.getAttribLocation(
+            this.discProgram,
+            'aModelPosition',
+          ),
           aModelUvs: gl.getAttribLocation(this.discProgram, 'aModelUvs'),
-          aInstanceMatrix: gl.getAttribLocation(this.discProgram, 'aInstanceMatrix'),
+          aInstanceMatrix: gl.getAttribLocation(
+            this.discProgram,
+            'aInstanceMatrix',
+          ),
           uWorldMatrix: gl.getUniformLocation(this.discProgram, 'uWorldMatrix'),
           uViewMatrix: gl.getUniformLocation(this.discProgram, 'uViewMatrix'),
-          uProjectionMatrix: gl.getUniformLocation(this.discProgram, 'uProjectionMatrix'),
-          uCameraPosition: gl.getUniformLocation(this.discProgram, 'uCameraPosition'),
-          uRotationAxisVelocity: gl.getUniformLocation(this.discProgram, 'uRotationAxisVelocity'),
+          uProjectionMatrix: gl.getUniformLocation(
+            this.discProgram,
+            'uProjectionMatrix',
+          ),
+          uCameraPosition: gl.getUniformLocation(
+            this.discProgram,
+            'uCameraPosition',
+          ),
+          uRotationAxisVelocity: gl.getUniformLocation(
+            this.discProgram,
+            'uRotationAxisVelocity',
+          ),
           uTex: gl.getUniformLocation(this.discProgram, 'uTex'),
           uFrames: gl.getUniformLocation(this.discProgram, 'uFrames'),
           uScaleFactor: gl.getUniformLocation(this.discProgram, 'uScaleFactor'),
@@ -515,7 +692,11 @@ void main() {
 
       const indexBuffer = gl.createBuffer();
       gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
-      gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, this.discBufferIndices, gl.STATIC_DRAW);
+      gl.bufferData(
+        gl.ELEMENT_ARRAY_BUFFER,
+        this.discBufferIndices,
+        gl.STATIC_DRAW,
+      );
 
       // Icosahedron instances
       const icoGeo = new IcosahedronGeometry();
@@ -539,7 +720,11 @@ void main() {
       const buffer = gl.createBuffer();
 
       for (let i = 0; i < count; ++i) {
-        const instanceMatrixArray = new Float32Array(matricesArray.buffer, i * 16 * 4, 16);
+        const instanceMatrixArray = new Float32Array(
+          matricesArray.buffer,
+          i * 16 * 4,
+          16,
+        );
         mat4.identity(instanceMatrixArray as unknown as mat4);
         matrices.push(instanceMatrixArray);
       }
@@ -554,7 +739,14 @@ void main() {
       for (let j = 0; j < 4; ++j) {
         const loc = instanceMatrixLoc + j;
         gl.enableVertexAttribArray(loc);
-        gl.vertexAttribPointer(loc, 4, gl.FLOAT, false, bytesPerMatrix, j * 4 * 4);
+        gl.vertexAttribPointer(
+          loc,
+          4,
+          gl.FLOAT,
+          false,
+          bytesPerMatrix,
+          j * 4 * 4,
+        );
         gl.vertexAttribDivisor(loc, 1);
       }
       gl.bindBuffer(gl.ARRAY_BUFFER, null);
@@ -570,7 +762,17 @@ void main() {
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
 
       // Placeholder 1x1 pixel
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
+      gl.texImage2D(
+        gl.TEXTURE_2D,
+        0,
+        gl.RGBA,
+        1,
+        1,
+        0,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        new Uint8Array([0, 0, 0, 255]),
+      );
 
       const itemCount = Math.max(1, this.items.length);
       this.atlasSize = Math.ceil(Math.sqrt(itemCount));
@@ -600,7 +802,14 @@ void main() {
           ctx.drawImage(images[i], x, y, cellSize, cellSize);
         }
         gl.bindTexture(gl.TEXTURE_2D, this.tex);
-        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, atlasCanvas);
+        gl.texImage2D(
+          gl.TEXTURE_2D,
+          0,
+          gl.RGBA,
+          gl.RGBA,
+          gl.UNSIGNED_BYTE,
+          atlasCanvas,
+        );
         gl.generateMipmap(gl.TEXTURE_2D);
       });
     }
@@ -610,7 +819,10 @@ void main() {
       const dpr = Math.min(2, window.devicePixelRatio);
       const displayWidth = Math.round(this.canvas.clientWidth * dpr);
       const displayHeight = Math.round(this.canvas.clientHeight * dpr);
-      if (this.canvas.width !== displayWidth || this.canvas.height !== displayHeight) {
+      if (
+        this.canvas.width !== displayWidth ||
+        this.canvas.height !== displayHeight
+      ) {
         this.canvas.width = displayWidth;
         this.canvas.height = displayHeight;
       }
@@ -637,15 +849,42 @@ void main() {
       const scale = 0.25;
       const SCALE_INTENSITY = 0.6;
       for (let ndx = 0; ndx < this.instancePositions.length; ndx++) {
-        const p = vec3.transformQuat(vec3.create(), this.instancePositions[ndx], this.control.orientation);
-        const s = (Math.abs(p[2]) / this.SPHERE_RADIUS) * SCALE_INTENSITY + (1 - SCALE_INTENSITY);
+        const p = vec3.transformQuat(
+          vec3.create(),
+          this.instancePositions[ndx],
+          this.control.orientation,
+        );
+        const s =
+          (Math.abs(p[2]) / this.SPHERE_RADIUS) * SCALE_INTENSITY +
+          (1 - SCALE_INTENSITY);
         const finalScale = s * scale;
         const matrix = mat4.create();
         const negP = vec3.negate(vec3.create(), p);
-        mat4.multiply(matrix, matrix, mat4.fromTranslation(mat4.create(), negP));
-        mat4.multiply(matrix, matrix, mat4.targetTo(mat4.create(), [0, 0, 0], Array.from(p) as [number, number, number], [0, 1, 0]));
-        mat4.multiply(matrix, matrix, mat4.fromScaling(mat4.create(), [finalScale, finalScale, finalScale]));
-        mat4.multiply(matrix, matrix, mat4.fromTranslation(mat4.create(), [0, 0, -this.SPHERE_RADIUS]));
+        mat4.multiply(
+          matrix,
+          matrix,
+          mat4.fromTranslation(mat4.create(), negP),
+        );
+        mat4.multiply(
+          matrix,
+          matrix,
+          mat4.targetTo(
+            mat4.create(),
+            [0, 0, 0],
+            Array.from(p) as [number, number, number],
+            [0, 1, 0],
+          ),
+        );
+        mat4.multiply(
+          matrix,
+          matrix,
+          mat4.fromScaling(mat4.create(), [finalScale, finalScale, finalScale]),
+        );
+        mat4.multiply(
+          matrix,
+          matrix,
+          mat4.fromTranslation(mat4.create(), [0, 0, -this.SPHERE_RADIUS]),
+        );
         mat4.copy(this.discInstances.matrices[ndx] as unknown as mat4, matrix);
       }
 
@@ -664,10 +903,27 @@ void main() {
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-      gl.uniformMatrix4fv(this.discLocations.uWorldMatrix as WebGLUniformLocation, false, this.worldMatrix);
-      gl.uniformMatrix4fv(this.discLocations.uViewMatrix as WebGLUniformLocation, false, this.camera.matrices.view);
-      gl.uniformMatrix4fv(this.discLocations.uProjectionMatrix as WebGLUniformLocation, false, this.camera.matrices.projection);
-      gl.uniform3f(this.discLocations.uCameraPosition as WebGLUniformLocation, this.camera.position[0], this.camera.position[1], this.camera.position[2]);
+      gl.uniformMatrix4fv(
+        this.discLocations.uWorldMatrix as WebGLUniformLocation,
+        false,
+        this.worldMatrix,
+      );
+      gl.uniformMatrix4fv(
+        this.discLocations.uViewMatrix as WebGLUniformLocation,
+        false,
+        this.camera.matrices.view,
+      );
+      gl.uniformMatrix4fv(
+        this.discLocations.uProjectionMatrix as WebGLUniformLocation,
+        false,
+        this.camera.matrices.projection,
+      );
+      gl.uniform3f(
+        this.discLocations.uCameraPosition as WebGLUniformLocation,
+        this.camera.position[0],
+        this.camera.position[1],
+        this.camera.position[2],
+      );
       gl.uniform4f(
         this.discLocations.uRotationAxisVelocity as WebGLUniformLocation,
         this.control.rotationAxis[0],
@@ -675,19 +931,39 @@ void main() {
         this.control.rotationAxis[2],
         this.smoothRotationVelocity * 1.1,
       );
-      gl.uniform1i(this.discLocations.uItemCount as WebGLUniformLocation, this.items.length);
-      gl.uniform1i(this.discLocations.uAtlasSize as WebGLUniformLocation, this.atlasSize);
-      gl.uniform1f(this.discLocations.uFrames as WebGLUniformLocation, this.frames);
+      gl.uniform1i(
+        this.discLocations.uItemCount as WebGLUniformLocation,
+        this.items.length,
+      );
+      gl.uniform1i(
+        this.discLocations.uAtlasSize as WebGLUniformLocation,
+        this.atlasSize,
+      );
+      gl.uniform1f(
+        this.discLocations.uFrames as WebGLUniformLocation,
+        this.frames,
+      );
       gl.uniform1i(this.discLocations.uTex as WebGLUniformLocation, 0);
       gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, this.tex);
 
       gl.bindVertexArray(this.discVAO);
-      gl.drawElementsInstanced(gl.TRIANGLES, this.discBufferIndices.length, gl.UNSIGNED_SHORT, 0, this.DISC_INSTANCE_COUNT);
+      gl.drawElementsInstanced(
+        gl.TRIANGLES,
+        this.discBufferIndices.length,
+        gl.UNSIGNED_SHORT,
+        0,
+        this.DISC_INSTANCE_COUNT,
+      );
     }
 
     private updateCameraMatrix(): void {
-      mat4.targetTo(this.camera.matrix, Array.from(this.camera.position) as [number, number, number], [0, 0, 0], Array.from(this.camera.up) as [number, number, number]);
+      mat4.targetTo(
+        this.camera.matrix,
+        Array.from(this.camera.position) as [number, number, number],
+        [0, 0, 0],
+        Array.from(this.camera.up) as [number, number, number],
+      );
       mat4.invert(this.camera.matrices.view, this.camera.matrix);
     }
 
@@ -699,8 +975,17 @@ void main() {
         this.camera.aspect > 1
           ? 2 * Math.atan(height / distance)
           : 2 * Math.atan(height / this.camera.aspect / distance);
-      mat4.perspective(this.camera.matrices.projection, this.camera.fov, this.camera.aspect, this.camera.near, this.camera.far);
-      mat4.invert(this.camera.matrices.inversProjection, this.camera.matrices.projection);
+      mat4.perspective(
+        this.camera.matrices.projection,
+        this.camera.fov,
+        this.camera.aspect,
+        this.camera.near,
+        this.camera.far,
+      );
+      mat4.invert(
+        this.camera.matrices.inversProjection,
+        this.camera.matrices.projection,
+      );
     }
 
     private onControlUpdate(deltaTime: number): void {
@@ -708,7 +993,9 @@ void main() {
       let damping = 5 / timeScale;
       let cameraTargetZ = 3 * this.scaleFactor;
 
-      const isCurrentlyMoving = this.control.isPointerDown || Math.abs(this.smoothRotationVelocity) > 0.01;
+      const isCurrentlyMoving =
+        this.control.isPointerDown ||
+        Math.abs(this.smoothRotationVelocity) > 0.01;
       if (isCurrentlyMoving !== this.movementActive) {
         this.movementActive = isCurrentlyMoving;
         this.onMovementChange(isCurrentlyMoving);
@@ -718,20 +1005,27 @@ void main() {
         const nearestVertexIndex = this.findNearestVertexIndex();
         const itemIndex = nearestVertexIndex % Math.max(1, this.items.length);
         this.onActiveItemChange(itemIndex);
-        const snapDir = vec3.normalize(vec3.create(), this.getVertexWorldPosition(nearestVertexIndex));
+        const snapDir = vec3.normalize(
+          vec3.create(),
+          this.getVertexWorldPosition(nearestVertexIndex),
+        );
         this.control.snapTargetDirection = snapDir;
       } else {
         cameraTargetZ += this.control.rotationVelocity * 80 + 2.5;
         damping = 7 / timeScale;
       }
 
-      this.camera.position[2] += (cameraTargetZ - this.camera.position[2]) / damping;
+      this.camera.position[2] +=
+        (cameraTargetZ - this.camera.position[2]) / damping;
       this.updateCameraMatrix();
     }
 
     private findNearestVertexIndex(): number {
       const n = this.control.snapDirection;
-      const inversOrientation = quat.conjugate(quat.create(), this.control.orientation);
+      const inversOrientation = quat.conjugate(
+        quat.create(),
+        this.control.orientation,
+      );
       const nt = vec3.transformQuat(vec3.create(), n, inversOrientation);
       let maxD = -1;
       let nearestVertexIndex = 0;
@@ -746,7 +1040,11 @@ void main() {
     }
 
     private getVertexWorldPosition(index: number): vec3 {
-      return vec3.transformQuat(vec3.create(), this.instancePositions[index], this.control.orientation);
+      return vec3.transformQuat(
+        vec3.create(),
+        this.instancePositions[index],
+        this.control.orientation,
+      );
     }
 
     dispose(): void {
@@ -796,21 +1094,12 @@ void main() {
 
 <template>
   <div :class="cn('relative size-full', $props.class)">
-    <canvas
-      ref="canvasRef"
-      class="infinite-grid-canvas"
-    ></canvas>
+    <canvas ref="canvasRef" class="infinite-grid-canvas"></canvas>
     <template v-if="activeItem">
-      <h2
-        class="face-title"
-        :class="isMoving ? 'inactive' : 'active'"
-      >
+      <h2 class="face-title" :class="isMoving ? 'inactive' : 'active'">
         {{ activeItem.title }}
       </h2>
-      <p
-        class="face-description"
-        :class="isMoving ? 'inactive' : 'active'"
-      >
+      <p class="face-description" :class="isMoving ? 'inactive' : 'active'">
         {{ activeItem.description }}
       </p>
       <div
@@ -818,9 +1107,7 @@ void main() {
         :class="isMoving ? 'inactive' : 'active'"
         @click="handleButtonClick"
       >
-        <p class="action-button-icon">
-          &#x2197;
-        </p>
+        <p class="action-button-icon">&#x2197;</p>
       </div>
     </template>
   </div>

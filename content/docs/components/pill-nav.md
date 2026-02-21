@@ -14,14 +14,14 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/pill-nav.json"
 
 ## Props
 
-| Prop                       | Type        | Default     | Description                     |
-| -------------------------- | ----------- | ----------- | ------------------------------- |
-| `items`                    | `NavItem[]` | —           | Navigation items (required)     |
-| `active-href`              | `string`    | `''`        | Currently active href           |
-| `base-color`               | `string`    | `'#fff'`    | Base text/border color          |
-| `pill-color`               | `string`    | `'#060010'` | Active pill background color    |
-| `hovered-pill-text-color`  | `string`    | `'#060010'` | Text color when hovered         |
-| `pill-text-color`          | `string`    | —           | Active pill text color          |
+| Prop                      | Type        | Default     | Description                  |
+| ------------------------- | ----------- | ----------- | ---------------------------- |
+| `items`                   | `NavItem[]` | —           | Navigation items (required)  |
+| `active-href`             | `string`    | `''`        | Currently active href        |
+| `base-color`              | `string`    | `'#fff'`    | Base text/border color       |
+| `pill-color`              | `string`    | `'#060010'` | Active pill background color |
+| `hovered-pill-text-color` | `string`    | `'#060010'` | Text color when hovered      |
+| `pill-text-color`         | `string`    | —           | Active pill text color       |
 
 ### NavItem
 

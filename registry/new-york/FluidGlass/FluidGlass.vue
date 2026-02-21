@@ -113,9 +113,12 @@
 
   function createGlassGeometry(): THREE.BufferGeometry {
     switch (props.mode) {
-      case 'bar': return new THREE.BoxGeometry(6, 1, 0.5, 32, 8, 4);
-      case 'cube': return new THREE.BoxGeometry(2, 2, 2, 16, 16, 16);
-      default: return new THREE.SphereGeometry(1.5, 64, 64);
+      case 'bar':
+        return new THREE.BoxGeometry(6, 1, 0.5, 32, 8, 4);
+      case 'cube':
+        return new THREE.BoxGeometry(2, 2, 2, 16, 16, 16);
+      default:
+        return new THREE.SphereGeometry(1.5, 64, 64);
     }
   }
 
@@ -145,7 +148,11 @@
         0.1 + Math.random() * 0.3,
       );
       const mat = new THREE.MeshBasicMaterial({
-        color: new THREE.Color().setHSL(Math.random(), 0.3, 0.5 + Math.random() * 0.3),
+        color: new THREE.Color().setHSL(
+          Math.random(),
+          0.3,
+          0.5 + Math.random() * 0.3,
+        ),
         transparent: true,
         opacity: 0.6 + Math.random() * 0.4,
       });
@@ -159,7 +166,10 @@
     }
     bgScene.add(textGroup);
 
-    renderTarget = new THREE.WebGLRenderTarget(w * renderer.getPixelRatio(), h * renderer.getPixelRatio());
+    renderTarget = new THREE.WebGLRenderTarget(
+      w * renderer.getPixelRatio(),
+      h * renderer.getPixelRatio(),
+    );
 
     // Glass scene
     scene = new THREE.Scene();
@@ -170,7 +180,12 @@
       transparent: true,
       uniforms: {
         uBackground: { value: renderTarget.texture },
-        uResolution: { value: new THREE.Vector2(w * renderer.getPixelRatio(), h * renderer.getPixelRatio()) },
+        uResolution: {
+          value: new THREE.Vector2(
+            w * renderer.getPixelRatio(),
+            h * renderer.getPixelRatio(),
+          ),
+        },
         uTime: { value: 0 },
         uIor: { value: props.ior },
         uThickness: { value: props.thickness },
@@ -197,7 +212,15 @@
 
   function animate() {
     animFrame = requestAnimationFrame(animate);
-    if (!renderer || !scene || !camera || !glassMesh || !bgScene || !renderTarget) return;
+    if (
+      !renderer ||
+      !scene ||
+      !camera ||
+      !glassMesh ||
+      !bgScene ||
+      !renderTarget
+    )
+      return;
 
     timer.update();
     const t = timer.getElapsed();
@@ -222,7 +245,8 @@
 
   useResizeObserver(containerRef, (entries) => {
     const { width, height } = entries[0].contentRect;
-    if (!renderer || !camera || !renderTarget || width <= 0 || height <= 0) return;
+    if (!renderer || !camera || !renderTarget || width <= 0 || height <= 0)
+      return;
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
@@ -234,15 +258,24 @@
     }
   });
 
-  watch(() => [props.ior, props.thickness, props.roughness, props.chromaticAberration, props.color], () => {
-    if (!glassMesh) return;
-    const mat = glassMesh.material as THREE.ShaderMaterial;
-    mat.uniforms.uIor.value = props.ior;
-    mat.uniforms.uThickness.value = props.thickness;
-    mat.uniforms.uRoughness.value = props.roughness;
-    mat.uniforms.uChromatic.value = props.chromaticAberration;
-    mat.uniforms.uColor.value.set(props.color);
-  });
+  watch(
+    () => [
+      props.ior,
+      props.thickness,
+      props.roughness,
+      props.chromaticAberration,
+      props.color,
+    ],
+    () => {
+      if (!glassMesh) return;
+      const mat = glassMesh.material as THREE.ShaderMaterial;
+      mat.uniforms.uIor.value = props.ior;
+      mat.uniforms.uThickness.value = props.thickness;
+      mat.uniforms.uRoughness.value = props.roughness;
+      mat.uniforms.uChromatic.value = props.chromaticAberration;
+      mat.uniforms.uColor.value.set(props.color);
+    },
+  );
 
   function cleanup() {
     if (animFrame !== null) cancelAnimationFrame(animFrame);
@@ -262,8 +295,12 @@
     glassMesh = null;
   }
 
-  onMounted(() => { init(); });
-  onBeforeUnmount(() => { cleanup(); });
+  onMounted(() => {
+    init();
+  });
+  onBeforeUnmount(() => {
+    cleanup();
+  });
 </script>
 
 <template>

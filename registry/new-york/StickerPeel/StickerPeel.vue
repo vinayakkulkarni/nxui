@@ -136,7 +136,8 @@
         </filter>
         <filter :id="`${filterId}-shadow`">
           <feDropShadow
-            dx="2" dy="4"
+            dx="2"
+            dy="4"
             :stdDeviation="3 * shadowIntensity"
             flood-color="black"
             :flood-opacity="shadowIntensity"
@@ -152,13 +153,32 @@
 
     <div ref="containerRef" class="sticker-container">
       <div class="sticker-main" :style="{ filter: `url(#${filterId}-shadow)` }">
-        <div class="sticker-lighting" :style="{ filter: `url(#${filterId}-light)` }">
-          <img :src="imageSrc" alt="" class="sticker-image" draggable="false" @contextmenu.prevent />
+        <div
+          class="sticker-lighting"
+          :style="{ filter: `url(#${filterId}-light)` }"
+        >
+          <img
+            :src="imageSrc"
+            alt=""
+            class="sticker-image"
+            draggable="false"
+            @contextmenu.prevent
+          />
         </div>
       </div>
       <div class="flap">
-        <div class="flap-lighting" :style="{ filter: `url(#${filterId}-light-flip)` }">
-          <img :src="imageSrc" alt="" class="flap-image" draggable="false" :style="{ filter: `url(#${filterId}-fill)` }" @contextmenu.prevent />
+        <div
+          class="flap-lighting"
+          :style="{ filter: `url(#${filterId}-light-flip)` }"
+        >
+          <img
+            :src="imageSrc"
+            alt=""
+            class="flap-image"
+            draggable="false"
+            :style="{ filter: `url(#${filterId}-fill)` }"
+            @contextmenu.prevent
+          />
         </div>
       </div>
     </div>
@@ -221,7 +241,8 @@
     );
   }
 
-  .sticker-image, .flap-image {
+  .sticker-image,
+  .flap-image {
     width: var(--sticker-width, 200px);
   }
 
@@ -274,12 +295,17 @@
     top: calc(-100% + 2 * var(--sticker-peelback-active) - 1px);
   }
 
-  .sticker-main, .flap {
+  .sticker-main,
+  .flap {
     will-change: clip-path, transform;
   }
 
   @media (hover: none) and (pointer: coarse) {
-    .sticker-draggable { cursor: default; }
-    .sticker-container { touch-action: none; }
+    .sticker-draggable {
+      cursor: default;
+    }
+    .sticker-container {
+      touch-action: none;
+    }
   }
 </style>

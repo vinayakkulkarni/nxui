@@ -4,11 +4,7 @@
   "type": "registry:ui",
   "title": "Dither Prism Hero",
   "description": "A prismatic dithered hero section with advanced WebGL shaders featuring ordered dithering, holographic iridescence, and floating particles.",
-  "dependencies": [
-    "three",
-    "motion-v",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "motion-v", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/DitherPrismHero/DitherPrismHero.vue",

@@ -31,12 +31,30 @@
     }>(),
     {
       images: () => [
-        { src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop', alt: 'Abstract art' },
-        { src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop', alt: 'Modern sculpture' },
-        { src: 'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop', alt: 'Digital artwork' },
-        { src: 'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop', alt: 'Contemporary art' },
-        { src: 'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop', alt: 'Geometric pattern' },
-        { src: 'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop', alt: 'Textured surface' },
+        {
+          src: 'https://images.unsplash.com/photo-1755331039789-7e5680e26e8f?q=80&w=774&auto=format&fit=crop',
+          alt: 'Abstract art',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1755569309049-98410b94f66d?q=80&w=772&auto=format&fit=crop',
+          alt: 'Modern sculpture',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1755497595318-7e5e3523854f?q=80&w=774&auto=format&fit=crop',
+          alt: 'Digital artwork',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1755353985163-c2a0fe5ac3d8?q=80&w=774&auto=format&fit=crop',
+          alt: 'Contemporary art',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1745965976680-d00be7dc0377?q=80&w=774&auto=format&fit=crop',
+          alt: 'Geometric pattern',
+        },
+        {
+          src: 'https://images.unsplash.com/photo-1752588975228-21f44630bb3c?q=80&w=774&auto=format&fit=crop',
+          alt: 'Textured surface',
+        },
       ],
       fit: 0.5,
       fitBasis: 'auto',
@@ -113,7 +131,10 @@
     }
 
     const totalSlots = coords.length;
-    const usedImages = Array.from({ length: totalSlots }, (_, i) => pool[i % pool.length]);
+    const usedImages = Array.from(
+      { length: totalSlots },
+      (_, i) => pool[i % pool.length],
+    );
 
     for (let i = 1; i < usedImages.length; i++) {
       if (usedImages[i].src === usedImages[i - 1].src) {
@@ -151,11 +172,20 @@
 
     let basis: number;
     switch (props.fitBasis) {
-      case 'min': basis = minDim; break;
-      case 'max': basis = maxDim; break;
-      case 'width': basis = w; break;
-      case 'height': basis = h; break;
-      default: basis = aspect >= 1.3 ? w : minDim;
+      case 'min':
+        basis = minDim;
+        break;
+      case 'max':
+        basis = maxDim;
+        break;
+      case 'width':
+        basis = w;
+        break;
+      case 'height':
+        basis = h;
+        break;
+      default:
+        basis = aspect >= 1.3 ? w : minDim;
     }
 
     let radius = basis * props.fit;
@@ -201,7 +231,11 @@
         inertiaRAF = null;
         return;
       }
-      const nextX = clamp(rotation.value.x - vY / 200, -props.maxVerticalRotationDeg, props.maxVerticalRotationDeg);
+      const nextX = clamp(
+        rotation.value.x - vY / 200,
+        -props.maxVerticalRotationDeg,
+        props.maxVerticalRotationDeg,
+      );
       const nextY = wrapAngleSigned(rotation.value.y + vX / 200);
       rotation.value = { x: nextX, y: nextY };
       applyTransform();
@@ -273,7 +307,8 @@
 
     const tile = e.currentTarget as HTMLElement;
     const parent = tile.closest('.dg-item') as HTMLElement;
-    if (!parent || !mainRef.value || !frameRef.value || !viewerRef.value) return;
+    if (!parent || !mainRef.value || !frameRef.value || !viewerRef.value)
+      return;
 
     enlarging.value = true;
 
@@ -324,8 +359,10 @@
           const tempRect = tempDiv.getBoundingClientRect();
           document.body.removeChild(tempDiv);
 
-          const centeredLeft = frameR.left - mainR.left + (frameR.width - tempRect.width) / 2;
-          const centeredTop = frameR.top - mainR.top + (frameR.height - tempRect.height) / 2;
+          const centeredLeft =
+            frameR.left - mainR.left + (frameR.width - tempRect.width) / 2;
+          const centeredTop =
+            frameR.top - mainR.top + (frameR.height - tempRect.height) / 2;
 
           requestAnimationFrame(() => {
             overlay.style.left = `${centeredLeft}px`;
@@ -350,7 +387,9 @@
     const onEnd = () => {
       overlay.remove();
       enlarging.value = false;
-      const hidden = mainRef.value?.querySelector('[style*="visibility: hidden"]') as HTMLElement | null;
+      const hidden = mainRef.value?.querySelector(
+        '[style*="visibility: hidden"]',
+      ) as HTMLElement | null;
       if (hidden) {
         hidden.style.visibility = '';
         hidden.style.opacity = '0';
@@ -379,14 +418,17 @@
     stopInertia();
   });
 
-  const rootStyles = computed(() => ({
-    '--segments-x': props.segments,
-    '--segments-y': props.segments,
-    '--overlay-blur-color': props.overlayBlurColor,
-    '--tile-radius': props.imageBorderRadius,
-    '--enlarge-radius': props.openedImageBorderRadius,
-    '--image-filter': props.grayscale ? 'grayscale(1)' : 'none',
-  }) as Record<string, string | number>);
+  const rootStyles = computed(
+    () =>
+      ({
+        '--segments-x': props.segments,
+        '--segments-y': props.segments,
+        '--overlay-blur-color': props.overlayBlurColor,
+        '--tile-radius': props.imageBorderRadius,
+        '--enlarge-radius': props.openedImageBorderRadius,
+        '--image-filter': props.grayscale ? 'grayscale(1)' : 'none',
+      }) as Record<string, string | number>,
+  );
 </script>
 
 <template>
@@ -405,21 +447,20 @@
       @pointerleave="onPointerUp"
     >
       <div class="dg-stage">
-        <div
-          ref="sphereRef"
-          class="dg-sphere"
-        >
+        <div ref="sphereRef" class="dg-sphere">
           <div
             v-for="(it, i) in items"
             :key="`${it.x},${it.y},${i}`"
             class="dg-item"
             :data-src="it.src"
-            :style="{
-              '--offset-x': it.x,
-              '--offset-y': it.y,
-              '--item-size-x': it.sizeX,
-              '--item-size-y': it.sizeY,
-            } as Record<string, number>"
+            :style="
+              {
+                '--offset-x': it.x,
+                '--offset-y': it.y,
+                '--item-size-x': it.sizeX,
+                '--item-size-y': it.sizeY,
+              } as Record<string, number>
+            "
           >
             <div
               class="dg-item-image"
@@ -428,34 +469,20 @@
               :aria-label="it.alt || 'Open image'"
               @click="onTileClick"
             >
-              <img
-                :src="it.src"
-                :alt="it.alt"
-                draggable="false"
-              />
+              <img :src="it.src" :alt="it.alt" draggable="false" />
             </div>
           </div>
         </div>
       </div>
 
-      <div class="dg-overlay" ></div>
-      <div class="dg-overlay dg-overlay--blur" ></div>
-      <div class="dg-edge-fade dg-edge-fade--top" ></div>
-      <div class="dg-edge-fade dg-edge-fade--bottom" ></div>
+      <div class="dg-overlay"></div>
+      <div class="dg-overlay dg-overlay--blur"></div>
+      <div class="dg-edge-fade dg-edge-fade--top"></div>
+      <div class="dg-edge-fade dg-edge-fade--bottom"></div>
 
-      <div
-        ref="viewerRef"
-        class="dg-viewer"
-      >
-        <div
-          ref="scrimRef"
-          class="dg-scrim"
-          @click="closeEnlarge"
-        ></div>
-        <div
-          ref="frameRef"
-          class="dg-frame"
-        ></div>
+      <div ref="viewerRef" class="dg-viewer">
+        <div ref="scrimRef" class="dg-scrim" @click="closeEnlarge"></div>
+        <div ref="frameRef" class="dg-frame"></div>
       </div>
     </main>
   </div>
@@ -517,13 +544,22 @@
     margin: auto;
     z-index: 3;
     pointer-events: none;
-    background-image: radial-gradient(rgba(235, 235, 235, 0) 65%, var(--overlay-blur-color, #060010) 100%);
+    background-image: radial-gradient(
+      rgba(235, 235, 235, 0) 65%,
+      var(--overlay-blur-color, #060010) 100%
+    );
   }
 
   .dg-overlay--blur {
     background-image: none;
-    -webkit-mask-image: radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, #060010) 90%);
-    mask-image: radial-gradient(rgba(235, 235, 235, 0) 70%, var(--overlay-blur-color, #060010) 90%);
+    -webkit-mask-image: radial-gradient(
+      rgba(235, 235, 235, 0) 70%,
+      var(--overlay-blur-color, #060010) 90%
+    );
+    mask-image: radial-gradient(
+      rgba(235, 235, 235, 0) 70%,
+      var(--overlay-blur-color, #060010) 90%
+    );
     backdrop-filter: blur(3px);
   }
 
@@ -539,8 +575,12 @@
     transform-origin: 50% 50%;
     backface-visibility: hidden;
     transition: transform 300ms;
-    transform: rotateY(calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2))))
-      rotateX(calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2))))
+    transform: rotateY(
+        calc(var(--rot-y) * (var(--offset-x) + ((var(--item-size-x) - 1) / 2)))
+      )
+      rotateX(
+        calc(var(--rot-x) * (var(--offset-y) - ((var(--item-size-y) - 1) / 2)))
+      )
       translateZ(var(--radius));
   }
 
@@ -621,7 +661,11 @@
     height: 120px;
     z-index: 5;
     pointer-events: none;
-    background: linear-gradient(to bottom, transparent, var(--overlay-blur-color, #060010));
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--overlay-blur-color, #060010)
+    );
   }
 
   .dg-edge-fade--top {
