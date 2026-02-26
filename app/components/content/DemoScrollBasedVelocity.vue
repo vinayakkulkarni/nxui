@@ -14,6 +14,8 @@
   <ScrollBasedVelocity text=&quot;nxui — &quot; />
 </template>`"
   >
-    <ScrollBasedVelocity text="nxui — " />
+    <div class="flex size-full items-center justify-center overflow-hidden">
+      <ScrollBasedVelocity text="nxui — " />
+    </div>
   </ComponentDemo>
 </template>

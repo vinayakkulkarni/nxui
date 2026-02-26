@@ -14,7 +14,7 @@
 </template>`"
   >
     <div
-      class="relative h-[300px] w-full overflow-hidden rounded-lg bg-neutral-950"
+      class="relative h-[300px] w-full overflow-hidden rounded-lg bg-background text-foreground"
     >
       <FallingText
         text="nxui makes beautiful components easy"

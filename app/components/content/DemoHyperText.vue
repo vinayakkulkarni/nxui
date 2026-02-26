@@ -12,6 +12,8 @@
   <HyperText text=&quot;Hyper Text&quot; class=&quot;text-4xl font-bold&quot; />
 </template>`"
   >
-    <HyperText text="Hyper Text" class="text-4xl font-bold" />
+    <div class="flex size-full items-center justify-center">
+      <HyperText text="Hyper Text" class="text-4xl font-bold" />
+    </div>
   </ComponentDemo>
 </template>

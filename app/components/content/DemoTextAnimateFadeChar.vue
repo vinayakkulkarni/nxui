@@ -13,11 +13,13 @@
   <TextAnimate text=&quot;Fade In By Character&quot; animation=&quot;fade-in&quot; by=&quot;character&quot; class=&quot;text-4xl font-bold&quot; />
 </template>`"
   >
-    <TextAnimate
-      text="Fade In By Character"
-      animation="fade-in"
-      by="character"
-      class="text-4xl font-bold text-primary"
-    />
+    <div class="flex size-full items-center justify-center">
+      <TextAnimate
+        text="Fade In By Character"
+        animation="fade-in"
+        by="character"
+        class="text-4xl font-bold text-primary"
+      />
+    </div>
   </ComponentDemo>
 </template>

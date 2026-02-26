@@ -76,6 +76,15 @@
   --sidebar-ring: oklch(0.439 0.01 270);
 }
 
+/* ─── Typography: 4-font stack ─── */
+
+@theme {
+  --font-sans: 'Satoshi', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', monospace;
+  --font-display: 'Clash Display', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Instrument Serif', ui-serif, Georgia, serif;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -169,17 +178,26 @@
     scrollbar-color: oklch(0.3 0.005 270) transparent;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings:
+      'rlig' 1,
+      'calt' 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer base {
   main h1 {
-    @apply text-4xl md:text-5xl font-bold tracking-tight mb-4;
+    @apply text-4xl md:text-5xl font-bold mb-4 font-display;
+    letter-spacing: -0.04em;
+    line-height: 1.1;
   }
 
   main h2 {
-    @apply text-2xl font-semibold tracking-tight mt-12 mb-4 pb-2 border-b border-border/50 scroll-mt-20;
+    @apply text-2xl font-semibold mt-12 mb-4 pb-2 border-b border-border/50 scroll-mt-20 font-display;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
   }
 
   main h2 a {
@@ -187,7 +205,9 @@
   }
 
   main h3 {
-    @apply text-xl font-semibold tracking-tight mt-8 mb-3 scroll-mt-20;
+    @apply text-xl font-semibold mt-8 mb-3 scroll-mt-20 font-display;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
   }
 
   main h3 a {
@@ -195,7 +215,9 @@
   }
 
   main h4 {
-    @apply text-lg font-semibold tracking-tight mt-6 mb-2;
+    @apply text-lg font-semibold mt-6 mb-2 font-display;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
   }
 
   main p {
@@ -228,6 +250,9 @@
 
   main code:not(pre code) {
     @apply text-xs bg-muted px-1.5 py-0.5 rounded font-mono text-foreground;
+    font-feature-settings:
+      'liga' 1,
+      'calt' 1;
   }
 
   main blockquote {

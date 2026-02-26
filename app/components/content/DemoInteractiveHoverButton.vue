@@ -12,6 +12,8 @@
   <InteractiveHoverButton>Hover Me</InteractiveHoverButton>
 </template>`"
   >
-    <InteractiveHoverButton>Hover Me</InteractiveHoverButton>
+    <div class="flex size-full items-center justify-center">
+      <InteractiveHoverButton>Hover Me</InteractiveHoverButton>
+    </div>
   </ComponentDemo>
 </template>

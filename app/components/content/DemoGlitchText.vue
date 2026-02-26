@@ -19,7 +19,7 @@
     <div
       class="flex h-[300px] w-full items-center justify-center overflow-hidden rounded-lg bg-background"
     >
-      <GlitchText text="Glitch Text" />
+      <GlitchText text="Glitch Text" class="text-[clamp(2rem,6vw,5rem)]" />
     </div>
   </ComponentDemo>
 </template>

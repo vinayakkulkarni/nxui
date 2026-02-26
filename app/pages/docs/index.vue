@@ -35,12 +35,15 @@
 <template>
   <div v-if="page" class="space-y-16">
     <header class="space-y-4">
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+      <h1
+        class="font-display text-4xl font-bold md:text-5xl lg:text-6xl"
+        style="letter-spacing: -0.04em; line-height: 1.1"
+      >
         {{ page.title }}
       </h1>
       <p
         v-if="page.description"
-        class="text-muted-foreground text-lg leading-relaxed max-w-2xl"
+        class="max-w-2xl font-serif text-lg/relaxed italic text-muted-foreground"
       >
         {{ page.description }}
       </p>

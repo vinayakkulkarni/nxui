@@ -12,10 +12,10 @@
   <TextPressure text=&quot;Pressure&quot; :flex=&quot;true&quot; :weight=&quot;true&quot; />
 </template>`"
   >
-    <div
-      class="flex h-[300px] w-full items-center justify-center overflow-hidden"
-    >
-      <TextPressure text="Pressure" :flex="true" :weight="true" />
+    <div class="flex size-full items-center justify-center overflow-hidden">
+      <div class="h-[300px] w-full">
+        <TextPressure text="Pressure" :flex="true" :weight="true" />
+      </div>
     </div>
   </ComponentDemo>
 </template>

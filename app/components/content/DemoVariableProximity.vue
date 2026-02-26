@@ -16,9 +16,9 @@
     <VariableProximity
       label=&quot;Variable Proximity&quot;
       :container-ref=&quot;containerRef&quot;
-      from-font-variation-settings=&quot;'wght' 400, 'opsz' 9&quot;
-      to-font-variation-settings=&quot;'wght' 900, 'opsz' 40&quot;
-      :radius=&quot;200&quot;
+      from-font-variation-settings=&quot;'wght' 300&quot;
+      to-font-variation-settings=&quot;'wght' 900&quot;
+      :radius=&quot;300&quot;
     />
   </div>
 </template>`"
@@ -30,10 +30,10 @@
       <VariableProximity
         label="Variable Proximity"
         :container-ref="containerRef"
-        from-font-variation-settings="'wght' 400, 'opsz' 9"
-        to-font-variation-settings="'wght' 900, 'opsz' 40"
-        :radius="200"
-        class="text-4xl"
+        from-font-variation-settings="'wght' 300"
+        to-font-variation-settings="'wght' 900"
+        :radius="300"
+        class="text-5xl"
       />
     </div>
   </ComponentDemo>

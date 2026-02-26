@@ -13,11 +13,13 @@
   <TextAnimate text=&quot;Word Split Animation&quot; animation=&quot;fade-in&quot; by=&quot;word&quot; class=&quot;text-4xl font-bold&quot; />
 </template>`"
   >
-    <TextAnimate
-      text="Word Split Animation"
-      animation="fade-in"
-      by="word"
-      class="text-4xl font-bold text-primary"
-    />
+    <div class="flex size-full items-center justify-center">
+      <TextAnimate
+        text="Word Split Animation"
+        animation="fade-in"
+        by="word"
+        class="text-4xl font-bold text-primary"
+      />
+    </div>
   </ComponentDemo>
 </template>

@@ -18,12 +18,14 @@
   />
 </template>`"
   >
-    <TrueFocus
-      sentence="Hover To Focus"
-      manual-mode
-      :blur-amount="5"
-      border-color="cyan"
-      glow-color="rgba(0, 255, 255, 0.6)"
-    />
+    <div class="flex size-full items-center justify-center">
+      <TrueFocus
+        sentence="Hover To Focus"
+        manual-mode
+        :blur-amount="5"
+        border-color="cyan"
+        glow-color="rgba(0, 255, 255, 0.6)"
+      />
+    </div>
   </ComponentDemo>
 </template>

@@ -12,6 +12,8 @@
   <PulsatingButton>Click Me</PulsatingButton>
 </template>`"
   >
-    <PulsatingButton>Click Me</PulsatingButton>
+    <div class="flex size-full items-center justify-center">
+      <PulsatingButton>Click Me</PulsatingButton>
+    </div>
   </ComponentDemo>
 </template>

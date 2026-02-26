@@ -30,8 +30,6 @@
     "
     :style="{
       '--shiny-speed': animationDuration,
-      backgroundImage:
-        'linear-gradient(120deg, rgba(255,255,255,0.4) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,0.4) 60%)',
     }"
   >
     {{ text }}

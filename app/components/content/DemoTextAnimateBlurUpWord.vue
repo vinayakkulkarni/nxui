@@ -13,11 +13,13 @@
   <TextAnimate text=&quot;Blur In Up By Word&quot; animation=&quot;blur-in-up&quot; by=&quot;word&quot; class=&quot;text-4xl font-bold&quot; />
 </template>`"
   >
-    <TextAnimate
-      text="Blur In Up By Word"
-      animation="blur-in-up"
-      by="word"
-      class="text-4xl font-bold"
-    />
+    <div class="flex size-full items-center justify-center">
+      <TextAnimate
+        text="Blur In Up By Word"
+        animation="blur-in-up"
+        by="word"
+        class="text-4xl font-bold"
+      />
+    </div>
   </ComponentDemo>
 </template>

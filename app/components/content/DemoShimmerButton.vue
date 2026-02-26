@@ -12,6 +12,8 @@
   <ShimmerButton>Shimmer</ShimmerButton>
 </template>`"
   >
-    <ShimmerButton>Shimmer</ShimmerButton>
+    <div class="flex size-full items-center justify-center">
+      <ShimmerButton>Shimmer</ShimmerButton>
+    </div>
   </ComponentDemo>
 </template>

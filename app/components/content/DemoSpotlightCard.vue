@@ -15,11 +15,13 @@
   </SpotlightCard>
 </template>`"
   >
-    <SpotlightCard class="max-w-sm p-8">
-      <h3 class="mb-2 text-lg font-semibold">Spotlight Card</h3>
-      <p class="text-sm text-muted-foreground">
-        Hover to see the spotlight effect follow your cursor.
-      </p>
-    </SpotlightCard>
+    <div class="flex size-full items-center justify-center p-4">
+      <SpotlightCard class="max-w-sm p-8">
+        <h3 class="mb-2 text-lg font-semibold">Spotlight Card</h3>
+        <p class="text-sm text-muted-foreground">
+          Hover to see the spotlight effect follow your cursor.
+        </p>
+      </SpotlightCard>
+    </div>
   </ComponentDemo>
 </template>

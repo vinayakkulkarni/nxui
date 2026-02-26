@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useRafFn, useElementHover } from '@vueuse/core';
+  import { useRafFn, useElementHover, useMutationObserver } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -81,6 +81,15 @@
 
   onMounted(() => {
     initCanvas();
+
+    // Re-init canvas when color scheme changes (dark class on <html>)
+    useMutationObserver(
+      document.documentElement,
+      () => {
+        initCanvas();
+      },
+      { attributes: true, attributeFilter: ['class'] },
+    );
   });
 
   useRafFn(() => {

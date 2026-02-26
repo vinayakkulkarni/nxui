@@ -13,6 +13,26 @@
     { class: '', fullWidth: false, refreshable: false },
   );
 
+  // Split mode: when rendered inside the split-layout page,
+  // only render the demo content (slot) and push code upward
+  const splitCodeTarget = inject<Ref<string> | null>(
+    'component-demo-code',
+    null,
+  );
+  const splitRefreshableTarget = inject<Ref<boolean> | null>(
+    'component-demo-refreshable',
+    null,
+  );
+  const isSplitMode = computed(() => splitCodeTarget !== null);
+
+  // In split mode, push code and refreshable flag to the parent page
+  if (splitCodeTarget && props.code) {
+    splitCodeTarget.value = props.code;
+  }
+  if (splitRefreshableTarget) {
+    splitRefreshableTarget.value = props.refreshable;
+  }
+
   const codeExpanded = ref(true);
   const refreshKey = ref(0);
   const { copy, copied } = useClipboard({ source: () => props.code ?? '' });
@@ -27,8 +47,19 @@
 </script>
 
 <template>
+  <!-- Split mode: fill the panel, override child height constraints, center bare components -->
+  <div
+    v-if="isSplitMode"
+    :key="refreshable ? refreshKey : undefined"
+    class="size-full overflow-hidden [&>*]:!h-full [&>*]:!w-full [&>*]:!rounded-none"
+  >
+    <slot></slot>
+  </div>
+
+  <!-- Normal mode: existing card behavior -->
   <component
     :is="motion.div"
+    v-else
     :initial="{ opacity: 0, y: 16, scale: 0.98 }"
     :animate="{ opacity: 1, y: 0, scale: 1 }"
     :transition="{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }"

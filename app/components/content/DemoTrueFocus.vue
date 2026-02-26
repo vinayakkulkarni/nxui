@@ -12,6 +12,8 @@
   <TrueFocus sentence=&quot;True Focus Effect&quot; />
 </template>`"
   >
-    <TrueFocus sentence="True Focus Effect" />
+    <div class="flex size-full items-center justify-center">
+      <TrueFocus sentence="True Focus Effect" />
+    </div>
   </ComponentDemo>
 </template>
