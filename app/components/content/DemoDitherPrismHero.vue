@@ -112,7 +112,9 @@
           <div
             class="flex h-full w-full items-center justify-center bg-[#0f0f23]"
           >
-            <span class="text-sm text-white/50">Loading dither prism...</span>
+            <span class="text-sm text-foreground/50"
+              >Loading dither prism...</span
+            >
           </div>
         </template>
       </ClientOnly>

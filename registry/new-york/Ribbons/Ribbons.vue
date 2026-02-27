@@ -28,7 +28,7 @@
       offsetFactor: 0.05,
       maxAge: 500,
       pointCount: 50,
-      speedMultiplier: 0.6,
+      speedMultiplier: 0.4,
       enableFade: false,
       enableShaderEffect: false,
       effectAmplitude: 2,
@@ -149,9 +149,9 @@ void main() {
 
     const center = (props.colors.length - 1) / 2;
     for (let idx = 0; idx < props.colors.length; idx++) {
-      const spring = props.baseSpring + (Math.random() - 0.5) * 0.05;
-      const friction = props.baseFriction + (Math.random() - 0.5) * 0.05;
-      const thickness = props.baseThickness + (Math.random() - 0.5) * 3;
+      const spring = props.baseSpring + (Math.random() - 0.5) * 0.01;
+      const friction = props.baseFriction + (Math.random() - 0.5) * 0.01;
+      const thickness = props.baseThickness + (Math.random() - 0.5) * 1;
       const mouseOffset = new Vec3(
         (idx - center) * props.offsetFactor + (Math.random() - 0.5) * 0.01,
         (Math.random() - 0.5) * 0.1,

@@ -127,7 +127,7 @@
   }
 
   .scroll-stack-inner {
-    padding: 20vh 5rem 50rem;
+    padding: 20vh 5rem 20vh;
     min-height: 100vh;
   }
 

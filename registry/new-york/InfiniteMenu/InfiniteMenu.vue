@@ -622,7 +622,7 @@ void main() {
       this.onMovementChange = onMovementChange;
       this.camera.position[2] = 3 * scale;
 
-      const gl = canvas.getContext('webgl2', { antialias: true, alpha: false });
+      const gl = canvas.getContext('webgl2', { antialias: true, alpha: true });
       if (!gl) throw new Error('No WebGL 2 context!');
       this.gl = gl;
 
@@ -1157,6 +1157,7 @@ void main() {
     left: 1.6em;
     top: 50%;
     transform: translate(20%, -50%);
+    color: white;
   }
 
   .face-title.active {
@@ -1180,6 +1181,7 @@ void main() {
     font-size: 1.2rem;
     right: 1%;
     transform: translate(0, -50%);
+    color: white;
   }
 
   .face-description.active {

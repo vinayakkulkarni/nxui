@@ -118,7 +118,7 @@
           <div
             class="flex h-[400px] w-full items-center justify-center rounded-lg bg-background"
           >
-            <span class="text-sm text-white/50">Loading galaxy...</span>
+            <span class="text-sm text-foreground/50">Loading galaxy...</span>
           </div>
         </template>
       </ClientOnly>

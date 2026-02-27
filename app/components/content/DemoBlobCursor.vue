@@ -17,7 +17,7 @@
     >
       <BlobCursor fill-color="#5227FF" :trail-count="3" blob-type="circle">
         <div class="flex size-full items-center justify-center">
-          <p class="relative z-10 text-lg text-white">Move your cursor</p>
+          <p class="relative z-10 text-lg text-foreground">Move your cursor</p>
         </div>
       </BlobCursor>
     </div>

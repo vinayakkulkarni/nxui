@@ -71,7 +71,7 @@
           <div
             class="flex h-full w-full items-center justify-center bg-[#02040b]"
           >
-            <span class="text-sm text-white/50">Loading liquid...</span>
+            <span class="text-sm text-foreground/50">Loading liquid...</span>
           </div>
         </template>
       </ClientOnly>

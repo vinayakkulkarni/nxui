@@ -55,7 +55,7 @@
 
   let ropeNodes: RopeNode[] = [];
   let cardMesh: THREE.Group | undefined;
-  let bandLine: THREE.Line | undefined;
+  let bandLine: THREE.Mesh | undefined;
   let isDragging = false;
   const dragOffset = new THREE.Vector3();
   let isHovered = false;
@@ -113,19 +113,26 @@
     }
   }
 
-  function createBand(): THREE.Line {
+  function createBand(): THREE.Mesh {
     const curve = new THREE.CatmullRomCurve3(
       ropeNodes.map((n) => n.position.clone()),
       false,
       'chordal',
     );
-    const points = curve.getPoints(32);
-    const geometry = new THREE.BufferGeometry().setFromPoints(points);
-    const material = new THREE.LineBasicMaterial({
+    const geometry = new THREE.TubeGeometry(
+      curve,
+      64,
+      props.bandWidth,
+      8,
+      false,
+    );
+    const material = new THREE.MeshStandardMaterial({
       color: new THREE.Color(props.bandColor),
-      linewidth: 1,
+      roughness: 0.5,
+      metalness: 0.3,
+      side: THREE.DoubleSide,
     });
-    return new THREE.Line(geometry, material);
+    return new THREE.Mesh(geometry, material);
   }
 
   function updateBand(): void {
@@ -135,18 +142,15 @@
       false,
       'chordal',
     );
-    const points = curve.getPoints(32);
-    const positions = new Float32Array(points.length * 3);
-    for (let i = 0; i < points.length; i++) {
-      positions[i * 3] = points[i].x;
-      positions[i * 3 + 1] = points[i].y;
-      positions[i * 3 + 2] = points[i].z;
-    }
-    bandLine.geometry.setAttribute(
-      'position',
-      new THREE.BufferAttribute(positions, 3),
+    const newGeometry = new THREE.TubeGeometry(
+      curve,
+      64,
+      props.bandWidth,
+      8,
+      false,
     );
-    bandLine.geometry.attributes.position.needsUpdate = true;
+    bandLine.geometry.dispose();
+    bandLine.geometry = newGeometry;
   }
 
   function createDefaultCard(): THREE.Group {
@@ -155,9 +159,9 @@
     // Card body
     const cardGeom = new THREE.BoxGeometry(1.6, 2.25, 0.02);
     const cardMat = new THREE.MeshPhysicalMaterial({
-      color: 0x1a1a2e,
-      roughness: 0.3,
-      metalness: 0.8,
+      color: 0xffffff,
+      roughness: 0.4,
+      metalness: 0.5,
       clearcoat: 1,
       clearcoatRoughness: 0.15,
     });

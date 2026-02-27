@@ -327,7 +327,8 @@
   function onPointerMove(e: PointerEvent) {
     const host = containerRef.value;
     if (!host) return;
-    const rect = host.getBoundingClientRect();
+    const parent = host.parentElement ?? host;
+    const rect = parent.getBoundingClientRect();
     const x = THREE.MathUtils.clamp(
       (e.clientX - rect.left) / Math.max(1, rect.width),
       0,

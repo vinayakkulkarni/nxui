@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <GlareHover width='300px' height='200px' background='#1a1a2e' border-color='#333' glare-color='#ffffff' />
+  <GlareHover width='300px' height='200px' background='var(--card)' border-color='var(--border)' glare-color='#ffffff' />
 </template>`"
   >
     <div
@@ -18,12 +18,12 @@
       <GlareHover
         width="300px"
         height="200px"
-        background="#1a1a2e"
-        border-color="#333"
+        background="var(--card)"
+        border-color="var(--border)"
         glare-color="#ffffff"
       >
         <div class="flex size-full items-center justify-center">
-          <p class="text-lg text-white">Hover me</p>
+          <p class="text-lg text-foreground">Hover me</p>
         </div>
       </GlareHover>
     </div>

@@ -17,9 +17,7 @@
       class="h-[300px] w-full rounded-xl bg-neutral-100 dark:bg-zinc-900"
     >
       <div class="flex h-full items-center justify-center">
-        <p class="text-lg font-medium text-neutral-800/80 dark:text-white/80">
-          Move your cursor
-        </p>
+        <p class="text-lg font-medium text-foreground/80">Move your cursor</p>
       </div>
     </LiquidBlob>
   </ComponentDemo>

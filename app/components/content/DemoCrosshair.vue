@@ -17,7 +17,7 @@
     >
       <Crosshair color="white">
         <div class="flex size-full items-center justify-center">
-          <p class="text-lg text-white">Move your cursor</p>
+          <p class="text-lg text-foreground">Move your cursor</p>
         </div>
       </Crosshair>
     </div>

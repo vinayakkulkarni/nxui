@@ -17,7 +17,7 @@
     >
       <ClickSpark spark-color="#fff" :spark-size="10" :spark-count="8">
         <div class="flex size-full items-center justify-center">
-          <p class="text-lg text-white">Click anywhere for sparks!</p>
+          <p class="text-lg text-foreground">Click anywhere for sparks!</p>
         </div>
       </ClickSpark>
     </div>

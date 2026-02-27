@@ -9,6 +9,7 @@
     ShaderMaterial,
     Mesh,
     Vector2,
+    Vector3,
     MathUtils,
   } from 'three';
   import { cn } from '~/lib/utils';
@@ -21,7 +22,7 @@
       borderSize?: number;
       circleSize?: number;
       circleEdge?: number;
-      class?: string;
+      shapeColor?: string;
     }>(),
     {
       variation: 0,
@@ -31,6 +32,7 @@
       circleSize: 0.3,
       circleEdge: 0.5,
       class: '',
+      shapeColor: '#ffffff',
     },
   );
 
@@ -49,6 +51,7 @@ uniform float u_roundness;
 uniform float u_borderSize;
 uniform float u_circleSize;
 uniform float u_circleEdge;
+uniform vec3 u_color;
 
 #ifndef PI
 #define PI 3.1415926535897932384626433832795
@@ -117,8 +120,17 @@ void main() {
     sdf = sdPoly(st - vec2(0.5, 0.45), 0.3, 3);
     sdf = fill(sdf, 0.05, sdfCircle) * 1.4;
   #endif
-  gl_FragColor = vec4(vec3(1.0), sdf);
+  gl_FragColor = vec4(u_color, sdf);
 }`;
+
+  function hexToVec3(hex: string): [number, number, number] {
+    const c = hex.replace('#', '');
+    return [
+      Number.parseInt(c.slice(0, 2), 16) / 255,
+      Number.parseInt(c.slice(2, 4), 16) / 255,
+      Number.parseInt(c.slice(4, 6), 16) / 255,
+    ];
+  }
 
   const containerRef = ref<HTMLDivElement>();
   let renderer: InstanceType<typeof WebGLRenderer> | null = null;
@@ -160,6 +172,7 @@ void main() {
         u_borderSize: { value: props.borderSize },
         u_circleSize: { value: props.circleSize },
         u_circleEdge: { value: props.circleEdge },
+        u_color: { value: new Vector3(...hexToVec3(props.shapeColor)) },
       },
       defines: { VAR: props.variation },
       transparent: true,
