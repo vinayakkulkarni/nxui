@@ -52,12 +52,12 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative w-full">
+    <div class="relative h-[400px] w-full">
       <ClientOnly>
         <ClosingPlasma
           :key="activeTab"
           v-bind="currentTab.props"
-          class="h-[400px] rounded-lg"
+          class="h-full rounded-lg"
         >
           <div class="flex size-full items-center justify-center">
             <p class="text-lg font-semibold text-white/80 dark:text-white/80">
@@ -67,7 +67,7 @@
         </ClosingPlasma>
         <template #fallback>
           <div
-            class="flex h-[400px] w-full items-center justify-center rounded-lg bg-zinc-900"
+            class="flex h-full w-full items-center justify-center rounded-lg bg-zinc-900"
           >
             <span class="text-sm text-white/50">Loading plasma...</span>
           </div>

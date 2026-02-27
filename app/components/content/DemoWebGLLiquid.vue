@@ -60,16 +60,16 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative w-full">
+    <div class="relative h-[500px] w-full">
       <ClientOnly>
         <WebGLLiquid
           :key="activeTab"
           v-bind="currentTab.props"
-          class="min-h-[500px]"
+          class="h-full"
         />
         <template #fallback>
           <div
-            class="flex min-h-[500px] w-full items-center justify-center bg-[#02040b]"
+            class="flex h-full w-full items-center justify-center bg-[#02040b]"
           >
             <span class="text-sm text-white/50">Loading liquid...</span>
           </div>

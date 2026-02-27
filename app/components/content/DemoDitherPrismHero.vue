@@ -101,16 +101,16 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative w-full">
+    <div class="relative h-[500px] w-full">
       <ClientOnly>
         <DitherPrismHero
           :key="activeTab"
           v-bind="currentTab.props"
-          class="aspect-video min-h-[400px]"
+          class="h-full"
         />
         <template #fallback>
           <div
-            class="flex aspect-video min-h-[400px] w-full items-center justify-center bg-[#0f0f23]"
+            class="flex h-full w-full items-center justify-center bg-[#0f0f23]"
           >
             <span class="text-sm text-white/50">Loading dither prism...</span>
           </div>

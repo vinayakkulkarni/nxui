@@ -126,12 +126,12 @@
 
 <template>
   <ComponentDemo :code="currentVariant.code" full-width>
-    <div class="relative w-full">
+    <div class="relative h-[600px] w-full">
       <CollectionSurfer
         :key="currentVariant.variant"
         :items="items"
         :variant="currentVariant.variant"
-        class="h-[600px] rounded-lg"
+        class="h-full rounded-lg"
       />
       <!-- Tabs overlaid at bottom of the component -->
       <div

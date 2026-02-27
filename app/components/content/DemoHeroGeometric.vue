@@ -53,16 +53,16 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative w-full overflow-hidden">
+    <div class="relative h-[500px] w-full overflow-hidden">
       <ClientOnly>
         <HeroGeometric
           :key="activeTab"
           v-bind="currentTab.props"
-          class="min-h-[500px]"
+          class="h-full"
         />
         <template #fallback>
           <div
-            class="flex min-h-[500px] w-full items-center justify-center bg-blue-50"
+            class="flex h-full w-full items-center justify-center bg-blue-50"
           >
             <span class="text-sm text-blue-400">Loading hero...</span>
           </div>

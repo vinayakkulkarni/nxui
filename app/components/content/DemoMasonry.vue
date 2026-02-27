@@ -25,7 +25,7 @@
 </template>`"
     full-width
   >
-    <div class="relative w-full" style="min-height: 500px">
+    <div class="relative h-[500px] w-full">
       <Masonry
         :items="items"
         :scale-on-hover="true"

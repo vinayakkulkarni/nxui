@@ -96,14 +96,14 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative w-full">
+    <div class="relative h-[400px] w-full">
       <PixelCanvas
         :key="activeTab"
         :variant="currentTab.variant"
         :colors="currentTab.colors"
         :gap="currentTab.gap"
         :speed="currentTab.speed"
-        class="h-[400px] w-full rounded-lg"
+        class="h-full w-full rounded-lg"
       >
         <div class="flex size-full items-center justify-center">
           <p class="text-2xl font-medium tracking-tight text-foreground/50">
