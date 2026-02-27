@@ -733,6 +733,12 @@ const COMPONENTS: Record<
       'Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.',
     deps: [],
   },
+  'scrub-input': {
+    title: 'Scrub Input',
+    description:
+      'An inline slider input styled as a pill, perfect for adjusting variables smoothly.',
+    deps: [],
+  },
 };
 
 function slugToPascal(slug: string): string {

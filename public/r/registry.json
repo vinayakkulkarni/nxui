@@ -710,6 +710,12 @@
       "type": "registry:ui",
       "title": "Reflective Card",
       "description": "Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration."
+    },
+    {
+      "name": "scrub-input",
+      "type": "registry:ui",
+      "title": "Scrub Input",
+      "description": "An inline slider input styled as a pill, perfect for adjusting variables smoothly."
     }
   ]
 }

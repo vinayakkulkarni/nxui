@@ -174,6 +174,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/scroll-stack',
         badge: 'New',
       },
+      {
+        title: 'Scrub Input',
+        path: '/docs/components/scrub-input',
+        badge: 'New',
+      },
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
       { title: 'Spotlight Card', path: '/docs/components/spotlight-card' },
       { title: 'Stack', path: '/docs/components/stack' },
