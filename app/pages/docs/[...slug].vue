@@ -159,14 +159,16 @@
 <template>
   <div
     v-if="page"
-    class="hide-scrollbar flex min-h-dvh flex-col lg:h-dvh lg:flex-row lg:overflow-hidden"
+    class="hide-scrollbar flex h-dvh flex-col overflow-hidden lg:flex-row"
   >
     <!-- Left panel: docs/code (1/3) -->
     <div
-      class="relative order-last flex flex-1 flex-col lg:order-first lg:w-1/3 lg:max-w-[33.333%]"
+      class="relative order-last flex min-h-0 flex-1 flex-col border-t border-border/30 lg:order-first lg:w-1/3 lg:max-w-[33.333%] lg:border-l lg:border-t-0"
     >
-      <!-- Scrollable content -->
-      <div class="hide-scrollbar flex-1 overflow-y-auto p-6 lg:p-10 lg:pt-12">
+      <!-- Scrollable content with edge fade -->
+      <div
+        class="hide-scrollbar scroll-fade-y min-h-0 flex-1 overflow-y-auto p-6 lg:p-10 lg:pt-12"
+      >
         <!-- Breadcrumb -->
         <NuxtLink
           to="/docs"
@@ -240,9 +242,8 @@
         <!-- Installation -->
         <DocsInstallTabs :component="componentSlug" class="mt-8" />
       </div>
-
       <!-- Sticky footer: navigation -->
-      <div class="shrink-0 px-6 pb-4 pt-2 lg:px-10">
+      <div class="shrink-0 px-4 pb-2 pt-1 lg:px-10 lg:pb-4 lg:pt-2">
         <DocsComponentNavigation
           :prev="prevItem ?? null"
           :next="nextItem ?? null"

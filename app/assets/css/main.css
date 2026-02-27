@@ -195,6 +195,22 @@
   .hide-scrollbar::-webkit-scrollbar {
     display: none;
   }
+  .scroll-fade-y {
+    mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 24px,
+      black calc(100% - 48px),
+      transparent
+    );
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent,
+      black 24px,
+      black calc(100% - 48px),
+      transparent
+    );
+  }
 }
 
 @layer base {
