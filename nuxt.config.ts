@@ -98,11 +98,6 @@ export default defineNuxtConfig({
     },
     cloudflare: {
       nodeCompat: true,
-      pages: {
-        routes: {
-          exclude: ['/docs/*'],
-        },
-      },
     },
     experimental: {
       wasm: true,
