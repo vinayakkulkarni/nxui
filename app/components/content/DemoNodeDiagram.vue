@@ -96,10 +96,12 @@
   />
 </template>`"
   >
-    <NodeDiagram
-      :nodes="nodes"
-      :connections="connections"
-      class="mx-auto h-[350px] w-full max-w-[500px]"
-    />
+    <div class="flex h-[400px] w-full items-center justify-center">
+      <NodeDiagram
+        :nodes="nodes"
+        :connections="connections"
+        class="mx-auto h-[350px] w-full max-w-[500px]"
+      />
+    </div>
   </ComponentDemo>
 </template>

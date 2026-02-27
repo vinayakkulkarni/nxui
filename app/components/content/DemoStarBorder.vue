@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="flex h-[200px] w-full items-center justify-center bg-black rounded-lg"
+      class="flex h-[200px] w-full items-center justify-center bg-background rounded-lg"
     >
       <StarBorder color="white" speed="6s" :thickness="1">
         Star Border Button

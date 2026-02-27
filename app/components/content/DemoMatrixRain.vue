@@ -10,12 +10,12 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full bg-black&quot;>
+  <div class=&quot;relative h-[400px] w-full bg-background&quot;>
     <MatrixRain class=&quot;absolute inset-0&quot; />
   </div>
 </template>`"
   >
-    <div class="relative min-h-[400px] w-full bg-black">
+    <div class="relative min-h-[400px] w-full bg-background">
       <MatrixRain class="absolute inset-0" />
       <div
         class="pointer-events-none absolute inset-0 flex items-center justify-center"

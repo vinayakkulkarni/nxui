@@ -64,6 +64,8 @@
   <TestimonialMarquee :items=&quot;items&quot; :speed=&quot;30&quot; />
 </template>`"
   >
-    <TestimonialMarquee :items="testimonials" :speed="30" />
+    <div class="flex w-full items-center justify-center overflow-hidden">
+      <TestimonialMarquee :items="testimonials" :speed="30" />
+    </div>
   </ComponentDemo>
 </template>

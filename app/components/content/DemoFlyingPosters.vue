@@ -20,7 +20,9 @@
   <FlyingPosters :items='images' :plane-width='320' :plane-height='320' :distortion='3' />
 </template>`"
   >
-    <div class="relative h-[500px] w-full overflow-hidden rounded-lg bg-black">
+    <div
+      class="relative h-[500px] w-full overflow-hidden rounded-lg bg-background"
+    >
       <FlyingPosters
         :items="images"
         :plane-width="320"

@@ -140,7 +140,7 @@ float cnoise(vec3 P){
   onMounted(() => {
     if (!containerRef.value) return;
     const scene = new Scene();
-    scene.background = new Color('#000000');
+    scene.background = null;
     const camera = new PerspectiveCamera(
       30,
       containerRef.value.clientWidth / containerRef.value.clientHeight,
@@ -149,7 +149,7 @@ float cnoise(vec3 P){
     );
     camera.position.set(0, 0, 20);
 
-    renderer = new WebGLRenderer({ antialias: true });
+    renderer = new WebGLRenderer({ antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.domElement.style.width = '100%';
     renderer.domElement.style.height = '100%';

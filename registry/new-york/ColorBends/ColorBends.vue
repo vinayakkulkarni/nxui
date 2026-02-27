@@ -227,8 +227,6 @@ void main(){
     resize();
 
     const timer = new Timer();
-    currentRot = props.rotation;
-
     function update() {
       if (!webglRenderer || !mat) return;
       timer.update();

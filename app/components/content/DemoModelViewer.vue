@@ -13,14 +13,14 @@
 </template>`"
   >
     <div
-      class="flex h-[400px] w-full items-center justify-center overflow-hidden rounded-lg bg-neutral-950"
+      class="flex h-[400px] w-full items-center justify-center overflow-hidden rounded-lg bg-background"
     >
       <ModelViewer
         url="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/Duck/glTF-Binary/Duck.glb"
         :auto-rotate="true"
         :fade-in="true"
         :auto-frame="true"
-        background-color="#0a0a0a"
+        background-color=""
       />
     </div>
   </ComponentDemo>

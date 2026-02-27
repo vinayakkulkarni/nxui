@@ -12,7 +12,9 @@
   <Crosshair color='white' />
 </template>`"
   >
-    <div class="relative h-[300px] w-full overflow-hidden rounded-lg bg-black">
+    <div
+      class="relative h-[300px] w-full overflow-hidden rounded-lg bg-background"
+    >
       <Crosshair color="white">
         <div class="flex size-full items-center justify-center">
           <p class="text-lg text-white">Move your cursor</p>

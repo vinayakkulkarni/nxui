@@ -14,7 +14,9 @@
   </div>
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+    <div
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
+    >
       <Lightning :hue="230" :speed="1" :intensity="1" :size="1" />
     </div>
   </ComponentDemo>

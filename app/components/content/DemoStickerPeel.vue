@@ -19,7 +19,7 @@
 </template>`"
   >
     <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950"
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
     >
       <p class="pt-16 text-center text-2xl font-light text-white/20">
         Try dragging it!

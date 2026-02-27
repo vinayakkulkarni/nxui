@@ -13,12 +13,14 @@
   <FadeContent :blur='true' :duration='1' />
 </template>`"
   >
-    <div class="flex h-[200px] w-full items-center justify-center">
-      <FadeContent :blur="true" :duration="1">
-        <p class="text-2xl font-bold text-foreground">
-          Fades in with blur on scroll
-        </p>
-      </FadeContent>
+    <div class="h-[300px] w-full overflow-y-auto rounded-lg">
+      <div class="flex h-[600px] items-end justify-center pb-12">
+        <FadeContent :blur="true" :duration="1">
+          <p class="text-2xl font-bold text-foreground">
+            Scroll down to see the fade effect
+          </p>
+        </FadeContent>
+      </div>
     </div>
   </ComponentDemo>
 </template>

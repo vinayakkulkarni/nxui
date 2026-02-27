@@ -18,7 +18,7 @@
   />
 </template>`"
   >
-    <div class="relative h-80 w-full overflow-hidden rounded-lg bg-zinc-900">
+    <div class="relative h-80 w-full overflow-hidden rounded-lg bg-background">
       <CardNav
         :items="[
           {

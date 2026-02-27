@@ -15,7 +15,9 @@
   </PixelTransition>
 </template>`"
   >
-    <div class="relative h-[300px] w-full overflow-hidden rounded-lg bg-black">
+    <div
+      class="relative h-[300px] w-full overflow-hidden rounded-lg bg-background"
+    >
       <PixelTransition
         :grid-size="12"
         pixel-color="#a855f7"

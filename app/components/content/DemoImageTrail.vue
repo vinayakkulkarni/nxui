@@ -22,10 +22,10 @@
 </template>`"
   >
     <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-neutral-950"
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
     >
       <ImageTrail :images="images" :sensitivity="80" :fade-out-duration="1200">
-        <p class="text-lg text-white/50">Move your mouse around</p>
+        <p class="text-lg text-foreground/50">Move your mouse around</p>
       </ImageTrail>
     </div>
   </ComponentDemo>

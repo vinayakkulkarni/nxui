@@ -12,7 +12,9 @@
   <FloatingLines :lines-gradient='[&quot;#e233f5&quot;, &quot;#2f4ba2&quot;]' :animation-speed='1' :interactive='true' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+    <div
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
+    >
       <FloatingLines
         :lines-gradient="['#e233f5', '#2f4ba2']"
         :animation-speed="1"

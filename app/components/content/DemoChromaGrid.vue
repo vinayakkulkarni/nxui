@@ -13,7 +13,7 @@
   <ChromaGrid :radius=&quot;300&quot; :columns=&quot;3&quot; :damping=&quot;0.12&quot; />
 </template>`"
   >
-    <div class="relative w-full overflow-hidden bg-black py-6">
+    <div class="relative w-full overflow-hidden bg-background py-6">
       <ChromaGrid :radius="300" :columns="3" :damping="0.12" />
     </div>
   </ComponentDemo>

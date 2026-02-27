@@ -15,12 +15,14 @@
   </AnimatedContent>
 </template>`"
   >
-    <div class="flex h-[200px] w-full items-center justify-center">
-      <AnimatedContent :distance="100" direction="vertical" :duration="0.8">
-        <p class="text-2xl font-bold text-foreground">
-          Scroll to reveal this content
-        </p>
-      </AnimatedContent>
+    <div class="h-[300px] w-full overflow-y-auto rounded-lg">
+      <div class="flex h-[600px] items-end justify-center pb-12">
+        <AnimatedContent :distance="100" direction="vertical" :duration="0.8">
+          <p class="text-2xl font-bold text-foreground">
+            Scroll down to reveal this content
+          </p>
+        </AnimatedContent>
+      </div>
     </div>
   </ComponentDemo>
 </template>

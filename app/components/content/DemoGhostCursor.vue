@@ -12,7 +12,9 @@
   <GhostCursor color='#B19EEF' :trail-length='50' :bloom-strength='0.1' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+    <div
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
+    >
       <GhostCursor color="#B19EEF" :trail-length="50" :bloom-strength="0.1" />
     </div>
   </ComponentDemo>

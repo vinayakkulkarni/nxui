@@ -12,7 +12,9 @@
   <LiquidEther :colors=&quot;['#5227FF', '#FF9FFC', '#B19EEF']&quot; :mouse-force=&quot;20&quot; :auto-demo=&quot;true&quot; />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+    <div
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
+    >
       <LiquidEther
         :colors="['#5227FF', '#FF9FFC', '#B19EEF']"
         :mouse-force="20"

@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="relative h-[500px] w-full overflow-hidden rounded-lg bg-black/90"
+      class="relative h-[500px] w-full overflow-hidden rounded-lg bg-background"
     >
       <BubbleMenu />
     </div>

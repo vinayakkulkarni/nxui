@@ -13,13 +13,17 @@
 </template>`"
   >
     <div class="relative h-[300px] w-full overflow-hidden rounded-lg">
-      <div class="size-full bg-gradient-to-b from-blue-500 to-purple-600 p-8">
-        <p class="text-white text-lg">
-          Content with a gradual blur overlay at the bottom.
-        </p>
-        <p class="text-white/80 mt-4">
-          This creates a smooth fade effect using layered backdrop filters.
-        </p>
+      <div
+        class="flex size-full items-center justify-center bg-gradient-to-b from-blue-500 to-purple-600 p-8"
+      >
+        <div class="text-center">
+          <p class="text-white text-lg">
+            Content with a gradual blur overlay at the bottom.
+          </p>
+          <p class="text-white/80 mt-4">
+            This creates a smooth fade effect using layered backdrop filters.
+          </p>
+        </div>
       </div>
       <GradualBlur
         position="bottom"

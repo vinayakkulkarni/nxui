@@ -12,7 +12,9 @@
   <RippleGrid grid-color='#ffffff' :ripple-intensity='0.05' :grid-size='10' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg bg-black">
+    <div
+      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
+    >
       <RippleGrid
         grid-color="#ffffff"
         :ripple-intensity="0.05"
