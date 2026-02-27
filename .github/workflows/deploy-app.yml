@@ -30,6 +30,7 @@ jobs:
         run: bun run build
         env:
           NITRO_PRESET: cloudflare-pages
+          NODE_OPTIONS: --max-old-space-size=8192
 
       - name: Deploy to Cloudflare Pages
         run: bunx wrangler pages deploy dist --project-name=nxui
