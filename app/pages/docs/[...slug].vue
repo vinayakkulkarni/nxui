@@ -159,7 +159,7 @@
 <template>
   <div
     v-if="page"
-    class="flex min-h-dvh flex-col lg:h-dvh lg:flex-row lg:overflow-hidden"
+    class="hide-scrollbar flex min-h-dvh flex-col lg:h-dvh lg:flex-row lg:overflow-hidden"
   >
     <!-- Left panel: docs/code (1/3) -->
     <div
@@ -256,7 +256,7 @@
       :aria-label="
         page.title ? `Interactive demo: ${page.title}` : 'Interactive demo'
       "
-      class="relative order-first min-h-[50dvh] overflow-hidden bg-muted/30 dark:bg-background lg:order-last lg:h-dvh lg:w-2/3"
+      class="relative order-first h-[50dvh] overflow-hidden bg-muted/30 dark:bg-background lg:order-last lg:h-dvh lg:w-2/3"
     >
       <!-- Refresh button for animation demos -->
       <button

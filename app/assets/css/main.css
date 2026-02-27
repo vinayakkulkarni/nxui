@@ -187,6 +187,16 @@
   }
 }
 
+@layer utilities {
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @layer base {
   main h1 {
     @apply text-4xl md:text-5xl font-bold mb-4 font-display;
