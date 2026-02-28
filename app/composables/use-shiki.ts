@@ -32,7 +32,9 @@ export function useShiki(code: Ref<string | undefined>, lang: Ref<string>) {
     });
   }
 
-  watch([code, lang, colorMode], () => highlight(), { immediate: true });
+  if (import.meta.client) {
+    watch([code, lang, colorMode], () => highlight(), { immediate: true });
+  }
 
   return { highlightedHtml };
 }
