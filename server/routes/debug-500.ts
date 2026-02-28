@@ -1,108 +1,137 @@
 export default defineEventHandler(async (event) => {
   const results: Record<string, unknown> = {};
 
-  // Test 1: Content query via internal $fetch (mimics what SSR does)
+  // Test 1: Direct D1 query (bypass content module entirely)
+  try {
+    const db = event.context?.cloudflare?.env?.DB;
+    if (db) {
+      const stmt = db.prepare('SELECT COUNT(*) as cnt FROM _content_docs');
+      const d1Result = await stmt.first();
+      results.d1Direct = { ok: true, count: d1Result?.cnt };
+    } else {
+      results.d1Direct = { ok: false, error: 'DB binding not available' };
+    }
+  } catch (e: unknown) {
+    results.d1Direct = { ok: false, error: (e as Error).message };
+  }
+
+  // Test 2: Direct D1 query for a specific doc
+  try {
+    const db = event.context?.cloudflare?.env?.DB;
+    if (db) {
+      const stmt = db.prepare(
+        `SELECT "id", "path", "title" FROM _content_docs WHERE "path" = ? LIMIT 1`,
+      );
+      const row = await stmt.bind('/docs/components/animated-list').first();
+      results.d1DocQuery = { ok: true, found: !!row, row };
+    } else {
+      results.d1DocQuery = { ok: false, error: 'DB binding not available' };
+    }
+  } catch (e: unknown) {
+    results.d1DocQuery = { ok: false, error: (e as Error).message };
+  }
+
+  // Test 3: Internal $fetch to content query endpoint (this is what fails)
   try {
     const content = await $fetch('/__nuxt_content/docs/query', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: { sql: 'SELECT COUNT(*) as cnt FROM _content_docs' },
     });
-    results.contentQuery = { ok: true, result: content };
+    results.internalFetch = { ok: true, result: content };
   } catch (e: unknown) {
-    const err = e as Error & { data?: unknown };
-    results.contentQuery = { ok: false, error: err.message, data: err.data };
-  }
-
-  // Test 2: Content query with WHERE (this is what queryCollection().path().first() generates)
-  try {
-    const content = await $fetch('/__nuxt_content/docs/query', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: {
-        sql: `SELECT * FROM _content_docs WHERE "path" = '/docs/components/animated-list' ORDER BY "stem" ASC LIMIT 1`,
-      },
-    });
-    results.contentQueryWhere = { ok: true, count: Array.isArray(content) ? content.length : 'not-array' };
-  } catch (e: unknown) {
-    const err = e as Error & { data?: unknown; stack?: string };
-    results.contentQueryWhere = {
-      ok: false,
-      error: err.message,
-      data: err.data,
-      stack: err.stack?.split('\n').slice(0, 5),
-    };
-  }
-
-  // Test 3: Fetch OG image font (tests if font resolution works)
-  try {
-    const fontRes = await $fetch<ArrayBuffer>('/_og-satori-fonts/Inter-400-normal.woff', {
-      responseType: 'arrayBuffer',
-    });
-    results.fontFetch = { ok: true, size: fontRes.byteLength };
-  } catch (e: unknown) {
-    const err = e as Error;
-    results.fontFetch = { ok: false, error: err.message };
-  }
-
-  // Test 4: Try ASSETS font fetch (Cloudflare way)
-  try {
-    const assets = event.context?.cloudflare?.env?.ASSETS || (event as Record<string, unknown>).context?.ASSETS;
-    if (assets && typeof (assets as { fetch: unknown }).fetch === 'function') {
-      const assetFetch = assets as { fetch: (url: string) => Promise<Response> };
-      const res = await assetFetch.fetch('/_og-satori-fonts/Inter-400-normal.woff').catch(() => null);
-      results.assetsFontFetch = {
-        ok: res?.ok ?? false,
-        status: res?.status,
-        hasBody: !!res?.body,
-      };
-    } else {
-      results.assetsFontFetch = { ok: false, error: 'ASSETS not available' };
-    }
-  } catch (e: unknown) {
-    results.assetsFontFetch = { ok: false, error: (e as Error).message };
-  }
-
-  // Test 5: Try SSR render of a page via internal fetch
-  try {
-    const html = await $fetch<string>('/docs/components/animated-list', {
-      headers: { accept: 'text/html' },
-    });
-    results.ssrRender = { ok: true, length: html.length, hasError: html.includes('500') && html.includes('Server Error') };
-  } catch (e: unknown) {
-    const err = e as Error & { data?: unknown; statusCode?: number; stack?: string };
-    results.ssrRender = {
+    const err = e as Error & { data?: unknown; cause?: Error; statusCode?: number };
+    results.internalFetch = {
       ok: false,
       error: err.message,
       statusCode: err.statusCode,
+      causeMessage: err.cause?.message,
+      causeStack: err.cause?.stack?.split('\n').slice(0, 5),
       stack: err.stack?.split('\n').slice(0, 8),
     };
   }
 
-  // Test 6: List OG font files available in ASSETS
+  // Test 4: event.$fetch vs $fetch (content module uses event.$fetch when event exists)
   try {
-    const assets = event.context?.cloudflare?.env?.ASSETS;
-    if (assets && typeof (assets as { fetch: unknown }).fetch === 'function') {
-      const assetFetch = assets as { fetch: (url: string) => Promise<Response> };
-      // Try to list known font paths
-      const fontPaths = [
-        '/_og-satori-fonts/Inter-400-normal.woff',
-        '/_og-satori-fonts/Satoshi-400-normal.woff',
-        '/_og-satori-fonts/Satoshi-400.woff',
-      ];
-      const fontResults: Record<string, { status: number; ok: boolean }> = {};
-      for (const p of fontPaths) {
-        try {
-          const res = await assetFetch.fetch(p);
-          fontResults[p] = { status: res.status, ok: res.ok };
-        } catch {
-          fontResults[p] = { status: 0, ok: false };
-        }
-      }
-      results.fontPaths = fontResults;
-    }
+    const content = await event.$fetch('/__nuxt_content/docs/query', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: { sql: 'SELECT COUNT(*) as cnt FROM _content_docs' },
+    });
+    results.eventFetch = { ok: true, result: content };
   } catch (e: unknown) {
-    results.fontPaths = { error: (e as Error).message };
+    const err = e as Error & { data?: unknown; cause?: Error; statusCode?: number };
+    results.eventFetch = {
+      ok: false,
+      error: err.message,
+      statusCode: err.statusCode,
+      causeMessage: err.cause?.message,
+      causeStack: err.cause?.stack?.split('\n').slice(0, 5),
+      stack: err.stack?.split('\n').slice(0, 8),
+    };
+  }
+
+  // Test 5: Check what request headers are being forwarded
+  try {
+    const { getRequestHeaders } = await import('h3');
+    const headers = getRequestHeaders(event);
+    results.requestHeaders = {
+      'accept-encoding': headers['accept-encoding'],
+      'content-type': headers['content-type'],
+      accept: headers['accept'],
+      'cf-ray': headers['cf-ray'],
+      host: headers['host'],
+    };
+  } catch (e: unknown) {
+    results.requestHeaders = { error: (e as Error).message };
+  }
+
+  // Test 6: Try sql_dump.txt fetch (D1 init path)
+  try {
+    const dump = await $fetch('/__nuxt_content/docs/sql_dump.txt', {
+      responseType: 'text',
+    });
+    results.sqlDump = {
+      ok: true,
+      length: typeof dump === 'string' ? dump.length : 0,
+      preview: typeof dump === 'string' ? dump.substring(0, 100) : 'not-string',
+    };
+  } catch (e: unknown) {
+    const err = e as Error & { statusCode?: number };
+    results.sqlDump = { ok: false, error: err.message, statusCode: err.statusCode };
+  }
+
+  // Test 7: Check available env bindings
+  try {
+    const env = event.context?.cloudflare?.env;
+    results.envBindings = {
+      hasDB: !!env?.DB,
+      hasASSETS: !!env?.ASSETS,
+      dbType: env?.DB ? typeof env.DB : 'undefined',
+      envKeys: env ? Object.keys(env) : [],
+    };
+  } catch (e: unknown) {
+    results.envBindings = { error: (e as Error).message };
+  }
+
+  // Test 8: External curl equivalent - POST to content query using event.fetch (h3)
+  try {
+    const { getRequestURL } = await import('h3');
+    const baseURL = getRequestURL(event);
+    const origin = baseURL.origin;
+    const res = await fetch(`${origin}/__nuxt_content/docs/query`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ sql: 'SELECT COUNT(*) as cnt FROM _content_docs' }),
+    });
+    const body = await res.text();
+    results.externalFetch = {
+      ok: res.ok,
+      status: res.status,
+      body: body.substring(0, 200),
+    };
+  } catch (e: unknown) {
+    results.externalFetch = { ok: false, error: (e as Error).message };
   }
 
   return results;
