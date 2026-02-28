@@ -12,9 +12,7 @@
   <PixelBlast color='#B19EEF' :pixel-size='3' variant='square' :enable-ripples='true' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <PixelBlast
         color="#B19EEF"
         :pixel-size="3"

@@ -27,15 +27,15 @@
 
 <template>
   <div
-    class="fixed left-1/2 top-1/2 z-[101] w-full max-w-[680px] -translate-x-1/2 -translate-y-1/2 p-4"
+    class="fixed left-1/2 top-1/2 z-101 w-full max-w-170 -translate-x-1/2 -translate-y-1/2 p-4"
   >
     <div
-      class="overflow-hidden rounded-2xl border border-border/80 bg-popover shadow-2xl shadow-black/10 dark:shadow-black/30 backdrop-blur-2xl dark:border-white/[0.08]"
+      class="overflow-hidden rounded-2xl border border-border/80 bg-popover shadow-2xl shadow-black/10 dark:shadow-black/30 backdrop-blur-2xl dark:border-white/8"
       @keydown="emit('keydown', $event)"
     >
       <div class="flex items-center gap-3 border-b border-border/50 px-4 py-3">
         <div
-          class="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5"
+          class="flex size-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/20 to-primary/5"
         >
           <Icon name="lucide:search" class="size-4 text-primary" />
         </div>
@@ -62,7 +62,7 @@
         </kbd>
       </div>
 
-      <div class="max-h-[400px] overflow-y-auto overscroll-contain p-2">
+      <div class="max-h-100 overflow-y-auto overscroll-contain p-2">
         <div
           v-if="flatItems.length === 0"
           class="flex flex-col items-center justify-center py-14 text-center"

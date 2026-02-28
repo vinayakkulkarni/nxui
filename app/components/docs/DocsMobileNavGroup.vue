@@ -31,7 +31,7 @@
         >
           <span
             v-if="activeHref === item.path"
-            class="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-[2px] rounded-full bg-foreground"
+            class="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-0.5 rounded-full bg-foreground"
           ></span>
           <span class="flex-1">{{ item.title }}</span>
           <span

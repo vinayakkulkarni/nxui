@@ -9,14 +9,12 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full overflow-hidden rounded-lg&quot;>
+  <div class=&quot;relative h-100 w-full overflow-hidden rounded-lg&quot;>
     <Lightning :hue=&quot;230&quot; :speed=&quot;1&quot; :intensity=&quot;1&quot; :size=&quot;1&quot; />
   </div>
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <Lightning :hue="230" :speed="1" :intensity="1" :size="1" />
     </div>
   </ComponentDemo>

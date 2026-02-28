@@ -138,10 +138,10 @@
 </script>
 
 <template>
-  <div :class="cn('relative w-[500px]', $props.class)">
+  <div :class="cn('relative w-125', $props.class)">
     <div
       ref="listRef"
-      class="max-h-[400px] overflow-y-auto p-4"
+      class="max-h-100 overflow-y-auto p-4"
       :class="{ 'scrollbar-none': !displayScrollbar }"
       @scroll="handleScroll"
     >
@@ -171,11 +171,11 @@
     </div>
     <template v-if="showGradients">
       <div
-        class="pointer-events-none absolute left-0 right-0 top-0 h-[50px] bg-gradient-to-b from-background to-transparent transition-opacity duration-300"
+        class="pointer-events-none absolute left-0 right-0 top-0 h-12.5 bg-linear-to-b from-background to-transparent transition-opacity duration-300"
         :style="{ opacity: topGradientOpacity }"
       ></div>
       <div
-        class="pointer-events-none absolute bottom-0 left-0 right-0 h-[100px] bg-gradient-to-t from-background to-transparent transition-opacity duration-300"
+        class="pointer-events-none absolute bottom-0 left-0 right-0 h-25 bg-linear-to-t from-background to-transparent transition-opacity duration-300"
         :style="{ opacity: bottomGradientOpacity }"
       ></div>
     </template>

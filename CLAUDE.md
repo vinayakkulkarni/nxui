@@ -386,3 +386,84 @@ This project uses `.agents/skills/vue-best-practices/` and `.agents/skills/nuxt-
 - Performance: `v-once`, `v-memo`, `defineAsyncComponent`, `KeepAlive`
 - Templates: `v-show` vs `v-if`, proper `:key` usage, avoid `v-if` + `v-for`
 - Composition API: Single-responsibility composables, return refs not reactive objects
+
+---
+
+## Tailwind CSS v4 Migration Rules
+
+### Rule 16: Tailwind v4 Canonical Classes
+
+Always use Tailwind v4 canonical class names. The Tailwind CSS IntelliSense VS Code extension reports `suggestCanonicalClasses` warnings for legacy syntax.
+
+```
+# Gradient direction
+bg-gradient-to-{dir}  →  bg-linear-to-{dir}
+
+# Important modifier (prefix → suffix)
+!m-0  →  m-0!
+
+# Arbitrary px → spacing scale (divide px by 4)
+h-[400px]  →  h-100
+w-[300px]  →  w-75
+size-[200px]  →  size-50
+gap-[20px]  →  gap-5
+
+# Opacity fractions → integers
+bg-white/[0.06]  →  bg-white/6
+bg-black/[0.12]  →  bg-black/12
+
+# Z-index and rotate
+z-[100]  →  z-100
+rotate-[15deg]  →  rotate-15
+
+# Child variant
+[&>*]:class  →  *:class
+
+# Theme-dependent renames (v3 → v4)
+shadow  →  shadow-sm
+rounded  →  rounded-sm
+blur  →  blur-sm
+ring  →  ring-3
+ring-[3px]  →  ring-3
+```
+
+**Note**: `[&>svg]:` is NOT the same as `*:` — it targets specific child elements, not all children. Leave specific selectors as-is.
+
+### Rule 17: TypeScript Non-Null Assertions for Controlled Indexes
+
+When array indexing is controlled (initialized to 0, only set via `v-for` index), use `!` non-null assertion:
+
+```typescript
+// ❌ TS error: possibly undefined
+const currentTab = computed(() => tabs[activeTab.value]);
+
+// ✅ Safe — index always valid
+const currentTab = computed(() => tabs[activeTab.value]!);
+```
+
+Same applies to `useMagicKeys()` destructuring — keys are always defined at runtime but typed as `T | undefined` due to `Record` index signature:
+
+```typescript
+const { escape } = useMagicKeys();
+// ❌ TS error: ComputedRef<boolean> | undefined
+watch(escape, ...);
+// ✅ Safe
+watch(escape!, ...);
+```
+
+### Rule 18: Batch Replacement Completeness
+
+When doing codebase-wide class replacements (sed, ast-grep, etc.), cover ALL utility prefixes and value types:
+
+**Spacing utilities**: `h-`, `w-`, `size-`, `min-h-`, `max-h-`, `min-w-`, `max-w-`, `p-`, `pt-`, `pb-`, `pl-`, `pr-`, `px-`, `py-`, `m-`, `mt-`, `mb-`, `ml-`, `mr-`, `mx-`, `my-`, `gap-`, `top-`, `left-`, `right-`, `bottom-`, `inset-`
+
+**Value types**: `[Npx]`, `/[0.N]` (opacity fractions), `[Ndeg]` (rotation), `[N]` (z-index)
+
+**Verification**: After batch replacements, always grep for remaining patterns to catch misses:
+
+```bash
+# Check for remaining arbitrary px values
+grep -r '\-\[.*px\]' --include='*.vue' app/ registry/
+# Check for remaining opacity fractions
+grep -r '/\[0\.' --include='*.vue' app/ registry/
+```

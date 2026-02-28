@@ -16,7 +16,7 @@
 </template>`"
   >
     <div
-      class="flex h-[200px] w-full items-center justify-center gap-2 text-4xl font-bold"
+      class="flex h-50 w-full items-center justify-center gap-2 text-4xl font-bold"
     >
       <span>Make it</span>
       <RotatingText

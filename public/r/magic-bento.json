@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Magic Bento",
   "description": "Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/MagicBento/MagicBento.vue",

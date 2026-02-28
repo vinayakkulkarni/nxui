@@ -180,7 +180,7 @@
 
         <!-- Title -->
         <h1
-          class="mb-3 bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text font-display text-2xl font-bold text-transparent lg:text-4xl"
+          class="mb-3 bg-linear-to-r from-foreground to-foreground/70 bg-clip-text font-display text-2xl font-bold text-transparent lg:text-4xl"
           style="letter-spacing: -0.04em; line-height: 1.1"
         >
           {{ page.title }}
@@ -233,7 +233,7 @@
             </button>
 
             <div
-              class="shiki-wrapper max-h-[60vh] overflow-auto text-sm [&_pre]:!m-0 [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent [&_pre]:px-4 [&_pre]:py-4 [&_code]:!text-[13px] [&_code]:!leading-relaxed"
+              class="shiki-wrapper max-h-[60vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:px-4 [&_pre]:py-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
               v-html="highlightedHtml"
             ></div>
           </div>
@@ -281,7 +281,7 @@
       <!-- Variant pills -->
       <template v-if="hasMultipleVariants">
         <div
-          class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-black/40 to-transparent"
+          class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-linear-to-t from-black/40 to-transparent"
         ></div>
         <div
           class="absolute inset-x-0 bottom-6 z-30 flex flex-wrap justify-center gap-2 px-4"

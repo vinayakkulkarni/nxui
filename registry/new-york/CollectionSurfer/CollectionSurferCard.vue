@@ -77,7 +77,7 @@
 <template>
   <div
     ref="cardRef"
-    class="absolute left-0 top-0 h-[400px] w-[300px] cursor-pointer overflow-hidden rounded-xl bg-neutral-900 shadow-2xl"
+    class="absolute left-0 top-0 h-100 w-75 cursor-pointer overflow-hidden rounded-xl bg-neutral-900 shadow-2xl"
     :style="{ transform: cardTransform }"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
@@ -96,7 +96,7 @@
       :class="isHovered ? 'brightness-100' : 'brightness-75'"
     />
     <div
-      class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"
+      class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"
     ></div>
     <div class="absolute bottom-4 left-4 right-4 z-10">
       <p class="text-sm font-medium tracking-wide text-white">

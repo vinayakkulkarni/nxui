@@ -30,7 +30,7 @@
 </template>`"
   >
     <div
-      class="flex h-[400px] w-full items-center justify-center overflow-hidden rounded-lg"
+      class="flex h-100 w-full items-center justify-center overflow-hidden rounded-lg"
     >
       <BounceCards
         :images="images"

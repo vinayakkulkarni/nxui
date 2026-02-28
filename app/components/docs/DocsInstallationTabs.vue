@@ -35,7 +35,7 @@
       </button>
     </div>
 
-    <div class="min-h-[100px]">
+    <div class="min-h-25">
       <div v-show="method === 'cli'">
         <slot name="cli"></slot>
       </div>

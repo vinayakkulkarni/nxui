@@ -13,7 +13,7 @@
   <CountUp :to=&quot;10000&quot; separator=&quot;,&quot; :duration=&quot;2&quot; />
 </template>`"
   >
-    <div class="flex h-[200px] w-full items-center justify-center">
+    <div class="flex h-50 w-full items-center justify-center">
       <CountUp
         :to="10000"
         separator=","

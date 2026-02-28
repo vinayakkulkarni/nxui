@@ -12,7 +12,7 @@
   <Antigravity :count='300' color='#FF9FFC' particle-shape='capsule' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <Antigravity :count="300" color="#FF9FFC" particle-shape="capsule" />
     </div>
   </ComponentDemo>

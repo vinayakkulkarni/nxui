@@ -15,7 +15,7 @@
   />
 </template>`"
   >
-    <div class="flex h-[200px] w-full items-center justify-center">
+    <div class="flex h-50 w-full items-center justify-center">
       <TextType
         :text="['Hello World!', 'Welcome to nxui.', 'Build something amazing.']"
         :typing-speed="50"

@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full overflow-hidden rounded-lg&quot;>
+  <div class=&quot;relative h-100 w-full overflow-hidden rounded-lg&quot;>
     <LetterGlitch
       :glitch-colors=&quot;['#2b4539', '#61dca3', '#61b3dc']&quot;
       :glitch-speed=&quot;50&quot;
@@ -20,7 +20,7 @@
   </div>
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <LetterGlitch
         :glitch-colors="['#2b4539', '#61dca3', '#61b3dc']"
         :glitch-speed="50"

@@ -18,7 +18,7 @@
 \x3C/script>
 
 \x3Ctemplate>
-  \x3CParticleGalaxyRenderer class="h-[400px] w-full" />
+  \x3CParticleGalaxyRenderer class="h-100 w-full" />
 \x3C/template>`,
     },
     {
@@ -39,7 +39,7 @@
     :spiral-arms="5"
     :particle-count="15000"
     :spread="3.5"
-    class="h-[400px] w-full"
+    class="h-100 w-full"
   />
 \x3C/template>`,
     },
@@ -67,7 +67,7 @@
     :density="0.9"
     :glow="80"
     :spread="2"
-    class="h-[400px] w-full"
+    class="h-100 w-full"
   />
 \x3C/template>`,
     },
@@ -91,13 +91,13 @@
     :mouse-influence="0.8"
     :camera-movement="false"
     :pulsate="false"
-    class="h-[400px] w-full"
+    class="h-100 w-full"
   />
 \x3C/template>`,
     },
   ];
 
-  const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]!);
 
   function handleTabClick(index: number) {
     activeTab.value = index;
@@ -112,11 +112,11 @@
           :key="activeTab"
           v-bind="currentTab.props"
           :blend-mode="blendMode"
-          class="h-[400px] w-full rounded-lg"
+          class="h-100 w-full rounded-lg"
         />
         <template #fallback>
           <div
-            class="flex h-[400px] w-full items-center justify-center rounded-lg bg-background"
+            class="flex h-100 w-full items-center justify-center rounded-lg bg-background"
           >
             <span class="text-sm text-foreground/50">Loading galaxy...</span>
           </div>

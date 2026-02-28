@@ -235,7 +235,7 @@
     ref="containerRef"
     :class="
       cn(
-        'relative grid aspect-[4/5] h-[400px] w-[300px] select-none place-items-center overflow-hidden rounded-[25px] border border-zinc-800 isolate',
+        'relative grid aspect-[4/5] h-100 w-75 select-none place-items-center overflow-hidden rounded-[25px] border border-zinc-800 isolate',
         $props.class,
       )
     "

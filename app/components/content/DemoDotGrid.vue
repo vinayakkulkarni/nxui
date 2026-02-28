@@ -12,9 +12,7 @@
   <DotGrid :dot-size='16' :gap='32' base-color='#5227FF' active-color='#5227FF' :proximity='150' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <DotGrid
         :dot-size="16"
         :gap="32"

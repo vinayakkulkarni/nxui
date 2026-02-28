@@ -44,7 +44,7 @@
       <Transition name="fade">
         <div
           v-if="isOpen"
-          class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
+          class="fixed inset-0 z-100 bg-black/50 backdrop-blur-sm"
           @click="handleClose"
         ></div>
       </Transition>
@@ -52,7 +52,7 @@
       <Transition name="slide-left">
         <div
           v-if="isOpen"
-          class="fixed inset-y-0 left-0 z-[100] w-[300px] bg-background border-r border-border shadow-2xl flex flex-col"
+          class="fixed inset-y-0 left-0 z-100 w-75 bg-background border-r border-border shadow-2xl flex flex-col"
         >
           <div
             class="flex items-center justify-between p-4 border-b border-border"

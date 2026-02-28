@@ -91,7 +91,7 @@
     ref="container"
     :class="
       cn(
-        'relative h-12 w-[280px] cursor-ew-resize select-none touch-none overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 transition-transform active:scale-[0.98] dark:border-zinc-800 dark:bg-zinc-900',
+        'relative h-12 w-70 cursor-ew-resize select-none touch-none overflow-hidden rounded-2xl border border-zinc-200 bg-zinc-100 transition-transform active:scale-[0.98] dark:border-zinc-800 dark:bg-zinc-900',
         $props.class,
       )
     "
@@ -113,7 +113,7 @@
       :style="{ width: `${fillWidth}%` }"
     >
       <!-- Handle mark -->
-      <div class="h-5 w-[3px] rounded-full bg-zinc-300 dark:bg-zinc-600" ></div>
+      <div class="h-5 w-0.75 rounded-full bg-zinc-300 dark:bg-zinc-600"></div>
     </div>
 
     <!-- Label and Value overlay -->

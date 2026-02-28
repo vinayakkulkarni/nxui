@@ -37,7 +37,7 @@
     :transition="{ duration: 0.6 }"
   >
     <div
-      class="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:min-h-[400px] overflow-hidden"
+      class="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:min-h-100 overflow-hidden"
     >
       <div v-if="tagline" class="absolute top-6 left-6 z-20">
         <span class="text-neutral-900 dark:text-white/90 text-sm font-medium">{{
@@ -51,7 +51,7 @@
         :style="{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }"
       />
       <div
-        class="absolute inset-0 bg-gradient-to-r from-white/60 dark:from-neutral-950/60 via-transparent to-transparent md:hidden"
+        class="absolute inset-0 bg-linear-to-r from-white/60 dark:from-neutral-950/60 via-transparent to-transparent md:hidden"
       ></div>
     </div>
     <div

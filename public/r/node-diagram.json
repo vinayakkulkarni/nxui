@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Node Diagram",
   "description": "An animated node diagram with glowing data pulses flowing through connections.",
-  "dependencies": ["@vueuse/core", "motion-v"],
+  "dependencies": [
+    "@vueuse/core",
+    "motion-v"
+  ],
   "files": [
     {
       "path": "registry/new-york/NodeDiagram/NodeDiagramTrace.vue",

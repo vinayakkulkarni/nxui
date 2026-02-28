@@ -77,7 +77,7 @@
     ref="cardRef"
     :class="
       cn(
-        'relative w-full max-w-[400px] cursor-pointer select-none overflow-hidden rounded-3xl bg-neutral-50 ring-1 ring-neutral-200/80 shadow-xl shadow-neutral-300/40 transition-all duration-300 hover:shadow-2xl hover:shadow-neutral-400/30 dark:bg-neutral-950 dark:ring-white/[0.06] dark:shadow-black/40 dark:hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]',
+        'relative w-full max-w-100 cursor-pointer select-none overflow-hidden rounded-3xl bg-neutral-50 ring-1 ring-neutral-200/80 shadow-xl shadow-neutral-300/40 transition-all duration-300 hover:shadow-2xl hover:shadow-neutral-400/30 dark:bg-neutral-950 dark:ring-white/6 dark:shadow-black/40 dark:hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)]',
         props.class,
       )
     "
@@ -109,7 +109,7 @@
       </div>
 
       <div
-        class="absolute inset-0 bg-gradient-to-t from-neutral-50 via-neutral-50/20 to-transparent opacity-90 dark:from-neutral-950 dark:via-transparent dark:opacity-60"
+        class="absolute inset-0 bg-linear-to-t from-neutral-50 via-neutral-50/20 to-transparent opacity-90 dark:from-neutral-950 dark:via-transparent dark:opacity-60"
       ></div>
     </div>
 
@@ -138,7 +138,7 @@
       >
         <component
           :is="motion.span"
-          class="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-black/[0.06] to-transparent dark:via-white/10"
+          class="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-black/6 to-transparent dark:via-white/10"
           :animate="
             isHovered ? { translateX: '200%' } : { translateX: '-100%' }
           "

@@ -14,7 +14,7 @@
   </TextCursor>
 </template>`"
   >
-    <div class="h-[300px] w-full">
+    <div class="h-75 w-full">
       <TextCursor text="✨" :spacing="80" :max-points="8">
         <div class="flex size-full items-center justify-center">
           <p class="text-center text-muted-foreground">Move your mouse here</p>

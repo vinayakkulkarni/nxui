@@ -148,7 +148,7 @@
                 item.text
               }}</span>
               <div
-                class="mx-[2vw] my-[2em] h-[7vh] w-[200px] shrink-0 rounded-[50px] bg-cover bg-center"
+                class="mx-[2vw] my-[2em] h-[7vh] w-50 shrink-0 rounded-[50px] bg-cover bg-center"
                 :style="{ backgroundImage: `url(${item.image})` }"
               ></div>
             </div>

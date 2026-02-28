@@ -141,7 +141,7 @@
 
 <template>
   <div
-    class="flex min-h-[300px] w-full items-center justify-center"
+    class="flex min-h-75 w-full items-center justify-center"
     :style="{ visibility: ready ? 'visible' : 'hidden', cursor: cursorStyle }"
     @pointerdown="onPointerDown"
     @pointermove="onPointerMove"

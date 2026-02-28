@@ -40,7 +40,7 @@
 </template>`"
   >
     <div
-      class="flex h-[400px] w-full items-center justify-center overflow-hidden rounded-lg bg-background"
+      class="flex h-100 w-full items-center justify-center overflow-hidden rounded-lg bg-background"
     >
       <OrbitImages
         :images="images"

@@ -97,7 +97,7 @@
       }"
     >
       <div
-        class="relative z-[2] grid w-[150vw] flex-none origin-center -rotate-[15deg] grid-rows-4 gap-4"
+        class="relative z-[2] grid w-[150vw] flex-none origin-center -rotate-15 grid-rows-4 gap-4"
         style="height: 150vh"
       >
         <div

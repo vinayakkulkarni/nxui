@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="flex h-[300px] w-full items-center justify-center overflow-hidden bg-background text-foreground"
+      class="flex h-75 w-full items-center justify-center overflow-hidden bg-background text-foreground"
     >
       <FuzzyText text="Fuzzy" :base-intensity="0.2" :hover-intensity="0.6" />
     </div>

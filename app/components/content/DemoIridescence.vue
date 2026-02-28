@@ -9,12 +9,12 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full overflow-hidden rounded-lg&quot;>
+  <div class=&quot;relative h-100 w-full overflow-hidden rounded-lg&quot;>
     <Iridescence :color=&quot;[1, 1, 1]&quot; :speed=&quot;1.0&quot; :amplitude=&quot;0.1&quot; mouse-react />
   </div>
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <Iridescence
         :color="[1, 1, 1]"
         :speed="1.0"

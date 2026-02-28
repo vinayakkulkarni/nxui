@@ -12,7 +12,7 @@
   <ReflectiveCard name=&quot;ALEXANDER DOE&quot; role=&quot;SENIOR DEVELOPER&quot; id-number=&quot;8901-2345-6789&quot; />
 </template>`"
   >
-    <div class="flex min-h-[560px] items-center justify-center">
+    <div class="flex min-h-140 items-center justify-center">
       <ReflectiveCard
         name="ALEXANDER DOE"
         role="SENIOR DEVELOPER"

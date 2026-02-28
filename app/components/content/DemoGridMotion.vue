@@ -12,7 +12,7 @@
   <GridMotion :items=&quot;['Item 1', 'https://picsum.photos/200/300', 'Item 3']&quot; gradient-color=&quot;black&quot; />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <GridMotion
         :items="[
           'Item 1',

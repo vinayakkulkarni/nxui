@@ -29,9 +29,9 @@
     full-width
     class="p-0"
   >
-    <div class="relative h-[500px] overflow-y-auto overscroll-contain">
+    <div class="relative h-125 overflow-y-auto overscroll-contain">
       <!-- Tall wrapper creating scroll height -->
-      <div class="relative min-h-[1500px]">
+      <div class="relative min-h-375">
         <!-- Sticky glass surface, centered in viewport -->
         <div
           class="sticky top-[calc(50%-50px)] z-10 flex justify-center pointer-events-none"
@@ -60,12 +60,12 @@
             Try scrolling.
           </p>
 
-          <div class="h-[180px]"></div>
+          <div class="h-45"></div>
 
           <div
             v-for="(item, idx) in scrollItems"
             :key="idx"
-            class="relative w-[500px] max-w-[85%]"
+            class="relative w-125 max-w-[85%]"
           >
             <img
               class="w-full rounded-[20px] object-cover grayscale"
@@ -73,13 +73,13 @@
               :alt="item.text"
             />
             <span
-              class="absolute inset-0 flex min-w-[250px] items-center justify-center text-center text-[clamp(1.5rem,3vw,3rem)] font-black leading-none text-white mix-blend-overlay"
+              class="absolute inset-0 flex min-w-62.5 items-center justify-center text-center text-[clamp(1.5rem,3vw,3rem)] font-black leading-none text-white mix-blend-overlay"
             >
               {{ item.text }}
             </span>
           </div>
 
-          <div class="h-[200px]"></div>
+          <div class="h-50"></div>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@
   <LaserFlow color='#B19EEF' :flow-speed='0.35' :wisp-density='1' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <LaserFlow color="#B19EEF" :flow-speed="0.35" :wisp-density="1" />
     </div>
   </ComponentDemo>

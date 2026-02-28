@@ -13,7 +13,7 @@
     if (mk || ck) isOpen.value = !isOpen.value;
   });
 
-  watch(escape, (val) => {
+  watch(escape!, (val) => {
     if (val) isOpen.value = false;
   });
 
@@ -88,7 +88,7 @@
     <Transition name="fade">
       <div
         v-if="isOpen"
-        class="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
+        class="fixed inset-0 z-100 bg-black/50 backdrop-blur-sm"
         @click="isOpen = false"
       ></div>
     </Transition>

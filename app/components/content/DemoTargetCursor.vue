@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <TargetCursor :spin-duration='2' :hide-default-cursor='true' class='h-[400px] rounded-xl bg-card p-8'>
+  <TargetCursor :spin-duration='2' :hide-default-cursor='true' class='h-100 rounded-xl bg-card p-8'>
     <p class='text-3xl font-black text-card-foreground mb-6'>Hover Below.</p>
     <div class='grid grid-cols-3 gap-4 mb-2'>
       <p class='cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400'>THIS</p>
@@ -23,7 +23,7 @@
     <TargetCursor
       :spin-duration="2"
       :hide-default-cursor="true"
-      class="h-[400px] overflow-hidden rounded-xl bg-card p-8"
+      class="h-100 overflow-hidden rounded-xl bg-card p-8"
     >
       <p class="mb-6 text-3xl font-black text-card-foreground">Hover Below.</p>
       <div class="grid grid-cols-3 gap-4 mb-2">

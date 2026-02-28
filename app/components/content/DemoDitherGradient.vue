@@ -10,10 +10,10 @@
 </script>
 
 <template>
-  <DitherGradient class=&quot;h-[300px] w-full&quot; />
+  <DitherGradient class=&quot;h-75 w-full&quot; />
 </template>`"
   >
-    <div class="relative h-[300px] w-full">
+    <div class="relative h-75 w-full">
       <DitherGradient class="absolute inset-0" />
       <div
         class="pointer-events-none absolute inset-0 flex items-center justify-center"

@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Card Nav",
   "description": "Expandable navbar with staggered card reveal, hamburger toggle, and color-coded panels.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/CardNav/CardNav.vue",

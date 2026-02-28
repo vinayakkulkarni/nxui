@@ -20,7 +20,7 @@
 </template>`"
   >
     <div
-      class="flex h-[200px] w-full items-center justify-center rounded-lg bg-neutral-950"
+      class="flex h-50 w-full items-center justify-center rounded-lg bg-neutral-950"
     >
       <GooeyNav :items="items" :particle-count="15" :initial-active-index="0" />
     </div>

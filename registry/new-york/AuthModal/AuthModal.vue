@@ -54,7 +54,7 @@
           exit="exit"
           :class="
             cn(
-              'relative w-full max-w-[360px] overflow-hidden rounded-3xl border border-zinc-100 bg-white p-6 shadow-2xl ring-1 ring-zinc-950/5 dark:border-zinc-900 dark:bg-zinc-950',
+              'relative w-full max-w-90 overflow-hidden rounded-3xl border border-zinc-100 bg-white p-6 shadow-2xl ring-1 ring-zinc-950/5 dark:border-zinc-900 dark:bg-zinc-950',
               props.class,
             )
           "

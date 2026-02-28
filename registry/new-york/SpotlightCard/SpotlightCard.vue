@@ -54,7 +54,7 @@
     ref="containerRef"
     :class="
       cn(
-        'relative overflow-hidden bg-gradient-to-b from-neutral-50 to-white ring-1 ring-neutral-200 dark:ring-white/10 dark:from-neutral-950 dark:to-neutral-900 transition-all duration-500',
+        'relative overflow-hidden bg-linear-to-b from-neutral-50 to-white ring-1 ring-neutral-200 dark:ring-white/10 dark:from-neutral-950 dark:to-neutral-900 transition-all duration-500',
         props.class,
       )
     "

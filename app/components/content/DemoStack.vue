@@ -21,8 +21,8 @@
   </Stack>
 </template>`"
   >
-    <div class="flex h-[400px] w-full items-center justify-center rounded-lg">
-      <div class="relative size-[200px]">
+    <div class="flex h-100 w-full items-center justify-center rounded-lg">
+      <div class="relative size-50">
         <Stack
           :sensitivity="200"
           :send-to-back-on-click="true"

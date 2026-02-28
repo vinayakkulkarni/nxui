@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full overflow-hidden rounded-lg&quot;>
+  <div class=&quot;relative h-100 w-full overflow-hidden rounded-lg&quot;>
     <LiquidChrome
       :base-color=&quot;[0.1, 0.1, 0.1]&quot;
       :speed=&quot;0.2&quot;
@@ -21,7 +21,7 @@
   </div>
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <LiquidChrome
         :base-color="[0.1, 0.1, 0.1]"
         :speed="0.2"

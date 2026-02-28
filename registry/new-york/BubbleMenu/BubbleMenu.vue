@@ -94,7 +94,7 @@
         :style="{ background: menuBg }"
       >
         <span
-          class="inline-flex w-[120px] items-center justify-center text-sm font-semibold"
+          class="inline-flex w-30 items-center justify-center text-sm font-semibold"
           :style="{ color: menuContentColor }"
         >
           <slot name="logo">Logo</slot>
@@ -109,13 +109,13 @@
         @click="toggle"
       >
         <span
-          class="block h-0.5 w-[26px] rounded-full transition-transform duration-300"
+          class="block h-0.5 w-6.5 rounded-full transition-transform duration-300"
           :class="isOpen ? 'translate-y-1 rotate-45' : ''"
           :style="{ background: menuContentColor }"
         ></span>
         <span
-          class="mt-1.5 block h-0.5 w-[18px] rounded-full transition-transform duration-300"
-          :class="isOpen ? '-translate-y-1 -rotate-45 !w-[26px]' : ''"
+          class="mt-1.5 block h-0.5 w-4.5 rounded-full transition-transform duration-300"
+          :class="isOpen ? '-translate-y-1 -rotate-45 w-6.5!' : ''"
           :style="{ background: menuContentColor }"
         ></span>
       </button>
@@ -127,7 +127,7 @@
       class="absolute inset-0 z-[98] flex items-center justify-center"
     >
       <ul
-        class="m-0 flex w-full max-w-[1600px] list-none flex-wrap justify-stretch gap-y-1 px-6"
+        class="m-0 flex w-full max-w-400 list-none flex-wrap justify-stretch gap-y-1 px-6"
       >
         <li
           v-for="(item, i) in items"

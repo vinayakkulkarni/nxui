@@ -96,7 +96,7 @@
       :class="
         cn(
           'relative size-full rounded-2xl overflow-hidden',
-          'bg-gradient-to-b from-neutral-100 to-neutral-50',
+          'bg-linear-to-b from-neutral-100 to-neutral-50',
           'dark:from-neutral-800 dark:to-neutral-900',
           'backdrop-blur-sm',
           'border border-neutral-300 dark:border-neutral-700',
@@ -118,7 +118,7 @@
       <div
         class="flex size-[60%] items-center justify-center text-neutral-700 dark:text-white"
       >
-        <Icon :name="item.icon" class="!size-full" />
+        <Icon :name="item.icon" class="size-full!" />
       </div>
 
       <!-- Shine effect -->
@@ -144,7 +144,7 @@
         :class="
           cn(
             'absolute -top-1 -right-1',
-            'min-w-[20px] h-5 px-1.5',
+            'min-w-5 h-5 px-1.5',
             'rounded-full',
             'bg-red-500',
             'text-white text-xs font-semibold',

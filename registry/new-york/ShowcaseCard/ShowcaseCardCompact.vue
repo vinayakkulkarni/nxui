@@ -38,7 +38,7 @@
         :style="{ transform: isHovered ? 'scale(1.08)' : 'scale(1)' }"
       />
       <div
-        class="absolute inset-0 bg-gradient-to-t from-white dark:from-neutral-900 via-transparent to-transparent opacity-80"
+        class="absolute inset-0 bg-linear-to-t from-white dark:from-neutral-900 via-transparent to-transparent opacity-80"
       ></div>
     </div>
     <div class="p-4 -mt-6 relative z-10">

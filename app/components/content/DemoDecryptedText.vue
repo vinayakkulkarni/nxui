@@ -17,7 +17,7 @@
   />
 </template>`"
   >
-    <div class="flex h-[200px] w-full items-center justify-center">
+    <div class="flex h-50 w-full items-center justify-center">
       <DecryptedText
         text="Hover to Decrypt"
         :speed="50"

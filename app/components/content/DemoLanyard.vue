@@ -12,9 +12,7 @@
   <Lanyard :gravity='-40' :fov='20' band-color='#B19EEF' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <Lanyard :gravity="-40" :fov="20" band-color="#B19EEF" />
     </div>
   </ComponentDemo>

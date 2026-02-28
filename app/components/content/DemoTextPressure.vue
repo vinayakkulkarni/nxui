@@ -13,7 +13,7 @@
 </template>`"
   >
     <div class="flex size-full items-center justify-center overflow-hidden">
-      <div class="h-[300px] w-full">
+      <div class="h-75 w-full">
         <TextPressure text="Pressure" :flex="true" :weight="true" />
       </div>
     </div>

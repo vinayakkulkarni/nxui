@@ -10,12 +10,10 @@
 </script>
 
 <template>
-  <LiquidBlob class=&quot;h-[300px] w-full rounded-xl bg-neutral-100 dark:bg-zinc-900&quot; />
+  <LiquidBlob class=&quot;h-75 w-full rounded-xl bg-neutral-100 dark:bg-zinc-900&quot; />
 </template>`"
   >
-    <LiquidBlob
-      class="h-[300px] w-full rounded-xl bg-neutral-100 dark:bg-zinc-900"
-    >
+    <LiquidBlob class="h-75 w-full rounded-xl bg-neutral-100 dark:bg-zinc-900">
       <div class="flex h-full items-center justify-center">
         <p class="text-lg font-medium text-foreground/80">Move your cursor</p>
       </div>

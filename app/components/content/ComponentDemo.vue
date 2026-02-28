@@ -51,7 +51,7 @@
   <div
     v-if="isSplitMode"
     :key="refreshable ? refreshKey : undefined"
-    class="size-full overflow-hidden [&>*]:!h-full [&>*]:!w-full [&>*]:!rounded-none"
+    class="size-full overflow-hidden *:h-full! *:w-full! *:rounded-none!"
   >
     <slot></slot>
   </div>
@@ -72,8 +72,8 @@
           'relative w-full bg-muted/30 dark:bg-background',
           code ? 'rounded-t-xl' : 'rounded-xl',
           fullWidth
-            ? 'min-h-[300px]'
-            : 'flex min-h-[350px] items-center justify-center p-6',
+            ? 'min-h-75'
+            : 'flex min-h-87.5 items-center justify-center p-6',
           props.class,
         )
       "
@@ -130,7 +130,7 @@
 
         <!-- Scrollable code -->
         <div
-          class="shiki-wrapper max-h-[400px] overflow-auto text-sm [&_pre]:!m-0 [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent [&_pre]:px-4 [&_pre]:py-4 [&_code]:!text-[13px] [&_code]:!leading-relaxed"
+          class="shiki-wrapper max-h-100 overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:px-4 [&_pre]:py-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
           v-html="highlightedHtml"
         ></div>
       </div>

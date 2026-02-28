@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="flex h-[300px] w-full items-center justify-center rounded-lg bg-background"
+      class="flex h-75 w-full items-center justify-center rounded-lg bg-background"
     >
       <GlareHover
         width="300px"

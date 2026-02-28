@@ -12,15 +12,13 @@
 </script>
 
 <template>
-  <div class='relative h-[400px]'>
+  <div class='relative h-100'>
     <p class='pt-16 text-center text-2xl text-muted-foreground/40'>Try dragging it!</p>
     <StickerPeel image-src='/sticker.png' :width='200' :rotate='0' :peel-direction='0' />
   </div>
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <p class="pt-16 text-center text-2xl font-light text-white/20">
         Try dragging it!
       </p>

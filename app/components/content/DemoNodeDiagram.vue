@@ -8,7 +8,7 @@
   const nodes: NodeDiagramNodeData[] = [
     {
       id: 'server',
-      x: 250,
+      x: 180,
       y: 80,
       label: 'Server',
       icon: 'lucide:server',
@@ -16,7 +16,7 @@
     },
     {
       id: 'cloud',
-      x: 80,
+      x: 50,
       y: 150,
       label: 'Cloud',
       icon: 'lucide:cloud',
@@ -24,7 +24,7 @@
     },
     {
       id: 'database',
-      x: 420,
+      x: 310,
       y: 150,
       label: 'Database',
       icon: 'lucide:database',
@@ -32,7 +32,7 @@
     },
     {
       id: 'validate',
-      x: 250,
+      x: 180,
       y: 220,
       label: 'Validate',
       icon: 'lucide:shield-check',
@@ -40,7 +40,7 @@
     },
     {
       id: 'deploy',
-      x: 130,
+      x: 90,
       y: 290,
       label: 'Deploy',
       icon: 'lucide:rocket',
@@ -48,7 +48,7 @@
     },
     {
       id: 'monitor',
-      x: 370,
+      x: 270,
       y: 290,
       label: 'Monitor',
       icon: 'lucide:activity',
@@ -74,10 +74,10 @@
   import type { NodeDiagramNodeData, NodeDiagramConnectionData } from '~/types/components';
 
   const nodes: NodeDiagramNodeData[] = [
-    { id: 'server', x: 250, y: 80, label: 'Server', icon: 'lucide:server', status: 'active' },
-    { id: 'cloud', x: 80, y: 150, label: 'Cloud', icon: 'lucide:cloud', status: 'active' },
-    { id: 'database', x: 420, y: 150, label: 'Database', icon: 'lucide:database', status: 'active' },
-    { id: 'validate', x: 250, y: 220, label: 'Validate', icon: 'lucide:shield-check', status: 'processing' },
+    { id: 'server', x: 180, y: 80, label: 'Server', icon: 'lucide:server', status: 'active' },
+    { id: 'cloud', x: 50, y: 150, label: 'Cloud', icon: 'lucide:cloud', status: 'active' },
+    { id: 'database', x: 310, y: 150, label: 'Database', icon: 'lucide:database', status: 'active' },
+    { id: 'validate', x: 180, y: 220, label: 'Validate', icon: 'lucide:shield-check', status: 'processing' },
   ];
 
   const connections: NodeDiagramConnectionData[] = [
@@ -92,15 +92,15 @@
   <NodeDiagram
     :nodes=&quot;nodes&quot;
     :connections=&quot;connections&quot;
-    class=&quot;mx-auto h-[350px] w-full max-w-[500px]&quot;
+    class=&quot;mx-auto h-87.5 w-full&quot;
   />
 </template>`"
   >
-    <div class="flex h-[400px] w-full items-center justify-center">
+    <div class="flex h-100 w-full items-center justify-center">
       <NodeDiagram
         :nodes="nodes"
         :connections="connections"
-        class="mx-auto h-[350px] w-full max-w-[500px]"
+        class="mx-auto h-87.5 w-full"
       />
     </div>
   </ComponentDemo>

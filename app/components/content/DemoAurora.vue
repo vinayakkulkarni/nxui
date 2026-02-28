@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full overflow-hidden rounded-lg bg-background&quot;>
+  <div class=&quot;relative h-100 w-full overflow-hidden rounded-lg bg-background&quot;>
     <Aurora
       :color-stops=&quot;['#5227FF', '#7cff67', '#5227FF']&quot;
       :amplitude=&quot;1.0&quot;
@@ -19,9 +19,7 @@
   </div>
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <Aurora
         :color-stops="['#5227FF', '#7cff67', '#5227FF']"
         :amplitude="1.0"

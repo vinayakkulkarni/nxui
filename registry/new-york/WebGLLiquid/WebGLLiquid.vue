@@ -268,7 +268,7 @@ void main(){
       style="display: block"
     ></canvas>
     <div
-      class="pointer-events-none absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent"
+      class="pointer-events-none absolute inset-0 bg-linear-to-r from-black/35 via-black/15 to-transparent"
     ></div>
     <div
       class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_65%_40%,rgba(255,255,255,0.16),transparent_45%)]"
@@ -278,9 +278,9 @@ void main(){
       v-if="
         props.title || props.subtitle || props.description || $slots.default
       "
-      class="relative z-10 mx-auto w-full max-w-[1240px] px-6 py-20 md:px-10 md:py-28"
+      class="relative z-10 mx-auto w-full max-w-310 px-6 py-20 md:px-10 md:py-28"
     >
-      <div class="max-w-[760px]">
+      <div class="max-w-190">
         <h1 v-if="props.title" :class="HEADLINE">{{ props.title }}</h1>
         <h2
           v-if="props.subtitle"
@@ -290,7 +290,7 @@ void main(){
         </h2>
         <p
           v-if="props.description"
-          class="mt-6 max-w-[620px] text-base leading-relaxed text-white/75 md:text-xl"
+          class="mt-6 max-w-155 text-base leading-relaxed text-white/75 md:text-xl"
         >
           {{ props.description }}
         </p>

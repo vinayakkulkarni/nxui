@@ -12,7 +12,7 @@
   <CircularGallery :bend='3' text-color='#ffffff' :border-radius='0.05' :scroll-speed='2' />
 </template>`"
   >
-    <div class="relative h-[500px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-125 w-full overflow-hidden rounded-lg">
       <CircularGallery
         :bend="3"
         text-color="#ffffff"

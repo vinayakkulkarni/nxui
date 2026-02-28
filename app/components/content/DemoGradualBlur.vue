@@ -12,9 +12,9 @@
   <GradualBlur position=&quot;bottom&quot; :strength=&quot;2&quot; height=&quot;6rem&quot; :div-count=&quot;5&quot; />
 </template>`"
   >
-    <div class="relative h-[300px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-75 w-full overflow-hidden rounded-lg">
       <div
-        class="flex size-full items-center justify-center bg-gradient-to-b from-blue-500 to-purple-600 p-8"
+        class="flex size-full items-center justify-center bg-linear-to-b from-blue-500 to-purple-600 p-8"
       >
         <div class="text-center">
           <p class="text-white text-lg">

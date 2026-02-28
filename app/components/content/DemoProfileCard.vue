@@ -20,7 +20,7 @@
   />
 </template>`"
   >
-    <div class="flex h-full min-h-[500px] items-center justify-center">
+    <div class="flex h-full min-h-125 items-center justify-center">
       <ProfileCard
         avatar-url="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop&q=80&crop=faces&facepad=3"
         name="Javi A. Torres"

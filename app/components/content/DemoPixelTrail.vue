@@ -12,9 +12,7 @@
   <PixelTrail :pixel-size='24' :fade-duration='500' color='#ffffff' :gooey-filter='true' />
 </template>`"
   >
-    <div
-      class="relative h-[300px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-75 w-full overflow-hidden rounded-lg bg-background">
       <PixelTrail
         :pixel-size="24"
         :fade-duration="500"

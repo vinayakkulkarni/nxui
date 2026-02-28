@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full overflow-hidden rounded-lg&quot;>
+  <div class=&quot;relative h-100 w-full overflow-hidden rounded-lg&quot;>
     <Squares
       :speed=&quot;0.5&quot;
       direction=&quot;diagonal&quot;
@@ -20,7 +20,7 @@
   </div>
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <Squares
         :speed="0.5"
         direction="diagonal"

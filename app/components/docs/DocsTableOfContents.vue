@@ -93,7 +93,7 @@
 
 <template>
   <aside
-    class="hidden w-64 shrink-0 border-l border-border/30 xl:block dark:border-white/[0.06]"
+    class="hidden w-64 shrink-0 border-l border-border/30 xl:block dark:border-white/6"
   >
     <div
       class="sticky top-16 flex h-[calc(100svh-4rem)] flex-col overflow-y-auto py-10 pl-6 pr-4"
@@ -107,7 +107,7 @@
 
         <nav ref="navRef" class="relative flex flex-col">
           <div
-            class="absolute bottom-0 left-0 top-0 w-px bg-border/50 dark:bg-white/[0.06]"
+            class="absolute bottom-0 left-0 top-0 w-px bg-border/50 dark:bg-white/6"
           ></div>
           <a
             v-for="heading in headings"
@@ -124,7 +124,7 @@
           >
             <div
               v-if="activeId === heading.id"
-              class="absolute left-0 top-1/2 h-4 w-[2px] -translate-y-1/2 rounded-full bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.5)]"
+              class="absolute left-0 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.5)]"
             ></div>
             {{ heading.text }}
           </a>
@@ -133,7 +133,7 @@
 
       <div class="mt-auto pt-6">
         <div
-          class="space-y-3 rounded-2xl border border-border/50 bg-muted/20 p-4 backdrop-blur-sm dark:border-white/[0.06] dark:bg-white/[0.02]"
+          class="space-y-3 rounded-2xl border border-border/50 bg-muted/20 p-4 backdrop-blur-sm dark:border-white/6 dark:bg-white/2"
         >
           <div class="space-y-1">
             <h4 class="text-sm font-medium tracking-tight text-foreground">
@@ -148,7 +148,7 @@
             to="https://vinayakkulkarni.dev"
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-violet-500 to-cyan-500 px-3 py-2 text-xs font-medium text-white shadow-lg shadow-violet-500/20 transition-all hover:shadow-violet-500/30"
+            class="group flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-violet-500 to-cyan-500 px-3 py-2 text-xs font-medium text-white shadow-lg shadow-violet-500/20 transition-all hover:shadow-violet-500/30"
           >
             Get in touch
             <Icon

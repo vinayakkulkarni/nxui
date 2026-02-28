@@ -12,9 +12,7 @@
   <LightRays rays-color='#ffffff' :rays-speed='1' :light-spread='1' :ray-length='2' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <LightRays
         rays-color="#ffffff"
         :rays-speed="1"

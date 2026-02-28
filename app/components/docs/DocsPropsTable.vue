@@ -14,17 +14,17 @@
           class="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted"
         >
           <th
-            class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[150px]"
+            class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-37.5"
           >
             Prop
           </th>
           <th
-            class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[150px]"
+            class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-37.5"
           >
             Type
           </th>
           <th
-            class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-[150px]"
+            class="h-12 px-4 text-left align-middle font-medium text-muted-foreground w-37.5"
           >
             Default
           </th>

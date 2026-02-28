@@ -12,9 +12,7 @@
   <LightPillar top-color='#5227FF' bottom-color='#FF9FFC' :intensity='1' :rotation-speed='0.3' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <LightPillar
         top-color="#5227FF"
         bottom-color="#FF9FFC"

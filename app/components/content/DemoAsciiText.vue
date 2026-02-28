@@ -12,7 +12,7 @@
   <ASCIIText text='Hello!' :ascii-font-size='8' :enable-waves='true' />
 </template>`"
   >
-    <div class="relative h-[300px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-75 w-full overflow-hidden rounded-lg">
       <ASCIIText text="Hello!" :ascii-font-size="8" :enable-waves="true" />
     </div>
   </ComponentDemo>

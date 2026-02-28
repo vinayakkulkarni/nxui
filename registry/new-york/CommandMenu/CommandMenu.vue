@@ -78,7 +78,7 @@
           :transition="{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }"
           :class="
             cn(
-              'fixed left-1/2 top-1/2 z-50 w-full max-w-[680px] -translate-x-1/2 -translate-y-1/2 p-4',
+              'fixed left-1/2 top-1/2 z-50 w-full max-w-170 -translate-x-1/2 -translate-y-1/2 p-4',
               props.class,
             )
           "
@@ -91,7 +91,7 @@
               class="flex items-center gap-3 border-b border-border/50 px-4 py-3"
             >
               <div
-                class="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/5"
+                class="flex size-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/20 to-primary/5"
               >
                 <Icon name="lucide:search" class="size-4 text-primary" />
               </div>
@@ -119,7 +119,7 @@
             </div>
 
             <!-- Items list -->
-            <div class="max-h-[400px] overflow-y-auto overscroll-contain p-2">
+            <div class="max-h-100 overflow-y-auto overscroll-contain p-2">
               <div
                 v-if="filteredItems.length === 0"
                 class="flex flex-col items-center justify-center py-14 text-center"

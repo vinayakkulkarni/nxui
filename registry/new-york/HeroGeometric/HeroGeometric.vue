@@ -187,7 +187,7 @@ void main(){
       v-if="props.title1 || props.title2 || props.description"
       class="relative z-10 flex w-full flex-1 flex-col items-center justify-center pb-8 pt-8 md:pb-20 md:pt-20"
     >
-      <div class="flex w-full max-w-[1200px] flex-col items-center px-6">
+      <div class="flex w-full max-w-300 flex-col items-center px-6">
         <div
           class="mb-8 flex flex-col items-center gap-2 text-center md:mb-12 md:gap-4"
         >
@@ -218,7 +218,7 @@ void main(){
             </component>
           </div>
         </div>
-        <div v-if="props.description" class="mb-8 max-w-[480px] text-center">
+        <div v-if="props.description" class="mb-8 max-w-120 text-center">
           <component
             :is="motion.p"
             :initial="{ opacity: 0, y: 20 }"

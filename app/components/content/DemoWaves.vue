@@ -9,12 +9,12 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full overflow-hidden rounded-lg&quot;>
+  <div class=&quot;relative h-100 w-full overflow-hidden rounded-lg&quot;>
     <Waves line-color=&quot;#fff&quot; background-color=&quot;#000&quot; :wave-speed-x=&quot;0.02&quot; :wave-amp-x=&quot;40&quot; />
   </div>
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <Waves
         line-color="#fff"
         background-color="#000"

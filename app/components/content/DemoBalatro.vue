@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <div class=&quot;relative h-[400px] w-full overflow-hidden rounded-lg&quot;>
+  <div class=&quot;relative h-100 w-full overflow-hidden rounded-lg&quot;>
     <Balatro
       color1=&quot;#DE443B&quot;
       color2=&quot;#006BB4&quot;
@@ -20,7 +20,7 @@
   </div>
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <Balatro
         color1="#DE443B"
         color2="#006BB4"

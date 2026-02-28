@@ -12,9 +12,7 @@
   <Ribbons :colors='[&quot;#FC8EAC&quot;, &quot;#A855F7&quot;, &quot;#3B82F6&quot;]' :base-thickness='30' :base-spring='0.03' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <Ribbons
         :colors="['#FC8EAC', '#A855F7', '#3B82F6']"
         :base-thickness="30"

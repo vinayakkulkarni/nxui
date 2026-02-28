@@ -10,13 +10,13 @@
 </script>
 
 <template>
-  <NoiseTexture class=&quot;h-[300px] w-full bg-gradient-to-br from-violet-500 to-pink-500&quot;>
+  <NoiseTexture class=&quot;h-75 w-full bg-linear-to-br from-violet-500 to-pink-500&quot;>
     <p class=&quot;text-3xl font-bold text-white&quot;>Noise Texture</p>
   </NoiseTexture>
 </template>`"
   >
     <NoiseTexture
-      class="flex min-h-[300px] w-full items-center justify-center bg-gradient-to-br from-violet-500 to-pink-500"
+      class="flex min-h-75 w-full items-center justify-center bg-linear-to-br from-violet-500 to-pink-500"
     >
       <p class="text-3xl font-bold text-white drop-shadow-lg">Noise Texture</p>
     </NoiseTexture>

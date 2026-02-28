@@ -20,7 +20,7 @@
 </template>`"
   >
     <div
-      class="flex h-[300px] w-full flex-col items-center justify-center gap-6 rounded-lg"
+      class="flex h-75 w-full flex-col items-center justify-center gap-6 rounded-lg"
     >
       <Counter
         :value="value"

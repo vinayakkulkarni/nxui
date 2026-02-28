@@ -12,7 +12,7 @@
   <Particles :particle-count='200' :particle-size='3' :speed='0.3' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <Particles :particle-count="200" :particle-size="3" :speed="0.3" />
     </div>
   </ComponentDemo>

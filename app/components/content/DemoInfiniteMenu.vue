@@ -35,7 +35,7 @@
   <InfiniteMenu :items='items' />
 </template>`"
   >
-    <div class="relative h-[500px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-125 w-full overflow-hidden rounded-lg">
       <InfiniteMenu :items="items" />
     </div>
   </ComponentDemo>

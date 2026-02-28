@@ -37,7 +37,7 @@
     full-width
     class="p-0"
   >
-    <div class="h-[500px] w-full">
+    <div class="h-125 w-full">
       <FlowingMenu
         :items="menuItems"
         text-color="#fff"

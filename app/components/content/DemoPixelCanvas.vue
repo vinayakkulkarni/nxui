@@ -25,7 +25,7 @@
 \x3Ctemplate>
   \x3CPixelCanvas
     :colors="['#e879f9', '#a78bfa', '#38bdf8', '#22d3ee']"
-    class="h-[400px]"
+    class="h-100"
   />
 \x3C/template>`,
     },
@@ -87,7 +87,7 @@
     },
   ];
 
-  const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]!);
 
   function handleTabClick(index: number) {
     activeTab.value = index;
@@ -96,7 +96,7 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative h-[400px] w-full">
+    <div class="relative h-100 w-full">
       <PixelCanvas
         :key="activeTab"
         :variant="currentTab.variant"

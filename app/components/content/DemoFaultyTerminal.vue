@@ -12,9 +12,7 @@
   <FaultyTerminal :scale='1' :scanline-intensity='0.3' :curvature='0.2' :brightness='1' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <FaultyTerminal
         :scale="1"
         :scanline-intensity="0.3"

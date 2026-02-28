@@ -12,7 +12,7 @@
   <ElasticSlider :default-value='50' :starting-value='0' :max-value='100' />
 </template>`"
   >
-    <div class="flex h-[200px] w-full items-center justify-center rounded-lg">
+    <div class="flex h-50 w-full items-center justify-center rounded-lg">
       <ElasticSlider :default-value="50" :starting-value="0" :max-value="100" />
     </div>
   </ComponentDemo>

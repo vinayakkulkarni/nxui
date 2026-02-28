@@ -137,7 +137,7 @@ void main(){
 }`;
 
   const HEADLINE =
-    'pb-[0.08em] text-[12cqi] md:text-[8cqi] lg:text-[6cqi] leading-[0.96] tracking-tighter font-bold text-transparent bg-clip-text bg-gradient-to-b from-zinc-900 via-zinc-500 to-zinc-800';
+    'pb-[0.08em] text-[12cqi] md:text-[8cqi] lg:text-[6cqi] leading-[0.96] tracking-tighter font-bold text-transparent bg-clip-text bg-linear-to-b from-zinc-900 via-zinc-500 to-zinc-800';
 
   const canvasRef = ref<HTMLCanvasElement | null>(null);
   const containerRef = ref<HTMLDivElement | null>(null);
@@ -304,7 +304,7 @@ void main(){
       v-if="props.title1 || props.title2 || $slots.default"
       class="relative z-10 flex w-full flex-1 flex-col items-center justify-center pb-8 pt-8 md:pb-20 md:pt-20"
     >
-      <div class="flex w-full max-w-[1200px] flex-col items-center px-6">
+      <div class="flex w-full max-w-300 flex-col items-center px-6">
         <div
           v-if="props.title1 || props.title2"
           class="mb-8 flex flex-col items-center gap-2 text-center md:mb-12 md:gap-4"

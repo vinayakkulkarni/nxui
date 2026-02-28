@@ -110,7 +110,7 @@
     },
   ];
 
-  const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]!);
 
   function handleTabClick(index: number) {
     activeTab.value = index;
@@ -120,7 +120,7 @@
 <template>
   <ComponentDemo :code="currentTab.code" full-width>
     <div
-      class="flex min-h-[300px] w-full flex-col items-center justify-end gap-6 pb-8"
+      class="flex min-h-75 w-full flex-col items-center justify-end gap-6 pb-8"
     >
       <MagneticDock
         :key="activeTab"

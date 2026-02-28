@@ -12,7 +12,7 @@
   <Folder color='#5227FF' :size='1' :items='[&quot;Doc 1&quot;, &quot;Doc 2&quot;, &quot;Doc 3&quot;]' />
 </template>`"
   >
-    <div class="flex h-[300px] w-full items-center justify-center rounded-lg">
+    <div class="flex h-75 w-full items-center justify-center rounded-lg">
       <Folder
         color="#5227FF"
         :size="1.5"

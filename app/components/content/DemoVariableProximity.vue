@@ -25,7 +25,7 @@
   >
     <div
       ref="containerRef"
-      class="flex h-[300px] w-full items-center justify-center"
+      class="flex h-75 w-full items-center justify-center"
     >
       <VariableProximity
         label="Variable Proximity"

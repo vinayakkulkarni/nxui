@@ -6,7 +6,7 @@
 
   const variants: {
     label: string;
-    props: Record<string, unknown>;
+    props: { username: string; [key: string]: unknown };
     code: string;
   }[] = [
     {
@@ -63,7 +63,7 @@
     },
   ];
 
-  const currentVariant = computed(() => variants[activeTab.value]);
+  const currentVariant = computed(() => variants[activeTab.value]!);
 
   function handleTabClick(index: number) {
     activeTab.value = index;

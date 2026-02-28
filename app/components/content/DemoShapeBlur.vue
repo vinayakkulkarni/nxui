@@ -17,9 +17,7 @@
   <ShapeBlur :variation='0' :shape-size='1.2' :roundness='0.4' :border-size='0.05' :circle-size='0.3' :circle-edge='0.5' :shape-color='shapeColor' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <ShapeBlur
         :variation="0"
         :shape-size="1.2"

@@ -12,9 +12,7 @@
   <PrismaticBurst :intensity='2' :speed='0.5' animation-type='rotate3d' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <PrismaticBurst :intensity="2" :speed="0.5" animation-type="rotate3d" />
     </div>
   </ComponentDemo>

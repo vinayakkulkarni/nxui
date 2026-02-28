@@ -39,7 +39,7 @@
   <ScrollStack :cards='cards' :card-height='200' :card-gap='30' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <ScrollStack :cards="cards" :card-height="200" :card-gap="30" />
     </div>
   </ComponentDemo>

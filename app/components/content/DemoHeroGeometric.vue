@@ -44,7 +44,7 @@
     },
   ];
 
-  const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]!);
 
   function handleTabClick(index: number) {
     activeTab.value = index;
@@ -53,7 +53,7 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative h-[500px] w-full overflow-hidden">
+    <div class="relative h-125 w-full overflow-hidden">
       <ClientOnly>
         <HeroGeometric
           :key="activeTab"

@@ -12,9 +12,7 @@
   <PixelSnow color='#ffffff' :speed='1.25' :density='0.3' variant='square' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <PixelSnow
         color="#ffffff"
         :speed="1.25"

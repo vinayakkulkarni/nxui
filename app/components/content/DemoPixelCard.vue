@@ -15,7 +15,7 @@
 </template>`"
   >
     <div
-      class="flex h-[500px] w-full items-center justify-center rounded-lg bg-background"
+      class="flex h-125 w-full items-center justify-center rounded-lg bg-background"
     >
       <PixelCard variant="blue">
         <h3 class="text-xl font-bold text-white">Hover Me</h3>

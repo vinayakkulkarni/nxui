@@ -51,7 +51,7 @@
     },
   ];
 
-  const currentTab = computed(() => tabs[activeTab.value]);
+  const currentTab = computed(() => tabs[activeTab.value]!);
 
   function handleTabClick(index: number) {
     activeTab.value = index;
@@ -60,7 +60,7 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative h-[500px] w-full">
+    <div class="relative h-125 w-full">
       <ClientOnly>
         <WebGLLiquid
           :key="activeTab"

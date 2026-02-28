@@ -15,7 +15,7 @@
 
 <template>
   <aside
-    class="hidden w-64 shrink-0 border-r border-border/30 md:block dark:border-white/[0.06]"
+    class="hidden w-64 shrink-0 border-r border-border/30 md:block dark:border-white/6"
   >
     <div
       class="sticky top-16 h-[calc(100svh-4rem)] overflow-y-auto px-3 py-8 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border/50"
@@ -30,7 +30,7 @@
         />
       </nav>
 
-      <div class="mt-8 border-t border-border/30 pt-6 dark:border-white/[0.06]">
+      <div class="mt-8 border-t border-border/30 pt-6 dark:border-white/6">
         <p
           class="px-3 text-[10px] uppercase tracking-widest text-muted-foreground/40"
         >

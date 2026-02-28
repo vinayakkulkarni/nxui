@@ -12,9 +12,7 @@
   <ColorBends :rotation='45' :speed='0.2' :colors='[&quot;#FF9FFC&quot;, &quot;#5227FF&quot;]' :warp-strength='1' />
 </template>`"
   >
-    <div
-      class="relative h-[400px] w-full overflow-hidden rounded-lg bg-background"
-    >
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
       <ColorBends
         :rotation="45"
         :speed="0.2"

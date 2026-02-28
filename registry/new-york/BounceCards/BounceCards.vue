@@ -103,7 +103,7 @@
     <div
       v-for="(src, idx) in images"
       :key="idx"
-      class="absolute aspect-square w-[200px] overflow-hidden rounded-[25px] border-[5px] border-white shadow-lg"
+      class="absolute aspect-square w-50 overflow-hidden rounded-[25px] border-[5px] border-white shadow-lg"
       :style="cardStyle(idx)"
       @mouseenter="hoveredIdx = idx"
       @mouseleave="hoveredIdx = null"

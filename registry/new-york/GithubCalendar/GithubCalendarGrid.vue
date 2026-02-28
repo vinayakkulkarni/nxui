@@ -51,7 +51,7 @@
 
 <template>
   <div
-    class="relative flex flex-nowrap gap-[3px] w-max max-w-full"
+    class="relative flex flex-nowrap gap-0.75 w-max max-w-full"
     @mouseleave="clearHover"
   >
     <AnimatePresence>
@@ -78,7 +78,7 @@
     <div
       v-for="(week, weekIndex) in weeks"
       :key="weekIndex"
-      class="flex flex-col gap-[3px] w-[14px]"
+      class="flex flex-col gap-0.75 w-3.5"
     >
       <component
         :is="motion.div"

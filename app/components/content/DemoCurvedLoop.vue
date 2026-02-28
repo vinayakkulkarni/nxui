@@ -18,7 +18,7 @@
 </template>`"
   >
     <div
-      class="flex h-[300px] w-full items-center justify-center overflow-hidden text-foreground"
+      class="flex h-75 w-full items-center justify-center overflow-hidden text-foreground"
     >
       <CurvedLoop
         marquee-text="nxui ✦ Beautiful Vue Components ✦ "

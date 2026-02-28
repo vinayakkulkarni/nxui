@@ -43,7 +43,7 @@
     :transition="{ duration: 0.6, ease: 'easeOut' }"
     :class="
       cn(
-        'flight-card relative w-full max-w-[520px] rounded-[28px] p-6 overflow-hidden',
+        'flight-card relative w-full max-w-130 rounded-[28px] p-6 overflow-hidden',
         'bg-[#f8f8f8] dark:bg-[#1a1a1a]',
         'shadow-[0_20px_60px_-10px_rgba(0,0,0,0.15),0_10px_30px_-5px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.8)]',
         'dark:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.6),0_10px_30px_-5px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.05)]',
@@ -145,7 +145,7 @@
           :transition="{ delay: 0.6 }"
           :class="
             cn(
-              'flex flex-col rounded-xl p-3 min-w-[140px]',
+              'flex flex-col rounded-xl p-3 min-w-35',
               'bg-white border border-[#e0e0e0] shadow-[0_4px_20px_rgba(0,0,0,0.12),0_2px_6px_rgba(0,0,0,0.08)]',
               'dark:bg-[#252525] dark:border-[#333] dark:shadow-[0_4px_16px_rgba(0,0,0,0.4)]',
             )

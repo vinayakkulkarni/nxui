@@ -12,7 +12,7 @@
   <MetallicPaint image-src='https://picsum.photos/800/600' :speed='0.3' :mouse-animation='true' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <MetallicPaint
         image-src="https://picsum.photos/800/600"
         :speed="0.3"

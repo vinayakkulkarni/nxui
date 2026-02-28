@@ -78,7 +78,7 @@
 \x3C/script>
 
 \x3Ctemplate>
-  \x3CCollectionSurfer :items="items" variant="magnetic" class="h-[600px]" />
+  \x3CCollectionSurfer :items="items" variant="magnetic" class="h-150" />
 \x3C/template>`,
     },
     {
@@ -95,7 +95,7 @@
 \x3C/script>
 
 \x3Ctemplate>
-  \x3CCollectionSurfer :items="items" variant="uplift" class="h-[600px]" />
+  \x3CCollectionSurfer :items="items" variant="uplift" class="h-150" />
 \x3C/template>`,
     },
     {
@@ -112,12 +112,12 @@
 \x3C/script>
 
 \x3Ctemplate>
-  \x3CCollectionSurfer :items="items" variant="simple" class="h-[600px]" />
+  \x3CCollectionSurfer :items="items" variant="simple" class="h-150" />
 \x3C/template>`,
     },
   ];
 
-  const currentVariant = computed(() => variants[activeTab.value]);
+  const currentVariant = computed(() => variants[activeTab.value]!);
 
   function handleTabClick(index: number) {
     activeTab.value = index;
@@ -126,7 +126,7 @@
 
 <template>
   <ComponentDemo :code="currentVariant.code" full-width>
-    <div class="relative h-[600px] w-full">
+    <div class="relative h-150 w-full">
       <CollectionSurfer
         :key="currentVariant.variant"
         :items="items"

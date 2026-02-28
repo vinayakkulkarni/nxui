@@ -12,7 +12,7 @@
   <GridScan scan-color='#FF9FFC' scan-direction='pingpong' :enable-post='true' />
 </template>`"
   >
-    <div class="relative h-[400px] w-full overflow-hidden rounded-lg">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <GridScan
         scan-color="#FF9FFC"
         scan-direction="pingpong"
