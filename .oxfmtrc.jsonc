@@ -18,5 +18,6 @@
     "*.min.js",
     "*.min.css",
     "bun.lock",
+    "**/CHANGELOG.md",
   ],
 }
