@@ -479,12 +479,11 @@ RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometr
         isVisible = entries[0].isIntersecting;
         if (isVisible && !isRunning) {
           isRunning = true;
-          clockRef?.start();
+          clockRef?.reset();
           animationId = requestAnimationFrame(animate);
         } else if (!isVisible && isRunning) {
           isRunning = false;
           cancelAnimationFrame(animationId);
-          clockRef?.stop();
         }
       },
       { threshold: 0 },
