@@ -1,18 +1,7 @@
 export default defineEventHandler(async (event) => {
   const results: Record<string, unknown> = {};
 
-  // Test 1: Direct D1 query
-  try {
-    const db = event.context?.cloudflare?.env?.DB;
-    if (db) {
-      const d1Result = await db.prepare('SELECT COUNT(*) as cnt FROM _content_docs').first();
-      results.d1Direct = { ok: true, count: d1Result?.cnt };
-    }
-  } catch (e: unknown) {
-    results.d1Direct = { ok: false, error: (e as Error).message };
-  }
-
-  // Test 2: Content query with VALID SQL (assertSafeQuery requires ORDER BY)
+  // Test 1: Content query works (proven)
   try {
     const content = await $fetch('/__nuxt_content/docs/query', {
       method: 'POST',
@@ -21,48 +10,63 @@ export default defineEventHandler(async (event) => {
         sql: `SELECT * FROM _content_docs WHERE ("path" = '/docs/components/animated-list') ORDER BY "stem" ASC LIMIT 1`,
       },
     });
-    results.contentQueryValid = {
+    results.contentQuery = {
       ok: true,
-      isArray: Array.isArray(content),
       length: Array.isArray(content) ? content.length : 0,
-      firstTitle: Array.isArray(content) && content.length > 0 ? (content[0] as Record<string, unknown>)?.title : null,
+      title: Array.isArray(content) && content.length > 0 ? (content[0] as Record<string, unknown>)?.title : null,
     };
   } catch (e: unknown) {
-    const err = e as Error & { data?: unknown; statusCode?: number };
-    results.contentQueryValid = { ok: false, error: err.message, statusCode: err.statusCode };
+    results.contentQuery = { ok: false, error: (e as Error).message };
   }
 
-  // Test 3: SSR render of a doc page (the user-facing failure)
+  // Test 2: SSR render of doc page (crashes with .buffer error)
   try {
     const html = await $fetch<string>('/docs/components/animated-list', {
       headers: { accept: 'text/html' },
     });
-    results.ssrRender = {
-      ok: true,
-      length: html.length,
-      hasContent: html.includes('Animated List'),
-    };
+    results.ssrDocPage = { ok: true, length: html.length };
   } catch (e: unknown) {
-    const err = e as Error & { statusCode?: number; stack?: string };
-    results.ssrRender = {
+    const err = e as Error & { statusCode?: number; stack?: string; cause?: Error };
+    results.ssrDocPage = {
       ok: false,
       error: err.message,
       statusCode: err.statusCode,
-      stack: err.stack?.split('\n').slice(0, 10),
+      causeMsg: err.cause?.message,
+      causeStack: err.cause?.stack?.split('\n').slice(0, 5),
+      stack: err.stack?.split('\n').slice(0, 8),
     };
   }
 
-  // Test 4: globalThis.__env__ and content config
+  // Test 3: SSR render of homepage (works)
   try {
-    const globalEnv = (globalThis as Record<string, unknown>).__env__ as Record<string, unknown> | undefined;
-    const config = useRuntimeConfig();
-    results.config = {
-      hasGlobalEnvDB: !!globalEnv?.DB,
-      integrityCheck: config.content?.integrityCheck,
-      database: config.content?.database,
-    };
+    const html = await $fetch<string>('/', {
+      headers: { accept: 'text/html' },
+    });
+    results.ssrHomepage = { ok: true, length: html.length };
   } catch (e: unknown) {
-    results.config = { error: (e as Error).message };
+    results.ssrHomepage = { ok: false, error: (e as Error).message };
+  }
+
+  // Test 4: SSR render of docs INDEX (no content query, should work)
+  try {
+    const html = await $fetch<string>('/docs/', {
+      headers: { accept: 'text/html' },
+    });
+    results.ssrDocsIndex = { ok: true, length: html.length };
+  } catch (e: unknown) {
+    results.ssrDocsIndex = { ok: false, error: (e as Error).message };
+  }
+
+  // Test 5: Try rendering a page that uses MDC/content rendering
+  // Use the ContentRenderer directly
+  try {
+    const html = await $fetch<string>('/docs/text-animations/blur-text', {
+      headers: { accept: 'text/html' },
+    });
+    results.ssrTextPage = { ok: true, length: html.length };
+  } catch (e: unknown) {
+    const err = e as Error & { statusCode?: number; message: string };
+    results.ssrTextPage = { ok: false, error: err.message, statusCode: err.statusCode };
   }
 
   return results;
