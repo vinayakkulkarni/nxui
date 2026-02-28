@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     'motion-v/nuxt',
-    'nuxt-og-image',
+    // 'nuxt-og-image', // TEMP: disabled to debug production 500 error
     '@nuxtjs/sitemap',
     'shadcn-nuxt',
   ],
@@ -64,12 +64,12 @@ export default defineNuxtConfig({
     '@registry': '../registry',
   },
 
-  ogImage: {
-    zeroRuntime: true,
-    defaults: {
-      component: 'NxuiDoc',
-    },
-  },
+  // ogImage: {
+  //   zeroRuntime: true,
+  //   defaults: {
+  //     component: 'NxuiDoc',
+  //   },
+  // },
 
   shadcn: {
     prefix: '',
