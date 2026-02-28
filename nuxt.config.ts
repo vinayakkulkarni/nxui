@@ -27,6 +27,15 @@ export default defineNuxtConfig({
     provider: 'iconify',
   },
 
+  fonts: {
+    families: [
+      { name: 'Satoshi', provider: 'fontshare', weights: [300, 400, 500, 700, 900] },
+      { name: 'Clash Display', provider: 'fontshare', weights: [200, 300, 400, 500, 600, 700] },
+      { name: 'JetBrains Mono', provider: 'google' },
+      { name: 'Instrument Serif', provider: 'google' },
+    ],
+  },
+
   css: ['~/assets/css/main.css'],
 
   devtools: { enabled: true },
