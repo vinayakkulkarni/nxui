@@ -42,13 +42,15 @@
     <div
       class="flex h-100 w-full items-center justify-center overflow-hidden rounded-lg bg-background"
     >
-      <OrbitImages
-        :images="images"
-        :orbit-radius-x="280"
-        :orbit-radius-y="120"
-        :item-size="80"
-        :speed="15"
-      />
+      <div class="scale-50 sm:scale-75 md:scale-100 origin-center">
+        <OrbitImages
+          :images="images"
+          :orbit-radius-x="280"
+          :orbit-radius-y="120"
+          :item-size="80"
+          :speed="15"
+        />
+      </div>
     </div>
   </ComponentDemo>
 </template>

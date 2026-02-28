@@ -106,13 +106,13 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative w-full">
+    <div class="relative h-full min-h-100 w-full">
       <ClientOnly>
         <ParticleGalaxyRenderer
           :key="activeTab"
           v-bind="currentTab.props"
           :blend-mode="blendMode"
-          class="h-100 w-full rounded-lg"
+          class="h-full min-h-100 w-full rounded-lg"
         />
         <template #fallback>
           <div

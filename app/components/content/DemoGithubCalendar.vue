@@ -72,10 +72,8 @@
 
 <template>
   <ComponentDemo :code="currentVariant.code">
-    <div
-      class="flex flex-col items-center justify-center gap-6 w-full overflow-hidden py-4"
-    >
-      <div class="scale-[0.55] md:scale-[0.7] origin-center">
+    <div class="flex flex-col items-center justify-center gap-6 w-full py-4">
+      <div class="[zoom:0.55] md:[zoom:0.7]">
         <GithubCalendar v-bind="currentVariant.props" />
       </div>
       <div class="flex gap-2">

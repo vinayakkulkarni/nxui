@@ -1,5 +1,10 @@
 <script setup lang="ts">
   import Crosshair from '@registry/new-york/Crosshair/Crosshair.vue';
+
+  const colorMode = useColorMode();
+  const crosshairColor = computed(() =>
+    colorMode.value === 'dark' ? 'white' : 'black',
+  );
 </script>
 
 <template>
@@ -9,11 +14,11 @@
 </script>
 
 <template>
-  <Crosshair color='white' />
+  <Crosshair color='currentColor' />
 </template>`"
   >
     <div class="relative h-75 w-full overflow-hidden rounded-lg bg-background">
-      <Crosshair color="white">
+      <Crosshair :color="crosshairColor">
         <div class="flex size-full items-center justify-center">
           <p class="text-lg text-foreground">Move your cursor</p>
         </div>

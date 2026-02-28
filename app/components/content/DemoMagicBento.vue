@@ -26,7 +26,9 @@
   />
 </template>`"
   >
-    <div class="flex w-full items-center justify-center rounded-lg py-8">
+    <div
+      class="flex w-full items-center justify-center overflow-hidden rounded-lg py-4"
+    >
       <MagicBento
         glow-color="132, 0, 255"
         :enable-spotlight="true"
@@ -37,3 +39,29 @@
     </div>
   </ComponentDemo>
 </template>
+
+<style scoped>
+  /* Force bento 4-col layout at all viewports for the demo */
+  :deep(.magic-bento-grid) {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  :deep(.magic-bento-card) {
+    min-height: 120px !important;
+  }
+
+  :deep(.magic-bento-card:nth-child(3)) {
+    grid-column: span 2 !important;
+    grid-row: span 2 !important;
+  }
+
+  :deep(.magic-bento-card:nth-child(4)) {
+    grid-column: 1 / span 2 !important;
+    grid-row: 2 / span 2 !important;
+  }
+
+  :deep(.magic-bento-card:nth-child(6)) {
+    grid-column: 4 !important;
+    grid-row: 3 !important;
+  }
+</style>

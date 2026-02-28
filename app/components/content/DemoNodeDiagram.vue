@@ -100,7 +100,7 @@
       <NodeDiagram
         :nodes="nodes"
         :connections="connections"
-        class="mx-auto h-87.5 w-full"
+        class="mx-auto h-87.5 w-full max-w-100"
       />
     </div>
   </ComponentDemo>
