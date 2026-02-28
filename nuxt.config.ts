@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'motion-v/nuxt',
     'nuxt-og-image',
+    '@nuxtjs/sitemap',
   ],
 
   colorMode: {
@@ -63,7 +64,24 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+      htmlAttrs: { lang: 'en' },
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          name: 'description',
+          content:
+            'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. 143+ interactive, copy-paste components.',
+        },
+        { name: 'apple-mobile-web-app-title', content: 'nxui' },
+        { name: 'theme-color', content: '#111119', media: '(prefers-color-scheme: dark)' },
+        { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' },
+      ],
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'manifest', href: '/site.webmanifest' },
+      ],
+      noscript: [{ innerHTML: 'This application requires JavaScript.' }],
     },
   },
 

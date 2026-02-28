@@ -136,15 +136,20 @@
   );
 
   // SEO
+  const canonicalUrl = `https://nxui.geoql.in${route.path}`;
+  useHead({
+    link: [{ rel: 'canonical', href: canonicalUrl }],
+  });
   useSeoMeta({
     title: page.value?.title,
     description: page.value?.description,
     ogTitle: page.value?.title,
     ogDescription: page.value?.description,
     ogType: 'website',
-    ogUrl: `https://nxui.geoql.in${route.path}`,
+    ogUrl: canonicalUrl,
     ogSiteName: 'nxui',
     twitterCard: 'summary_large_image',
+    twitterSite: '@vinayakkulkarni',
     twitterTitle: page.value?.title,
     twitterDescription: page.value?.description,
   });

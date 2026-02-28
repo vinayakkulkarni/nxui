@@ -42,6 +42,14 @@
 
 ---
 
+<div align="center">
+  <a href="https://nxui.geoql.in">
+    <img src="https://nxui.geoql.in/__og-image__/image/docs/og.png" alt="nxui showcase" width="720" />
+  </a>
+  <br />
+  <sub>143 animated components. Dark mode. Copy, paste, ship.</sub>
+</div>
+
 ## Introduction
 
 nxui is a collection of beautifully designed, interactive UI components built with Vue 3 and Tailwind CSS. Just run the CLI command, add the component to your project, and start building.
@@ -316,6 +324,10 @@ See [LICENSE](./LICENSE) for more information.
 
 ## Acknowledgments
 
+nxui is a Vue port of [Componentry](https://componentry.fun) by [Harsh Jadhav](https://github.com/harshjdhv). The original component designs and interactions come from that project.
+
+- [Componentry](https://componentry.fun) ([GitHub](https://github.com/harshjdhv/componentry)) — Original React component library that nxui ports to Vue
+- [React Bits](https://reactbits.dev) ([GitHub](https://github.com/DavidHDev/react-bits)) — Animated React component collection and ecosystem inspiration
 - [shadcn-vue](https://www.shadcn-vue.com/) — Vue port of shadcn/ui
 - [motion-v](https://github.com/motiondivision/motion-vue) — Vue animation library
 - [VueUse](https://vueuse.org/) — Collection of Vue composition utilities

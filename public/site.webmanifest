@@ -1,0 +1,16 @@
+{
+  "name": "nxui",
+  "short_name": "nxui",
+  "description": "Beautiful animated components for Vue. Built with Tailwind CSS and motion-v.",
+  "start_url": "/docs",
+  "display": "standalone",
+  "background_color": "#111119",
+  "theme_color": "#111119",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}
