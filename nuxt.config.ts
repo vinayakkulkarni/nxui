@@ -65,6 +65,7 @@ export default defineNuxtConfig({
   },
 
   ogImage: {
+    zeroRuntime: true,
     defaults: {
       component: 'NxuiDoc',
     },
