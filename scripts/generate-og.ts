@@ -1,9 +1,9 @@
 import sharp from 'sharp';
 import { readdirSync } from 'node:fs';
 
-const componentCount = readdirSync('registry/new-york', { withFileTypes: true }).filter(
-  (d) => d.isDirectory(),
-).length;
+const componentCount = readdirSync('registry/new-york', {
+  withFileTypes: true,
+}).filter((d) => d.isDirectory()).length;
 
 const f = "system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif";
 

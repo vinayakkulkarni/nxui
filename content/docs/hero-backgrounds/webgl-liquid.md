@@ -3,7 +3,7 @@ title: WebGL Liquid
 description: A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.
 ---
 
-::demo-web-g-l-liquid
+::demo-webgl-liquid
 ::
 
 ## Installation

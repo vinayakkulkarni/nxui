@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     'motion-v/nuxt',
     'nuxt-og-image',
     '@nuxtjs/sitemap',
+    'shadcn-nuxt',
   ],
 
   colorMode: {
@@ -67,6 +68,11 @@ export default defineNuxtConfig({
     defaults: {
       component: 'NxuiDoc',
     },
+  },
+
+  shadcn: {
+    prefix: '',
+    componentDir: './app/components/ui',
   },
 
   site: {

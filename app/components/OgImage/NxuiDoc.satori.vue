@@ -21,7 +21,8 @@
       flexDirection: 'column',
       width: '100%',
       height: '100%',
-      backgroundImage: 'linear-gradient(145deg, #0f0e17 0%, #161229 50%, #1a0f2e 100%)',
+      backgroundImage:
+        'linear-gradient(145deg, #0f0e17 0%, #161229 50%, #1a0f2e 100%)',
       fontFamily: 'Inter, sans-serif',
       position: 'relative',
       overflow: 'hidden',
@@ -36,7 +37,8 @@
         width: '300px',
         height: '300px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%)',
+        background:
+          'radial-gradient(circle, rgba(124, 58, 237, 0.25) 0%, transparent 70%)',
       }"
     ></div>
 
@@ -49,7 +51,8 @@
         width: '350px',
         height: '350px',
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
+        background:
+          'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%)',
       }"
     ></div>
 
@@ -62,7 +65,8 @@
         width: '4px',
         height: '120px',
         borderRadius: '0 4px 4px 0',
-        backgroundImage: 'linear-gradient(180deg, #7c3aed, #6366f1, transparent)',
+        backgroundImage:
+          'linear-gradient(180deg, #7c3aed, #6366f1, transparent)',
       }"
     ></div>
 
