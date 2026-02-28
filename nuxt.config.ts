@@ -30,8 +30,16 @@ export default defineNuxtConfig({
 
   fonts: {
     families: [
-      { name: 'Satoshi', provider: 'fontshare', weights: [300, 400, 500, 700, 900] },
-      { name: 'Clash Display', provider: 'fontshare', weights: [200, 300, 400, 500, 600, 700] },
+      {
+        name: 'Satoshi',
+        provider: 'fontshare',
+        weights: [300, 400, 500, 700, 900],
+      },
+      {
+        name: 'Clash Display',
+        provider: 'fontshare',
+        weights: [200, 300, 400, 500, 600, 700],
+      },
       { name: 'JetBrains Mono', provider: 'google' },
       { name: 'Instrument Serif', provider: 'google' },
     ],
@@ -74,8 +82,16 @@ export default defineNuxtConfig({
             'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. 143+ interactive, copy-paste components.',
         },
         { name: 'apple-mobile-web-app-title', content: 'nxui' },
-        { name: 'theme-color', content: '#111119', media: '(prefers-color-scheme: dark)' },
-        { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' },
+        {
+          name: 'theme-color',
+          content: '#111119',
+          media: '(prefers-color-scheme: dark)',
+        },
+        {
+          name: 'theme-color',
+          content: '#ffffff',
+          media: '(prefers-color-scheme: light)',
+        },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
