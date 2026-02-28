@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "True Focus",
   "description": "A text component that highlights words in sequence with a glowing focus effect.",
-  "dependencies": [
-    "@vueuse/core",
-    "motion-v"
-  ],
+  "dependencies": ["@vueuse/core", "motion-v"],
   "files": [
     {
       "path": "registry/new-york/TrueFocus/TrueFocus.vue",

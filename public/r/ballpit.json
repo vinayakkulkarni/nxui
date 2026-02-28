@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Ballpit",
   "description": "3D physics-based ball pit with instanced meshes, subsurface scattering, and cursor interaction.",
-  "dependencies": [
-    "three",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/Ballpit/Ballpit.vue",

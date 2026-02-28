@@ -1,0 +1,91 @@
+name: Feature Request
+description: Suggest a new component or enhancement
+title: '[Feature]: '
+labels: ['enhancement']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please fill out the form below.
+
+  - type: checkboxes
+    id: existing-issue
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please search to see if a feature request already exists.
+      options:
+        - label: I have searched the existing issues
+          required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: Is your feature request related to a problem? Please describe.
+      placeholder: I'm always frustrated when...
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: Describe the solution you'd like.
+      placeholder: I would like to be able to...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reference
+    attributes:
+      label: Reference implementation (optional)
+      description: If this component exists in another library (e.g. componentry.fun, shadcn/ui, Magic UI), share a link.
+      placeholder: https://componentry.fun/components/...
+    validations:
+      required: false
+
+  - type: textarea
+    id: api
+    attributes:
+      label: Suggested API (optional)
+      description: If you have ideas about how this component should be used, share them here.
+      placeholder: |
+        ```vue
+        <script setup lang="ts">
+          import NewComponent from '~/components/ui/NewComponent.vue';
+        </script>
+
+        <template>
+          <NewComponent :some-prop="value" />
+        </template>
+        ```
+      render: markdown
+    validations:
+      required: false
+
+  - type: dropdown
+    id: importance
+    attributes:
+      label: How important is this feature?
+      options:
+        - Nice to have
+        - Important - would significantly improve my workflow
+        - Critical - blocking my project
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Are you willing to contribute?
+      description: Would you be willing to help implement this feature?
+      options:
+        - label: I would be willing to submit a PR to implement this feature
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add any other context, screenshots, or examples about the feature request here.
+    validations:
+      required: false

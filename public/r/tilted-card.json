@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Tilted Card",
   "description": "3D tilting card that follows cursor with spring damping and tooltip caption.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/TiltedCard/TiltedCard.vue",

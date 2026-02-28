@@ -14,8 +14,16 @@
     return `https://github.com/vinayakkulkarni/nxui/edit/main/content/docs/${category}/${slug}.md`;
   });
 
-  const issueUrl =
-    'https://github.com/vinayakkulkarni/nxui/issues/new?labels=bug';
+  const issueUrl = computed(() => {
+    const slug = route.path.split('/').pop();
+    const component = slug
+      ? slug
+          .split('-')
+          .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+          .join(' ')
+      : '';
+    return `https://github.com/vinayakkulkarni/nxui/issues/new?template=bug_report.yml&labels=bug,triage&title=${encodeURIComponent(`[Bug]: ${component} - `)}`;
+  });
 </script>
 
 <template>
