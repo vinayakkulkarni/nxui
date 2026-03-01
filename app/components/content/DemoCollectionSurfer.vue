@@ -135,21 +135,25 @@
       />
       <!-- Tabs overlaid at bottom of the component -->
       <div
-        class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2"
+        class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center px-4"
       >
-        <button
-          v-for="(variant, index) in variants"
-          :key="variant.label"
-          class="pointer-events-auto rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
-          :class="
-            activeTab === index
-              ? 'bg-neutral-900 text-white dark:bg-white dark:text-black'
-              : 'bg-black/10 text-neutral-700 hover:bg-black/20 dark:bg-white/20 dark:text-white dark:hover:bg-white/30'
-          "
-          @click="handleTabClick(index)"
+        <div
+          class="pointer-events-auto flex gap-2 overflow-x-auto rounded-full"
         >
-          {{ variant.label }}
-        </button>
+          <button
+            v-for="(variant, index) in variants"
+            :key="variant.label"
+            class="whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
+            :class="
+              activeTab === index
+                ? 'bg-neutral-900 text-white dark:bg-white dark:text-black'
+                : 'bg-black/10 text-neutral-700 hover:bg-black/20 dark:bg-white/20 dark:text-white dark:hover:bg-white/30'
+            "
+            @click="handleTabClick(index)"
+          >
+            {{ variant.label }}
+          </button>
+        </div>
       </div>
     </div>
   </ComponentDemo>

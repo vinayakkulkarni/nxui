@@ -112,21 +112,25 @@
         </div>
       </PixelCanvas>
       <div
-        class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center gap-2"
+        class="pointer-events-none absolute inset-x-0 bottom-4 z-30 flex justify-center px-4"
       >
-        <button
-          v-for="(tab, index) in tabs"
-          :key="tab.label"
-          class="pointer-events-auto rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
-          :class="
-            activeTab === index
-              ? 'bg-foreground text-background'
-              : 'bg-foreground/10 text-foreground hover:bg-foreground/20'
-          "
-          @click="handleTabClick(index)"
+        <div
+          class="pointer-events-auto flex gap-2 overflow-x-auto rounded-full"
         >
-          {{ tab.label }}
-        </button>
+          <button
+            v-for="(tab, index) in tabs"
+            :key="tab.label"
+            class="whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
+            :class="
+              activeTab === index
+                ? 'bg-foreground text-background'
+                : 'bg-foreground/10 text-foreground hover:bg-foreground/20'
+            "
+            @click="handleTabClick(index)"
+          >
+            {{ tab.label }}
+          </button>
+        </div>
       </div>
     </div>
   </ComponentDemo>

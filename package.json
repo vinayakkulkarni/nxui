@@ -65,7 +65,7 @@
     "eslint-plugin-oxlint": "^1.50.0",
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
-    "lint-staged": "^16.3.0",
+    "lint-staged": "^16.3.1",
     "oxfmt": "^0.35.0",
     "oxlint": "^1.50.0",
     "tailwindcss": "^4.2.1",
