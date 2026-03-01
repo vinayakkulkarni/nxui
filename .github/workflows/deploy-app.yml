@@ -27,7 +27,21 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Build app
-        run: bun run build
+        run: |
+          max_attempts=3
+          for attempt in $(seq 1 $max_attempts); do
+            echo "Build attempt $attempt/$max_attempts..."
+            if bun run build; then
+              echo "Build succeeded on attempt $attempt"
+              exit 0
+            fi
+            if [ $attempt -lt $max_attempts ]; then
+              echo "Build failed, retrying in 15s..."
+              sleep 15
+            fi
+          done
+          echo "Build failed after $max_attempts attempts"
+          exit 1
         env:
           NITRO_PRESET: cloudflare-pages
           NODE_OPTIONS: --max-old-space-size=8192
