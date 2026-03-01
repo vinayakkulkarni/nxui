@@ -14,8 +14,7 @@ export default defineEventHandler(async (event) => {
 
   const title = (query.title as string) || 'nxui';
   const description =
-    (query.description as string) ||
-    'Beautiful animated components for Vue.';
+    (query.description as string) || 'Beautiful animated components for Vue.';
   const category = (query.category as string) || '';
 
   const element = el(
@@ -25,7 +24,8 @@ export default defineEventHandler(async (event) => {
       flexDirection: 'column',
       width: '100%',
       height: '100%',
-      background: 'linear-gradient(145deg, #0f0e17 0%, #161229 50%, #1a0f2e 100%)',
+      background:
+        'linear-gradient(145deg, #0f0e17 0%, #161229 50%, #1a0f2e 100%)',
       fontFamily: 'sans-serif',
       position: 'relative',
       overflow: 'hidden',

@@ -64,7 +64,6 @@ export default defineNuxtConfig({
     '@registry': '../registry',
   },
 
-
   shadcn: {
     prefix: '',
     componentDir: './app/components/ui',
