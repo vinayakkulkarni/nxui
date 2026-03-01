@@ -1,12 +1,20 @@
 // Dynamic import: @cf-wasm/og/workerd only works on CF Workers, not Node.js dev
 
 // Satori element helper — plain JS objects, no React
+// Satori requires display:flex on divs with 2+ children, and chokes on children:[]
 function el(
   type: string,
   style: Record<string, unknown>,
   ...children: unknown[]
 ) {
-  return { type, props: { style, children: children.flat() } };
+  const flat = children.flat().filter((c) => c != null && c !== false);
+  const props: Record<string, unknown> = { style };
+  if (flat.length === 1 && typeof flat[0] === 'string') {
+    props.children = flat[0];
+  } else if (flat.length > 0) {
+    props.children = flat;
+  }
+  return { type, props };
 }
 
 export default defineEventHandler(async (event) => {
