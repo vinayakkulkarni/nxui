@@ -68,6 +68,13 @@ export default defineNuxtConfig({
     defaults: {
       component: 'NxuiDoc',
     },
+    compatibility: {
+      runtime: {
+        resvg: 'wasm',
+        satori: 'wasm',
+        cssInline: false,
+      },
+    },
   },
 
   shadcn: {
