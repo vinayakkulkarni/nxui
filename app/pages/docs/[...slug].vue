@@ -140,6 +140,7 @@
   useHead({
     link: [{ rel: 'canonical', href: canonicalUrl }],
   });
+  const ogImageUrl = `https://nxui.geoql.in/og${route.path}.png?title=${encodeURIComponent(page.value?.title ?? 'nxui')}&description=${encodeURIComponent(page.value?.description ?? '')}&category=${encodeURIComponent(formattedCategory.value)}`;
   useSeoMeta({
     title: page.value?.title,
     description: page.value?.description,
@@ -148,16 +149,14 @@
     ogType: 'website',
     ogUrl: canonicalUrl,
     ogSiteName: 'nxui',
+    ogImage: ogImageUrl,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
     twitterCard: 'summary_large_image',
     twitterSite: '@vinayakkulkarni',
     twitterTitle: page.value?.title,
     twitterDescription: page.value?.description,
-  });
-
-  defineOgImage('NxuiDoc', {
-    title: page.value?.title ?? 'nxui',
-    description: page.value?.description ?? '',
-    category: formattedCategory.value,
+    twitterImage: ogImageUrl,
   });
 </script>
 

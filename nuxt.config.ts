@@ -21,7 +21,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     'motion-v/nuxt',
-    'nuxt-og-image',
+    // nuxt-og-image removed: Satori WASM crashes on CF Workers (issue #434)
     '@nuxtjs/sitemap',
     'shadcn-nuxt',
   ],
@@ -64,18 +64,6 @@ export default defineNuxtConfig({
     '@registry': '../registry',
   },
 
-  ogImage: {
-    defaults: {
-      component: 'NxuiDoc',
-    },
-    compatibility: {
-      runtime: {
-        resvg: 'wasm',
-        satori: 'wasm',
-        cssInline: false,
-      },
-    },
-  },
 
   shadcn: {
     prefix: '',
