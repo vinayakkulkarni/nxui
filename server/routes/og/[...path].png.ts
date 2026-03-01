@@ -177,18 +177,25 @@ export default defineEventHandler(async (event) => {
     ),
   );
 
-  const { ImageResponse } = await import('@cf-wasm/og/workerd');
-  const response = await ImageResponse.async(element, {
-    width: 1200,
-    height: 630,
-  });
+  try {
+    const { ImageResponse } = await import('@cf-wasm/og/workerd');
+    const response = await ImageResponse.async(element, {
+      width: 1200,
+      height: 630,
+    });
 
-  const buffer = await response.arrayBuffer();
+    const buffer = await response.arrayBuffer();
 
-  setResponseHeaders(event, {
-    'Content-Type': 'image/png',
-    'Cache-Control': 'public, max-age=31536000, s-maxage=31536000, immutable',
-  });
+    setResponseHeaders(event, {
+      'Content-Type': 'image/png',
+      'Cache-Control': 'public, max-age=31536000, s-maxage=31536000, immutable',
+    });
 
-  return Buffer.from(buffer);
+    return Buffer.from(buffer);
+  } catch (err) {
+    throw createError({
+      statusCode: 500,
+      message: `OG generation failed: ${err instanceof Error ? err.message : String(err)}`,
+    });
+  }
 });
