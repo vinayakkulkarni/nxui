@@ -38,6 +38,7 @@
   // Dynamic demo component resolution via import.meta.glob
   const demoModules = import.meta.glob<{ default: Component }>(
     '~/components/content/Demo*.vue',
+    { eager: true },
   );
 
   const slug = route.path.split('/').pop() ?? '';
@@ -83,9 +84,7 @@
       return {
         key: k,
         label,
-        component: defineAsyncComponent(
-          demoModules[k] as () => Promise<{ default: Component }>,
-        ),
+        component: (demoModules[k] as { default: Component }).default,
       };
     });
 
