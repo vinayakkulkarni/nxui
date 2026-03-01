@@ -1,4 +1,4 @@
-import { ImageResponse } from '@cf-wasm/og/workerd';
+// Dynamic import: @cf-wasm/og/workerd only works on CF Workers, not Node.js dev
 
 // Satori element helper — plain JS objects, no React
 function el(
@@ -177,6 +177,7 @@ export default defineEventHandler(async (event) => {
     ),
   );
 
+  const { ImageResponse } = await import('@cf-wasm/og/workerd');
   const response = await ImageResponse.async(element, {
     width: 1200,
     height: 630,
