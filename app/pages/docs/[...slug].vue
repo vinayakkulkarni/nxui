@@ -154,12 +154,11 @@
     twitterDescription: page.value?.description,
   });
 
-  // TEMP: disabled while nuxt-og-image is disabled for 500 debug
-  // defineOgImage('NxuiDoc', {
-  //   title: page.value?.title ?? 'nxui',
-  //   description: page.value?.description ?? '',
-  //   category: formattedCategory.value,
-  // });
+  defineOgImage('NxuiDoc', {
+    title: page.value?.title ?? 'nxui',
+    description: page.value?.description ?? '',
+    category: formattedCategory.value,
+  });
 </script>
 
 <template>
