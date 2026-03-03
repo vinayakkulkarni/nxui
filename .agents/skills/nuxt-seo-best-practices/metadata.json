@@ -1,0 +1,27 @@
+{
+  "name": "nuxt-seo-best-practices",
+  "version": "1.0.0",
+  "description": "Nuxt SEO optimization guidelines for Cloudflare-deployed applications",
+  "author": "vinayakkulkarni",
+  "license": "MIT",
+  "categories": [
+    "og",
+    "meta",
+    "schema",
+    "cf"
+  ],
+  "tags": [
+    "nuxt",
+    "nuxt4",
+    "seo",
+    "og-image",
+    "open-graph",
+    "twitter-card",
+    "json-ld",
+    "cloudflare",
+    "cloudflare-workers",
+    "satori",
+    "meta-tags",
+    "best-practices"
+  ]
+}
