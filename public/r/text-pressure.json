@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Text Pressure",
   "description": "Variable font text responding to cursor with weight, width, italic changes.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/TextPressure/TextPressure.vue",

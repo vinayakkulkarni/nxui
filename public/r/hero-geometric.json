@@ -4,7 +4,11 @@
   "type": "registry:ui",
   "title": "Hero Geometric",
   "description": "A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering.",
-  "dependencies": ["three", "motion-v", "@vueuse/core"],
+  "dependencies": [
+    "three",
+    "motion-v",
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/HeroGeometric/HeroGeometric.vue",

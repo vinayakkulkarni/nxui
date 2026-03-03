@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Scrambled Text",
   "description": "Proximity-based character scrambling effect.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/ScrambledText/ScrambledText.vue",

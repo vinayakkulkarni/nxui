@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Iridescence",
   "description": "Mesmerizing iridescent color waves with mouse-reactive distortion.",
-  "dependencies": ["ogl", "@vueuse/core"],
+  "dependencies": [
+    "ogl",
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/Iridescence/Iridescence.vue",

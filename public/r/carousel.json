@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Carousel",
   "description": "Draggable card carousel with 3D perspective rotation and dot indicators.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/Carousel/Carousel.vue",

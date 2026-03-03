@@ -739,6 +739,30 @@ const COMPONENTS: Record<
       'An inline slider input styled as a pill, perfect for adjusting variables smoothly.',
     deps: [],
   },
+  'letter-cascade': {
+    title: 'Letter Cascade',
+    description:
+      'A 3D split-flap letter animation with spring physics that cascades on hover or click.',
+    deps: ['@vueuse/core'],
+  },
+  'text-repel': {
+    title: 'Text Repel',
+    description:
+      'Physics-based text where letters are repelled or attracted by the cursor with spring dynamics.',
+    deps: ['@vueuse/core'],
+  },
+  'cursor-driven-particle-typography': {
+    title: 'Cursor Driven Particle Typography',
+    description:
+      'Canvas-based text rendered as particles that disperse on cursor hover with spring physics.',
+    deps: ['@vueuse/core'],
+  },
+  'scroll-choreography': {
+    title: 'Scroll Choreography',
+    description:
+      'Scroll-driven image choreography with diagonal movement, stacking, and hero expansion phases.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {
