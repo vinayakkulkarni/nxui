@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/__og-image__/image/docs/og.png" alt="nxui showcase" width="720" />
   </a>
   <br />
-  <sub>143 animated components. Dark mode. Copy, paste, ship.</sub>
+  <sub>147 animated components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -70,38 +70,41 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (143)
+## Components (147)
 
-### Text Animations (26)
+### Text Animations (29)
 
-| Component                                                                                 | Description                         |
-| ----------------------------------------------------------------------------------------- | ----------------------------------- |
-| [ASCII Text](https://nxui.geoql.in/docs/text-animations/ascii-text)                       | ASCII art text with wave distortion |
-| [Blur Text](https://nxui.geoql.in/docs/text-animations/blur-text)                         | Blur-to-focus text reveal           |
-| [Circular Text](https://nxui.geoql.in/docs/text-animations/circular-text)                 | Characters around a circle          |
-| [Count Up](https://nxui.geoql.in/docs/text-animations/count-up)                           | Animated number counter             |
-| [Curved Loop](https://nxui.geoql.in/docs/text-animations/curved-loop)                     | Text on curved SVG path             |
-| [Decrypted Text](https://nxui.geoql.in/docs/text-animations/decrypted-text)               | Decryption scramble effect          |
-| [Falling Text](https://nxui.geoql.in/docs/text-animations/falling-text)                   | Physics-based falling text          |
-| [Fuzzy Text](https://nxui.geoql.in/docs/text-animations/fuzzy-text)                       | Fuzzy blur text hover               |
-| [Glitch Text](https://nxui.geoql.in/docs/text-animations/glitch-text)                     | Digital glitch distortion           |
-| [Gradient Text](https://nxui.geoql.in/docs/text-animations/gradient-text)                 | Flowing gradient across text        |
-| [Hyper Text](https://nxui.geoql.in/docs/text-animations/hyper-text)                       | Scrambling text reveal              |
-| [Logo Loop](https://nxui.geoql.in/docs/text-animations/logo-loop)                         | Infinite scrolling logo marquee     |
-| [Rotating Text](https://nxui.geoql.in/docs/text-animations/rotating-text)                 | Cycling word rotation               |
-| [Scrambled Text](https://nxui.geoql.in/docs/text-animations/scrambled-text)               | Random character scramble           |
-| [Scroll Based Velocity](https://nxui.geoql.in/docs/text-animations/scroll-based-velocity) | Scroll-speed text                   |
-| [Scroll Float](https://nxui.geoql.in/docs/text-animations/scroll-float)                   | Scroll-triggered float effect       |
-| [Scroll Reveal](https://nxui.geoql.in/docs/text-animations/scroll-reveal)                 | Progressive scroll reveal           |
-| [Shiny Text](https://nxui.geoql.in/docs/text-animations/shiny-text)                       | Shimmering text highlight           |
-| [Shuffle](https://nxui.geoql.in/docs/text-animations/shuffle)                             | Text shuffle animation              |
-| [Split Text](https://nxui.geoql.in/docs/text-animations/split-text)                       | Staggered character entrance        |
-| [Text Animate](https://nxui.geoql.in/docs/text-animations/text-animate)                   | Character-by-character animation    |
-| [Text Cursor](https://nxui.geoql.in/docs/text-animations/text-cursor)                     | Blinking cursor effect              |
-| [Text Pressure](https://nxui.geoql.in/docs/text-animations/text-pressure)                 | Cursor-reactive text weight         |
-| [Text Type](https://nxui.geoql.in/docs/text-animations/text-type)                         | Typewriter text effect              |
-| [True Focus](https://nxui.geoql.in/docs/text-animations/true-focus)                       | Focus highlight effect              |
-| [Variable Proximity](https://nxui.geoql.in/docs/text-animations/variable-proximity)       | Cursor-distance font variation      |
+| Component                                                                                                         | Description                          |
+| ----------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| [ASCII Text](https://nxui.geoql.in/docs/text-animations/ascii-text)                                               | ASCII art text with wave distortion  |
+| [Blur Text](https://nxui.geoql.in/docs/text-animations/blur-text)                                                 | Blur-to-focus text reveal            |
+| [Circular Text](https://nxui.geoql.in/docs/text-animations/circular-text)                                         | Characters around a circle           |
+| [Count Up](https://nxui.geoql.in/docs/text-animations/count-up)                                                   | Animated number counter              |
+| [Cursor Driven Particle Typography](https://nxui.geoql.in/docs/text-animations/cursor-driven-particle-typography) | Particle text with cursor dispersion |
+| [Curved Loop](https://nxui.geoql.in/docs/text-animations/curved-loop)                                             | Text on curved SVG path              |
+| [Decrypted Text](https://nxui.geoql.in/docs/text-animations/decrypted-text)                                       | Decryption scramble effect           |
+| [Falling Text](https://nxui.geoql.in/docs/text-animations/falling-text)                                           | Physics-based falling text           |
+| [Fuzzy Text](https://nxui.geoql.in/docs/text-animations/fuzzy-text)                                               | Fuzzy blur text hover                |
+| [Glitch Text](https://nxui.geoql.in/docs/text-animations/glitch-text)                                             | Digital glitch distortion            |
+| [Gradient Text](https://nxui.geoql.in/docs/text-animations/gradient-text)                                         | Flowing gradient across text         |
+| [Hyper Text](https://nxui.geoql.in/docs/text-animations/hyper-text)                                               | Scrambling text reveal               |
+| [Letter Cascade](https://nxui.geoql.in/docs/text-animations/letter-cascade)                                       | 3D split-flap letter animation       |
+| [Logo Loop](https://nxui.geoql.in/docs/text-animations/logo-loop)                                                 | Infinite scrolling logo marquee      |
+| [Rotating Text](https://nxui.geoql.in/docs/text-animations/rotating-text)                                         | Cycling word rotation                |
+| [Scrambled Text](https://nxui.geoql.in/docs/text-animations/scrambled-text)                                       | Random character scramble            |
+| [Scroll Based Velocity](https://nxui.geoql.in/docs/text-animations/scroll-based-velocity)                         | Scroll-speed text                    |
+| [Scroll Float](https://nxui.geoql.in/docs/text-animations/scroll-float)                                           | Scroll-triggered float effect        |
+| [Scroll Reveal](https://nxui.geoql.in/docs/text-animations/scroll-reveal)                                         | Progressive scroll reveal            |
+| [Shiny Text](https://nxui.geoql.in/docs/text-animations/shiny-text)                                               | Shimmering text highlight            |
+| [Shuffle](https://nxui.geoql.in/docs/text-animations/shuffle)                                                     | Text shuffle animation               |
+| [Split Text](https://nxui.geoql.in/docs/text-animations/split-text)                                               | Staggered character entrance         |
+| [Text Animate](https://nxui.geoql.in/docs/text-animations/text-animate)                                           | Character-by-character animation     |
+| [Text Cursor](https://nxui.geoql.in/docs/text-animations/text-cursor)                                             | Blinking cursor effect               |
+| [Text Pressure](https://nxui.geoql.in/docs/text-animations/text-pressure)                                         | Cursor-reactive text weight          |
+| [Text Repel](https://nxui.geoql.in/docs/text-animations/text-repel)                                               | Cursor-repulsive text physics        |
+| [Text Type](https://nxui.geoql.in/docs/text-animations/text-type)                                                 | Typewriter text effect               |
+| [True Focus](https://nxui.geoql.in/docs/text-animations/true-focus)                                               | Focus highlight effect               |
+| [Variable Proximity](https://nxui.geoql.in/docs/text-animations/variable-proximity)                               | Cursor-distance font variation       |
 
 ### Animations (20)
 
@@ -128,56 +131,57 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Star Border](https://nxui.geoql.in/docs/animations/star-border)           | Animated glowing border beams   |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Snapping crosshair cursor       |
 
-### Components (46)
+### Components (47)
 
-| Component                                                                        | Description                     |
-| -------------------------------------------------------------------------------- | ------------------------------- |
-| [Animated List](https://nxui.geoql.in/docs/components/animated-list)             | Scroll-triggered list animation |
-| [Auth Modal](https://nxui.geoql.in/docs/components/auth-modal)                   | Authentication dialog           |
-| [Bounce Cards](https://nxui.geoql.in/docs/components/bounce-cards)               | Staggered card fan animation    |
-| [Bubble Menu](https://nxui.geoql.in/docs/components/bubble-menu)                 | Full-screen pill navigation     |
-| [Card Nav](https://nxui.geoql.in/docs/components/card-nav)                       | Expandable card navbar          |
-| [Card Swap](https://nxui.geoql.in/docs/components/card-swap)                     | Stacked card carousel           |
-| [Carousel](https://nxui.geoql.in/docs/components/carousel)                       | Draggable 3D card carousel      |
-| [Chroma Grid](https://nxui.geoql.in/docs/components/chroma-grid)                 | Mouse-tracking spotlight grid   |
-| [Circular Gallery](https://nxui.geoql.in/docs/components/circular-gallery)       | OGL curved image gallery        |
-| [Collection Surfer](https://nxui.geoql.in/docs/components/collection-surfer)     | Image collection browser        |
-| [Command Menu](https://nxui.geoql.in/docs/components/command-menu)               | Command palette (Cmd+K)         |
-| [Counter](https://nxui.geoql.in/docs/components/counter)                         | Spring-physics digit counter    |
-| [Decay Card](https://nxui.geoql.in/docs/components/decay-card)                   | SVG displacement warp card      |
-| [Dome Gallery](https://nxui.geoql.in/docs/components/dome-gallery)               | 3D dome-shaped image gallery    |
-| [Elastic Slider](https://nxui.geoql.in/docs/components/elastic-slider)           | Draggable elastic bounce slider |
-| [Flight Status Card](https://nxui.geoql.in/docs/components/flight-status-card)   | Animated flight info card       |
-| [Flowing Menu](https://nxui.geoql.in/docs/components/flowing-menu)               | Hover-activated marquee menu    |
-| [Fluid Glass](https://nxui.geoql.in/docs/components/fluid-glass)                 | Glass refraction shader effect  |
-| [Flying Posters](https://nxui.geoql.in/docs/components/flying-posters)           | OGL scroll poster gallery       |
-| [Folder](https://nxui.geoql.in/docs/components/folder)                           | CSS 3D folder animation         |
-| [GitHub Calendar](https://nxui.geoql.in/docs/components/github-calendar)         | GitHub-style contribution graph |
-| [Glass Icons](https://nxui.geoql.in/docs/components/glass-icons)                 | Glassmorphism icon buttons      |
-| [Glass Surface](https://nxui.geoql.in/docs/components/glass-surface)             | Frosted glass surface effect    |
-| [Gooey Nav](https://nxui.geoql.in/docs/components/gooey-nav)                     | Particle-burst SVG navigation   |
-| [Infinite Menu](https://nxui.geoql.in/docs/components/infinite-menu)             | WebGL sphere menu               |
-| [Lanyard](https://nxui.geoql.in/docs/components/lanyard)                         | 3D lanyard with rope physics    |
-| [Magic Bento](https://nxui.geoql.in/docs/components/magic-bento)                 | Animated bento grid layout      |
-| [Magnetic Dock](https://nxui.geoql.in/docs/components/magnetic-dock)             | macOS-style magnetic dock       |
-| [Masonry](https://nxui.geoql.in/docs/components/masonry)                         | Responsive masonry image grid   |
-| [Model Viewer](https://nxui.geoql.in/docs/components/model-viewer)               | 3D model viewer with controls   |
-| [Node Diagram](https://nxui.geoql.in/docs/components/node-diagram)               | Animated node connections       |
-| [Orbit Images](https://nxui.geoql.in/docs/components/orbit-images)               | Circular orbiting images        |
-| [Pill Nav](https://nxui.geoql.in/docs/components/pill-nav)                       | Pill-shaped sliding navigation  |
-| [Pixel Card](https://nxui.geoql.in/docs/components/pixel-card)                   | Canvas pixel shimmer card       |
-| [Profile Card](https://nxui.geoql.in/docs/components/profile-card)               | Animated profile card           |
-| [Reflective Card](https://nxui.geoql.in/docs/components/reflective-card)         | Metallic reflection card        |
-| [Scroll Stack](https://nxui.geoql.in/docs/components/scroll-stack)               | Scroll-driven stacked cards     |
-| [Scrub Input](https://nxui.geoql.in/docs/components/scrub-input)                 | Inline slider pill input        |
-| [Showcase Card](https://nxui.geoql.in/docs/components/showcase-card)             | 3D tilt showcase card           |
-| [Spotlight Card](https://nxui.geoql.in/docs/components/spotlight-card)           | Cursor-tracking spotlight       |
-| [Stack](https://nxui.geoql.in/docs/components/stack)                             | Draggable card stack            |
-| [Staggered Menu](https://nxui.geoql.in/docs/components/staggered-menu)           | Full-screen staggered menu      |
-| [Stepper](https://nxui.geoql.in/docs/components/stepper)                         | Multi-step wizard               |
-| [Sticker Peel](https://nxui.geoql.in/docs/components/sticker-peel)               | Interactive sticker peel effect |
-| [Testimonial Marquee](https://nxui.geoql.in/docs/components/testimonial-marquee) | Scrolling testimonials          |
-| [Tilted Card](https://nxui.geoql.in/docs/components/tilted-card)                 | 3D cursor-following tilt card   |
+| Component                                                                        | Description                      |
+| -------------------------------------------------------------------------------- | -------------------------------- |
+| [Animated List](https://nxui.geoql.in/docs/components/animated-list)             | Scroll-triggered list animation  |
+| [Auth Modal](https://nxui.geoql.in/docs/components/auth-modal)                   | Authentication dialog            |
+| [Bounce Cards](https://nxui.geoql.in/docs/components/bounce-cards)               | Staggered card fan animation     |
+| [Bubble Menu](https://nxui.geoql.in/docs/components/bubble-menu)                 | Full-screen pill navigation      |
+| [Card Nav](https://nxui.geoql.in/docs/components/card-nav)                       | Expandable card navbar           |
+| [Card Swap](https://nxui.geoql.in/docs/components/card-swap)                     | Stacked card carousel            |
+| [Carousel](https://nxui.geoql.in/docs/components/carousel)                       | Draggable 3D card carousel       |
+| [Chroma Grid](https://nxui.geoql.in/docs/components/chroma-grid)                 | Mouse-tracking spotlight grid    |
+| [Circular Gallery](https://nxui.geoql.in/docs/components/circular-gallery)       | OGL curved image gallery         |
+| [Collection Surfer](https://nxui.geoql.in/docs/components/collection-surfer)     | Image collection browser         |
+| [Command Menu](https://nxui.geoql.in/docs/components/command-menu)               | Command palette (Cmd+K)          |
+| [Counter](https://nxui.geoql.in/docs/components/counter)                         | Spring-physics digit counter     |
+| [Decay Card](https://nxui.geoql.in/docs/components/decay-card)                   | SVG displacement warp card       |
+| [Dome Gallery](https://nxui.geoql.in/docs/components/dome-gallery)               | 3D dome-shaped image gallery     |
+| [Elastic Slider](https://nxui.geoql.in/docs/components/elastic-slider)           | Draggable elastic bounce slider  |
+| [Flight Status Card](https://nxui.geoql.in/docs/components/flight-status-card)   | Animated flight info card        |
+| [Flowing Menu](https://nxui.geoql.in/docs/components/flowing-menu)               | Hover-activated marquee menu     |
+| [Fluid Glass](https://nxui.geoql.in/docs/components/fluid-glass)                 | Glass refraction shader effect   |
+| [Flying Posters](https://nxui.geoql.in/docs/components/flying-posters)           | OGL scroll poster gallery        |
+| [Folder](https://nxui.geoql.in/docs/components/folder)                           | CSS 3D folder animation          |
+| [GitHub Calendar](https://nxui.geoql.in/docs/components/github-calendar)         | GitHub-style contribution graph  |
+| [Glass Icons](https://nxui.geoql.in/docs/components/glass-icons)                 | Glassmorphism icon buttons       |
+| [Glass Surface](https://nxui.geoql.in/docs/components/glass-surface)             | Frosted glass surface effect     |
+| [Gooey Nav](https://nxui.geoql.in/docs/components/gooey-nav)                     | Particle-burst SVG navigation    |
+| [Infinite Menu](https://nxui.geoql.in/docs/components/infinite-menu)             | WebGL sphere menu                |
+| [Lanyard](https://nxui.geoql.in/docs/components/lanyard)                         | 3D lanyard with rope physics     |
+| [Magic Bento](https://nxui.geoql.in/docs/components/magic-bento)                 | Animated bento grid layout       |
+| [Magnetic Dock](https://nxui.geoql.in/docs/components/magnetic-dock)             | macOS-style magnetic dock        |
+| [Masonry](https://nxui.geoql.in/docs/components/masonry)                         | Responsive masonry image grid    |
+| [Model Viewer](https://nxui.geoql.in/docs/components/model-viewer)               | 3D model viewer with controls    |
+| [Node Diagram](https://nxui.geoql.in/docs/components/node-diagram)               | Animated node connections        |
+| [Orbit Images](https://nxui.geoql.in/docs/components/orbit-images)               | Circular orbiting images         |
+| [Pill Nav](https://nxui.geoql.in/docs/components/pill-nav)                       | Pill-shaped sliding navigation   |
+| [Pixel Card](https://nxui.geoql.in/docs/components/pixel-card)                   | Canvas pixel shimmer card        |
+| [Profile Card](https://nxui.geoql.in/docs/components/profile-card)               | Animated profile card            |
+| [Reflective Card](https://nxui.geoql.in/docs/components/reflective-card)         | Metallic reflection card         |
+| [Scroll Choreography](https://nxui.geoql.in/docs/components/scroll-choreography) | Scroll-driven image choreography |
+| [Scroll Stack](https://nxui.geoql.in/docs/components/scroll-stack)               | Scroll-driven stacked cards      |
+| [Scrub Input](https://nxui.geoql.in/docs/components/scrub-input)                 | Inline slider pill input         |
+| [Showcase Card](https://nxui.geoql.in/docs/components/showcase-card)             | 3D tilt showcase card            |
+| [Spotlight Card](https://nxui.geoql.in/docs/components/spotlight-card)           | Cursor-tracking spotlight        |
+| [Stack](https://nxui.geoql.in/docs/components/stack)                             | Draggable card stack             |
+| [Staggered Menu](https://nxui.geoql.in/docs/components/staggered-menu)           | Full-screen staggered menu       |
+| [Stepper](https://nxui.geoql.in/docs/components/stepper)                         | Multi-step wizard                |
+| [Sticker Peel](https://nxui.geoql.in/docs/components/sticker-peel)               | Interactive sticker peel effect  |
+| [Testimonial Marquee](https://nxui.geoql.in/docs/components/testimonial-marquee) | Scrolling testimonials           |
+| [Tilted Card](https://nxui.geoql.in/docs/components/tilted-card)                 | 3D cursor-following tilt card    |
 
 ### Backgrounds (36)
 
