@@ -4,7 +4,7 @@ description: Nuxt SEO optimization guidelines for Cloudflare-deployed applicatio
 license: MIT
 metadata:
   author: vinayakkulkarni
-  version: "1.0.0"
+  version: '1.0.0'
 ---
 
 # Nuxt SEO Best Practices
@@ -14,6 +14,7 @@ Comprehensive SEO optimization guide for Nuxt 4 applications deployed to Cloudfl
 ## When to Apply
 
 Reference these guidelines when:
+
 - Generating dynamic OG images on Cloudflare Workers
 - Setting up page-level SEO meta tags and composables
 - Adding JSON-LD structured data
@@ -24,12 +25,12 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | OG Image Generation | CRITICAL | `og-` |
-| 2 | Page SEO & Meta | HIGH | `meta-` |
-| 3 | Structured Data | MEDIUM | `schema-` |
-| 4 | Cloudflare & Nitro Config | HIGH | `cf-` |
+| Priority | Category                  | Impact   | Prefix    |
+| -------- | ------------------------- | -------- | --------- |
+| 1        | OG Image Generation       | CRITICAL | `og-`     |
+| 2        | Page SEO & Meta           | HIGH     | `meta-`   |
+| 3        | Structured Data           | MEDIUM   | `schema-` |
+| 4        | Cloudflare & Nitro Config | HIGH     | `cf-`     |
 
 ## Quick Reference
 
@@ -67,6 +68,7 @@ rules/_sections.md
 ```
 
 Each rule file contains:
+
 - Brief explanation of why it matters
 - Incorrect code example with explanation
 - Correct code example with explanation

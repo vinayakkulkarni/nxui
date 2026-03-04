@@ -13,29 +13,29 @@ Instead of calling `useSeoMeta` and `useHead` separately on every page, create a
 
 ```vue
 <script setup lang="ts">
-// ❌ WRONG — Duplicated across every page, inconsistent, error-prone
-const config = useRuntimeConfig()
-const baseUrl = config.public.baseUrl
+  // ❌ WRONG — Duplicated across every page, inconsistent, error-prone
+  const config = useRuntimeConfig();
+  const baseUrl = config.public.baseUrl;
 
-useSeoMeta({
-  title: 'About Us',
-  description: 'Learn about our team.',
-  ogType: 'website',
-  ogUrl: `${baseUrl}/about`,
-  ogTitle: 'About Us',
-  ogDescription: 'Learn about our team.',
-  ogImage: `${baseUrl}/og/about.png?title=About%20Us`,
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'About Us',
-  twitterDescription: 'Learn about our team.',
-  twitterImage: `${baseUrl}/og/about.png?title=About%20Us`,
-})
+  useSeoMeta({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    ogType: 'website',
+    ogUrl: `${baseUrl}/about`,
+    ogTitle: 'About Us',
+    ogDescription: 'Learn about our team.',
+    ogImage: `${baseUrl}/og/about.png?title=About%20Us`,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'About Us',
+    twitterDescription: 'Learn about our team.',
+    twitterImage: `${baseUrl}/og/about.png?title=About%20Us`,
+  });
 
-useHead({
-  link: [{ rel: 'canonical', href: `${baseUrl}/about` }],
-})
+  useHead({
+    link: [{ rel: 'canonical', href: `${baseUrl}/about` }],
+  });
 </script>
 ```
 
@@ -96,12 +96,12 @@ export function usePageSeo(options: {
 
 ```vue
 <script setup lang="ts">
-// ✅ Clean, consistent, one line per page
-usePageSeo({
-  title: 'About Us',
-  description: 'Learn about our team and mission.',
-  path: '/about',
-})
+  // ✅ Clean, consistent, one line per page
+  usePageSeo({
+    title: 'About Us',
+    description: 'Learn about our team and mission.',
+    path: '/about',
+  });
 </script>
 ```
 
@@ -114,6 +114,7 @@ app/composables/seo/
 ```
 
 **Key features:**
+
 - `ogDescription` defaults to `description` if not provided
 - `ogImageAlt` defaults to `title` if not provided
 - `robots` is optional — only set when needed (e.g., `'noindex'` for private pages)

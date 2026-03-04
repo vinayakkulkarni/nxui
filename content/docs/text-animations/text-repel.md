@@ -24,4 +24,4 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/text-repel.json"
 | `damping`      | `number`               | `14`      | Spring damping — lower = bouncier return         |
 | `mass`         | `number`               | `0.4`     | Spring mass — higher = heavier feel              |
 | `class`        | `string`               | —         | Additional CSS classes for the container         |
-| `letter-class` | `string`               | —         | CSS classes applied to each letter                |
+| `letter-class` | `string`               | —         | CSS classes applied to each letter               |

@@ -14,7 +14,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/scroll-choreography.json"
 
 ## Props
 
-| Prop     | Type                                                                             | Default | Description                                    |
-| -------- | -------------------------------------------------------------------------------- | ------- | ---------------------------------------------- |
-| `images` | `{ topLeft: string; topRight: string; bottomLeft: string; bottomRight: string }` | —       | URLs for the four choreographed images         |
-| `class`  | `string`                                                                         | —       | Additional CSS classes                         |
+| Prop     | Type                                                                             | Default | Description                            |
+| -------- | -------------------------------------------------------------------------------- | ------- | -------------------------------------- |
+| `images` | `{ topLeft: string; topRight: string; bottomLeft: string; bottomRight: string }` | —       | URLs for the four choreographed images |
+| `class`  | `string`                                                                         | —       | Additional CSS classes                 |

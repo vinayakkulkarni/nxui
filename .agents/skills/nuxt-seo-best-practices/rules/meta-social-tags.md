@@ -13,14 +13,14 @@ Social media platforms (Twitter, Facebook, LinkedIn, Discord, Slack) use Open Gr
 
 ```vue
 <script setup lang="ts">
-// ❌ WRONG — Missing OG image dimensions, Twitter card, og:type
-useSeoMeta({
-  title: 'My Page',
-  ogTitle: 'My Page',
-  ogImage: '/og/my-page.png',
-  // Missing: ogType, ogUrl, ogDescription, ogImageWidth, ogImageHeight
-  // Missing: twitterCard, twitterTitle, twitterDescription, twitterImage
-})
+  // ❌ WRONG — Missing OG image dimensions, Twitter card, og:type
+  useSeoMeta({
+    title: 'My Page',
+    ogTitle: 'My Page',
+    ogImage: '/og/my-page.png',
+    // Missing: ogType, ogUrl, ogDescription, ogImageWidth, ogImageHeight
+    // Missing: twitterCard, twitterTitle, twitterDescription, twitterImage
+  });
 </script>
 ```
 
@@ -28,47 +28,47 @@ useSeoMeta({
 
 ```vue
 <script setup lang="ts">
-// ✅ CORRECT — Full OG + Twitter Card meta
-useSeoMeta({
-  title: 'My Page',
-  description: 'Page description for search engines.',
-  // Open Graph (Facebook, LinkedIn, Discord, Slack)
-  ogType: 'website',
-  ogUrl: 'https://example.com/my-page',
-  ogTitle: 'My Page',
-  ogDescription: 'Page description for social sharing.',
-  ogImage: 'https://example.com/og/my-page.png',
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
-  ogImageAlt: 'My Page preview',
-  ogSiteName: 'My App',
-  // Twitter Card
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'My Page',
-  twitterDescription: 'Page description for Twitter.',
-  twitterImage: 'https://example.com/og/my-page.png',
-  twitterImageAlt: 'My Page preview',
-})
+  // ✅ CORRECT — Full OG + Twitter Card meta
+  useSeoMeta({
+    title: 'My Page',
+    description: 'Page description for search engines.',
+    // Open Graph (Facebook, LinkedIn, Discord, Slack)
+    ogType: 'website',
+    ogUrl: 'https://example.com/my-page',
+    ogTitle: 'My Page',
+    ogDescription: 'Page description for social sharing.',
+    ogImage: 'https://example.com/og/my-page.png',
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    ogImageAlt: 'My Page preview',
+    ogSiteName: 'My App',
+    // Twitter Card
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'My Page',
+    twitterDescription: 'Page description for Twitter.',
+    twitterImage: 'https://example.com/og/my-page.png',
+    twitterImageAlt: 'My Page preview',
+  });
 </script>
 ```
 
 **Required meta tags checklist:**
 
-| Tag | Purpose | Required |
-|-----|---------|----------|
-| `ogType` | Content type (`website`, `article`) | Yes |
-| `ogUrl` | Canonical URL | Yes |
-| `ogTitle` | Title for social cards | Yes |
-| `ogDescription` | Description for social cards | Yes |
-| `ogImage` | **Full URL** to OG image | Yes |
-| `ogImageWidth` | Image width (1200) | Yes |
-| `ogImageHeight` | Image height (630) | Yes |
-| `ogImageAlt` | Image alt text | Recommended |
-| `ogSiteName` | Site name | Recommended |
-| `twitterCard` | Card type (`summary_large_image`) | Yes |
-| `twitterTitle` | Title for Twitter | Yes |
-| `twitterDescription` | Description for Twitter | Yes |
-| `twitterImage` | **Full URL** to image | Yes |
+| Tag                  | Purpose                             | Required    |
+| -------------------- | ----------------------------------- | ----------- |
+| `ogType`             | Content type (`website`, `article`) | Yes         |
+| `ogUrl`              | Canonical URL                       | Yes         |
+| `ogTitle`            | Title for social cards              | Yes         |
+| `ogDescription`      | Description for social cards        | Yes         |
+| `ogImage`            | **Full URL** to OG image            | Yes         |
+| `ogImageWidth`       | Image width (1200)                  | Yes         |
+| `ogImageHeight`      | Image height (630)                  | Yes         |
+| `ogImageAlt`         | Image alt text                      | Recommended |
+| `ogSiteName`         | Site name                           | Recommended |
+| `twitterCard`        | Card type (`summary_large_image`)   | Yes         |
+| `twitterTitle`       | Title for Twitter                   | Yes         |
+| `twitterDescription` | Description for Twitter             | Yes         |
+| `twitterImage`       | **Full URL** to image               | Yes         |
 
 **Important notes:**
 
@@ -91,12 +91,10 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#0f0e17' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
       ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
   },
-})
+});
 ```
 
 Reference: [Open Graph Protocol](https://ogp.me/) | [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards)

@@ -13,13 +13,13 @@ Every public page must have a `<link rel="canonical">` tag and an `og:url` meta 
 
 ```vue
 <script setup lang="ts">
-// ❌ WRONG — No canonical URL, no og:url
-useSeoMeta({
-  title: 'About Us',
-  description: 'Learn about our team.',
-  ogTitle: 'About Us',
-  // Missing: ogUrl, canonical link
-})
+  // ❌ WRONG — No canonical URL, no og:url
+  useSeoMeta({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    ogTitle: 'About Us',
+    // Missing: ogUrl, canonical link
+  });
 </script>
 ```
 
@@ -27,23 +27,23 @@ useSeoMeta({
 
 ```vue
 <script setup lang="ts">
-// ✅ CORRECT — Both canonical link and og:url
-const config = useRuntimeConfig()
-const baseUrl = config.public.baseUrl || 'https://example.com'
-const canonicalUrl = `${baseUrl}/about`
+  // ✅ CORRECT — Both canonical link and og:url
+  const config = useRuntimeConfig();
+  const baseUrl = config.public.baseUrl || 'https://example.com';
+  const canonicalUrl = `${baseUrl}/about`;
 
-useHead({
-  link: [{ rel: 'canonical', href: canonicalUrl }],
-})
+  useHead({
+    link: [{ rel: 'canonical', href: canonicalUrl }],
+  });
 
-useSeoMeta({
-  title: 'About Us',
-  description: 'Learn about our team.',
-  ogUrl: canonicalUrl,
-  ogTitle: 'About Us',
-  ogDescription: 'Learn about our team.',
-  // ... rest of meta
-})
+  useSeoMeta({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    ogUrl: canonicalUrl,
+    ogTitle: 'About Us',
+    ogDescription: 'Learn about our team.',
+    // ... rest of meta
+  });
 </script>
 ```
 
@@ -51,12 +51,12 @@ useSeoMeta({
 
 ```vue
 <script setup lang="ts">
-// ✅ BEST — usePageSeo handles canonical and og:url automatically
-usePageSeo({
-  title: 'About Us',
-  description: 'Learn about our team.',
-  path: '/about',
-})
+  // ✅ BEST — usePageSeo handles canonical and og:url automatically
+  usePageSeo({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    path: '/about',
+  });
 </script>
 ```
 
@@ -70,10 +70,11 @@ export default defineNuxtConfig({
       baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'https://example.com',
     },
   },
-})
+});
 ```
 
 **Key rules:**
+
 - Canonical URL must be **absolute** (full URL with protocol and domain)
 - Canonical URL should **not** include query parameters unless they change the page content
 - Canonical URL should be **consistent** — pick either with or without trailing slash, never both

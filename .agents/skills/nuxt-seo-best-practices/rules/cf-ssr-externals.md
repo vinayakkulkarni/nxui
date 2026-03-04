@@ -19,7 +19,7 @@ Client-only libraries (analytics, tracking, browser APIs) should never be bundle
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
   // No vite.ssr.external — posthog-js is bundled into server entry
-})
+});
 ```
 
 **Correct (externalize with vite.ssr.external):**
@@ -36,7 +36,7 @@ export default defineNuxtConfig({
       external: ['posthog-js'],
     },
   },
-})
+});
 ```
 
 **How to identify leaking libraries:**

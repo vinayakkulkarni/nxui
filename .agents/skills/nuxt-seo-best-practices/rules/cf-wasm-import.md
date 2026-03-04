@@ -18,7 +18,7 @@ export default defineNuxtConfig({
     preset: 'cloudflare-pages',
     // Missing wasm config
   },
-})
+});
 ```
 
 **Correct (WASM ESM imports with lazy loading):**
@@ -35,7 +35,7 @@ export default defineNuxtConfig({
       lazy: true,
     },
   },
-})
+});
 ```
 
 **Why lazy loading matters:**

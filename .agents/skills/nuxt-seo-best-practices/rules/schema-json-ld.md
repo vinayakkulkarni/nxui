@@ -14,7 +14,7 @@ JSON-LD structured data helps search engines understand your site's content. Add
 ```vue
 <!-- ❌ WRONG — app.vue with no structured data -->
 <script setup lang="ts">
-// No JSON-LD — search engines have less context about the site
+  // No JSON-LD — search engines have less context about the site
 </script>
 
 <template>
@@ -29,32 +29,32 @@ JSON-LD structured data helps search engines understand your site's content. Add
 ```vue
 <!-- ✅ CORRECT — app.vue with WebApplication structured data -->
 <script setup lang="ts">
-useHead({
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebApplication',
-        'name': 'My App',
-        'url': 'https://example.com',
-        'description': 'Description of what the app does.',
-        'applicationCategory': 'DesignApplication',
-        'operatingSystem': 'Web',
-        'offers': {
-          '@type': 'Offer',
-          'price': '0',
-          'priceCurrency': 'USD',
-        },
-        'author': {
-          '@type': 'Organization',
-          'name': 'My Company',
-          'url': 'https://example.com',
-        },
-      }),
-    },
-  ],
-})
+  useHead({
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: 'My App',
+          url: 'https://example.com',
+          description: 'Description of what the app does.',
+          applicationCategory: 'DesignApplication',
+          operatingSystem: 'Web',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+          author: {
+            '@type': 'Organization',
+            name: 'My Company',
+            url: 'https://example.com',
+          },
+        }),
+      },
+    ],
+  });
 </script>
 
 <template>
@@ -74,32 +74,33 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        'name': 'My Docs',
-        'url': 'https://docs.example.com',
-        'description': 'Documentation for My App.',
-        'potentialAction': {
+        name: 'My Docs',
+        url: 'https://docs.example.com',
+        description: 'Documentation for My App.',
+        potentialAction: {
           '@type': 'SearchAction',
-          'target': {
+          target: {
             '@type': 'EntryPoint',
-            'urlTemplate': 'https://docs.example.com/search?q={search_term_string}',
+            urlTemplate:
+              'https://docs.example.com/search?q={search_term_string}',
           },
           'query-input': 'required name=search_term_string',
         },
       }),
     },
   ],
-})
+});
 ```
 
 **Common schema types:**
 
-| Type | Use Case |
-|------|----------|
-| `WebApplication` | SaaS apps, tools, platforms |
-| `WebSite` | Documentation sites, blogs, content sites |
-| `Organization` | Company/team pages |
-| `SoftwareSourceCode` | Open source project landing pages |
-| `BreadcrumbList` | Navigation breadcrumbs (per-page) |
+| Type                 | Use Case                                  |
+| -------------------- | ----------------------------------------- |
+| `WebApplication`     | SaaS apps, tools, platforms               |
+| `WebSite`            | Documentation sites, blogs, content sites |
+| `Organization`       | Company/team pages                        |
+| `SoftwareSourceCode` | Open source project landing pages         |
+| `BreadcrumbList`     | Navigation breadcrumbs (per-page)         |
 
 **Validation:** Use [Google's Rich Results Test](https://search.google.com/test/rich-results) to verify structured data.
 

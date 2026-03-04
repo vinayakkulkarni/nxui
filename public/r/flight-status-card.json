@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Flight Status Card",
   "description": "An animated card displaying real-time flight information.",
-  "dependencies": [
-    "motion-v"
-  ],
+  "dependencies": ["motion-v"],
   "files": [
     {
       "path": "registry/new-york/FlightStatusCard/FlightStatusCard.vue",

@@ -18,8 +18,8 @@ export default defineNuxtConfig({
   modules: ['nuxt-og-image'],
   ogImage: {
     // This will fail with "WebAssembly.instantiate() is not allowed" on CF Workers
-  }
-})
+  },
+});
 ```
 
 **Correct (custom server route with @cf-wasm/og):**
@@ -28,7 +28,11 @@ export default defineNuxtConfig({
 // ✅ CORRECT — server/routes/og/[...path].png.ts
 
 // Satori element helper — plain JS objects, no React
-function el(type: string, style: Record<string, unknown>, ...children: unknown[]) {
+function el(
+  type: string,
+  style: Record<string, unknown>,
+  ...children: unknown[]
+) {
   const flat = children.flat().filter((c) => c != null && c !== false);
   const props: Record<string, unknown> = { style };
   if (flat.length === 1 && typeof flat[0] === 'string') {
@@ -51,12 +55,17 @@ export default defineEventHandler(async (event) => {
       flexDirection: 'column',
       width: '100%',
       height: '100%',
-      background: 'linear-gradient(145deg, #0f0e17 0%, #161229 50%, #1a0f2e 100%)',
+      background:
+        'linear-gradient(145deg, #0f0e17 0%, #161229 50%, #1a0f2e 100%)',
       fontFamily: 'sans-serif',
       padding: '60px 64px',
     },
     el('div', { fontSize: '64px', fontWeight: 800, color: '#fafafa' }, title),
-    el('div', { fontSize: '24px', color: '#a1a1aa', marginTop: '20px' }, description),
+    el(
+      'div',
+      { fontSize: '24px', color: '#a1a1aa', marginTop: '20px' },
+      description,
+    ),
   );
 
   try {

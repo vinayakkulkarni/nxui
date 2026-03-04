@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Auth Modal",
   "description": "An animated authentication modal with sign in and sign up tabs.",
-  "dependencies": [
-    "@vueuse/core",
-    "motion-v"
-  ],
+  "dependencies": ["@vueuse/core", "motion-v"],
   "files": [
     {
       "path": "registry/new-york/AuthModal/AuthModalEmail.vue",

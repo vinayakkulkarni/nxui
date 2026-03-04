@@ -15,7 +15,10 @@ OG images are fetched by social media crawlers (Twitter, Facebook, LinkedIn, Dis
 // ❌ WRONG — No cache headers, every request generates a new image
 export default defineEventHandler(async (event) => {
   const { ImageResponse } = await import('@cf-wasm/og/workerd');
-  const response = await ImageResponse.async(element, { width: 1200, height: 630 });
+  const response = await ImageResponse.async(element, {
+    width: 1200,
+    height: 630,
+  });
   const buffer = await response.arrayBuffer();
 
   setResponseHeaders(event, {
@@ -33,7 +36,10 @@ export default defineEventHandler(async (event) => {
 // ✅ CORRECT — CDN caches for 1 year, immutable
 export default defineEventHandler(async (event) => {
   const { ImageResponse } = await import('@cf-wasm/og/workerd');
-  const response = await ImageResponse.async(element, { width: 1200, height: 630 });
+  const response = await ImageResponse.async(element, {
+    width: 1200,
+    height: 630,
+  });
   const buffer = await response.arrayBuffer();
 
   setResponseHeaders(event, {

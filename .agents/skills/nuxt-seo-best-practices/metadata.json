@@ -4,12 +4,7 @@
   "description": "Nuxt SEO optimization guidelines for Cloudflare-deployed applications",
   "author": "vinayakkulkarni",
   "license": "MIT",
-  "categories": [
-    "og",
-    "meta",
-    "schema",
-    "cf"
-  ],
+  "categories": ["og", "meta", "schema", "cf"],
   "tags": [
     "nuxt",
     "nuxt4",

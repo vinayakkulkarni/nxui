@@ -17,7 +17,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare-pages',
   },
-})
+});
 ```
 
 **Correct (full CF Pages config):**
@@ -54,19 +54,19 @@ export default defineNuxtConfig({
       lazy: true,
     },
   },
-})
+});
 ```
 
 **Configuration breakdown:**
 
-| Setting | Why |
-|---------|-----|
-| `compatibilityDate: '2025-07-18'` | Pinned date — never use `'latest'` |
-| `cloudflare.nodeCompat: true` | Enables `Buffer`, `crypto`, and other Node.js APIs on Workers |
-| `process.stdout: 'undefined'` | `process.stdout` doesn't exist on Workers — some libraries reference it |
-| `vite.ssr.external` | Keeps client-only libraries out of the server bundle |
-| `wasm.esmImport: true` | Allows `import wasm from './file.wasm'` syntax |
-| `wasm.lazy: true` | Lazy-loads WASM modules (required for CF Workers dynamic instantiation) |
+| Setting                           | Why                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------- |
+| `compatibilityDate: '2025-07-18'` | Pinned date — never use `'latest'`                                      |
+| `cloudflare.nodeCompat: true`     | Enables `Buffer`, `crypto`, and other Node.js APIs on Workers           |
+| `process.stdout: 'undefined'`     | `process.stdout` doesn't exist on Workers — some libraries reference it |
+| `vite.ssr.external`               | Keeps client-only libraries out of the server bundle                    |
+| `wasm.esmImport: true`            | Allows `import wasm from './file.wasm'` syntax                          |
+| `wasm.lazy: true`                 | Lazy-loads WASM modules (required for CF Workers dynamic instantiation) |
 
 **Common errors these settings fix:**
 

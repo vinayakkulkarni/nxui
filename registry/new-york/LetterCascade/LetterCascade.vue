@@ -46,8 +46,8 @@
     const omega = Math.sqrt(props.stiffness);
     const zeta = props.damping / (2 * omega);
     // Settling time ≈ 4 / (zeta * omega) for underdamped
-    if (zeta < 1) return Math.min(4 / (zeta * omega) * 1000, 1200);
-    return Math.min(4 / omega * 1000, 1200);
+    if (zeta < 1) return Math.min((4 / (zeta * omega)) * 1000, 1200);
+    return Math.min((4 / omega) * 1000, 1200);
   }
 
   function trigger() {
@@ -68,16 +68,32 @@
       const delay = getStaggerDelay(i, total);
       const anim = el.animate(
         [
-          { transform: 'rotateX(0deg) translateY(0px)', opacity: '1', filter: 'blur(0px)' },
-          { transform: 'rotateX(90deg) translateY(-6px)', opacity: '0', filter: 'blur(4px)' },
+          {
+            transform: 'rotateX(0deg) translateY(0px)',
+            opacity: '1',
+            filter: 'blur(0px)',
+          },
+          {
+            transform: 'rotateX(90deg) translateY(-6px)',
+            opacity: '0',
+            filter: 'blur(4px)',
+          },
         ],
         { duration: dur, delay, easing: cubicEase, fill: 'forwards' },
       );
       anim.onfinish = () => {
         el.animate(
           [
-            { transform: 'rotateX(90deg) translateY(-6px)', opacity: '0', filter: 'blur(0px)' },
-            { transform: 'rotateX(0deg) translateY(0px)', opacity: '1', filter: 'blur(0px)' },
+            {
+              transform: 'rotateX(90deg) translateY(-6px)',
+              opacity: '0',
+              filter: 'blur(0px)',
+            },
+            {
+              transform: 'rotateX(0deg) translateY(0px)',
+              opacity: '1',
+              filter: 'blur(0px)',
+            },
           ],
           { duration: 1, fill: 'forwards' },
         );
@@ -93,16 +109,32 @@
       const delay = getStaggerDelay(i, total);
       const anim = el.animate(
         [
-          { transform: 'rotateX(-90deg) translateY(6px) scale(0.8)', opacity: '0', filter: 'blur(4px)' },
-          { transform: 'rotateX(0deg) translateY(0px) scale(1)', opacity: '1', filter: 'blur(0px)' },
+          {
+            transform: 'rotateX(-90deg) translateY(6px) scale(0.8)',
+            opacity: '0',
+            filter: 'blur(4px)',
+          },
+          {
+            transform: 'rotateX(0deg) translateY(0px) scale(1)',
+            opacity: '1',
+            filter: 'blur(0px)',
+          },
         ],
         { duration: dur, delay, easing: cubicEase, fill: 'forwards' },
       );
       anim.onfinish = () => {
         el.animate(
           [
-            { transform: 'rotateX(0deg) translateY(0px) scale(1)', opacity: '1', filter: 'blur(0px)' },
-            { transform: 'rotateX(-90deg) translateY(6px) scale(0.8)', opacity: '0', filter: 'blur(4px)' },
+            {
+              transform: 'rotateX(0deg) translateY(0px) scale(1)',
+              opacity: '1',
+              filter: 'blur(0px)',
+            },
+            {
+              transform: 'rotateX(-90deg) translateY(6px) scale(0.8)',
+              opacity: '0',
+              filter: 'blur(4px)',
+            },
           ],
           { duration: 1, fill: 'forwards' },
         );

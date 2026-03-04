@@ -10,6 +10,7 @@ Comprehensive SEO optimization guide for Nuxt 4 applications deployed to Cloudfl
 ## When to Apply
 
 Reference these guidelines when:
+
 - Generating dynamic OG images on Cloudflare Workers
 - Setting up page-level SEO meta tags and composables
 - Adding JSON-LD structured data
@@ -20,12 +21,12 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | OG Image Generation | CRITICAL | `og-` |
-| 2 | Page SEO & Meta | HIGH | `meta-` |
-| 3 | Structured Data | MEDIUM | `schema-` |
-| 4 | Cloudflare & Nitro Config | HIGH | `cf-` |
+| Priority | Category                  | Impact   | Prefix    |
+| -------- | ------------------------- | -------- | --------- |
+| 1        | OG Image Generation       | CRITICAL | `og-`     |
+| 2        | Page SEO & Meta           | HIGH     | `meta-`   |
+| 3        | Structured Data           | MEDIUM   | `schema-` |
+| 4        | Cloudflare & Nitro Config | HIGH     | `cf-`     |
 
 ## Quick Reference
 
@@ -63,6 +64,7 @@ rules/_sections.md
 ```
 
 Each rule file contains:
+
 - Brief explanation of why it matters
 - Incorrect code example with explanation
 - Correct code example with explanation
@@ -93,7 +95,7 @@ export default defineNuxtConfig({
   compatibilityDate: 'latest',
   // Today it might be 2025-07-18, tomorrow 2025-07-19
   // Each date can change Nitro's internal behavior
-})
+});
 ```
 
 **Correct (pinned date):**
@@ -105,20 +107,23 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-18',
   // Consistent behavior across all builds
   // Update intentionally when you want new Nitro features
-})
+});
 ```
 
 **When to update:**
+
 - When upgrading Nuxt or Nitro versions
 - When you need a specific Nitro feature that requires a newer date
 - Always test after updating — some changes are breaking
 
 **How to find the right date:**
+
 - Use the date of your current Nuxt release
 - Check [Nitro changelog](https://github.com/unjs/nitro/releases) for what changed
 - Pin to the latest date that works with your deployment target
 
 **Real-world impact:** A `compatibilityDate` change can affect:
+
 - How `process.env` is handled in server routes
 - WASM module loading behavior
 - Node.js API compatibility layer
@@ -142,7 +147,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'cloudflare-pages',
   },
-})
+});
 ```
 
 **Correct (full CF Pages config):**
@@ -179,19 +184,19 @@ export default defineNuxtConfig({
       lazy: true,
     },
   },
-})
+});
 ```
 
 **Configuration breakdown:**
 
-| Setting | Why |
-|---------|-----|
-| `compatibilityDate: '2025-07-18'` | Pinned date — never use `'latest'` |
-| `cloudflare.nodeCompat: true` | Enables `Buffer`, `crypto`, and other Node.js APIs on Workers |
-| `process.stdout: 'undefined'` | `process.stdout` doesn't exist on Workers — some libraries reference it |
-| `vite.ssr.external` | Keeps client-only libraries out of the server bundle |
-| `wasm.esmImport: true` | Allows `import wasm from './file.wasm'` syntax |
-| `wasm.lazy: true` | Lazy-loads WASM modules (required for CF Workers dynamic instantiation) |
+| Setting                           | Why                                                                     |
+| --------------------------------- | ----------------------------------------------------------------------- |
+| `compatibilityDate: '2025-07-18'` | Pinned date — never use `'latest'`                                      |
+| `cloudflare.nodeCompat: true`     | Enables `Buffer`, `crypto`, and other Node.js APIs on Workers           |
+| `process.stdout: 'undefined'`     | `process.stdout` doesn't exist on Workers — some libraries reference it |
+| `vite.ssr.external`               | Keeps client-only libraries out of the server bundle                    |
+| `wasm.esmImport: true`            | Allows `import wasm from './file.wasm'` syntax                          |
+| `wasm.lazy: true`                 | Lazy-loads WASM modules (required for CF Workers dynamic instantiation) |
 
 **Common errors these settings fix:**
 
@@ -233,7 +238,7 @@ Client-only libraries (analytics, tracking, browser APIs) should never be bundle
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
   // No vite.ssr.external — posthog-js is bundled into server entry
-})
+});
 ```
 
 **Correct (externalize with vite.ssr.external):**
@@ -250,7 +255,7 @@ export default defineNuxtConfig({
       external: ['posthog-js'],
     },
   },
-})
+});
 ```
 
 **How to identify leaking libraries:**
@@ -304,7 +309,7 @@ export default defineNuxtConfig({
     preset: 'cloudflare-pages',
     // Missing wasm config
   },
-})
+});
 ```
 
 **Correct (WASM ESM imports with lazy loading):**
@@ -321,7 +326,7 @@ export default defineNuxtConfig({
       lazy: true,
     },
   },
-})
+});
 ```
 
 **Why lazy loading matters:**
@@ -360,13 +365,13 @@ Every public page must have a `<link rel="canonical">` tag and an `og:url` meta 
 
 ```vue
 <script setup lang="ts">
-// ❌ WRONG — No canonical URL, no og:url
-useSeoMeta({
-  title: 'About Us',
-  description: 'Learn about our team.',
-  ogTitle: 'About Us',
-  // Missing: ogUrl, canonical link
-})
+  // ❌ WRONG — No canonical URL, no og:url
+  useSeoMeta({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    ogTitle: 'About Us',
+    // Missing: ogUrl, canonical link
+  });
 </script>
 ```
 
@@ -374,23 +379,23 @@ useSeoMeta({
 
 ```vue
 <script setup lang="ts">
-// ✅ CORRECT — Both canonical link and og:url
-const config = useRuntimeConfig()
-const baseUrl = config.public.baseUrl || 'https://example.com'
-const canonicalUrl = `${baseUrl}/about`
+  // ✅ CORRECT — Both canonical link and og:url
+  const config = useRuntimeConfig();
+  const baseUrl = config.public.baseUrl || 'https://example.com';
+  const canonicalUrl = `${baseUrl}/about`;
 
-useHead({
-  link: [{ rel: 'canonical', href: canonicalUrl }],
-})
+  useHead({
+    link: [{ rel: 'canonical', href: canonicalUrl }],
+  });
 
-useSeoMeta({
-  title: 'About Us',
-  description: 'Learn about our team.',
-  ogUrl: canonicalUrl,
-  ogTitle: 'About Us',
-  ogDescription: 'Learn about our team.',
-  // ... rest of meta
-})
+  useSeoMeta({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    ogUrl: canonicalUrl,
+    ogTitle: 'About Us',
+    ogDescription: 'Learn about our team.',
+    // ... rest of meta
+  });
 </script>
 ```
 
@@ -398,12 +403,12 @@ useSeoMeta({
 
 ```vue
 <script setup lang="ts">
-// ✅ BEST — usePageSeo handles canonical and og:url automatically
-usePageSeo({
-  title: 'About Us',
-  description: 'Learn about our team.',
-  path: '/about',
-})
+  // ✅ BEST — usePageSeo handles canonical and og:url automatically
+  usePageSeo({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    path: '/about',
+  });
 </script>
 ```
 
@@ -417,10 +422,11 @@ export default defineNuxtConfig({
       baseUrl: process.env.NUXT_PUBLIC_BASE_URL || 'https://example.com',
     },
   },
-})
+});
 ```
 
 **Key rules:**
+
 - Canonical URL must be **absolute** (full URL with protocol and domain)
 - Canonical URL should **not** include query parameters unless they change the page content
 - Canonical URL should be **consistent** — pick either with or without trailing slash, never both
@@ -442,14 +448,14 @@ Social media platforms (Twitter, Facebook, LinkedIn, Discord, Slack) use Open Gr
 
 ```vue
 <script setup lang="ts">
-// ❌ WRONG — Missing OG image dimensions, Twitter card, og:type
-useSeoMeta({
-  title: 'My Page',
-  ogTitle: 'My Page',
-  ogImage: '/og/my-page.png',
-  // Missing: ogType, ogUrl, ogDescription, ogImageWidth, ogImageHeight
-  // Missing: twitterCard, twitterTitle, twitterDescription, twitterImage
-})
+  // ❌ WRONG — Missing OG image dimensions, Twitter card, og:type
+  useSeoMeta({
+    title: 'My Page',
+    ogTitle: 'My Page',
+    ogImage: '/og/my-page.png',
+    // Missing: ogType, ogUrl, ogDescription, ogImageWidth, ogImageHeight
+    // Missing: twitterCard, twitterTitle, twitterDescription, twitterImage
+  });
 </script>
 ```
 
@@ -457,47 +463,47 @@ useSeoMeta({
 
 ```vue
 <script setup lang="ts">
-// ✅ CORRECT — Full OG + Twitter Card meta
-useSeoMeta({
-  title: 'My Page',
-  description: 'Page description for search engines.',
-  // Open Graph (Facebook, LinkedIn, Discord, Slack)
-  ogType: 'website',
-  ogUrl: 'https://example.com/my-page',
-  ogTitle: 'My Page',
-  ogDescription: 'Page description for social sharing.',
-  ogImage: 'https://example.com/og/my-page.png',
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
-  ogImageAlt: 'My Page preview',
-  ogSiteName: 'My App',
-  // Twitter Card
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'My Page',
-  twitterDescription: 'Page description for Twitter.',
-  twitterImage: 'https://example.com/og/my-page.png',
-  twitterImageAlt: 'My Page preview',
-})
+  // ✅ CORRECT — Full OG + Twitter Card meta
+  useSeoMeta({
+    title: 'My Page',
+    description: 'Page description for search engines.',
+    // Open Graph (Facebook, LinkedIn, Discord, Slack)
+    ogType: 'website',
+    ogUrl: 'https://example.com/my-page',
+    ogTitle: 'My Page',
+    ogDescription: 'Page description for social sharing.',
+    ogImage: 'https://example.com/og/my-page.png',
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    ogImageAlt: 'My Page preview',
+    ogSiteName: 'My App',
+    // Twitter Card
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'My Page',
+    twitterDescription: 'Page description for Twitter.',
+    twitterImage: 'https://example.com/og/my-page.png',
+    twitterImageAlt: 'My Page preview',
+  });
 </script>
 ```
 
 **Required meta tags checklist:**
 
-| Tag | Purpose | Required |
-|-----|---------|----------|
-| `ogType` | Content type (`website`, `article`) | Yes |
-| `ogUrl` | Canonical URL | Yes |
-| `ogTitle` | Title for social cards | Yes |
-| `ogDescription` | Description for social cards | Yes |
-| `ogImage` | **Full URL** to OG image | Yes |
-| `ogImageWidth` | Image width (1200) | Yes |
-| `ogImageHeight` | Image height (630) | Yes |
-| `ogImageAlt` | Image alt text | Recommended |
-| `ogSiteName` | Site name | Recommended |
-| `twitterCard` | Card type (`summary_large_image`) | Yes |
-| `twitterTitle` | Title for Twitter | Yes |
-| `twitterDescription` | Description for Twitter | Yes |
-| `twitterImage` | **Full URL** to image | Yes |
+| Tag                  | Purpose                             | Required    |
+| -------------------- | ----------------------------------- | ----------- |
+| `ogType`             | Content type (`website`, `article`) | Yes         |
+| `ogUrl`              | Canonical URL                       | Yes         |
+| `ogTitle`            | Title for social cards              | Yes         |
+| `ogDescription`      | Description for social cards        | Yes         |
+| `ogImage`            | **Full URL** to OG image            | Yes         |
+| `ogImageWidth`       | Image width (1200)                  | Yes         |
+| `ogImageHeight`      | Image height (630)                  | Yes         |
+| `ogImageAlt`         | Image alt text                      | Recommended |
+| `ogSiteName`         | Site name                           | Recommended |
+| `twitterCard`        | Card type (`summary_large_image`)   | Yes         |
+| `twitterTitle`       | Title for Twitter                   | Yes         |
+| `twitterDescription` | Description for Twitter             | Yes         |
+| `twitterImage`       | **Full URL** to image               | Yes         |
 
 **Important notes:**
 
@@ -520,12 +526,10 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#0f0e17' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
       ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
     },
   },
-})
+});
 ```
 
 Reference: [Open Graph Protocol](https://ogp.me/) | [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards)
@@ -544,29 +548,29 @@ Instead of calling `useSeoMeta` and `useHead` separately on every page, create a
 
 ```vue
 <script setup lang="ts">
-// ❌ WRONG — Duplicated across every page, inconsistent, error-prone
-const config = useRuntimeConfig()
-const baseUrl = config.public.baseUrl
+  // ❌ WRONG — Duplicated across every page, inconsistent, error-prone
+  const config = useRuntimeConfig();
+  const baseUrl = config.public.baseUrl;
 
-useSeoMeta({
-  title: 'About Us',
-  description: 'Learn about our team.',
-  ogType: 'website',
-  ogUrl: `${baseUrl}/about`,
-  ogTitle: 'About Us',
-  ogDescription: 'Learn about our team.',
-  ogImage: `${baseUrl}/og/about.png?title=About%20Us`,
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
-  twitterCard: 'summary_large_image',
-  twitterTitle: 'About Us',
-  twitterDescription: 'Learn about our team.',
-  twitterImage: `${baseUrl}/og/about.png?title=About%20Us`,
-})
+  useSeoMeta({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    ogType: 'website',
+    ogUrl: `${baseUrl}/about`,
+    ogTitle: 'About Us',
+    ogDescription: 'Learn about our team.',
+    ogImage: `${baseUrl}/og/about.png?title=About%20Us`,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
+    twitterCard: 'summary_large_image',
+    twitterTitle: 'About Us',
+    twitterDescription: 'Learn about our team.',
+    twitterImage: `${baseUrl}/og/about.png?title=About%20Us`,
+  });
 
-useHead({
-  link: [{ rel: 'canonical', href: `${baseUrl}/about` }],
-})
+  useHead({
+    link: [{ rel: 'canonical', href: `${baseUrl}/about` }],
+  });
 </script>
 ```
 
@@ -627,12 +631,12 @@ export function usePageSeo(options: {
 
 ```vue
 <script setup lang="ts">
-// ✅ Clean, consistent, one line per page
-usePageSeo({
-  title: 'About Us',
-  description: 'Learn about our team and mission.',
-  path: '/about',
-})
+  // ✅ Clean, consistent, one line per page
+  usePageSeo({
+    title: 'About Us',
+    description: 'Learn about our team and mission.',
+    path: '/about',
+  });
 </script>
 ```
 
@@ -645,6 +649,7 @@ app/composables/seo/
 ```
 
 **Key features:**
+
 - `ogDescription` defaults to `description` if not provided
 - `ogImageAlt` defaults to `title` if not provided
 - `robots` is optional — only set when needed (e.g., `'noindex'` for private pages)
@@ -669,7 +674,10 @@ OG images are fetched by social media crawlers (Twitter, Facebook, LinkedIn, Dis
 // ❌ WRONG — No cache headers, every request generates a new image
 export default defineEventHandler(async (event) => {
   const { ImageResponse } = await import('@cf-wasm/og/workerd');
-  const response = await ImageResponse.async(element, { width: 1200, height: 630 });
+  const response = await ImageResponse.async(element, {
+    width: 1200,
+    height: 630,
+  });
   const buffer = await response.arrayBuffer();
 
   setResponseHeaders(event, {
@@ -687,7 +695,10 @@ export default defineEventHandler(async (event) => {
 // ✅ CORRECT — CDN caches for 1 year, immutable
 export default defineEventHandler(async (event) => {
   const { ImageResponse } = await import('@cf-wasm/og/workerd');
-  const response = await ImageResponse.async(element, { width: 1200, height: 630 });
+  const response = await ImageResponse.async(element, {
+    width: 1200,
+    height: 630,
+  });
   const buffer = await response.arrayBuffer();
 
   setResponseHeaders(event, {
@@ -733,8 +744,8 @@ export default defineNuxtConfig({
   modules: ['nuxt-og-image'],
   ogImage: {
     // This will fail with "WebAssembly.instantiate() is not allowed" on CF Workers
-  }
-})
+  },
+});
 ```
 
 **Correct (custom server route with @cf-wasm/og):**
@@ -743,7 +754,11 @@ export default defineNuxtConfig({
 // ✅ CORRECT — server/routes/og/[...path].png.ts
 
 // Satori element helper — plain JS objects, no React
-function el(type: string, style: Record<string, unknown>, ...children: unknown[]) {
+function el(
+  type: string,
+  style: Record<string, unknown>,
+  ...children: unknown[]
+) {
   const flat = children.flat().filter((c) => c != null && c !== false);
   const props: Record<string, unknown> = { style };
   if (flat.length === 1 && typeof flat[0] === 'string') {
@@ -766,12 +781,17 @@ export default defineEventHandler(async (event) => {
       flexDirection: 'column',
       width: '100%',
       height: '100%',
-      background: 'linear-gradient(145deg, #0f0e17 0%, #161229 50%, #1a0f2e 100%)',
+      background:
+        'linear-gradient(145deg, #0f0e17 0%, #161229 50%, #1a0f2e 100%)',
       fontFamily: 'sans-serif',
       padding: '60px 64px',
     },
     el('div', { fontSize: '64px', fontWeight: 800, color: '#fafafa' }, title),
-    el('div', { fontSize: '24px', color: '#a1a1aa', marginTop: '20px' }, description),
+    el(
+      'div',
+      { fontSize: '24px', color: '#a1a1aa', marginTop: '20px' },
+      description,
+    ),
   );
 
   try {
@@ -840,7 +860,11 @@ export default defineEventHandler(async (event) => {
 
 // Satori element helper — creates { type, props } objects
 // Satori requires display:flex on divs with 2+ children, and chokes on children:[]
-function el(type: string, style: Record<string, unknown>, ...children: unknown[]) {
+function el(
+  type: string,
+  style: Record<string, unknown>,
+  ...children: unknown[]
+) {
   const flat = children.flat().filter((c) => c != null && c !== false);
   const props: Record<string, unknown> = { style };
   if (flat.length === 1 && typeof flat[0] === 'string') {
@@ -881,7 +905,7 @@ el(
   ...(description
     ? [el('div', { fontSize: '24px', color: '#a1a1aa' }, description)]
     : []),
-)
+);
 ```
 
 **HARD RULE: No React in Vue projects. Ever. Not even for OG image generation.**
@@ -901,7 +925,7 @@ JSON-LD structured data helps search engines understand your site's content. Add
 ```vue
 <!-- ❌ WRONG — app.vue with no structured data -->
 <script setup lang="ts">
-// No JSON-LD — search engines have less context about the site
+  // No JSON-LD — search engines have less context about the site
 </script>
 
 <template>
@@ -916,32 +940,32 @@ JSON-LD structured data helps search engines understand your site's content. Add
 ```vue
 <!-- ✅ CORRECT — app.vue with WebApplication structured data -->
 <script setup lang="ts">
-useHead({
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebApplication',
-        'name': 'My App',
-        'url': 'https://example.com',
-        'description': 'Description of what the app does.',
-        'applicationCategory': 'DesignApplication',
-        'operatingSystem': 'Web',
-        'offers': {
-          '@type': 'Offer',
-          'price': '0',
-          'priceCurrency': 'USD',
-        },
-        'author': {
-          '@type': 'Organization',
-          'name': 'My Company',
-          'url': 'https://example.com',
-        },
-      }),
-    },
-  ],
-})
+  useHead({
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebApplication',
+          name: 'My App',
+          url: 'https://example.com',
+          description: 'Description of what the app does.',
+          applicationCategory: 'DesignApplication',
+          operatingSystem: 'Web',
+          offers: {
+            '@type': 'Offer',
+            price: '0',
+            priceCurrency: 'USD',
+          },
+          author: {
+            '@type': 'Organization',
+            name: 'My Company',
+            url: 'https://example.com',
+          },
+        }),
+      },
+    ],
+  });
 </script>
 
 <template>
@@ -961,32 +985,33 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        'name': 'My Docs',
-        'url': 'https://docs.example.com',
-        'description': 'Documentation for My App.',
-        'potentialAction': {
+        name: 'My Docs',
+        url: 'https://docs.example.com',
+        description: 'Documentation for My App.',
+        potentialAction: {
           '@type': 'SearchAction',
-          'target': {
+          target: {
             '@type': 'EntryPoint',
-            'urlTemplate': 'https://docs.example.com/search?q={search_term_string}',
+            urlTemplate:
+              'https://docs.example.com/search?q={search_term_string}',
           },
           'query-input': 'required name=search_term_string',
         },
       }),
     },
   ],
-})
+});
 ```
 
 **Common schema types:**
 
-| Type | Use Case |
-|------|----------|
-| `WebApplication` | SaaS apps, tools, platforms |
-| `WebSite` | Documentation sites, blogs, content sites |
-| `Organization` | Company/team pages |
-| `SoftwareSourceCode` | Open source project landing pages |
-| `BreadcrumbList` | Navigation breadcrumbs (per-page) |
+| Type                 | Use Case                                  |
+| -------------------- | ----------------------------------------- |
+| `WebApplication`     | SaaS apps, tools, platforms               |
+| `WebSite`            | Documentation sites, blogs, content sites |
+| `Organization`       | Company/team pages                        |
+| `SoftwareSourceCode` | Open source project landing pages         |
+| `BreadcrumbList`     | Navigation breadcrumbs (per-page)         |
 
 **Validation:** Use [Google's Rich Results Test](https://search.google.com/test/rich-results) to verify structured data.
 

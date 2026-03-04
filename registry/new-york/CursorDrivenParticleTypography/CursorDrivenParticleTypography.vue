@@ -138,21 +138,13 @@
 
     ctx.clearRect(0, 0, containerWidth, containerHeight);
     ctx.fillStyle = textColor;
-    const effectiveFontSize = Math.min(
-      props.fontSize,
-      containerWidth * 0.15,
-    );
+    const effectiveFontSize = Math.min(props.fontSize, containerWidth * 0.15);
     ctx.font = `bold ${effectiveFontSize}px ${props.fontFamily}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(props.text, containerWidth / 2, containerHeight / 2);
 
-    const textCoordinates = ctx.getImageData(
-      0,
-      0,
-      canvas.width,
-      canvas.height,
-    );
+    const textCoordinates = ctx.getImageData(0, 0, canvas.width, canvas.height);
     particles = [];
 
     const step = Math.max(1, Math.floor(props.particleDensity * dpr));
@@ -223,9 +215,12 @@
     init();
   });
 
-  watch(() => colorMode.value, () => {
-    init();
-  });
+  watch(
+    () => colorMode.value,
+    () => {
+      init();
+    },
+  );
 
   onMounted(() => {
     setTimeout(() => {

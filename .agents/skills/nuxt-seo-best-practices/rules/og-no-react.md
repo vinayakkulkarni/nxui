@@ -29,7 +29,11 @@ export default defineEventHandler(async (event) => {
 
 // Satori element helper — creates { type, props } objects
 // Satori requires display:flex on divs with 2+ children, and chokes on children:[]
-function el(type: string, style: Record<string, unknown>, ...children: unknown[]) {
+function el(
+  type: string,
+  style: Record<string, unknown>,
+  ...children: unknown[]
+) {
   const flat = children.flat().filter((c) => c != null && c !== false);
   const props: Record<string, unknown> = { style };
   if (flat.length === 1 && typeof flat[0] === 'string') {
@@ -70,7 +74,7 @@ el(
   ...(description
     ? [el('div', { fontSize: '24px', color: '#a1a1aa' }, description)]
     : []),
-)
+);
 ```
 
 **HARD RULE: No React in Vue projects. Ever. Not even for OG image generation.**

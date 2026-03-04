@@ -96,7 +96,7 @@
         let targetY = 0;
 
         if (distance < props.radius && distance > 0) {
-          const force = ((1 - distance / props.radius) ** 2) * props.strength;
+          const force = (1 - distance / props.radius) ** 2 * props.strength;
           const angle = Math.atan2(dy, dx);
           const dir = props.mode === 'attract' ? -1 : 1;
           targetX = Math.cos(angle) * force * dir;
@@ -151,19 +151,21 @@
     @mouseleave="onMouseLeave"
   >
     <template v-for="(letter, i) in letters" :key="i">
-      <span
-        v-if="letter === ' '"
-        class="inline-block whitespace-pre"
-      >&nbsp;</span>
+      <span v-if="letter === ' '" class="inline-block whitespace-pre"
+        >&nbsp;</span
+      >
       <span
         v-else
         :ref="(el) => setLetterRef(el, i)"
         :class="
-          cn('inline-block whitespace-pre will-change-transform', props.letterClass)
+          cn(
+            'inline-block whitespace-pre will-change-transform',
+            props.letterClass,
+          )
         "
         :style="{
           transform: letterStates[i]
-            ? `translate(${letterStates[i]!.x}px, ${letterStates[i]!.y}px) rotate(${(letterStates[i]!.x) * 0.3}deg)`
+            ? `translate(${letterStates[i]!.x}px, ${letterStates[i]!.y}px) rotate(${letterStates[i]!.x * 0.3}deg)`
             : undefined,
         }"
         aria-hidden="true"

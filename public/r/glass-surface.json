@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Glass Surface",
   "description": "SVG displacement-based glass distortion with chromatic aberration and frosted backdrop filter.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/GlassSurface/GlassSurface.vue",

@@ -64,7 +64,9 @@
       const end = inputRange[i + 1]!;
       if (t >= start && t <= end) {
         const localT = (t - start) / (end - start);
-        return outputRange[i]! + (outputRange[i + 1]! - outputRange[i]!) * localT;
+        return (
+          outputRange[i]! + (outputRange[i + 1]! - outputRange[i]!) * localT
+        );
       }
     }
     return outputRange[outputRange.length - 1]!;
@@ -103,8 +105,16 @@
     const sp = smoothProgress.value;
     return {
       transform: `translate(-50%, -50%) translate(${interpolate(sp, [0, 0.3, 0.35, 0.65, 1], [xRight, xRight, xRight, '0vw', '0vw'])}, ${interpolate(sp, [0, 0.3, 0.35, 0.65, 1], [yTop, yTop, yTop, '0vh', '0vh'])})`,
-      width: interpolate(sp, [0.65, 0.7, 0.9, 1], ['36vw', '36vw', '100vw', '100vw']),
-      height: interpolate(sp, [0.65, 0.7, 0.9, 1], ['24vh', '24vh', '100vh', '100vh']),
+      width: interpolate(
+        sp,
+        [0.65, 0.7, 0.9, 1],
+        ['36vw', '36vw', '100vw', '100vw'],
+      ),
+      height: interpolate(
+        sp,
+        [0.65, 0.7, 0.9, 1],
+        ['24vh', '24vh', '100vh', '100vh'],
+      ),
     };
   });
 
@@ -144,17 +154,11 @@
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('relative h-[300vh] w-full', props.class)"
-  >
+  <div ref="containerRef" :class="cn('relative h-[300vh] w-full', props.class)">
     <div class="sticky top-0 h-screen w-full overflow-hidden">
       <div class="absolute inset-0 flex items-center justify-center">
         <!-- Top Left Image -->
-        <div
-          :class="cn(baseImageClasses, 'z-10')"
-          :style="tlStyle"
-        >
+        <div :class="cn(baseImageClasses, 'z-10')" :style="tlStyle">
           <img
             :src="images.topLeft"
             alt="Top Left"
@@ -163,10 +167,7 @@
         </div>
 
         <!-- Bottom Right Image -->
-        <div
-          :class="cn(baseImageClasses, 'z-20')"
-          :style="brStyle"
-        >
+        <div :class="cn(baseImageClasses, 'z-20')" :style="brStyle">
           <img
             :src="images.bottomRight"
             alt="Bottom Right"
@@ -175,10 +176,7 @@
         </div>
 
         <!-- Bottom Left Image -->
-        <div
-          :class="cn(baseImageClasses, 'z-30')"
-          :style="blStyle"
-        >
+        <div :class="cn(baseImageClasses, 'z-30')" :style="blStyle">
           <img
             :src="images.bottomLeft"
             alt="Bottom Left"
