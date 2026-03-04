@@ -257,6 +257,6 @@
       @touchstart="onTouchStart"
       @touchmove="onTouchMove"
       @touchend="onMouseLeave"
-    />
+    ></canvas>
   </div>
 </template>

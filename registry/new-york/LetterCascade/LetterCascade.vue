@@ -60,7 +60,6 @@
     const total = fronts.length;
     const dur = springDuration();
 
-    const easing = `spring(1, ${props.stiffness}, ${props.damping}, 0)`;
     const cubicEase = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
 
     let frontDone = 0;

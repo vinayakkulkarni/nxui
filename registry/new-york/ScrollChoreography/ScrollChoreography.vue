@@ -41,8 +41,8 @@
       const end = inputRange[i + 1]!;
       if (t >= start && t <= end) {
         const localT = (t - start) / (end - start);
-        const startVal = parseFloat(outputRange[i]!);
-        const endVal = parseFloat(outputRange[i + 1]!);
+        const startVal = Number.parseFloat(outputRange[i]!);
+        const endVal = Number.parseFloat(outputRange[i + 1]!);
         const unit = outputRange[i]!.replace(/[-\d.]/g, '');
         return `${startVal + (endVal - startVal) * localT}${unit}`;
       }
