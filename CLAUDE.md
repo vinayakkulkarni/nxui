@@ -370,10 +370,12 @@ From Butterick's Practical Typography — rules for the docs site.
 This project uses the following skills in `.agents/skills/`:
 
 **Development:**
+
 - `vue-best-practices/` — Vue 3 performance optimization and patterns
 - `nuxt-best-practices/` — Nuxt 4 architecture and data fetching patterns
 
 **Marketing:**
+
 - `social-content/` — Social media content creation and viral strategies
 - `launch-strategy/` — Product launch planning (ORB framework, Product Hunt)
 - `copywriting/` — Marketing copy, headlines, CTAs
