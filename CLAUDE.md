@@ -367,7 +367,19 @@ From Butterick's Practical Typography — rules for the docs site.
 
 ## Skills Integration
 
-This project uses `.agents/skills/vue-best-practices/` and `.agents/skills/nuxt-best-practices/`.
+This project uses the following skills in `.agents/skills/`:
+
+**Development:**
+- `vue-best-practices/` — Vue 3 performance optimization and patterns
+- `nuxt-best-practices/` — Nuxt 4 architecture and data fetching patterns
+
+**Marketing:**
+- `social-content/` — Social media content creation and viral strategies
+- `launch-strategy/` — Product launch planning (ORB framework, Product Hunt)
+- `copywriting/` — Marketing copy, headlines, CTAs
+- `marketing-psychology/` — Mental models, persuasion, behavioral science
+- `marketing-ideas/` — 140+ SaaS marketing tactics
+- `content-strategy/` — Content planning and pillar frameworks
 
 **CLAUDE.md ALWAYS takes precedence over skills.**
 
