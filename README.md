@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/__og-image__/image/docs/og.png" alt="nxui showcase" width="720" />
   </a>
   <br />
-  <sub>147 animated components. Dark mode. Copy, paste, ship.</sub>
+  <sub>148 animated components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -70,7 +70,7 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (147)
+## Components (148)
 
 ### Text Animations (29)
 
@@ -224,10 +224,11 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Threads](https://nxui.geoql.in/docs/backgrounds/threads)                 | Perlin noise thread lines          |
 | [Waves](https://nxui.geoql.in/docs/backgrounds/waves)                     | Perlin noise wave lines            |
 
-### Hero Backgrounds (3)
+### Hero Backgrounds (4)
 
 | Component                                                                          | Description                |
 | ---------------------------------------------------------------------------------- | -------------------------- |
+| [Animated Gradient](https://nxui.geoql.in/docs/hero-backgrounds/animated-gradient) | Animated WebGL gradient    |
 | [Dither Prism Hero](https://nxui.geoql.in/docs/hero-backgrounds/dither-prism-hero) | Dithered prism effect      |
 | [Hero Geometric](https://nxui.geoql.in/docs/hero-backgrounds/hero-geometric)       | Geometric shapes animation |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | WebGL liquid simulation    |

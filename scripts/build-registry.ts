@@ -182,6 +182,12 @@ const COMPONENTS: Record<
       'A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering.',
     deps: ['three', 'motion-v', '@vueuse/core'],
   },
+  'animated-gradient': {
+    title: 'Animated Gradient',
+    description:
+      'A beautiful, animated, and customizable WebGL gradient with noise capabilities. Supports built-in presets and fully custom configurations.',
+    deps: ['@vueuse/core'],
+  },
   'dither-prism-hero': {
     title: 'Dither Prism Hero',
     description:

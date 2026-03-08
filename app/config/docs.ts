@@ -380,6 +380,10 @@ export const docsNav: NavGroup[] = [
     title: 'Hero Backgrounds',
     items: [
       {
+        title: 'Animated Gradient',
+        path: '/docs/hero-backgrounds/animated-gradient',
+      },
+      {
         title: 'Dither Prism Hero',
         path: '/docs/hero-backgrounds/dither-prism-hero',
       },

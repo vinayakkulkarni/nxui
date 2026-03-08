@@ -154,6 +154,12 @@
       "description": "A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering."
     },
     {
+      "name": "animated-gradient",
+      "type": "registry:ui",
+      "title": "Animated Gradient",
+      "description": "A beautiful, animated, and customizable WebGL gradient with noise capabilities. Supports built-in presets and fully custom configurations."
+    },
+    {
       "name": "dither-prism-hero",
       "type": "registry:ui",
       "title": "Dither Prism Hero",
