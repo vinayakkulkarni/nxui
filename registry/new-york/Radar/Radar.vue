@@ -48,9 +48,9 @@
   function hexToVec3(hex: string): [number, number, number] {
     const h = hex.replace('#', '');
     return [
-      parseInt(h.slice(0, 2), 16) / 255,
-      parseInt(h.slice(2, 4), 16) / 255,
-      parseInt(h.slice(4, 6), 16) / 255,
+      Number.parseInt(h.slice(0, 2), 16) / 255,
+      Number.parseInt(h.slice(2, 4), 16) / 255,
+      Number.parseInt(h.slice(4, 6), 16) / 255,
     ];
   }
 
@@ -118,7 +118,7 @@
     });
     container.appendChild(gl.canvas);
 
-    let currentMouse = [0.5, 0.5];
+    const currentMouse = [0.5, 0.5];
     let targetMouse = [0.5, 0.5];
 
     const geometry = new Triangle(gl);
