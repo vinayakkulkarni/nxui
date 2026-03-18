@@ -45,14 +45,8 @@
 
   function computeOffset(card: HTMLElement, container: HTMLElement) {
     return {
-      x:
-        container.clientWidth / 2 -
-        card.offsetWidth / 2 -
-        card.offsetLeft,
-      y:
-        container.clientHeight / 2 -
-        card.offsetHeight / 2 -
-        card.offsetTop,
+      x: container.clientWidth / 2 - card.offsetWidth / 2 - card.offsetLeft,
+      y: container.clientHeight / 2 - card.offsetHeight / 2 - card.offsetTop,
     };
   }
 

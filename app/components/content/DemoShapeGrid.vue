@@ -13,7 +13,14 @@
 </template>`"
   >
     <div class="h-100 w-full overflow-hidden rounded-lg">
-      <ClientOnly><ShapeGrid direction="diagonal" border-color="#271E37" hover-fill-color="#222222" :square-size="40" :speed="0.5" /></ClientOnly>
+      <ClientOnly
+        ><ShapeGrid
+          direction="diagonal"
+          border-color="#271E37"
+          hover-fill-color="#222222"
+          :square-size="40"
+          :speed="0.5"
+      /></ClientOnly>
     </div>
   </ComponentDemo>
 </template>

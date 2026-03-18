@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Cursor Driven Particle Typography",
   "description": "Canvas-based text rendered as particles that disperse on cursor hover with spring physics.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/CursorDrivenParticleTypography/CursorDrivenParticleTypography.vue",

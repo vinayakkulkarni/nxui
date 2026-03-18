@@ -520,10 +520,10 @@ void main() {
     :class="cn('absolute inset-0 overflow-hidden', props.class)"
     :style="{ borderRadius: radius }"
   >
-    <canvas ref="canvasRef" aria-hidden="true" class="block size-full" ></canvas>
-    <div v-if="noiseStyle" :style="noiseStyle" ></div>
+    <canvas ref="canvasRef" aria-hidden="true" class="block size-full"></canvas>
+    <div v-if="noiseStyle" :style="noiseStyle"></div>
     <div v-if="$slots.default" class="relative z-10 size-full">
-      <slot ></slot>
+      <slot></slot>
     </div>
   </div>
 </template>

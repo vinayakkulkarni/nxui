@@ -6,20 +6,38 @@
 
   const props = withDefaults(
     defineProps<{
-      height?: number; baseWidth?: number;
+      height?: number;
+      baseWidth?: number;
       animationType?: 'rotate' | 'hover' | '3drotate';
-      glow?: number; noise?: number; transparent?: boolean;
-      scale?: number; hueShift?: number; colorFrequency?: number;
-      hoverStrength?: number; inertia?: number; bloom?: number;
-      suspendWhenOffscreen?: boolean; timeScale?: number;
+      glow?: number;
+      noise?: number;
+      transparent?: boolean;
+      scale?: number;
+      hueShift?: number;
+      colorFrequency?: number;
+      hoverStrength?: number;
+      inertia?: number;
+      bloom?: number;
+      suspendWhenOffscreen?: boolean;
+      timeScale?: number;
       class?: string;
     }>(),
     {
-      height: 3.5, baseWidth: 5.5, animationType: 'rotate',
-      glow: 1, noise: 0.5, transparent: true, scale: 3.6,
-      hueShift: 0, colorFrequency: 1, hoverStrength: 2,
-      inertia: 0.05, bloom: 1, suspendWhenOffscreen: false,
-      timeScale: 0.5, class: '',
+      height: 3.5,
+      baseWidth: 5.5,
+      animationType: 'rotate',
+      glow: 1,
+      noise: 0.5,
+      transparent: true,
+      scale: 3.6,
+      hueShift: 0,
+      colorFrequency: 1,
+      hoverStrength: 2,
+      inertia: 0.05,
+      bloom: 1,
+      suspendWhenOffscreen: false,
+      timeScale: 0.5,
+      class: '',
     },
   );
 
@@ -83,28 +101,51 @@
     const BH = Math.max(0.001, props.baseWidth) * 0.5;
     const SAT = props.transparent ? 1.5 : 1;
     const dpr = Math.min(2, window.devicePixelRatio || 1);
-    const renderer = new Renderer({ dpr, alpha: props.transparent, antialias: false });
+    const renderer = new Renderer({
+      dpr,
+      alpha: props.transparent,
+      antialias: false,
+    });
     const gl = renderer.gl;
-    gl.disable(gl.DEPTH_TEST); gl.disable(gl.CULL_FACE); gl.disable(gl.BLEND);
-    Object.assign(gl.canvas.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block' });
+    gl.disable(gl.DEPTH_TEST);
+    gl.disable(gl.CULL_FACE);
+    gl.disable(gl.BLEND);
+    Object.assign(gl.canvas.style, {
+      position: 'absolute',
+      inset: '0',
+      width: '100%',
+      height: '100%',
+      display: 'block',
+    });
     container.appendChild(gl.canvas);
 
     const iResBuf = new Float32Array(2);
-    const rotBuf = new Float32Array([1,0,0,0,1,0,0,0,1]);
+    const rotBuf = new Float32Array([1, 0, 0, 0, 1, 0, 0, 0, 1]);
     const program = new Program(gl, {
-      vertex, fragment,
+      vertex,
+      fragment,
       uniforms: {
-        iResolution: { value: iResBuf }, iTime: { value: 0 },
-        uHeight: { value: H }, uBaseHalf: { value: BH },
+        iResolution: { value: iResBuf },
+        iTime: { value: 0 },
+        uHeight: { value: H },
+        uBaseHalf: { value: BH },
         uUseBaseWobble: { value: props.animationType === 'rotate' ? 1 : 0 },
-        uRot: { value: rotBuf }, uGlow: { value: props.glow },
+        uRot: { value: rotBuf },
+        uGlow: { value: props.glow },
         uOffsetPx: { value: new Float32Array([0, 0]) },
-        uNoise: { value: props.noise }, uSaturation: { value: SAT },
-        uScale: { value: props.scale }, uHueShift: { value: props.hueShift },
-        uColorFreq: { value: props.colorFrequency }, uBloom: { value: props.bloom },
-        uCenterShift: { value: H * 0.25 }, uInvBaseHalf: { value: 1 / BH },
-        uInvHeight: { value: 1 / H }, uMinAxis: { value: Math.min(BH, H) },
-        uPxScale: { value: 1 / ((gl.drawingBufferHeight || 1) * 0.1 * props.scale) },
+        uNoise: { value: props.noise },
+        uSaturation: { value: SAT },
+        uScale: { value: props.scale },
+        uHueShift: { value: props.hueShift },
+        uColorFreq: { value: props.colorFrequency },
+        uBloom: { value: props.bloom },
+        uCenterShift: { value: H * 0.25 },
+        uInvBaseHalf: { value: 1 / BH },
+        uInvHeight: { value: 1 / H },
+        uMinAxis: { value: Math.min(BH, H) },
+        uPxScale: {
+          value: 1 / ((gl.drawingBufferHeight || 1) * 0.1 * props.scale),
+        },
         uTimeScale: { value: props.timeScale },
       },
     });
@@ -112,38 +153,72 @@
 
     function resize() {
       renderer.setSize(container!.clientWidth, container!.clientHeight);
-      iResBuf[0] = gl.drawingBufferWidth; iResBuf[1] = gl.drawingBufferHeight;
-      program.uniforms.uPxScale.value = 1 / ((gl.drawingBufferHeight || 1) * 0.1 * props.scale);
+      iResBuf[0] = gl.drawingBufferWidth;
+      iResBuf[1] = gl.drawingBufferHeight;
+      program.uniforms.uPxScale.value =
+        1 / ((gl.drawingBufferHeight || 1) * 0.1 * props.scale);
     }
     useResizeObserver(containerRef, resize);
     resize();
 
-    const setMat3 = (yaw: number, pitch: number, roll: number, out: Float32Array) => {
-      const cy=Math.cos(yaw),sy=Math.sin(yaw),cx=Math.cos(pitch),sx=Math.sin(pitch),cz=Math.cos(roll),sz=Math.sin(roll);
-      out[0]=cy*cz+sy*sx*sz; out[1]=cx*sz; out[2]=-sy*cz+cy*sx*sz;
-      out[3]=-cy*sz+sy*sx*cz; out[4]=cx*cz; out[5]=sy*sz+cy*sx*cz;
-      out[6]=sy*cx; out[7]=-sx; out[8]=cy*cx;
+    const setMat3 = (
+      yaw: number,
+      pitch: number,
+      roll: number,
+      out: Float32Array,
+    ) => {
+      const cy = Math.cos(yaw),
+        sy = Math.sin(yaw),
+        cx = Math.cos(pitch),
+        sx = Math.sin(pitch),
+        cz = Math.cos(roll),
+        sz = Math.sin(roll);
+      out[0] = cy * cz + sy * sx * sz;
+      out[1] = cx * sz;
+      out[2] = -sy * cz + cy * sx * sz;
+      out[3] = -cy * sz + sy * sx * cz;
+      out[4] = cx * cz;
+      out[5] = sy * sz + cy * sx * cz;
+      out[6] = sy * cx;
+      out[7] = -sx;
+      out[8] = cy * cx;
     };
 
-    let yaw=0, pitch=0, roll=0, targetYaw=0, targetPitch=0;
+    let yaw = 0,
+      pitch = 0,
+      roll = 0,
+      targetYaw = 0,
+      targetPitch = 0;
     const pointer = { x: 0, y: 0, inside: true };
     const rnd = () => Math.random();
-    const wX=(0.3+rnd()*0.6), wY=(0.2+rnd()*0.7), wZ=(0.1+rnd()*0.5);
-    const phX=rnd()*Math.PI*2, phZ=rnd()*Math.PI*2;
+    const wX = 0.3 + rnd() * 0.6,
+      wY = 0.2 + rnd() * 0.7,
+      wZ = 0.1 + rnd() * 0.5;
+    const phX = rnd() * Math.PI * 2,
+      phZ = rnd() * Math.PI * 2;
 
     if (props.animationType === 'hover') {
       useEventListener(window, 'pointermove', (e: PointerEvent) => {
-        const ww=Math.max(1,window.innerWidth), wh=Math.max(1,window.innerHeight);
-        pointer.x=Math.max(-1,Math.min(1,(e.clientX-ww*0.5)/(ww*0.5)));
-        pointer.y=Math.max(-1,Math.min(1,(e.clientY-wh*0.5)/(wh*0.5)));
-        pointer.inside=true;
+        const ww = Math.max(1, window.innerWidth),
+          wh = Math.max(1, window.innerHeight);
+        pointer.x = Math.max(
+          -1,
+          Math.min(1, (e.clientX - ww * 0.5) / (ww * 0.5)),
+        );
+        pointer.y = Math.max(
+          -1,
+          Math.min(1, (e.clientY - wh * 0.5) / (wh * 0.5)),
+        );
+        pointer.inside = true;
       });
-      useEventListener(window, 'mouseleave', () => { pointer.inside=false; });
+      useEventListener(window, 'mouseleave', () => {
+        pointer.inside = false;
+      });
     }
 
     let raf = 0;
     const t0 = performance.now();
-    const lerp = (a: number, b: number, t: number) => a+(b-a)*t;
+    const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
     const TS = props.timeScale;
     const HOVSTR = props.hoverStrength;
     const INERT = Math.max(0, Math.min(1, props.inertia));
@@ -153,17 +228,22 @@
       program.uniforms.iTime.value = time;
 
       if (props.animationType === 'hover') {
-        const maxP=0.6*HOVSTR, maxY=0.6*HOVSTR;
-        targetYaw=(pointer.inside?-pointer.x:0)*maxY;
-        targetPitch=(pointer.inside?pointer.y:0)*maxP;
-        yaw=lerp(yaw,targetYaw,INERT); pitch=lerp(pitch,targetPitch,INERT); roll=lerp(roll,0,0.1);
-        setMat3(yaw,pitch,roll,rotBuf);
+        const maxP = 0.6 * HOVSTR,
+          maxY = 0.6 * HOVSTR;
+        targetYaw = (pointer.inside ? -pointer.x : 0) * maxY;
+        targetPitch = (pointer.inside ? pointer.y : 0) * maxP;
+        yaw = lerp(yaw, targetYaw, INERT);
+        pitch = lerp(pitch, targetPitch, INERT);
+        roll = lerp(roll, 0, 0.1);
+        setMat3(yaw, pitch, roll, rotBuf);
       } else if (props.animationType === '3drotate') {
-        const ts=time*TS;
-        yaw=ts*wY; pitch=Math.sin(ts*wX+phX)*0.6; roll=Math.sin(ts*wZ+phZ)*0.5;
-        setMat3(yaw,pitch,roll,rotBuf);
+        const ts = time * TS;
+        yaw = ts * wY;
+        pitch = Math.sin(ts * wX + phX) * 0.6;
+        roll = Math.sin(ts * wZ + phZ) * 0.5;
+        setMat3(yaw, pitch, roll, rotBuf);
       } else {
-        rotBuf.set([1,0,0,0,1,0,0,0,1]);
+        rotBuf.set([1, 0, 0, 0, 1, 0, 0, 0, 1]);
       }
       program.uniforms.uRot.value = rotBuf;
       renderer.render({ scene: mesh });
@@ -173,7 +253,8 @@
 
     onBeforeUnmount(() => {
       if (raf) cancelAnimationFrame(raf);
-      if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
+      if (gl.canvas.parentElement === container)
+        container.removeChild(gl.canvas);
     });
   });
 </script>

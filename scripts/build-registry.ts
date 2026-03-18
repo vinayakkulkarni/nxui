@@ -805,7 +805,6 @@ const COMPONENTS: Record<
       'An animated evil eye background with flame effects and cursor-tracking pupil.',
     deps: ['ogl'],
   },
-
 };
 
 function slugToPascal(slug: string): string {

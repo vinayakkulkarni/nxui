@@ -24,11 +24,22 @@
       class?: string;
     }>(),
     {
-      speed: 1.0, scale: 0.5, ringCount: 10, spokeCount: 10,
-      ringThickness: 0.05, spokeThickness: 0.01, sweepSpeed: 1.0,
-      sweepWidth: 2.0, sweepLobes: 1.0, color: '#9f29ff',
-      backgroundColor: '#000000', falloff: 2.0, brightness: 1.0,
-      enableMouseInteraction: true, mouseInfluence: 0.1, class: '',
+      speed: 1.0,
+      scale: 0.5,
+      ringCount: 10,
+      spokeCount: 10,
+      ringThickness: 0.05,
+      spokeThickness: 0.01,
+      sweepSpeed: 1.0,
+      sweepWidth: 2.0,
+      sweepLobes: 1.0,
+      color: '#9f29ff',
+      backgroundColor: '#000000',
+      falloff: 2.0,
+      brightness: 1.0,
+      enableMouseInteraction: true,
+      mouseInfluence: 0.1,
+      class: '',
     },
   );
 
@@ -98,7 +109,13 @@
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: false });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
-    Object.assign(gl.canvas.style, { position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block' });
+    Object.assign(gl.canvas.style, {
+      position: 'absolute',
+      inset: '0',
+      width: '100%',
+      height: '100%',
+      display: 'block',
+    });
     container.appendChild(gl.canvas);
 
     let currentMouse = [0.5, 0.5];
@@ -106,17 +123,30 @@
 
     const geometry = new Triangle(gl);
     const program = new Program(gl, {
-      vertex, fragment,
+      vertex,
+      fragment,
       uniforms: {
         uTime: { value: 0 },
-        uResolution: { value: [gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height] },
-        uSpeed: { value: props.speed }, uScale: { value: props.scale },
-        uRingCount: { value: props.ringCount }, uSpokeCount: { value: props.spokeCount },
-        uRingThickness: { value: props.ringThickness }, uSpokeThickness: { value: props.spokeThickness },
-        uSweepSpeed: { value: props.sweepSpeed }, uSweepWidth: { value: props.sweepWidth },
+        uResolution: {
+          value: [
+            gl.canvas.width,
+            gl.canvas.height,
+            gl.canvas.width / gl.canvas.height,
+          ],
+        },
+        uSpeed: { value: props.speed },
+        uScale: { value: props.scale },
+        uRingCount: { value: props.ringCount },
+        uSpokeCount: { value: props.spokeCount },
+        uRingThickness: { value: props.ringThickness },
+        uSpokeThickness: { value: props.spokeThickness },
+        uSweepSpeed: { value: props.sweepSpeed },
+        uSweepWidth: { value: props.sweepWidth },
         uSweepLobes: { value: props.sweepLobes },
-        uColor: { value: hexToVec3(props.color) }, uBgColor: { value: hexToVec3(props.backgroundColor) },
-        uFalloff: { value: props.falloff }, uBrightness: { value: props.brightness },
+        uColor: { value: hexToVec3(props.color) },
+        uBgColor: { value: hexToVec3(props.backgroundColor) },
+        uFalloff: { value: props.falloff },
+        uBrightness: { value: props.brightness },
         uMouse: { value: new Float32Array([0.5, 0.5]) },
         uMouseInfluence: { value: props.mouseInfluence },
         uEnableMouse: { value: props.enableMouseInteraction },
@@ -126,17 +156,30 @@
 
     function resize() {
       renderer.setSize(container!.clientWidth, container!.clientHeight);
-      program.uniforms.uResolution.value = [gl.canvas.width, gl.canvas.height, gl.canvas.width / gl.canvas.height];
+      program.uniforms.uResolution.value = [
+        gl.canvas.width,
+        gl.canvas.height,
+        gl.canvas.width / gl.canvas.height,
+      ];
     }
     useResizeObserver(containerRef, resize);
     resize();
 
     if (props.enableMouseInteraction) {
-      useEventListener(gl.canvas as HTMLCanvasElement, 'mousemove', (e: MouseEvent) => {
-        const rect = (gl.canvas as HTMLCanvasElement).getBoundingClientRect();
-        targetMouse = [(e.clientX - rect.left) / rect.width, 1.0 - (e.clientY - rect.top) / rect.height];
+      useEventListener(
+        gl.canvas as HTMLCanvasElement,
+        'mousemove',
+        (e: MouseEvent) => {
+          const rect = (gl.canvas as HTMLCanvasElement).getBoundingClientRect();
+          targetMouse = [
+            (e.clientX - rect.left) / rect.width,
+            1.0 - (e.clientY - rect.top) / rect.height,
+          ];
+        },
+      );
+      useEventListener(gl.canvas as HTMLCanvasElement, 'mouseleave', () => {
+        targetMouse = [0.5, 0.5];
       });
-      useEventListener(gl.canvas as HTMLCanvasElement, 'mouseleave', () => { targetMouse = [0.5, 0.5]; });
     }
 
     let animId: number;
@@ -153,7 +196,8 @@
 
     onBeforeUnmount(() => {
       cancelAnimationFrame(animId);
-      if (gl.canvas.parentElement === container) container.removeChild(gl.canvas);
+      if (gl.canvas.parentElement === container)
+        container.removeChild(gl.canvas);
       gl.getExtension('WEBGL_lose_context')?.loseContext();
     });
   });

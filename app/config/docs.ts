@@ -22,7 +22,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Logo Loop', path: '/docs/text-animations/logo-loop' },
       { title: 'Rotating Text', path: '/docs/text-animations/rotating-text' },
       { title: 'Scrambled Text', path: '/docs/text-animations/scrambled-text' },
-      { title: 'Scroll Based Velocity', path: '/docs/text-animations/scroll-based-velocity' },
+      {
+        title: 'Scroll Based Velocity',
+        path: '/docs/text-animations/scroll-based-velocity',
+      },
       { title: 'Scroll Float', path: '/docs/text-animations/scroll-float' },
       { title: 'Scroll Reveal', path: '/docs/text-animations/scroll-reveal' },
       { title: 'Shiny Text', path: '/docs/text-animations/shiny-text' },
@@ -33,7 +36,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Text Pressure', path: '/docs/text-animations/text-pressure' },
       { title: 'Text Type', path: '/docs/text-animations/text-type' },
       { title: 'True Focus', path: '/docs/text-animations/true-focus' },
-      { title: 'Variable Proximity', path: '/docs/text-animations/variable-proximity' },
+      {
+        title: 'Variable Proximity',
+        path: '/docs/text-animations/variable-proximity',
+      },
     ],
   },
   {
@@ -48,13 +54,19 @@ export const docsNav: NavGroup[] = [
       { title: 'Carousel', path: '/docs/components/carousel' },
       { title: 'Chroma Grid', path: '/docs/components/chroma-grid' },
       { title: 'Circular Gallery', path: '/docs/components/circular-gallery' },
-      { title: 'Collection Surfer', path: '/docs/components/collection-surfer' },
+      {
+        title: 'Collection Surfer',
+        path: '/docs/components/collection-surfer',
+      },
       { title: 'Command Menu', path: '/docs/components/command-menu' },
       { title: 'Counter', path: '/docs/components/counter' },
       { title: 'Decay Card', path: '/docs/components/decay-card' },
       { title: 'Dome Gallery', path: '/docs/components/dome-gallery' },
       { title: 'Elastic Slider', path: '/docs/components/elastic-slider' },
-      { title: 'Flight Status Card', path: '/docs/components/flight-status-card' },
+      {
+        title: 'Flight Status Card',
+        path: '/docs/components/flight-status-card',
+      },
       { title: 'Flowing Menu', path: '/docs/components/flowing-menu' },
       { title: 'Flying Posters', path: '/docs/components/flying-posters' },
       { title: 'Fluid Glass', path: '/docs/components/fluid-glass' },
@@ -76,7 +88,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Pixel Card', path: '/docs/components/pixel-card' },
       { title: 'Profile Card', path: '/docs/components/profile-card' },
       { title: 'Reflective Card', path: '/docs/components/reflective-card' },
-      { title: 'Scroll Choreography', path: '/docs/components/scroll-choreography' },
+      {
+        title: 'Scroll Choreography',
+        path: '/docs/components/scroll-choreography',
+      },
       { title: 'Scroll Stack', path: '/docs/components/scroll-stack' },
       { title: 'Scrub Input', path: '/docs/components/scrub-input' },
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
@@ -85,7 +100,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Staggered Menu', path: '/docs/components/staggered-menu' },
       { title: 'Stepper', path: '/docs/components/stepper' },
       { title: 'Sticker Peel', path: '/docs/components/sticker-peel' },
-      { title: 'Testimonial Marquee', path: '/docs/components/testimonial-marquee' },
+      {
+        title: 'Testimonial Marquee',
+        path: '/docs/components/testimonial-marquee',
+      },
       { title: 'Tilted Card', path: '/docs/components/tilted-card' },
     ],
   },
@@ -94,19 +112,28 @@ export const docsNav: NavGroup[] = [
     items: [
       { title: 'Border Beam', path: '/docs/visual-effects/border-beam' },
       { title: 'Closing Plasma', path: '/docs/visual-effects/closing-plasma' },
-      { title: 'Dither Gradient', path: '/docs/visual-effects/dither-gradient' },
+      {
+        title: 'Dither Gradient',
+        path: '/docs/visual-effects/dither-gradient',
+      },
       { title: 'Liquid Blob', path: '/docs/visual-effects/liquid-blob' },
       { title: 'Magnet Lines', path: '/docs/visual-effects/magnet-lines' },
       { title: 'Matrix Rain', path: '/docs/visual-effects/matrix-rain' },
       { title: 'Noise Texture', path: '/docs/visual-effects/noise-texture' },
-      { title: 'Particle Galaxy', path: '/docs/visual-effects/particle-galaxy' },
+      {
+        title: 'Particle Galaxy',
+        path: '/docs/visual-effects/particle-galaxy',
+      },
       { title: 'Pixel Canvas', path: '/docs/visual-effects/pixel-canvas' },
     ],
   },
   {
     title: 'Buttons',
     items: [
-      { title: 'Interactive Hover Button', path: '/docs/buttons/interactive-hover-button' },
+      {
+        title: 'Interactive Hover Button',
+        path: '/docs/buttons/interactive-hover-button',
+      },
       { title: 'Pulsating Button', path: '/docs/buttons/pulsating-button' },
       { title: 'Shimmer Button', path: '/docs/buttons/shimmer-button' },
     ],
@@ -185,9 +212,18 @@ export const docsNav: NavGroup[] = [
   {
     title: 'Hero Backgrounds',
     items: [
-      { title: 'Animated Gradient', path: '/docs/hero-backgrounds/animated-gradient' },
-      { title: 'Dither Prism Hero', path: '/docs/hero-backgrounds/dither-prism-hero' },
-      { title: 'Hero Geometric', path: '/docs/hero-backgrounds/hero-geometric' },
+      {
+        title: 'Animated Gradient',
+        path: '/docs/hero-backgrounds/animated-gradient',
+      },
+      {
+        title: 'Dither Prism Hero',
+        path: '/docs/hero-backgrounds/dither-prism-hero',
+      },
+      {
+        title: 'Hero Geometric',
+        path: '/docs/hero-backgrounds/hero-geometric',
+      },
       { title: 'WebGL Liquid', path: '/docs/hero-backgrounds/webgl-liquid' },
     ],
   },

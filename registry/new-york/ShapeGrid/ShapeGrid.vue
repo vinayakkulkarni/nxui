@@ -93,10 +93,7 @@
         const t = trailCells[i]!;
         const key = `${t.x},${t.y}`;
         if (!targets.has(key)) {
-          targets.set(
-            key,
-            (trailCells.length - i) / (trailCells.length + 1),
-          );
+          targets.set(key, (trailCells.length - i) / (trailCells.length + 1));
         }
       }
     }
@@ -143,9 +140,12 @@
         ((gridOffset.y % (isHex ? hexVert : isTri ? sq * 2 : sq)) +
           (isHex ? hexVert : isTri ? sq * 2 : sq)) %
         (isHex ? hexVert : isTri ? sq * 2 : sq);
-      const cols = Math.ceil(canvas.width / (isHex ? hexHoriz : isTri ? sq / 2 : sq)) + 4;
+      const cols =
+        Math.ceil(canvas.width / (isHex ? hexHoriz : isTri ? sq / 2 : sq)) + 4;
       const rows = Math.ceil(canvas.height / (isHex ? hexVert : sq)) + 4;
-      const colShift = Math.floor(gridOffset.x / (isHex ? hexHoriz : isTri ? sq / 2 : sq));
+      const colShift = Math.floor(
+        gridOffset.x / (isHex ? hexHoriz : isTri ? sq / 2 : sq),
+      );
       const rowShift = Math.floor(gridOffset.y / sq);
 
       for (let col = -2; col < cols; col++) {
@@ -155,7 +155,10 @@
 
           if (props.shape === 'hexagon') {
             const cx = col * hexHoriz + offsetX;
-            const cy = row * hexVert + ((col + colShift) % 2 !== 0 ? hexVert / 2 : 0) + offsetY;
+            const cy =
+              row * hexVert +
+              ((col + colShift) % 2 !== 0 ? hexVert / 2 : 0) +
+              offsetY;
             if (alpha) {
               ctx.globalAlpha = alpha;
               drawHex(ctx, cx, cy, sq);
@@ -169,7 +172,8 @@
           } else if (props.shape === 'triangle') {
             const cx = col * (sq / 2) + offsetX;
             const cy = row * sq + sq / 2 + offsetY;
-            const flip = ((col + colShift + row + rowShift) % 2 + 2) % 2 !== 0;
+            const flip =
+              (((col + colShift + row + rowShift) % 2) + 2) % 2 !== 0;
             if (alpha) {
               ctx.globalAlpha = alpha;
               drawTriangle(ctx, cx, cy, sq, flip);
@@ -209,8 +213,11 @@
       }
 
       const gradient = ctx.createRadialGradient(
-        canvas.width / 2, canvas.height / 2, 0,
-        canvas.width / 2, canvas.height / 2,
+        canvas.width / 2,
+        canvas.height / 2,
+        0,
+        canvas.width / 2,
+        canvas.height / 2,
         Math.sqrt(canvas.width ** 2 + canvas.height ** 2) / 2,
       );
       gradient.addColorStop(0, 'rgba(0,0,0,0)');
@@ -222,13 +229,25 @@
     function animate() {
       const effectiveSpeed = Math.max(props.speed, 0.1);
       const wrapX = isHex ? hexHoriz * 2 : props.squareSize;
-      const wrapY = isHex ? hexVert : isTri ? props.squareSize * 2 : props.squareSize;
+      const wrapY = isHex
+        ? hexVert
+        : isTri
+          ? props.squareSize * 2
+          : props.squareSize;
 
       switch (props.direction) {
-        case 'right': gridOffset.x = (gridOffset.x - effectiveSpeed + wrapX) % wrapX; break;
-        case 'left': gridOffset.x = (gridOffset.x + effectiveSpeed + wrapX) % wrapX; break;
-        case 'up': gridOffset.y = (gridOffset.y + effectiveSpeed + wrapY) % wrapY; break;
-        case 'down': gridOffset.y = (gridOffset.y - effectiveSpeed + wrapY) % wrapY; break;
+        case 'right':
+          gridOffset.x = (gridOffset.x - effectiveSpeed + wrapX) % wrapX;
+          break;
+        case 'left':
+          gridOffset.x = (gridOffset.x + effectiveSpeed + wrapX) % wrapX;
+          break;
+        case 'up':
+          gridOffset.y = (gridOffset.y + effectiveSpeed + wrapY) % wrapY;
+          break;
+        case 'down':
+          gridOffset.y = (gridOffset.y - effectiveSpeed + wrapY) % wrapY;
+          break;
         case 'diagonal':
           gridOffset.x = (gridOffset.x - effectiveSpeed + wrapX) % wrapX;
           gridOffset.y = (gridOffset.y - effectiveSpeed + wrapY) % wrapY;
@@ -250,10 +269,15 @@
       const col = Math.floor((mouseX - oX) / sq);
       const row = Math.floor((mouseY - oY) / sq);
 
-      if (!hoveredSquare || hoveredSquare.x !== col || hoveredSquare.y !== row) {
+      if (
+        !hoveredSquare ||
+        hoveredSquare.x !== col ||
+        hoveredSquare.y !== row
+      ) {
         if (hoveredSquare && props.hoverTrailAmount > 0) {
           trailCells.unshift({ ...hoveredSquare });
-          if (trailCells.length > props.hoverTrailAmount) trailCells.length = props.hoverTrailAmount;
+          if (trailCells.length > props.hoverTrailAmount)
+            trailCells.length = props.hoverTrailAmount;
         }
         hoveredSquare = { x: col, y: row };
       }
@@ -262,7 +286,8 @@
     useEventListener(canvas, 'mouseleave', () => {
       if (hoveredSquare && props.hoverTrailAmount > 0) {
         trailCells.unshift({ ...hoveredSquare });
-        if (trailCells.length > props.hoverTrailAmount) trailCells.length = props.hoverTrailAmount;
+        if (trailCells.length > props.hoverTrailAmount)
+          trailCells.length = props.hoverTrailAmount;
       }
       hoveredSquare = null;
     });

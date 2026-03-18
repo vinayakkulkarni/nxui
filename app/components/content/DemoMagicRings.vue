@@ -12,7 +12,9 @@
   <MagicRings :follow-mouse='true' />
 </template>`"
   >
-    <div class="h-100 w-full overflow-hidden rounded-lg bg-background dark:bg-black">
+    <div
+      class="h-100 w-full overflow-hidden rounded-lg bg-background dark:bg-black"
+    >
       <ClientOnly><MagicRings :follow-mouse="true" /></ClientOnly>
     </div>
   </ComponentDemo>
