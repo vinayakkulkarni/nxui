@@ -746,6 +746,42 @@
       "type": "registry:ui",
       "title": "Scroll Choreography",
       "description": "Scroll-driven image choreography with diagonal movement, stacking, and hero expansion phases."
+    },
+    {
+      "name": "layered-stack",
+      "type": "registry:ui",
+      "title": "Layered Stack",
+      "description": "A container that stacks its children into a pile with random rotation, fanning out on hover."
+    },
+    {
+      "name": "prism",
+      "type": "registry:ui",
+      "title": "Prism",
+      "description": "A prismatic light refraction background rendered with WebGL shaders via OGL."
+    },
+    {
+      "name": "radar",
+      "type": "registry:ui",
+      "title": "Radar",
+      "description": "An animated radar sweep background with concentric rings and radial spokes."
+    },
+    {
+      "name": "shape-grid",
+      "type": "registry:ui",
+      "title": "Shape Grid",
+      "description": "An animated grid of shapes (squares, hexagons, circles, triangles) with hover trail effects."
+    },
+    {
+      "name": "magic-rings",
+      "type": "registry:ui",
+      "title": "Magic Rings",
+      "description": "Concentric animated rings rendered with Three.js shaders, featuring glow and parallax effects."
+    },
+    {
+      "name": "evil-eye",
+      "type": "registry:ui",
+      "title": "Evil Eye",
+      "description": "An animated evil eye background with flame effects and cursor-tracking pupil."
     }
   ]
 }

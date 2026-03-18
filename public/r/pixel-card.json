@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Pixel Card",
   "description": "Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/PixelCard/PixelCard.vue",

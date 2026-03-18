@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Crosshair",
   "description": "Smooth crosshair cursor replacement with horizontal and vertical lines.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/Crosshair/Crosshair.vue",

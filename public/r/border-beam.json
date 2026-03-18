@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Border Beam",
   "description": "A moving gradient beam that travels along the border of its container.",
-  "dependencies": ["motion-v"],
+  "dependencies": [
+    "motion-v"
+  ],
   "files": [
     {
       "path": "registry/new-york/BorderBeam/BorderBeam.vue",

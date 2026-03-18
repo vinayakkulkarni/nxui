@@ -769,6 +769,43 @@ const COMPONENTS: Record<
       'Scroll-driven image choreography with diagonal movement, stacking, and hero expansion phases.',
     deps: ['@vueuse/core'],
   },
+  'layered-stack': {
+    title: 'Layered Stack',
+    description:
+      'A container that stacks its children into a pile with random rotation, fanning out on hover.',
+    deps: ['@vueuse/core'],
+  },
+  prism: {
+    title: 'Prism',
+    description:
+      'A prismatic light refraction background rendered with WebGL shaders via OGL.',
+    deps: ['ogl'],
+  },
+  radar: {
+    title: 'Radar',
+    description:
+      'An animated radar sweep background with concentric rings and radial spokes.',
+    deps: ['ogl'],
+  },
+  'shape-grid': {
+    title: 'Shape Grid',
+    description:
+      'An animated grid of shapes (squares, hexagons, circles, triangles) with hover trail effects.',
+    deps: ['@vueuse/core'],
+  },
+  'magic-rings': {
+    title: 'Magic Rings',
+    description:
+      'Concentric animated rings rendered with Three.js shaders, featuring glow and parallax effects.',
+    deps: ['three'],
+  },
+  'evil-eye': {
+    title: 'Evil Eye',
+    description:
+      'An animated evil eye background with flame effects and cursor-tracking pupil.',
+    deps: ['ogl'],
+  },
+
 };
 
 function slugToPascal(slug: string): string {

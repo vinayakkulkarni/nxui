@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Liquid Blob",
   "description": "A morphing liquid blob that follows the cursor.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/LiquidBlob/LiquidBlob.vue",

@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Rotating Text",
   "description": "Cycle through an array of text phrases with staggered character transitions.",
-  "dependencies": ["@vueuse/core", "motion-v"],
+  "dependencies": [
+    "@vueuse/core",
+    "motion-v"
+  ],
   "files": [
     {
       "path": "registry/new-york/RotatingText/RotatingText.vue",

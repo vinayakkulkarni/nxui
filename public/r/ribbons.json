@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Ribbons",
   "description": "Interactive OGL ribbon lines that follow mouse movement with spring physics.",
-  "dependencies": ["ogl", "@vueuse/core"],
+  "dependencies": [
+    "ogl",
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/Ribbons/Ribbons.vue",
