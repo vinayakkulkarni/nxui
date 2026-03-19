@@ -123,10 +123,7 @@
     if (props.gradient && props.gradient.length > 0) {
       const grad = offCtx.createLinearGradient(0, 0, offscreenWidth, 0);
       for (let i = 0; i < props.gradient.length; i++) {
-        grad.addColorStop(
-          i / (props.gradient.length - 1),
-          props.gradient[i]!,
-        );
+        grad.addColorStop(i / (props.gradient.length - 1), props.gradient[i]!);
       }
       offCtx.fillStyle = grad;
     } else {
@@ -214,15 +211,9 @@
     if (props.transitionDuration > 0) {
       const step = (1 / props.transitionDuration) * 16; // ~16ms per frame
       if (currentIntensity < targetIntensity) {
-        currentIntensity = Math.min(
-          currentIntensity + step,
-          targetIntensity,
-        );
+        currentIntensity = Math.min(currentIntensity + step, targetIntensity);
       } else {
-        currentIntensity = Math.max(
-          currentIntensity - step,
-          targetIntensity,
-        );
+        currentIntensity = Math.max(currentIntensity - step, targetIntensity);
       }
     } else {
       currentIntensity = targetIntensity;
@@ -255,7 +246,6 @@
         1,
       );
     }
-
   });
 </script>
 

@@ -274,8 +274,5 @@ void main() {
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('size-full', props.class)"
-  ></div>
+  <div ref="containerRef" :class="cn('size-full', props.class)"></div>
 </template>

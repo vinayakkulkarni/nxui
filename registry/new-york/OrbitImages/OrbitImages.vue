@@ -71,7 +71,12 @@
   let lastTime = 0;
 
   // Shape generators
-  function generateEllipsePath(cx: number, cy: number, rx: number, ry: number): string {
+  function generateEllipsePath(
+    cx: number,
+    cy: number,
+    rx: number,
+    ry: number,
+  ): string {
     return `M ${cx - rx} ${cy} A ${rx} ${ry} 0 1 0 ${cx + rx} ${cy} A ${rx} ${ry} 0 1 0 ${cx - rx} ${cy}`;
   }
 
@@ -84,7 +89,12 @@
     return `M ${cx - h} ${cy - h} L ${cx + h} ${cy - h} L ${cx + h} ${cy + h} L ${cx - h} ${cy + h} Z`;
   }
 
-  function generateRectanglePath(cx: number, cy: number, w: number, h: number): string {
+  function generateRectanglePath(
+    cx: number,
+    cy: number,
+    w: number,
+    h: number,
+  ): string {
     const hw = w / 2;
     const hh = h / 2;
     return `M ${cx - hw} ${cy - hh} L ${cx + hw} ${cy - hh} L ${cx + hw} ${cy + hh} L ${cx - hw} ${cy + hh} Z`;
@@ -96,7 +106,13 @@
     return `M ${cx} ${cy - height / 1.5} L ${cx + hs} ${cy + height / 3} L ${cx - hs} ${cy + height / 3} Z`;
   }
 
-  function generateStarPath(cx: number, cy: number, outerR: number, innerR: number, points: number): string {
+  function generateStarPath(
+    cx: number,
+    cy: number,
+    outerR: number,
+    innerR: number,
+    points: number,
+  ): string {
     const step = Math.PI / points;
     let path = '';
     for (let i = 0; i < 2 * points; i++) {
@@ -114,13 +130,24 @@
     return `M ${cx} ${cy + 12 * s} C ${cx - 20 * s} ${cy - 5 * s}, ${cx - 12 * s} ${cy - 18 * s}, ${cx} ${cy - 8 * s} C ${cx + 12 * s} ${cy - 18 * s}, ${cx + 20 * s} ${cy - 5 * s}, ${cx} ${cy + 12 * s}`;
   }
 
-  function generateInfinityPath(cx: number, cy: number, w: number, h: number): string {
+  function generateInfinityPath(
+    cx: number,
+    cy: number,
+    w: number,
+    h: number,
+  ): string {
     const hw = w / 2;
     const hh = h / 2;
     return `M ${cx} ${cy} C ${cx + hw * 0.5} ${cy - hh}, ${cx + hw} ${cy - hh}, ${cx + hw} ${cy} C ${cx + hw} ${cy + hh}, ${cx + hw * 0.5} ${cy + hh}, ${cx} ${cy} C ${cx - hw * 0.5} ${cy + hh}, ${cx - hw} ${cy + hh}, ${cx - hw} ${cy} C ${cx - hw} ${cy - hh}, ${cx - hw * 0.5} ${cy - hh}, ${cx} ${cy}`;
   }
 
-  function generateWavePath(cx: number, cy: number, w: number, amplitude: number, waves: number): string {
+  function generateWavePath(
+    cx: number,
+    cy: number,
+    w: number,
+    amplitude: number,
+    waves: number,
+  ): string {
     const pts: string[] = [];
     const segs = waves * 20;
     const hw = w / 2;
@@ -149,15 +176,31 @@
       case 'square':
         return generateSquarePath(cx, cy, props.radius * 2);
       case 'rectangle':
-        return generateRectanglePath(cx, cy, props.radiusX * 2, props.radiusY * 2);
+        return generateRectanglePath(
+          cx,
+          cy,
+          props.radiusX * 2,
+          props.radiusY * 2,
+        );
       case 'triangle':
         return generateTrianglePath(cx, cy, props.radius * 2);
       case 'star':
-        return generateStarPath(cx, cy, props.radius, props.radius * props.starInnerRatio, props.starPoints);
+        return generateStarPath(
+          cx,
+          cy,
+          props.radius,
+          props.radius * props.starInnerRatio,
+          props.starPoints,
+        );
       case 'heart':
         return generateHeartPath(cx, cy, props.radius * 2);
       case 'infinity':
-        return generateInfinityPath(cx, cy, props.radiusX * 2, props.radiusY * 2);
+        return generateInfinityPath(
+          cx,
+          cy,
+          props.radiusX * 2,
+          props.radiusY * 2,
+        );
       case 'wave':
         return generateWavePath(cx, cy, props.radiusX * 2, props.radiusY, 3);
       default:
@@ -195,7 +238,10 @@
 
     const speed = (100 / props.duration) * delta;
     progress.value =
-      ((progress.value + (props.direction === 'reverse' ? -speed : speed)) % 100 + 100) % 100;
+      (((progress.value + (props.direction === 'reverse' ? -speed : speed)) %
+        100) +
+        100) %
+      100;
 
     animId = requestAnimationFrame(animate);
   }
@@ -220,11 +266,17 @@
     aria-hidden="true"
   >
     <div
-      :class="responsive ? 'orbit-scaling absolute left-1/2 top-1/2 origin-center' : 'relative size-full'"
+      :class="
+        responsive
+          ? 'orbit-scaling absolute left-1/2 top-1/2 origin-center'
+          : 'relative size-full'
+      "
       :style="{
         width: responsive ? `${baseWidth}px` : '100%',
         height: responsive ? `${baseWidth}px` : '100%',
-        transform: responsive ? `translate(-50%, -50%) scale(${scale})` : undefined,
+        transform: responsive
+          ? `translate(-50%, -50%) scale(${scale})`
+          : undefined,
       }"
     >
       <div
@@ -238,7 +290,12 @@
           :viewBox="`0 0 ${baseWidth} ${baseWidth}`"
           class="absolute inset-0 pointer-events-none"
         >
-          <path :d="path" fill="none" :stroke="pathColor" :stroke-width="pathWidth / scale" />
+          <path
+            :d="path"
+            fill="none"
+            :stroke="pathColor"
+            :stroke-width="pathWidth / scale"
+          />
         </svg>
 
         <div

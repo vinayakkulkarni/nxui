@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Soft Aurora",
   "description": "A WebGL aurora borealis background effect with perlin noise, cosine gradient coloring, and mouse interaction.",
-  "dependencies": [
-    "ogl"
-  ],
+  "dependencies": ["ogl"],
   "files": [
     {
       "path": "registry/new-york/SoftAurora/SoftAurora.vue",

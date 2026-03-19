@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Hyper Text",
   "description": "A text component that scrambles letters before revealing the final text on hover or load.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/HyperText/HyperText.vue",

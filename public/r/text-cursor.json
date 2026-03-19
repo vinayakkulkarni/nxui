@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Text Cursor",
   "description": "Cursor trail that drops text along the mouse path.",
-  "dependencies": [
-    "@vueuse/core",
-    "motion-v"
-  ],
+  "dependencies": ["@vueuse/core", "motion-v"],
   "files": [
     {
       "path": "registry/new-york/TextCursor/TextCursor.vue",

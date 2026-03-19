@@ -18,10 +18,10 @@
     <div
       class="relative flex h-75 w-full items-center justify-center overflow-hidden rounded-lg bg-background"
     >
-      <p class="text-2xl font-semibold text-foreground">
-        Noise Overlay Effect
-      </p>
-      <ClientOnly><Noise :pattern-alpha="15" :pattern-refresh-interval="2" /></ClientOnly>
+      <p class="text-2xl font-semibold text-foreground">Noise Overlay Effect</p>
+      <ClientOnly>
+        <Noise :pattern-alpha="15" :pattern-refresh-interval="2" />
+      </ClientOnly>
     </div>
   </ComponentDemo>
 </template>

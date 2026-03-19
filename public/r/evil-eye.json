@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Evil Eye",
   "description": "An animated evil eye background with flame effects and cursor-tracking pupil.",
-  "dependencies": [
-    "ogl"
-  ],
+  "dependencies": ["ogl"],
   "files": [
     {
       "path": "registry/new-york/EvilEye/EvilEye.vue",

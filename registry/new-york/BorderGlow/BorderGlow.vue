@@ -34,9 +34,10 @@
   const cardRef = ref<HTMLDivElement>();
 
   function parseHSL(hslStr: string): { h: number; s: number; l: number } {
-    const match = hslStr.match(/(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%?\s+(\d+(?:\.\d+)?)%?/);
-    if (!match)
-      return { h: 40, s: 80, l: 80 };
+    const match = hslStr.match(
+      /(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%?\s+(\d+(?:\.\d+)?)%?/,
+    );
+    if (!match) return { h: 40, s: 80, l: 80 };
     return {
       h: Number.parseFloat(match[1]!),
       s: Number.parseFloat(match[2]!),
@@ -72,12 +73,12 @@
     const vars: Record<string, string | number> = {};
 
     for (let i = 0; i < opacities.length; i++) {
-      vars[`--glow-color${keys[i]!}`] = `hsl(${base} / ${Math.min(opacities[i]! * props.glowIntensity, 100)}%)`;
+      vars[`--glow-color${keys[i]!}`] =
+        `hsl(${base} / ${Math.min(opacities[i]! * props.glowIntensity, 100)}%)`;
     }
 
     for (let i = 0; i < 7; i++) {
-      const c =
-        props.colors[Math.min(COLOR_MAP[i]!, props.colors.length - 1)]!;
+      const c = props.colors[Math.min(COLOR_MAP[i]!, props.colors.length - 1)]!;
       vars[GRADIENT_KEYS[i]!] =
         `radial-gradient(at ${GRADIENT_POSITIONS[i]}, ${c} 0px, transparent 50%)`;
     }
@@ -179,8 +180,7 @@
 
     animateValue({
       duration: 500,
-      onUpdate: (v) =>
-        card.style.setProperty('--edge-proximity', `${v}`),
+      onUpdate: (v) => card.style.setProperty('--edge-proximity', `${v}`),
     });
     animateValue({
       ease: easeInCubic,
@@ -210,8 +210,7 @@
       duration: 1500,
       start: 100,
       end: 0,
-      onUpdate: (v) =>
-        card.style.setProperty('--edge-proximity', `${v}`),
+      onUpdate: (v) => card.style.setProperty('--edge-proximity', `${v}`),
       onEnd: () => card.classList.remove('sweep-active'),
     });
   });

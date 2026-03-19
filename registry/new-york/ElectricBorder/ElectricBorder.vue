@@ -328,7 +328,12 @@
     transform: scale(1.1);
     filter: blur(32px);
     opacity: 0.3;
-    background: linear-gradient(-30deg, var(--eb-color), transparent, var(--eb-color));
+    background: linear-gradient(
+      -30deg,
+      var(--eb-color),
+      transparent,
+      var(--eb-color)
+    );
   }
 
   .eb-content {

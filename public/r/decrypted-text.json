@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Decrypted Text",
   "description": "Hacker-style text decryption effect that scrambles characters before revealing the original text.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/DecryptedText/DecryptedText.vue",
