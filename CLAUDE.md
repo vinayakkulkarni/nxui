@@ -32,21 +32,21 @@ bun run build:registry # Build registry JSONs → public/r/
 
 ## Tech Stack
 
-| Layer           | Technology                                       | Version                                   |
-| --------------- | ------------------------------------------------ | ----------------------------------------- |
-| Framework       | Nuxt 4                                           | v4.2.2 (`future.compatibilityVersion: 4`) |
-| UI              | Vue 3 Composition API                            | v3.5+                                     |
-| Styling         | Tailwind CSS v4                                  | via `@tailwindcss/vite` (NOT PostCSS)     |
-| Animation       | motion-v                                         | v1.9.0 (Vue Framer Motion equivalent)     |
-| Utilities       | VueUse                                           | v14.2.1                                   |
-| Content         | @nuxt/content                                    | v3                                        |
-| Icons           | @nuxt/icon (Iconify)                             | v1.12.0 (lucide:_, simple-icons:_)        |
-| Color Mode      | @nuxtjs/color-mode                               | v4                                        |
-| Headless UI     | reka-ui                                          | v2.8.0                                    |
-| Highlighting    | shiki                                            | v3.21.0                                   |
-| Class Utils     | class-variance-authority + clsx + tailwind-merge |                                           |
-| Types           | TypeScript                                       | v5.8+ strict                              |
-| Package Manager | Bun                                              | v1.3.9                                    |
+| Layer           | Technology                                       | Version                                                        |
+| --------------- | ------------------------------------------------ | -------------------------------------------------------------- |
+| Framework       | Nuxt 4                                           | v4.4.2 (`future.compatibilityVersion: 4`)                      |
+| UI              | Vue 3 Composition API                            | v3.5+                                                          |
+| Styling         | Tailwind CSS v4                                  | `@nuxtjs/tailwindcss` v7 (wraps `@tailwindcss/vite` — no PostCSS) |
+| Animation       | motion-v                                         | v2.0.1 (Vue Framer Motion equivalent)                          |
+| Utilities       | VueUse                                           | v14.2.1                                                        |
+| Content         | @nuxt/content                                    | v3                                                             |
+| Icons           | @nuxt/icon (Iconify)                             | v2.2.1 (lucide:\_, simple-icons:\_)                            |
+| Color Mode      | @nuxtjs/color-mode                               | v4                                                             |
+| Headless UI     | reka-ui                                          | v2.9.2                                                         |
+| Highlighting    | shiki                                            | v4.0.2                                                         |
+| Class Utils     | class-variance-authority + clsx + tailwind-merge |                                                                |
+| Types           | TypeScript                                       | v5.8+ strict                                                   |
+| Package Manager | Bun                                              | v1.3.10                                                        |
 
 ---
 
@@ -211,7 +211,7 @@ This applies everywhere: live `<template>` usage, `code` prop strings in demos, 
 
 ### Tailwind v4 Setup
 
-- Configured via `@tailwindcss/vite` plugin (NOT PostCSS)
+- Configured via `@nuxtjs/tailwindcss` v7 (wraps `@tailwindcss/vite` internally — NOT PostCSS)
 - Main CSS: `app/assets/css/main.css`
 - Registry scanning: `@source "../../../registry";`
 - Dark variant: `@custom-variant dark (&:is(.dark *));`
