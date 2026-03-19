@@ -32,21 +32,21 @@ bun run build:registry # Build registry JSONs → public/r/
 
 ## Tech Stack
 
-| Layer           | Technology                                       | Version                                                        |
-| --------------- | ------------------------------------------------ | -------------------------------------------------------------- |
-| Framework       | Nuxt 4                                           | v4.4.2 (`future.compatibilityVersion: 4`)                      |
-| UI              | Vue 3 Composition API                            | v3.5+                                                          |
+| Layer           | Technology                                       | Version                                                           |
+| --------------- | ------------------------------------------------ | ----------------------------------------------------------------- |
+| Framework       | Nuxt 4                                           | v4.4.2 (`future.compatibilityVersion: 4`)                         |
+| UI              | Vue 3 Composition API                            | v3.5+                                                             |
 | Styling         | Tailwind CSS v4                                  | `@nuxtjs/tailwindcss` v7 (wraps `@tailwindcss/vite` — no PostCSS) |
-| Animation       | motion-v                                         | v2.0.1 (Vue Framer Motion equivalent)                          |
-| Utilities       | VueUse                                           | v14.2.1                                                        |
-| Content         | @nuxt/content                                    | v3                                                             |
-| Icons           | @nuxt/icon (Iconify)                             | v2.2.1 (lucide:\_, simple-icons:\_)                            |
-| Color Mode      | @nuxtjs/color-mode                               | v4                                                             |
-| Headless UI     | reka-ui                                          | v2.9.2                                                         |
-| Highlighting    | shiki                                            | v4.0.2                                                         |
-| Class Utils     | class-variance-authority + clsx + tailwind-merge |                                                                |
-| Types           | TypeScript                                       | v5.8+ strict                                                   |
-| Package Manager | Bun                                              | v1.3.10                                                        |
+| Animation       | motion-v                                         | v2.0.1 (Vue Framer Motion equivalent)                             |
+| Utilities       | VueUse                                           | v14.2.1                                                           |
+| Content         | @nuxt/content                                    | v3                                                                |
+| Icons           | @nuxt/icon (Iconify)                             | v2.2.1 (lucide:\_, simple-icons:\_)                               |
+| Color Mode      | @nuxtjs/color-mode                               | v4                                                                |
+| Headless UI     | reka-ui                                          | v2.9.2                                                            |
+| Highlighting    | shiki                                            | v4.0.2                                                            |
+| Class Utils     | class-variance-authority + clsx + tailwind-merge |                                                                   |
+| Types           | TypeScript                                       | v5.8+ strict                                                      |
+| Package Manager | Bun                                              | v1.3.10                                                           |
 
 ---
 
