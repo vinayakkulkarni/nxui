@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <ShinyText text=&quot;Shiny Text&quot; :speed=&quot;5&quot; />
+  <ShinyText text=&quot;Shiny Text&quot; :speed=&quot;2&quot; color=&quot;#b5b5b5&quot; shine-color=&quot;#ffffff&quot; />
 </template>`"
   >
     <div class="flex h-50 w-full items-center justify-center">

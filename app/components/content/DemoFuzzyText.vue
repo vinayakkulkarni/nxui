@@ -9,7 +9,7 @@
 </script>
 
 <template>
-  <FuzzyText text=&quot;Fuzzy&quot; :base-intensity=&quot;0.2&quot; :hover-intensity=&quot;0.6&quot; />
+  <FuzzyText text=&quot;Fuzzy&quot; :base-intensity=&quot;0.2&quot; :hover-intensity=&quot;0.6&quot; direction=&quot;both&quot; />
 </template>`"
   >
     <div

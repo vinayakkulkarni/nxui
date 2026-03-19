@@ -36,6 +36,12 @@
     Map<number, { show: boolean; y: string; innerY: string }>
   >(new Map());
 
+  // Dynamic repetition count based on viewport width
+  const repetitions = computed(() => {
+    if (typeof window === 'undefined') return 6;
+    return Math.max(4, Math.ceil(window.innerWidth / 200) + 2);
+  });
+
   function distMetric(x: number, y: number, x2: number, y2: number) {
     return (x - x2) ** 2 + (y - y2) ** 2;
   }
@@ -139,7 +145,7 @@
             }"
           >
             <div
-              v-for="rep in 6"
+              v-for="rep in repetitions"
               :key="rep"
               class="flex shrink-0 items-center px-[1vw] text-[4vh] font-normal uppercase"
               :style="{ color: marqueeTextColor }"

@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Profile Card",
   "description": "Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/ProfileCard/ProfileCard.vue",

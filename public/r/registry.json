@@ -782,6 +782,30 @@
       "type": "registry:ui",
       "title": "Evil Eye",
       "description": "An animated evil eye background with flame effects and cursor-tracking pupil."
+    },
+    {
+      "name": "soft-aurora",
+      "type": "registry:ui",
+      "title": "Soft Aurora",
+      "description": "A WebGL aurora borealis background effect with perlin noise, cosine gradient coloring, and mouse interaction."
+    },
+    {
+      "name": "line-waves",
+      "type": "registry:ui",
+      "title": "Line Waves",
+      "description": "A WebGL animated line wave background with warping, color cycling, and mouse interaction."
+    },
+    {
+      "name": "border-glow",
+      "type": "registry:ui",
+      "title": "Border Glow",
+      "description": "A CSS-driven directional glow card that tracks cursor position and proximity to edges."
+    },
+    {
+      "name": "noise",
+      "type": "registry:ui",
+      "title": "Noise",
+      "description": "An animated canvas noise grain overlay for adding texture to backgrounds and sections."
     }
   ]
 }

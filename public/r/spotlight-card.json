@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Spotlight Card",
   "description": "A card that follows the cursor with a spotlight glow effect.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/SpotlightCard/SpotlightCardDescription.vue",

@@ -10,14 +10,15 @@
 
 <template>
   <GradientText
-    text=&quot;Gradient Text&quot;
-    :colors=&quot;['#40ffaa', '#4079ff', '#40ffaa', '#4079ff', '#40ffaa']&quot;
-    :speed=&quot;8&quot;
-  />
+    :colors=&quot;['#5227FF', '#FF9FFC', '#B19EEF']&quot;
+    :animation-speed=&quot;8&quot;
+  >
+    Gradient Text
+  </GradientText>
 </template>`"
   >
     <div class="flex h-50 w-full items-center justify-center">
-      <GradientText text="Gradient Text" class="text-4xl font-bold" />
+      <GradientText class="text-4xl font-bold">Gradient Text</GradientText>
     </div>
   </ComponentDemo>
 </template>

@@ -270,6 +270,7 @@
       <div class="eb-glow-1"></div>
       <div class="eb-glow-2"></div>
     </div>
+    <div class="eb-bg-glow"></div>
     <div class="eb-content">
       <slot></slot>
     </div>
@@ -281,6 +282,7 @@
     position: relative;
     display: inline-block;
     overflow: visible;
+    isolation: isolate;
   }
 
   .eb-canvas-container {
@@ -315,6 +317,18 @@
     border-radius: inherit;
     box-shadow: inset 0 0 15px 2px var(--eb-color);
     opacity: 0.15;
+  }
+
+  .eb-bg-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: -1;
+    transform: scale(1.1);
+    filter: blur(32px);
+    opacity: 0.3;
+    background: linear-gradient(-30deg, var(--eb-color), transparent, var(--eb-color));
   }
 
   .eb-content {

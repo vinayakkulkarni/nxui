@@ -805,6 +805,30 @@ const COMPONENTS: Record<
       'An animated evil eye background with flame effects and cursor-tracking pupil.',
     deps: ['ogl'],
   },
+  'soft-aurora': {
+    title: 'Soft Aurora',
+    description:
+      'A WebGL aurora borealis background effect with perlin noise, cosine gradient coloring, and mouse interaction.',
+    deps: ['ogl'],
+  },
+  'line-waves': {
+    title: 'Line Waves',
+    description:
+      'A WebGL animated line wave background with warping, color cycling, and mouse interaction.',
+    deps: ['ogl'],
+  },
+  'border-glow': {
+    title: 'Border Glow',
+    description:
+      'A CSS-driven directional glow card that tracks cursor position and proximity to edges.',
+    deps: [],
+  },
+  noise: {
+    title: 'Noise',
+    description:
+      'An animated canvas noise grain overlay for adding texture to backgrounds and sections.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

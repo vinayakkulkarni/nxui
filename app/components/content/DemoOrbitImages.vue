@@ -36,7 +36,7 @@
 </script>
 
 <template>
-  <OrbitImages :images='images' :orbit-radius-x='280' :orbit-radius-y='120' :item-size='80' :speed='15' />
+  <OrbitImages :images='images' :radius-x='280' :radius-y='120' :item-size='80' :duration='30' shape='ellipse' />
 </template>`"
   >
     <div
@@ -45,10 +45,12 @@
       <div class="scale-50 sm:scale-75 md:scale-100 origin-center">
         <OrbitImages
           :images="images"
-          :orbit-radius-x="280"
-          :orbit-radius-y="120"
+          :base-width="700"
+          :radius-x="280"
+          :radius-y="120"
           :item-size="80"
-          :speed="15"
+          :duration="30"
+          show-path
         />
       </div>
     </div>
