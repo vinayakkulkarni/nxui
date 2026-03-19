@@ -11,7 +11,7 @@
 bun install            # Install dependencies
 bun run dev            # Start dev server (localhost:3000)
 bun run build          # Production build (Cloudflare Pages)
-bun run lint           # Run oxlint + eslint
+bun run lint           # Run oxlint
 bun run lint:fix       # Fix lint issues
 bun run format         # Format with oxfmt
 bun run format:check   # Check formatting
