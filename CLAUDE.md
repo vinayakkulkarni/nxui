@@ -45,7 +45,7 @@ bun run build:registry # Build registry JSONs → public/r/
 | Headless UI     | reka-ui                                          | v2.9.2                                                            |
 | Highlighting    | shiki                                            | v4.0.2                                                            |
 | Class Utils     | class-variance-authority + clsx + tailwind-merge |                                                                   |
-| Types           | TypeScript                                       | v5.8+ strict                                                      |
+| Types           | TypeScript                                       | v6.0+ strict                                                      |
 | Package Manager | Bun                                              | v1.3.10                                                           |
 
 ---
