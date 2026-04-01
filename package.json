@@ -43,6 +43,7 @@
     "motion-v": "^2.2.0",
     "nuxt": "^4.4.2",
     "ogl": "^1.0.11",
+    "opentype.js": "^1.3.4",
     "postprocessing": "^6.39.0",
     "reka-ui": "^2.9.2",
     "shadcn-nuxt": "^2.4.3",

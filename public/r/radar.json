@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Radar",
   "description": "An animated radar sweep background with concentric rings and radial spokes.",
-  "dependencies": ["ogl"],
+  "dependencies": [
+    "ogl"
+  ],
   "files": [
     {
       "path": "registry/new-york/Radar/Radar.vue",

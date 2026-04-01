@@ -14,6 +14,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Count Up', path: '/docs/text-animations/count-up' },
       { title: 'Curved Loop', path: '/docs/text-animations/curved-loop' },
       { title: 'Decrypted Text', path: '/docs/text-animations/decrypted-text' },
+      {
+        title: 'Editorial Orbs',
+        path: '/docs/text-animations/editorial-orbs',
+      },
       { title: 'Falling Text', path: '/docs/text-animations/falling-text' },
       { title: 'Fuzzy Text', path: '/docs/text-animations/fuzzy-text' },
       { title: 'Glitch Text', path: '/docs/text-animations/glitch-text' },
@@ -34,8 +38,13 @@ export const docsNav: NavGroup[] = [
       { title: 'Text Animate', path: '/docs/text-animations/text-animate' },
       { title: 'Text Cursor', path: '/docs/text-animations/text-cursor' },
       { title: 'Text Pressure', path: '/docs/text-animations/text-pressure' },
+      { title: 'Text String', path: '/docs/text-animations/text-string' },
       { title: 'Text Type', path: '/docs/text-animations/text-type' },
       { title: 'True Focus', path: '/docs/text-animations/true-focus' },
+      {
+        title: 'Typographic Particles',
+        path: '/docs/text-animations/typographic-particles',
+      },
       {
         title: 'Variable Proximity',
         path: '/docs/text-animations/variable-proximity',
@@ -64,6 +73,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Decay Card', path: '/docs/components/decay-card' },
       { title: 'Dome Gallery', path: '/docs/components/dome-gallery' },
       { title: 'Elastic Slider', path: '/docs/components/elastic-slider' },
+      { title: 'Eye Tracking', path: '/docs/components/eye-tracking' },
       {
         title: 'Flight Status Card',
         path: '/docs/components/flight-status-card',
@@ -79,6 +89,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Infinite Menu', path: '/docs/components/infinite-menu' },
       { title: 'Lanyard', path: '/docs/components/lanyard' },
       { title: 'Layered Stack', path: '/docs/components/layered-stack' },
+      { title: 'Mac Keyboard', path: '/docs/components/mac-keyboard' },
       { title: 'Magic Bento', path: '/docs/components/magic-bento' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
       { title: 'Masonry', path: '/docs/components/masonry' },
@@ -96,6 +107,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Scroll Stack', path: '/docs/components/scroll-stack' },
       { title: 'Scrub Input', path: '/docs/components/scrub-input' },
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
+      { title: 'Signature', path: '/docs/components/signature' },
+      {
+        title: 'Split Flap Display',
+        path: '/docs/components/split-flap-display',
+      },
       { title: 'Spotlight Card', path: '/docs/components/spotlight-card' },
       { title: 'Stack', path: '/docs/components/stack' },
       { title: 'Staggered Menu', path: '/docs/components/staggered-menu' },
@@ -116,6 +132,14 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Dither Gradient',
         path: '/docs/visual-effects/dither-gradient',
+      },
+      {
+        title: 'Image Ripple Effect',
+        path: '/docs/visual-effects/image-ripple-effect',
+      },
+      {
+        title: 'Infinite Image Field',
+        path: '/docs/visual-effects/infinite-image-field',
       },
       { title: 'Liquid Blob', path: '/docs/visual-effects/liquid-blob' },
       { title: 'Magnet Lines', path: '/docs/visual-effects/magnet-lines' },
@@ -201,6 +225,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Particles', path: '/docs/backgrounds/particles' },
       { title: 'Pixel Blast', path: '/docs/backgrounds/pixel-blast' },
       { title: 'Pixel Snow', path: '/docs/backgrounds/pixel-snow' },
+      { title: 'Plasma', path: '/docs/backgrounds/plasma' },
       { title: 'Prism', path: '/docs/backgrounds/prism' },
       { title: 'Prismatic Burst', path: '/docs/backgrounds/prismatic-burst' },
       { title: 'Radar', path: '/docs/backgrounds/radar' },

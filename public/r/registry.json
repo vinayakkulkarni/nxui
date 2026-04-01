@@ -806,6 +806,66 @@
       "type": "registry:ui",
       "title": "Noise",
       "description": "An animated canvas noise grain overlay for adding texture to backgrounds and sections."
+    },
+    {
+      "name": "text-string",
+      "type": "registry:ui",
+      "title": "Text String",
+      "description": "A Verlet physics rope simulation where each character is a draggable node connected by distance constraints with gravity, collision, and progressive unravel."
+    },
+    {
+      "name": "split-flap-display",
+      "type": "registry:ui",
+      "title": "Split Flap Display",
+      "description": "An airport-style split flap display that cycles through characters with realistic flip animations and staggered timing."
+    },
+    {
+      "name": "eye-tracking",
+      "type": "registry:ui",
+      "title": "Eye Tracking",
+      "description": "Realistic eyes that follow the cursor with spring physics, blinking, reactive pupil dilation, and four style variants."
+    },
+    {
+      "name": "signature",
+      "type": "registry:ui",
+      "title": "Signature",
+      "description": "An animated handwriting signature that loads an OTF font and draws each character path with staggered stroke animation."
+    },
+    {
+      "name": "mac-keyboard",
+      "type": "registry:ui",
+      "title": "Mac Keyboard",
+      "description": "An interactive Mac keyboard that highlights pressed keys in real-time with Web Audio key click sounds."
+    },
+    {
+      "name": "image-ripple-effect",
+      "type": "registry:ui",
+      "title": "Image Ripple Effect",
+      "description": "A WebGL image viewer with interactive ripple distortion using FBO ping-pong and custom shaders."
+    },
+    {
+      "name": "infinite-image-field",
+      "type": "registry:ui",
+      "title": "Infinite Image Field",
+      "description": "An infinite scrolling grid of images on canvas driven by cursor position with smooth camera movement."
+    },
+    {
+      "name": "plasma",
+      "type": "registry:ui",
+      "title": "Plasma",
+      "description": "A WebGL2 plasma background with 60-iteration ray march shader, mouse interaction, and configurable direction."
+    },
+    {
+      "name": "editorial-orbs",
+      "type": "registry:ui",
+      "title": "Editorial Orbs",
+      "description": "Bouncing glowing orbs with text that dynamically flows around them in multi-column layout."
+    },
+    {
+      "name": "typographic-particles",
+      "type": "registry:ui",
+      "title": "Typographic Particles",
+      "description": "Particle physics simulation rendered as proportional ASCII art with brightness-matched character selection."
     }
   ]
 }

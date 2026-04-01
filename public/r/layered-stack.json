@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Layered Stack",
   "description": "A container that stacks its children into a pile with random rotation, fanning out on hover.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/LayeredStack/LayeredStack.vue",

@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Showcase Card",
   "description": "A card with 3D tilt effect that responds to mouse movement.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/ShowcaseCard/ShowcaseCard.vue",

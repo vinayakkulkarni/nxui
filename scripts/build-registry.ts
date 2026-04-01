@@ -829,6 +829,66 @@ const COMPONENTS: Record<
       'An animated canvas noise grain overlay for adding texture to backgrounds and sections.',
     deps: ['@vueuse/core'],
   },
+  'text-string': {
+    title: 'Text String',
+    description:
+      'A Verlet physics rope simulation where each character is a draggable node connected by distance constraints with gravity, collision, and progressive unravel.',
+    deps: ['@vueuse/core'],
+  },
+  'split-flap-display': {
+    title: 'Split Flap Display',
+    description:
+      'An airport-style split flap display that cycles through characters with realistic flip animations and staggered timing.',
+    deps: [],
+  },
+  'eye-tracking': {
+    title: 'Eye Tracking',
+    description:
+      'Realistic eyes that follow the cursor with spring physics, blinking, reactive pupil dilation, and four style variants.',
+    deps: ['@vueuse/core'],
+  },
+  signature: {
+    title: 'Signature',
+    description:
+      'An animated handwriting signature that loads an OTF font and draws each character path with staggered stroke animation.',
+    deps: ['opentype.js', 'motion-v'],
+  },
+  'mac-keyboard': {
+    title: 'Mac Keyboard',
+    description:
+      'An interactive Mac keyboard that highlights pressed keys in real-time with Web Audio key click sounds.',
+    deps: ['@vueuse/core'],
+  },
+  'image-ripple-effect': {
+    title: 'Image Ripple Effect',
+    description:
+      'A WebGL image viewer with interactive ripple distortion using FBO ping-pong and custom shaders.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'infinite-image-field': {
+    title: 'Infinite Image Field',
+    description:
+      'An infinite scrolling grid of images on canvas driven by cursor position with smooth camera movement.',
+    deps: ['@vueuse/core'],
+  },
+  plasma: {
+    title: 'Plasma',
+    description:
+      'A WebGL2 plasma background with 60-iteration ray march shader, mouse interaction, and configurable direction.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'editorial-orbs': {
+    title: 'Editorial Orbs',
+    description:
+      'Bouncing glowing orbs with text that dynamically flows around them in multi-column layout.',
+    deps: ['@vueuse/core'],
+  },
+  'typographic-particles': {
+    title: 'Typographic Particles',
+    description:
+      'Particle physics simulation rendered as proportional ASCII art with brightness-matched character selection.',
+    deps: ['@vueuse/core'],
+  },
 };
 
 function slugToPascal(slug: string): string {

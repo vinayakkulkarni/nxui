@@ -325,3 +325,142 @@ export interface AnimatedGradientProps {
   radius?: string;
   class?: string;
 }
+
+export type PlasmaDirection = 'forward' | 'reverse' | 'pingpong';
+
+export interface PlasmaProps {
+  color?: string;
+  speed?: number;
+  direction?: PlasmaDirection;
+  scale?: number;
+  opacity?: number;
+  mouseInteractive?: boolean;
+  class?: string;
+}
+
+export interface RippleImageItem {
+  src: string;
+  alt?: string;
+}
+
+export interface ImageRippleEffectProps {
+  images: RippleImageItem[];
+  brushTextureUrl?: string;
+  distortionStrength?: number;
+  waveCount?: number;
+  waveSize?: number;
+  waveRotationSpeed?: number;
+  waveFadeMultiplier?: number;
+  waveGrowth?: number;
+  waveSpawnThreshold?: number;
+  class?: string;
+}
+
+export interface InfiniteImageFieldProps {
+  images?: string[];
+  imageWidth?: number;
+  imageHeight?: number;
+  gap?: number;
+  maxSpeed?: number;
+  smoothing?: number;
+  borderRadius?: number;
+  class?: string;
+}
+
+export interface MacKeyboardProps {
+  soundSrc?: string;
+  class?: string;
+}
+
+export interface MacKeyboardKeyProps {
+  label?: string;
+  subLabel?: string;
+  icon?: string;
+  iconLabel?: string;
+  width?: number;
+  keyCode?: string;
+  noAspectRatio?: boolean;
+}
+
+export interface TextStringProps {
+  text?: string;
+  fontFamily?: string;
+  fontSize?: number;
+  lineHeight?: number;
+  damping?: number;
+  gravity?: number;
+  constraintIterations?: number;
+  collisionRadius?: number;
+  class?: string;
+}
+
+export interface SplitFlapRow {
+  label: string;
+  value: string;
+}
+
+export interface SplitFlapDisplayProps {
+  rows?: SplitFlapRow[];
+  text?: string;
+  columns?: number;
+  size?: 'sm' | 'md' | 'lg';
+  accentColor?: string;
+  showIndicators?: boolean;
+  staggerDelay?: number;
+  flipSpeed?: number;
+  class?: string;
+}
+
+export interface SignatureCharPath {
+  d: string;
+}
+
+export interface SignatureProps {
+  text?: string;
+  color?: string;
+  fontSize?: number;
+  duration?: number;
+  delay?: number;
+  class?: string;
+  inView?: boolean;
+  once?: boolean;
+  fontUrl?: string;
+}
+
+export type EyeTrackingVariant = 'realistic' | 'cartoon' | 'minimal' | 'cyber';
+
+export interface EyeTrackingProps {
+  eyeSize?: number;
+  gap?: number;
+  irisColor?: string;
+  irisColorSecondary?: string;
+  pupilColor?: string;
+  scleraColor?: string;
+  pupilRange?: number;
+  showReflection?: boolean;
+  showIrisDetail?: boolean;
+  idleAnimation?: boolean;
+  blinkInterval?: number;
+  eyeCount?: number;
+  variant?: EyeTrackingVariant;
+  reactivePupil?: boolean;
+  showEyelids?: boolean;
+  class?: string;
+}
+
+export interface EditorialOrbsProps {
+  text?: string;
+  orbCount?: number;
+  showDropCap?: boolean;
+  showPullQuotes?: boolean;
+  className?: string;
+}
+
+export interface TypographicParticlesProps {
+  text?: string;
+  cols?: number;
+  rows?: number;
+  fontSize?: number;
+  particleCount?: number;
+  class?: string;
+}

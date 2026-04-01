@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Faulty Terminal",
   "description": "Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration.",
-  "dependencies": ["ogl", "@vueuse/core"],
+  "dependencies": [
+    "ogl",
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/FaultyTerminal/FaultyTerminal.vue",
