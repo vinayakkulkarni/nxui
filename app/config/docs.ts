@@ -42,10 +42,6 @@ export const docsNav: NavGroup[] = [
       { title: 'Text Type', path: '/docs/text-animations/text-type' },
       { title: 'True Focus', path: '/docs/text-animations/true-focus' },
       {
-        title: 'Typographic Particles',
-        path: '/docs/text-animations/typographic-particles',
-      },
-      {
         title: 'Variable Proximity',
         path: '/docs/text-animations/variable-proximity',
       },
@@ -107,7 +103,6 @@ export const docsNav: NavGroup[] = [
       { title: 'Scroll Stack', path: '/docs/components/scroll-stack' },
       { title: 'Scrub Input', path: '/docs/components/scrub-input' },
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
-      { title: 'Signature', path: '/docs/components/signature' },
       {
         title: 'Split Flap Display',
         path: '/docs/components/split-flap-display',

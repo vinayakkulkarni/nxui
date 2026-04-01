@@ -826,12 +826,6 @@
       "description": "Realistic eyes that follow the cursor with spring physics, blinking, reactive pupil dilation, and four style variants."
     },
     {
-      "name": "signature",
-      "type": "registry:ui",
-      "title": "Signature",
-      "description": "An animated handwriting signature that loads an OTF font and draws each character path with staggered stroke animation."
-    },
-    {
       "name": "mac-keyboard",
       "type": "registry:ui",
       "title": "Mac Keyboard",
@@ -860,12 +854,6 @@
       "type": "registry:ui",
       "title": "Editorial Orbs",
       "description": "Bouncing glowing orbs with text that dynamically flows around them in multi-column layout."
-    },
-    {
-      "name": "typographic-particles",
-      "type": "registry:ui",
-      "title": "Typographic Particles",
-      "description": "Particle physics simulation rendered as proportional ASCII art with brightness-matched character selection."
     }
   ]
 }

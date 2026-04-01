@@ -847,12 +847,6 @@ const COMPONENTS: Record<
       'Realistic eyes that follow the cursor with spring physics, blinking, reactive pupil dilation, and four style variants.',
     deps: ['@vueuse/core'],
   },
-  signature: {
-    title: 'Signature',
-    description:
-      'An animated handwriting signature that loads an OTF font and draws each character path with staggered stroke animation.',
-    deps: ['opentype.js', 'motion-v'],
-  },
   'mac-keyboard': {
     title: 'Mac Keyboard',
     description:
@@ -881,12 +875,6 @@ const COMPONENTS: Record<
     title: 'Editorial Orbs',
     description:
       'Bouncing glowing orbs with text that dynamically flows around them in multi-column layout.',
-    deps: ['@vueuse/core'],
-  },
-  'typographic-particles': {
-    title: 'Typographic Particles',
-    description:
-      'Particle physics simulation rendered as proportional ASCII art with brightness-matched character selection.',
     deps: ['@vueuse/core'],
   },
 };
