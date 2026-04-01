@@ -223,7 +223,7 @@
     );
   }
 
-  const { pause } = useRafFn(() => render(), { immediate: false });
+  const { pause, resume } = useRafFn(() => render(), { immediate: false });
 
   useResizeObserver(containerRef, () => updateCanvasSize());
 
@@ -267,6 +267,7 @@
     try {
       loadedImages = await preloadImages();
       imagesReady = true;
+      resume();
     } catch {
       // Silently handle failed image loads
       imagesReady = false;

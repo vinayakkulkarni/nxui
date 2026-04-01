@@ -432,7 +432,7 @@
   }
 
   /* ── Animation loop ───────────────────────────── */
-  const { pause: stopRaf } = useRafFn(
+  const { pause: stopRaf, resume: startRaf } = useRafFn(
     () => {
       updatePhysics();
       const spans = layoutText();
@@ -518,8 +518,8 @@
       else columnCount.value = 1;
     }
     initOrbs();
-    // Kick off the RAF loop
     textSpans.value = layoutText();
+    startRaf();
   });
 
   onBeforeUnmount(() => {

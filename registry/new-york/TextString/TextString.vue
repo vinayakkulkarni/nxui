@@ -39,8 +39,8 @@
   const containerHeight = ref(0);
 
   let gravityOn = true;
-  const FIXED_DT = 1 / 120;
-  const MAX_STEPS = 4;
+  const FIXED_DT = 1 / 60;
+  const MAX_STEPS = 2;
   const BOUNCE = 0.4;
   let accumulator = 0;
   let lastTime = 0;
@@ -193,12 +193,18 @@
         }
       }
 
-      // Letter-to-letter collision (skip adjacent pairs)
+      // Letter-to-letter collision — only check unlocked particles
+      const unlocked: number[] = [];
       for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 2; j < pts.length; j++) {
-          const a = pts[i]!;
-          const b = pts[j]!;
-          if (a.locked && b.locked) continue;
+        if (!pts[i]!.locked) unlocked.push(i);
+      }
+      for (let ui = 0; ui < unlocked.length; ui++) {
+        const ai = unlocked[ui]!;
+        const a = pts[ai]!;
+        for (let uj = ui + 1; uj < unlocked.length; uj++) {
+          const bi = unlocked[uj]!;
+          if (Math.abs(ai - bi) < 2) continue; // skip adjacent
+          const b = pts[bi]!;
           const dx = b.x - a.x;
           const dy = b.y - a.y;
           const dist = Math.sqrt(dx * dx + dy * dy) || 0.001;
@@ -206,11 +212,11 @@
             const overlap = (collDist - dist) / dist;
             const mx = dx * overlap * 0.5;
             const my = dy * overlap * 0.5;
-            if (!a.locked && !a.dragging) {
+            if (!a.dragging) {
               a.x -= mx;
               a.y -= my;
             }
-            if (!b.locked && !b.dragging) {
+            if (!b.dragging) {
               b.x += mx;
               b.y += my;
             }

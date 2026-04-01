@@ -112,84 +112,82 @@
   >
     <!-- Static top half -->
     <div
-      class="absolute inset-x-0 top-0 flex items-end justify-center overflow-hidden"
+      class="absolute inset-0 overflow-hidden"
       :style="{
-        height: '50%',
+        clipPath: 'inset(0 0 50% 0)',
         background: 'linear-gradient(to bottom, #1e1e1e, #181818)',
         borderRadius: '4px 4px 0 0',
-        fontSize: props.fontSize,
-        lineHeight: props.cellHeight,
-        color: '#e0e0e0',
       }"
     >
-      {{ currentChar }}
+      <span
+        class="absolute inset-0 flex items-center justify-center"
+        :style="{
+          fontSize: props.fontSize,
+          color: '#e0e0e0',
+        }"
+        >{{ currentChar }}</span
+      >
     </div>
 
     <!-- Static bottom half -->
     <div
-      class="absolute inset-x-0 bottom-0 flex items-start justify-center overflow-hidden"
+      class="absolute inset-0 overflow-hidden"
       :style="{
-        height: '50%',
+        clipPath: 'inset(50% 0 0 0)',
         background: 'linear-gradient(to bottom, #181818, #1e1e1e)',
         borderRadius: '0 0 4px 4px',
-        fontSize: props.fontSize,
-        lineHeight: props.cellHeight,
-        color: '#d0d0d0',
       }"
     >
       <span
+        class="absolute inset-0 flex items-center justify-center"
         :style="{
-          transform: `translateY(-${parseFloat(props.cellHeight) / 2}px)`,
+          fontSize: props.fontSize,
+          color: '#d0d0d0',
         }"
+        >{{ currentChar }}</span
       >
-        {{ currentChar }}
-      </span>
     </div>
 
-    <!-- Top flap (flips down to reveal next char) -->
+    <!-- Animated top flap (flips down showing current char) -->
     <div
       v-if="phase === 'top-down'"
-      class="absolute inset-x-0 top-0 flex items-end justify-center overflow-hidden"
+      class="absolute inset-0 overflow-hidden"
       :style="{
-        height: '50%',
+        clipPath: 'inset(0 0 50% 0)',
         background: 'linear-gradient(to bottom, #1e1e1e, #181818)',
         borderRadius: '4px 4px 0 0',
-        fontSize: props.fontSize,
-        lineHeight: props.cellHeight,
-        color: '#e0e0e0',
-        transformOrigin: 'bottom',
+        transformOrigin: 'center bottom',
         backfaceVisibility: 'hidden',
         animation: `flapTopDown ${props.flipSpeed * 0.5}ms linear forwards`,
         zIndex: 2,
       }"
     >
-      {{ currentChar }}
+      <span
+        class="absolute inset-0 flex items-center justify-center"
+        :style="{ fontSize: props.fontSize, color: '#e0e0e0' }"
+        >{{ currentChar }}</span
+      >
     </div>
 
-    <!-- Bottom flap (flips up to show next char) -->
+    <!-- Animated bottom flap (flips up showing next char) -->
     <div
       v-if="phase === 'bottom-up'"
-      class="absolute inset-x-0 bottom-0 flex items-start justify-center overflow-hidden"
+      class="absolute inset-0 overflow-hidden"
       :style="{
-        height: '50%',
+        clipPath: 'inset(50% 0 0 0)',
         background: 'linear-gradient(to bottom, #181818, #1e1e1e)',
         borderRadius: '0 0 4px 4px',
-        fontSize: props.fontSize,
-        lineHeight: props.cellHeight,
-        color: '#d0d0d0',
-        transformOrigin: 'top',
+        transformOrigin: 'center top',
         backfaceVisibility: 'hidden',
         animation: `flapBottomUp ${props.flipSpeed * 0.6}ms linear forwards`,
         zIndex: 2,
       }"
     >
       <span
-        :style="{
-          transform: `translateY(-${parseFloat(props.cellHeight) / 2}px)`,
-        }"
+        class="absolute inset-0 flex items-center justify-center"
+        :style="{ fontSize: props.fontSize, color: '#d0d0d0' }"
+        >{{ nextChar }}</span
       >
-        {{ nextChar }}
-      </span>
     </div>
 
     <!-- Center divider line -->

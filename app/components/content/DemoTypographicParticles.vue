@@ -20,7 +20,7 @@
   />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-zinc-950">
       <TypographicParticles class="size-full" />
     </div>
   </ComponentDemo>

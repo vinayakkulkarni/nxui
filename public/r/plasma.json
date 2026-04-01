@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Plasma",
   "description": "A WebGL2 plasma background with 60-iteration ray march shader, mouse interaction, and configurable direction.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/Plasma/Plasma.vue",

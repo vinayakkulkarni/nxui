@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Eye Tracking",
   "description": "Realistic eyes that follow the cursor with spring physics, blinking, reactive pupil dilation, and four style variants.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/EyeTracking/EyeTracking.vue",

@@ -57,7 +57,7 @@
   <button
     :class="
       cn(
-        'relative flex flex-col items-center justify-center rounded-md',
+        'relative flex flex-col items-center justify-center rounded-sm',
         'border border-zinc-300 dark:border-zinc-600',
         'bg-white dark:bg-zinc-800',
         'shadow-sm shadow-zinc-400/50 dark:shadow-black/50',
@@ -72,6 +72,7 @@
     "
     :style="{
       flex: `${width} 0 0%`,
+      minHeight: noAspectRatio ? undefined : '36px',
       aspectRatio: noAspectRatio ? undefined : `${width} / 1`,
     }"
     tabindex="-1"

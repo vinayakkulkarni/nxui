@@ -13,13 +13,14 @@
     delay: 0,
     inView: false,
     once: true,
-    fontUrl: 'https://componentry.fun/LastoriaBoldRegular.otf',
+    fontUrl: '',
   });
 
   const maskId = `signature-mask-${useId()}`;
   const charPaths = ref<SignatureCharPath[]>([]);
   const svgWidth = ref(0);
   const loaded = ref(false);
+  const fontError = ref(false);
   const shouldAnimate = ref(!props.inView);
   const containerRef = ref<HTMLElement | null>(null);
 
@@ -29,6 +30,11 @@
 
   const animateState = computed(() =>
     shouldAnimate.value ? { pathLength: 1 } : { pathLength: 0 },
+  );
+
+  // Estimate SVG width for fallback text rendering
+  const estimatedWidth = computed(
+    () => props.text.length * props.fontSize * 0.6,
   );
 
   if (props.inView) {
@@ -42,13 +48,13 @@
     });
   }
 
+  const FONT_URLS = [
+    'https://componentry.fun/LastoriaBoldRegular.otf',
+    'https://cdn.jsdelivr.net/gh/harshjdhv/componentry@main/apps/www/public/LastoriaBoldRegular.otf',
+  ];
+
   async function loadFont(): Promise<opentype.Font> {
-    const urls = [
-      props.fontUrl,
-      '/LastoriaBoldRegular.otf',
-      './LastoriaBoldRegular.otf',
-      'https://componentry.fun/LastoriaBoldRegular.otf',
-    ];
+    const urls = props.fontUrl ? [props.fontUrl, ...FONT_URLS] : FONT_URLS;
 
     for (const url of urls) {
       try {
@@ -94,6 +100,7 @@
       loaded.value = true;
     } catch (error) {
       console.error('Signature: Failed to load font', error);
+      fontError.value = true;
     }
   });
 
@@ -103,8 +110,11 @@
       try {
         const font = await loadFont();
         extractPaths(font);
+        loaded.value = true;
+        fontError.value = false;
       } catch (error) {
         console.error('Signature: Failed to reload font', error);
+        fontError.value = true;
       }
     },
   );
@@ -112,6 +122,7 @@
 
 <template>
   <div ref="containerRef" :class="props.class">
+    <!-- Animated signature with loaded font paths -->
     <svg
       v-if="loaded"
       :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
@@ -147,5 +158,42 @@
         />
       </g>
     </svg>
+
+    <!-- Fallback: CSS-animated cursive text when font fails to load -->
+    <svg
+      v-else-if="fontError"
+      :viewBox="`0 0 ${estimatedWidth} ${svgHeight}`"
+      xmlns="http://www.w3.org/2000/svg"
+      class="signature-fallback"
+    >
+      <text
+        :x="0"
+        :y="topMargin"
+        :fill="props.color"
+        :font-size="props.fontSize"
+        font-family="'Brush Script MT', 'Segoe Script', cursive"
+        font-weight="bold"
+      >
+        {{ props.text }}
+      </text>
+    </svg>
   </div>
 </template>
+
+<style scoped>
+  .signature-fallback text {
+    opacity: 0;
+    animation: signatureFadeIn 1.5s ease-out forwards;
+  }
+
+  @keyframes signatureFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>

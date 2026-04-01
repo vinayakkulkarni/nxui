@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Line Waves",
   "description": "A WebGL animated line wave background with warping, color cycling, and mouse interaction.",
-  "dependencies": [
-    "ogl"
-  ],
+  "dependencies": ["ogl"],
   "files": [
     {
       "path": "registry/new-york/LineWaves/LineWaves.vue",

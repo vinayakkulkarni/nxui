@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Typographic Particles",
   "description": "Particle physics simulation rendered as proportional ASCII art with brightness-matched character selection.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/TypographicParticles/TypographicParticles.vue",
