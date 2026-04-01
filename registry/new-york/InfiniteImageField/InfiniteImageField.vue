@@ -209,18 +209,26 @@
   }
 
   function preloadImages(): Promise<HTMLImageElement[]> {
-    return Promise.all(
+    return Promise.allSettled(
       props.images.map(
         (src) =>
           new Promise<HTMLImageElement>((resolve, reject) => {
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.onload = () => resolve(img);
-            img.onerror = reject;
+            img.onerror = () => reject(new Error(`Failed to load: ${src}`));
             img.src = src;
           }),
       ),
-    );
+    ).then((results) => {
+      const loaded = results
+        .filter(
+          (r): r is PromiseFulfilledResult<HTMLImageElement> =>
+            r.status === 'fulfilled',
+        )
+        .map((r) => r.value);
+      return loaded;
+    });
   }
 
   const { pause, resume } = useRafFn(() => render(), { immediate: false });
@@ -264,13 +272,11 @@
       });
     }
 
-    try {
-      loadedImages = await preloadImages();
+    const loaded = await preloadImages();
+    if (loaded.length > 0) {
+      loadedImages = loaded;
       imagesReady = true;
       resume();
-    } catch {
-      // Silently handle failed image loads
-      imagesReady = false;
     }
   });
 

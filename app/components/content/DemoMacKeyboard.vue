@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="flex w-full items-center justify-center overflow-hidden rounded-lg bg-zinc-950 p-8"
+      class="flex w-full items-center justify-center overflow-hidden rounded-lg bg-zinc-100 p-8 dark:bg-zinc-950"
     >
       <MacKeyboard />
     </div>

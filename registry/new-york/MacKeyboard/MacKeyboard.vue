@@ -54,8 +54,9 @@
   <div
     :class="
       cn(
-        'inline-block rounded-2xl bg-zinc-900 p-3 shadow-2xl',
-        'border border-zinc-700/50',
+        'inline-block rounded-2xl p-3 shadow-2xl',
+        'bg-zinc-100 dark:bg-zinc-900',
+        'border border-zinc-300/50 dark:border-zinc-700/50',
         props.class,
       )
     "

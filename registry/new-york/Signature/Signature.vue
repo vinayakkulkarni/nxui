@@ -49,16 +49,32 @@
   }
 
   const FONT_URLS = [
-    'https://componentry.fun/LastoriaBoldRegular.otf',
     'https://cdn.jsdelivr.net/gh/harshjdhv/componentry@main/apps/www/public/LastoriaBoldRegular.otf',
+    'https://componentry.fun/LastoriaBoldRegular.otf',
   ];
+
+  function withTimeout<T>(promise: Promise<T>, ms: number): Promise<T> {
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error('Timeout')), ms);
+      promise.then(
+        (v) => {
+          clearTimeout(timer);
+          resolve(v);
+        },
+        (e) => {
+          clearTimeout(timer);
+          reject(e);
+        },
+      );
+    });
+  }
 
   async function loadFont(): Promise<opentype.Font> {
     const urls = props.fontUrl ? [props.fontUrl, ...FONT_URLS] : FONT_URLS;
 
     for (const url of urls) {
       try {
-        const font = await opentype.load(url);
+        const font = await withTimeout(opentype.load(url), 5000);
         return font;
       } catch {
         continue;
@@ -98,8 +114,7 @@
       const font = await loadFont();
       extractPaths(font);
       loaded.value = true;
-    } catch (error) {
-      console.error('Signature: Failed to load font', error);
+    } catch {
       fontError.value = true;
     }
   });
@@ -112,8 +127,7 @@
         extractPaths(font);
         loaded.value = true;
         fontError.value = false;
-      } catch (error) {
-        console.error('Signature: Failed to reload font', error);
+      } catch {
         fontError.value = true;
       }
     },
@@ -159,19 +173,18 @@
       </g>
     </svg>
 
-    <!-- Fallback: CSS-animated cursive text when font fails to load -->
+    <!-- Fallback: cursive text when font fails to load -->
     <svg
       v-else-if="fontError"
       :viewBox="`0 0 ${estimatedWidth} ${svgHeight}`"
       xmlns="http://www.w3.org/2000/svg"
-      class="signature-fallback"
     >
       <text
         :x="0"
         :y="topMargin"
         :fill="props.color"
         :font-size="props.fontSize"
-        font-family="'Brush Script MT', 'Segoe Script', cursive"
+        font-family="'Brush Script MT', 'Segoe Script', 'Dancing Script', cursive"
         font-weight="bold"
       >
         {{ props.text }}
@@ -179,21 +192,3 @@
     </svg>
   </div>
 </template>
-
-<style scoped>
-  .signature-fallback text {
-    opacity: 0;
-    animation: signatureFadeIn 1.5s ease-out forwards;
-  }
-
-  @keyframes signatureFadeIn {
-    0% {
-      opacity: 0;
-      transform: translateX(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-</style>
