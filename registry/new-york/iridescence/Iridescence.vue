@@ -65,7 +65,7 @@ void main() {
 
   useResizeObserver(containerRef, (entries) => {
     if (!renderer || !programRef) return;
-    const { width, height } = entries[0].contentRect;
+    const { width, height } = entries[0]!.contentRect;
     renderer.setSize(width, height);
     programRef.uniforms.uResolution.value = new Color(
       (renderer.gl.canvas as HTMLCanvasElement).width,
