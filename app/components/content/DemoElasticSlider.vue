@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ElasticSlider from '@registry/new-york/ElasticSlider/ElasticSlider.vue';
+  import ElasticSlider from '@registry/new-york/elastic-slider/ElasticSlider.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CardSwap from '@registry/new-york/CardSwap/CardSwap.vue';
+  import CardSwap from '@registry/new-york/card-swap/CardSwap.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import SplitText from '@registry/new-york/SplitText/SplitText.vue';
+  import SplitText from '@registry/new-york/split-text/SplitText.vue';
 </script>
 
 <template>

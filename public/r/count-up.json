@@ -4,13 +4,21 @@
   "type": "registry:ui",
   "title": "Count Up",
   "description": "Animated number counter with easeOutExpo easing, triggered on scroll into view.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
-      "path": "registry/new-york/CountUp/CountUp.vue",
+      "path": "registry/new-york/count-up/CountUp.vue",
       "content": "<script setup lang=\"ts\">\n  import { useIntersectionObserver } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      to: number;\n      from?: number;\n      duration?: number;\n      separator?: string;\n      decimals?: number;\n      class?: string;\n    }>(),\n    {\n      from: 0,\n      duration: 2,\n      separator: ',',\n      decimals: 0,\n      class: '',\n    },\n  );\n\n  const el = ref<HTMLElement>();\n  const currentValue = ref(props.from);\n  const hasTriggered = ref(false);\n\n  function formatNumber(num: number): string {\n    const fixed = num.toFixed(props.decimals);\n    if (!props.separator) return fixed;\n    const [integer, decimal] = fixed.split('.');\n    const formatted = (integer ?? '').replace(\n      /\\B(?=(\\d{3})+(?!\\d))/g,\n      props.separator,\n    );\n    return decimal !== undefined ? `${formatted}.${decimal}` : formatted;\n  }\n\n  function easeOutExpo(t: number): number {\n    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);\n  }\n\n  function startCount() {\n    if (hasTriggered.value) return;\n    hasTriggered.value = true;\n\n    const startTime = performance.now();\n    const durationMs = props.duration * 1000;\n\n    function animate(now: number) {\n      const elapsed = now - startTime;\n      const progress = Math.min(elapsed / durationMs, 1);\n      const eased = easeOutExpo(progress);\n\n      currentValue.value = props.from + (props.to - props.from) * eased;\n\n      if (progress < 1) {\n        requestAnimationFrame(animate);\n      } else {\n        currentValue.value = props.to;\n      }\n    }\n\n    requestAnimationFrame(animate);\n  }\n\n  const displayValue = computed(() => formatNumber(currentValue.value));\n\n  useIntersectionObserver(el, ([entry]) => {\n    if (entry?.isIntersecting) {\n      startCount();\n    }\n  });\n</script>\n\n<template>\n  <span ref=\"el\" :class=\"cn('tabular-nums', props.class)\">\n    {{ displayValue }}\n  </span>\n</template>\n",
       "type": "registry:ui",
-      "target": "components/ui/CountUp/CountUp.vue"
+      "target": "components/ui/count-up/CountUp.vue"
+    },
+    {
+      "path": "registry/new-york/count-up/index.ts",
+      "content": "export { default as CountUp } from './CountUp.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/count-up/index.ts"
     }
   ]
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DitherPrismHero from '@registry/new-york/DitherPrismHero/DitherPrismHero.vue';
+  import DitherPrismHero from '@registry/new-york/dither-prism-hero/DitherPrismHero.vue';
 
   const activeTab = ref(0);
 

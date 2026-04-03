@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import FlyingPosters from '@registry/new-york/FlyingPosters/FlyingPosters.vue';
+  import FlyingPosters from '@registry/new-york/flying-posters/FlyingPosters.vue';
 
   const images = [
     'https://picsum.photos/seed/10/600/600',

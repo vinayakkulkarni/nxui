@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ClosingPlasma from '@registry/new-york/ClosingPlasma/ClosingPlasma.vue';
+  import ClosingPlasma from '@registry/new-york/closing-plasma/ClosingPlasma.vue';
 
   const activeTab = ref(0);
 

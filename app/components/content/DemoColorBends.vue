@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ColorBends from '@registry/new-york/ColorBends/ColorBends.vue';
+  import ColorBends from '@registry/new-york/color-bends/ColorBends.vue';
 </script>
 
 <template>

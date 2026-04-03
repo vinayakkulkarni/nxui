@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PixelSnow from '@registry/new-york/PixelSnow/PixelSnow.vue';
+  import PixelSnow from '@registry/new-york/pixel-snow/PixelSnow.vue';
 </script>
 
 <template>

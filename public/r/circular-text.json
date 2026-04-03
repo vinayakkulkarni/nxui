@@ -7,10 +7,16 @@
   "dependencies": [],
   "files": [
     {
-      "path": "registry/new-york/CircularText/CircularText.vue",
+      "path": "registry/new-york/circular-text/CircularText.vue",
       "content": "<script setup lang=\"ts\">\n  import { computed } from 'vue';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      text: string;\n      radius?: number;\n      fontSize?: number;\n      spin?: boolean;\n      spinDuration?: number;\n      class?: string;\n    }>(),\n    {\n      radius: 80,\n      fontSize: 14,\n      spin: true,\n      spinDuration: 20,\n      class: '',\n    },\n  );\n\n  const characters = computed(() => props.text.split(''));\n\n  const anglePerChar = computed(() => 360 / characters.value.length);\n\n  const containerSize = computed(() => props.radius * 2 + props.fontSize * 2);\n</script>\n\n<template>\n  <div\n    :class=\"cn('relative inline-flex items-center justify-center', props.class)\"\n    :style=\"{\n      width: `${containerSize}px`,\n      height: `${containerSize}px`,\n    }\"\n  >\n    <div\n      class=\"absolute inset-0\"\n      :class=\"spin && 'animate-[spin_var(--spin-duration)_linear_infinite]'\"\n      :style=\"{ '--spin-duration': `${spinDuration}s` }\"\n    >\n      <span\n        v-for=\"(char, i) in characters\"\n        :key=\"i\"\n        class=\"absolute left-1/2 top-0 origin-[0_var(--radius)] font-medium text-foreground\"\n        :style=\"{\n          '--radius': `${radius}px`,\n          fontSize: `${fontSize}px`,\n          transform: `rotate(${i * anglePerChar}deg)`,\n          transformOrigin: `0 ${radius + fontSize / 2}px`,\n        }\"\n      >\n        {{ char }}\n      </span>\n    </div>\n  </div>\n</template>\n",
       "type": "registry:ui",
-      "target": "components/ui/CircularText/CircularText.vue"
+      "target": "components/ui/circular-text/CircularText.vue"
+    },
+    {
+      "path": "registry/new-york/circular-text/index.ts",
+      "content": "export { default as CircularText } from './CircularText.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/circular-text/index.ts"
     }
   ]
 }

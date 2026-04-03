@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import InteractiveHoverButton from '@registry/new-york/InteractiveHoverButton/InteractiveHoverButton.vue';
+  import InteractiveHoverButton from '@registry/new-york/interactive-hover-button/InteractiveHoverButton.vue';
 </script>
 
 <template>

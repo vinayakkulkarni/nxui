@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Shuffle from '@registry/new-york/Shuffle/Shuffle.vue';
+  import Shuffle from '@registry/new-york/shuffle/Shuffle.vue';
 </script>
 
 <template>

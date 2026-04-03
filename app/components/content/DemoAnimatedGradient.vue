@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AnimatedGradient from '@registry/new-york/AnimatedGradient/AnimatedGradient.vue';
+  import AnimatedGradient from '@registry/new-york/animated-gradient/AnimatedGradient.vue';
   import type { AnimatedGradientConfig } from '~/types/components';
 
   const activeTab = ref(0);

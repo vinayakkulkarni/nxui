@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import SoftAurora from '@registry/new-york/SoftAurora/SoftAurora.vue';
+  import SoftAurora from '@registry/new-york/soft-aurora/SoftAurora.vue';
 </script>
 
 <template>

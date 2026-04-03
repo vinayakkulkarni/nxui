@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Masonry from '@registry/new-york/Masonry/Masonry.vue';
+  import Masonry from '@registry/new-york/masonry/Masonry.vue';
 
   const items = [
     { id: 1, img: 'https://picsum.photos/seed/a/400/600', height: 600 },

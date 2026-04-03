@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ScrollStack from '@registry/new-york/ScrollStack/ScrollStack.vue';
+  import ScrollStack from '@registry/new-york/scroll-stack/ScrollStack.vue';
 
   const cards = [
     {

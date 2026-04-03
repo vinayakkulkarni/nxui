@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import EvilEye from '@registry/new-york/EvilEye/EvilEye.vue';
+  import EvilEye from '@registry/new-york/evil-eye/EvilEye.vue';
 </script>
 
 <template>

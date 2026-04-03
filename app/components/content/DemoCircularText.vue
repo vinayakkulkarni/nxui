@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CircularText from '@registry/new-york/CircularText/CircularText.vue';
+  import CircularText from '@registry/new-york/circular-text/CircularText.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Stack from '@registry/new-york/Stack/Stack.vue';
+  import Stack from '@registry/new-york/stack/Stack.vue';
 
   const images = [
     'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=500&auto=format',

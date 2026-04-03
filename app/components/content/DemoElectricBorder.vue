@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ElectricBorder from '@registry/new-york/ElectricBorder/ElectricBorder.vue';
+  import ElectricBorder from '@registry/new-york/electric-border/ElectricBorder.vue';
 </script>
 
 <template>

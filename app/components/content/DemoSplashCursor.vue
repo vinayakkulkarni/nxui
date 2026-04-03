@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import SplashCursor from '@registry/new-york/SplashCursor/SplashCursor.vue';
+  import SplashCursor from '@registry/new-york/splash-cursor/SplashCursor.vue';
 </script>
 
 <template>

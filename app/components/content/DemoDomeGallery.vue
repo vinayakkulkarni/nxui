@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DomeGallery from '@registry/new-york/DomeGallery/DomeGallery.vue';
+  import DomeGallery from '@registry/new-york/dome-gallery/DomeGallery.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import FaultyTerminal from '@registry/new-york/FaultyTerminal/FaultyTerminal.vue';
+  import FaultyTerminal from '@registry/new-york/faulty-terminal/FaultyTerminal.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GooeyNav from '@registry/new-york/GooeyNav/GooeyNav.vue';
+  import GooeyNav from '@registry/new-york/gooey-nav/GooeyNav.vue';
 
   const items = [
     { label: 'Home' },

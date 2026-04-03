@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DitherGradient from '@registry/new-york/DitherGradient/DitherGradient.vue';
+  import DitherGradient from '@registry/new-york/dither-gradient/DitherGradient.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PixelCard from '@registry/new-york/PixelCard/PixelCard.vue';
+  import PixelCard from '@registry/new-york/pixel-card/PixelCard.vue';
 </script>
 
 <template>

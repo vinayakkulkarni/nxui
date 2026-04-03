@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Lanyard from '@registry/new-york/Lanyard/Lanyard.vue';
+  import Lanyard from '@registry/new-york/lanyard/Lanyard.vue';
 </script>
 
 <template>

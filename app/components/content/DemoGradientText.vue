@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GradientText from '@registry/new-york/GradientText/GradientText.vue';
+  import GradientText from '@registry/new-york/gradient-text/GradientText.vue';
 </script>
 
 <template>

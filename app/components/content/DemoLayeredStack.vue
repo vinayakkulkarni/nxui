@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LayeredStack from '@registry/new-york/LayeredStack/LayeredStack.vue';
+  import LayeredStack from '@registry/new-york/layered-stack/LayeredStack.vue';
 </script>
 
 <template>

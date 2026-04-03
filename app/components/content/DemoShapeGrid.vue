@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ShapeGrid from '@registry/new-york/ShapeGrid/ShapeGrid.vue';
+  import ShapeGrid from '@registry/new-york/shape-grid/ShapeGrid.vue';
 </script>
 
 <template>

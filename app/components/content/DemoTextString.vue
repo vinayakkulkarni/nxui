@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TextString from '@registry/new-york/TextString/TextString.vue';
+  import TextString from '@registry/new-york/text-string/TextString.vue';
 </script>
 
 <template>

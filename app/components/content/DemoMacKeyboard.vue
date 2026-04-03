@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import MacKeyboard from '@registry/new-york/MacKeyboard/MacKeyboard.vue';
+  import MacKeyboard from '@registry/new-york/mac-keyboard/MacKeyboard.vue';
 </script>
 
 <template>

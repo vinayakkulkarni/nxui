@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CardNav from '@registry/new-york/CardNav/CardNav.vue';
+  import CardNav from '@registry/new-york/card-nav/CardNav.vue';
 </script>
 
 <template>

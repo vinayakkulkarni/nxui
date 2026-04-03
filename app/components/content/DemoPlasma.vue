@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Plasma from '@registry/new-york/Plasma/Plasma.vue';
+  import Plasma from '@registry/new-york/plasma/Plasma.vue';
 </script>
 
 <template>

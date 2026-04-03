@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ScrubInput from '@registry/new-york/ScrubInput/ScrubInput.vue';
+  import ScrubInput from '@registry/new-york/scrub-input/ScrubInput.vue';
 </script>
 
 <template>

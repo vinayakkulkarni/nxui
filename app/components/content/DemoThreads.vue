@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Threads from '@registry/new-york/Threads/Threads.vue';
+  import Threads from '@registry/new-york/threads/Threads.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AuthModal from '@registry/new-york/AuthModal/AuthModal.vue';
+  import AuthModal from '@registry/new-york/auth-modal/AuthModal.vue';
 
   const open = ref(false);
 </script>

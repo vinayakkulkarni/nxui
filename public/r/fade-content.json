@@ -4,13 +4,21 @@
   "type": "registry:ui",
   "title": "Fade Content",
   "description": "Scroll-triggered fade-in with optional blur effect.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
-      "path": "registry/new-york/FadeContent/FadeContent.vue",
+      "path": "registry/new-york/fade-content/FadeContent.vue",
       "content": "<script setup lang=\"ts\">\n  import { ref } from 'vue';\n  import { useIntersectionObserver } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      blur?: boolean;\n      duration?: number;\n      ease?: string;\n      delay?: number;\n      threshold?: number;\n      initialOpacity?: number;\n      class?: string;\n    }>(),\n    {\n      blur: false,\n      duration: 1,\n      ease: 'cubic-bezier(0.33, 1, 0.68, 1)',\n      delay: 0,\n      threshold: 0.1,\n      initialOpacity: 0,\n      class: '',\n    },\n  );\n\n  const containerRef = ref<HTMLDivElement>();\n  const isVisible = ref(false);\n  const hasAnimated = ref(false);\n\n  useIntersectionObserver(\n    containerRef,\n    ([{ isIntersecting }]) => {\n      if (isIntersecting && !hasAnimated.value) {\n        isVisible.value = true;\n        hasAnimated.value = true;\n      }\n    },\n    { threshold: props.threshold },\n  );\n</script>\n\n<template>\n  <div\n    ref=\"containerRef\"\n    :class=\"cn($props.class)\"\n    :style=\"{\n      opacity: isVisible ? '1' : String(initialOpacity),\n      filter: isVisible ? 'blur(0px)' : blur ? 'blur(10px)' : 'blur(0px)',\n      transition: `opacity ${duration}s ${ease} ${delay}s, filter ${duration}s ${ease} ${delay}s`,\n      willChange: 'opacity, filter',\n    }\"\n  >\n    <slot></slot>\n  </div>\n</template>\n",
       "type": "registry:ui",
-      "target": "components/ui/FadeContent/FadeContent.vue"
+      "target": "components/ui/fade-content/FadeContent.vue"
+    },
+    {
+      "path": "registry/new-york/fade-content/index.ts",
+      "content": "export { default as FadeContent } from './FadeContent.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/fade-content/index.ts"
     }
   ]
 }

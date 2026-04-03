@@ -4,13 +4,21 @@
   "type": "registry:ui",
   "title": "Variable Proximity",
   "description": "Text that changes font variation settings based on cursor proximity.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
-      "path": "registry/new-york/VariableProximity/VariableProximity.vue",
+      "path": "registry/new-york/variable-proximity/VariableProximity.vue",
       "content": "<script setup lang=\"ts\">\n  import { useRafFn, useEventListener } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      label: string;\n      fromFontVariationSettings: string;\n      toFontVariationSettings: string;\n      containerRef: HTMLElement | null;\n      radius?: number;\n      falloff?: 'linear' | 'exponential' | 'gaussian';\n      class?: string;\n    }>(),\n    {\n      radius: 50,\n      falloff: 'linear',\n      class: '',\n    },\n  );\n\n  const letterRefs = ref<(HTMLSpanElement | null)[]>([]);\n  const mousePos = ref({ x: 0, y: 0 });\n\n  useEventListener(window, 'mousemove', (e: MouseEvent) => {\n    if (!props.containerRef) return;\n    const rect = props.containerRef.getBoundingClientRect();\n    mousePos.value = { x: e.clientX - rect.left, y: e.clientY - rect.top };\n  });\n\n  useEventListener(window, 'touchmove', (e: TouchEvent) => {\n    if (!props.containerRef || !e.touches[0]) return;\n    const rect = props.containerRef.getBoundingClientRect();\n    mousePos.value = {\n      x: e.touches[0].clientX - rect.left,\n      y: e.touches[0].clientY - rect.top,\n    };\n  });\n\n  function parseSettings(str: string): Map<string, number> {\n    return new Map(\n      str\n        .split(',')\n        .map((s) => s.trim())\n        .map((s) => {\n          const [name, value] = s.split(' ');\n          return [\n            (name ?? '').replace(/['\"]/g, ''),\n            Number.parseFloat(value ?? '0'),\n          ];\n        }),\n    );\n  }\n\n  const parsedAxes = computed(() => {\n    const from = parseSettings(props.fromFontVariationSettings);\n    const to = parseSettings(props.toFontVariationSettings);\n    return Array.from(from.entries()).map(([axis, fromValue]) => ({\n      axis,\n      fromValue,\n      toValue: to.get(axis) ?? fromValue,\n    }));\n  });\n\n  function calculateFalloff(distance: number): number {\n    const norm = Math.min(Math.max(1 - distance / props.radius, 0), 1);\n    if (props.falloff === 'exponential') return norm ** 2;\n    if (props.falloff === 'gaussian') {\n      return Math.exp(-((distance / (props.radius / 2)) ** 2) / 2);\n    }\n    return norm;\n  }\n\n  useRafFn(() => {\n    if (!props.containerRef) return;\n    const containerRect = props.containerRef.getBoundingClientRect();\n\n    letterRefs.value.forEach((el) => {\n      if (!el) return;\n      const rect = el.getBoundingClientRect();\n      const cx = rect.left + rect.width / 2 - containerRect.left;\n      const cy = rect.top + rect.height / 2 - containerRect.top;\n      const dx = mousePos.value.x - cx;\n      const dy = mousePos.value.y - cy;\n      const dist = Math.sqrt(dx * dx + dy * dy);\n\n      if (dist >= props.radius) {\n        el.style.fontVariationSettings = props.fromFontVariationSettings;\n        return;\n      }\n\n      const f = calculateFalloff(dist);\n      const settings = parsedAxes.value\n        .map(({ axis, fromValue, toValue }) => {\n          const v = fromValue + (toValue - fromValue) * f;\n          return `'${axis}' ${v}`;\n        })\n        .join(', ');\n\n      el.style.fontVariationSettings = settings;\n    });\n  });\n\n  const words = computed(() => props.label.split(' '));\n\n  function setLetterRef(\n    index: number,\n    el: Element | ComponentPublicInstance | null,\n  ) {\n    letterRefs.value[index] = el as HTMLSpanElement | null;\n  }\n</script>\n\n<template>\n  <span :class=\"cn('inline', props.class)\">\n    <span\n      v-for=\"(word, wi) in words\"\n      :key=\"wi\"\n      class=\"inline-block whitespace-nowrap\"\n    >\n      <span\n        v-for=\"(letter, li) in word.split('')\"\n        :key=\"li\"\n        :ref=\"(el) => setLetterRef(words.slice(0, wi).join('').length + li, el)\"\n        class=\"inline-block\"\n        aria-hidden=\"true\"\n        >{{ letter }}</span\n      >\n      <span v-if=\"wi < words.length - 1\" class=\"inline-block\">&nbsp;</span>\n    </span>\n    <span class=\"sr-only\">{{ label }}</span>\n  </span>\n</template>\n",
       "type": "registry:ui",
-      "target": "components/ui/VariableProximity/VariableProximity.vue"
+      "target": "components/ui/variable-proximity/VariableProximity.vue"
+    },
+    {
+      "path": "registry/new-york/variable-proximity/index.ts",
+      "content": "export { default as VariableProximity } from './VariableProximity.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/variable-proximity/index.ts"
     }
   ]
 }

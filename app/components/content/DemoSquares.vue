@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Squares from '@registry/new-york/Squares/Squares.vue';
+  import Squares from '@registry/new-york/squares/Squares.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import BorderBeam from '@registry/new-york/BorderBeam/BorderBeam.vue';
+  import BorderBeam from '@registry/new-york/border-beam/BorderBeam.vue';
 </script>
 
 <template>

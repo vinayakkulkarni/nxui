@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Ribbons from '@registry/new-york/Ribbons/Ribbons.vue';
+  import Ribbons from '@registry/new-york/ribbons/Ribbons.vue';
 </script>
 
 <template>

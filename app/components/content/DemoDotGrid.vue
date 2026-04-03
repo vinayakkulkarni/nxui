@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DotGrid from '@registry/new-york/DotGrid/DotGrid.vue';
+  import DotGrid from '@registry/new-york/dot-grid/DotGrid.vue';
 </script>
 
 <template>

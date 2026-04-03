@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import EyeTracking from '@registry/new-york/EyeTracking/EyeTracking.vue';
+  import EyeTracking from '@registry/new-york/eye-tracking/EyeTracking.vue';
 </script>
 
 <template>

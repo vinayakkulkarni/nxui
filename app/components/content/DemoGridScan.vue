@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GridScan from '@registry/new-york/GridScan/GridScan.vue';
+  import GridScan from '@registry/new-york/grid-scan/GridScan.vue';
 </script>
 
 <template>

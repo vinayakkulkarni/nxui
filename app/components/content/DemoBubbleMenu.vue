@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import BubbleMenu from '@registry/new-york/BubbleMenu/BubbleMenu.vue';
+  import BubbleMenu from '@registry/new-york/bubble-menu/BubbleMenu.vue';
 </script>
 
 <template>

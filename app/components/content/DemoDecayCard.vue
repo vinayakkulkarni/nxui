@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DecayCard from '@registry/new-york/DecayCard/DecayCard.vue';
+  import DecayCard from '@registry/new-york/decay-card/DecayCard.vue';
 </script>
 
 <template>

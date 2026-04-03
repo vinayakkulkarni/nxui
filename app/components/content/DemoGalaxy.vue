@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Galaxy from '@registry/new-york/Galaxy/Galaxy.vue';
+  import Galaxy from '@registry/new-york/galaxy/Galaxy.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ParticleGalaxyRenderer from '@registry/new-york/ParticleGalaxy/ParticleGalaxyRenderer.vue';
+  import ParticleGalaxyRenderer from '@registry/new-york/particle-galaxy/ParticleGalaxyRenderer.vue';
   import type { ParticleGalaxyBlendMode } from '~/types/components';
 
   const colorMode = useColorMode();

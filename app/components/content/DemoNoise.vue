@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Noise from '@registry/new-york/Noise/Noise.vue';
+  import Noise from '@registry/new-york/noise/Noise.vue';
 </script>
 
 <template>

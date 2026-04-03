@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ModelViewer from '@registry/new-york/ModelViewer/ModelViewer.vue';
+  import ModelViewer from '@registry/new-york/model-viewer/ModelViewer.vue';
 </script>
 
 <template>

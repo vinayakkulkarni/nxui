@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Antigravity from '@registry/new-york/Antigravity/Antigravity.vue';
+  import Antigravity from '@registry/new-york/antigravity/Antigravity.vue';
 </script>
 
 <template>

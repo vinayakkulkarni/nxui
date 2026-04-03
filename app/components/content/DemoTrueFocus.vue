@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TrueFocus from '@registry/new-york/TrueFocus/TrueFocus.vue';
+  import TrueFocus from '@registry/new-york/true-focus/TrueFocus.vue';
 </script>
 
 <template>

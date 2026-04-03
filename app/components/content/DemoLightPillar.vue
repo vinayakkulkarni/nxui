@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LightPillar from '@registry/new-york/LightPillar/LightPillar.vue';
+  import LightPillar from '@registry/new-york/light-pillar/LightPillar.vue';
 </script>
 
 <template>

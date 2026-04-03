@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PixelTrail from '@registry/new-york/PixelTrail/PixelTrail.vue';
+  import PixelTrail from '@registry/new-york/pixel-trail/PixelTrail.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ClickSpark from '@registry/new-york/ClickSpark/ClickSpark.vue';
+  import ClickSpark from '@registry/new-york/click-spark/ClickSpark.vue';
 </script>
 
 <template>

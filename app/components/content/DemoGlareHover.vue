@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GlareHover from '@registry/new-york/GlareHover/GlareHover.vue';
+  import GlareHover from '@registry/new-york/glare-hover/GlareHover.vue';
 </script>
 
 <template>

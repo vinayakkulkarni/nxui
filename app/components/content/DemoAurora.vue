@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Aurora from '@registry/new-york/Aurora/Aurora.vue';
+  import Aurora from '@registry/new-york/aurora/Aurora.vue';
 </script>
 
 <template>

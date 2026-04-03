@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CurvedLoop from '@registry/new-york/CurvedLoop/CurvedLoop.vue';
+  import CurvedLoop from '@registry/new-york/curved-loop/CurvedLoop.vue';
 </script>
 
 <template>

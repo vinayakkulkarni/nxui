@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LineWaves from '@registry/new-york/LineWaves/LineWaves.vue';
+  import LineWaves from '@registry/new-york/line-waves/LineWaves.vue';
 </script>
 
 <template>

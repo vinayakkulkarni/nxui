@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AnimatedContent from '@registry/new-york/AnimatedContent/AnimatedContent.vue';
+  import AnimatedContent from '@registry/new-york/animated-content/AnimatedContent.vue';
 </script>
 
 <template>

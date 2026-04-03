@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { Testimonial } from '~/types/components';
-  import TestimonialMarquee from '@registry/new-york/TestimonialMarquee/TestimonialMarquee.vue';
+  import TestimonialMarquee from '@registry/new-york/testimonial-marquee/TestimonialMarquee.vue';
 
   const testimonials: Testimonial[] = [
     {

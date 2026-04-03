@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PrismaticBurst from '@registry/new-york/PrismaticBurst/PrismaticBurst.vue';
+  import PrismaticBurst from '@registry/new-york/prismatic-burst/PrismaticBurst.vue';
 </script>
 
 <template>

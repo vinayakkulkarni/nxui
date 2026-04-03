@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import AnimatedList from '@registry/new-york/AnimatedList/AnimatedList.vue';
+  import AnimatedList from '@registry/new-york/animated-list/AnimatedList.vue';
 
   const items = [
     'Build responsive layouts with Tailwind',

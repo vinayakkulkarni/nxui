@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ScrambledText from '@registry/new-york/ScrambledText/ScrambledText.vue';
+  import ScrambledText from '@registry/new-york/scrambled-text/ScrambledText.vue';
 </script>
 
 <template>

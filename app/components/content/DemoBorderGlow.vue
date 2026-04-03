@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import BorderGlow from '@registry/new-york/BorderGlow/BorderGlow.vue';
+  import BorderGlow from '@registry/new-york/border-glow/BorderGlow.vue';
 </script>
 
 <template>

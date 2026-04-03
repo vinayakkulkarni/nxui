@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ASCIIText from '@registry/new-york/ASCIIText/ASCIIText.vue';
+  import ASCIIText from '@registry/new-york/ascii-text/ASCIIText.vue';
 </script>
 
 <template>

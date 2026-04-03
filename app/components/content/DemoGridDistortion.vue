@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GridDistortion from '@registry/new-york/GridDistortion/GridDistortion.vue';
+  import GridDistortion from '@registry/new-york/grid-distortion/GridDistortion.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import HyperText from '@registry/new-york/HyperText/HyperText.vue';
+  import HyperText from '@registry/new-york/hyper-text/HyperText.vue';
 </script>
 
 <template>

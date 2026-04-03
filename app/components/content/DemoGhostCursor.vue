@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GhostCursor from '@registry/new-york/GhostCursor/GhostCursor.vue';
+  import GhostCursor from '@registry/new-york/ghost-cursor/GhostCursor.vue';
 
   const colorMode = useColorMode();
   const ghostColor = computed(() =>

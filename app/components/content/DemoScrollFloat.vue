@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ScrollFloat from '@registry/new-york/ScrollFloat/ScrollFloat.vue';
+  import ScrollFloat from '@registry/new-york/scroll-float/ScrollFloat.vue';
 
   const scrollContainer = useTemplateRef<HTMLElement>('scrollContainer');
 </script>

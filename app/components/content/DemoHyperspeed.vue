@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Hyperspeed from '@registry/new-york/Hyperspeed/Hyperspeed.vue';
+  import Hyperspeed from '@registry/new-york/hyperspeed/Hyperspeed.vue';
 </script>
 
 <template>

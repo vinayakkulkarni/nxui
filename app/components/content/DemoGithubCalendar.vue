@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue';
-  import GithubCalendar from '@registry/new-york/GithubCalendar/GithubCalendar.vue';
+  import GithubCalendar from '@registry/new-york/github-calendar/GithubCalendar.vue';
 
   const activeTab = ref(0);
 

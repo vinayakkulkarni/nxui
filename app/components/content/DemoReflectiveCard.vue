@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ReflectiveCard from '@registry/new-york/ReflectiveCard/ReflectiveCard.vue';
+  import ReflectiveCard from '@registry/new-york/reflective-card/ReflectiveCard.vue';
 </script>
 
 <template>

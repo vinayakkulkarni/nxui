@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Waves from '@registry/new-york/Waves/Waves.vue';
+  import Waves from '@registry/new-york/waves/Waves.vue';
 </script>
 
 <template>

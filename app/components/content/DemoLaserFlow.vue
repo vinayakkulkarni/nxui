@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LaserFlow from '@registry/new-york/LaserFlow/LaserFlow.vue';
+  import LaserFlow from '@registry/new-york/laser-flow/LaserFlow.vue';
 </script>
 
 <template>

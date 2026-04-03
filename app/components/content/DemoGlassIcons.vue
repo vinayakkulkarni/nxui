@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GlassIcons from '@registry/new-york/GlassIcons/GlassIcons.vue';
+  import GlassIcons from '@registry/new-york/glass-icons/GlassIcons.vue';
 
   const items = [
     { icon: 'lucide:home', label: 'Home', color: 'blue' },

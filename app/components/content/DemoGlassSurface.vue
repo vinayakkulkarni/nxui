@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GlassSurface from '@registry/new-york/GlassSurface/GlassSurface.vue';
+  import GlassSurface from '@registry/new-york/glass-surface/GlassSurface.vue';
 
   const scrollItems = [
     {

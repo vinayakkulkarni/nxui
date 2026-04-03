@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import RotatingText from '@registry/new-york/RotatingText/RotatingText.vue';
+  import RotatingText from '@registry/new-york/rotating-text/RotatingText.vue';
 </script>
 
 <template>

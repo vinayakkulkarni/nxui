@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LiquidEther from '@registry/new-york/LiquidEther/LiquidEther.vue';
+  import LiquidEther from '@registry/new-york/liquid-ether/LiquidEther.vue';
 </script>
 
 <template>

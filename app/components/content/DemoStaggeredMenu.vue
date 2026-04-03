@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import StaggeredMenu from '@registry/new-york/StaggeredMenu/StaggeredMenu.vue';
+  import StaggeredMenu from '@registry/new-york/staggered-menu/StaggeredMenu.vue';
 
   const items = [
     { label: 'Home', link: '#' },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Orb from '@registry/new-york/Orb/Orb.vue';
+  import Orb from '@registry/new-york/orb/Orb.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ScrollBasedVelocity from '@registry/new-york/ScrollBasedVelocity/ScrollBasedVelocity.vue';
+  import ScrollBasedVelocity from '@registry/new-york/scroll-based-velocity/ScrollBasedVelocity.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Magnet from '@registry/new-york/Magnet/Magnet.vue';
+  import Magnet from '@registry/new-york/magnet/Magnet.vue';
 </script>
 
 <template>

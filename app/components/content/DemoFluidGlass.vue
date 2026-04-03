@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import FluidGlass from '@registry/new-york/FluidGlass/FluidGlass.vue';
+  import FluidGlass from '@registry/new-york/fluid-glass/FluidGlass.vue';
 </script>
 
 <template>

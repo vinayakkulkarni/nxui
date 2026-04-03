@@ -71,12 +71,14 @@ nxui/
 │       └── components.ts              # Component interfaces
 ├── registry/
 │   └── new-york/                      # Registry components (NOT auto-imported)
-│       ├── ShimmerButton/
-│       │   └── ShimmerButton.vue
-│       ├── NodeDiagram/
+│       ├── shimmer-button/
+│       │   ├── ShimmerButton.vue
+│       │   └── index.ts
+│       ├── node-diagram/
 │       │   ├── NodeDiagram.vue
 │       │   ├── NodeDiagramNode.vue
-│       │   └── NodeDiagramTrace.vue
+│       │   ├── NodeDiagramTrace.vue
+│       │   └── index.ts
 │       └── ...
 ├── content/                           # @nuxt/content markdown
 │   ├── docs/components/               # Component doc pages
@@ -177,7 +179,7 @@ Dark mode uses oklch with hue 270. Dark variant: `@custom-variant dark (&:is(.da
 Components in `registry/new-york/` are NOT auto-imported by Nuxt. Sub-components MUST use explicit relative imports.
 
 ```typescript
-// Inside registry/new-york/NodeDiagram/NodeDiagram.vue:
+// Inside registry/new-york/node-diagram/NodeDiagram.vue:
 import NodeDiagramNode from './NodeDiagramNode.vue'; // ✅ Explicit
 ```
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ShowcaseCard from '@registry/new-york/ShowcaseCard/ShowcaseCard.vue';
+  import ShowcaseCard from '@registry/new-york/showcase-card/ShowcaseCard.vue';
 </script>
 
 <template>

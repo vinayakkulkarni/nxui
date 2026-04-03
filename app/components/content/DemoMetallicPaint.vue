@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import MetallicPaint from '@registry/new-york/MetallicPaint/MetallicPaint.vue';
+  import MetallicPaint from '@registry/new-york/metallic-paint/MetallicPaint.vue';
 </script>
 
 <template>

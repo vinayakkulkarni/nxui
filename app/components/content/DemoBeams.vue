@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Beams from '@registry/new-york/Beams/Beams.vue';
+  import Beams from '@registry/new-york/beams/Beams.vue';
 </script>
 
 <template>

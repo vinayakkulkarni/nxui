@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LightRays from '@registry/new-york/LightRays/LightRays.vue';
+  import LightRays from '@registry/new-york/light-rays/LightRays.vue';
 </script>
 
 <template>

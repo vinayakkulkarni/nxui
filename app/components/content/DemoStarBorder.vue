@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import StarBorder from '@registry/new-york/StarBorder/StarBorder.vue';
+  import StarBorder from '@registry/new-york/star-border/StarBorder.vue';
 </script>
 
 <template>

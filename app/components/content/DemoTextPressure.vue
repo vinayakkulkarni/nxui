@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TextPressure from '@registry/new-york/TextPressure/TextPressure.vue';
+  import TextPressure from '@registry/new-york/text-pressure/TextPressure.vue';
 </script>
 
 <template>

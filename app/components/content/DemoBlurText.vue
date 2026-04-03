@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import BlurText from '@registry/new-york/BlurText/BlurText.vue';
+  import BlurText from '@registry/new-york/blur-text/BlurText.vue';
 </script>
 
 <template>

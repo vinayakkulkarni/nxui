@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TiltedCard from '@registry/new-york/TiltedCard/TiltedCard.vue';
+  import TiltedCard from '@registry/new-york/tilted-card/TiltedCard.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import SplitFlapDisplay from '@registry/new-york/SplitFlapDisplay/SplitFlapDisplay.vue';
+  import SplitFlapDisplay from '@registry/new-york/split-flap-display/SplitFlapDisplay.vue';
 
   const rows = [
     { label: 'DEPARTURE', value: 'LOS ANGELES' },

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ProfileCard from '@registry/new-york/ProfileCard/ProfileCard.vue';
+  import ProfileCard from '@registry/new-york/profile-card/ProfileCard.vue';
 </script>
 
 <template>

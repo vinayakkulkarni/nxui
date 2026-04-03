@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CollectionSurfer from '@registry/new-york/CollectionSurfer/CollectionSurfer.vue';
+  import CollectionSurfer from '@registry/new-york/collection-surfer/CollectionSurfer.vue';
   import type {
     CollectionSurferItem,
     CollectionSurferVariant,

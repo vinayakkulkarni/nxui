@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import InfiniteImageField from '@registry/new-york/InfiniteImageField/InfiniteImageField.vue';
+  import InfiniteImageField from '@registry/new-york/infinite-image-field/InfiniteImageField.vue';
 </script>
 
 <template>

@@ -4,13 +4,21 @@
   "type": "registry:ui",
   "title": "Text Type",
   "description": "Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
-      "path": "registry/new-york/TextType/TextType.vue",
+      "path": "registry/new-york/text-type/TextType.vue",
       "content": "<script setup lang=\"ts\">\n  import { useIntersectionObserver } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      text: string | string[];\n      typingSpeed?: number;\n      deletingSpeed?: number;\n      pauseDuration?: number;\n      loop?: boolean;\n      showCursor?: boolean;\n      cursorCharacter?: string;\n      startOnView?: boolean;\n      class?: string;\n    }>(),\n    {\n      typingSpeed: 50,\n      deletingSpeed: 30,\n      pauseDuration: 2000,\n      loop: true,\n      showCursor: true,\n      cursorCharacter: '|',\n      startOnView: true,\n      class: '',\n    },\n  );\n\n  const el = ref<HTMLElement>();\n  const displayedText = ref('');\n  const charIndex = ref(0);\n  const textIndex = ref(0);\n  const isDeleting = ref(false);\n  const isVisible = ref(!props.startOnView);\n\n  const textArray = computed(() =>\n    Array.isArray(props.text) ? props.text : [props.text],\n  );\n\n  if (props.startOnView) {\n    useIntersectionObserver(el, ([entry]) => {\n      if (entry?.isIntersecting) {\n        isVisible.value = true;\n      }\n    });\n  }\n\n  let timeout: ReturnType<typeof setTimeout>;\n\n  function tick() {\n    if (!isVisible.value) return;\n\n    const currentText = textArray.value[textIndex.value] ?? '';\n\n    if (isDeleting.value) {\n      if (displayedText.value.length > 0) {\n        displayedText.value = displayedText.value.slice(0, -1);\n        timeout = setTimeout(tick, props.deletingSpeed);\n      } else {\n        isDeleting.value = false;\n        textIndex.value = (textIndex.value + 1) % textArray.value.length;\n        charIndex.value = 0;\n        timeout = setTimeout(tick, props.pauseDuration);\n      }\n    } else {\n      if (charIndex.value < currentText.length) {\n        displayedText.value += currentText[charIndex.value];\n        charIndex.value++;\n        timeout = setTimeout(tick, props.typingSpeed);\n      } else {\n        if (textArray.value.length === 1 && !props.loop) return;\n        if (!props.loop && textIndex.value === textArray.value.length - 1)\n          return;\n        timeout = setTimeout(() => {\n          isDeleting.value = true;\n          tick();\n        }, props.pauseDuration);\n      }\n    }\n  }\n\n  watch(isVisible, (visible) => {\n    if (visible) tick();\n  });\n\n  onMounted(() => {\n    if (isVisible.value) tick();\n  });\n\n  onUnmounted(() => {\n    clearTimeout(timeout);\n  });\n</script>\n\n<template>\n  <span ref=\"el\" :class=\"cn('inline-block whitespace-pre-wrap', props.class)\">\n    <span>{{ displayedText }}</span>\n    <span\n      v-if=\"showCursor\"\n      class=\"ml-0.5 inline-block animate-[cursor-blink_1s_steps(2)_infinite]\"\n    >\n      {{ cursorCharacter }}\n    </span>\n  </span>\n</template>\n\n<style scoped>\n  @keyframes cursor-blink {\n    0%,\n    100% {\n      opacity: 1;\n    }\n    50% {\n      opacity: 0;\n    }\n  }\n</style>\n",
       "type": "registry:ui",
-      "target": "components/ui/TextType/TextType.vue"
+      "target": "components/ui/text-type/TextType.vue"
+    },
+    {
+      "path": "registry/new-york/text-type/index.ts",
+      "content": "export { default as TextType } from './TextType.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/text-type/index.ts"
     }
   ]
 }

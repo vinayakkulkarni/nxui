@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import MetaBalls from '@registry/new-york/MetaBalls/MetaBalls.vue';
+  import MetaBalls from '@registry/new-york/meta-balls/MetaBalls.vue';
 </script>
 
 <template>

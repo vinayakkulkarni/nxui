@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import MagicBento from '@registry/new-york/MagicBento/MagicBento.vue';
+  import MagicBento from '@registry/new-york/magic-bento/MagicBento.vue';
 </script>
 
 <template>

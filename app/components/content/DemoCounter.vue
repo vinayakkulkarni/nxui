@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref } from 'vue';
-  import Counter from '@registry/new-york/Counter/Counter.vue';
+  import Counter from '@registry/new-york/counter/Counter.vue';
 
   const value = ref(1234);
 

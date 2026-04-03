@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GradientBlinds from '@registry/new-york/GradientBlinds/GradientBlinds.vue';
+  import GradientBlinds from '@registry/new-york/gradient-blinds/GradientBlinds.vue';
 </script>
 
 <template>

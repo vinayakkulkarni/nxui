@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import StickerPeel from '@registry/new-york/StickerPeel/StickerPeel.vue';
+  import StickerPeel from '@registry/new-york/sticker-peel/StickerPeel.vue';
 
   const stickerSrc =
     'https://api.iconify.design/simple-icons:vuedotjs.svg?color=%234FC08D&width=200&height=200';

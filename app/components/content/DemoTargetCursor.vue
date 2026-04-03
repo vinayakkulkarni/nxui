@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TargetCursor from '@registry/new-york/TargetCursor/TargetCursor.vue';
+  import TargetCursor from '@registry/new-york/target-cursor/TargetCursor.vue';
 </script>
 
 <template>

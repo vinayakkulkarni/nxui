@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import FadeContent from '@registry/new-york/FadeContent/FadeContent.vue';
+  import FadeContent from '@registry/new-york/fade-content/FadeContent.vue';
 </script>
 
 <template>

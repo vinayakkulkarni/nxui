@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DecryptedText from '@registry/new-york/DecryptedText/DecryptedText.vue';
+  import DecryptedText from '@registry/new-york/decrypted-text/DecryptedText.vue';
 </script>
 
 <template>

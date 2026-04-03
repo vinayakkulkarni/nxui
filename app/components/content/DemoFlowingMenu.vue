@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import FlowingMenu from '@registry/new-york/FlowingMenu/FlowingMenu.vue';
+  import FlowingMenu from '@registry/new-york/flowing-menu/FlowingMenu.vue';
 
   const menuItems = [
     {

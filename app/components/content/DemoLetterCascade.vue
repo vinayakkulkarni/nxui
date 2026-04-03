@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LetterCascade from '@registry/new-york/LetterCascade/LetterCascade.vue';
+  import LetterCascade from '@registry/new-york/letter-cascade/LetterCascade.vue';
 </script>
 
 <template>

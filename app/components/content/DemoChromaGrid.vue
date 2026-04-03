@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ChromaGrid from '@registry/new-york/ChromaGrid/ChromaGrid.vue';
+  import ChromaGrid from '@registry/new-york/chroma-grid/ChromaGrid.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import FallingText from '@registry/new-york/FallingText/FallingText.vue';
+  import FallingText from '@registry/new-york/falling-text/FallingText.vue';
 </script>
 
 <template>

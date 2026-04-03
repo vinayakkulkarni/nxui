@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import RippleGrid from '@registry/new-york/RippleGrid/RippleGrid.vue';
+  import RippleGrid from '@registry/new-york/ripple-grid/RippleGrid.vue';
 </script>
 
 <template>

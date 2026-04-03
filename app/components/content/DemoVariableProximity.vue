@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import VariableProximity from '@registry/new-york/VariableProximity/VariableProximity.vue';
+  import VariableProximity from '@registry/new-york/variable-proximity/VariableProximity.vue';
 
   const containerRef = ref<HTMLElement | null>(null);
 </script>

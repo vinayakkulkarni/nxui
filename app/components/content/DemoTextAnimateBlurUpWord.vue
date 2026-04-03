@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TextAnimate from '@registry/new-york/TextAnimate/TextAnimate.vue';
+  import TextAnimate from '@registry/new-york/text-animate/TextAnimate.vue';
 </script>
 
 <template>

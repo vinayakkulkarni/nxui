@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PixelCanvas from '@registry/new-york/PixelCanvas/PixelCanvas.vue';
+  import PixelCanvas from '@registry/new-york/pixel-canvas/PixelCanvas.vue';
   import type { PixelCanvasVariant } from '~/types/components';
 
   const activeTab = ref(0);

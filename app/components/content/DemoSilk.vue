@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Silk from '@registry/new-york/Silk/Silk.vue';
+  import Silk from '@registry/new-york/silk/Silk.vue';
 </script>
 
 <template>

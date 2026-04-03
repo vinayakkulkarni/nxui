@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ScrollReveal from '@registry/new-york/ScrollReveal/ScrollReveal.vue';
+  import ScrollReveal from '@registry/new-york/scroll-reveal/ScrollReveal.vue';
 
   const scrollContainer = useTemplateRef<HTMLElement>('scrollContainer');
 </script>

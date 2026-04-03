@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import EditorialOrbs from '@registry/new-york/EditorialOrbs/EditorialOrbs.vue';
+  import EditorialOrbs from '@registry/new-york/editorial-orbs/EditorialOrbs.vue';
 </script>
 
 <template>

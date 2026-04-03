@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import DarkVeil from '@registry/new-york/DarkVeil/DarkVeil.vue';
+  import DarkVeil from '@registry/new-york/dark-veil/DarkVeil.vue';
 </script>
 
 <template>

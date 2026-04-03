@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GradualBlur from '@registry/new-york/GradualBlur/GradualBlur.vue';
+  import GradualBlur from '@registry/new-york/gradual-blur/GradualBlur.vue';
 </script>
 
 <template>

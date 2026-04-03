@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import NodeDiagram from '@registry/new-york/NodeDiagram/NodeDiagram.vue';
+  import NodeDiagram from '@registry/new-york/node-diagram/NodeDiagram.vue';
   import type {
     NodeDiagramNodeData,
     NodeDiagramConnectionData,

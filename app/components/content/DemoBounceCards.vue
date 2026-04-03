@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import BounceCards from '@registry/new-york/BounceCards/BounceCards.vue';
+  import BounceCards from '@registry/new-york/bounce-cards/BounceCards.vue';
 
   const images = [
     'https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=200&auto=format',

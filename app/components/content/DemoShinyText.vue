@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ShinyText from '@registry/new-york/ShinyText/ShinyText.vue';
+  import ShinyText from '@registry/new-york/shiny-text/ShinyText.vue';
 </script>
 
 <template>

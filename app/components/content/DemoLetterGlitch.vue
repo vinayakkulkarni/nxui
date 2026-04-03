@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LetterGlitch from '@registry/new-york/LetterGlitch/LetterGlitch.vue';
+  import LetterGlitch from '@registry/new-york/letter-glitch/LetterGlitch.vue';
 </script>
 
 <template>

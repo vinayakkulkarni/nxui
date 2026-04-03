@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GridMotion from '@registry/new-york/GridMotion/GridMotion.vue';
+  import GridMotion from '@registry/new-york/grid-motion/GridMotion.vue';
 </script>
 
 <template>

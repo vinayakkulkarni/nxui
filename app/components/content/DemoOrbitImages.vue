@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import OrbitImages from '@registry/new-york/OrbitImages/OrbitImages.vue';
+  import OrbitImages from '@registry/new-york/orbit-images/OrbitImages.vue';
 
   const images = [
     {

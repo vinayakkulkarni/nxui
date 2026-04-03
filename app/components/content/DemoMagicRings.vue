@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import MagicRings from '@registry/new-york/MagicRings/MagicRings.vue';
+  import MagicRings from '@registry/new-york/magic-rings/MagicRings.vue';
 </script>
 
 <template>

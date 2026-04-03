@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Grainient from '@registry/new-york/Grainient/Grainient.vue';
+  import Grainient from '@registry/new-york/grainient/Grainient.vue';
 </script>
 
 <template>

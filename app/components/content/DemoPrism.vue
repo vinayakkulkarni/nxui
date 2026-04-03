@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Prism from '@registry/new-york/Prism/Prism.vue';
+  import Prism from '@registry/new-york/prism/Prism.vue';
 </script>
 
 <template>

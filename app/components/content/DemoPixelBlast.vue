@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PixelBlast from '@registry/new-york/PixelBlast/PixelBlast.vue';
+  import PixelBlast from '@registry/new-york/pixel-blast/PixelBlast.vue';
 </script>
 
 <template>

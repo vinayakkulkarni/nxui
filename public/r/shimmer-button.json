@@ -7,10 +7,16 @@
   "dependencies": [],
   "files": [
     {
-      "path": "registry/new-york/ShimmerButton/ShimmerButton.vue",
+      "path": "registry/new-york/shimmer-button/ShimmerButton.vue",
       "content": "<script setup lang=\"ts\">\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      shimmerColor?: string;\n      shimmerSize?: string;\n      shimmerDuration?: string;\n      borderRadius?: string;\n      background?: string;\n      class?: string;\n    }>(),\n    {\n      shimmerColor: '#ffffff',\n      shimmerSize: '0.05em',\n      shimmerDuration: '3s',\n      borderRadius: '100px',\n      background: 'rgba(0, 0, 0, 1)',\n      class: '',\n    },\n  );\n\n  const colorMode = useColorMode();\n  const isDark = computed(() => colorMode.value === 'dark');\n\n  const resolvedBg = computed(() => {\n    if (props.background !== 'rgba(0, 0, 0, 1)') return props.background;\n    return isDark.value ? 'rgba(255, 255, 255, 1)' : 'rgba(0, 0, 0, 1)';\n  });\n\n  const resolvedShimmerColor = computed(() => {\n    if (props.shimmerColor !== '#ffffff') return props.shimmerColor;\n    return isDark.value ? '#000000' : '#ffffff';\n  });\n</script>\n\n<template>\n  <button\n    :class=\"\n      cn(\n        'group relative z-0 inline-flex h-11 cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-sm font-medium text-white [background:var(--bg)] [border-radius:var(--radius)] transition-transform duration-300 ease-in-out active:translate-y-px dark:border-black/10 dark:text-black',\n        $props.class,\n      )\n    \"\n    :style=\"{\n      '--spread': '90deg',\n      '--shimmer-color': resolvedShimmerColor,\n      '--radius': borderRadius,\n      '--speed': shimmerDuration,\n      '--cut': shimmerSize,\n      '--bg': resolvedBg,\n    }\"\n  >\n    <!-- spark container -->\n    <span\n      class=\"absolute inset-0 -z-30 overflow-visible blur-[2px] [container-type:size]\"\n    >\n      <!-- spark -->\n      <span\n        class=\"absolute inset-0 h-[100cqh] animate-shimmer-slide [aspect-ratio:1] [border-radius:0] [mask:none]\"\n      >\n        <!-- spark gradient -->\n        <span\n          class=\"absolute -inset-full w-auto rotate-0 animate-spin-around [background:conic-gradient(from_calc(270deg-(var(--spread)*0.5)),transparent_0,var(--shimmer-color)_var(--spread),transparent_var(--spread))]\"\n        ></span>\n      </span>\n    </span>\n\n    <!-- content -->\n    <span class=\"relative z-10 flex items-center gap-2\">\n      <slot>Shimmer Button</slot>\n    </span>\n\n    <!-- highlight -->\n    <span\n      class=\"absolute inset-0 size-full rounded-2xl px-4 py-1.5 shadow-[inset_0_-8px_10px_#ffffff1f] transition-all duration-300 ease-in-out group-hover:shadow-[inset_0_-6px_10px_#ffffff3f] group-active:shadow-[inset_0_-10px_10px_#ffffff3f] dark:shadow-[inset_0_-8px_10px_#0000000d] dark:group-hover:shadow-[inset_0_-6px_10px_#00000014] dark:group-active:shadow-[inset_0_-10px_10px_#00000014]\"\n    ></span>\n\n    <!-- backdrop -->\n    <span\n      class=\"absolute -z-20 [background:var(--bg)] [border-radius:var(--radius)] [inset:var(--cut)]\"\n    ></span>\n  </button>\n</template>\n",
       "type": "registry:ui",
-      "target": "components/ui/ShimmerButton/ShimmerButton.vue"
+      "target": "components/ui/shimmer-button/ShimmerButton.vue"
+    },
+    {
+      "path": "registry/new-york/shimmer-button/index.ts",
+      "content": "export { default as ShimmerButton } from './ShimmerButton.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/shimmer-button/index.ts"
     }
   ]
 }

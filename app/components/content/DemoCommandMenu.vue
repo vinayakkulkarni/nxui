@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CommandMenu from '@registry/new-york/CommandMenu/CommandMenu.vue';
+  import CommandMenu from '@registry/new-york/command-menu/CommandMenu.vue';
   import type { CommandItem } from '~/types/components';
 
   const open = ref(false);

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TextType from '@registry/new-york/TextType/TextType.vue';
+  import TextType from '@registry/new-york/text-type/TextType.vue';
 </script>
 
 <template>

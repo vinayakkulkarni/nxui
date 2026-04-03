@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CircularGallery from '@registry/new-york/CircularGallery/CircularGallery.vue';
+  import CircularGallery from '@registry/new-york/circular-gallery/CircularGallery.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ImageRippleEffect from '@registry/new-york/ImageRippleEffect/ImageRippleEffect.vue';
+  import ImageRippleEffect from '@registry/new-york/image-ripple-effect/ImageRippleEffect.vue';
 </script>
 
 <template>

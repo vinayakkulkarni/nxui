@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import HeroGeometric from '@registry/new-york/HeroGeometric/HeroGeometric.vue';
+  import HeroGeometric from '@registry/new-york/hero-geometric/HeroGeometric.vue';
 
   const activeTab = ref(0);
 

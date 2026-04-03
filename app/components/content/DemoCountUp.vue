@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CountUp from '@registry/new-york/CountUp/CountUp.vue';
+  import CountUp from '@registry/new-york/count-up/CountUp.vue';
 </script>
 
 <template>

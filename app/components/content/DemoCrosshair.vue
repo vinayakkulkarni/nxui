@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Crosshair from '@registry/new-york/Crosshair/Crosshair.vue';
+  import Crosshair from '@registry/new-york/crosshair/Crosshair.vue';
 
   const colorMode = useColorMode();
   const crosshairColor = computed(() =>

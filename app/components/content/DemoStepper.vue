@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Stepper from '@registry/new-york/Stepper/Stepper.vue';
+  import Stepper from '@registry/new-york/stepper/Stepper.vue';
 </script>
 
 <template>

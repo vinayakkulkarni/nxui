@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PixelTransition from '@registry/new-york/PixelTransition/PixelTransition.vue';
+  import PixelTransition from '@registry/new-york/pixel-transition/PixelTransition.vue';
 </script>
 
 <template>

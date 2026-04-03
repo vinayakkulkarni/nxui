@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Lightning from '@registry/new-york/Lightning/Lightning.vue';
+  import Lightning from '@registry/new-york/lightning/Lightning.vue';
 </script>
 
 <template>

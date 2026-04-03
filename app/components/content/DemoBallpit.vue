@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Ballpit from '@registry/new-york/Ballpit/Ballpit.vue';
+  import Ballpit from '@registry/new-york/ballpit/Ballpit.vue';
 </script>
 
 <template>

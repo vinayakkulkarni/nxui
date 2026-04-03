@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import WebGLLiquid from '@registry/new-york/WebGLLiquid/WebGLLiquid.vue';
+  import WebGLLiquid from '@registry/new-york/webgl-liquid/WebGLLiquid.vue';
 
   const activeTab = ref(0);
 

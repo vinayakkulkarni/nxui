@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Particles from '@registry/new-york/Particles/Particles.vue';
+  import Particles from '@registry/new-york/particles/Particles.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import GlitchText from '@registry/new-york/GlitchText/GlitchText.vue';
+  import GlitchText from '@registry/new-york/glitch-text/GlitchText.vue';
 </script>
 
 <template>

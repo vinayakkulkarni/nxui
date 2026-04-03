@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Cubes from '@registry/new-york/Cubes/Cubes.vue';
+  import Cubes from '@registry/new-york/cubes/Cubes.vue';
 </script>
 
 <template>

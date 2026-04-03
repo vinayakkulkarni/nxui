@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ImageTrail from '@registry/new-york/ImageTrail/ImageTrail.vue';
+  import ImageTrail from '@registry/new-york/image-trail/ImageTrail.vue';
 
   const images = [
     'https://picsum.photos/190/209?random=1',

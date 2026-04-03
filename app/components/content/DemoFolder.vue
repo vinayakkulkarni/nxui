@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Folder from '@registry/new-york/Folder/Folder.vue';
+  import Folder from '@registry/new-york/folder/Folder.vue';
 </script>
 
 <template>

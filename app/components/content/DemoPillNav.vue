@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import PillNav from '@registry/new-york/PillNav/PillNav.vue';
+  import PillNav from '@registry/new-york/pill-nav/PillNav.vue';
 
   const items = [
     { label: 'Home', href: '#' },

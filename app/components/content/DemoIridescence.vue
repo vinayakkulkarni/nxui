@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Iridescence from '@registry/new-york/Iridescence/Iridescence.vue';
+  import Iridescence from '@registry/new-york/iridescence/Iridescence.vue';
 </script>
 
 <template>

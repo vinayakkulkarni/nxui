@@ -879,13 +879,6 @@ const COMPONENTS: Record<
   },
 };
 
-function slugToPascal(slug: string): string {
-  return slug
-    .split('-')
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join('');
-}
-
 function buildRegistryItem(slug: string): RegistryItem | null {
   const meta = COMPONENTS[slug];
   if (!meta) {
@@ -893,8 +886,7 @@ function buildRegistryItem(slug: string): RegistryItem | null {
     return null;
   }
 
-  const pascalName = slugToPascal(slug);
-  const componentDir = join(REGISTRY_DIR, pascalName);
+  const componentDir = join(REGISTRY_DIR, slug);
 
   if (!existsSync(componentDir)) {
     console.warn(`Directory not found: ${componentDir}`);
@@ -911,10 +903,10 @@ function buildRegistryItem(slug: string): RegistryItem | null {
 
     const content = readFileSync(fullPath, 'utf-8');
     files.push({
-      path: `registry/new-york/${pascalName}/${entry}`,
+      path: `registry/new-york/${slug}/${entry}`,
       content,
       type: 'registry:ui',
-      target: `components/ui/${pascalName}/${entry}`,
+      target: `components/ui/${slug}/${entry}`,
     });
   }
 

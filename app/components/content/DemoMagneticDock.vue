@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import MagneticDock from '@registry/new-york/MagneticDock/MagneticDock.vue';
+  import MagneticDock from '@registry/new-york/magnetic-dock/MagneticDock.vue';
   import type {
     MagneticDockItemData,
     MagneticDockVariant,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import NoiseTexture from '@registry/new-york/NoiseTexture/NoiseTexture.vue';
+  import NoiseTexture from '@registry/new-york/noise-texture/NoiseTexture.vue';
 </script>
 
 <template>

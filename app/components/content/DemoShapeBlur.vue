@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ShapeBlur from '@registry/new-york/ShapeBlur/ShapeBlur.vue';
+  import ShapeBlur from '@registry/new-york/shape-blur/ShapeBlur.vue';
 
   const colorMode = useColorMode();
   const shapeColor = computed(() =>

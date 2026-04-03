@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import FuzzyText from '@registry/new-york/FuzzyText/FuzzyText.vue';
+  import FuzzyText from '@registry/new-york/fuzzy-text/FuzzyText.vue';
 </script>
 
 <template>

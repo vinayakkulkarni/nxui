@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import CursorDrivenParticleTypography from '@registry/new-york/CursorDrivenParticleTypography/CursorDrivenParticleTypography.vue';
+  import CursorDrivenParticleTypography from '@registry/new-york/cursor-driven-particle-typography/CursorDrivenParticleTypography.vue';
 </script>
 
 <template>

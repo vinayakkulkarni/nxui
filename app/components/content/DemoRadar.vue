@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Radar from '@registry/new-york/Radar/Radar.vue';
+  import Radar from '@registry/new-york/radar/Radar.vue';
 </script>
 
 <template>

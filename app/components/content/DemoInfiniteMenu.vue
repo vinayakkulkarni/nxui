@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import InfiniteMenu from '@registry/new-york/InfiniteMenu/InfiniteMenu.vue';
+  import InfiniteMenu from '@registry/new-york/infinite-menu/InfiniteMenu.vue';
 
   const items = [
     {

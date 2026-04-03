@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TextCursor from '@registry/new-york/TextCursor/TextCursor.vue';
+  import TextCursor from '@registry/new-york/text-cursor/TextCursor.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LiquidChrome from '@registry/new-york/LiquidChrome/LiquidChrome.vue';
+  import LiquidChrome from '@registry/new-york/liquid-chrome/LiquidChrome.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import TextRepel from '@registry/new-york/TextRepel/TextRepel.vue';
+  import TextRepel from '@registry/new-york/text-repel/TextRepel.vue';
 </script>
 
 <template>

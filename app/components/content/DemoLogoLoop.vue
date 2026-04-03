@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LogoLoop from '@registry/new-york/LogoLoop/LogoLoop.vue';
+  import LogoLoop from '@registry/new-york/logo-loop/LogoLoop.vue';
 </script>
 
 <template>

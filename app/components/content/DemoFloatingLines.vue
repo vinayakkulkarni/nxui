@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import FloatingLines from '@registry/new-york/FloatingLines/FloatingLines.vue';
+  import FloatingLines from '@registry/new-york/floating-lines/FloatingLines.vue';
 </script>
 
 <template>

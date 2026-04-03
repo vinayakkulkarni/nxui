@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ScrollChoreography from '@registry/new-york/ScrollChoreography/ScrollChoreography.vue';
+  import ScrollChoreography from '@registry/new-york/scroll-choreography/ScrollChoreography.vue';
 </script>
 
 <template>

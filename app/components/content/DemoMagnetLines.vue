@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import MagnetLines from '@registry/new-york/MagnetLines/MagnetLines.vue';
+  import MagnetLines from '@registry/new-york/magnet-lines/MagnetLines.vue';
 </script>
 
 <template>

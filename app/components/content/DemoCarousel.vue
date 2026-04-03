@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Carousel from '@registry/new-york/Carousel/Carousel.vue';
+  import Carousel from '@registry/new-york/carousel/Carousel.vue';
 </script>
 
 <template>

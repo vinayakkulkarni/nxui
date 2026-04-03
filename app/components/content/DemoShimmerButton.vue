@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import ShimmerButton from '@registry/new-york/ShimmerButton/ShimmerButton.vue';
+  import ShimmerButton from '@registry/new-york/shimmer-button/ShimmerButton.vue';
 </script>
 
 <template>

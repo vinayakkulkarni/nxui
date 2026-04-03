@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import LiquidBlob from '@registry/new-york/LiquidBlob/LiquidBlob.vue';
+  import LiquidBlob from '@registry/new-york/liquid-blob/LiquidBlob.vue';
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import BlobCursor from '@registry/new-york/BlobCursor/BlobCursor.vue';
+  import BlobCursor from '@registry/new-york/blob-cursor/BlobCursor.vue';
 </script>
 
 <template>

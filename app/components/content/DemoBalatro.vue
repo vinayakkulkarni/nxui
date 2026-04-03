@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import Balatro from '@registry/new-york/Balatro/Balatro.vue';
+  import Balatro from '@registry/new-york/balatro/Balatro.vue';
 </script>
 
 <template>

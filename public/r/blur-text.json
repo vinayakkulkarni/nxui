@@ -4,13 +4,22 @@
   "type": "registry:ui",
   "title": "Blur Text",
   "description": "Words or letters animate from blurred to clear with a staggered entrance.",
-  "dependencies": ["@vueuse/core", "motion-v"],
+  "dependencies": [
+    "@vueuse/core",
+    "motion-v"
+  ],
   "files": [
     {
-      "path": "registry/new-york/BlurText/BlurText.vue",
+      "path": "registry/new-york/blur-text/BlurText.vue",
       "content": "<script setup lang=\"ts\">\n  import { useIntersectionObserver } from '@vueuse/core';\n  import { motion } from 'motion-v';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      text: string;\n      delay?: number;\n      by?: 'words' | 'letters';\n      direction?: 'top' | 'bottom';\n      threshold?: number;\n      duration?: number;\n      class?: string;\n    }>(),\n    {\n      delay: 200,\n      by: 'words',\n      direction: 'top',\n      threshold: 0.1,\n      duration: 0.35,\n      class: '',\n    },\n  );\n\n  const el = ref<HTMLElement>();\n  const isInView = ref(false);\n\n  useIntersectionObserver(\n    el,\n    ([entry]) => {\n      if (entry?.isIntersecting) {\n        isInView.value = true;\n      }\n    },\n    { threshold: props.threshold },\n  );\n\n  const segments = computed(() =>\n    props.by === 'words' ? props.text.split(' ') : props.text.split(''),\n  );\n\n  const initialState = computed(() =>\n    props.direction === 'top'\n      ? { filter: 'blur(10px)', opacity: 0, y: -50 }\n      : { filter: 'blur(10px)', opacity: 0, y: 50 },\n  );\n\n  const animatedState = computed(() => ({\n    filter: 'blur(0px)',\n    opacity: 1,\n    y: 0,\n  }));\n</script>\n\n<template>\n  <p ref=\"el\" :class=\"cn('flex flex-wrap', props.class)\">\n    <component\n      :is=\"motion.span\"\n      v-for=\"(segment, i) in segments\"\n      :key=\"i\"\n      class=\"inline-block will-change-[transform,filter,opacity]\"\n      :initial=\"initialState\"\n      :animate=\"isInView ? animatedState : initialState\"\n      :transition=\"{\n        duration,\n        delay: (i * delay) / 1000,\n      }\"\n    >\n      {{ segment === ' ' ? '\\u00A0' : segment\n      }}<span v-if=\"by === 'words' && i < segments.length - 1\">&nbsp;</span>\n    </component>\n  </p>\n</template>\n",
       "type": "registry:ui",
-      "target": "components/ui/BlurText/BlurText.vue"
+      "target": "components/ui/blur-text/BlurText.vue"
+    },
+    {
+      "path": "registry/new-york/blur-text/index.ts",
+      "content": "export { default as BlurText } from './BlurText.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/blur-text/index.ts"
     }
   ]
 }
