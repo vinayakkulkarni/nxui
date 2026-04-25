@@ -877,6 +877,42 @@ const COMPONENTS: Record<
       'Bouncing glowing orbs with text that dynamically flows around them in multi-column layout.',
     deps: ['@vueuse/core'],
   },
+  dither: {
+    title: 'Dither',
+    description:
+      'Retro Bayer-matrix dithered noise shader background with cursor-reactive wave distortion powered by Three.js postprocessing.',
+    deps: ['three', 'postprocessing', '@vueuse/core'],
+  },
+  'plasma-wave': {
+    title: 'Plasma Wave',
+    description:
+      'Raymarched plasma waves with dual-wave interference, configurable colors, focal length, and rotation rendered with OGL.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  'dot-field': {
+    title: 'Dot Field',
+    description:
+      'Interactive canvas dot grid with cursor bulge, glow, sparkle, and wave effects with smooth physics-based response.',
+    deps: ['@vueuse/core'],
+  },
+  'sticky-scroll-cards': {
+    title: 'Sticky Scroll Cards',
+    description:
+      'Scroll-driven card stack where images pin and scale with subtle rotation, creating a layered depth effect.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'music-player': {
+    title: 'Music Player',
+    description:
+      'Interactive vinyl-record music player with swinging tonearm and animated rotation. Supports audio URLs and YouTube embeds.',
+    deps: ['motion-v'],
+  },
+  'scroll-split-card': {
+    title: 'Scroll Split Card',
+    description:
+      'Scroll-driven interactive card that splits into three panels and flips to reveal back-side content with 3D transforms.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
 };
 
 function buildRegistryItem(slug: string): RegistryItem | null {
