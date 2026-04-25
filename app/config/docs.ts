@@ -90,6 +90,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
       { title: 'Masonry', path: '/docs/components/masonry' },
       { title: 'Model Viewer', path: '/docs/components/model-viewer' },
+      { title: 'Music Player', path: '/docs/components/music-player' },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },
       { title: 'Orbit Images', path: '/docs/components/orbit-images' },
       { title: 'Pill Nav', path: '/docs/components/pill-nav' },
@@ -99,6 +100,10 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Scroll Choreography',
         path: '/docs/components/scroll-choreography',
+      },
+      {
+        title: 'Scroll Split Card',
+        path: '/docs/components/scroll-split-card',
       },
       { title: 'Scroll Stack', path: '/docs/components/scroll-stack' },
       { title: 'Scrub Input', path: '/docs/components/scrub-input' },
@@ -112,6 +117,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Staggered Menu', path: '/docs/components/staggered-menu' },
       { title: 'Stepper', path: '/docs/components/stepper' },
       { title: 'Sticker Peel', path: '/docs/components/sticker-peel' },
+      {
+        title: 'Sticky Scroll Cards',
+        path: '/docs/components/sticky-scroll-cards',
+      },
       {
         title: 'Testimonial Marquee',
         path: '/docs/components/testimonial-marquee',
@@ -195,6 +204,8 @@ export const docsNav: NavGroup[] = [
       { title: 'Beams', path: '/docs/backgrounds/beams' },
       { title: 'Color Bends', path: '/docs/backgrounds/color-bends' },
       { title: 'Dark Veil', path: '/docs/backgrounds/dark-veil' },
+      { title: 'Dither', path: '/docs/backgrounds/dither' },
+      { title: 'Dot Field', path: '/docs/backgrounds/dot-field' },
       { title: 'Dot Grid', path: '/docs/backgrounds/dot-grid' },
       { title: 'Evil Eye', path: '/docs/backgrounds/evil-eye' },
       { title: 'Faulty Terminal', path: '/docs/backgrounds/faulty-terminal' },
@@ -221,6 +232,7 @@ export const docsNav: NavGroup[] = [
       { title: 'Pixel Blast', path: '/docs/backgrounds/pixel-blast' },
       { title: 'Pixel Snow', path: '/docs/backgrounds/pixel-snow' },
       { title: 'Plasma', path: '/docs/backgrounds/plasma' },
+      { title: 'Plasma Wave', path: '/docs/backgrounds/plasma-wave' },
       { title: 'Prism', path: '/docs/backgrounds/prism' },
       { title: 'Prismatic Burst', path: '/docs/backgrounds/prismatic-burst' },
       { title: 'Radar', path: '/docs/backgrounds/radar' },
