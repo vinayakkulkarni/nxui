@@ -439,3 +439,90 @@ export interface EditorialOrbsProps {
   showPullQuotes?: boolean;
   className?: string;
 }
+
+export interface PlasmaWaveProps {
+  xOffset?: number;
+  yOffset?: number;
+  rotationDeg?: number;
+  focalLength?: number;
+  speed1?: number;
+  speed2?: number;
+  dir2?: number;
+  bend1?: number;
+  bend2?: number;
+  colors?: [string, string];
+  class?: string;
+}
+
+export interface DitherProps {
+  waveSpeed?: number;
+  waveFrequency?: number;
+  waveAmplitude?: number;
+  waveColor?: [number, number, number];
+  colorNum?: number;
+  pixelSize?: number;
+  disableAnimation?: boolean;
+  enableMouseInteraction?: boolean;
+  mouseRadius?: number;
+  class?: string;
+}
+
+export interface MusicPlayerProps {
+  src: string;
+  coverArt: string;
+  autoPlay?: boolean;
+  class?: string;
+}
+
+export interface DotFieldProps {
+  dotRadius?: number;
+  dotSpacing?: number;
+  cursorRadius?: number;
+  cursorForce?: number;
+  bulgeOnly?: boolean;
+  bulgeStrength?: number;
+  glowRadius?: number;
+  sparkle?: boolean;
+  waveAmplitude?: number;
+  gradientFrom?: string;
+  gradientTo?: string;
+  glowColor?: string;
+  class?: string;
+}
+
+export interface StickyScrollCardItem {
+  title: string;
+  src: string;
+}
+
+export interface StickyScrollCardsProps {
+  cards?: StickyScrollCardItem[];
+  hint?: string;
+  class?: string;
+}
+
+export interface ScrollSplitCardItem {
+  title: string;
+  description: string;
+  bgColor: string;
+  textColor: string;
+}
+
+export interface ScrollSplitCardProps {
+  imageSrc: string;
+  cards: ScrollSplitCardItem[];
+  startHint?: string;
+  endHint?: string;
+  class?: string;
+}
+
+export interface DotFieldDot {
+  ax: number;
+  ay: number;
+  sx: number;
+  sy: number;
+  vx: number;
+  vy: number;
+}
+
+export type DitherUniforms = Record<string, WebGLUniformLocation>;
