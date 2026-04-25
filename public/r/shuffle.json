@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Shuffle",
   "description": "Random character shuffle that reveals text left-to-right.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/shuffle/Shuffle.vue",

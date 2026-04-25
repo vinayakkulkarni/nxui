@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Aurora",
   "description": "WebGL aurora borealis effect with simplex noise and configurable color stops.",
-  "dependencies": [
-    "ogl"
-  ],
+  "dependencies": ["ogl"],
   "files": [
     {
       "path": "registry/new-york/aurora/Aurora.vue",

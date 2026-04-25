@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Text Type",
   "description": "Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/text-type/TextType.vue",

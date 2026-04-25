@@ -854,6 +854,42 @@
       "type": "registry:ui",
       "title": "Editorial Orbs",
       "description": "Bouncing glowing orbs with text that dynamically flows around them in multi-column layout."
+    },
+    {
+      "name": "dither",
+      "type": "registry:ui",
+      "title": "Dither",
+      "description": "Retro Bayer-matrix dithered noise shader background with cursor-reactive wave distortion powered by Three.js postprocessing."
+    },
+    {
+      "name": "plasma-wave",
+      "type": "registry:ui",
+      "title": "Plasma Wave",
+      "description": "Raymarched plasma waves with dual-wave interference, configurable colors, focal length, and rotation rendered with OGL."
+    },
+    {
+      "name": "dot-field",
+      "type": "registry:ui",
+      "title": "Dot Field",
+      "description": "Interactive canvas dot grid with cursor bulge, glow, sparkle, and wave effects with smooth physics-based response."
+    },
+    {
+      "name": "sticky-scroll-cards",
+      "type": "registry:ui",
+      "title": "Sticky Scroll Cards",
+      "description": "Scroll-driven card stack where images pin and scale with subtle rotation, creating a layered depth effect."
+    },
+    {
+      "name": "music-player",
+      "type": "registry:ui",
+      "title": "Music Player",
+      "description": "Interactive vinyl-record music player with swinging tonearm and animated rotation. Supports audio URLs and YouTube embeds."
+    },
+    {
+      "name": "scroll-split-card",
+      "type": "registry:ui",
+      "title": "Scroll Split Card",
+      "description": "Scroll-driven interactive card that splits into three panels and flips to reveal back-side content with 3D transforms."
     }
   ]
 }

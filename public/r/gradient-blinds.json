@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Gradient Blinds",
   "description": "Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/gradient-blinds/index.ts",

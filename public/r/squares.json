@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Squares",
   "description": "Animated grid of squares with directional movement and hover interaction.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/squares/Squares.vue",

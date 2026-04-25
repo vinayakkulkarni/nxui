@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "GitHub Calendar",
   "description": "A GitHub-style contribution heatmap calendar.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/github-calendar/GithubCalendarGrid.vue",

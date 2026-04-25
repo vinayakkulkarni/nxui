@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Pixel Snow",
   "description": "3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction.",
-  "dependencies": [
-    "three",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/pixel-snow/PixelSnow.vue",

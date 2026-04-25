@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Threads",
   "description": "Animated Perlin noise thread lines with mouse-reactive distortion.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/threads/Threads.vue",
