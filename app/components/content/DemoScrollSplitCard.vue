@@ -21,33 +21,34 @@
       textColor: '#ffffff',
     },
   ];
+</script>
 
-  const code = `<script setup lang="ts">
+<template>
+  <ComponentDemo
+    class="p-0"
+    :code="`<script setup lang=&quot;ts&quot;>
   import ScrollSplitCard from '~/components/ui/ScrollSplitCard.vue';
 </script>
 
 <template>
   <ScrollSplitCard
-    image-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200"
-    start-hint="Scroll down"
-    end-hint="So cool, right?"
-    :cards="cards"
+    image-src=&quot;https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&quot;
+    start-hint=&quot;Scroll down&quot;
+    end-hint=&quot;So cool, right?&quot;
+    :cards=&quot;cards&quot;
   >
     <template #icon-0>
-      <Icon name="lucide:image" class="size-8 text-white/70" />
+      <Icon name=&quot;lucide:image&quot; class=&quot;size-8 text-white/70&quot; />
     </template>
     <template #icon-1>
-      <Icon name="lucide:globe" class="size-8 text-white/70" />
+      <Icon name=&quot;lucide:globe&quot; class=&quot;size-8 text-white/70&quot; />
     </template>
     <template #icon-2>
-      <Icon name="lucide:calendar" class="size-8 text-white/70" />
+      <Icon name=&quot;lucide:calendar&quot; class=&quot;size-8 text-white/70&quot; />
     </template>
   </ScrollSplitCard>
-</template>`;
-</script>
-
-<template>
-  <ComponentDemo class="p-0" :code="code">
+</template>`"
+  >
     <div class="relative h-150 w-full overflow-y-auto">
       <ScrollSplitCard
         image-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200"

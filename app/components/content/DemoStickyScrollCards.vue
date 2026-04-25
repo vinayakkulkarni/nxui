@@ -19,8 +19,12 @@
       src: 'https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=800',
     },
   ];
+</script>
 
-  const code = `<script setup lang="ts">
+<template>
+  <ComponentDemo
+    class="p-0"
+    :code="`<script setup lang=&quot;ts&quot;>
   import StickyScrollCards from '~/components/ui/StickyScrollCards.vue';
 
   const cards = [
@@ -32,12 +36,9 @@
 </script>
 
 <template>
-  <StickyScrollCards :cards="cards" />
-</template>`;
-</script>
-
-<template>
-  <ComponentDemo class="p-0" :code="code">
+  <StickyScrollCards :cards=&quot;cards&quot; />
+</template>`"
+  >
     <div class="relative h-150 w-full overflow-y-auto rounded-lg">
       <StickyScrollCards :cards="cards" />
     </div>
