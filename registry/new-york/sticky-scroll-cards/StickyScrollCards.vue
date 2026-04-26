@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue';
+  import { ref, computed, onMounted } from 'vue';
   import { useScroll } from 'motion-v';
   import { cn } from '~/lib/utils';
   import StickyScrollCard from './StickyScrollCard.vue';
@@ -43,14 +43,31 @@
   );
 
   const containerRef = ref<HTMLDivElement | null>(null);
+  // Resolved scroll parent (set onMounted). Null = scroll the window.
+  const scrollParent = ref<HTMLElement | null>(null);
 
-  // Track scroll progress through the container; offset means
-  // progress = 0 when container start meets viewport start, and 1 when
-  // container end meets viewport end.
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
+  function findScrollParent(el: HTMLElement | null): HTMLElement | null {
+    let node: HTMLElement | null = el?.parentElement ?? null;
+    while (node) {
+      const overflowY = getComputedStyle(node).overflowY;
+      if (overflowY === 'auto' || overflowY === 'scroll') return node;
+      node = node.parentElement;
+    }
+    return null;
+  }
+
+  onMounted(() => {
+    scrollParent.value = findScrollParent(containerRef.value);
   });
+
+  // Track scroll progress through the container relative to its scroll
+  // parent (or the window). Works both in full-page mode and inside
+  // scrollable demo wrappers.
+  const { scrollYProgress } = useScroll(() => ({
+    container: scrollParent.value ?? undefined,
+    target: containerRef.value ?? undefined,
+    offset: ['start start', 'end end'],
+  }));
 </script>
 
 <template>
