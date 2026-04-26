@@ -1,4 +1,5 @@
 import { defineCollection, defineContentConfig } from '@nuxt/content';
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content';
 import { z } from 'zod';
 
 export default defineContentConfig({
@@ -9,6 +10,7 @@ export default defineContentConfig({
       schema: z.object({
         title: z.string(),
         description: z.string().optional(),
+        sitemap: defineSitemapSchema(),
       }),
     }),
   },

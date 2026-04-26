@@ -1,8 +1,20 @@
-import { readdirSync } from 'node:fs';
+import { readdirSync, existsSync } from 'node:fs';
+import { docsNav } from './app/config/docs';
 
 const componentCount = readdirSync('registry/new-york', {
   withFileTypes: true,
 }).filter((d) => d.isDirectory()).length;
+
+// Build the prerender route list from docsNav, only including paths whose
+// backing content/docs/{cat}/{slug}.md actually exists. This avoids
+// aborting prerender on missing pages (createError 404 with fatal: true).
+const docRoutes = docsNav
+  .flatMap((g) => g.items.map((i) => i.path))
+  .filter((p) => {
+    if (p === '/docs') return true;
+    const rel = p.replace(/^\/docs\//, '');
+    return existsSync(`content/docs/${rel}.md`);
+  });
 
 export default defineNuxtConfig({
   modules: [
@@ -148,7 +160,8 @@ export default defineNuxtConfig({
     preset: 'cloudflare-pages',
     prerender: {
       crawlLinks: true,
-      routes: ['/'],
+      failOnError: false,
+      routes: ['/', ...docRoutes],
     },
     cloudflare: {
       nodeCompat: true,
