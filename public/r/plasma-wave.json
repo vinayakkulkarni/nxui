@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Plasma Wave",
   "description": "Raymarched plasma waves with dual-wave interference, configurable colors, focal length, and rotation rendered with OGL.",
-  "dependencies": ["ogl", "@vueuse/core"],
+  "dependencies": [
+    "ogl",
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/plasma-wave/index.ts",

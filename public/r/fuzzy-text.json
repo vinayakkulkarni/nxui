@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Fuzzy Text",
   "description": "Canvas-based vibrating fuzzy text with horizontal displacement that intensifies on hover.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/fuzzy-text/FuzzyText.vue",

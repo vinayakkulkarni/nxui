@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Blur Text",
   "description": "Words or letters animate from blurred to clear with a staggered entrance.",
-  "dependencies": ["@vueuse/core", "motion-v"],
+  "dependencies": [
+    "@vueuse/core",
+    "motion-v"
+  ],
   "files": [
     {
       "path": "registry/new-york/blur-text/BlurText.vue",

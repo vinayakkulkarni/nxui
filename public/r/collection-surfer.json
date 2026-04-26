@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Collection Surfer",
   "description": "A scroll-driven card carousel with parallax depth and momentum-based navigation.",
-  "dependencies": ["@vueuse/core", "motion-v"],
+  "dependencies": [
+    "@vueuse/core",
+    "motion-v"
+  ],
   "files": [
     {
       "path": "registry/new-york/collection-surfer/CollectionSurfer.vue",

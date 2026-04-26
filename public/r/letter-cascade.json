@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Letter Cascade",
   "description": "A 3D split-flap letter animation with spring physics that cascades on hover or click.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/letter-cascade/index.ts",

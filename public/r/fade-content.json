@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Fade Content",
   "description": "Scroll-triggered fade-in with optional blur effect.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/fade-content/FadeContent.vue",

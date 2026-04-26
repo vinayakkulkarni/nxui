@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Text Repel",
   "description": "Physics-based text where letters are repelled or attracted by the cursor with spring dynamics.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/text-repel/TextRepel.vue",

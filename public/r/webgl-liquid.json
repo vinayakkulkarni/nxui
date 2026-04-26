@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "WebGL Liquid",
   "description": "A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/webgl-liquid/WebGLLiquid.vue",

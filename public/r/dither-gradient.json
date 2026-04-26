@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Dither Gradient",
   "description": "A dithered gradient effect rendered on canvas.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/dither-gradient/DitherGradient.vue",

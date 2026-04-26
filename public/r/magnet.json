@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Magnet",
   "description": "Element that magnetically pulls toward the cursor when nearby.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/magnet/Magnet.vue",

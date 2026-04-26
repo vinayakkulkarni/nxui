@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Chroma Grid",
   "description": "Profile card grid with mouse-tracking spotlight reveal and per-card hover glow.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/chroma-grid/ChromaGrid.vue",

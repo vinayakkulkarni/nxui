@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Count Up",
   "description": "Animated number counter with easeOutExpo easing, triggered on scroll into view.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/count-up/CountUp.vue",
