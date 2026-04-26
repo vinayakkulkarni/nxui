@@ -85,10 +85,15 @@
       aria-label="Toggle theme"
       @click="toggleColorMode"
     >
-      <Icon
-        :name="colorMode.value === 'dark' ? 'lucide:sun' : 'lucide:moon'"
-        class="size-4"
-      />
+      <ClientOnly>
+        <Icon
+          :name="colorMode.value === 'dark' ? 'lucide:sun' : 'lucide:moon'"
+          class="size-4"
+        />
+        <template #fallback>
+          <Icon name="lucide:moon" class="size-4" />
+        </template>
+      </ClientOnly>
     </button>
   </div>
 </template>

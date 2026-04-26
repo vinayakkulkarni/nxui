@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import type { Component } from 'vue';
+  import { defineAsyncComponent } from 'vue';
   import { useClipboard } from '@vueuse/core';
   import { docsNav } from '~/config/docs';
 
@@ -20,7 +21,6 @@
     throw createError({
       statusCode: 404,
       statusMessage: 'Page not found',
-      fatal: true,
     });
   }
 
@@ -35,10 +35,10 @@
   // Component slug for installation
   const componentSlug = computed(() => route.path.split('/').pop() ?? '');
 
-  // Dynamic demo component resolution via import.meta.glob
+  // Dynamic demo component resolution via import.meta.glob (lazy: only the
+  // selected demo gets loaded at runtime, keeping per-route SSR bundles small).
   const demoModules = import.meta.glob<{ default: Component }>(
     '~/components/content/Demo*.vue',
-    { eager: true },
   );
 
   const slug = route.path.split('/').pop() ?? '';
@@ -84,7 +84,9 @@
       return {
         key: k,
         label,
-        component: (demoModules[k] as { default: Component }).default,
+        component: defineAsyncComponent(
+          demoModules[k] as () => Promise<{ default: Component }>,
+        ),
       };
     });
 
@@ -272,14 +274,19 @@
         <Icon name="lucide:rotate-ccw" class="size-4" />
       </button>
 
-      <!-- Demo component -->
-      <div
-        v-if="DemoComponent"
-        :key="`${activeVariant}-${refreshKey}`"
-        class="size-full overflow-hidden"
-      >
-        <component :is="DemoComponent" />
-      </div>
+      <!-- Demo component (client-only: WebGL/canvas demos use browser APIs) -->
+      <ClientOnly>
+        <div
+          v-if="DemoComponent"
+          :key="`${activeVariant}-${refreshKey}`"
+          class="size-full overflow-hidden"
+        >
+          <component :is="DemoComponent" />
+        </div>
+        <template #fallback>
+          <div class="size-full animate-pulse bg-muted/30" />
+        </template>
+      </ClientOnly>
 
       <!-- Variant pills -->
       <template v-if="hasMultipleVariants">
