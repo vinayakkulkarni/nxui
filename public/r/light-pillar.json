@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Light Pillar",
   "description": "3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction.",
-  "dependencies": [
-    "three",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/light-pillar/LightPillar.vue",

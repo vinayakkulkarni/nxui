@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Flying Posters",
   "description": "OGL-powered vertical scroll gallery with rotating poster distortion.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/flying-posters/FlyingPosters.vue",

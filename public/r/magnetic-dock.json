@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Magnetic Dock",
   "description": "A macOS-style dock with magnetic hover magnification effect.",
-  "dependencies": [
-    "@vueuse/core",
-    "motion-v"
-  ],
+  "dependencies": ["@vueuse/core", "motion-v"],
   "files": [
     {
       "path": "registry/new-york/magnetic-dock/MagneticDock.vue",

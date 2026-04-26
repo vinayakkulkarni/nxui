@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Beams",
   "description": "3D light beam planes with Perlin noise deformation and directional lighting.",
-  "dependencies": [
-    "three",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/beams/Beams.vue",

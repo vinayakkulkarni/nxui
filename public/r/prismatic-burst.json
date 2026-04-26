@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Prismatic Burst",
   "description": "WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/prismatic-burst/PrismaticBurst.vue",

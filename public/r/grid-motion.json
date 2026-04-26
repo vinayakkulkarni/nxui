@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Grid Motion",
   "description": "A rotated grid of items that shifts horizontally based on cursor position with smooth easing.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/grid-motion/GridMotion.vue",

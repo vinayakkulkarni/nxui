@@ -68,9 +68,7 @@
       v-if="hint"
       class="absolute left-1/2 top-[8%] z-10 flex -translate-x-1/2 flex-col items-center gap-3"
     >
-      <p
-        class="text-[10px] font-medium uppercase tracking-[0.2em] opacity-30"
-      >
+      <p class="text-[10px] font-medium uppercase tracking-[0.2em] opacity-30">
         {{ hint }}
       </p>
       <span

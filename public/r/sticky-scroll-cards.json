@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Sticky Scroll Cards",
   "description": "Scroll-driven card stack where images pin and scale with subtle rotation, creating a layered depth effect.",
-  "dependencies": [
-    "@vueuse/core",
-    "motion-v"
-  ],
+  "dependencies": ["@vueuse/core", "motion-v"],
   "files": [
     {
       "path": "registry/new-york/sticky-scroll-cards/StickyScrollCard.vue",

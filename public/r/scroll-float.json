@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Scroll Float",
   "description": "Characters float up with scale distortion on scroll.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/scroll-float/index.ts",

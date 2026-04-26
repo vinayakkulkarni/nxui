@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Logo Loop",
   "description": "Infinite scrolling logo marquee with smooth animation and fade edges.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/logo-loop/LogoLoop.vue",

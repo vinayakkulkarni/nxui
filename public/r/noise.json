@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Noise",
   "description": "An animated canvas noise grain overlay for adding texture to backgrounds and sections.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/noise/Noise.vue",

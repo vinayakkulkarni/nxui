@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Electric Border",
   "description": "Animated electric border with noise-driven distortion and glow effects.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/electric-border/ElectricBorder.vue",

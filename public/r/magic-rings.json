@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Magic Rings",
   "description": "Concentric animated rings rendered with Three.js shaders, featuring glow and parallax effects.",
-  "dependencies": [
-    "three"
-  ],
+  "dependencies": ["three"],
   "files": [
     {
       "path": "registry/new-york/magic-rings/index.ts",

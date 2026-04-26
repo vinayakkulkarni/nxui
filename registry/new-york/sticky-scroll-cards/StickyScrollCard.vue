@@ -17,7 +17,10 @@
   // Subtle natural tilt cycle
   const CARD_ROTATIONS = [-1.4, 1.0, -0.8, 1.6, -1.1];
 
-  const scale = useTransform(props.progress, props.range, [1, props.targetScale]);
+  const scale = useTransform(props.progress, props.range, [
+    1,
+    props.targetScale,
+  ]);
   const rotation = computed(
     () => CARD_ROTATIONS[props.i % CARD_ROTATIONS.length] ?? 0,
   );

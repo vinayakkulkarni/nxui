@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Ripple Grid",
   "description": "Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/ripple-grid/RippleGrid.vue",
