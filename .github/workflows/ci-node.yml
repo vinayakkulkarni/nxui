@@ -1,0 +1,61 @@
+name: 'Continuous Integration (Node)'
+
+on:
+  workflow_call:
+
+permissions:
+  checks: write
+  contents: read
+
+jobs:
+  ci:
+    name: 'Lint & Build'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Format check
+        run: pnpm run format:check
+
+      - name: Build app
+        run: |
+          max_attempts=3
+          for attempt in $(seq 1 $max_attempts); do
+            echo "Build attempt $attempt/$max_attempts..."
+            if pnpm run build; then
+              echo "Build succeeded on attempt $attempt"
+              exit 0
+            fi
+            if [ $attempt -lt $max_attempts ]; then
+              echo "Build failed, retrying in 15s..."
+              sleep 15
+            fi
+          done
+          echo "Build failed after $max_attempts attempts"
+          exit 1
+        env:
+          NITRO_PRESET: cloudflare-pages
+          NODE_OPTIONS: --max-old-space-size=8192
+
+      - name: Build registry
+        run: pnpm run build:registry
