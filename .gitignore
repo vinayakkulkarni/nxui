@@ -34,3 +34,6 @@ logs
 
 tmp/*.*
 .sisyphus
+
+# Local-only audit notes (not part of the public repo)
+MISSING_COMPONENTS.md
