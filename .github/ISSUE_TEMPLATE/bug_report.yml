@@ -98,9 +98,9 @@ body:
         Please provide relevant environment details.
       placeholder: |
         - OS: macOS 15.0
-        - Node: 22.0.0
-        - Bun/npm/pnpm: bun 1.3.9
-        - Vue: 3.5.x
+        - Node: 24.0.0
+        - pnpm: 11.3.0
+        - Vue: 3.6.x
         - Nuxt (if applicable): 4.x
         - Tailwind CSS: 4.x
       render: shell
