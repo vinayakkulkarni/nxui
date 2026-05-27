@@ -18,20 +18,26 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
         with:
-          bun-version: latest
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Build app
         run: |
           max_attempts=3
           for attempt in $(seq 1 $max_attempts); do
             echo "Build attempt $attempt/$max_attempts..."
-            if bun run build; then
+            if pnpm run build; then
               echo "Build succeeded on attempt $attempt"
               exit 0
             fi
@@ -47,7 +53,7 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=8192
 
       - name: Deploy to Cloudflare Pages
-        run: bunx wrangler pages deploy dist --project-name=nxui
+        run: pnpm exec wrangler pages deploy dist --project-name=nxui
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
