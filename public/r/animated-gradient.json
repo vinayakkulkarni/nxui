@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Animated Gradient",
   "description": "A beautiful, animated, and customizable WebGL gradient with noise capabilities. Supports built-in presets and fully custom configurations.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/animated-gradient/AnimatedGradient.vue",

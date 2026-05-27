@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Image Ripple Effect",
   "description": "A WebGL image viewer with interactive ripple distortion using FBO ping-pong and custom shaders.",
-  "dependencies": ["three", "@vueuse/core"],
+  "dependencies": [
+    "three",
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/image-ripple-effect/ImageRippleEffect.vue",

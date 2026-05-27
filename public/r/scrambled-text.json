@@ -4,19 +4,21 @@
   "type": "registry:ui",
   "title": "Scrambled Text",
   "description": "Proximity-based character scrambling effect.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
-    {
-      "path": "registry/new-york/scrambled-text/index.ts",
-      "content": "export { default as ScrambledText } from './ScrambledText.vue';\n",
-      "type": "registry:ui",
-      "target": "components/ui/scrambled-text/index.ts"
-    },
     {
       "path": "registry/new-york/scrambled-text/ScrambledText.vue",
       "content": "<script setup lang=\"ts\">\n  import { useEventListener } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      text: string;\n      radius?: number;\n      speed?: number;\n      scrambleChars?: string;\n      class?: string;\n    }>(),\n    {\n      radius: 100,\n      speed: 50,\n      scrambleChars: '.:!?#*&@^$~',\n      class: '',\n    },\n  );\n\n  const el = ref<HTMLElement>();\n  const charRefs = ref<(HTMLSpanElement | null)[]>([]);\n  const originalChars = computed(() => props.text.split(''));\n  const displayChars = ref(props.text.split(''));\n\n  const scrambleTimers = new Map<number, ReturnType<typeof setTimeout>>();\n\n  useEventListener(el, 'pointermove', (e: PointerEvent) => {\n    if (!el.value) return;\n\n    charRefs.value.forEach((span, i) => {\n      if (!span) return;\n      const rect = span.getBoundingClientRect();\n      const cx = rect.left + rect.width / 2;\n      const cy = rect.top + rect.height / 2;\n      const dx = e.clientX - cx;\n      const dy = e.clientY - cy;\n      const dist = Math.sqrt(dx * dx + dy * dy);\n\n      if (dist < props.radius) {\n        scrambleChar(i);\n      }\n    });\n  });\n\n  function scrambleChar(index: number) {\n    if (scrambleTimers.has(index)) return;\n\n    const original = originalChars.value[index] ?? '';\n    if (original === ' ') return;\n\n    let step = 0;\n    const maxSteps = Math.ceil(props.speed / 16);\n\n    function tick() {\n      if (step >= maxSteps) {\n        displayChars.value[index] = original;\n        scrambleTimers.delete(index);\n        return;\n      }\n\n      const chars = props.scrambleChars;\n      displayChars.value[index] =\n        chars[Math.floor(Math.random() * chars.length)] ?? '.';\n      step++;\n      scrambleTimers.set(index, setTimeout(tick, 16));\n    }\n\n    tick();\n  }\n\n  function setCharRef(i: number, el: Element | ComponentPublicInstance | null) {\n    charRefs.value[i] = el as HTMLSpanElement | null;\n  }\n\n  onUnmounted(() => {\n    scrambleTimers.forEach((timer) => clearTimeout(timer));\n  });\n</script>\n\n<template>\n  <div\n    ref=\"el\"\n    :class=\"\n      cn('font-mono text-[clamp(14px,4vw,32px)] cursor-default', props.class)\n    \"\n  >\n    <span\n      v-for=\"(char, i) in displayChars\"\n      :key=\"i\"\n      :ref=\"(el) => setCharRef(i, el)\"\n      class=\"inline-block will-change-[transform]\"\n      >{{ char === ' ' ? '\\u00A0' : char }}</span\n    >\n  </div>\n</template>\n",
       "type": "registry:ui",
       "target": "components/ui/scrambled-text/ScrambledText.vue"
+    },
+    {
+      "path": "registry/new-york/scrambled-text/index.ts",
+      "content": "export { default as ScrambledText } from './ScrambledText.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/scrambled-text/index.ts"
     }
   ]
 }

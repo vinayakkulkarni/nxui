@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Infinite Image Field",
   "description": "An infinite scrolling grid of images on canvas driven by cursor position with smooth camera movement.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/infinite-image-field/InfiniteImageField.vue",

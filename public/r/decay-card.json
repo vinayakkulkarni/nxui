@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Decay Card",
   "description": "SVG displacement map card that warps on cursor movement with lerp physics.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/decay-card/DecayCard.vue",

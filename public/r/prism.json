@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Prism",
   "description": "A prismatic light refraction background rendered with WebGL shaders via OGL.",
-  "dependencies": ["ogl"],
+  "dependencies": [
+    "ogl"
+  ],
   "files": [
     {
       "path": "registry/new-york/prism/Prism.vue",

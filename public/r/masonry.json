@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Masonry",
   "description": "Responsive masonry image grid with blur-to-focus entrance animation and hover scaling.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/masonry/Masonry.vue",

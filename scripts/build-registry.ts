@@ -931,7 +931,8 @@ function buildRegistryItem(slug: string): RegistryItem | null {
 
   const files: RegistryFile[] = [];
 
-  const entries = readdirSync(componentDir);
+  // Sorted so registry JSON is deterministic across runtimes/filesystems.
+  const entries = readdirSync(componentDir).sort();
   for (const entry of entries) {
     const fullPath = join(componentDir, entry);
     if (!statSync(fullPath).isFile()) continue;

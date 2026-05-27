@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Orb",
   "description": "Glowing orb with hue-shifted noise, hover distortion, and optional rotation.",
-  "dependencies": ["ogl", "@vueuse/core"],
+  "dependencies": [
+    "ogl",
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/orb/Orb.vue",

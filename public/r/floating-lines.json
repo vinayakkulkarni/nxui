@@ -4,7 +4,10 @@
   "type": "registry:ui",
   "title": "Floating Lines",
   "description": "Multi-layered glowing wave lines with cursor-reactive bending.",
-  "dependencies": ["three", "@vueuse/core"],
+  "dependencies": [
+    "three",
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/floating-lines/FloatingLines.vue",

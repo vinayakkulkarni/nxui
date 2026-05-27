@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Scroll Reveal",
   "description": "Text revealed word by word on scroll with optional blur.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/scroll-reveal/ScrollReveal.vue",

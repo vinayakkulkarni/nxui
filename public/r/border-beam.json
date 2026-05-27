@@ -4,19 +4,21 @@
   "type": "registry:ui",
   "title": "Border Beam",
   "description": "A moving gradient beam that travels along the border of its container.",
-  "dependencies": ["motion-v"],
+  "dependencies": [
+    "motion-v"
+  ],
   "files": [
-    {
-      "path": "registry/new-york/border-beam/index.ts",
-      "content": "export { default as BorderBeam } from './BorderBeam.vue';\n",
-      "type": "registry:ui",
-      "target": "components/ui/border-beam/index.ts"
-    },
     {
       "path": "registry/new-york/border-beam/BorderBeam.vue",
       "content": "<script setup lang=\"ts\">\n  import { motion } from 'motion-v';\n  import { cn } from '~/lib/utils';\n\n  const props = withDefaults(\n    defineProps<{\n      class?: string;\n      size?: number;\n      duration?: number;\n      borderWidth?: number;\n      anchor?: number;\n      colorFrom?: string;\n      colorTo?: string;\n      delay?: number;\n    }>(),\n    {\n      class: '',\n      size: 200,\n      duration: 15,\n      borderWidth: 1.5,\n      anchor: 90,\n      colorFrom: '#ffaa40',\n      colorTo: '#9c40ff',\n      delay: 0,\n    },\n  );\n</script>\n\n<template>\n  <div\n    :style=\"{ '--border-width': `${borderWidth}px` }\"\n    :class=\"\n      cn(\n        'pointer-events-none absolute inset-0 rounded-[inherit] [border:var(--border-width)_solid_transparent]',\n        '![mask-clip:padding-box,border-box] ![mask-composite:intersect] [mask:linear-gradient(transparent,transparent),linear-gradient(white,white)]',\n        props.class,\n      )\n    \"\n  >\n    <component\n      :is=\"motion.div\"\n      :style=\"{\n        width: `${size}px`,\n        height: `${size}px`,\n        background: `linear-gradient(to left, ${colorFrom}, ${colorTo}, transparent)`,\n        offsetPath: `rect(0 auto auto 0 round ${size}px)`,\n        offsetAnchor: `${anchor}% 50%`,\n      }\"\n      :initial=\"{ offsetDistance: '0%' }\"\n      :animate=\"{ offsetDistance: '100%' }\"\n      :transition=\"{\n        duration,\n        delay,\n        repeat: Infinity,\n        ease: 'linear',\n      }\"\n      class=\"absolute aspect-square\"\n    />\n  </div>\n</template>\n",
       "type": "registry:ui",
       "target": "components/ui/border-beam/BorderBeam.vue"
+    },
+    {
+      "path": "registry/new-york/border-beam/index.ts",
+      "content": "export { default as BorderBeam } from './BorderBeam.vue';\n",
+      "type": "registry:ui",
+      "target": "components/ui/border-beam/index.ts"
     }
   ]
 }

@@ -4,7 +4,9 @@
   "type": "registry:ui",
   "title": "Text String",
   "description": "A Verlet physics rope simulation where each character is a draggable node connected by distance constraints with gravity, collision, and progressive unravel.",
-  "dependencies": ["@vueuse/core"],
+  "dependencies": [
+    "@vueuse/core"
+  ],
   "files": [
     {
       "path": "registry/new-york/text-string/TextString.vue",
