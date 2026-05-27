@@ -282,13 +282,14 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com)
 - **Components**: [Vue 3](https://vuejs.org)
 - **Animation**: [motion-v](https://github.com/motiondivision/motion-vue)
-- **Package Manager**: [Bun](https://bun.sh)
+- **Package Manager**: [pnpm](https://pnpm.io)
 
 ## Development
 
 ### Prerequisites
 
-- [Bun 1.3+](https://bun.sh)
+- [Node.js 24+](https://nodejs.org)
+- [pnpm 11.3+](https://pnpm.io) (recommended: install via `corepack enable`)
 
 ### Setup
 
@@ -298,21 +299,24 @@ git clone https://github.com/vinayakkulkarni/nxui.git
 cd nxui
 
 # Install dependencies
-bun install
+pnpm install
 
 # Start development server
-bun run dev
+pnpm run dev
 ```
 
 ### Available Scripts
 
-| Command                  | Description              |
-| ------------------------ | ------------------------ |
-| `bun run dev`            | Start development server |
-| `bun run build`          | Build for production     |
-| `bun run lint`           | Run oxlint + eslint      |
-| `bun run format`         | Format with oxfmt        |
-| `bun run build:registry` | Build registry JSONs     |
+| Command                   | Description                          |
+| ------------------------- | ------------------------------------ |
+| `pnpm run dev`            | Start development server             |
+| `pnpm run build`          | Build for production                 |
+| `pnpm run lint`           | Run oxlint                           |
+| `pnpm run lint:fix`       | Fix lint issues automatically        |
+| `pnpm run format`         | Format with oxfmt                    |
+| `pnpm run format:check`   | Verify formatting                    |
+| `pnpm run build:registry` | Build registry JSONs → `public/r/`   |
+| `pnpm run update:deps`    | Interactively update all deps (taze) |
 
 ## Contributing
 

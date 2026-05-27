@@ -8,14 +8,15 @@
 ## Quick Reference
 
 ```bash
-bun install            # Install dependencies
-bun run dev            # Start dev server (localhost:3000)
-bun run build          # Production build (Cloudflare Pages)
-bun run lint           # Run oxlint
-bun run lint:fix       # Fix lint issues
-bun run format         # Format with oxfmt
-bun run format:check   # Check formatting
-bun run build:registry # Build registry JSONs → public/r/
+pnpm install            # Install dependencies
+pnpm run dev            # Start dev server (localhost:3000)
+pnpm run build          # Production build (Cloudflare Pages)
+pnpm run lint           # Run oxlint
+pnpm run lint:fix       # Fix lint issues
+pnpm run format         # Format with oxfmt
+pnpm run format:check   # Check formatting
+pnpm run build:registry # Build registry JSONs → public/r/
+pnpm run update:deps    # Interactively update all deps (taze)
 ```
 
 ---
@@ -46,7 +47,7 @@ bun run build:registry # Build registry JSONs → public/r/
 | Highlighting    | shiki                                            | v4.0.2                                                            |
 | Class Utils     | class-variance-authority + clsx + tailwind-merge |                                                                   |
 | Types           | TypeScript                                       | v6.0+ strict                                                      |
-| Package Manager | Bun                                              | v1.3.10                                                           |
+| Package Manager | pnpm                                             | v11.3.0                                                           |
 
 ---
 
@@ -257,7 +258,7 @@ Each registry component: `registry/new-york/ComponentName/`
 
 The `@registry` alias maps to `../registry` (set in `nuxt.config.ts`).
 
-Build: `bun run scripts/build-registry.ts` → generates `public/r/*.json` for `shadcn-vue` CLI.
+Build: `pnpm run build:registry` → generates `public/r/*.json` for `shadcn-vue` CLI.
 
 ---
 
