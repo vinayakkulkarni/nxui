@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Text Animate",
   "description": "Versatile text animation component with multiple animation types and split modes.",
-  "dependencies": [
-    "@vueuse/core",
-    "motion-v"
-  ],
+  "dependencies": ["@vueuse/core", "motion-v"],
   "files": [
     {
       "path": "registry/new-york/text-animate/TextAnimate.vue",

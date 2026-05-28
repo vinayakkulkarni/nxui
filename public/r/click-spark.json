@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Click Spark",
   "description": "Click-triggered spark burst animation rendered on canvas.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/click-spark/ClickSpark.vue",

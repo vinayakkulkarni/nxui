@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Circular Gallery",
   "description": "OGL-powered curved image gallery with drag/scroll navigation and wave deformation.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/circular-gallery/CircularGallery.vue",

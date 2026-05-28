@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Dot Grid",
   "description": "Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/dot-grid/DotGrid.vue",

@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Mac Keyboard",
   "description": "An interactive Mac keyboard that highlights pressed keys in real-time with Web Audio key click sounds.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/mac-keyboard/MacKeyboard.vue",

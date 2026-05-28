@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Shape Grid",
   "description": "An animated grid of shapes (squares, hexagons, circles, triangles) with hover trail effects.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/shape-grid/ShapeGrid.vue",

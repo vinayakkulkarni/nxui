@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Dark Veil",
   "description": "CPPN neural network shader background with hue shift, scanlines, and warp distortion.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/dark-veil/DarkVeil.vue",

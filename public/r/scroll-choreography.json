@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Scroll Choreography",
   "description": "Scroll-driven image choreography with diagonal movement, stacking, and hero expansion phases.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/scroll-choreography/ScrollChoreography.vue",

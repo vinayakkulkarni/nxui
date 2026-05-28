@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Dot Field",
   "description": "Interactive canvas dot grid with cursor bulge, glow, sparkle, and wave effects with smooth physics-based response.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/dot-field/DotField.vue",

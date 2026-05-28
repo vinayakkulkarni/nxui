@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Animated Content",
   "description": "Scroll-triggered entrance animation with configurable direction, distance, and easing.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/animated-content/AnimatedContent.vue",

@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Scroll Based Velocity",
   "description": "Text that scrolls horizontally with velocity based on scroll speed.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/scroll-based-velocity/ScrollBasedVelocity.vue",

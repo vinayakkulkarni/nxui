@@ -4,11 +4,7 @@
   "type": "registry:ui",
   "title": "Dither",
   "description": "Retro Bayer-matrix dithered noise shader background with cursor-reactive wave distortion powered by Three.js postprocessing.",
-  "dependencies": [
-    "three",
-    "postprocessing",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "postprocessing", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/dither/Dither.vue",

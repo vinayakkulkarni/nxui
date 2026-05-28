@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Balatro",
   "description": "Psychedelic spin-paint background with configurable colors and animation speed.",
-  "dependencies": [
-    "ogl",
-    "@vueuse/core"
-  ],
+  "dependencies": ["ogl", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/balatro/Balatro.vue",

@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Silk",
   "description": "Silky fabric-like shader background with flowing noise patterns.",
-  "dependencies": [
-    "three",
-    "@vueuse/core"
-  ],
+  "dependencies": ["three", "@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/silk/Silk.vue",

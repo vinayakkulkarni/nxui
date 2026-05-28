@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Music Player",
   "description": "Interactive vinyl-record music player with swinging tonearm and animated rotation. Supports audio URLs and YouTube embeds.",
-  "dependencies": [
-    "motion-v"
-  ],
+  "dependencies": ["motion-v"],
   "files": [
     {
       "path": "registry/new-york/music-player/MusicPlayer.vue",

@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Particle Galaxy",
   "description": "A swirling 3D particle galaxy effect that responds to mouse movement.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/particle-galaxy/ParticleGalaxy.vue",

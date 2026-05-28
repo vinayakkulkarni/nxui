@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Magnet Lines",
   "description": "Lines that bend toward the cursor like a magnetic field.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/magnet-lines/MagnetLine.vue",

@@ -7,6 +7,7 @@ import {
   existsSync,
 } from 'node:fs';
 import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const ROOT = join(import.meta.dirname, '..');
 const REGISTRY_DIR = join(ROOT, 'registry', 'new-york');
@@ -1000,6 +1001,18 @@ function main() {
   const indexPath = join(OUTPUT_DIR, 'registry.json');
   writeFileSync(indexPath, JSON.stringify(registryIndex, null, 2) + '\n');
   console.log(`\n  ✓ registry.json (${indexItems.length} items)`);
+
+  // Run oxfmt over the freshly-written JSONs so CI's format:check stays green.
+  // oxfmt collapses short arrays/objects to one line; JSON.stringify always
+  // expands them, so without this pass every regen produces lint failures.
+  const fmt = spawnSync('pnpm', ['exec', 'oxfmt', '--write', OUTPUT_DIR], {
+    stdio: 'inherit',
+    cwd: ROOT,
+  });
+  if (fmt.status !== 0) {
+    console.error(`oxfmt failed with status ${fmt.status}`);
+    process.exit(fmt.status ?? 1);
+  }
 
   console.log(`\nDone: ${built} built, ${skipped} skipped`);
 }

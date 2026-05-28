@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Command Menu",
   "description": "A spotlight-style command palette with keyboard shortcuts.",
-  "dependencies": [
-    "@vueuse/core",
-    "motion-v"
-  ],
+  "dependencies": ["@vueuse/core", "motion-v"],
   "files": [
     {
       "path": "registry/new-york/command-menu/CommandMenu.vue",

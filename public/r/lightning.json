@@ -4,9 +4,7 @@
   "type": "registry:ui",
   "title": "Lightning",
   "description": "WebGL-powered lightning bolt effect with fbm noise and customizable hue.",
-  "dependencies": [
-    "@vueuse/core"
-  ],
+  "dependencies": ["@vueuse/core"],
   "files": [
     {
       "path": "registry/new-york/lightning/Lightning.vue",

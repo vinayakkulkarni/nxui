@@ -4,10 +4,7 @@
   "type": "registry:ui",
   "title": "Scroll Split Card",
   "description": "Scroll-driven interactive card that splits into three panels and flips to reveal back-side content with 3D transforms.",
-  "dependencies": [
-    "@vueuse/core",
-    "motion-v"
-  ],
+  "dependencies": ["@vueuse/core", "motion-v"],
   "files": [
     {
       "path": "registry/new-york/scroll-split-card/ScrollSplitCard.vue",
