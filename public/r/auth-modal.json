@@ -26,7 +26,7 @@
     },
     {
       "path": "registry/new-york/auth-modal/AuthModalSocials.vue",
-      "content": "<script setup lang=\"ts\">\n  import type { SocialProvider } from '~/types/components';\n\n  defineProps<{\n    providers: SocialProvider[];\n  }>();\n\n  const emit = defineEmits<{\n    login: [provider: string];\n  }>();\n</script>\n\n<template>\n  <div class=\"grid grid-cols-5 gap-3\">\n    <button\n      v-for=\"(btn, i) in providers\"\n      :key=\"i\"\n      class=\"flex aspect-square items-center justify-center rounded-2xl border border-zinc-200 bg-white transition-all hover:scale-105 hover:bg-zinc-100 active:scale-95 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800\"\n      :aria-label=\"`Sign in with ${btn.label}`\"\n      @click=\"emit('login', btn.label)\"\n    >\n      <Icon :name=\"btn.icon\" class=\"size-5\" />\n    </button>\n  </div>\n</template>\n",
+      "content": "<script setup lang=\"ts\">\n  import type { SocialProvider } from './types';\n\n  defineProps<{\n    providers: SocialProvider[];\n  }>();\n\n  const emit = defineEmits<{\n    login: [provider: string];\n  }>();\n</script>\n\n<template>\n  <div class=\"grid grid-cols-5 gap-3\">\n    <button\n      v-for=\"(btn, i) in providers\"\n      :key=\"i\"\n      class=\"flex aspect-square items-center justify-center rounded-2xl border border-zinc-200 bg-white transition-all hover:scale-105 hover:bg-zinc-100 active:scale-95 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-800\"\n      :aria-label=\"`Sign in with ${btn.label}`\"\n      @click=\"emit('login', btn.label)\"\n    >\n      <Icon :name=\"btn.icon\" class=\"size-5\" />\n    </button>\n  </div>\n</template>\n",
       "type": "registry:ui",
       "target": "components/ui/auth-modal/AuthModalSocials.vue"
     },
@@ -35,6 +35,12 @@
       "content": "export { default as AuthModal } from './AuthModal.vue';\nexport { default as AuthModalContent } from './AuthModalContent.vue';\nexport { default as AuthModalEmail } from './AuthModalEmail.vue';\nexport { default as AuthModalSocials } from './AuthModalSocials.vue';\n",
       "type": "registry:ui",
       "target": "components/ui/auth-modal/index.ts"
+    },
+    {
+      "path": "registry/new-york/auth-modal/types.ts",
+      "content": "export interface SocialProvider {\n  icon: string;\n  label: string;\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/auth-modal/types.ts"
     }
   ]
 }
