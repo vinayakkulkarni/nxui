@@ -1,5 +1,22 @@
 # Changelog
 
+## [0.0.3](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.2...nxui-v0.0.3) (2026-05-28)
+
+
+### Features
+
+* **registry:** co-locate types in each component dir (closes [#7](https://github.com/vinayakkulkarni/nxui/issues/7)) ([d996829](https://github.com/vinayakkulkarni/nxui/commit/d996829f413a65a1b013f0a676bd413b2a0a0194))
+
+
+### Miscellaneous
+
+* rewrite types/components.ts as barrel; regen registry JSONs ([9fd11aa](https://github.com/vinayakkulkarni/nxui/commit/9fd11aac9784b68c84faf5d562cbaa8f9ea7bc67))
+
+
+### Code Refactoring
+
+* **registry:** point all type imports at ./types instead of ~/types/components ([9fa4bbf](https://github.com/vinayakkulkarni/nxui/commit/9fa4bbf282d7dee7d290789022c60a41e55b29ea))
+
 ## [0.0.2](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.1...nxui-v0.0.2) (2026-05-28)
 
 
