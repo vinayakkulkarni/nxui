@@ -35,6 +35,13 @@ jobs:
             The subject "{subject}" found in the pull request title "{title}"
             doesn't match the configured pattern. Please ensure the subject
             starts with a lowercase letter, not uppercase.
+          # Dependabot's github-actions ecosystem emits "Bump" (uppercase) in
+          # the subject — see dependabot-core#2257. Skip validation for
+          # automated dependency PRs; automerger.yml still gates them on the
+          # update-type (semver-minor/patch only).
+          ignoreLabels: |
+            dependencies
+            deps
 
       - uses: marocchino/sticky-pull-request-comment@v3
         if: always() && (steps.lint_pr_title.outputs.error_message != null)
