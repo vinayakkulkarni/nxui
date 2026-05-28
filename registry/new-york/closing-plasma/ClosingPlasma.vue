@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
-  import type { ClosingPlasmaProps } from '~/types/components';
+  import type { ClosingPlasmaProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<ClosingPlasmaProps>(), {

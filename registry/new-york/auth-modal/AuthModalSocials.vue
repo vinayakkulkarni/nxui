@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { SocialProvider } from '~/types/components';
+  import type { SocialProvider } from './types';
 
   defineProps<{
     providers: SocialProvider[];

@@ -1,10 +1,7 @@
 <script setup lang="ts">
   import { useMotionValue } from 'motion-v';
   import { useElementSize } from '@vueuse/core';
-  import type {
-    CollectionSurferItem,
-    CollectionSurferVariant,
-  } from '~/types/components';
+  import type { CollectionSurferItem, CollectionSurferVariant } from './types';
   import { cn } from '~/lib/utils';
   import CollectionSurferCard from './CollectionSurferCard.vue';
 

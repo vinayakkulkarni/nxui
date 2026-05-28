@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { ShowcaseGridProps } from '~/types/components';
+  import type { ShowcaseGridProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<ShowcaseGridProps>(), {

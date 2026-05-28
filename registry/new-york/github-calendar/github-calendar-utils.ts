@@ -1,4 +1,4 @@
-import type { GithubCalendarColorSchema } from '~/types/components';
+import type { GithubCalendarColorSchema } from './types';
 
 export const colorSchemas: Record<
   GithubCalendarColorSchema,

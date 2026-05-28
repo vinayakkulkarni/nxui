@@ -18,7 +18,7 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useRafFn, useResizeObserver, useEventListener } from '@vueuse/core';
-  import type { InfiniteImageFieldProps } from '~/types/components';
+  import type { InfiniteImageFieldProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<InfiniteImageFieldProps>(), {

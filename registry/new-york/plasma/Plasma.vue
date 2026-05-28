@@ -2,7 +2,7 @@
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { Renderer, Program, Mesh, Triangle } from 'ogl';
-  import type { PlasmaProps, PlasmaDirection } from '~/types/components';
+  import type { PlasmaProps, PlasmaDirection } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<PlasmaProps>(), {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useElementHover } from '@vueuse/core';
   import { motion } from 'motion-v';
-  import type { ShowcaseCardHorizontalProps } from '~/types/components';
+  import type { ShowcaseCardHorizontalProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<ShowcaseCardHorizontalProps>(), {

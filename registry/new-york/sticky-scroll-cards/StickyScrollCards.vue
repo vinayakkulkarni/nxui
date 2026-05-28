@@ -3,10 +3,7 @@
   import { useScroll } from 'motion-v';
   import { cn } from '~/lib/utils';
   import StickyScrollCard from './StickyScrollCard.vue';
-  import type {
-    StickyScrollCardItem,
-    StickyScrollCardsProps,
-  } from '~/types/components';
+  import type { StickyScrollCardItem, StickyScrollCardsProps } from './types';
 
   const props = withDefaults(defineProps<StickyScrollCardsProps>(), {
     cards: () => [],

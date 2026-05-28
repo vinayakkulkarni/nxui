@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { Testimonial } from '~/types/components';
+  import type { Testimonial } from './types';
 
   defineProps<{
     item: Testimonial;

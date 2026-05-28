@@ -13,7 +13,7 @@
     useEventListener,
     useIntervalFn,
   } from '@vueuse/core';
-  import type { DotFieldProps, DotFieldDot } from '~/types/components';
+  import type { DotFieldProps, DotFieldDot } from './types';
   import { cn } from '~/lib/utils';
 
   const TWO_PI = Math.PI * 2;

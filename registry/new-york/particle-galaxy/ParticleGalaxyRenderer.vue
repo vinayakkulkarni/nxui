@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useResizeObserver } from '@vueuse/core';
   import * as THREE from 'three';
-  import type { ParticleGalaxyBlendMode } from '~/types/components';
+  import type { ParticleGalaxyBlendMode } from './types';
   import { createGalaxyParticles } from './createGalaxyParticles';
   import { useGalaxyInteractions } from './useGalaxyInteractions';
 

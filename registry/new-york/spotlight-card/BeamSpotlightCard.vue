@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useMouseInElement, useElementHover } from '@vueuse/core';
-  import type { BeamSpotlightCardProps } from '~/types/components';
+  import type { BeamSpotlightCardProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<BeamSpotlightCardProps>(), {

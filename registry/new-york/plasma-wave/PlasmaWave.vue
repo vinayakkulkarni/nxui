@@ -3,7 +3,7 @@
   import { useResizeObserver } from '@vueuse/core';
   import { Renderer, Program, Mesh, Geometry } from 'ogl';
   import { cn } from '~/lib/utils';
-  import type { PlasmaWaveProps } from '~/types/components';
+  import type { PlasmaWaveProps } from './types';
 
   const props = withDefaults(defineProps<PlasmaWaveProps>(), {
     xOffset: 0,

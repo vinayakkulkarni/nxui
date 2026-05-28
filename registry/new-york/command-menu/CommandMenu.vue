@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useMagicKeys } from '@vueuse/core';
   import { motion, AnimatePresence } from 'motion-v';
-  import type { CommandItem } from '~/types/components';
+  import type { CommandItem } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(

@@ -2,10 +2,7 @@
   import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
   import { useRafFn } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-  import type {
-    ScrollSplitCardItem,
-    ScrollSplitCardProps,
-  } from '~/types/components';
+  import type { ScrollSplitCardItem, ScrollSplitCardProps } from './types';
 
   const props = withDefaults(defineProps<ScrollSplitCardProps>(), {
     startHint: 'Scroll down',

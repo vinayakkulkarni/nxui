@@ -3,7 +3,7 @@
   import type {
     GithubContributionDay,
     GithubCalendarColorSchema,
-  } from '~/types/components';
+  } from './types';
   import { cn } from '~/lib/utils';
   import {
     getLevelClass,

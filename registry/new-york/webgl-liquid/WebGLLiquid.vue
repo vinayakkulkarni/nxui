@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
-  import type { WebGLLiquidProps } from '~/types/components';
+  import type { WebGLLiquidProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<WebGLLiquidProps>(), {

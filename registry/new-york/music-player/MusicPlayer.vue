@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, computed, watch, onMounted } from 'vue';
   import { motion } from 'motion-v';
-  import type { MusicPlayerProps } from '~/types/components';
+  import type { MusicPlayerProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<MusicPlayerProps>(), {

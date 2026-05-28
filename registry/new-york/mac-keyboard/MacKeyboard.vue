@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useEventListener } from '@vueuse/core';
-  import type { MacKeyboardProps } from '~/types/components';
+  import type { MacKeyboardProps } from './types';
   import { cn } from '~/lib/utils';
   import MacKeyboardKey from './MacKeyboardKey.vue';
 

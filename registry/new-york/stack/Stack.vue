@@ -10,7 +10,7 @@
   } from 'vue';
   import { motion } from 'motion-v';
   import { useMediaQuery } from '@vueuse/core';
-  import type { StackAnimationConfig } from '~/types/components';
+  import type { StackAnimationConfig } from './types';
   import { cn } from '~/lib/utils';
   import StackCardRotate from './StackCardRotate.vue';
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { Ref } from 'vue';
-  import type { MacKeyboardKeyProps } from '~/types/components';
+  import type { MacKeyboardKeyProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<MacKeyboardKeyProps>(), {

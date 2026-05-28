@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, computed, onMounted, onBeforeUnmount, inject } from 'vue';
   import type { Ref } from 'vue';
-  import type { EyeTrackingVariant } from '~/types/components';
+  import type { EyeTrackingVariant } from './types';
 
   const props = withDefaults(
     defineProps<{

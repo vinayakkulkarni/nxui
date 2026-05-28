@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import type { ParticleGalaxyBlendMode } from '~/types/components';
+import type { ParticleGalaxyBlendMode } from './types';
 import { particleVertexShader, particleFragmentShader } from './shaders';
 
 interface ParticleConfig {

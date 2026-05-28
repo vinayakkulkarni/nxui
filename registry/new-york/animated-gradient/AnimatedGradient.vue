@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
-  import type { AnimatedGradientProps } from '~/types/components';
+  import type { AnimatedGradientProps } from './types';
   import { cn } from '~/lib/utils';
 
   type PatternShape = 'Checks' | 'Stripes' | 'Edge';

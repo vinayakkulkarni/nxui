@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { Testimonial } from '~/types/components';
+  import type { Testimonial } from './types';
   import { cn } from '~/lib/utils';
   import TestimonialMarqueeRow from './TestimonialMarqueeRow.vue';
   import TestimonialMarqueeCard from './TestimonialMarqueeCard.vue';

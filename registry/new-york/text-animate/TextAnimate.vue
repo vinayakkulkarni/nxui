@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useIntersectionObserver } from '@vueuse/core';
   import { motion, AnimatePresence } from 'motion-v';
-  import type { AnimationType, SplitBy } from '~/types/components';
+  import type { AnimationType, SplitBy } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { FlightStatusCardProps } from '~/types/components';
+  import type { FlightStatusCardProps } from './types';
   import FlightStatusCard from './FlightStatusCard.vue';
   import FlightStatusCardLight from './FlightStatusCardLight.vue';
 

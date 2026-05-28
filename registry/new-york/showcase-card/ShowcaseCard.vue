@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useMouseInElement } from '@vueuse/core';
   import { motion } from 'motion-v';
-  import type { ShowcaseCardProps } from '~/types/components';
+  import type { ShowcaseCardProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<ShowcaseCardProps>(), {

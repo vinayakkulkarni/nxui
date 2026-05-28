@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { motion } from 'motion-v';
-  import type { FlightStatusCardProps } from '~/types/components';
+  import type { FlightStatusCardProps } from './types';
   import { cn } from '~/lib/utils';
   import FlightStatusCardDotMatrix from './FlightStatusCardDotMatrix.vue';
   import FlightStatusCardHalftone from './FlightStatusCardHalftone.vue';

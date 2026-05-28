@@ -2,7 +2,7 @@
   import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
   import { useResizeObserver, useRafFn } from '@vueuse/core';
   import * as THREE from 'three';
-  import type { ImageRippleEffectProps } from '~/types/components';
+  import type { ImageRippleEffectProps } from './types';
   import { cn } from '~/lib/utils';
 
   const DEFAULT_BRUSH = `data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><radialGradient id="g"><stop offset="0%" stop-color="white"/><stop offset="100%" stop-color="black"/></radialGradient></defs><circle cx="50" cy="50" r="50" fill="url(#g)"/></svg>`)}`;

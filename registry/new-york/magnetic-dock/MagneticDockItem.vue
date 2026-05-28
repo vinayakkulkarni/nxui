@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { motion, AnimatePresence, useTransform, useSpring } from 'motion-v';
   import type { MotionValue } from 'framer-motion/dom';
-  import type { MagneticDockItemData } from '~/types/components';
+  import type { MagneticDockItemData } from './types';
   import { cn } from '~/lib/utils';
 
   const props = defineProps<{

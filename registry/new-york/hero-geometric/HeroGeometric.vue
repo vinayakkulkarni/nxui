@@ -3,7 +3,7 @@
   import * as THREE from 'three';
   import { useResizeObserver } from '@vueuse/core';
   import { motion } from 'motion-v';
-  import type { HeroGeometricProps } from '~/types/components';
+  import type { HeroGeometricProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<HeroGeometricProps>(), {

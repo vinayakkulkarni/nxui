@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, provide, onMounted, onBeforeUnmount } from 'vue';
   import { useEventListener } from '@vueuse/core';
-  import type { EyeTrackingProps } from '~/types/components';
+  import type { EyeTrackingProps } from './types';
   import EyeTrackingEye from './EyeTrackingEye.vue';
   import { cn } from '~/lib/utils';
 

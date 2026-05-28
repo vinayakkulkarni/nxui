@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useMouseInElement, useElementHover } from '@vueuse/core';
-  import type { GradientFollowCardProps } from '~/types/components';
+  import type { GradientFollowCardProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<GradientFollowCardProps>(), {

@@ -4,7 +4,7 @@
     MagneticDockItemData,
     MagneticDockVariant,
     MagneticDockPosition,
-  } from '~/types/components';
+  } from './types';
   import { cn } from '~/lib/utils';
   import MagneticDockItem from './MagneticDockItem.vue';
 

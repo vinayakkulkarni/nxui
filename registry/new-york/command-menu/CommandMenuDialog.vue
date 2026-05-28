@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { motion, AnimatePresence } from 'motion-v';
-  import type { CommandMenuGroup, CommandMenuItem } from '~/types/components';
+  import type { CommandMenuGroup, CommandMenuItem } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(

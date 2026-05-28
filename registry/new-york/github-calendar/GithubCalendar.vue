@@ -5,7 +5,7 @@
     GithubCalendarColorSchema,
     GithubCalendarVariant,
     GithubCalendarShape,
-  } from '~/types/components';
+  } from './types';
   import { cn } from '~/lib/utils';
   import GithubCalendarGrid from './GithubCalendarGrid.vue';
 

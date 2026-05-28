@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
-  import type { DitherProps, DitherUniforms } from '~/types/components';
+  import type { DitherProps, DitherUniforms } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<DitherProps>(), {

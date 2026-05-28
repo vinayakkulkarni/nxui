@@ -1,9 +1,6 @@
 <script setup lang="ts">
   import { motion } from 'motion-v';
-  import type {
-    NodeDiagramNodeData,
-    NodeDiagramConnectionData,
-  } from '~/types/components';
+  import type { NodeDiagramNodeData, NodeDiagramConnectionData } from './types';
 
   const props = withDefaults(
     defineProps<{

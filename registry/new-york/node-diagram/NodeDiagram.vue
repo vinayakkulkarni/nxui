@@ -3,7 +3,7 @@
     NodeDiagramNodeData,
     NodeDiagramConnectionData,
     NodeDiagramPattern,
-  } from '~/types/components';
+  } from './types';
   import NodeDiagramNode from './NodeDiagramNode.vue';
   import NodeDiagramTrace from './NodeDiagramTrace.vue';
   import { cn } from '~/lib/utils';

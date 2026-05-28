@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useMouseInElement, useElementHover } from '@vueuse/core';
-  import type { TiltSpotlightCardProps } from '~/types/components';
+  import type { TiltSpotlightCardProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<TiltSpotlightCardProps>(), {

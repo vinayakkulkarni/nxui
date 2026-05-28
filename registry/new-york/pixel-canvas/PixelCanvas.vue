@@ -1,9 +1,6 @@
 <script setup lang="ts">
   import { useResizeObserver, useEventListener } from '@vueuse/core';
-  import type {
-    PixelCanvasPixel,
-    PixelCanvasVariant,
-  } from '~/types/components';
+  import type { PixelCanvasPixel, PixelCanvasVariant } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(

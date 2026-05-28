@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { cn } from '~/lib/utils';
-  import type { GlassIconItem } from '~/types/components';
+  import type { GlassIconItem } from './types';
 
   withDefaults(
     defineProps<{

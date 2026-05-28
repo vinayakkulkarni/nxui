@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { cn } from '~/lib/utils';
-  import type { SplitFlapDisplayProps, SplitFlapRow } from '~/types/components';
+  import type { SplitFlapDisplayProps, SplitFlapRow } from './types';
   import SplitFlapDisplayRow from './SplitFlapDisplayRow.vue';
 
   const SIZE_MAP = {

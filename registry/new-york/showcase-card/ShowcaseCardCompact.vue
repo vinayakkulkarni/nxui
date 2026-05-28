@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { useElementHover } from '@vueuse/core';
   import { motion } from 'motion-v';
-  import type { ShowcaseCardCompactProps } from '~/types/components';
+  import type { ShowcaseCardCompactProps } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<ShowcaseCardCompactProps>(), {

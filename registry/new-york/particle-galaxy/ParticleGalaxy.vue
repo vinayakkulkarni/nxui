@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useRafFn, useResizeObserver, useMouseInElement } from '@vueuse/core';
-  import type { GalaxyParticle } from '~/types/components';
+  import type { GalaxyParticle } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(

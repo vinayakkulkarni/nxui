@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { motion } from 'motion-v';
-  import type { FlightInfo, FlightStatus } from '~/types/components';
+  import type { FlightInfo, FlightStatus } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
