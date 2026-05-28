@@ -9,7 +9,7 @@ const componentCount = readdirSync('registry/new-york', {
 // backing content/docs/{cat}/{slug}.md actually exists. This avoids
 // aborting prerender on missing pages (createError 404 with fatal: true).
 const docRoutes = docsNav
-  .flatMap((g) => g.items.map((i) => i.path))
+  .flatMap((g) => g.items.map((i: { path: string }) => i.path))
   .filter((p) => {
     if (p === '/docs') return true;
     const rel = p.replace(/^\/docs\//, '');
@@ -18,10 +18,51 @@ const docRoutes = docsNav
 
 export default defineNuxtConfig({
   modules: [
-    '@nuxt/content',
-    '@nuxt/icon',
-    '@nuxt/fonts',
-    '@nuxtjs/color-mode',
+    [
+      '@nuxt/content',
+      {
+        build: {
+          markdown: {
+            highlight: {
+              theme: {
+                light: 'material-theme-lighter',
+                default: 'material-theme',
+                dark: 'material-theme-palenight',
+              },
+              langs: [
+                'bash',
+                'json',
+                'js',
+                'ts',
+                'html',
+                'css',
+                'vue',
+                'shell',
+                'md',
+                'yaml',
+              ],
+            },
+          },
+        },
+        database: {
+          type: 'd1',
+          bindingName: 'DB',
+        },
+      },
+    ],
+    [
+      '@nuxt/icon',
+      {
+        provider: 'iconify',
+      },
+    ],
+    [
+      '@nuxtjs/color-mode',
+      {
+        preference: 'dark',
+        classSuffix: '',
+      },
+    ],
     [
       '@nuxtjs/plausible',
       {
@@ -34,58 +75,50 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     'motion-v/nuxt',
     // nuxt-og-image removed: Satori WASM crashes on CF Workers (issue #434)
-    '@nuxtjs/sitemap',
-    'shadcn-nuxt',
+    [
+      '@nuxtjs/sitemap',
+      {
+        name: 'nxui',
+        description:
+          'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v.',
+        url: 'https://nxui.geoql.in',
+      },
+    ],
+    [
+      'shadcn-nuxt',
+      {
+        prefix: '',
+        componentDir: './app/components/ui',
+      },
+    ],
   ],
 
-  colorMode: {
-    preference: 'dark',
-    classSuffix: '',
-  },
-
-  icon: {
-    provider: 'iconify',
-  },
-
-  fonts: {
-    families: [
-      {
-        name: 'Satoshi',
-        provider: 'fontshare',
-        weights: [300, 400, 500, 700, 900],
-      },
-      {
-        name: 'Clash Display',
-        provider: 'fontshare',
-        weights: [200, 300, 400, 500, 600, 700],
-      },
-      { name: 'JetBrains Mono', provider: 'google' },
-      { name: 'Instrument Serif', provider: 'google' },
-    ],
+  vite: {
+    build: {
+      sourcemap: false,
+      chunkSizeWarningLimit: 1500,
+    },
+    optimizeDeps: {
+      include: [
+        'clsx',
+        'reka-ui',
+        'shiki/bundle/web',
+        'tailwind-merge',
+        'three',
+      ],
+    },
   },
 
   css: ['~/assets/css/main.css'],
 
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   future: {
-    compatibilityVersion: 4,
+    compatibilityVersion: 5,
   },
 
   alias: {
     '@registry': '../registry',
-  },
-
-  shadcn: {
-    prefix: '',
-    componentDir: './app/components/ui',
-  },
-
-  site: {
-    name: 'nxui',
-    description:
-      'Beautiful animated components for Vue. Built with Tailwind CSS and motion-v.',
-    url: 'https://nxui.geoql.in',
   },
 
   app: {
@@ -124,36 +157,6 @@ export default defineNuxtConfig({
     },
   },
 
-  content: {
-    build: {
-      markdown: {
-        highlight: {
-          theme: {
-            light: 'material-theme-lighter',
-            default: 'material-theme',
-            dark: 'material-theme-palenight',
-          },
-          langs: [
-            'bash',
-            'json',
-            'js',
-            'ts',
-            'html',
-            'css',
-            'vue',
-            'shell',
-            'md',
-            'yaml',
-          ],
-        },
-      },
-    },
-    database: {
-      type: 'd1',
-      bindingName: 'DB',
-    },
-  },
-
   compatibilityDate: '2025-07-18',
 
   nitro: {
@@ -172,6 +175,7 @@ export default defineNuxtConfig({
     wasm: {
       esmImport: true,
       lazy: true,
+      silent: true,
     },
     rollupConfig: {
       output: {
