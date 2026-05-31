@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.3...nxui-v0.0.4) (2026-05-28)
+
+
+### Performance Improvements
+
+* migrate to use local fonts and use Vite 8 ([429ba02](https://github.com/vinayakkulkarni/nxui/commit/429ba022a5a9de6354ec7ebc44dcaf3b1b757672))
+
 ## [0.0.3](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.2...nxui-v0.0.3) (2026-05-28)
 
 
