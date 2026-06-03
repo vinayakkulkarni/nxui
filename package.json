@@ -45,7 +45,7 @@
     "ogl": "^1.0.11",
     "postprocessing": "^6.39.1",
     "reka-ui": "^2.9.9",
-    "shadcn-nuxt": "^2.7.3",
+    "shadcn-nuxt": "^2.7.4",
     "shiki": "^4.2.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss-animate": "^1.0.7",
