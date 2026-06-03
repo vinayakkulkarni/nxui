@@ -29,7 +29,7 @@
     "@iconify-json/lucide": "^1.2.109",
     "@iconify-json/simple-icons": "^1.2.84",
     "@nuxt/content": "^3.14.0",
-    "@nuxt/icon": "^2.2.2",
+    "@nuxt/icon": "^2.2.3",
     "@nuxtjs/color-mode": "^4.0.0",
     "@nuxtjs/plausible": "^3.0.2",
     "@nuxtjs/sitemap": "^8.0.15",
