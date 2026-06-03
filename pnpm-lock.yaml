@@ -15,8 +15,8 @@ importers:
         specifier: ^0.3.8
         version: 0.3.8(react@19.2.6)
       '@iconify-json/lucide':
-        specifier: ^1.2.109
-        version: 1.2.110
+        specifier: ^1.2.111
+        version: 1.2.111
       '@iconify-json/simple-icons':
         specifier: ^1.2.85
         version: 1.2.85
@@ -815,8 +815,8 @@ packages:
     peerDependencies:
       react: '>=16.0'
 
-  '@iconify-json/lucide@1.2.110':
-    resolution: {integrity: sha512-rLeHqnZZBxZbprbVwf6uY7HB5GkGVgvT9VujhjvaUEqFDLKZON6zR8K1f8uD1brBwf5TJ0TIvvW8mz5u2XJU+w==}
+  '@iconify-json/lucide@1.2.111':
+    resolution: {integrity: sha512-S6oXom2YOKuXFxWofhHa2oq++Z3WeZ78dRFDA7aEEJqyNCJlQd1UGAfN8u2gD2NzvYotmm+j5kH678viWfZbGQ==}
 
   '@iconify-json/simple-icons@1.2.85':
     resolution: {integrity: sha512-Hp5LXvd3LRk+e+1558wtonA7c1Z0/Phmi7xCqpgtb8bs8cuyGnP34GDbt5uhhUXxKlzacnnhAcXgcDxe9bUa1w==}
@@ -6778,7 +6778,7 @@ snapshots:
       htmlparser2: 9.1.0
       react: 19.2.6
 
-  '@iconify-json/lucide@1.2.110':
+  '@iconify-json/lucide@1.2.111':
     dependencies:
       '@iconify/types': 2.0.0
 
