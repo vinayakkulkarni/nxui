@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.5](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.4...nxui-v0.0.5) (2026-06-01)
+
+
+### Bug Fixes
+
+* **deps:** Bump @tanstack/vue-table ([#18](https://github.com/vinayakkulkarni/nxui/issues/18)) ([03a4e40](https://github.com/vinayakkulkarni/nxui/commit/03a4e406960cbe621283c302886c0a00fe2290d5))
+
+
+### Miscellaneous
+
+* **deps-dev:** Bump @commitlint/cli from 21.0.1 to 21.0.2 ([#17](https://github.com/vinayakkulkarni/nxui/issues/17)) ([1ec9320](https://github.com/vinayakkulkarni/nxui/commit/1ec9320ae90c75e337556e1375c843174c1e46c6))
+* **deps-dev:** Bump @commitlint/config-conventional ([#16](https://github.com/vinayakkulkarni/nxui/issues/16)) ([bfd883c](https://github.com/vinayakkulkarni/nxui/commit/bfd883c5af65c4446d0cb52022357a54482b483a))
+* **deps-dev:** Bump lint-staged from 17.0.5 to 17.0.7 ([#14](https://github.com/vinayakkulkarni/nxui/issues/14)) ([2c4ea79](https://github.com/vinayakkulkarni/nxui/commit/2c4ea796a574644be1f33896a5762182fa0f7afe))
+* **deps-dev:** Bump tsx from 4.22.3 to 4.22.4 ([#19](https://github.com/vinayakkulkarni/nxui/issues/19)) ([d631430](https://github.com/vinayakkulkarni/nxui/commit/d6314300bae181cadb9b15c8f3d6675244fd8bc5))
+
 ## [0.0.4](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.3...nxui-v0.0.4) (2026-05-28)
 
 
