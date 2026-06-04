@@ -36,8 +36,8 @@ importers:
         specifier: ^8.0.15
         version: 8.0.15(@nuxt/schema@4.4.7)(magicast@0.5.3)(nuxt@4.4.7(@babel/plugin-syntax-jsx@7.29.7(@babel/core@7.29.7))(@babel/plugin-syntax-typescript@7.29.7(@babel/core@7.29.7))(@parcel/watcher@2.5.6)(@types/node@25.9.1)(@vue/compiler-sfc@3.5.35)(better-sqlite3@12.10.0)(cac@6.7.14)(db0@0.3.4(better-sqlite3@12.10.0))(esbuild@0.28.0)(ioredis@5.11.0)(magicast@0.5.3)(meow@13.2.0)(oxlint@1.67.0)(rolldown@1.0.3)(rollup-plugin-visualizer@7.0.1(rolldown@1.0.3)(rollup@4.61.0))(rollup@4.61.0)(srvx@0.11.16)(terser@5.48.0)(tsx@4.22.4)(typescript@6.0.3)(vite@8.0.16(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(yaml@2.9.0))(vite@8.0.16(@types/node@25.9.1)(esbuild@0.28.0)(jiti@2.7.0)(terser@5.48.0)(tsx@4.22.4)(yaml@2.9.0))(vue@3.6.0-beta.13(typescript@6.0.3))(zod@3.25.76)
       '@tanstack/vue-table':
-        specifier: ^9.0.0-alpha.52
-        version: 9.0.0-alpha.52(vue@3.6.0-beta.13(typescript@6.0.3))
+        specifier: ^9.0.0-alpha.53
+        version: 9.0.0-alpha.53(vue@3.6.0-beta.13(typescript@6.0.3))
       '@vueuse/core':
         specifier: ^14.3.0
         version: 14.3.0(vue@3.6.0-beta.13(typescript@6.0.3))
@@ -2567,8 +2567,8 @@ packages:
   '@tanstack/store@0.11.0':
     resolution: {integrity: sha512-WlzzCt3xi0G6pCAJu1U+2jiECwabETDpQDi3hfkFZvJii9AuZqEKbOiVarX1/bWhTNjU486yQtJCCasi/0q+Cw==}
 
-  '@tanstack/table-core@9.0.0-alpha.52':
-    resolution: {integrity: sha512-Zug5vb6qS1ih3WmGDv6FcLH52fsidjm1wnKhMn0AgLhN9JUn5JT6sc9LY0xZq1FczEpXYePtB0bOtsRvCfcNVQ==}
+  '@tanstack/table-core@9.0.0-alpha.53':
+    resolution: {integrity: sha512-m2HUn/eD8B0/9rEqDf+Qv6saCCf/ujpWCdIZC2tsTEQIZ5bwm32iWqlPl3layxko2MnyEgSxuSv3238SXnZWJQ==}
     engines: {node: '>=16'}
 
   '@tanstack/virtual-core@3.17.0':
@@ -2583,8 +2583,8 @@ packages:
       '@vue/composition-api':
         optional: true
 
-  '@tanstack/vue-table@9.0.0-alpha.52':
-    resolution: {integrity: sha512-jcLLOr52KglRewIlemqYdjCe1L9Sp03mOOEuvlO3EKThPBlvcAF+tbU9cOnAcnSa7tm3mCuAXP05pPiN3KZaqA==}
+  '@tanstack/vue-table@9.0.0-alpha.53':
+    resolution: {integrity: sha512-hJyo7wFeK7GitxjvJ1F6TH4Cunx4Dgx9R+4+FenL/UlN6eO3qORK4rP8sqhz3i7JZ3YaVXMI2d4gcnOMRR1juw==}
     engines: {node: '>=16'}
     peerDependencies:
       vue: '>=3.2'
@@ -8332,7 +8332,7 @@ snapshots:
 
   '@tanstack/store@0.11.0': {}
 
-  '@tanstack/table-core@9.0.0-alpha.52':
+  '@tanstack/table-core@9.0.0-alpha.53':
     dependencies:
       '@tanstack/store': 0.11.0
 
@@ -8344,9 +8344,9 @@ snapshots:
       vue: 3.6.0-beta.13(typescript@6.0.3)
       vue-demi: 0.14.10(vue@3.6.0-beta.13(typescript@6.0.3))
 
-  '@tanstack/vue-table@9.0.0-alpha.52(vue@3.6.0-beta.13(typescript@6.0.3))':
+  '@tanstack/vue-table@9.0.0-alpha.53(vue@3.6.0-beta.13(typescript@6.0.3))':
     dependencies:
-      '@tanstack/table-core': 9.0.0-alpha.52
+      '@tanstack/table-core': 9.0.0-alpha.53
       '@tanstack/vue-store': 0.11.0(vue@3.6.0-beta.13(typescript@6.0.3))
       vue: 3.6.0-beta.13(typescript@6.0.3)
     transitivePeerDependencies:
