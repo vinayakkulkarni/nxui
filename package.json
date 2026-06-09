@@ -32,7 +32,7 @@
     "@nuxt/icon": "^2.2.3",
     "@nuxtjs/color-mode": "^4.0.0",
     "@nuxtjs/plausible": "^3.0.2",
-    "@nuxtjs/sitemap": "^8.0.15",
+    "@nuxtjs/sitemap": "^8.1.0",
     "@tanstack/vue-table": "^9.0.0-beta.6",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
