@@ -40,7 +40,7 @@
     "clsx": "^2.1.1",
     "gl-matrix": "^4.0.0-beta.2",
     "matter-js": "^0.20.0",
-    "motion-v": "^2.2.1",
+    "motion-v": "^2.3.0",
     "nuxt": "^4.4.8",
     "ogl": "^1.0.11",
     "postprocessing": "^6.39.1",
