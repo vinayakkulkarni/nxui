@@ -890,6 +890,150 @@
       "type": "registry:ui",
       "title": "Scroll Split Card",
       "description": "Scroll-driven interactive card that splits into three panels and flips to reveal back-side content with 3D transforms."
+    },
+    {
+      "name": "antigravity",
+      "type": "registry:ui",
+      "title": "Antigravity",
+      "description": "Three.js InstancedMesh particle field with mouse-driven magnetic attraction, wave animation, and configurable shapes."
+    },
+    {
+      "name": "ascii-text",
+      "type": "registry:ui",
+      "title": "ASCII Text",
+      "description": "Three.js rendered text converted to ASCII art with animated wave distortion."
+    },
+    {
+      "name": "dome-gallery",
+      "type": "registry:ui",
+      "title": "Dome Gallery",
+      "description": "3D dome-shaped image gallery with CSS transforms, drag interaction, and click-to-enlarge."
+    },
+    {
+      "name": "falling-text",
+      "type": "registry:ui",
+      "title": "Falling Text",
+      "description": "Matter.js physics-based falling text where words collapse and tumble with realistic gravity."
+    },
+    {
+      "name": "fluid-glass",
+      "type": "registry:ui",
+      "title": "Fluid Glass",
+      "description": "Three.js glass refraction effect with chromatic aberration shader in lens, bar, or cube mode."
+    },
+    {
+      "name": "galaxy",
+      "type": "registry:ui",
+      "title": "Galaxy",
+      "description": "OGL-powered starfield galaxy with thousands of animated points and parallax depth."
+    },
+    {
+      "name": "ghost-cursor",
+      "type": "registry:ui",
+      "title": "Ghost Cursor",
+      "description": "Three.js-powered ghostly cursor trail with bloom, grain, and FBM noise effects."
+    },
+    {
+      "name": "grid-scan",
+      "type": "registry:ui",
+      "title": "Grid Scan",
+      "description": "Three.js animated grid with scanning line effect, bloom, chromatic aberration, and mouse-reactive distortion."
+    },
+    {
+      "name": "hyperspeed",
+      "type": "registry:ui",
+      "title": "Hyperspeed",
+      "description": "Three.js highway light simulation with bloom, SMAA, distortion presets, and configurable car lights."
+    },
+    {
+      "name": "image-trail",
+      "type": "registry:ui",
+      "title": "Image Trail",
+      "description": "Mouse-following image trail that spawns images at cursor position with fade and scale animations."
+    },
+    {
+      "name": "infinite-menu",
+      "type": "registry:ui",
+      "title": "Infinite Menu",
+      "description": "WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection."
+    },
+    {
+      "name": "lanyard",
+      "type": "registry:ui",
+      "title": "Lanyard",
+      "description": "Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model."
+    },
+    {
+      "name": "laser-flow",
+      "type": "registry:ui",
+      "title": "Laser Flow",
+      "description": "Three.js volumetric laser beams with fog, mouse tilt, and flow animation using GLSL shaders."
+    },
+    {
+      "name": "metallic-paint",
+      "type": "registry:ui",
+      "title": "Metallic Paint",
+      "description": "Raw WebGL2 metallic paint effect with Laplacian depth solve, chromatic aberration, and mouse-driven ripples."
+    },
+    {
+      "name": "model-viewer",
+      "type": "registry:ui",
+      "title": "Model Viewer",
+      "description": "Three.js 3D model viewer with OrbitControls, GLTF/FBX/OBJ support, auto-framing, and screenshot."
+    },
+    {
+      "name": "orbit-images",
+      "type": "registry:ui",
+      "title": "Orbit Images",
+      "description": "Images orbiting along customizable path shapes including ellipse, circle, star, heart, infinity, and more."
+    },
+    {
+      "name": "particles",
+      "type": "registry:ui",
+      "title": "Particles",
+      "description": "OGL particle system with velocity simulation, mouse influence, and connection lines."
+    },
+    {
+      "name": "pill-nav",
+      "type": "registry:ui",
+      "title": "Pill Nav",
+      "description": "Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu."
+    },
+    {
+      "name": "pixel-trail",
+      "type": "registry:ui",
+      "title": "Pixel Trail",
+      "description": "Mouse-following pixel trail with SVG gooey filter for a blobby, organic cursor effect."
+    },
+    {
+      "name": "scroll-stack",
+      "type": "registry:ui",
+      "title": "Scroll Stack",
+      "description": "Scroll-driven stacked card animation with scale and sticky positioning effects."
+    },
+    {
+      "name": "splash-cursor",
+      "type": "registry:ui",
+      "title": "Splash Cursor",
+      "description": "Full WebGL fluid simulation cursor effect with realistic ink-in-water dynamics."
+    },
+    {
+      "name": "staggered-menu",
+      "type": "registry:ui",
+      "title": "Staggered Menu",
+      "description": "Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links."
+    },
+    {
+      "name": "sticker-peel",
+      "type": "registry:ui",
+      "title": "Sticker Peel",
+      "description": "Interactive sticker peel effect with CSS clip-path, SVG lighting filters, and drag interaction."
+    },
+    {
+      "name": "target-cursor",
+      "type": "registry:ui",
+      "title": "Target Cursor",
+      "description": "Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking."
     }
   ]
 }

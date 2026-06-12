@@ -914,6 +914,150 @@ const COMPONENTS: Record<
       'Scroll-driven interactive card that splits into three panels and flips to reveal back-side content with 3D transforms.',
     deps: ['@vueuse/core', 'motion-v'],
   },
+  antigravity: {
+    title: 'Antigravity',
+    description:
+      'Three.js InstancedMesh particle field with mouse-driven magnetic attraction, wave animation, and configurable shapes.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'ascii-text': {
+    title: 'ASCII Text',
+    description:
+      'Three.js rendered text converted to ASCII art with animated wave distortion.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'dome-gallery': {
+    title: 'Dome Gallery',
+    description:
+      '3D dome-shaped image gallery with CSS transforms, drag interaction, and click-to-enlarge.',
+    deps: ['@vueuse/core'],
+  },
+  'falling-text': {
+    title: 'Falling Text',
+    description:
+      'Matter.js physics-based falling text where words collapse and tumble with realistic gravity.',
+    deps: ['matter-js'],
+  },
+  'fluid-glass': {
+    title: 'Fluid Glass',
+    description:
+      'Three.js glass refraction effect with chromatic aberration shader in lens, bar, or cube mode.',
+    deps: ['three', '@vueuse/core'],
+  },
+  galaxy: {
+    title: 'Galaxy',
+    description:
+      'OGL-powered starfield galaxy with thousands of animated points and parallax depth.',
+    deps: ['ogl'],
+  },
+  'ghost-cursor': {
+    title: 'Ghost Cursor',
+    description:
+      'Three.js-powered ghostly cursor trail with bloom, grain, and FBM noise effects.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'grid-scan': {
+    title: 'Grid Scan',
+    description:
+      'Three.js animated grid with scanning line effect, bloom, chromatic aberration, and mouse-reactive distortion.',
+    deps: ['three', 'postprocessing', '@vueuse/core'],
+  },
+  hyperspeed: {
+    title: 'Hyperspeed',
+    description:
+      'Three.js highway light simulation with bloom, SMAA, distortion presets, and configurable car lights.',
+    deps: ['three', 'postprocessing'],
+  },
+  'image-trail': {
+    title: 'Image Trail',
+    description:
+      'Mouse-following image trail that spawns images at cursor position with fade and scale animations.',
+    deps: ['@vueuse/core'],
+  },
+  'infinite-menu': {
+    title: 'Infinite Menu',
+    description:
+      'WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection.',
+    deps: ['gl-matrix', '@vueuse/core'],
+  },
+  lanyard: {
+    title: 'Lanyard',
+    description:
+      'Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'laser-flow': {
+    title: 'Laser Flow',
+    description:
+      'Three.js volumetric laser beams with fog, mouse tilt, and flow animation using GLSL shaders.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'metallic-paint': {
+    title: 'Metallic Paint',
+    description:
+      'Raw WebGL2 metallic paint effect with Laplacian depth solve, chromatic aberration, and mouse-driven ripples.',
+    deps: [],
+  },
+  'model-viewer': {
+    title: 'Model Viewer',
+    description:
+      'Three.js 3D model viewer with OrbitControls, GLTF/FBX/OBJ support, auto-framing, and screenshot.',
+    deps: ['three', '@vueuse/core'],
+  },
+  'orbit-images': {
+    title: 'Orbit Images',
+    description:
+      'Images orbiting along customizable path shapes including ellipse, circle, star, heart, infinity, and more.',
+    deps: ['@vueuse/core'],
+  },
+  particles: {
+    title: 'Particles',
+    description:
+      'OGL particle system with velocity simulation, mouse influence, and connection lines.',
+    deps: ['ogl'],
+  },
+  'pill-nav': {
+    title: 'Pill Nav',
+    description:
+      'Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu.',
+    deps: ['@vueuse/core'],
+  },
+  'pixel-trail': {
+    title: 'Pixel Trail',
+    description:
+      'Mouse-following pixel trail with SVG gooey filter for a blobby, organic cursor effect.',
+    deps: ['@vueuse/core'],
+  },
+  'scroll-stack': {
+    title: 'Scroll Stack',
+    description:
+      'Scroll-driven stacked card animation with scale and sticky positioning effects.',
+    deps: ['@vueuse/core'],
+  },
+  'splash-cursor': {
+    title: 'Splash Cursor',
+    description:
+      'Full WebGL fluid simulation cursor effect with realistic ink-in-water dynamics.',
+    deps: [],
+  },
+  'staggered-menu': {
+    title: 'Staggered Menu',
+    description:
+      'Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links.',
+    deps: ['@vueuse/core'],
+  },
+  'sticker-peel': {
+    title: 'Sticker Peel',
+    description:
+      'Interactive sticker peel effect with CSS clip-path, SVG lighting filters, and drag interaction.',
+    deps: ['@vueuse/core'],
+  },
+  'target-cursor': {
+    title: 'Target Cursor',
+    description:
+      'Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.',
+    deps: [],
+  },
 };
 
 function buildRegistryItem(slug: string): RegistryItem | null {
