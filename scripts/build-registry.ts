@@ -52,6 +52,12 @@ const COMPONENTS: Record<
       'A text component that scrambles letters before revealing the final text on hover or load.',
     deps: ['@vueuse/core'],
   },
+  'kinetic-text-reveal': {
+    title: 'Kinetic Text Reveal',
+    description:
+      'A kinetic text reveal that segments text into words, characters, or lines and animates each into place with configurable direction, stagger, and blur.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
   'text-animate': {
     title: 'Text Animate',
     description:
@@ -1039,6 +1045,12 @@ const COMPONENTS: Record<
     description:
       'Three.js 3D model viewer with OrbitControls, GLTF/FBX/OBJ support, auto-framing, and screenshot.',
     deps: ['three', '@vueuse/core'],
+  },
+  'orbit-card-stack': {
+    title: 'Orbit Card Stack',
+    description:
+      'A stacked deck of profile cards that fans out into an orbital arc on hover, lifting the active card with spring physics.',
+    deps: ['motion-v', '@vueuse/core'],
   },
   'orbit-images': {
     title: 'Orbit Images',

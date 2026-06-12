@@ -23,6 +23,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Glitch Text', path: '/docs/text-animations/glitch-text' },
       { title: 'Gradient Text', path: '/docs/text-animations/gradient-text' },
       { title: 'Hyper Text', path: '/docs/text-animations/hyper-text' },
+      {
+        title: 'Kinetic Text Reveal',
+        path: '/docs/text-animations/kinetic-text-reveal',
+      },
       { title: 'Logo Loop', path: '/docs/text-animations/logo-loop' },
       { title: 'Rotating Text', path: '/docs/text-animations/rotating-text' },
       { title: 'Scrambled Text', path: '/docs/text-animations/scrambled-text' },
@@ -93,6 +97,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Model Viewer', path: '/docs/components/model-viewer' },
       { title: 'Music Player', path: '/docs/components/music-player' },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },
+      {
+        title: 'Orbit Card Stack',
+        path: '/docs/components/orbit-card-stack',
+      },
       { title: 'Orbit Images', path: '/docs/components/orbit-images' },
       { title: 'Pill Nav', path: '/docs/components/pill-nav' },
       { title: 'Pixel Card', path: '/docs/components/pixel-card' },
