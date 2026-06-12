@@ -3,6 +3,7 @@
   import { useIntersectionObserver } from '@vueuse/core';
   import { motion } from 'motion-v';
   import * as opentype from 'opentype.js';
+  import { cn } from '~/lib/utils';
 
   interface SignatureCharPath {
     d: string;
@@ -120,13 +121,22 @@
 </script>
 
 <template>
-  <div ref="containerRef" :class="props.class">
+  <div
+    ref="containerRef"
+    :class="cn('flex size-full items-center justify-center', props.class)"
+  >
     <svg
       v-if="loaded"
       :viewBox="`0 0 ${svgWidth} ${svgHeight}`"
       :width="svgWidth"
       :height="svgHeight"
-      :style="{ width: '100%', height: 'auto', maxWidth: `${svgWidth}px` }"
+      :style="{
+        display: 'block',
+        width: 'auto',
+        height: 'auto',
+        maxWidth: '100%',
+        maxHeight: '100%',
+      }"
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>

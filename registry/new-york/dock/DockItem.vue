@@ -14,12 +14,21 @@
     baseItemSize: number;
   }>();
 
-  const itemRef = ref<HTMLElement | null>(null);
+  const itemRef = ref<Record<string, unknown> | null>(null);
   const isHovered = ref(false);
   const sizeVal = ref(`${props.baseItemSize}px`);
 
+  function getEl(): HTMLElement | null {
+    const val = itemRef.value;
+    if (!val) return null;
+    if (val instanceof HTMLElement) return val;
+    if ('$el' in val) return val.$el as HTMLElement;
+    return null;
+  }
+
   const mouseDistance = useTransform(props.mouseX, (val: number) => {
-    const rect = itemRef.value?.getBoundingClientRect() ?? {
+    const el = getEl();
+    const rect = el?.getBoundingClientRect() ?? {
       x: 0,
       width: props.baseItemSize,
     };
