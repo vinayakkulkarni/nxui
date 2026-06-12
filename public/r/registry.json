@@ -64,6 +64,12 @@
       "description": "A card with 3D tilt effect that responds to mouse movement."
     },
     {
+      "name": "signature",
+      "type": "registry:ui",
+      "title": "Signature",
+      "description": "Animated handwriting effect that converts text to font glyph paths and reveals them with staggered SVG stroke animations."
+    },
+    {
       "name": "matrix-rain",
       "type": "registry:ui",
       "title": "Matrix Rain",
@@ -400,6 +406,12 @@
       "description": "Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration."
     },
     {
+      "name": "ferrofluid",
+      "type": "registry:ui",
+      "title": "Ferrofluid",
+      "description": "A WebGL ferrofluid metaball background with flowing turbulence, configurable colors, rim glow, and mouse interaction."
+    },
+    {
       "name": "gradient-blinds",
       "type": "registry:ui",
       "title": "Gradient Blinds",
@@ -422,6 +434,18 @@
       "type": "registry:ui",
       "title": "Light Rays",
       "description": "Animated light rays emanating from a configurable origin with mouse following and color controls."
+    },
+    {
+      "name": "side-rays",
+      "type": "registry:ui",
+      "title": "Side Rays",
+      "description": "A WebGL light-rays background emanating from a screen corner, with configurable origin, tilt, colors, spread, and falloff."
+    },
+    {
+      "name": "lightfall",
+      "type": "registry:ui",
+      "title": "Lightfall",
+      "description": "A WebGL raymarched light-streak background with falling luminous trails, configurable colors, density, and mouse interaction."
     },
     {
       "name": "ripple-grid",
@@ -532,6 +556,12 @@
       "description": "Interactive OGL ribbon lines that follow mouse movement with spring physics."
     },
     {
+      "name": "strands",
+      "type": "registry:ui",
+      "title": "Strands",
+      "description": "Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction."
+    },
+    {
       "name": "pixel-transition",
       "type": "registry:ui",
       "title": "Pixel Transition",
@@ -584,6 +614,12 @@
       "type": "registry:ui",
       "title": "Decay Card",
       "description": "SVG displacement map card that warps on cursor movement with lerp physics."
+    },
+    {
+      "name": "dock",
+      "type": "registry:ui",
+      "title": "Dock",
+      "description": "A macOS-style dock with cursor-proximity magnification driven by configurable spring physics."
     },
     {
       "name": "elastic-slider",

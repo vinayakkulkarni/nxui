@@ -103,6 +103,12 @@ const COMPONENTS: Record<
     description: 'A card with 3D tilt effect that responds to mouse movement.',
     deps: ['@vueuse/core'],
   },
+  signature: {
+    title: 'Signature',
+    description:
+      'Animated handwriting effect that converts text to font glyph paths and reveals them with staggered SVG stroke animations.',
+    deps: ['opentype.js', '@vueuse/core', 'motion-v'],
+  },
   'matrix-rain': {
     title: 'Matrix Rain',
     description: 'The iconic Matrix digital rain effect rendered on canvas.',
@@ -424,6 +430,12 @@ const COMPONENTS: Record<
       'Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration.',
     deps: ['ogl', '@vueuse/core'],
   },
+  ferrofluid: {
+    title: 'Ferrofluid',
+    description:
+      'A WebGL ferrofluid metaball background with flowing turbulence, configurable colors, rim glow, and mouse interaction.',
+    deps: ['ogl'],
+  },
   'gradient-blinds': {
     title: 'Gradient Blinds',
     description:
@@ -447,6 +459,18 @@ const COMPONENTS: Record<
     description:
       'Animated light rays emanating from a configurable origin with mouse following and color controls.',
     deps: ['ogl', '@vueuse/core'],
+  },
+  'side-rays': {
+    title: 'Side Rays',
+    description:
+      'A WebGL light-rays background emanating from a screen corner, with configurable origin, tilt, colors, spread, and falloff.',
+    deps: ['ogl', '@vueuse/core'],
+  },
+  lightfall: {
+    title: 'Lightfall',
+    description:
+      'A WebGL raymarched light-streak background with falling luminous trails, configurable colors, density, and mouse interaction.',
+    deps: ['ogl'],
   },
   'ripple-grid': {
     title: 'Ripple Grid',
@@ -554,6 +578,12 @@ const COMPONENTS: Record<
       'Interactive OGL ribbon lines that follow mouse movement with spring physics.',
     deps: ['ogl', '@vueuse/core'],
   },
+  strands: {
+    title: 'Strands',
+    description:
+      'Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction.',
+    deps: ['ogl'],
+  },
   'pixel-transition': {
     title: 'Pixel Transition',
     description:
@@ -607,6 +637,12 @@ const COMPONENTS: Record<
     description:
       'SVG displacement map card that warps on cursor movement with lerp physics.',
     deps: ['@vueuse/core'],
+  },
+  dock: {
+    title: 'Dock',
+    description:
+      'A macOS-style dock with cursor-proximity magnification driven by configurable spring physics.',
+    deps: ['motion-v', '@vueuse/core'],
   },
   'elastic-slider': {
     title: 'Elastic Slider',
