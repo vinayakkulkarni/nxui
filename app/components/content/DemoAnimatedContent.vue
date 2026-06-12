@@ -15,8 +15,8 @@
   </AnimatedContent>
 </template>`"
   >
-    <div class="h-75 w-full overflow-y-auto rounded-lg">
-      <div class="flex h-150 items-end justify-center pb-12">
+    <div class="h-75 w-full overflow-y-auto overscroll-contain rounded-lg">
+      <div class="flex h-[200%] items-end justify-center pb-12">
         <AnimatedContent :distance="100" direction="vertical" :duration="0.8">
           <p class="text-2xl font-bold text-foreground">
             Scroll down to reveal this content

@@ -13,8 +13,8 @@
   <FadeContent :blur='true' :duration='1' />
 </template>`"
   >
-    <div class="h-75 w-full overflow-y-auto rounded-lg">
-      <div class="flex h-150 items-end justify-center pb-12">
+    <div class="h-75 w-full overflow-y-auto overscroll-contain rounded-lg">
+      <div class="flex h-[200%] items-end justify-center pb-12">
         <FadeContent :blur="true" :duration="1">
           <p class="text-2xl font-bold text-foreground">
             Scroll down to see the fade effect
