@@ -168,7 +168,7 @@
   >
     <!-- Left panel: docs/code (1/3) -->
     <div
-      class="relative order-last flex min-h-0 flex-1 flex-col border-t border-border/30 lg:order-first lg:w-1/3 lg:max-w-[33.333%] lg:border-l lg:border-t-0"
+      class="relative order-last hidden min-h-0 flex-1 flex-col lg:order-first lg:flex lg:w-1/3 lg:max-w-[33.333%] lg:border-l"
     >
       <!-- Scrollable content with edge fade -->
       <div
@@ -258,59 +258,131 @@
 
     <!-- Right panel: live preview (2/3) -->
     <div
-      role="img"
-      :aria-label="
-        page.title ? `Interactive demo: ${page.title}` : 'Interactive demo'
-      "
-      class="relative order-first h-[50dvh] overflow-hidden bg-muted/30 dark:bg-background lg:order-last lg:h-dvh lg:w-2/3"
+      class="relative order-first flex min-h-0 flex-1 flex-col overflow-hidden bg-muted/30 dark:bg-background lg:order-last lg:h-dvh lg:w-2/3"
     >
-      <!-- Refresh button for animation demos -->
-      <button
-        v-if="demoRefreshable"
-        class="absolute top-4 right-4 z-10 grid size-9 place-items-center rounded-md border border-border bg-background/50 text-muted-foreground backdrop-blur-sm transition-all hover:bg-background hover:text-foreground"
-        aria-label="Replay animation"
-        @click="replay"
+      <!-- Demo area -->
+      <div
+        role="img"
+        :aria-label="
+          page.title ? `Interactive demo: ${page.title}` : 'Interactive demo'
+        "
+        class="relative min-h-0 flex-1 overflow-hidden"
       >
-        <Icon name="lucide:rotate-ccw" class="size-4" />
-      </button>
-
-      <!-- Demo component (client-only: WebGL/canvas demos use browser APIs) -->
-      <ClientOnly>
-        <div
-          v-if="DemoComponent"
-          :key="`${activeVariant}-${refreshKey}`"
-          class="size-full overflow-hidden"
+        <!-- Refresh button for animation demos -->
+        <button
+          v-if="demoRefreshable"
+          class="absolute top-4 right-4 z-10 grid size-9 place-items-center rounded-md border border-border bg-background/50 text-muted-foreground backdrop-blur-sm transition-all hover:bg-background hover:text-foreground"
+          aria-label="Replay animation"
+          @click="replay"
         >
-          <component :is="DemoComponent" />
-        </div>
-        <template #fallback>
-          <div class="size-full animate-pulse bg-muted/30" />
-        </template>
-      </ClientOnly>
+          <Icon name="lucide:rotate-ccw" class="size-4" />
+        </button>
 
-      <!-- Variant pills -->
-      <template v-if="hasMultipleVariants">
-        <div
-          class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-linear-to-t from-black/40 to-transparent"
-        ></div>
-        <div
-          class="absolute inset-x-0 bottom-6 z-30 flex flex-wrap justify-center gap-2 px-4"
-        >
-          <button
-            v-for="(entry, i) in demoEntries"
-            :key="entry.key"
-            class="rounded-full px-4 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
-            :class="
-              activeVariant === i
-                ? 'bg-white text-black shadow-lg'
-                : 'bg-white/20 text-white hover:bg-white/30'
-            "
-            @click="activeVariant = i"
+        <!-- Demo component (client-only: WebGL/canvas demos use browser APIs) -->
+        <ClientOnly>
+          <div
+            v-if="DemoComponent"
+            :key="`${activeVariant}-${refreshKey}`"
+            class="size-full overflow-hidden"
           >
-            {{ entry.label }}
+            <component :is="DemoComponent" />
+          </div>
+          <template #fallback>
+            <div class="size-full animate-pulse bg-muted/30" />
+          </template>
+        </ClientOnly>
+
+        <!-- Variant pills -->
+        <template v-if="hasMultipleVariants">
+          <div
+            class="pointer-events-none absolute inset-x-0 bottom-0 z-20 h-24 bg-linear-to-t from-black/40 to-transparent"
+          ></div>
+          <div
+            class="absolute inset-x-0 bottom-6 z-30 flex flex-wrap justify-center gap-2 px-4"
+          >
+            <button
+              v-for="(entry, i) in demoEntries"
+              :key="entry.key"
+              class="rounded-full px-4 py-1.5 text-xs font-medium backdrop-blur-sm transition-colors"
+              :class="
+                activeVariant === i
+                  ? 'bg-white text-black shadow-lg'
+                  : 'bg-white/20 text-white hover:bg-white/30'
+              "
+              @click="activeVariant = i"
+            >
+              {{ entry.label }}
+            </button>
+          </div>
+        </template>
+      </div>
+
+      <DocsMobileSheet :title="page?.title">
+        <NuxtLink
+          to="/docs"
+          class="mb-3 inline-flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <Icon name="lucide:arrow-left" class="size-3" />
+          Back to {{ formattedCategory }}
+        </NuxtLink>
+        <p
+          v-if="page?.description"
+          class="mb-4 text-sm/relaxed text-muted-foreground"
+        >
+          {{ page.description }}
+        </p>
+        <!-- mobile code collapsible -->
+        <div v-if="demoCode" class="not-prose">
+          <button
+            class="mb-3 flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
+            :aria-expanded="codeExpanded"
+            aria-controls="code-panel-mobile"
+            @click="codeExpanded = !codeExpanded"
+          >
+            <Icon name="lucide:code" class="size-3.5" />
+            <span>{{ codeExpanded ? 'Hide code' : 'View code' }}</span>
+            <Icon
+              name="lucide:chevron-down"
+              :class="[
+                'size-3 transition-transform duration-200',
+                codeExpanded ? 'rotate-180' : '',
+              ]"
+            />
           </button>
+
+          <div
+            v-show="codeExpanded"
+            id="code-panel-mobile"
+            role="region"
+            aria-label="Source code"
+            class="relative overflow-hidden rounded-xl border border-border/50"
+          >
+            <button
+              class="absolute right-2 top-2 z-10 grid size-8 place-items-center rounded-md text-muted-foreground/50 transition-colors hover:bg-muted hover:text-foreground"
+              :class="codeCopied ? 'text-foreground' : ''"
+              :aria-label="codeCopied ? 'Copied' : 'Copy code'"
+              @click="copyCode(demoCode)"
+            >
+              <Icon
+                :name="codeCopied ? 'lucide:check' : 'lucide:copy'"
+                class="size-3.5"
+              />
+            </button>
+
+            <div
+              class="shiki-wrapper max-h-[40vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:px-4 [&_pre]:py-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
+              v-html="highlightedHtml"
+            ></div>
+          </div>
         </div>
-      </template>
+        <DocsInstallTabs :component="componentSlug" class="mt-6" />
+        <div class="mt-6 border-t border-border/50 pt-4">
+          <DocsComponentNavigation
+            :prev="prevItem ?? null"
+            :next="nextItem ?? null"
+          />
+        </div>
+      </DocsMobileSheet>
     </div>
   </div>
 </template>

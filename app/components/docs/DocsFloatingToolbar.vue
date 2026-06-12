@@ -35,7 +35,7 @@
 <template>
   <!-- Floating toolbar — top-left corner -->
   <div
-    class="pointer-events-none absolute left-3 top-3 z-30 flex items-center gap-1"
+    class="pointer-events-none absolute left-3 top-3 z-30 hidden items-center gap-1 lg:flex"
   >
     <!-- Sidebar trigger (Sheet) -->
     <Sheet v-model:open="sidebarOpen">

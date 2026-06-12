@@ -70,3 +70,7 @@ export interface StaggeredEntryOptions {
   baseDelay?: number;
   staggerDelay?: number;
 }
+
+export interface DocsMobileSheetProps {
+  title?: string;
+}
