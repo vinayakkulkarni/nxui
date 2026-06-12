@@ -67,7 +67,7 @@
     "tailwindcss": "^4.3.0",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
-    "vue": "^3.6.0-beta.14",
+    "vue": "^3.6.0-beta.15",
     "wrangler": "^4.99.0"
   },
   "engines": {
