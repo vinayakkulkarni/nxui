@@ -23,8 +23,6 @@
   const barStyle = { paddingBottom: 'env(safe-area-inset-bottom, 0px)' };
   const navTriggerClass =
     'm-1.5 inline-flex size-9 items-center justify-center rounded-md transition-colors hover:bg-muted';
-  const navTitleClass =
-    'border-b border-border px-4 py-3 text-lg font-bold tracking-tight';
   const detailsTriggerClass =
     'flex flex-1 items-center justify-between gap-3 px-3 text-left transition-colors hover:bg-muted';
   const detailsLabelClass =
@@ -48,7 +46,14 @@
         </button>
       </SheetTrigger>
       <SheetContent side="left" class="w-72 overflow-y-auto p-0">
-        <SheetTitle :class="navTitleClass">nxui</SheetTitle>
+        <div
+          class="flex items-center justify-between border-b border-border px-4 py-3"
+        >
+          <SheetTitle class="text-lg font-bold tracking-tight">
+            nxui
+          </SheetTitle>
+          <DocsThemeToggle />
+        </div>
         <nav class="space-y-5 px-3 py-4">
           <DocsSidebarGroup
             v-for="group in docsNav"
