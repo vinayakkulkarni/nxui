@@ -22,7 +22,7 @@ overrides:
   vite: ^8.0.16
 
 allowBuilds:
-  "@parcel/watcher": false
+  '@parcel/watcher': false
   better-sqlite3: true
   esbuild: true
   sharp: true
