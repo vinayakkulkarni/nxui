@@ -1,5 +1,43 @@
 # Changelog
 
+## [0.0.6](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.5...nxui-v0.0.6) (2026-06-12)
+
+
+### Bug Fixes
+
+* **deps:** Bump @iconify-json/lucide from 1.2.110 to 1.2.111 ([#20](https://github.com/vinayakkulkarni/nxui/issues/20)) ([381c0b3](https://github.com/vinayakkulkarni/nxui/commit/381c0b30b8c93fbbaa42dd823bd714200deb5fde))
+* **deps:** Bump @iconify-json/simple-icons from 1.2.84 to 1.2.85 ([#25](https://github.com/vinayakkulkarni/nxui/issues/25)) ([827f3a4](https://github.com/vinayakkulkarni/nxui/commit/827f3a42f9dd9c36a51ce32f520595ac49ec6124))
+* **deps:** Bump @iconify-json/simple-icons from 1.2.85 to 1.2.86 ([#37](https://github.com/vinayakkulkarni/nxui/issues/37)) ([63ad065](https://github.com/vinayakkulkarni/nxui/commit/63ad065950610f16bf3edb19d4070f4fdcfd6087))
+* **deps:** Bump @nuxt/icon from 2.2.2 to 2.2.3 ([#28](https://github.com/vinayakkulkarni/nxui/issues/28)) ([e11dc5a](https://github.com/vinayakkulkarni/nxui/commit/e11dc5ad34e8aa972ec2921ef0328550aeee9c57))
+* **deps:** Bump @nuxtjs/color-mode from 4.0.0 to 4.0.1 ([#44](https://github.com/vinayakkulkarni/nxui/issues/44)) ([af1a08b](https://github.com/vinayakkulkarni/nxui/commit/af1a08bb5d6246f50af48f5581aaf15f2bd13713))
+* **deps:** Bump @nuxtjs/sitemap from 8.0.15 to 8.1.0 ([#43](https://github.com/vinayakkulkarni/nxui/issues/43)) ([f55e0cb](https://github.com/vinayakkulkarni/nxui/commit/f55e0cb02413563dd461531a1481a46a50237102))
+* **deps:** Bump @tanstack/vue-table ([#27](https://github.com/vinayakkulkarni/nxui/issues/27)) ([e76e46c](https://github.com/vinayakkulkarni/nxui/commit/e76e46c8e1415675ac0c1c1e03583c043a2a9613))
+* **deps:** Bump @tanstack/vue-table ([#30](https://github.com/vinayakkulkarni/nxui/issues/30)) ([1f461b2](https://github.com/vinayakkulkarni/nxui/commit/1f461b29f5104136326e22c77742c275b08b7a7a))
+* **deps:** Bump @tanstack/vue-table ([#33](https://github.com/vinayakkulkarni/nxui/issues/33)) ([e1e24d1](https://github.com/vinayakkulkarni/nxui/commit/e1e24d1a4ab513695749e68da4ecba5a6673a34c))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-alpha.54 to 9.0.0-beta.6 ([#38](https://github.com/vinayakkulkarni/nxui/issues/38)) ([d413583](https://github.com/vinayakkulkarni/nxui/commit/d413583ba469ca0d4d6317bbeb440c5fcb981663))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.6 to 9.0.0-beta.7 ([#46](https://github.com/vinayakkulkarni/nxui/issues/46)) ([fd3019b](https://github.com/vinayakkulkarni/nxui/commit/fd3019bb2ecd12c6a778ff8c5accba7c14c01bd1))
+* **deps:** Bump motion-v from 2.2.1 to 2.3.0 ([#42](https://github.com/vinayakkulkarni/nxui/issues/42)) ([f10002b](https://github.com/vinayakkulkarni/nxui/commit/f10002b6f9f6f6004a344c01da3f4d46a0949a0c))
+* **deps:** Bump nuxt from 4.4.6 to 4.4.7 ([#29](https://github.com/vinayakkulkarni/nxui/issues/29)) ([3efa9ea](https://github.com/vinayakkulkarni/nxui/commit/3efa9ea8f91728c44556e73fe964e53d36cc4c5f))
+* **deps:** Bump nuxt from 4.4.7 to 4.4.8 ([#40](https://github.com/vinayakkulkarni/nxui/issues/40)) ([c0eb165](https://github.com/vinayakkulkarni/nxui/commit/c0eb165cbbaf1fde1143135388d7f8998fa17771))
+* **deps:** Bump reka-ui from 2.9.8 to 2.9.9 ([#24](https://github.com/vinayakkulkarni/nxui/issues/24)) ([205d3cb](https://github.com/vinayakkulkarni/nxui/commit/205d3cb2b8aac4d902d609a074459954550cc3b4))
+* **deps:** Bump reka-ui from 2.9.9 to 2.9.10 ([#47](https://github.com/vinayakkulkarni/nxui/issues/47)) ([26e2e89](https://github.com/vinayakkulkarni/nxui/commit/26e2e898f1b41e9c8500644a1cbdadc9e5f4836e))
+* **deps:** Bump shadcn-nuxt from 2.7.3 to 2.7.4 ([#26](https://github.com/vinayakkulkarni/nxui/issues/26)) ([11648b7](https://github.com/vinayakkulkarni/nxui/commit/11648b768bc052d8f95768496b3893f32ae00fab))
+* **deps:** Bump shiki from 4.1.0 to 4.2.0 ([#22](https://github.com/vinayakkulkarni/nxui/issues/22)) ([53e1726](https://github.com/vinayakkulkarni/nxui/commit/53e172642a00cbb789b964fa548b9ccd44a38e55))
+
+
+### Miscellaneous
+
+* bump dependencies 🛫 ([462a108](https://github.com/vinayakkulkarni/nxui/commit/462a1085053e3167d81b9c3c7025132b411ec919))
+* **deps-dev:** Bump oxfmt from 0.52.0 to 0.53.0 ([#32](https://github.com/vinayakkulkarni/nxui/issues/32)) ([cd547e3](https://github.com/vinayakkulkarni/nxui/commit/cd547e302953eaa639ea00877baa4555c717f953))
+* **deps-dev:** Bump oxfmt from 0.53.0 to 0.54.0 ([#39](https://github.com/vinayakkulkarni/nxui/issues/39)) ([67f20d0](https://github.com/vinayakkulkarni/nxui/commit/67f20d04ec6bf134730e729337a64d0372779709))
+* **deps-dev:** Bump oxlint from 1.67.0 to 1.68.0 ([#31](https://github.com/vinayakkulkarni/nxui/issues/31)) ([d6ebeb0](https://github.com/vinayakkulkarni/nxui/commit/d6ebeb06e7e7a78362fe22c382acc3048c52e4be))
+* **deps-dev:** Bump oxlint from 1.68.0 to 1.69.0 ([#41](https://github.com/vinayakkulkarni/nxui/issues/41)) ([54fe21e](https://github.com/vinayakkulkarni/nxui/commit/54fe21e40b55cb8f2586346b4249cccc00963785))
+* **deps-dev:** Bump vue from 3.6.0-beta.13 to 3.6.0-beta.14 ([#35](https://github.com/vinayakkulkarni/nxui/issues/35)) ([5018b5d](https://github.com/vinayakkulkarni/nxui/commit/5018b5d5c4482f36fbd95c20da0141dd3c36db72))
+* **deps-dev:** Bump vue from 3.6.0-beta.14 to 3.6.0-beta.15 ([#48](https://github.com/vinayakkulkarni/nxui/issues/48)) ([4fcc26f](https://github.com/vinayakkulkarni/nxui/commit/4fcc26fd5dc469983cf96b85a59e03171713e72c))
+* **deps-dev:** Bump wrangler from 4.95.0 to 4.97.0 ([#21](https://github.com/vinayakkulkarni/nxui/issues/21)) ([9546a73](https://github.com/vinayakkulkarni/nxui/commit/9546a73ec3ae21cde8f868e2b76caa290050b0dd))
+* **deps-dev:** Bump wrangler from 4.97.0 to 4.98.0 ([#34](https://github.com/vinayakkulkarni/nxui/issues/34)) ([3e119e4](https://github.com/vinayakkulkarni/nxui/commit/3e119e4adf89e356d276cf7c8b29a80f22642df9))
+* **deps-dev:** Bump wrangler from 4.98.0 to 4.99.0 ([#45](https://github.com/vinayakkulkarni/nxui/issues/45)) ([fea6bc5](https://github.com/vinayakkulkarni/nxui/commit/fea6bc5585864c644ed0ab4bec9b628874854ca5))
+
 ## [0.0.5](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.4...nxui-v0.0.5) (2026-06-01)
 
 
