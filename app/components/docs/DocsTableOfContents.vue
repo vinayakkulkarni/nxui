@@ -107,7 +107,7 @@
 
         <nav ref="navRef" class="relative flex flex-col">
           <div
-            class="absolute bottom-0 left-0 top-0 w-px bg-border/50 dark:bg-white/6"
+            class="absolute inset-y-0 left-0 w-px bg-border/50 dark:bg-white/6"
           ></div>
           <a
             v-for="heading in headings"
@@ -139,7 +139,7 @@
             <h4 class="text-sm font-medium tracking-tight text-foreground">
               Need custom components?
             </h4>
-            <p class="text-xs leading-relaxed text-muted-foreground">
+            <p class="text-xs/relaxed text-muted-foreground">
               Get bespoke UI components &amp; stunning websites tailored for
               your brand.
             </p>

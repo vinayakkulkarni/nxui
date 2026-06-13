@@ -193,7 +193,7 @@
       )
     "
   >
-    <div class="relative h-[470px] w-full max-w-[980px]">
+    <div class="relative h-117.5 w-full max-w-245">
       <component
         :is="motion.article"
         v-for="(item, index) in safeItems"
@@ -242,7 +242,7 @@
             </h3>
           </div>
           <p
-            class="mt-4 max-w-[17rem] text-[0.98rem] font-medium leading-[1.42] tracking-[-0.01em] text-zinc-700"
+            class="mt-4 max-w-68 text-[0.98rem] font-medium leading-[1.42] tracking-[-0.01em] text-zinc-700"
           >
             {{ item.description }}
           </p>

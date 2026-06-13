@@ -238,7 +238,7 @@
             </button>
 
             <div
-              class="shiki-wrapper max-h-[60vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:px-4 [&_pre]:py-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
+              class="shiki-wrapper max-h-[60vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:p-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
               v-html="highlightedHtml"
             ></div>
           </div>
@@ -370,7 +370,7 @@
             </button>
 
             <div
-              class="shiki-wrapper max-h-[40vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:px-4 [&_pre]:py-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
+              class="shiki-wrapper max-h-[40vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:p-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
               v-html="highlightedHtml"
             ></div>
           </div>

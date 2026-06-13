@@ -95,7 +95,7 @@
     <div
       class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"
     ></div>
-    <div class="absolute bottom-4 left-4 right-4 z-10">
+    <div class="absolute bottom-4 inset-x-4 z-10">
       <p class="text-sm font-medium tracking-wide text-white">
         {{ item.title }}
       </p>

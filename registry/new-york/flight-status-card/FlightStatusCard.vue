@@ -67,7 +67,7 @@
         >
           <Icon
             name="lucide:plane"
-            class="size-4 -translate-x-1/2 -translate-y-1/2 text-primary"
+            class="size-4 -translate-1/2 text-primary"
           />
         </component>
       </div>

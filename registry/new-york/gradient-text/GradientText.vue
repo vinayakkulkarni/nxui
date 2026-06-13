@@ -123,7 +123,7 @@
       }"
     ></div>
     <span
-      class="text-content relative z-[2] inline-block bg-clip-text text-transparent"
+      class="text-content relative z-2 inline-block bg-clip-text text-transparent"
       :style="{
         backgroundImage: gradientImage,
         backgroundSize,

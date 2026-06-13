@@ -171,11 +171,11 @@
     </div>
     <template v-if="showGradients">
       <div
-        class="pointer-events-none absolute left-0 right-0 top-0 h-12.5 bg-linear-to-b from-background to-transparent transition-opacity duration-300"
+        class="pointer-events-none absolute inset-x-0 top-0 h-12.5 bg-linear-to-b from-background to-transparent transition-opacity duration-300"
         :style="{ opacity: topGradientOpacity }"
       ></div>
       <div
-        class="pointer-events-none absolute bottom-0 left-0 right-0 h-25 bg-linear-to-t from-background to-transparent transition-opacity duration-300"
+        class="pointer-events-none absolute bottom-0 inset-x-0 h-25 bg-linear-to-t from-background to-transparent transition-opacity duration-300"
         :style="{ opacity: bottomGradientOpacity }"
       ></div>
     </template>

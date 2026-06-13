@@ -33,7 +33,7 @@
   >
     <Icon
       name="lucide:search"
-      class="h-4 w-4 opacity-70 group-hover:opacity-100 transition-opacity"
+      class="size-4 opacity-70 group-hover:opacity-100 transition-opacity"
     />
     <span class="hidden lg:inline-flex">{{ triggerLabel }}</span>
     <span class="inline-flex lg:hidden">Search</span>

@@ -97,7 +97,7 @@
           :animate="{ opacity: 1, scale: 1 }"
           :exit="{ opacity: 0, scale: 0.96 }"
           :transition="{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }"
-          class="fixed left-1/2 top-1/2 z-50 w-full max-w-170 -translate-x-1/2 -translate-y-1/2 p-4"
+          class="fixed left-1/2 top-1/2 z-50 w-full max-w-170 -translate-1/2 p-4"
         >
           <div
             :class="
@@ -112,9 +112,9 @@
               class="flex items-center gap-3 border-b border-border/50 px-4 py-3"
             >
               <div
-                class="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/20 to-primary/5"
+                class="flex size-8 items-center justify-center rounded-lg bg-linear-to-br from-primary/20 to-primary/5"
               >
-                <Icon name="lucide:search" class="h-4 w-4 text-primary" />
+                <Icon name="lucide:search" class="size-4 text-primary" />
               </div>
               <input
                 ref="inputRef"
@@ -142,11 +142,11 @@
                 class="flex flex-col items-center justify-center py-14 text-center"
               >
                 <div
-                  class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-muted/50"
+                  class="mb-3 flex size-12 items-center justify-center rounded-full bg-muted/50"
                 >
                   <Icon
                     name="lucide:search"
-                    class="h-5 w-5 text-muted-foreground/50"
+                    class="size-5 text-muted-foreground/50"
                   />
                 </div>
                 <p class="text-sm text-muted-foreground">{{ emptyMessage }}</p>
@@ -178,12 +178,12 @@
                   <div
                     :class="
                       cn(
-                        'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors',
+                        'flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted text-muted-foreground transition-colors',
                         isSelected(item) && 'bg-primary/10 text-primary',
                       )
                     "
                   >
-                    <Icon v-if="item.icon" :name="item.icon" class="h-4 w-4" />
+                    <Icon v-if="item.icon" :name="item.icon" class="size-4" />
                   </div>
                   <div
                     class="flex flex-1 flex-col items-start gap-0.5 text-left"
@@ -199,7 +199,7 @@
                     name="lucide:arrow-right"
                     :class="
                       cn(
-                        'h-4 w-4 text-muted-foreground transition-all -translate-x-2 opacity-0',
+                        'size-4 text-muted-foreground transition-all -translate-x-2 opacity-0',
                         isSelected(item) && 'opacity-100 translate-x-0',
                       )
                     "

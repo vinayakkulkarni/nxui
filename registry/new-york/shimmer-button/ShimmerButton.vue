@@ -38,7 +38,7 @@
   <button
     :class="
       cn(
-        'group relative z-0 inline-flex h-11 cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-sm font-medium text-white [background:var(--bg)] [border-radius:var(--radius)] transition-transform duration-300 ease-in-out active:translate-y-px dark:border-black/10 dark:text-black',
+        'group relative z-0 inline-flex h-11 cursor-pointer items-center justify-center overflow-hidden whitespace-nowrap border border-white/10 px-6 py-3 text-sm font-medium text-white [background:var(--bg)] rounded-lg transition-transform duration-300 ease-in-out active:translate-y-px dark:border-black/10 dark:text-black',
         $props.class,
       )
     "
@@ -53,11 +53,11 @@
   >
     <!-- spark container -->
     <span
-      class="absolute inset-0 -z-30 overflow-visible blur-[2px] [container-type:size]"
+      class="absolute inset-0 -z-30 overflow-visible blur-[2px] @container-size"
     >
       <!-- spark -->
       <span
-        class="absolute inset-0 h-[100cqh] animate-shimmer-slide [aspect-ratio:1] [border-radius:0] [mask:none]"
+        class="absolute inset-0 h-[100cqh] animate-shimmer-slide aspect-[1] rounded-none [mask:none]"
       >
         <!-- spark gradient -->
         <span
@@ -78,7 +78,7 @@
 
     <!-- backdrop -->
     <span
-      class="absolute -z-20 [background:var(--bg)] [border-radius:var(--radius)] [inset:var(--cut)]"
+      class="absolute -z-20 [background:var(--bg)] rounded-lg inset-(--cut)"
     ></span>
   </button>
 </template>

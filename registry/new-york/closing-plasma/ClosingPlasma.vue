@@ -304,7 +304,7 @@ void main(){
 <template>
   <div
     ref="containerRef"
-    :class="cn('relative h-full w-full overflow-hidden', props.class)"
+    :class="cn('relative size-full overflow-hidden', props.class)"
   >
     <canvas
       ref="canvasRef"

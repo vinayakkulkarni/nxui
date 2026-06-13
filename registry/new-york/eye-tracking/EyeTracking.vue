@@ -5,7 +5,7 @@
   import EyeTrackingEye from './EyeTrackingEye.vue';
   import { cn } from '~/lib/utils';
 
-  const props = withDefaults(defineProps<EyeTrackingProps>(), {
+  withDefaults(defineProps<EyeTrackingProps>(), {
     eyeSize: 120,
     gap: 40,
     irisColor: '#4A6741',

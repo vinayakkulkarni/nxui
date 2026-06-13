@@ -61,9 +61,7 @@
           class="h-full"
         />
         <template #fallback>
-          <div
-            class="flex h-full w-full items-center justify-center bg-blue-50"
-          >
+          <div class="flex size-full items-center justify-center bg-blue-50">
             <span class="text-sm text-blue-400">Loading hero...</span>
           </div>
         </template>

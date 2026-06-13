@@ -108,7 +108,7 @@
     ref="scrollContainerRef"
     :class="
       cn(
-        'relative overflow-y-auto overflow-x-hidden bg-neutral-100 dark:bg-black [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+        'relative overflow-y-auto overflow-x-hidden bg-neutral-100 dark:bg-black scrollbar-none [&::-webkit-scrollbar]:hidden',
         props.class,
       )
     "
@@ -133,7 +133,7 @@
         >
           <!-- Animated track (w-0 h-0 so cards position from center) -->
           <div
-            class="relative h-0 w-0"
+            class="relative size-0"
             :style="{
               transform: groupTransform,
               transformStyle: 'preserve-3d',

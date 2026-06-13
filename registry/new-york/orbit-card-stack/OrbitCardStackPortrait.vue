@@ -21,13 +21,9 @@
 <template>
   <div
     v-if="item.image"
-    class="relative flex aspect-[1.36] w-full overflow-hidden rounded-[1.45rem] border border-black/8 bg-black/[0.045]"
+    class="relative flex aspect-[1.36] w-full overflow-hidden rounded-[1.45rem] border border-black/8 bg-black/4.5"
   >
-    <img
-      :src="item.image"
-      :alt="item.name"
-      class="h-full w-full object-cover"
-    />
+    <img :src="item.image" :alt="item.name" class="size-full object-cover" />
     <div
       class="absolute bottom-4 right-4 rounded-full bg-zinc-950 px-3 py-1 text-xs font-semibold tracking-[0.18em] text-white"
     >
@@ -36,7 +32,7 @@
   </div>
   <div
     v-else
-    class="relative flex aspect-[1.36] w-full overflow-hidden rounded-[1.45rem] border border-black/8 bg-black/[0.045]"
+    class="relative flex aspect-[1.36] w-full overflow-hidden rounded-[1.45rem] border border-black/8 bg-black/4.5"
     :style="{ '--accent': item.accent ?? '#f3f1ea' }"
   >
     <div

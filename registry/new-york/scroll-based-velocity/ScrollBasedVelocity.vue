@@ -24,7 +24,7 @@
       :base-velocity="defaultVelocity"
       :class="
         cn(
-          'font-display text-center text-4xl font-bold tracking-[-0.02em] text-foreground drop-shadow-sm md:text-7xl md:leading-[5rem]',
+          'font-display text-center text-4xl font-bold tracking-[-0.02em] text-foreground drop-shadow-sm md:text-7xl/20',
           props.class,
         )
       "
@@ -35,7 +35,7 @@
       :base-velocity="-defaultVelocity"
       :class="
         cn(
-          'font-display text-center text-4xl font-bold tracking-[-0.02em] text-foreground drop-shadow-sm md:text-7xl md:leading-[5rem]',
+          'font-display text-center text-4xl font-bold tracking-[-0.02em] text-foreground drop-shadow-sm md:text-7xl/20',
           props.class,
         )
       "

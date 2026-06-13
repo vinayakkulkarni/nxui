@@ -37,7 +37,7 @@
     :transition="{ duration: 0.6 }"
   >
     <div
-      class="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:min-h-100 overflow-hidden"
+      class="relative w-full md:w-1/2 aspect-4/3 md:aspect-auto md:min-h-100 overflow-hidden"
     >
       <div v-if="tagline" class="absolute top-6 left-6 z-20">
         <span class="text-neutral-900 dark:text-white/90 text-sm font-medium">{{
@@ -47,7 +47,7 @@
       <img
         :src="imageUrl"
         :alt="imageAlt"
-        class="w-full h-full object-cover transition-transform duration-600 ease-out"
+        class="size-full object-cover transition-transform duration-600 ease-out"
         :style="{ transform: isHovered ? 'scale(1.05)' : 'scale(1)' }"
       />
       <div
@@ -59,7 +59,7 @@
     >
       <component
         :is="motion.h2"
-        class="text-3xl md:text-4xl lg:text-5xl font-medium text-neutral-900 dark:text-white tracking-tight leading-tight mb-4"
+        class="text-3xl/tight md:text-4xl lg:text-5xl font-medium text-neutral-900 dark:text-white tracking-tight mb-4"
         :initial="{ opacity: 0, y: 20 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ delay: 0.2, duration: 0.5 }"
@@ -69,7 +69,7 @@
       <component
         :is="motion.p"
         v-if="description"
-        class="text-base md:text-lg text-neutral-600 dark:text-neutral-400 mb-8 leading-relaxed max-w-md"
+        class="text-base/relaxed md:text-lg text-neutral-600 dark:text-neutral-400 mb-8 max-w-md"
         :initial="{ opacity: 0, y: 20 }"
         :animate="{ opacity: 1, y: 0 }"
         :transition="{ delay: 0.3, duration: 0.5 }"

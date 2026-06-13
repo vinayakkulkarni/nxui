@@ -74,8 +74,8 @@
       <audio
         ref="audioRef"
         :src="props.src"
-        @ended="isPlaying = false"
         class="hidden"
+        @ended="isPlaying = false"
       />
     </template>
 
@@ -89,7 +89,7 @@
       <!-- Tonearm -->
       <component
         :is="motion.div"
-        class="absolute z-20 -top-[5%] -right-[10%] sm:-top-[8%] sm:-right-[15%] origin-top-right w-[60%] h-[15%] pointer-events-none"
+        class="absolute z-20 top-[-5%] right-[-10%] sm:top-[-8%] sm:right-[-15%] origin-top-right w-[60%] h-[15%] pointer-events-none"
         :initial="{ rotate: 10 }"
         :animate="{ rotate: isPlaying ? -20 : 10 }"
         :transition="{ duration: 0.5, ease: 'easeInOut' }"
@@ -147,7 +147,7 @@
 
         <!-- Center Hole and Label Area -->
         <div
-          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/3 h-1/3 rounded-full bg-zinc-900 border border-zinc-700 shadow-inner flex items-center justify-center"
+          class="absolute top-1/2 left-1/2 -translate-1/2 size-1/3 rounded-full bg-zinc-900 border border-zinc-700 shadow-inner flex items-center justify-center"
         >
           <!-- The very center pin hole -->
           <div

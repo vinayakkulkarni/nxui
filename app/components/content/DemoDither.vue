@@ -14,7 +14,7 @@
   <Dither :wave-color=&quot;[0.5, 0.5, 0.5]&quot; />
 </template>`"
   >
-    <div class="relative h-full min-h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-100 overflow-hidden rounded-lg">
       <Dither :wave-color="waveColor" />
     </div>
   </ComponentDemo>

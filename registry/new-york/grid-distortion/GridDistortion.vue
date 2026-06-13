@@ -17,6 +17,7 @@
     DoubleSide,
     Vector4,
   } from 'three';
+  import type { Texture } from 'three';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -141,7 +142,7 @@ void main() {
       time: { value: 0 },
       resolution: { value: new Vector4() },
       uTexture: {
-        value: null as InstanceType<typeof import('three').Texture> | null,
+        value: null as Texture | null,
       },
       uDataTexture: { value: dataTexture },
     };

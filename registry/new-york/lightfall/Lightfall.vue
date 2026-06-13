@@ -185,7 +185,6 @@ void main() { vec4 color; mainImage(color, vUv * iResolution.xy); gl_FragColor =
   let lastTime = 0;
   let pointerHandler: ((event: PointerEvent) => void) | null = null;
   let stopResizeObserver: (() => void) | undefined;
-  let uniformsRef: Uniforms | null = null;
 
   function updateColors(uniforms: Uniforms) {
     const { arr, count, avg } = prepColors(props.colors);
@@ -261,8 +260,6 @@ void main() { vec4 color; mainImage(color, vUv * iResolution.xy); gl_FragColor =
       uMouseStrength: { value: props.mouseStrength },
       uMouseRadius: { value: props.mouseRadius },
     };
-    uniformsRef = uniforms;
-
     programRef = new Program(gl, {
       vertex: VERTEX,
       fragment: FRAGMENT,
@@ -375,14 +372,13 @@ void main() { vec4 color; mainImage(color, vUv * iResolution.xy); gl_FragColor =
     geometryRef = null;
     meshRef = null;
     renderer = null;
-    uniformsRef = null;
   });
 </script>
 
 <template>
   <div
     ref="containerRef"
-    :class="cn('relative h-full w-full overflow-hidden', $props.class)"
+    :class="cn('relative size-full overflow-hidden', $props.class)"
     :style="
       props.mixBlendMode ? `mix-blend-mode: ${props.mixBlendMode}` : undefined
     "

@@ -92,7 +92,7 @@
     ></div>
 
     <!-- Image section -->
-    <div class="relative aspect-[4/3] overflow-hidden">
+    <div class="relative aspect-4/3 overflow-hidden">
       <div
         v-if="tagline"
         class="absolute left-4 top-4 z-20 drop-shadow-md sm:left-6 sm:top-6"
@@ -116,14 +116,14 @@
     <!-- Content section -->
     <div class="relative z-10 -mt-8 px-4 pb-4 sm:px-6 sm:pb-6">
       <h2
-        class="mb-2 border-0 text-2xl font-medium leading-tight tracking-tight text-neutral-900 dark:text-white sm:mb-3 sm:text-3xl lg:text-4xl"
+        class="mb-2 border-0 text-2xl/tight font-medium tracking-tight text-neutral-900 dark:text-white sm:mb-3 sm:text-3xl lg:text-4xl"
       >
         {{ heading }}
       </h2>
 
       <p
         v-if="description"
-        class="mb-4 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400 sm:mb-6 sm:text-base"
+        class="mb-4 text-sm/relaxed text-neutral-600 dark:text-neutral-400 sm:mb-6 sm:text-base"
       >
         {{ description }}
       </p>
@@ -151,7 +151,7 @@
     <!-- Footer section -->
     <div
       v-if="brandName || services.length > 0"
-      class="flex flex-wrap items-center justify-between gap-2 border-t border-neutral-200 px-4 py-4 dark:border-neutral-800/50 sm:px-6 sm:py-5"
+      class="flex flex-wrap items-center justify-between gap-2 border-t border-neutral-200 p-4 dark:border-neutral-800/50 sm:px-6 sm:py-5"
     >
       <component
         :is="motion.span"

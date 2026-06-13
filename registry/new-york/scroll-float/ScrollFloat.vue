@@ -83,7 +83,7 @@
 
 <template>
   <h2 ref="el" :class="cn('my-5 overflow-hidden', props.class)">
-    <span class="inline-block text-[clamp(1.6rem,4vw,3rem)] leading-[1.5]">
+    <span class="inline-block text-[clamp(1.6rem,4vw,3rem)] leading-normal">
       <span
         v-for="(char, i) in chars"
         :key="i"

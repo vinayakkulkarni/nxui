@@ -41,19 +41,19 @@
       class="relative -top-1/4 origin-top overflow-hidden bg-white"
     >
       <!-- 10px frame on three sides -->
-      <div class="p-[10px] pb-0">
-        <div class="w-[460px] overflow-hidden">
+      <div class="p-2.5 pb-0">
+        <div class="w-115 overflow-hidden">
           <img
             :src="src"
             :alt="title"
-            class="block h-[290px] w-full object-cover"
+            class="block h-72.5 w-full object-cover"
             draggable="false"
           />
         </div>
       </div>
 
       <!-- Caption -->
-      <div class="flex h-[44px] items-center justify-center px-4">
+      <div class="flex h-11 items-center justify-center px-4">
         <p
           class="text-[11px] font-medium uppercase tracking-[0.18em] text-neutral-400"
         >

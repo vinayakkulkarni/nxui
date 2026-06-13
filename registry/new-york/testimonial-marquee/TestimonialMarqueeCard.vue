@@ -10,13 +10,13 @@
 <template>
   <div
     v-if="variant === 'flush'"
-    class="group relative flex h-auto w-87.5 shrink-0 flex-col justify-between overflow-hidden rounded-none border-r border-border bg-black/7 p-6 shadow-sm transition-all hover:bg-black/12 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/10 transform-gpu [backface-visibility:hidden]"
+    class="group relative flex h-auto w-87.5 shrink-0 flex-col justify-between overflow-hidden rounded-none border-r border-border bg-black/7 p-6 shadow-sm transition-all hover:bg-black/12 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/10 transform-gpu backface-hidden"
   >
     <div
       class="absolute inset-0 bg-linear-to-br from-black/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100 dark:from-white/5"
     ></div>
     <div class="relative z-10 flex flex-col gap-4">
-      <p class="line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+      <p class="line-clamp-4 text-sm/relaxed text-muted-foreground">
         &quot;{{ item.text }}&quot;
       </p>
       <div class="flex items-center gap-3 pt-2">
@@ -44,13 +44,13 @@
 
   <div
     v-else
-    class="group relative flex h-auto w-87.5 shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-border bg-black/7 p-6 shadow-sm transition-all hover:-translate-y-1 hover:bg-black/12 hover:shadow-xl hover:shadow-black/5 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/10 transform-gpu [backface-visibility:hidden]"
+    class="group relative flex h-auto w-87.5 shrink-0 flex-col justify-between overflow-hidden rounded-2xl border border-border bg-black/7 p-6 shadow-sm transition-all hover:-translate-y-1 hover:bg-black/12 hover:shadow-xl hover:shadow-black/5 dark:bg-white/5 dark:shadow-none dark:hover:bg-white/10 transform-gpu backface-hidden"
   >
     <div
       class="absolute inset-0 bg-linear-to-br from-black/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100 dark:from-white/5"
     ></div>
     <div class="relative z-10 flex flex-col gap-4">
-      <p class="line-clamp-4 text-sm leading-relaxed text-muted-foreground">
+      <p class="line-clamp-4 text-sm/relaxed text-muted-foreground">
         &quot;{{ item.text }}&quot;
       </p>
       <div class="flex items-center gap-3 pt-2">

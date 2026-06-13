@@ -1,8 +1,8 @@
 <script setup lang="ts">
-  import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+  import { ref, computed, onMounted } from 'vue';
   import { useRafFn } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-  import type { ScrollSplitCardItem, ScrollSplitCardProps } from './types';
+  import type { ScrollSplitCardProps } from './types';
 
   const props = withDefaults(defineProps<ScrollSplitCardProps>(), {
     startHint: 'Scroll down',
@@ -219,7 +219,7 @@
     >
       <!-- Starting Text indicator -->
       <div
-        class="absolute left-0 right-0 top-[20%] text-center"
+        class="absolute inset-x-0 top-[20%] text-center"
         :style="{
           opacity: startTextOpacity,
           transform: `translateY(${startTextY})`,
@@ -315,7 +315,7 @@
 
             <!-- Title -->
             <h3
-              class="relative z-10 mb-4 text-2xl font-medium leading-tight"
+              class="relative z-10 mb-4 text-2xl/tight font-medium"
               :style="{ opacity: backTextOpacity }"
             >
               {{ card.title }}
@@ -334,7 +334,7 @@
 
       <!-- Ending Text -->
       <div
-        class="absolute bottom-[20%] left-0 right-0 text-center"
+        class="absolute bottom-[20%] inset-x-0 text-center"
         :style="{
           opacity: endTextOpacity,
           transform: `translateY(${endTextY})`,

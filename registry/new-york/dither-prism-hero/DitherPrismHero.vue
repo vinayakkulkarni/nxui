@@ -302,7 +302,7 @@ void main(){
 
     <div
       v-if="props.title1 || props.title2 || $slots.default"
-      class="relative z-10 flex w-full flex-1 flex-col items-center justify-center pb-8 pt-8 md:pb-20 md:pt-20"
+      class="relative z-10 flex w-full flex-1 flex-col items-center justify-center py-8 md:py-20"
     >
       <div class="flex w-full max-w-300 flex-col items-center px-6">
         <div

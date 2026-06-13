@@ -78,7 +78,7 @@
           :transition="{ duration: 0.2, ease: [0.32, 0.72, 0, 1] }"
           :class="
             cn(
-              'fixed left-1/2 top-1/2 z-50 w-full max-w-170 -translate-x-1/2 -translate-y-1/2 p-4',
+              'fixed left-1/2 top-1/2 z-50 w-full max-w-170 -translate-1/2 p-4',
               props.class,
             )
           "

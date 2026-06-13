@@ -169,7 +169,7 @@
         :class="
           cn(
             'absolute -bottom-2',
-            'w-1.5 h-1.5 rounded-full',
+            'size-1.5 rounded-full',
             'bg-neutral-600 dark:bg-white/80',
           )
         "
@@ -203,7 +203,7 @@
           :class="
             cn(
               'absolute left-1/2 -translate-x-1/2 -bottom-1',
-              'w-2 h-2 rotate-45',
+              'size-2 rotate-45',
               'bg-white dark:bg-neutral-900/95',
               'border-r border-b border-neutral-200 dark:border-white/10',
             )

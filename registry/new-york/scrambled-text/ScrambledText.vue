@@ -89,7 +89,7 @@
       v-for="(char, i) in displayChars"
       :key="i"
       :ref="(el) => setCharRef(i, el)"
-      class="inline-block will-change-[transform]"
+      class="inline-block will-change-transform"
       >{{ char === ' ' ? '\u00A0' : char }}</span
     >
   </div>

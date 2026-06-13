@@ -19,9 +19,9 @@
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     return result
       ? [
-          parseInt(result[1]!, 16) / 255,
-          parseInt(result[2]!, 16) / 255,
-          parseInt(result[3]!, 16) / 255,
+          Number.parseInt(result[1]!, 16) / 255,
+          Number.parseInt(result[2]!, 16) / 255,
+          Number.parseInt(result[3]!, 16) / 255,
         ]
       : [1, 0.5, 0.2];
   }
@@ -185,7 +185,7 @@ void main() {
     function loop(t: number) {
       if (!renderer || !program || !mesh) return;
 
-      let timeValue = (t - t0) * 0.001;
+      const timeValue = (t - t0) * 0.001;
 
       if (props.direction === 'pingpong') {
         const pingpongDuration = 10;

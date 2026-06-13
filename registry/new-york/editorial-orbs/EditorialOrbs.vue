@@ -571,7 +571,7 @@
       }"
     >
       <span
-        class="text-sm italic leading-snug"
+        class="text-sm/snug italic"
         style="color: #c4a35a; font-family: Georgia, 'Times New Roman', serif"
       >
         {{ pq.text }}

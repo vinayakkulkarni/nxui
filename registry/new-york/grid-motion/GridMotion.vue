@@ -97,7 +97,7 @@
       }"
     >
       <div
-        class="relative z-[2] grid w-[150vw] flex-none origin-center -rotate-15 grid-rows-4 gap-4"
+        class="relative z-2 grid w-[150vw] flex-none origin-center -rotate-15 grid-rows-4 gap-4"
         style="height: 150vh"
       >
         <div
@@ -123,7 +123,7 @@
                 class="absolute inset-0 bg-cover bg-center"
                 :style="{ backgroundImage: `url(${content})` }"
               ></div>
-              <div v-else class="relative z-[1] p-4 text-center">
+              <div v-else class="relative z-1 p-4 text-center">
                 {{ content }}
               </div>
             </div>

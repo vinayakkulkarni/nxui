@@ -80,7 +80,7 @@
   }
 
   function buildDots(w: number, h: number) {
-    const { dotRadius, dotSpacing } = props;
+    const { dotSpacing } = props;
     const cell = dotSpacing;
     const cols = Math.ceil(w / cell) + 1;
     const rows = Math.ceil(h / cell) + 1;
@@ -119,7 +119,6 @@
 
     const {
       dotRadius,
-      dotSpacing,
       cursorRadius,
       cursorForce,
       bulgeOnly,

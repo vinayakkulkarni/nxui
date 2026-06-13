@@ -26,9 +26,7 @@
 </script>
 
 <template>
-  <div
-    class="fixed left-1/2 top-1/2 z-101 w-full max-w-170 -translate-x-1/2 -translate-y-1/2 p-4"
-  >
+  <div class="fixed left-1/2 top-1/2 z-101 w-full max-w-170 -translate-1/2 p-4">
     <div
       class="overflow-hidden rounded-2xl border border-border/80 bg-popover shadow-2xl shadow-black/10 dark:shadow-black/30 backdrop-blur-2xl dark:border-white/8"
       @keydown="emit('keydown', $event)"

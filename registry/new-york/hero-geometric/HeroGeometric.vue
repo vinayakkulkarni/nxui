@@ -185,7 +185,7 @@ void main(){
 
     <div
       v-if="props.title1 || props.title2 || props.description"
-      class="relative z-10 flex w-full flex-1 flex-col items-center justify-center pb-8 pt-8 md:pb-20 md:pt-20"
+      class="relative z-10 flex w-full flex-1 flex-col items-center justify-center py-8 md:py-20"
     >
       <div class="flex w-full max-w-300 flex-col items-center px-6">
         <div
@@ -224,7 +224,7 @@ void main(){
             :initial="{ opacity: 0, y: 20 }"
             :animate="{ opacity: 1, y: 0 }"
             :transition="{ duration: 0.8, delay: 0.6, ease: 'easeOut' }"
-            class="text-lg font-normal leading-relaxed text-neutral-600 md:text-[1.35rem]"
+            class="text-lg/relaxed font-normal text-neutral-600 md:text-[1.35rem]"
           >
             {{ props.description }}
           </component>

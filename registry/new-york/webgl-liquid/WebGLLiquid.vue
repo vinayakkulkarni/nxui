@@ -290,7 +290,7 @@ void main(){
         </h2>
         <p
           v-if="props.description"
-          class="mt-6 max-w-155 text-base leading-relaxed text-white/75 md:text-xl"
+          class="mt-6 max-w-155 text-base/relaxed text-white/75 md:text-xl"
         >
           {{ props.description }}
         </p>

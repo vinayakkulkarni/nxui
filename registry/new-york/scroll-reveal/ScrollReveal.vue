@@ -85,7 +85,7 @@
 
 <template>
   <h2 ref="el" :class="cn('my-5', props.class)" :style="containerStyle">
-    <p class="text-[clamp(1.6rem,4vw,3rem)] leading-[1.5] font-semibold">
+    <p class="text-[clamp(1.6rem,4vw,3rem)] leading-normal font-semibold">
       <span
         v-for="(word, i) in words"
         :key="i"

@@ -26,7 +26,7 @@
       <div
         class="flex w-full flex-col items-center justify-center px-6 py-8 text-center lg:w-1/2 lg:items-start lg:pl-24 lg:text-left"
       >
-        <h3 class="mb-4 text-3xl font-medium leading-tight">
+        <h3 class="mb-4 text-3xl/tight font-medium">
           Card stacks have never
           <span class="lg:block">looked so good</span>
         </h3>

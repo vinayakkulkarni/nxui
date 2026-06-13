@@ -68,7 +68,7 @@
 
 <template>
   <button
-    class="group inline-flex items-center justify-center md:justify-start gap-2 whitespace-nowrap transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 border-0 md:border md:border-input/50 md:hover:border-input hover:bg-accent/50 md:px-3 md:py-2 relative h-9 w-9 md:w-40 lg:w-56 rounded-md md:rounded-lg bg-transparent md:bg-muted/30 text-sm font-normal text-muted-foreground"
+    class="group inline-flex items-center justify-center md:justify-start gap-2 whitespace-nowrap transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 border-0 md:border md:border-input/50 md:hover:border-input hover:bg-accent/50 md:px-3 md:py-2 relative size-9 md:w-40 lg:w-56 rounded-md md:rounded-lg bg-transparent md:bg-muted/30 text-sm font-normal text-muted-foreground"
     @click="isOpen = true"
   >
     <Icon

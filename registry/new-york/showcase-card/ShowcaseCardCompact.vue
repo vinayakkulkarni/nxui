@@ -30,11 +30,11 @@
     "
     @click="emit('click')"
   >
-    <div class="relative aspect-[16/10] overflow-hidden">
+    <div class="relative aspect-16/10 overflow-hidden">
       <img
         :src="imageUrl"
         :alt="imageAlt"
-        class="w-full h-full object-cover transition-transform duration-400 ease-out"
+        class="size-full object-cover transition-transform duration-400 ease-out"
         :style="{ transform: isHovered ? 'scale(1.08)' : 'scale(1)' }"
       />
       <div
@@ -61,7 +61,7 @@
       :animate="{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -10 }"
       :transition="{ duration: 0.2 }"
     >
-      <Icon name="lucide:arrow-up-right" class="w-5 h-5 text-neutral-400" />
+      <Icon name="lucide:arrow-up-right" class="size-5 text-neutral-400" />
     </component>
   </div>
 </template>

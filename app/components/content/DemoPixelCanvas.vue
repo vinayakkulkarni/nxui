@@ -103,7 +103,7 @@
         :colors="currentTab.colors"
         :gap="currentTab.gap"
         :speed="currentTab.speed"
-        class="h-full w-full rounded-lg"
+        class="size-full rounded-lg"
       >
         <div class="flex size-full items-center justify-center">
           <p class="text-2xl font-medium tracking-tight text-foreground/50">

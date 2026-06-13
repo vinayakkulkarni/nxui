@@ -130,19 +130,19 @@
       :transition="{ duration: animationDuration }"
     >
       <span
-        class="absolute left-[-10px] top-[-10px] size-4 rounded-[3px] border-[3px] border-b-0 border-r-0"
+        class="absolute -left-2.5 -top-2.5 size-4 rounded-[3px] border-[3px] border-b-0 border-r-0"
         :style="{ borderColor, filter: `drop-shadow(0 0 4px ${glowColor})` }"
       ></span>
       <span
-        class="absolute right-[-10px] top-[-10px] size-4 rounded-[3px] border-[3px] border-b-0 border-l-0"
+        class="absolute -right-2.5 -top-2.5 size-4 rounded-[3px] border-[3px] border-b-0 border-l-0"
         :style="{ borderColor, filter: `drop-shadow(0 0 4px ${glowColor})` }"
       ></span>
       <span
-        class="absolute bottom-[-10px] left-[-10px] size-4 rounded-[3px] border-[3px] border-r-0 border-t-0"
+        class="absolute -bottom-2.5 -left-2.5 size-4 rounded-[3px] border-[3px] border-r-0 border-t-0"
         :style="{ borderColor, filter: `drop-shadow(0 0 4px ${glowColor})` }"
       ></span>
       <span
-        class="absolute bottom-[-10px] right-[-10px] size-4 rounded-[3px] border-[3px] border-l-0 border-t-0"
+        class="absolute -bottom-2.5 -right-2.5 size-4 rounded-[3px] border-[3px] border-l-0 border-t-0"
         :style="{ borderColor, filter: `drop-shadow(0 0 4px ${glowColor})` }"
       ></span>
     </component>

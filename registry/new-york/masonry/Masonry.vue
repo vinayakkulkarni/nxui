@@ -119,7 +119,7 @@
         class="size-full rounded-lg bg-cover bg-center shadow-lg"
         :class="
           scaleOnHover
-            ? 'transition-transform duration-300 hover:scale-[var(--hover-scale)]'
+            ? 'transition-transform duration-300 hover:scale-(--hover-scale)'
             : ''
         "
         :style="{

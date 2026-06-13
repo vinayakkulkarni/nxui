@@ -87,7 +87,7 @@
   <div :class="cn('relative size-full', $props.class)">
     <!-- Top bar: logo + hamburger -->
     <nav
-      class="absolute inset-x-0 top-4 z-[99] flex items-center justify-between px-8 pointer-events-none"
+      class="absolute inset-x-0 top-4 z-99 flex items-center justify-between px-8 pointer-events-none"
     >
       <div
         class="pointer-events-auto inline-flex h-14 items-center rounded-full px-4 shadow-lg"
@@ -124,7 +124,7 @@
     <!-- Overlay with pill items -->
     <div
       v-if="isOpen"
-      class="absolute inset-0 z-[98] flex items-center justify-center"
+      class="absolute inset-0 z-98 flex items-center justify-center"
     >
       <ul
         class="m-0 flex w-full max-w-400 list-none flex-wrap justify-stretch gap-y-1 px-6"

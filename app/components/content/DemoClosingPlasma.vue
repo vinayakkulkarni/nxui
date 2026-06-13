@@ -67,7 +67,7 @@
         </ClosingPlasma>
         <template #fallback>
           <div
-            class="flex h-full w-full items-center justify-center rounded-lg bg-background"
+            class="flex size-full items-center justify-center rounded-lg bg-background"
           >
             <span class="text-sm text-white/50">Loading plasma...</span>
           </div>

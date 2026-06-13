@@ -32,7 +32,7 @@
     <div
       :class="
         cn(
-          'flex shrink-0 justify-start [gap:var(--gap)] min-w-full pr-[var(--gap)] will-change-transform [backface-visibility:hidden]',
+          'flex shrink-0 justify-start gap-(--gap) min-w-full pr-(--gap) will-change-transform backface-hidden',
           animClass,
           hoverClass,
         )
@@ -45,7 +45,7 @@
       aria-hidden="true"
       :class="
         cn(
-          'flex shrink-0 justify-start [gap:var(--gap)] min-w-full pr-[var(--gap)] will-change-transform [backface-visibility:hidden]',
+          'flex shrink-0 justify-start gap-(--gap) min-w-full pr-(--gap) will-change-transform backface-hidden',
           animClass,
           hoverClass,
         )

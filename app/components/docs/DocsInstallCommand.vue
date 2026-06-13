@@ -71,7 +71,7 @@
 
     <div class="relative">
       <pre
-        class="overflow-x-auto p-4 text-sm font-mono leading-relaxed text-zinc-100"
+        class="overflow-x-auto p-4 text-sm/relaxed font-mono text-zinc-100"
       ><span class="text-zinc-400 dark:text-zinc-500 mr-2">$</span><span class="text-purple-600 dark:text-purple-400">{{ prefix }}</span><span class="text-zinc-600 dark:text-zinc-400"> shadcn@latest add</span> <span class="text-green-600 dark:text-green-400">"{{ componentUrl }}"</span></pre>
       <DocsCopyButton :code="command" />
     </div>

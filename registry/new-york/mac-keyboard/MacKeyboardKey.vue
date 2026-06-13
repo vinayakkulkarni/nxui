@@ -32,8 +32,8 @@
     const label = props.label;
     if (!label) return '';
     if (label.length === 1) {
-      if (/^[a-zA-Z]$/.test(label)) return `Key${label.toUpperCase()}`;
-      if (/^[0-9]$/.test(label)) return `Digit${label}`;
+      if (/^[a-z]$/i.test(label)) return `Key${label.toUpperCase()}`;
+      if (/^\d$/.test(label)) return `Digit${label}`;
       if (SYMBOL_KEY_MAP[label]) return SYMBOL_KEY_MAP[label]!;
     }
     return '';

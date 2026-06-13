@@ -77,7 +77,7 @@
     style="cursor: none"
   >
     <slot></slot>
-    <div class="pointer-events-none absolute inset-0 z-[10000]">
+    <div class="pointer-events-none absolute inset-0 z-10000">
       <div
         ref="lineHRef"
         class="absolute w-full"

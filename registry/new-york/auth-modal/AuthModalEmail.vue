@@ -22,7 +22,7 @@
       v-model="email"
       type="email"
       placeholder="name@example.com"
-      class="h-10 w-full rounded-full border border-zinc-200 bg-zinc-50 pl-10 pr-10 text-sm outline-none transition-all focus:border-zinc-900 focus:bg-white focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-900/50 dark:focus:border-zinc-100 dark:focus:bg-zinc-900"
+      class="h-10 w-full rounded-full border border-zinc-200 bg-zinc-50 px-10 text-sm outline-none transition-all focus:border-zinc-900 focus:bg-white focus:ring-1 focus:ring-zinc-900 dark:border-zinc-800 dark:bg-zinc-900/50 dark:focus:border-zinc-100 dark:focus:bg-zinc-900"
       @keydown.enter="handleSubmit"
     />
     <button
