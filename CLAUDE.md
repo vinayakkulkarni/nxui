@@ -484,3 +484,28 @@ grep -r '\-\[.*px\]' --include='*.vue' app/ registry/
 # Check for remaining opacity fractions
 grep -r '/\[0\.' --include='*.vue' app/ registry/
 ```
+
+### Rule 19: Separate Type Imports — NEVER inline `type` qualifiers
+
+Always split value imports and type imports into separate statements. NEVER mix them with an inline `type` qualifier.
+
+```typescript
+// ❌ WRONG — inline type qualifier in a value import
+import { ref, type Ref } from 'vue';
+import { computed, type ComputedRef } from 'vue';
+
+// ✅ CORRECT — separate value import + dedicated `import type`
+import { ref, computed } from 'vue';
+import type { Ref, ComputedRef } from 'vue';
+```
+
+Enforced by `@typescript-eslint/consistent-type-imports` with `fixStyle: 'separate-type-imports'` in `eslint.config.js`. Run `pnpm run lint:fix` to autofix existing violations.
+
+### Linting: ESLint + oxlint coexist
+
+nxui runs BOTH linters (mirrors the-doctor.report). `pnpm run lint` = `oxlint && eslint .`; `pnpm run lint:fix` = `oxlint --fix && eslint . --fix`.
+
+- **oxlint** (`.oxlintrc.jsonc`): fast general linting (typescript, vue, import plugins).
+- **ESLint** (`eslint.config.js`): `eslint-plugin-better-tailwindcss` Tailwind v4 canonical-class enforcement on `app/**/*.vue` + `registry/**/*.vue` (`enforce-canonical-classes`, `no-conflicting-classes`, `no-duplicate-classes`, `no-unnecessary-whitespace` at error), plus `consistent-type-imports`. `eslint-plugin-oxlint` disables overlapping rules.
+- `import/first` is disabled for `.vue` — its autofixer reorders module-`<script>` consts below `<script setup>` imports, breaking `defineProps()` hoisting in dual-script SFCs.
+- `vue/require-default-prop` / `vue/no-required-prop-with-default` remain advisory warnings (faithful-port prop behavior is intentionally preserved).
