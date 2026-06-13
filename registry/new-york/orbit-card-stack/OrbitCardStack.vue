@@ -1,7 +1,5 @@
 <script lang="ts">
-  import type { OrbitStackItem } from './types';
-
-  const defaultItems: OrbitStackItem[] = [
+  const defaultItems = [
     {
       name: 'Mira Vale',
       role: 'Creative Lead',
@@ -132,8 +130,8 @@
   function activateCard(item: OrbitStackItem, index: number) {
     activeIndex.value = index;
     emit('activeChange', item, index);
-    if (raiseTimeoutRef.value) window.clearTimeout(raiseTimeoutRef.value);
-    raiseTimeoutRef.value = window.setTimeout(
+    if (raiseTimeoutRef.value) clearTimeout(raiseTimeoutRef.value);
+    raiseTimeoutRef.value = setTimeout(
       () => {
         raisedIndex.value = index;
       },
@@ -142,8 +140,8 @@
   }
 
   function scheduleCollapse() {
-    if (collapseTimeoutRef.value) window.clearTimeout(collapseTimeoutRef.value);
-    collapseTimeoutRef.value = window.setTimeout(() => {
+    if (collapseTimeoutRef.value) clearTimeout(collapseTimeoutRef.value);
+    collapseTimeoutRef.value = setTimeout(() => {
       expanded.value = false;
       activeIndex.value = defaultIndex.value;
       raisedIndex.value = defaultIndex.value;
@@ -169,7 +167,7 @@
 
   function getCardAnimate(index: number) {
     const itemLayout =
-      cardLayouts.value[index] ?? cardLayouts.value[defaultIndex.value];
+      cardLayouts.value[index] ?? cardLayouts.value[defaultIndex.value]!;
     const layout = expanded.value ? itemLayout.expanded : itemLayout.collapsed;
     const active = activeIndex.value === index;
     return {

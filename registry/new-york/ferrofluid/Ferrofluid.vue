@@ -324,10 +324,6 @@ void main() { vec4 color; mainImage(color, vUv * iResolution.xy); gl_FragColor =
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
       glContext.getExtension('WEBGL_lose_context')?.loseContext();
     }
-    programRef?.remove?.();
-    geometryRef?.remove?.();
-    meshRef?.remove?.();
-    renderer?.destroy?.();
     renderer = null;
     glContext = null;
     programRef = null;
