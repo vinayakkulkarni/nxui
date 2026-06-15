@@ -1,5 +1,34 @@
 # Changelog
 
+## [0.0.7](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.6...nxui-v0.0.7) (2026-06-15)
+
+
+### Features
+
+* **docs:** add Sponsor button to ToC sidebar card ([a1d18e3](https://github.com/vinayakkulkarni/nxui/commit/a1d18e3433508e322c728653a6f28168096c42b0))
+* **geo:** add entity, FAQ, and HowTo schema + dynamic count ([fbaf0b5](https://github.com/vinayakkulkarni/nxui/commit/fbaf0b51b675ee3d4cafbaf56d454fdb2b163970))
+* **geo:** allowlist AI crawlers + Organization schema infra ([a77796f](https://github.com/vinayakkulkarni/nxui/commit/a77796fa68b6cf3e65a58605275beeb2c69a590c))
+* **llms:** add nuxt-llms module for AI-crawler discovery ([80129bc](https://github.com/vinayakkulkarni/nxui/commit/80129bcc3b7a4faf601c0c2a42de8f0c85435b24))
+
+
+### Bug Fixes
+
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.9 to 9.0.0-beta.12 ([#53](https://github.com/vinayakkulkarni/nxui/issues/53)) ([e38aa26](https://github.com/vinayakkulkarni/nxui/commit/e38aa268ad8fb5a76719d27d55fb8be9ddb29568))
+* **lint:** resolve all require-default-prop + no-v-html warnings ([2054d3e](https://github.com/vinayakkulkarni/nxui/commit/2054d3eed95accfcb635fbe7d1d1e5dc0d7427ca))
+
+
+### Documentation
+
+* add animated demo GIF to README hero ([0c43b29](https://github.com/vinayakkulkarni/nxui/commit/0c43b297559e1282fd48ab2fdae5dfcbf9d54225))
+
+
+### Miscellaneous
+
+* add GitHub Sponsors funding config ([7cb68e9](https://github.com/vinayakkulkarni/nxui/commit/7cb68e91a63f7b07a65462f0595bbbf0f089586f))
+* **deps-dev:** Bump better-sqlite3 from 12.10.0 to 12.10.1 ([#55](https://github.com/vinayakkulkarni/nxui/issues/55)) ([5fc3f0c](https://github.com/vinayakkulkarni/nxui/commit/5fc3f0ccfaaeb691d75cb44c725f780c3c2d03be))
+* **deps:** bump to use pnpm 11.7 ([c4407a3](https://github.com/vinayakkulkarni/nxui/commit/c4407a35ab98c2fc4fa4c1f36d26e2b4e008740a))
+* **skills:** vendor nuxt-geo-best-practices skill ([1c3f90c](https://github.com/vinayakkulkarni/nxui/commit/1c3f90c7a3b7f9b7f1b72ddbe5806821006a7a52))
+
 ## [0.0.6](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.5...nxui-v0.0.6) (2026-06-13)
 
 
