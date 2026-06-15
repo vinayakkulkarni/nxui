@@ -84,6 +84,7 @@ export default defineNuxtConfig({
         url: 'https://nxui.geoql.in',
       },
     ],
+    'nuxt-llms',
     [
       'shadcn-nuxt',
       {
@@ -154,6 +155,16 @@ export default defineNuxtConfig({
         { rel: 'manifest', href: '/site.webmanifest' },
       ],
       noscript: [{ innerHTML: 'This application requires JavaScript.' }],
+    },
+  },
+
+  llms: {
+    domain: 'https://nxui.geoql.in',
+    title: 'nxui',
+    description: `Beautiful, interactive UI components you can copy and paste into your Vue apps. ${componentCount}+ animated, copy-paste components built with Vue 3, Tailwind CSS, and motion-v. Open source, free forever.`,
+    full: {
+      title: 'nxui — Full Component Documentation',
+      description: `Complete documentation for all ${componentCount}+ nxui components, with usage, props, and source.`,
     },
   },
 

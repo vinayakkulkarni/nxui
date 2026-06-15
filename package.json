@@ -42,6 +42,7 @@
     "matter-js": "^0.20.0",
     "motion-v": "^2.3.0",
     "nuxt": "^4.4.8",
+    "nuxt-llms": "^0.2.0",
     "ogl": "^1.0.11",
     "opentype.js": "^2.0.0",
     "postprocessing": "^6.39.1",
