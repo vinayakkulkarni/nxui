@@ -33,7 +33,7 @@
     "@nuxtjs/color-mode": "^4.0.1",
     "@nuxtjs/plausible": "^3.0.2",
     "@nuxtjs/sitemap": "^8.2.1",
-    "@tanstack/vue-table": "^9.0.0-beta.9",
+    "@tanstack/vue-table": "^9.0.0-beta.12",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
     "class-variance-authority": "^0.7.1",
