@@ -1,0 +1,15 @@
+{
+  "name": "nuxt-geo-best-practices",
+  "version": "1.0.0",
+  "description": "Nuxt Generative Engine Optimization (GEO) best practices for AI agents",
+  "license": "MIT",
+  "author": {
+    "name": "Vinayak Kulkarni",
+    "email": "inbox.vinayak@gmail.com",
+    "url": "https://vinayakkulkarni.dev"
+  },
+  "scripts": {
+    "build": "bun run scripts/build.ts",
+    "validate": "bun run scripts/validate.ts"
+  }
+}
