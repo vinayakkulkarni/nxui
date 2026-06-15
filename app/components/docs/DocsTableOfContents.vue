@@ -156,6 +156,18 @@
               class="size-3 opacity-70 transition-transform group-hover:translate-x-0.5"
             />
           </NuxtLink>
+          <NuxtLink
+            to="https://github.com/sponsors/vinayakkulkarni"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="group flex w-full items-center justify-center gap-2 rounded-xl border border-border/60 bg-muted/30 px-3 py-2 text-xs font-medium text-foreground transition-all hover:bg-muted/50 dark:border-white/8 dark:bg-white/4 dark:hover:bg-white/8"
+          >
+            <Icon
+              name="lucide:heart"
+              class="size-3 text-pink-500 transition-transform group-hover:scale-110"
+            />
+            Sponsor
+          </NuxtLink>
         </div>
       </div>
     </div>
