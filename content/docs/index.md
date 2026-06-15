@@ -7,7 +7,7 @@ nxui is a collection of beautifully crafted animated Vue components that you can
 
 ## Features
 
-- **150+ Components** — Text animations, backgrounds, visual effects, hero backgrounds, buttons, animations, and more
+- **Animated components** — Text animations, backgrounds, visual effects, hero backgrounds, buttons, animations, and more
 - **Vue 3 Composition API** — Built with `<script setup>` and TypeScript
 - **Tailwind CSS v4** — Styled with utility classes, fully customizable
 - **motion-v** — Smooth animations powered by the Vue port of Framer Motion
