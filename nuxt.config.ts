@@ -248,12 +248,21 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2025-07-18',
 
+  // Edge 301 from bare root to /docs. Social crawlers don't run client-side
+  // JS redirects, so a prerendered 200 stub at '/' leaves them with no OG
+  // card; a real HTTP 301 is followed to the tagged /docs page.
+  routeRules: {
+    '/': { redirect: { to: '/docs', statusCode: 301 } },
+  },
+
   nitro: {
     preset: 'cloudflare-pages',
     prerender: {
       crawlLinks: true,
       failOnError: false,
-      routes: ['/', '/robots.txt', ...docRoutes],
+      // '/' intentionally excluded: prerendering it emits a 200 stub that
+      // shadows the routeRules 301 above. Let the edge serve the redirect.
+      routes: ['/robots.txt', ...docRoutes],
     },
     cloudflare: {
       nodeCompat: true,
