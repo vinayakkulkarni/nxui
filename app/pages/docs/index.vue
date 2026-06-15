@@ -75,7 +75,7 @@
       ),
     }),
   ]);
-  const ogImageUrl = `https://nxui.geoql.in/og/docs.png?title=${encodeURIComponent(page.value?.title ?? 'nxui')}&description=${encodeURIComponent(page.value?.description ?? '')}`;
+  const ogImageUrl = 'https://nxui.geoql.in/og.png';
   useSeoMeta({
     title: page.value?.title,
     description: page.value?.description,

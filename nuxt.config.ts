@@ -145,6 +145,32 @@ export default defineNuxtConfig({
           content: '#ffffff',
           media: '(prefers-color-scheme: light)',
         },
+        // Site-wide Open Graph + Twitter defaults: baseline social card for the
+        // root + every route. Per-page useSeoMeta overrides title/description.
+        {
+          property: 'og:title',
+          content: 'nxui — Copy-paste animated UI components for Vue',
+        },
+        {
+          property: 'og:description',
+          content: `Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. ${componentCount}+ interactive, copy-paste components.`,
+        },
+        { property: 'og:image', content: 'https://nxui.geoql.in/og.png' },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
+        { property: 'og:url', content: 'https://nxui.geoql.in' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:site_name', content: 'nxui' },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        {
+          name: 'twitter:title',
+          content: 'nxui — Copy-paste animated UI components for Vue',
+        },
+        {
+          name: 'twitter:description',
+          content: `Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. ${componentCount}+ interactive, copy-paste components.`,
+        },
+        { name: 'twitter:image', content: 'https://nxui.geoql.in/og.png' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

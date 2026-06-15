@@ -141,7 +141,7 @@
   useHead({
     link: [{ rel: 'canonical', href: canonicalUrl }],
   });
-  const ogImageUrl = `https://nxui.geoql.in/og${route.path}.png?title=${encodeURIComponent(page.value?.title ?? 'nxui')}&description=${encodeURIComponent(page.value?.description ?? '')}&category=${encodeURIComponent(formattedCategory.value)}`;
+  const ogImageUrl = 'https://nxui.geoql.in/og.png';
   useSeoMeta({
     title: page.value?.title,
     description: page.value?.description,
