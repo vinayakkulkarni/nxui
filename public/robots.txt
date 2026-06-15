@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://nxui.geoql.in/sitemap.xml

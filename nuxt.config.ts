@@ -84,6 +84,8 @@ export default defineNuxtConfig({
         url: 'https://nxui.geoql.in',
       },
     ],
+    '@nuxtjs/robots',
+    'nuxt-schema-org',
     'nuxt-llms',
     [
       'shadcn-nuxt',
@@ -168,6 +170,56 @@ export default defineNuxtConfig({
     },
   },
 
+  // Shared site config consumed by @nuxtjs/robots, @nuxtjs/sitemap, and
+  // nuxt-schema-org — single source of truth for the canonical URL + name.
+  site: {
+    url: 'https://nxui.geoql.in',
+    name: 'nxui',
+  },
+
+  // GEO: explicitly allowlist AI crawlers. nxui is open source, so being
+  // cited in AI answers is the goal. Google-Extended and Applebot-Extended
+  // are block-by-default — without explicit allow rules nxui is invisible to
+  // Google AI Overviews / Gemini and Apple Intelligence.
+  robots: {
+    groups: [
+      { userAgent: ['GPTBot', 'ChatGPT-User', 'OAI-SearchBot'], allow: ['/'] },
+      {
+        userAgent: [
+          'ClaudeBot',
+          'anthropic-ai',
+          'Claude-Web',
+          'Claude-User',
+          'Claude-SearchBot',
+        ],
+        allow: ['/'],
+      },
+      { userAgent: ['PerplexityBot', 'Perplexity-User'], allow: ['/'] },
+      { userAgent: ['Google-Extended'], allow: ['/'] },
+      { userAgent: ['Applebot-Extended'], allow: ['/'] },
+      {
+        userAgent: [
+          'CCBot',
+          'Bytespider',
+          'meta-externalagent',
+          'FacebookBot',
+          'cohere-ai',
+        ],
+        allow: ['/'],
+      },
+    ],
+  },
+
+  schemaOrg: {
+    identity: 'Organization',
+  },
+
+  runtimeConfig: {
+    public: {
+      componentCount,
+    },
+  },
+
   compatibilityDate: '2025-07-18',
 
   nitro: {
@@ -175,7 +227,7 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       failOnError: false,
-      routes: ['/', ...docRoutes],
+      routes: ['/', '/robots.txt', ...docRoutes],
     },
     cloudflare: {
       nodeCompat: true,
