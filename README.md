@@ -44,10 +44,10 @@
 
 <div align="center">
   <a href="https://nxui.geoql.in">
-    <img src="https://nxui.geoql.in/__og-image__/image/docs/og.png" alt="nxui showcase" width="720" />
+    <img src="https://nxui.geoql.in/nxui-demo.gif" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>169 animated components. Dark mode. Copy, paste, ship.</sub>
+  <sub>180+ animated components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
