@@ -33,6 +33,7 @@
       name: 'ALEXANDER DOE',
       role: 'SENIOR DEVELOPER',
       idNumber: '8901-2345-6789',
+      class: '',
     },
   );
 

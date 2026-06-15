@@ -47,6 +47,8 @@
       mouseRadius: 1,
       mouseDampening: 0.15,
       paused: false,
+      dpr: undefined,
+      mixBlendMode: undefined,
       class: '',
     },
   );

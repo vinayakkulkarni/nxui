@@ -63,6 +63,7 @@
       menuColor: '#000000',
       buttonBgColor: '#111111',
       buttonTextColor: '#ffffff',
+      class: '',
     },
   );
 

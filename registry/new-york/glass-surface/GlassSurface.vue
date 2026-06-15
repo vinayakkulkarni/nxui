@@ -42,6 +42,7 @@
       xChannel: 'R',
       yChannel: 'G',
       mixBlendMode: 'difference',
+      class: '',
     },
   );
 

@@ -10,7 +10,7 @@
       code?: string;
       refreshable?: boolean;
     }>(),
-    { class: '', fullWidth: false, refreshable: false },
+    { class: '', fullWidth: false, code: undefined, refreshable: false },
   );
 
   // Split mode: when rendered inside the split-layout page,
@@ -129,10 +129,12 @@
         </button>
 
         <!-- Scrollable code -->
+        <!-- eslint-disable vue/no-v-html -- highlightedHtml is trusted build-time Shiki output, never user input -->
         <div
           class="shiki-wrapper max-h-100 overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:p-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
           v-html="highlightedHtml"
         ></div>
+        <!-- eslint-enable vue/no-v-html -->
       </div>
     </div>
   </component>

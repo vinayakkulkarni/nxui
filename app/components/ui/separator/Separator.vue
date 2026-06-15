@@ -10,6 +10,7 @@
     {
       orientation: 'horizontal',
       decorative: true,
+      class: '',
     },
   );
 

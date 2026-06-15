@@ -11,6 +11,7 @@
     >(),
     {
       orientation: 'vertical',
+      class: '',
     },
   );
 

@@ -3,15 +3,15 @@
 
   const props = withDefaults(
     defineProps<{
-      text: string;
-      columns: number;
-      cellWidth: string;
-      cellHeight: string;
-      fontSize: string;
-      flipSpeed: number;
-      staggerDelay: number;
-      accentColor: string;
-      showIndicator: boolean;
+      text?: string;
+      columns?: number;
+      cellWidth?: string;
+      cellHeight?: string;
+      fontSize?: string;
+      flipSpeed?: number;
+      staggerDelay?: number;
+      accentColor?: string;
+      showIndicator?: boolean;
     }>(),
     {
       text: '',

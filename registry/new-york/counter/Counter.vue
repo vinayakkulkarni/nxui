@@ -28,6 +28,7 @@
       gradientHeight: 16,
       gradientFrom: 'black',
       gradientTo: 'transparent',
+      class: '',
     },
   );
 

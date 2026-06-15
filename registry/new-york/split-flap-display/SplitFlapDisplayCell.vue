@@ -3,11 +3,11 @@
 
   const props = withDefaults(
     defineProps<{
-      targetChar: string;
-      flipSpeed: number;
-      cellWidth: string;
-      cellHeight: string;
-      fontSize: string;
+      targetChar?: string;
+      flipSpeed?: number;
+      cellWidth?: string;
+      cellHeight?: string;
+      fontSize?: string;
     }>(),
     {
       targetChar: ' ',

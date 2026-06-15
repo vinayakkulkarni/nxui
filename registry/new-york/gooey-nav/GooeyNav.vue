@@ -28,6 +28,7 @@
       timeVariance: 300,
       colors: () => [1, 2, 3, 1, 2, 3, 1, 4],
       initialActiveIndex: 0,
+      class: '',
     },
   );
 

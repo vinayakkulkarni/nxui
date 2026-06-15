@@ -6,7 +6,7 @@
       align?: 'center' | 'start' | 'end';
       class?: string;
     }>(),
-    { align: 'center' },
+    { align: 'center', class: '' },
   );
 </script>
 

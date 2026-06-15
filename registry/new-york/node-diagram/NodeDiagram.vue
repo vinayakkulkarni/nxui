@@ -24,6 +24,12 @@
       class?: string;
     }>(),
     {
+      nodes: undefined,
+      connections: undefined,
+      pattern: undefined,
+      traceColor: undefined,
+      pulseColor: undefined,
+      nodeColor: undefined,
       traceWidth: 2,
       pulseSpeed: 2,
       showGrid: true,

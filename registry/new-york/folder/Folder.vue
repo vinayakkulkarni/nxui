@@ -13,6 +13,7 @@
       color: '#5227FF',
       size: 1,
       items: () => [],
+      class: '',
     },
   );
 

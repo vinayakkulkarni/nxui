@@ -18,6 +18,7 @@
       enableArrowNavigation: true,
       displayScrollbar: true,
       initialSelectedIndex: -1,
+      class: '',
     },
   );
 

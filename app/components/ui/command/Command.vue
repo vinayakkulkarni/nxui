@@ -11,6 +11,7 @@
     defineProps<ListboxRootProps & { class?: HTMLAttributes['class'] }>(),
     {
       modelValue: '',
+      class: '',
     },
   );
 

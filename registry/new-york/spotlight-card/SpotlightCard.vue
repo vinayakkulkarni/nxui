@@ -13,6 +13,7 @@
     }>(),
     {
       spotlightColor: 'rgba(120, 119, 198, 0.3)',
+      borderColor: undefined,
       borderWidth: 1,
       borderRadius: 16,
       glowIntensity: 0.15,

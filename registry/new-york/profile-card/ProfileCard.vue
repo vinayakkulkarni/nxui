@@ -51,6 +51,7 @@
       status: 'Online',
       contactText: 'Contact',
       showUserInfo: true,
+      class: '',
     },
   );
 

@@ -30,6 +30,7 @@
     inView: false,
     once: true,
     fontUrl: '/fonts/LastoriaBoldRegular.otf',
+    class: '',
   });
 
   const maskId = `signature-mask-${useId()}`;

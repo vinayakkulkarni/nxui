@@ -7,7 +7,7 @@
       items: GlassIconItem[];
       class?: string;
     }>(),
-    {},
+    { class: '' },
   );
 
   const gradientMapping: Record<string, string> = {
