@@ -273,6 +273,9 @@
         "
         class="relative min-h-0 flex-1 overflow-hidden"
       >
+        <!-- FPS meter overlay (toggled from the floating toolbar) -->
+        <DocsFpsMeter />
+
         <!-- Refresh button for animation demos -->
         <button
           v-if="demoRefreshable"

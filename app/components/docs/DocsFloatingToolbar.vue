@@ -9,6 +9,7 @@
   const colorMode = useColorMode();
   const route = useRoute();
   const sidebarOpen = ref(false);
+  const { showFps, toggle: toggleFps } = useFpsMeter();
 
   // Close sidebar on navigation
   watch(
@@ -94,6 +95,21 @@
           <Icon name="lucide:moon" class="size-4" />
         </template>
       </ClientOnly>
+    </button>
+
+    <!-- FPS meter toggle -->
+    <button
+      class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 backdrop-blur-sm transition-colors"
+      :class="
+        showFps
+          ? 'text-foreground'
+          : 'text-muted-foreground hover:text-foreground'
+      "
+      :aria-label="showFps ? 'Hide FPS meter' : 'Show FPS meter'"
+      :aria-pressed="showFps"
+      @click="toggleFps"
+    >
+      <Icon name="lucide:gauge" class="size-4" />
     </button>
   </div>
 </template>
