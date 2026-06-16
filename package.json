@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@cf-wasm/og": "^0.4.0",
-    "@iconify-json/lucide": "^1.2.112",
+    "@iconify-json/lucide": "^1.2.113",
     "@iconify-json/simple-icons": "^1.2.86",
     "@nuxt/content": "^3.14.0",
     "@nuxt/icon": "^2.2.3",
@@ -74,12 +74,12 @@
     "is-ci": "^4.1.0",
     "lint-staged": "^17.0.7",
     "oxfmt": "^0.55.0",
-    "oxlint": "^1.69.0",
+    "oxlint": "^1.70.0",
     "tailwindcss": "^4.3.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "vue": "^3.6.0-beta.15",
-    "wrangler": "^4.100.0"
+    "wrangler": "^4.101.0"
   },
   "engines": {
     "node": ">=24.0.0"
