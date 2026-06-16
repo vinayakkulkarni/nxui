@@ -141,7 +141,10 @@
   useHead({
     link: [{ rel: 'canonical', href: canonicalUrl }],
   });
-  const ogImageUrl = 'https://nxui.geoql.in/og.png';
+  // Per-page OG card, generated at build time by scripts/build-og-images.ts
+  // (one static PNG per component under public/og/docs/**). The site-wide
+  // og.png in nuxt.config remains the baseline for any route without a card.
+  const ogImageUrl = `https://nxui.geoql.in/og${path.value}.png`;
   useSeoMeta({
     title: page.value?.title,
     description: page.value?.description,

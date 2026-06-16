@@ -6,6 +6,10 @@
 .cache
 dist
 
+# Generated per-page OG cards (built by scripts/build-og-images.ts on every
+# build; 180 deterministic PNGs regenerated from content frontmatter).
+public/og/
+
 # Node dependencies
 node_modules
 
@@ -38,3 +42,4 @@ tmp/*.*
 # Local-only audit notes (not part of the public repo)
 MISSING_COMPONENTS.md
 .omo
+COMMUNITY_FEEDBACK.md

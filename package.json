@@ -12,7 +12,8 @@
   "type": "module",
   "scripts": {
     "dev": "nuxt dev",
-    "build": "nuxt build",
+    "build": "tsx scripts/build-og-images.ts && nuxt build",
+    "build:og": "tsx scripts/build-og-images.ts",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
