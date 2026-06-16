@@ -25,7 +25,7 @@
     "update:deps": "pnpm dlx taze -I"
   },
   "dependencies": {
-    "@cf-wasm/og": "^0.3.8",
+    "@cf-wasm/og": "^0.4.0",
     "@iconify-json/lucide": "^1.2.112",
     "@iconify-json/simple-icons": "^1.2.86",
     "@nuxt/content": "^3.14.0",
