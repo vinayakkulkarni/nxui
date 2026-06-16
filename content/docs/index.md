@@ -32,6 +32,6 @@ Or browse the component docs and copy the source code directly.
 | [Vue 3](https://vuejs.org)                 | UI framework                                  |
 | [Nuxt 4](https://nuxt.com)                 | SSR/SSG framework                             |
 | [Tailwind CSS v4](https://tailwindcss.com) | Utility-first styling                         |
-| [motion-v](https://motion-v.vercel.app)    | Animation library (Vue port of Framer Motion) |
+| [motion-v](https://motion.dev/docs/vue)    | Animation library (Vue port of Framer Motion) |
 | [VueUse](https://vueuse.org)               | Composition utilities                         |
 | [reka-ui](https://reka-ui.com)             | Headless UI primitives                        |
