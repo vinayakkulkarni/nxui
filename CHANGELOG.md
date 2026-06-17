@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.0.8](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.7...nxui-v0.0.8) (2026-06-17)
+
+
+### Features
+
+* **docs:** add toggleable FPS meter to demo viewport ([d2cc551](https://github.com/vinayakkulkarni/nxui/commit/d2cc5512f1c68a7aaf0d5f9188f7a9f66de5345c))
+* **seo:** generate per-page OG cards at build time ([3ef1160](https://github.com/vinayakkulkarni/nxui/commit/3ef11609d6e34f783f346e20fd2cde7477a3e11e))
+
+
+### Bug Fixes
+
+* **deps:** Bump @cf-wasm/og from 0.3.8 to 0.4.0 ([#57](https://github.com/vinayakkulkarni/nxui/issues/57)) ([bf358d4](https://github.com/vinayakkulkarni/nxui/commit/bf358d49228b338e9b29b050ca86cfad296a636e))
+* **docs:** move mobile nav theme toggle into a sticky footer ([d82cabc](https://github.com/vinayakkulkarni/nxui/commit/d82cabcf592e1278e854eb8aa3d0cb50188271d2))
+* **seo:** restore static OG image for social share previews ([7fd76ea](https://github.com/vinayakkulkarni/nxui/commit/7fd76ea1381a8f4648651d01ead4bd51005c68b5))
+* **seo:** serve real 301 from root so crawlers reach tagged /docs ([d768e64](https://github.com/vinayakkulkarni/nxui/commit/d768e64431e0f0221e32660bac137d16c7eb8d57))
+
+
+### Documentation
+
+* fix stale motion-v link to motion.dev/docs/vue ([4c109a9](https://github.com/vinayakkulkarni/nxui/commit/4c109a999dae637e60ac43067d78bf287c234d5e))
+
+
+### Miscellaneous
+
+* add LICENSE file and pull request template ([1de0f7c](https://github.com/vinayakkulkarni/nxui/commit/1de0f7cabdc1a96be5a717f32f9e3847f197d671))
+* bump dependencies ✨ ([6962831](https://github.com/vinayakkulkarni/nxui/commit/6962831da79b93561554ea96d38105444eb6e1ce))
+* **deps-dev:** Bump better-sqlite3 from 12.10.1 to 12.11.1 ([#60](https://github.com/vinayakkulkarni/nxui/issues/60)) ([119c18b](https://github.com/vinayakkulkarni/nxui/commit/119c18b162f68dda26e4aef77907a435b3a5833d))
+* **deps-dev:** Bump eslint-plugin-oxlint from 1.69.0 to 1.70.0 ([#59](https://github.com/vinayakkulkarni/nxui/issues/59)) ([eb23a20](https://github.com/vinayakkulkarni/nxui/commit/eb23a20af5b0b5f0c632ced3ef5b0a7a991b77f0))
+* **deps-dev:** Bump oxfmt from 0.54.0 to 0.55.0 ([#58](https://github.com/vinayakkulkarni/nxui/issues/58)) ([d27a0af](https://github.com/vinayakkulkarni/nxui/commit/d27a0af4d29ef96bff70bebe4a45932ef53ffddd))
+
 ## [0.0.7](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.6...nxui-v0.0.7) (2026-06-15)
 
 
