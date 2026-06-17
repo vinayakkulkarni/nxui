@@ -34,7 +34,7 @@
     <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
   </a>
   <a href="./LICENSE">
-    <img src="https://img.shields.io/github/license/vinayakkulkarni/nxui?color=blue" alt="License" />
+    <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
   </a>
 </p>
 
