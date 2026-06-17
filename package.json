@@ -1,6 +1,6 @@
 {
   "name": "nxui",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "description": "Beautiful animated components for Vue. Built with Tailwind CSS and motion-v. Copy, paste, and ship.",
   "license": "MIT",
