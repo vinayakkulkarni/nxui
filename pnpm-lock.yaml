@@ -39,8 +39,8 @@ importers:
         specifier: ^8.2.1
         version: 8.2.1(4bf77d6ee682299e2735a87c0d0df168)
       '@tanstack/vue-table':
-        specifier: ^9.0.0-beta.12
-        version: 9.0.0-beta.12(vue@3.6.0-beta.16(typescript@6.0.3))
+        specifier: ^9.0.0-beta.16
+        version: 9.0.0-beta.16(vue@3.6.0-beta.16(typescript@6.0.3))
       '@vueuse/core':
         specifier: ^14.3.0
         version: 14.3.0(vue@3.6.0-beta.16(typescript@6.0.3))
@@ -266,8 +266,8 @@ packages:
     resolution: {integrity: sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/helper-validator-identifier@8.0.0':
-    resolution: {integrity: sha512-kXxQVZHNOctSJJsqzmcbPSCEkM6oHNnDIkua7g9RCO9xRHj2eCiKvRx2KPdfWR9QxcGWnK/oArrtunmie3rL9g==}
+  '@babel/helper-validator-identifier@8.0.2':
+    resolution: {integrity: sha512-9Fr9QeyCAyi1BR1jKZ6uYQ24EIhQUx5ReHfQU7drOE+TPOb+w11/dsqLkMOT2U29OdCT71XajrOT8xDc1C7orA==}
     engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/helper-validator-option@7.29.7':
@@ -2933,8 +2933,8 @@ packages:
     resolution: {integrity: sha512-ldZXEhOBb8Is7xLs01fR3YEc3DERiz5silj8tnGkFZytt1abEvl/GhUmCE0PMLaMPTa3Jk4HbKmRlHmu+gCftg==}
     engines: {node: '>=12'}
 
-  '@tanstack/table-core@9.0.0-beta.12':
-    resolution: {integrity: sha512-u91SPvqkF1JNqVKZkaxcZRt1G5rW2fkWVOSqzrGwhbapCDjzIR2Rtzc9b5bMOFdF0u6X57CAC3aVe3mmdlEDVg==}
+  '@tanstack/table-core@9.0.0-beta.16':
+    resolution: {integrity: sha512-2FdqnEAQXv3Q7qWy30efQ62rwmIspKqUg/9IRgYbG3Plvba6QL1zlplvokrEqE62Vb6MDYlAG86KdMBkvubGaQ==}
     engines: {node: '>=16'}
 
   '@tanstack/virtual-core@3.17.0':
@@ -2946,8 +2946,8 @@ packages:
     peerDependencies:
       vue: '>=3.2'
 
-  '@tanstack/vue-table@9.0.0-beta.12':
-    resolution: {integrity: sha512-zNyiwNGjlVSUfjl7NOydQnNHW4mEsI/gWWvAiXjEk+bK89giRkD4WFjOeqyLqLrkAp02Aczlxd2gcj4/F1Ve1g==}
+  '@tanstack/vue-table@9.0.0-beta.16':
+    resolution: {integrity: sha512-HhEWAx32TgoT8e8uQmZtVXEVi+amHbNsZd44lcZ7S6k4IUvn/0pLqGMURuaaIcAgAM/zs1R+cZHEXp6iHUSRbw==}
     engines: {node: '>=16'}
     peerDependencies:
       vue: '>=3.2'
@@ -5779,8 +5779,8 @@ packages:
   muggle-string@0.4.1:
     resolution: {integrity: sha512-VNTrAak/KhO2i8dqqnqnAHOa3cYBwXEZe9h+D5h/1ZqFSTEFHdM65lR7RoIqq3tBBYavsOXV84NoHXZ0AkPyqQ==}
 
-  nanoid@3.3.12:
-    resolution: {integrity: sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==}
+  nanoid@3.3.13:
+    resolution: {integrity: sha512-sPdqC6ByMVVGvF1ynvvMo0/o+oD1VX7DaHhijt1bFgjvBkHBib4t49GoNDhf2NDta4oeUNlaGbSt5K7qjZ955Q==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
@@ -5842,8 +5842,8 @@ packages:
   node-mock-http@1.0.4:
     resolution: {integrity: sha512-8DY+kFsDkNXy1sJglUfuODx1/opAGJGyrTuFqEoN90oRc2Vk0ZbD4K2qmKXBBEhZQzdKHIVfEJpDU8Ak2NJEvQ==}
 
-  node-releases@2.0.47:
-    resolution: {integrity: sha512-Uzmd6LXpouKo8EUK68IjH4+E01w/hXyV3R3g/geCJo+rXLNfh1xucB+LOzYEOQPSiUK3h/xZf0cQGcSsmyL2Og==}
+  node-releases@2.0.48:
+    resolution: {integrity: sha512-1uz8041X6LoI6ZSdZacM9lVY28vuzDlSKitnpbSNK0RfKoIJkX29NBPVEFXhnuSuEOA9Ww0xnPJ+ILWbGAv8DA==}
     engines: {node: '>=18'}
 
   nopt@8.1.0:
@@ -7855,7 +7855,7 @@ snapshots:
 
   '@babel/helper-validator-identifier@7.29.7': {}
 
-  '@babel/helper-validator-identifier@8.0.0': {}
+  '@babel/helper-validator-identifier@8.0.2': {}
 
   '@babel/helper-validator-option@7.29.7': {}
 
@@ -7919,7 +7919,7 @@ snapshots:
   '@babel/types@8.0.0':
     dependencies:
       '@babel/helper-string-parser': 8.0.0
-      '@babel/helper-validator-identifier': 8.0.0
+      '@babel/helper-validator-identifier': 8.0.2
 
   '@bomb.sh/tab@0.0.15(cac@6.7.14)(citty@0.2.2)':
     optionalDependencies:
@@ -10455,7 +10455,7 @@ snapshots:
 
   '@tanstack/table-core@8.21.3': {}
 
-  '@tanstack/table-core@9.0.0-beta.12':
+  '@tanstack/table-core@9.0.0-beta.16':
     dependencies:
       '@tanstack/store': 0.11.0
 
@@ -10466,10 +10466,10 @@ snapshots:
       '@tanstack/table-core': 8.21.3
       vue: 3.6.0-beta.16(typescript@6.0.3)
 
-  '@tanstack/vue-table@9.0.0-beta.12(vue@3.6.0-beta.16(typescript@6.0.3))':
+  '@tanstack/vue-table@9.0.0-beta.16(vue@3.6.0-beta.16(typescript@6.0.3))':
     dependencies:
       '@tanstack/store': 0.11.0
-      '@tanstack/table-core': 9.0.0-beta.12
+      '@tanstack/table-core': 9.0.0-beta.16
       vue: 3.6.0-beta.16(typescript@6.0.3)
 
   '@tanstack/vue-virtual@3.13.28(vue@3.6.0-beta.16(typescript@6.0.3))':
@@ -11474,7 +11474,7 @@ snapshots:
       baseline-browser-mapping: 2.10.38
       caniuse-lite: 1.0.30001799
       electron-to-chromium: 1.5.375
-      node-releases: 2.0.47
+      node-releases: 2.0.48
       update-browserslist-db: 1.2.3(browserslist@4.28.2)
 
   buffer-crc32@1.0.0: {}
@@ -13666,7 +13666,7 @@ snapshots:
 
   muggle-string@0.4.1: {}
 
-  nanoid@3.3.12: {}
+  nanoid@3.3.13: {}
 
   nanotar@0.3.0: {}
 
@@ -13806,7 +13806,7 @@ snapshots:
 
   node-mock-http@1.0.4: {}
 
-  node-releases@2.0.47: {}
+  node-releases@2.0.48: {}
 
   nopt@8.1.0:
     dependencies:
@@ -14753,7 +14753,7 @@ snapshots:
 
   postcss@8.5.15:
     dependencies:
-      nanoid: 3.3.12
+      nanoid: 3.3.13
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
