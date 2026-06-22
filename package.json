@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@cf-wasm/og": "^0.4.0",
-    "@iconify-json/lucide": "^1.2.113",
+    "@iconify-json/lucide": "^1.2.114",
     "@iconify-json/simple-icons": "^1.2.86",
     "@nuxt/content": "^3.14.0",
     "@nuxt/icon": "^2.2.3",
