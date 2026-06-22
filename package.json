@@ -35,7 +35,7 @@
     "@nuxtjs/plausible": "^3.0.2",
     "@nuxtjs/robots": "^6.1.1",
     "@nuxtjs/sitemap": "^8.2.1",
-    "@tanstack/vue-table": "^9.0.0-beta.16",
+    "@tanstack/vue-table": "^9.0.0-beta.17",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
     "class-variance-authority": "^0.7.1",
