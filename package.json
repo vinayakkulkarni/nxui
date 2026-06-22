@@ -49,7 +49,7 @@
     "ogl": "^1.0.11",
     "opentype.js": "^2.0.0",
     "postprocessing": "^6.39.1",
-    "reka-ui": "^2.9.10",
+    "reka-ui": "^2.10.0",
     "shadcn-nuxt": "^2.7.4",
     "shiki": "^4.2.0",
     "tailwind-merge": "^3.6.0",
