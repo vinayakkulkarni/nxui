@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.0.9](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.8...nxui-v0.0.9) (2026-06-22)
+
+
+### Bug Fixes
+
+* **deps:** Bump @iconify-json/lucide from 1.2.113 to 1.2.114 ([#68](https://github.com/vinayakkulkarni/nxui/issues/68)) ([b0ef7c7](https://github.com/vinayakkulkarni/nxui/commit/b0ef7c7f8569636a95736c199f53aac2902e4f32))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.12 to 9.0.0-beta.16 ([#67](https://github.com/vinayakkulkarni/nxui/issues/67)) ([3300e89](https://github.com/vinayakkulkarni/nxui/commit/3300e8911021c6477b85a28a690eb6c0ecb3c9ec))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.16 to 9.0.0-beta.17 ([#69](https://github.com/vinayakkulkarni/nxui/issues/69)) ([c3c7452](https://github.com/vinayakkulkarni/nxui/commit/c3c74527eb9dae0c12b908fe8ac1934324d782ae))
+* **deps:** Bump actions/checkout from 6 to 7 ([#65](https://github.com/vinayakkulkarni/nxui/issues/65)) ([a8cd3b2](https://github.com/vinayakkulkarni/nxui/commit/a8cd3b2f2432e58ac633bc848d1808b76a32641f))
+* **deps:** Bump reka-ui from 2.9.10 to 2.10.0 ([#71](https://github.com/vinayakkulkarni/nxui/issues/71)) ([1ba544f](https://github.com/vinayakkulkarni/nxui/commit/1ba544f9b88f6a23bcbafd09cd0881d21aafff77))
+* **readme:** shrink demo gif under GitHub camo 5MB limit ([e434828](https://github.com/vinayakkulkarni/nxui/commit/e43482846467d9ed4130cad93121ba4e1a0371ff))
+* **readme:** use static MIT license badge ([276fb08](https://github.com/vinayakkulkarni/nxui/commit/276fb086d148672258aee2e2a6eeae1ccdb21fda))
+
+
+### Miscellaneous
+
+* **deps-dev:** Bump lint-staged from 17.0.7 to 17.0.8 ([#70](https://github.com/vinayakkulkarni/nxui/issues/70)) ([6f4e108](https://github.com/vinayakkulkarni/nxui/commit/6f4e10839b50d7f4ba3a24af0acb719e05f51d07))
+* **deps-dev:** Bump vue from 3.6.0-beta.15 to 3.6.0-beta.16 ([#63](https://github.com/vinayakkulkarni/nxui/issues/63)) ([88224dd](https://github.com/vinayakkulkarni/nxui/commit/88224dd5a8b8c238a5da6ecf4dc8ea4f9eb6d9d3))
+* **deps-dev:** Bump wrangler from 4.101.0 to 4.102.0 ([#66](https://github.com/vinayakkulkarni/nxui/issues/66)) ([cd0b541](https://github.com/vinayakkulkarni/nxui/commit/cd0b54129e18537e5eb0c43f8f751f5278562dec))
+* **deps-dev:** Bump wrangler from 4.102.0 to 4.103.0 ([#72](https://github.com/vinayakkulkarni/nxui/issues/72)) ([2324580](https://github.com/vinayakkulkarni/nxui/commit/23245805a7722f71bc944820226eab163d95d625))
+
 ## [0.0.8](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.7...nxui-v0.0.8) (2026-06-17)
 
 
