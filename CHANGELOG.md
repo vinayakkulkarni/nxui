@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.0.10](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.9...nxui-v0.0.10) (2026-06-27)
+
+
+### Miscellaneous
+
+* **deps:** bump vite & devDeps ([83d64c2](https://github.com/vinayakkulkarni/nxui/commit/83d64c2dcbcd20b56a1da83c1a15ba7215ae2526))
+* update `.gitignore` ([12235a3](https://github.com/vinayakkulkarni/nxui/commit/12235a3d8b49fad3a1949cb813ac31a48b0d6253))
+
 ## [0.0.9](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.8...nxui-v0.0.9) (2026-06-22)
 
 
