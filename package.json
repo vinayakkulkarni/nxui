@@ -30,7 +30,7 @@
     "@iconify-json/lucide": "^1.2.115",
     "@iconify-json/simple-icons": "^1.2.87",
     "@nuxt/content": "^3.14.0",
-    "@nuxt/icon": "^2.2.4",
+    "@nuxt/icon": "^2.2.5",
     "@nuxtjs/color-mode": "^4.0.1",
     "@nuxtjs/plausible": "^3.0.2",
     "@nuxtjs/robots": "^6.1.2",
