@@ -59,8 +59,8 @@
     "vue-sonner": "^2.0.9"
   },
   "devDependencies": {
-    "@commitlint/cli": "^21.1.0",
-    "@commitlint/config-conventional": "^21.1.0",
+    "@commitlint/cli": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.0",
     "@nuxt/eslint": "^1.16.0",
     "@nuxt/eslint-config": "^1.16.0",
     "@nuxtjs/tailwindcss": "7.0.0-beta.1",
@@ -69,17 +69,17 @@
     "better-sqlite3": "^12.11.1",
     "eslint": "^10.6.0",
     "eslint-plugin-better-tailwindcss": "^4.6.0",
-    "eslint-plugin-oxlint": "^1.71.0",
+    "eslint-plugin-oxlint": "^1.72.0",
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
     "lint-staged": "^17.0.8",
-    "oxfmt": "^0.56.0",
-    "oxlint": "^1.71.0",
+    "oxfmt": "^0.57.0",
+    "oxlint": "^1.72.0",
     "tailwindcss": "^4.3.2",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "vue": "^3.6.0-beta.17",
-    "wrangler": "^4.105.0"
+    "wrangler": "^4.106.0"
   },
   "engines": {
     "node": ">=24.11.0"
