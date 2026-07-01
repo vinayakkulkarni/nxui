@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mesh Gradient · Vue port of Paper Shaders · nxui</title>
+    <meta
+      name="description"
+      content="A Vue 3 + OGL port of Paper Shaders' mesh-gradient, built for nxui (nxui.geoql.in). Proof-of-concept demonstrating the framework-agnostic core running in the Vue ecosystem."
+    />
+    <meta property="og:title" content="Mesh Gradient — Vue port of Paper Shaders" />
+    <meta
+      property="og:description"
+      content="Paper Shaders' mesh-gradient running in Vue 3 + OGL. A proof-of-concept for nxui."
+    />
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #08080c;
+        --fg: #fafafa;
+        --muted: #a1a1aa;
+        --border: rgba(255, 255, 255, 0.1);
+        --panel: rgba(20, 20, 26, 0.72);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        background: var(--bg);
+        color: var(--fg);
+        font-family:
+          ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+      #app {
+        position: fixed;
+        inset: 0;
+      }
+      .stage {
+        position: absolute;
+        inset: 0;
+      }
+      .stage canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: clamp(16px, 4vw, 40px);
+      }
+      header {
+        pointer-events: none;
+        max-width: 640px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: var(--panel);
+        backdrop-filter: blur(12px);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 12px;
+        pointer-events: auto;
+      }
+      .dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #4ade80;
+        box-shadow: 0 0 10px #4ade80;
+      }
+      h1 {
+        margin-top: 18px;
+        font-size: clamp(30px, 6vw, 60px);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.04;
+        text-shadow: 0 2px 30px rgba(0, 0, 0, 0.5);
+      }
+      h1 em {
+        font-style: italic;
+        font-weight: 500;
+        color: var(--muted);
+      }
+      .lead {
+        margin-top: 14px;
+        max-width: 40ch;
+        font-size: clamp(15px, 2vw, 18px);
+        line-height: 1.5;
+        color: var(--muted);
+        text-shadow: 0 1px 20px rgba(0, 0, 0, 0.5);
+      }
+      .lead a {
+        color: var(--fg);
+        text-underline-offset: 3px;
+      }
+      .panel {
+        pointer-events: auto;
+        align-self: flex-start;
+        display: grid;
+        gap: 14px;
+        width: min(340px, 90vw);
+        background: var(--panel);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 18px 20px;
+        box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.7);
+      }
+      .panel h2 {
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      .control {
+        display: grid;
+        gap: 6px;
+      }
+      .control .row {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 13px;
+      }
+      .control .val {
+        font-family: ui-monospace, "JetBrains Mono", "Cascadia Code", monospace;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 4px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.16);
+        outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--fg);
+        cursor: pointer;
+        border: none;
+      }
+      input[type="range"]::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: var(--fg);
+        cursor: pointer;
+        border: none;
+      }
+      .swatches {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .swatches input[type="color"] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+      }
+      .swatches input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 2px;
+      }
+      .swatches input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 6px;
+      }
+      footer {
+        pointer-events: auto;
+        display: flex;
+        gap: 8px 18px;
+        flex-wrap: wrap;
+        align-items: center;
+        font-size: 12px;
+        color: var(--muted);
+        align-self: flex-start;
+      }
+      footer a {
+        color: var(--fg);
+        text-decoration: none;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 1px;
+      }
+      footer .sep {
+        opacity: 0.4;
+      }
+      .attribution {
+        max-width: 52ch;
+        line-height: 1.5;
+      }
+      @media (max-width: 720px) {
+        .overlay {
+          justify-content: flex-end;
+          gap: 16px;
+        }
+        header {
+          order: -1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="stage" ref="stage"></div>
+      <div class="overlay">
+        <header>
+          <span class="eyebrow"><span class="dot"></span> Vue 3 + OGL · live WebGL</span>
+          <h1>Mesh Gradient<br /><em>Paper Shaders, ported to Vue</em></h1>
+          <p class="lead">
+            The <code>mesh-gradient</code> fragment shader from
+            <a href="https://github.com/paper-design/shaders" target="_blank" rel="noreferrer"
+              >paper-design/shaders</a
+            >
+            running in the Vue ecosystem — a proof-of-concept for
+            <a href="https://nxui.geoql.in" target="_blank" rel="noreferrer">nxui</a>.
+          </p>
+        </header>
+
+        <div class="panel">
+          <h2>Live controls</h2>
+          <div class="control">
+            <div class="row"><span>Speed</span><span class="val">{{ speed.toFixed(2) }}</span></div>
+            <input type="range" min="0" max="3" step="0.01" v-model.number="speed" />
+          </div>
+          <div class="control">
+            <div class="row">
+              <span>Distortion</span><span class="val">{{ distortion.toFixed(2) }}</span>
+            </div>
+            <input type="range" min="0" max="1" step="0.01" v-model.number="distortion" />
+          </div>
+          <div class="control">
+            <div class="row"><span>Swirl</span><span class="val">{{ swirl.toFixed(2) }}</span></div>
+            <input type="range" min="0" max="1" step="0.01" v-model.number="swirl" />
+          </div>
+          <div class="control">
+            <div class="row">
+              <span>Grain overlay</span><span class="val">{{ grainOverlay.toFixed(2) }}</span>
+            </div>
+            <input type="range" min="0" max="1" step="0.01" v-model.number="grainOverlay" />
+          </div>
+          <div class="control">
+            <div class="row"><span>Colors</span></div>
+            <div class="swatches">
+              <input v-for="(c, i) in colors" :key="i" type="color" v-model="colors[i]" />
+            </div>
+          </div>
+        </div>
+
+        <footer>
+          <span class="attribution">
+            Shader © Lost Coast Labs, Inc. — Apache-2.0. Ported to Vue 3 + OGL for
+            <a href="https://nxui.geoql.in" target="_blank" rel="noreferrer">nxui</a>.
+          </span>
+          <span class="sep">·</span>
+          <a href="https://github.com/paper-design/shaders" target="_blank" rel="noreferrer"
+            >Original (React)</a
+          >
+          <span class="sep">·</span>
+          <a href="https://shaders.paper.design" target="_blank" rel="noreferrer"
+            >shaders.paper.design</a
+          >
+        </footer>
+      </div>
+    </div>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "vue": "https://esm.sh/vue@3.5.13/dist/vue.esm-browser.prod.js",
+          "ogl": "https://esm.sh/ogl@1.0.11"
+        }
+      }
+    </script>
+    <script type="module">
+      import { createApp, ref, watch, onMounted, onBeforeUnmount } from 'vue';
+      import { Renderer, Program, Mesh, Triangle } from 'ogl';
+
+      const MAX_COLORS = 10;
+
+      const VERT = `#version 300 es
+precision highp float;
+in vec2 position;
+in vec2 uv;
+uniform vec2 u_resolution;
+uniform float u_scale;
+out vec2 v_objectUV;
+void main() {
+  vec2 centered = uv - 0.5;
+  float aspect = u_resolution.x / max(u_resolution.y, 1.0);
+  if (aspect > 1.0) { centered.x *= aspect; } else { centered.y /= max(aspect, 1e-4); }
+  v_objectUV = centered / max(u_scale, 1e-4);
+  gl_Position = vec4(position, 0.0, 1.0);
+}`;
+
+      // Fragment shader ported verbatim from paper-design/shaders
+      // (packages/shaders/src/shaders/mesh-gradient.ts) + shader-utils helpers.
+      // Copyright Lost Coast Labs, Inc. — Apache-2.0.
+      const FRAG = `#version 300 es
+precision mediump float;
+
+uniform float u_time;
+uniform vec4 u_colors[${MAX_COLORS}];
+uniform float u_colorsCount;
+uniform float u_distortion;
+uniform float u_swirl;
+uniform float u_grainMixer;
+uniform float u_grainOverlay;
+
+in vec2 v_objectUV;
+out vec4 fragColor;
+
+vec2 rotate(vec2 uv, float th) {
+  return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
+}
+float hash21(vec2 p) {
+  p = fract(p * vec2(0.3183099, 0.3678794)) + 0.1;
+  p += dot(p, p + 19.19);
+  return fract(p.x * p.y);
+}
+float valueNoise(vec2 st) {
+  vec2 i = floor(st);
+  vec2 f = fract(st);
+  float a = hash21(i);
+  float b = hash21(i + vec2(1.0, 0.0));
+  float c = hash21(i + vec2(0.0, 1.0));
+  float d = hash21(i + vec2(1.0, 1.0));
+  vec2 u = f * f * (3.0 - 2.0 * f);
+  float x1 = mix(a, b, u.x);
+  float x2 = mix(c, d, u.x);
+  return mix(x1, x2, u.y);
+}
+float noise(vec2 n, vec2 seedOffset) { return valueNoise(n + seedOffset); }
+vec2 getPosition(int i, float t) {
+  float a = float(i) * .37;
+  float b = .6 + fract(float(i) / 3.) * .9;
+  float c = .8 + fract(float(i + 1) / 4.);
+  float x = sin(t * b + a);
+  float y = cos(t * c + a * 1.5);
+  return .5 + .5 * vec2(x, y);
+}
+void main() {
+  vec2 uv = v_objectUV;
+  uv += .5;
+  vec2 grainUV = uv * 1000.;
+  float grain = noise(grainUV, vec2(0.));
+  float mixerGrain = .4 * u_grainMixer * (grain - .5);
+  const float firstFrameOffset = 41.5;
+  float t = .5 * (u_time + firstFrameOffset);
+  float radius = smoothstep(0., 1., length(uv - .5));
+  float center = 1. - radius;
+  for (float i = 1.; i <= 2.; i++) {
+    uv.x += u_distortion * center / i * sin(t + i * .4 * smoothstep(.0, 1., uv.y)) * cos(.2 * t + i * 2.4 * smoothstep(.0, 1., uv.y));
+    uv.y += u_distortion * center / i * cos(t + i * 2. * smoothstep(.0, 1., uv.x));
+  }
+  vec2 uvRotated = uv;
+  uvRotated -= vec2(.5);
+  float angle = 3. * u_swirl * radius;
+  uvRotated = rotate(uvRotated, -angle);
+  uvRotated += vec2(.5);
+  vec3 color = vec3(0.);
+  float opacity = 0.;
+  float totalWeight = 0.;
+  for (int i = 0; i < ${MAX_COLORS}; i++) {
+    if (i >= int(u_colorsCount)) break;
+    vec2 pos = getPosition(i, t) + mixerGrain;
+    vec3 colorFraction = u_colors[i].rgb * u_colors[i].a;
+    float opacityFraction = u_colors[i].a;
+    float dist = length(uvRotated - pos);
+    dist = pow(dist, 3.5);
+    float weight = 1. / (dist + 1e-3);
+    color += colorFraction * weight;
+    opacity += opacityFraction * weight;
+    totalWeight += weight;
+  }
+  color /= max(1e-4, totalWeight);
+  opacity /= max(1e-4, totalWeight);
+  float grainOverlay = valueNoise(rotate(grainUV, 1.) + vec2(3.));
+  grainOverlay = mix(grainOverlay, valueNoise(rotate(grainUV, 2.) + vec2(-1.)), .5);
+  grainOverlay = pow(grainOverlay, 1.3);
+  float grainOverlayV = grainOverlay * 2. - 1.;
+  vec3 grainOverlayColor = vec3(step(0., grainOverlayV));
+  float grainOverlayStrength = u_grainOverlay * abs(grainOverlayV);
+  grainOverlayStrength = pow(grainOverlayStrength, .8);
+  color = mix(color, grainOverlayColor, .35 * grainOverlayStrength);
+  opacity += .5 * grainOverlayStrength;
+  opacity = clamp(opacity, 0., 1.);
+  fragColor = vec4(color, opacity);
+}`;
+
+      function hexToRgba(hex) {
+        const clean = hex.replace('#', '');
+        const full =
+          clean.length === 3
+            ? clean.split('').map((c) => c + c).join('')
+            : clean;
+        const r = parseInt(full.slice(0, 2), 16) / 255;
+        const g = parseInt(full.slice(2, 4), 16) / 255;
+        const b = parseInt(full.slice(4, 6), 16) / 255;
+        return [r || 0, g || 0, b || 0, 1];
+      }
+      function buildColorArray(colors) {
+        const data = new Float32Array(MAX_COLORS * 4);
+        const count = Math.min(colors.length, MAX_COLORS);
+        for (let i = 0; i < count; i++) {
+          const [r, g, b, a] = hexToRgba(colors[i]);
+          data[i * 4] = r;
+          data[i * 4 + 1] = g;
+          data[i * 4 + 2] = b;
+          data[i * 4 + 3] = a;
+        }
+        return data;
+      }
+
+      createApp({
+        setup() {
+          const stage = ref(null);
+          const speed = ref(1);
+          const distortion = ref(0.8);
+          const swirl = ref(0.1);
+          const grainOverlay = ref(0);
+          const colors = ref(['#e0eaff', '#241d9a', '#f75092', '#9f50d3']);
+
+          let animationId = 0;
+          let renderer = null;
+          let gl = null;
+          let program = null;
+          let mesh = null;
+          let t0 = 0;
+
+          function resize() {
+            if (!renderer || !program || !stage.value) return;
+            const w = Math.max(1, stage.value.clientWidth);
+            const h = Math.max(1, stage.value.clientHeight);
+            renderer.setSize(w, h);
+            const res = program.uniforms.u_resolution.value;
+            res[0] = gl.drawingBufferWidth;
+            res[1] = gl.drawingBufferHeight;
+          }
+
+          watch(
+            colors,
+            (c) => {
+              if (!program) return;
+              program.uniforms.u_colors.value = buildColorArray(c);
+              program.uniforms.u_colorsCount.value = Math.min(c.length, MAX_COLORS);
+            },
+            { deep: true },
+          );
+
+          onMounted(() => {
+            renderer = new Renderer({
+              webgl: 2,
+              alpha: true,
+              antialias: false,
+              dpr: Math.min(window.devicePixelRatio || 1, 2),
+            });
+            gl = renderer.gl;
+            const canvas = gl.canvas;
+            canvas.style.width = '100%';
+            canvas.style.height = '100%';
+            stage.value.appendChild(canvas);
+
+            const geometry = new Triangle(gl);
+            program = new Program(gl, {
+              vertex: VERT,
+              fragment: FRAG,
+              uniforms: {
+                u_time: { value: 0 },
+                u_resolution: { value: new Float32Array([1, 1]) },
+                u_scale: { value: 1 },
+                u_colors: { value: buildColorArray(colors.value) },
+                u_colorsCount: { value: colors.value.length },
+                u_distortion: { value: distortion.value },
+                u_swirl: { value: swirl.value },
+                u_grainMixer: { value: 0 },
+                u_grainOverlay: { value: grainOverlay.value },
+              },
+            });
+            mesh = new Mesh(gl, { geometry, program });
+            resize();
+            window.addEventListener('resize', resize);
+            t0 = performance.now();
+
+            function loop(now) {
+              if (!renderer || !program || !mesh) return;
+              program.uniforms.u_time.value = (now - t0) * 0.001 * speed.value;
+              program.uniforms.u_distortion.value = distortion.value;
+              program.uniforms.u_swirl.value = swirl.value;
+              program.uniforms.u_grainOverlay.value = grainOverlay.value;
+              renderer.render({ scene: mesh });
+              animationId = requestAnimationFrame(loop);
+            }
+            animationId = requestAnimationFrame(loop);
+          });
+
+          onBeforeUnmount(() => {
+            cancelAnimationFrame(animationId);
+            window.removeEventListener('resize', resize);
+            if (gl) gl.getExtension('WEBGL_lose_context')?.loseContext();
+          });
+
+          return { stage, speed, distortion, swirl, grainOverlay, colors };
+        },
+      }).mount('#app');
+    </script>
+  </body>
+</html>
