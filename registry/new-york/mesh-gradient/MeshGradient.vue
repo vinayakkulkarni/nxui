@@ -11,7 +11,8 @@
   // PolyForm Shield. Until that discrepancy is confirmed, this component is
   // intentionally NOT wired into scripts/build-registry.ts, so it cannot be
   // installed via `shadcn-vue add`. Add the build-registry.ts entry only after
-  // the license question is resolved. See the tracking issue before shipping.
+  // the license question is resolved. Tracking issue:
+  // https://github.com/paper-design/shaders/issues/269
   // ─────────────────────────────────────────────────────────────────────────
   import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
