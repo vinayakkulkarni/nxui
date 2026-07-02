@@ -260,6 +260,15 @@ export const docsNav: NavGroup[] = [
     ],
   },
   {
+    title: 'Paper Shaders',
+    items: [
+      {
+        title: 'Mesh Gradient',
+        path: '/docs/paper-shaders/paper-mesh-gradient',
+      },
+    ],
+  },
+  {
     title: 'Hero Backgrounds',
     items: [
       {
