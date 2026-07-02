@@ -892,6 +892,186 @@
       "description": "A WebGL2 plasma background with 60-iteration ray march shader, mouse interaction, and configurable direction."
     },
     {
+      "name": "paper-shader-mount",
+      "type": "registry:ui",
+      "title": "Paper Shader Mount",
+      "description": "Vue mount for Paper Shaders — wraps the framework-agnostic ShaderMount class with Vue lifecycle, reactive uniforms, and URL-to-image loading."
+    },
+    {
+      "name": "paper-mesh-gradient",
+      "type": "registry:ui",
+      "title": "Mesh Gradient",
+      "description": "A flowing composition of color spots moving along distinct trajectories with organic distortion. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-smoke-ring",
+      "type": "registry:ui",
+      "title": "Smoke Ring",
+      "description": "Radial multi-colored gradient shaped with layered noise for a natural, smoky aesthetic. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-neuro-noise",
+      "type": "registry:ui",
+      "title": "Neuro Noise",
+      "description": "A glowing, web-like structure of fluid lines and soft intersections. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-dot-orbit",
+      "type": "registry:ui",
+      "title": "Dot Orbit",
+      "description": "Animated multi-color dots pattern with each dot orbiting around its cell center. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-dot-grid",
+      "type": "registry:ui",
+      "title": "Dot Grid",
+      "description": "Static grid pattern made of circles, diamonds, squares or triangles. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-simplex-noise",
+      "type": "registry:ui",
+      "title": "Simplex Noise",
+      "description": "A multi-color gradient mapped into smooth, animated simplex-noise curves. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-metaballs",
+      "type": "registry:ui",
+      "title": "Metaballs",
+      "description": "Up to 20 gooey blobs moving around the center and merging into smooth organic shapes. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-perlin-noise",
+      "type": "registry:ui",
+      "title": "Perlin Noise",
+      "description": "Animated 3D Perlin noise with exposed octave, persistence, and contour controls. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-voronoi",
+      "type": "registry:ui",
+      "title": "Voronoi",
+      "description": "Anti-aliased animated Voronoi pattern with smooth, customizable cell edges and glow. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-waves",
+      "type": "registry:ui",
+      "title": "Waves",
+      "description": "Static line pattern configurable into textures from sharp zigzags to smooth flowing waves. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-warp",
+      "type": "registry:ui",
+      "title": "Warp",
+      "description": "Animated color fields warped by noise and swirls over checks, stripes, or edge patterns. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-god-rays",
+      "type": "registry:ui",
+      "title": "God Rays",
+      "description": "Animated rays of light radiating from a configurable origin, blended with up to 5 colors. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-spiral",
+      "type": "registry:ui",
+      "title": "Spiral",
+      "description": "A single-colored animated spiral morphing from crisp geometry to flowing whirlpool forms. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-swirl",
+      "type": "registry:ui",
+      "title": "Swirl",
+      "description": "Animated bands of color twisting into spirals, arcs, and flowing circular patterns. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-dithering",
+      "type": "registry:ui",
+      "title": "Dithering",
+      "description": "Animated 2-color dithering over noise, warp, dots, waves, ripple, swirl, and sphere sources. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-grain-gradient",
+      "type": "registry:ui",
+      "title": "Grain Gradient",
+      "description": "Multi-color gradients with grainy, noise-textured distortion in 7 animated abstract forms. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-pulsing-border",
+      "type": "registry:ui",
+      "title": "Pulsing Border",
+      "description": "Luminous trails of color merging into a glowing gradient frame around the canvas edge. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-color-panels",
+      "type": "registry:ui",
+      "title": "Color Panels",
+      "description": "Glowing translucent 3D panels rotating around a central axis with adjustable perspective. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-static-mesh-gradient",
+      "type": "registry:ui",
+      "title": "Static Mesh Gradient",
+      "description": "Multi-point mesh gradient with up to 10 color spots, two-direction warping, and grain controls. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-static-radial-gradient",
+      "type": "registry:ui",
+      "title": "Static Radial Gradient",
+      "description": "Radial gradient with up to 10 blended colors, focal point control, shape distortion, and grain. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-texture",
+      "type": "registry:ui",
+      "title": "Paper Texture",
+      "description": "A static texture built from multiple noise layers for realistic paper and cardboard surfaces. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-water",
+      "type": "registry:ui",
+      "title": "Water",
+      "description": "Water-like surface distortion with caustic realism — an image filter or standalone animated texture. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-fluted-glass",
+      "type": "registry:ui",
+      "title": "Fluted Glass",
+      "description": "Image filter transforming a picture into streaked, ribbed glass distortions mixing clarity and obscurity. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-image-dithering",
+      "type": "registry:ui",
+      "title": "Image Dithering",
+      "description": "A dithering image filter with 4 pattern modes and multiple color palettes. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-heatmap",
+      "type": "registry:ui",
+      "title": "Heatmap",
+      "description": "A glowing gradient of colors flowing through an input image as an animated intensity wave. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-liquid-metal",
+      "type": "registry:ui",
+      "title": "Liquid Metal",
+      "description": "Futuristic liquid metal material applied to an uploaded logo or predefined abstract shapes. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-halftone-dots",
+      "type": "registry:ui",
+      "title": "Halftone Dots",
+      "description": "A halftone-dot image filter featuring customizable grids, color palettes, and dot styles. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-halftone-cmyk",
+      "type": "registry:ui",
+      "title": "Halftone CMYK",
+      "description": "A classic CMYK halftone image filter with per-channel angle and grid control. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "paper-gem-smoke",
+      "type": "registry:ui",
+      "title": "Gem Smoke",
+      "description": "Animated color fields running around a glassy logo or abstract shape. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
       "name": "editorial-orbs",
       "type": "registry:ui",
       "title": "Editorial Orbs",

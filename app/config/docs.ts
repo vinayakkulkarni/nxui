@@ -260,6 +260,79 @@ export const docsNav: NavGroup[] = [
     ],
   },
   {
+    title: 'Paper Shaders',
+    items: [
+      {
+        title: 'Color Panels',
+        path: '/docs/paper-shaders/paper-color-panels',
+      },
+      { title: 'Dithering', path: '/docs/paper-shaders/paper-dithering' },
+      { title: 'Dot Grid', path: '/docs/paper-shaders/paper-dot-grid' },
+      { title: 'Dot Orbit', path: '/docs/paper-shaders/paper-dot-orbit' },
+      {
+        title: 'Fluted Glass',
+        path: '/docs/paper-shaders/paper-fluted-glass',
+      },
+      { title: 'Gem Smoke', path: '/docs/paper-shaders/paper-gem-smoke' },
+      { title: 'God Rays', path: '/docs/paper-shaders/paper-god-rays' },
+      {
+        title: 'Grain Gradient',
+        path: '/docs/paper-shaders/paper-grain-gradient',
+      },
+      {
+        title: 'Halftone CMYK',
+        path: '/docs/paper-shaders/paper-halftone-cmyk',
+      },
+      {
+        title: 'Halftone Dots',
+        path: '/docs/paper-shaders/paper-halftone-dots',
+      },
+      { title: 'Heatmap', path: '/docs/paper-shaders/paper-heatmap' },
+      {
+        title: 'Image Dithering',
+        path: '/docs/paper-shaders/paper-image-dithering',
+      },
+      {
+        title: 'Liquid Metal',
+        path: '/docs/paper-shaders/paper-liquid-metal',
+      },
+      {
+        title: 'Mesh Gradient',
+        path: '/docs/paper-shaders/paper-mesh-gradient',
+      },
+      { title: 'Metaballs', path: '/docs/paper-shaders/paper-metaballs' },
+      { title: 'Neuro Noise', path: '/docs/paper-shaders/paper-neuro-noise' },
+      { title: 'Paper Texture', path: '/docs/paper-shaders/paper-texture' },
+      {
+        title: 'Perlin Noise',
+        path: '/docs/paper-shaders/paper-perlin-noise',
+      },
+      {
+        title: 'Pulsing Border',
+        path: '/docs/paper-shaders/paper-pulsing-border',
+      },
+      {
+        title: 'Simplex Noise',
+        path: '/docs/paper-shaders/paper-simplex-noise',
+      },
+      { title: 'Smoke Ring', path: '/docs/paper-shaders/paper-smoke-ring' },
+      { title: 'Spiral', path: '/docs/paper-shaders/paper-spiral' },
+      {
+        title: 'Static Mesh Gradient',
+        path: '/docs/paper-shaders/paper-static-mesh-gradient',
+      },
+      {
+        title: 'Static Radial Gradient',
+        path: '/docs/paper-shaders/paper-static-radial-gradient',
+      },
+      { title: 'Swirl', path: '/docs/paper-shaders/paper-swirl' },
+      { title: 'Voronoi', path: '/docs/paper-shaders/paper-voronoi' },
+      { title: 'Warp', path: '/docs/paper-shaders/paper-warp' },
+      { title: 'Water', path: '/docs/paper-shaders/paper-water' },
+      { title: 'Waves', path: '/docs/paper-shaders/paper-waves' },
+    ],
+  },
+  {
     title: 'Hero Backgrounds',
     items: [
       {
