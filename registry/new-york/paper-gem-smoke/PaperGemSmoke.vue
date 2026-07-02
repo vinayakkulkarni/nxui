@@ -54,6 +54,9 @@
     }
 
     let cancelled = false;
+    onCleanup(() => {
+      cancelled = true;
+    });
     try {
       const result = await toProcessedGemSmoke(props.image);
       if (cancelled) return;
@@ -63,9 +66,6 @@
     } catch {
       // Leave the previous (or emptyPixel) URL in place on failure.
     }
-    return () => {
-      cancelled = true;
-    };
   });
 
   const uniforms = computed(() => ({

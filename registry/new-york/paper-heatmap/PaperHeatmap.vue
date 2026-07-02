@@ -5,7 +5,7 @@
   // The image is preprocessed via `toProcessedHeatmap` on the client (extracts
   // contour + inner/outer blur channels from the alpha into an RGB mask) before
   // being passed to the shader.
-  import { computed, ref, watchEffect, onBeforeUnmount } from 'vue';
+  import { computed, ref, watchEffect } from 'vue';
   import {
     heatmapFragmentShader,
     getShaderColorFromString,
@@ -49,9 +49,8 @@
   // Processed-image URL — starts as the plain input, then is replaced with a
   // blob URL once `toProcessedHeatmap` resolves (client-only).
   const processedImage = ref<string>(props.image);
-  const currentBlobUrl = ref<string | null>(null);
 
-  watchEffect(async () => {
+  watchEffect(async (onCleanup) => {
     if (typeof window === 'undefined') return;
     const src = props.image;
     if (!src) {
@@ -60,21 +59,22 @@
     }
 
     // Preprocess the image (mirror upstream React `useLayoutEffect` flow).
+    // The cancelled flag drops stale completions when `image` changes quickly.
+    let cancelled = false;
+    onCleanup(() => {
+      cancelled = true;
+    });
     try {
       const { blob } = await toProcessedHeatmap(src);
-      const newUrl = URL.createObjectURL(blob);
-      const previous = currentBlobUrl.value;
-      currentBlobUrl.value = newUrl;
-      processedImage.value = newUrl;
-      if (previous) URL.revokeObjectURL(previous);
+      if (cancelled) return;
+      const url = URL.createObjectURL(blob);
+      onCleanup(() => URL.revokeObjectURL(url));
+      processedImage.value = url;
     } catch {
+      if (cancelled) return;
       // Fall back to the original image URL on failure.
       processedImage.value = src;
     }
-  });
-
-  onBeforeUnmount(() => {
-    if (currentBlobUrl.value) URL.revokeObjectURL(currentBlobUrl.value);
   });
 
   const uniforms = computed(() => ({
