@@ -914,6 +914,19 @@ const COMPONENTS: Record<
       'A WebGL2 plasma background with 60-iteration ray march shader, mouse interaction, and configurable direction.',
     deps: ['ogl', '@vueuse/core'],
   },
+  'paper-shader-mount': {
+    title: 'Paper Shader Mount',
+    description:
+      'Vue mount for Paper Shaders — wraps the framework-agnostic ShaderMount class with Vue lifecycle, reactive uniforms, and URL-to-image loading.',
+    deps: ['@paper-design/shaders'],
+  },
+  'paper-mesh-gradient': {
+    title: 'Mesh Gradient',
+    description:
+      'A flowing composition of color spots moving along distinct trajectories with organic distortion. Ported from Paper Shaders (Apache-2.0).',
+    deps: ['@paper-design/shaders'],
+  },
+
   'editorial-orbs': {
     title: 'Editorial Orbs',
     description:
