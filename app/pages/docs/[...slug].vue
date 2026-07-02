@@ -145,10 +145,13 @@
   // (one static PNG per component under public/og/docs/**). The site-wide
   // og.png in nuxt.config remains the baseline for any route without a card.
   const ogImageUrl = `https://nxui.geoql.in/og${path.value}.png`;
+  const socialTitle = page.value?.title
+    ? `${page.value.title} · nxui`
+    : 'nxui — Animated Vue Components';
   useSeoMeta({
     title: page.value?.title,
     description: page.value?.description,
-    ogTitle: page.value?.title,
+    ogTitle: socialTitle,
     ogDescription: page.value?.description,
     ogType: 'website',
     ogUrl: canonicalUrl,
@@ -158,7 +161,7 @@
     ogImageHeight: 630,
     twitterCard: 'summary_large_image',
     twitterSite: '@vinayakkulkarni',
-    twitterTitle: page.value?.title,
+    twitterTitle: socialTitle,
     twitterDescription: page.value?.description,
     twitterImage: ogImageUrl,
   });

@@ -76,11 +76,13 @@
     }),
   ]);
   const ogImageUrl = 'https://nxui.geoql.in/og.png';
+  const brandTitle = `nxui — ${componentCount}+ Animated, Copy-Paste UI Components for Vue`;
+  const brandDescription = `Beautiful animated components for Vue 3 & Nuxt. Built with Tailwind CSS and motion-v. ${componentCount}+ interactive, copy-paste components. Open source, MIT, free forever.`;
   useSeoMeta({
-    title: page.value?.title,
-    description: page.value?.description,
-    ogTitle: page.value?.title,
-    ogDescription: page.value?.description,
+    title: brandTitle,
+    description: brandDescription,
+    ogTitle: brandTitle,
+    ogDescription: brandDescription,
     ogType: 'website',
     ogUrl: 'https://nxui.geoql.in/docs',
     ogSiteName: 'nxui',
@@ -89,8 +91,8 @@
     ogImageHeight: 630,
     twitterCard: 'summary_large_image',
     twitterSite: '@vinayakkulkarni',
-    twitterTitle: page.value?.title,
-    twitterDescription: page.value?.description,
+    twitterTitle: brandTitle,
+    twitterDescription: brandDescription,
     twitterImage: ogImageUrl,
   });
 </script>

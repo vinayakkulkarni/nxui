@@ -1,4 +1,12 @@
 <script setup lang="ts">
+  useHead({
+    titleTemplate: (title?: string) =>
+      title && title.includes('nxui')
+        ? title
+        : title
+          ? `${title} · nxui`
+          : 'nxui — Animated Vue Components',
+  });
   useSchemaOrg([
     defineOrganization({
       name: 'nxui',
