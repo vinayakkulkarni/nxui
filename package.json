@@ -36,7 +36,7 @@
     "@nuxtjs/robots": "^6.1.2",
     "@nuxtjs/sitemap": "^8.2.2",
     "@paper-design/shaders": "0.0.76",
-    "@tanstack/vue-table": "^9.0.0-beta.26",
+    "@tanstack/vue-table": "^9.0.0-beta.27",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
     "class-variance-authority": "^0.7.1",
