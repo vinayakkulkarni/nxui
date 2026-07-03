@@ -1,5 +1,23 @@
 <script setup lang="ts">
+  import { reactive } from 'vue';
   import PaperPerlinNoise from '@registry/new-york/paper-perlin-noise/PaperPerlinNoise.vue';
+  import type { Pane } from 'tweakpane';
+
+  const params = reactive({
+    colorFront: '#fccff7',
+    colorBack: '#632ad5',
+    proportion: 0.35,
+    octaveCount: 2,
+    speed: 0.5,
+  });
+
+  function onPaneCreated(pane: Pane) {
+    pane.addBinding(params, 'colorFront');
+    pane.addBinding(params, 'colorBack');
+    pane.addBinding(params, 'proportion', { min: 0, max: 1, step: 0.05 });
+    pane.addBinding(params, 'octaveCount', { min: 1, max: 8, step: 1 });
+    pane.addBinding(params, 'speed', { min: 0, max: 3, step: 0.1 });
+  }
 </script>
 
 <template>
@@ -23,12 +41,13 @@
   >
     <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <PaperPerlinNoise
-        :color-front="'#fccff7'"
-        :color-back="'#632ad5'"
-        :proportion="0.35"
-        :octave-count="2"
-        :speed="0.5"
+        :color-front="params.colorFront"
+        :color-back="params.colorBack"
+        :proportion="params.proportion"
+        :octave-count="params.octaveCount"
+        :speed="params.speed"
       />
+      <ShaderPane title="Perlin Noise" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

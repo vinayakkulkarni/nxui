@@ -628,6 +628,12 @@
       "description": "A macOS-style dock with cursor-proximity magnification driven by configurable spring physics."
     },
     {
+      "name": "drag-reorder-list",
+      "type": "registry:ui",
+      "title": "Drag Reorder List",
+      "description": "Drag-to-reorder list with lift, tilt, shadow, and an empty-space cutout drop indicator."
+    },
+    {
       "name": "elastic-slider",
       "type": "registry:ui",
       "title": "Elastic Slider",

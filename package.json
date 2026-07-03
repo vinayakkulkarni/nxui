@@ -37,6 +37,7 @@
     "@nuxtjs/sitemap": "^8.2.2",
     "@paper-design/shaders": "0.0.77",
     "@tanstack/vue-table": "^9.0.0-beta.27",
+    "@tweakpane/plugin-essentials": "^0.2.1",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
     "class-variance-authority": "^0.7.1",
@@ -57,6 +58,8 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "^0.185.1",
     "tw-animate-css": "^1.4.0",
+    "tweakpane": "^4.0.5",
+    "v-tweakpane": "^0.3.2",
     "vue-sonner": "^2.0.9"
   },
   "devDependencies": {

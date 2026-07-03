@@ -650,6 +650,12 @@ const COMPONENTS: Record<
       'A macOS-style dock with cursor-proximity magnification driven by configurable spring physics.',
     deps: ['motion-v', '@vueuse/core'],
   },
+  'drag-reorder-list': {
+    title: 'Drag Reorder List',
+    description:
+      'Drag-to-reorder list with lift, tilt, shadow, and an empty-space cutout drop indicator.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
   'elastic-slider': {
     title: 'Elastic Slider',
     description:

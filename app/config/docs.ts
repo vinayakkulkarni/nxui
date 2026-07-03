@@ -73,6 +73,10 @@ export const docsNav: NavGroup[] = [
       { title: 'Decay Card', path: '/docs/components/decay-card' },
       { title: 'Dock', path: '/docs/components/dock' },
       { title: 'Dome Gallery', path: '/docs/components/dome-gallery' },
+      {
+        title: 'Drag Reorder List',
+        path: '/docs/components/drag-reorder-list',
+      },
       { title: 'Elastic Slider', path: '/docs/components/elastic-slider' },
       { title: 'Eye Tracking', path: '/docs/components/eye-tracking' },
       {

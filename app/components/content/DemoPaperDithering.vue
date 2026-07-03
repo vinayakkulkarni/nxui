@@ -1,5 +1,42 @@
 <script setup lang="ts">
+  import { reactive } from 'vue';
   import PaperDithering from '@registry/new-york/paper-dithering/PaperDithering.vue';
+  import type { Pane } from 'tweakpane';
+
+  const params = reactive({
+    colorBack: '#000000',
+    colorFront: '#00b2ff',
+    shape: 'sphere',
+    type: '4x4',
+    size: 2,
+    speed: 1,
+  });
+
+  function onPaneCreated(pane: Pane) {
+    pane.addBinding(params, 'colorBack');
+    pane.addBinding(params, 'colorFront');
+    pane.addBinding(params, 'shape', {
+      options: {
+        Simplex: 'simplex',
+        Warp: 'warp',
+        Dots: 'dots',
+        Wave: 'wave',
+        Ripple: 'ripple',
+        Swirl: 'swirl',
+        Sphere: 'sphere',
+      },
+    });
+    pane.addBinding(params, 'type', {
+      options: {
+        Random: 'random',
+        '2x2': '2x2',
+        '4x4': '4x4',
+        '8x8': '8x8',
+      },
+    });
+    pane.addBinding(params, 'size', { min: 0.5, max: 20, step: 0.1 });
+    pane.addBinding(params, 'speed', { min: 0, max: 3, step: 0.1 });
+  }
 </script>
 
 <template>
@@ -24,13 +61,14 @@
   >
     <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <PaperDithering
-        :color-back="'#000000'"
-        :color-front="'#00b2ff'"
-        :shape="'sphere'"
-        :type="'4x4'"
-        :size="2"
-        :speed="1"
+        :color-back="params.colorBack"
+        :color-front="params.colorFront"
+        :shape="params.shape"
+        :type="params.type"
+        :size="params.size"
+        :speed="params.speed"
       />
+      <ShaderPane title="Dithering" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>
