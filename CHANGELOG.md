@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.0.12](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.11...nxui-v0.0.12) (2026-07-03)
+
+
+### Features
+
+* **components:** add visual-stepper ([16a966c](https://github.com/vinayakkulkarni/nxui/commit/16a966c644a7f2f9f5475d7cace57a05eb14bb8c))
+* drag-reorder-list component + tweakpane controls for paper shader demos ([#87](https://github.com/vinayakkulkarni/nxui/issues/87)) ([6d5e2a1](https://github.com/vinayakkulkarni/nxui/commit/6d5e2a1b165ad5d478668ced36804702599d2f92))
+
+
+### Bug Fixes
+
+* **demos:** shader pane overlap + kebab-case binding labels ([4a3cda2](https://github.com/vinayakkulkarni/nxui/commit/4a3cda2cac42043d00ffa75fafa927ca0b00528d))
+* **deps:** Bump @paper-design/shaders from 0.0.76 to 0.0.77 ([#85](https://github.com/vinayakkulkarni/nxui/issues/85)) ([c627aad](https://github.com/vinayakkulkarni/nxui/commit/c627aad5680b2316caac66a6023c71d57787fdee))
+
+
+### Documentation
+
+* credit Paper Shaders port in README, regenerate component tables (209) ([e8cf208](https://github.com/vinayakkulkarni/nxui/commit/e8cf208bdb77bc347555920359a13787aceca19f))
+
+
+### Miscellaneous
+
+* **registry:** regenerate drag-reorder-list.json after formatting ([8a919e6](https://github.com/vinayakkulkarni/nxui/commit/8a919e60258eb7d05d1f37e44e45c4b12b2a0b36))
+
 ## [0.0.11](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.10...nxui-v0.0.11) (2026-07-03)
 
 
