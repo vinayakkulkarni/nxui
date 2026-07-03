@@ -140,6 +140,7 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/testimonial-marquee',
       },
       { title: 'Tilted Card', path: '/docs/components/tilted-card' },
+      { title: 'Visual Stepper', path: '/docs/components/visual-stepper' },
     ],
   },
   {

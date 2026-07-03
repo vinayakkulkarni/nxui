@@ -650,6 +650,12 @@ const COMPONENTS: Record<
       'A macOS-style dock with cursor-proximity magnification driven by configurable spring physics.',
     deps: ['motion-v', '@vueuse/core'],
   },
+  'visual-stepper': {
+    title: 'Visual Stepper',
+    description:
+      'Auto-playing vertical stepper with growing connector bars and a crossfading preview card.',
+    deps: ['motion-v'],
+  },
   'drag-reorder-list': {
     title: 'Drag Reorder List',
     description:
