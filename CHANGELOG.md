@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.0.11](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.10...nxui-v0.0.11) (2026-07-03)
+
+
+### Features
+
+* port the full Paper Shaders suite (29 shaders) to Vue ([#81](https://github.com/vinayakkulkarni/nxui/issues/81)) ([0ea04c1](https://github.com/vinayakkulkarni/nxui/commit/0ea04c1a0b4f9ce705ab497faec5db40d219ef9d))
+
+
+### Bug Fixes
+
+* **deps:** Bump @iconify-json/lucide from 1.2.114 to 1.2.115 ([#76](https://github.com/vinayakkulkarni/nxui/issues/76)) ([cbea3ee](https://github.com/vinayakkulkarni/nxui/commit/cbea3eee79b42794b6e3f289300c30ef2a3bebd3))
+* **deps:** Bump @iconify-json/simple-icons from 1.2.87 to 1.2.88 ([#80](https://github.com/vinayakkulkarni/nxui/issues/80)) ([a89bf24](https://github.com/vinayakkulkarni/nxui/commit/a89bf24c3d9c858ebf740a2f6342e0b45046cd3f))
+* **deps:** Bump @nuxt/icon from 2.2.4 to 2.2.5 ([#77](https://github.com/vinayakkulkarni/nxui/issues/77)) ([5a30d3c](https://github.com/vinayakkulkarni/nxui/commit/5a30d3caffef0f345f107420ce7221fa67acb368))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.21 to 9.0.0-beta.23 ([#78](https://github.com/vinayakkulkarni/nxui/issues/78)) ([71b890f](https://github.com/vinayakkulkarni/nxui/commit/71b890fa12e2493db2f6dd5c85b9b0fa7f86881f))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.23 to 9.0.0-beta.26 ([#83](https://github.com/vinayakkulkarni/nxui/issues/83)) ([3817059](https://github.com/vinayakkulkarni/nxui/commit/3817059d6714b6cfa0679579188178372e4d904b))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.26 to 9.0.0-beta.27 ([#84](https://github.com/vinayakkulkarni/nxui/issues/84)) ([1ee2f32](https://github.com/vinayakkulkarni/nxui/commit/1ee2f320b6305abea41ef0cb8db17906ee4326e2))
+* **deps:** Bump postprocessing from 6.39.1 to 6.39.2 ([#74](https://github.com/vinayakkulkarni/nxui/issues/74)) ([286480d](https://github.com/vinayakkulkarni/nxui/commit/286480d207409f6b7640d296a8fe577e2c194fcb))
+* **deps:** Bump three from 0.185.0 to 0.185.1 ([#82](https://github.com/vinayakkulkarni/nxui/issues/82)) ([6d010bf](https://github.com/vinayakkulkarni/nxui/commit/6d010bf49b269a779600b44339b02b6ff1518a75))
+* **seo:** brand social share titles instead of bare page titles ([81d7a10](https://github.com/vinayakkulkarni/nxui/commit/81d7a10853961ac15e802654bb89291d214051f7))
+
+
+### Miscellaneous
+
+* **deps-dev:** Bump tailwindcss from 4.3.1 to 4.3.2 ([#79](https://github.com/vinayakkulkarni/nxui/issues/79)) ([0890160](https://github.com/vinayakkulkarni/nxui/commit/089016014198b399ec97570bbf768f60afcc78fe))
+* **deps:** update dependencies ([ac0325f](https://github.com/vinayakkulkarni/nxui/commit/ac0325f6fe96f8708080b0cd248eca2657dda61c))
+* **deps:** updated dependencies ✨ ([a8c1a46](https://github.com/vinayakkulkarni/nxui/commit/a8c1a46586861b3169a259504ee9f38d1f3ab155))
+
 ## [0.0.10](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.9...nxui-v0.0.10) (2026-06-27)
 
 
