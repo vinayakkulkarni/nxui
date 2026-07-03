@@ -108,6 +108,7 @@ export default defineNuxtConfig({
         'shiki/bundle/web',
         'tailwind-merge',
         'three',
+        'v-tweakpane',
       ],
     },
   },

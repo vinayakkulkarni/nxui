@@ -1,5 +1,19 @@
 <script setup lang="ts">
+  import { reactive } from 'vue';
   import PaperHeatmap from '@registry/new-york/paper-heatmap/PaperHeatmap.vue';
+  import type { Pane } from 'tweakpane';
+
+  const params = reactive({
+    contour: 0.5,
+    innerGlow: 0.5,
+    outerGlow: 0.5,
+  });
+
+  function onPaneCreated(pane: Pane) {
+    pane.addBinding(params, 'contour', { min: 0, max: 1, step: 0.05 });
+    pane.addBinding(params, 'innerGlow', { min: 0, max: 1, step: 0.05 });
+    pane.addBinding(params, 'outerGlow', { min: 0, max: 1, step: 0.05 });
+  }
 </script>
 
 <template>
@@ -17,10 +31,11 @@
     <div class="relative h-100 w-full overflow-hidden rounded-lg">
       <PaperHeatmap
         image="/flowers.webp"
-        :contour="0.5"
-        :inner-glow="0.5"
-        :outer-glow="0.5"
+        :contour="params.contour"
+        :inner-glow="params.innerGlow"
+        :outer-glow="params.outerGlow"
       />
+      <ShaderPane title="Heatmap" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>
