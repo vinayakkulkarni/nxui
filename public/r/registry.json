@@ -905,7 +905,7 @@
     },
     {
       "name": "paper-shader-mount",
-      "type": "registry:ui",
+      "type": "registry:lib",
       "title": "Paper Shader Mount",
       "description": "Vue mount for Paper Shaders — wraps the framework-agnostic ShaderMount class with Vue lifecycle, reactive uniforms, and URL-to-image loading."
     },

@@ -10,7 +10,7 @@
     ShaderFitOptions,
     WarpPatterns,
   } from '@paper-design/shaders';
-  import PaperShaderMount from './PaperShaderMount.vue';
+  import PaperShaderMount from '../paper-shader-mount/PaperShaderMount.vue';
   import type { PaperWarpProps } from './types';
 
   const props = withDefaults(defineProps<PaperWarpProps>(), {

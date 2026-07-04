@@ -13,20 +13,23 @@ const ROOT = join(import.meta.dirname, '..');
 const REGISTRY_DIR = join(ROOT, 'registry', 'new-york');
 const OUTPUT_DIR = join(ROOT, 'public', 'r');
 
+type RegistryItemType = 'registry:ui' | 'registry:lib';
+
 interface RegistryFile {
   path: string;
   content: string;
-  type: 'registry:ui';
+  type: RegistryItemType;
   target: string;
 }
 
 interface RegistryItem {
   $schema: string;
   name: string;
-  type: 'registry:ui';
+  type: RegistryItemType;
   title: string;
   description: string;
   dependencies: string[];
+  registryDependencies?: string[];
   files: RegistryFile[];
 }
 
@@ -36,11 +39,19 @@ interface RegistryIndex {
   homepage: string;
   items: Array<{
     name: string;
-    type: 'registry:ui';
+    type: RegistryItemType;
     title: string;
     description: string;
   }>;
 }
+
+/**
+ * Shared runtime installed once and referenced by all paper-* shaders via
+ * registryDependencies. Full URL so the shadcn-vue CLI can resolve it from
+ * this third-party registry regardless of how the consumer configured it.
+ */
+const PAPER_SHADER_MOUNT = 'paper-shader-mount';
+const PAPER_SHADER_MOUNT_URL = `https://nxui.geoql.in/r/${PAPER_SHADER_MOUNT}.json`;
 
 const COMPONENTS: Record<
   string,
@@ -1315,6 +1326,8 @@ function buildRegistryItem(slug: string): RegistryItem | null {
     return null;
   }
 
+  const isMount = slug === PAPER_SHADER_MOUNT;
+  const itemType: RegistryItemType = isMount ? 'registry:lib' : 'registry:ui';
   const files: RegistryFile[] = [];
 
   // Sorted so registry JSON is deterministic across runtimes/filesystems.
@@ -1328,7 +1341,7 @@ function buildRegistryItem(slug: string): RegistryItem | null {
     files.push({
       path: `registry/new-york/${slug}/${entry}`,
       content,
-      type: 'registry:ui',
+      type: itemType,
       target: `components/ui/${slug}/${entry}`,
     });
   }
@@ -1338,13 +1351,16 @@ function buildRegistryItem(slug: string): RegistryItem | null {
     return null;
   }
 
+  const needsMount = !isMount && slug.startsWith('paper-');
+
   return {
     $schema: 'https://shadcn-vue.com/schema/registry-item.json',
     name: slug,
-    type: 'registry:ui',
+    type: itemType,
     title: meta.title,
     description: meta.description,
     dependencies: meta.deps,
+    ...(needsMount ? { registryDependencies: [PAPER_SHADER_MOUNT_URL] } : {}),
     files,
   };
 }
@@ -1370,7 +1386,7 @@ function main() {
 
     indexItems.push({
       name: slug,
-      type: 'registry:ui',
+      type: item.type,
       title: item.title,
       description: item.description,
     });

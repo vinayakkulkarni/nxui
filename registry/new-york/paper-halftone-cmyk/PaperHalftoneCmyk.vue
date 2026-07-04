@@ -12,7 +12,7 @@
     ShaderFitOptions,
     HalftoneCmykTypes,
   } from '@paper-design/shaders';
-  import PaperShaderMount from './PaperShaderMount.vue';
+  import PaperShaderMount from '../paper-shader-mount/PaperShaderMount.vue';
   import type { PaperHalftoneCmykProps } from './types';
 
   const props = withDefaults(defineProps<PaperHalftoneCmykProps>(), {

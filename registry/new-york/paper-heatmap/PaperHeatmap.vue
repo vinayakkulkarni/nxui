@@ -12,7 +12,7 @@
     toProcessedHeatmap,
     ShaderFitOptions,
   } from '@paper-design/shaders';
-  import PaperShaderMount from './PaperShaderMount.vue';
+  import PaperShaderMount from '../paper-shader-mount/PaperShaderMount.vue';
   import type { PaperHeatmapProps } from './types';
 
   const props = withDefaults(defineProps<PaperHeatmapProps>(), {

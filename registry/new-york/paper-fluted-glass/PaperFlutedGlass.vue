@@ -10,7 +10,7 @@
     GlassGridShapes,
     ShaderFitOptions,
   } from '@paper-design/shaders';
-  import PaperShaderMount from './PaperShaderMount.vue';
+  import PaperShaderMount from '../paper-shader-mount/PaperShaderMount.vue';
   import type { PaperFlutedGlassProps } from './types';
 
   const props = withDefaults(defineProps<PaperFlutedGlassProps>(), {
