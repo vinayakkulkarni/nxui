@@ -3,20 +3,21 @@
   import PaperTexture from '@registry/new-york/paper-texture/PaperTexture.vue';
   import type { Pane } from 'tweakpane';
 
+  // Mirrors the component's defaultPreset (see PaperTexture.vue withDefaults).
   const params = reactive({
-    colorFront: '#ffffff',
-    colorBack: '#000000',
-    contrast: 0,
-    roughness: 0,
+    colorFront: '#9fadbc',
+    colorBack: '#ffffff',
+    contrast: 0.3,
+    roughness: 0.4,
     fiber: 0.3,
-    fiberSize: 0,
-    crumples: 0,
-    crumpleSize: 0,
+    fiberSize: 0.2,
+    crumples: 0.3,
+    crumpleSize: 0.35,
     folds: 0.65,
-    foldCount: 1,
+    foldCount: 5,
     fade: 0,
-    drops: 0,
-    seed: 0,
+    drops: 0.2,
+    seed: 5.8,
     speed: 0,
   });
 
