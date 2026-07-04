@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.0.13](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.12...nxui-v0.0.13) (2026-07-04)
+
+
+### Bug Fixes
+
+* repair corrupt JetBrains Mono woff2 files and restore PaperTexture demo defaults ([b220646](https://github.com/vinayakkulkarni/nxui/commit/b220646c7ce31ba4a41bfc40cda35059caf050c0))
+
+
+### Code Refactoring
+
+* **registry:** single-source PaperShaderMount via registryDependencies ([dfd4321](https://github.com/vinayakkulkarni/nxui/commit/dfd432140d49d6bc53866a872403df10f92c6061))
+
 ## [0.0.12](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.11...nxui-v0.0.12) (2026-07-03)
 
 
