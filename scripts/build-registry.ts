@@ -667,6 +667,18 @@ const COMPONENTS: Record<
       'Auto-playing vertical stepper with growing connector bars and a crossfading preview card.',
     deps: ['motion-v'],
   },
+  'curved-drawer': {
+    title: 'Curved Drawer',
+    description:
+      'Slide-in drawer whose inner edge bulges with velocity via SVG path morphing, settling straight at rest.',
+    deps: ['@vueuse/core'],
+  },
+  'dynamic-island-header': {
+    title: 'Dynamic Island Header',
+    description:
+      'Navbar that collapses into a compact pill on scroll, morphing to show the active section and reading progress.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
   'drag-reorder-list': {
     title: 'Drag Reorder List',
     description:

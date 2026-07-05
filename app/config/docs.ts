@@ -70,12 +70,17 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Command Menu', path: '/docs/components/command-menu' },
       { title: 'Counter', path: '/docs/components/counter' },
+      { title: 'Curved Drawer', path: '/docs/components/curved-drawer' },
       { title: 'Decay Card', path: '/docs/components/decay-card' },
       { title: 'Dock', path: '/docs/components/dock' },
       { title: 'Dome Gallery', path: '/docs/components/dome-gallery' },
       {
         title: 'Drag Reorder List',
         path: '/docs/components/drag-reorder-list',
+      },
+      {
+        title: 'Dynamic Island Header',
+        path: '/docs/components/dynamic-island-header',
       },
       { title: 'Elastic Slider', path: '/docs/components/elastic-slider' },
       { title: 'Eye Tracking', path: '/docs/components/eye-tracking' },

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "curved-drawer",
+  "type": "registry:ui",
+  "title": "Curved Drawer",
+  "description": "Slide-in drawer whose inner edge bulges with velocity via SVG path morphing, settling straight at rest.",
+  "dependencies": ["@vueuse/core"],
+  "files": [
+    {
+      "path": "registry/new-york/curved-drawer/CurvedDrawer.vue",
+      "content": "<script setup lang=\"ts\">\n  // Curved drawer: the inner edge is an SVG path that bulges while the\n  // panel slides and settles straight at rest — velocity drives the curve.\n  // Inspired by the \"Curved Drawer\" interaction by @diip3sh.\n  import { ref, computed, watch } from 'vue';\n  import { useRafFn } from '@vueuse/core';\n  import { cn } from '~/lib/utils';\n  import type { CurvedDrawerProps } from './types';\n\n  const props = withDefaults(defineProps<CurvedDrawerProps>(), {\n    side: 'right',\n    width: 380,\n    maxBulge: 48,\n    stiffness: 170,\n    damping: 22,\n    overlay: true,\n    background: 'var(--background)',\n    class: '',\n  });\n\n  const open = defineModel<boolean>({ default: false });\n\n  // Spring-integrated slide: x = 0 fully open, 1 fully closed (offscreen).\n  const x = ref(1);\n  const velocity = ref(0);\n\n  const { resume, pause } = useRafFn(\n    ({ delta }) => {\n      const dt = Math.min(delta / 1000, 1 / 30);\n      const target = open.value ? 0 : 1;\n      const accel =\n        props.stiffness * (target - x.value) - props.damping * velocity.value;\n      velocity.value += accel * dt;\n      x.value += velocity.value * dt;\n      if (\n        Math.abs(x.value - target) < 0.0005 &&\n        Math.abs(velocity.value) < 0.001\n      ) {\n        x.value = target;\n        velocity.value = 0;\n        pause();\n      }\n    },\n    { immediate: false },\n  );\n\n  watch(open, () => resume());\n\n  const totalWidth = computed(() => props.width + props.maxBulge);\n\n  const translate = computed(() => {\n    const offset = x.value * totalWidth.value;\n    return props.side === 'right' ? offset : -offset;\n  });\n\n  // Bulge magnitude follows speed: the free edge bows outward while the\n  // panel slides (leading on open, lagging on close), straight at rest.\n  const bulge = computed(() => {\n    const raw = Math.abs(velocity.value) * totalWidth.value * 0.06;\n    return Math.min(raw, props.maxBulge);\n  });\n\n  // SVG strip sits on the drawer's inner edge; the quadratic control point\n  // pushes the midpoint outward while moving, straight when settled.\n  const edgePath = computed(() => {\n    const b = props.maxBulge;\n    if (props.side === 'right') {\n      const cx = b - bulge.value * 2;\n      return `M ${b} 0 Q ${cx} 50 ${b} 100 Z`;\n    }\n    const cx = bulge.value * 2;\n    return `M 0 0 Q ${cx} 50 0 100 Z`;\n  });\n\n  const visible = computed(() => x.value < 0.999);\n</script>\n\n<template>\n  <div\n    v-if=\"overlay\"\n    class=\"absolute inset-0 z-20 bg-black/40 transition-opacity duration-300\"\n    :class=\"visible && open ? 'opacity-100' : 'pointer-events-none opacity-0'\"\n    aria-hidden=\"true\"\n    @click=\"open = false\"\n  />\n\n  <div\n    v-show=\"visible\"\n    :class=\"\n      cn(\n        'absolute inset-y-0 z-30 flex',\n        side === 'right' ? 'right-0' : 'left-0 flex-row-reverse',\n        props.class,\n      )\n    \"\n    :style=\"{\n      width: `${totalWidth}px`,\n      transform: `translateX(${translate}px)`,\n    }\"\n  >\n    <!-- Curved edge strip -->\n    <svg\n      class=\"h-full shrink-0\"\n      :style=\"{ width: `${maxBulge}px` }\"\n      viewBox=\"0 0 48 100\"\n      preserveAspectRatio=\"none\"\n      aria-hidden=\"true\"\n    >\n      <path :d=\"edgePath\" :fill=\"background\" />\n    </svg>\n\n    <!-- Panel body -->\n    <div\n      class=\"h-full overflow-y-auto\"\n      :style=\"{ width: `${width}px`, background }\"\n    >\n      <slot />\n    </div>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/curved-drawer/CurvedDrawer.vue"
+    },
+    {
+      "path": "registry/new-york/curved-drawer/index.ts",
+      "content": "export { default as CurvedDrawer } from './CurvedDrawer.vue';\nexport type { CurvedDrawerProps } from './types';\n",
+      "type": "registry:ui",
+      "target": "components/ui/curved-drawer/index.ts"
+    },
+    {
+      "path": "registry/new-york/curved-drawer/types.ts",
+      "content": "export interface CurvedDrawerProps {\n  /** Which edge the drawer slides from. */\n  side?: 'left' | 'right';\n  /** Drawer panel width in px. */\n  width?: number;\n  /** Maximum bulge depth of the curved edge in px. */\n  maxBulge?: number;\n  /** Spring stiffness for the slide. */\n  stiffness?: number;\n  /** Spring damping for the slide. */\n  damping?: number;\n  /** Show a dimming overlay behind the drawer. */\n  overlay?: boolean;\n  /** Panel background color (any CSS color). */\n  background?: string;\n  class?: string;\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/curved-drawer/types.ts"
+    }
+  ]
+}

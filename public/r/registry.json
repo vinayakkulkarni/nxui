@@ -634,6 +634,18 @@
       "description": "Auto-playing vertical stepper with growing connector bars and a crossfading preview card."
     },
     {
+      "name": "curved-drawer",
+      "type": "registry:ui",
+      "title": "Curved Drawer",
+      "description": "Slide-in drawer whose inner edge bulges with velocity via SVG path morphing, settling straight at rest."
+    },
+    {
+      "name": "dynamic-island-header",
+      "type": "registry:ui",
+      "title": "Dynamic Island Header",
+      "description": "Navbar that collapses into a compact pill on scroll, morphing to show the active section and reading progress."
+    },
+    {
       "name": "drag-reorder-list",
       "type": "registry:ui",
       "title": "Drag Reorder List",
