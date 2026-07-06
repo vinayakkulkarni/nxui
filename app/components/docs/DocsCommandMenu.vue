@@ -7,20 +7,13 @@
   }>();
 
   const router = useRouter();
-  const isOpen = ref(false);
+  // Shared open state + a single global ⌘K/Ctrl+K/Escape binding, so multiple
+  // trigger instances (docs header + component-page toolbar) stay in sync and
+  // never double-register the shortcut.
+  const { isOpen } = useCommandPalette();
   const query = ref('');
   const inputRef = ref<HTMLInputElement | null>(null);
   const selectedIndex = ref(0);
-
-  const { meta_k, ctrl_k, escape } = useMagicKeys();
-
-  watch([meta_k, ctrl_k], ([mk, ck]) => {
-    if (mk || ck) isOpen.value = !isOpen.value;
-  });
-
-  watch(escape!, (val) => {
-    if (val) isOpen.value = false;
-  });
 
   watch(isOpen, (val) => {
     if (val) {

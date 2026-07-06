@@ -74,6 +74,10 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 
 ## Components (215)
 
+> The registry also ships one internal helper, `paper-shader-mount`, that the
+> Paper Shaders depend on — so `npx shadcn-vue add` resolves 216 items total,
+> of which these 215 are user-facing components.
+
 ### Text Animations (32)
 
 | Component                                                                                                         | Description                                                                                                                                                                          |

@@ -5,7 +5,7 @@
   import { ref, computed } from 'vue';
   import { motion, AnimatePresence } from 'motion-v';
   import { cn } from '~/lib/utils';
-  import type { AuroraAccordionProps, AuroraAccordionItem } from './types';
+  import type { AuroraAccordionProps, AuroraAccordionSegment } from './types';
 
   const props = withDefaults(defineProps<AuroraAccordionProps>(), {
     auroraColors: () => ['#2563eb', '#9333ea', '#ea580c'],
@@ -26,15 +26,9 @@
 
   // Split rows into contiguous groups around the opened row so the active
   // item detaches into its own card while the rest stay grouped.
-  interface Segment {
-    key: string;
-    open: boolean;
-    rows: { item: AuroraAccordionItem; index: number }[];
-  }
-
-  const segments = computed<Segment[]>(() => {
-    const out: Segment[] = [];
-    let run: Segment | null = null;
+  const segments = computed<AuroraAccordionSegment[]>(() => {
+    const out: AuroraAccordionSegment[] = [];
+    let run: AuroraAccordionSegment | null = null;
     props.items.forEach((item, index) => {
       if (index === open.value) {
         run = null;
