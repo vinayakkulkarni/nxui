@@ -55,10 +55,15 @@ export const docsNav: NavGroup[] = [
     title: 'Components',
     items: [
       { title: 'Animated List', path: '/docs/components/animated-list' },
-      { title: 'Animated TOC', path: '/docs/components/animated-toc' },
+      {
+        title: 'Animated TOC',
+        path: '/docs/components/animated-toc',
+        badge: 'new',
+      },
       {
         title: 'Aurora Accordion',
         path: '/docs/components/aurora-accordion',
+        badge: 'new',
       },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       { title: 'Border Glow', path: '/docs/components/border-glow' },
@@ -86,6 +91,7 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Drag Reorder List',
         path: '/docs/components/drag-reorder-list',
+        badge: 'new',
       },
       {
         title: 'Dynamic Island Header',
@@ -155,7 +161,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/testimonial-marquee',
       },
       { title: 'Tilted Card', path: '/docs/components/tilted-card' },
-      { title: 'Visual Stepper', path: '/docs/components/visual-stepper' },
+      {
+        title: 'Visual Stepper',
+        path: '/docs/components/visual-stepper',
+        badge: 'new',
+      },
     ],
   },
   {
