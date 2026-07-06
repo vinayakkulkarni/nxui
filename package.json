@@ -80,7 +80,7 @@
     "oxfmt": "^0.57.0",
     "oxlint": "^1.72.0",
     "tailwindcss": "^4.3.2",
-    "tsx": "^4.22.5",
+    "tsx": "^4.23.0",
     "typescript": "^6.0.3",
     "vue": "^3.6.0-beta.17",
     "wrangler": "^4.107.0"
