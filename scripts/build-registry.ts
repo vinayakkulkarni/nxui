@@ -667,6 +667,18 @@ const COMPONENTS: Record<
       'Auto-playing vertical stepper with growing connector bars and a crossfading preview card.',
     deps: ['motion-v'],
   },
+  'animated-toc': {
+    title: 'Animated TOC',
+    description:
+      'Table of contents with an SVG rail that snakes through nesting levels and a dot that glides along the curve to the active entry.',
+    deps: ['@vueuse/core'],
+  },
+  'aurora-accordion': {
+    title: 'Aurora Accordion',
+    description:
+      'Accordion whose opened row detaches into its own card while an aurora gradient blooms behind the answer.',
+    deps: ['motion-v'],
+  },
   'curved-drawer': {
     title: 'Curved Drawer',
     description:

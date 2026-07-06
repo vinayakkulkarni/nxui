@@ -634,6 +634,18 @@
       "description": "Auto-playing vertical stepper with growing connector bars and a crossfading preview card."
     },
     {
+      "name": "animated-toc",
+      "type": "registry:ui",
+      "title": "Animated TOC",
+      "description": "Table of contents with an SVG rail that snakes through nesting levels and a dot that glides along the curve to the active entry."
+    },
+    {
+      "name": "aurora-accordion",
+      "type": "registry:ui",
+      "title": "Aurora Accordion",
+      "description": "Accordion whose opened row detaches into its own card while an aurora gradient blooms behind the answer."
+    },
+    {
       "name": "curved-drawer",
       "type": "registry:ui",
       "title": "Curved Drawer",

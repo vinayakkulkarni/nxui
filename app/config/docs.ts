@@ -55,6 +55,11 @@ export const docsNav: NavGroup[] = [
     title: 'Components',
     items: [
       { title: 'Animated List', path: '/docs/components/animated-list' },
+      { title: 'Animated TOC', path: '/docs/components/animated-toc' },
+      {
+        title: 'Aurora Accordion',
+        path: '/docs/components/aurora-accordion',
+      },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       { title: 'Border Glow', path: '/docs/components/border-glow' },
       { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
@@ -70,7 +75,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Command Menu', path: '/docs/components/command-menu' },
       { title: 'Counter', path: '/docs/components/counter' },
-      { title: 'Curved Drawer', path: '/docs/components/curved-drawer' },
+      {
+        title: 'Curved Drawer',
+        path: '/docs/components/curved-drawer',
+        badge: 'new',
+      },
       { title: 'Decay Card', path: '/docs/components/decay-card' },
       { title: 'Dock', path: '/docs/components/dock' },
       { title: 'Dome Gallery', path: '/docs/components/dome-gallery' },
@@ -81,6 +90,7 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Dynamic Island Header',
         path: '/docs/components/dynamic-island-header',
+        badge: 'new',
       },
       { title: 'Elastic Slider', path: '/docs/components/elastic-slider' },
       { title: 'Eye Tracking', path: '/docs/components/eye-tracking' },

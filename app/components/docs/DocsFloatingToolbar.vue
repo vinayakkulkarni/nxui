@@ -38,6 +38,9 @@
   <div
     class="pointer-events-none absolute left-3 top-3 z-30 hidden items-center gap-1 lg:flex"
   >
+    <!-- Command palette (⌘K) — restores search on component pages -->
+    <DocsCommandMenu compact />
+
     <!-- Sidebar trigger (Sheet) -->
     <Sheet v-model:open="sidebarOpen">
       <SheetTrigger as-child>

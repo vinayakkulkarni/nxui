@@ -1,6 +1,11 @@
 <script setup lang="ts">
   import { docsNav } from '~/config/docs';
 
+  const props = defineProps<{
+    /** Compact icon-only trigger (for the floating toolbar). */
+    compact?: boolean;
+  }>();
+
   const router = useRouter();
   const isOpen = ref(false);
   const query = ref('');
@@ -67,18 +72,30 @@
 </script>
 
 <template>
+  <!-- Compact icon-only trigger (floating toolbar on component pages) -->
   <button
-    class="group inline-flex items-center justify-center md:justify-start gap-2 whitespace-nowrap transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 border-0 md:border md:border-input/50 md:hover:border-input hover:bg-accent/50 md:px-3 md:py-2 relative size-9 md:w-40 lg:w-56 rounded-md md:rounded-lg bg-transparent md:bg-muted/30 text-sm font-normal text-muted-foreground"
+    v-if="props.compact"
+    class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+    aria-label="Search components (⌘K)"
+    @click="isOpen = true"
+  >
+    <Icon name="lucide:search" class="size-4" />
+  </button>
+
+  <!-- Full search box (docs header) -->
+  <button
+    v-else
+    class="group relative inline-flex size-9 items-center justify-center gap-2 rounded-md border-0 bg-transparent text-sm font-normal whitespace-nowrap text-muted-foreground transition-all duration-200 hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:outline-none md:w-40 md:justify-start md:rounded-lg md:border md:border-input/50 md:bg-muted/30 md:px-3 md:py-2 md:hover:border-input lg:w-56"
     @click="isOpen = true"
   >
     <Icon
       name="lucide:search"
-      class="size-[1.2rem] md:size-4 opacity-70 group-hover:opacity-100 md:opacity-50 md:group-hover:opacity-70 transition-opacity"
+      class="size-[1.2rem] opacity-70 transition-opacity group-hover:opacity-100 md:size-4 md:opacity-50 md:group-hover:opacity-70"
     />
     <span class="hidden lg:inline-flex">Search...</span>
     <span class="hidden md:inline-flex lg:hidden">Search</span>
     <kbd
-      class="pointer-events-none absolute right-1.5 top-1.5 hidden h-6 select-none items-center gap-0.5 rounded-md border bg-background/80 px-1.5 font-mono text-[10px] font-medium text-muted-foreground/70 sm:flex"
+      class="pointer-events-none absolute top-1.5 right-1.5 hidden h-6 items-center gap-0.5 rounded-md border bg-background/80 px-1.5 font-mono text-[10px] font-medium text-muted-foreground/70 select-none sm:flex"
     >
       <span class="text-xs">⌘</span>K
     </kbd>
