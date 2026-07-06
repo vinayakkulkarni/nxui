@@ -36,7 +36,7 @@
     "@nuxtjs/robots": "^6.1.2",
     "@nuxtjs/sitemap": "^8.2.2",
     "@paper-design/shaders": "0.0.77",
-    "@tanstack/vue-table": "^9.0.0-beta.27",
+    "@tanstack/vue-table": "^9.0.0-beta.31",
     "@tweakpane/plugin-essentials": "^0.2.1",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
