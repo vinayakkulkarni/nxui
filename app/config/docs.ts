@@ -123,6 +123,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Music Player', path: '/docs/components/music-player' },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },
       {
+        title: 'Nostalgia',
+        path: '/docs/components/nostalgia',
+        badge: 'new',
+      },
+      {
         title: 'Orbit Card Stack',
         path: '/docs/components/orbit-card-stack',
       },

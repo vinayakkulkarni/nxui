@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>215 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>216 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (215)
+## Components (216)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
-> Paper Shaders depend on — so `npx shadcn-vue add` resolves 216 items total,
-> of which these 215 are user-facing components.
+> Paper Shaders depend on — so `npx shadcn-vue add` resolves 217 items total,
+> of which these 216 are user-facing components.
 
 ### Text Animations (32)
 
@@ -143,7 +143,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (64)
+### Components (65)
 
 | Component                                                                            | Description                                                                                                                                                         |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -189,6 +189,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Model Viewer](https://nxui.geoql.in/docs/components/model-viewer)                   | Three.js 3D model viewer with OrbitControls, GLTF/FBX/OBJ support, auto-framing, and screenshot.                                                                    |
 | [Music Player](https://nxui.geoql.in/docs/components/music-player)                   | An interactive vinyl-record music player with swinging tonearm and animated rotation.                                                                               |
 | [Node Diagram](https://nxui.geoql.in/docs/components/node-diagram)                   | An animated node diagram with glowing data pulses flowing through connections.                                                                                      |
+| [Nostalgia](https://nxui.geoql.in/docs/components/nostalgia)                         | Vintage slide-viewer that cycles through memories while a fan of polaroid thumbnails arcs around it and a year + serif title crossfade underneath.                  |
 | [Orbit Card Stack](https://nxui.geoql.in/docs/components/orbit-card-stack)           | A stacked deck of profile cards that fans out into an orbital arc on hover, lifting the active card with spring physics.                                            |
 | [Orbit Images](https://nxui.geoql.in/docs/components/orbit-images)                   | Images orbiting along customizable path shapes including ellipse, circle, star, heart, infinity, and more.                                                          |
 | [Pill Nav](https://nxui.geoql.in/docs/components/pill-nav)                           | Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu.                                                                          |

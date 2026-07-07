@@ -667,6 +667,12 @@ const COMPONENTS: Record<
       'Auto-playing vertical stepper with growing connector bars and a crossfading preview card.',
     deps: ['motion-v'],
   },
+  nostalgia: {
+    title: 'Nostalgia',
+    description:
+      'Vintage slide-viewer that cycles through memories while a fan of polaroid thumbnails arcs around it and a year + serif title crossfade underneath.',
+    deps: ['motion-v'],
+  },
   'animated-toc': {
     title: 'Animated TOC',
     description:
