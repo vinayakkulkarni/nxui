@@ -634,6 +634,18 @@
       "description": "Auto-playing vertical stepper with growing connector bars and a crossfading preview card."
     },
     {
+      "name": "typer-text",
+      "type": "registry:ui",
+      "title": "Typer Text",
+      "description": "Typing transition where words get staggered outline boxes while a solid accent cursor block sweeps across, scrambling characters before they settle."
+    },
+    {
+      "name": "podcast-player",
+      "type": "registry:ui",
+      "title": "Podcast Player",
+      "description": "Expandable podcast episode card driving a real audio element — waveform seek with hover scrubber, chapters, speed cycling, volume, and a compact pill mode."
+    },
+    {
       "name": "nostalgia",
       "type": "registry:ui",
       "title": "Nostalgia",

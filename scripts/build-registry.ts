@@ -667,6 +667,18 @@ const COMPONENTS: Record<
       'Auto-playing vertical stepper with growing connector bars and a crossfading preview card.',
     deps: ['motion-v'],
   },
+  'typer-text': {
+    title: 'Typer Text',
+    description:
+      'Typing transition where words get staggered outline boxes while a solid accent cursor block sweeps across, scrambling characters before they settle.',
+    deps: [],
+  },
+  'podcast-player': {
+    title: 'Podcast Player',
+    description:
+      'Expandable podcast episode card driving a real audio element — waveform seek with hover scrubber, chapters, speed cycling, volume, and a compact pill mode.',
+    deps: ['motion-v'],
+  },
   nostalgia: {
     title: 'Nostalgia',
     description:

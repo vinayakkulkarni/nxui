@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>216 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>218 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,13 +72,13 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (216)
+## Components (218)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
-> Paper Shaders depend on — so `npx shadcn-vue add` resolves 217 items total,
-> of which these 216 are user-facing components.
+> Paper Shaders depend on — so `npx shadcn-vue add` resolves 219 items total,
+> of which these 218 are user-facing components.
 
-### Text Animations (32)
+### Text Animations (33)
 
 | Component                                                                                                         | Description                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -113,6 +113,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Text String](https://nxui.geoql.in/docs/text-animations/text-string)                                             | A Verlet physics rope text animation where each character acts as a connected particle. Drag letters to unravel the string, toggle gravity, and watch characters collide and bounce. |
 | [Text Type](https://nxui.geoql.in/docs/text-animations/text-type)                                                 | Typewriter effect with character-by-character typing, optional delete-and-retype loop, and blinking cursor.                                                                          |
 | [True Focus](https://nxui.geoql.in/docs/text-animations/true-focus)                                               | A temporal illusion that directs attention by blurring everything except the current focal point.                                                                                    |
+| [Typer Text](https://nxui.geoql.in/docs/text-animations/typer-text)                                               | Typing transition where words get staggered outline boxes while a solid accent cursor block sweeps across, scrambling characters before they settle.                                 |
 | [Variable Proximity](https://nxui.geoql.in/docs/text-animations/variable-proximity)                               | Text that changes font variation settings based on cursor proximity, creating a magnetic weight/width effect.                                                                        |
 
 ### Animations (23)
@@ -143,7 +144,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (65)
+### Components (66)
 
 | Component                                                                            | Description                                                                                                                                                         |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -194,6 +195,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Orbit Images](https://nxui.geoql.in/docs/components/orbit-images)                   | Images orbiting along customizable path shapes including ellipse, circle, star, heart, infinity, and more.                                                          |
 | [Pill Nav](https://nxui.geoql.in/docs/components/pill-nav)                           | Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu.                                                                          |
 | [Pixel Card](https://nxui.geoql.in/docs/components/pixel-card)                       | Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.                                                                                  |
+| [Podcast Player](https://nxui.geoql.in/docs/components/podcast-player)               | Expandable podcast episode card driving a real audio element — waveform seek with hover scrubber, chapters, speed cycling, volume, and a compact pill mode.         |
 | [Profile Card](https://nxui.geoql.in/docs/components/profile-card)                   | Holographic tilt card with pointer-tracking 3D transforms, rainbow shine effects, and avatar parallax.                                                              |
 | [Reflective Card](https://nxui.geoql.in/docs/components/reflective-card)             | Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.                                                                   |
 | [Scroll Choreography](https://nxui.geoql.in/docs/components/scroll-choreography)     | Scroll-driven image choreography with diagonal movement, stacking, and hero expansion phases.                                                                       |

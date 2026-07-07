@@ -46,6 +46,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Text Type', path: '/docs/text-animations/text-type' },
       { title: 'True Focus', path: '/docs/text-animations/true-focus' },
       {
+        title: 'Typer Text',
+        path: '/docs/text-animations/typer-text',
+        badge: 'new',
+      },
+      {
         title: 'Variable Proximity',
         path: '/docs/text-animations/variable-proximity',
       },
@@ -134,6 +139,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Orbit Images', path: '/docs/components/orbit-images' },
       { title: 'Pill Nav', path: '/docs/components/pill-nav' },
       { title: 'Pixel Card', path: '/docs/components/pixel-card' },
+      {
+        title: 'Podcast Player',
+        path: '/docs/components/podcast-player',
+        badge: 'new',
+      },
       { title: 'Profile Card', path: '/docs/components/profile-card' },
       { title: 'Reflective Card', path: '/docs/components/reflective-card' },
       {
