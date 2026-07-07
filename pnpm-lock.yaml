@@ -42,8 +42,8 @@ importers:
         specifier: 0.0.77
         version: 0.0.77
       '@tanstack/vue-table':
-        specifier: ^9.0.0-beta.31
-        version: 9.0.0-beta.31(vue@3.6.0-beta.17(typescript@6.0.3))
+        specifier: ^9.0.0-beta.33
+        version: 9.0.0-beta.33(vue@3.6.0-beta.17(typescript@6.0.3))
       '@tweakpane/plugin-essentials':
         specifier: ^0.2.1
         version: 0.2.1(tweakpane@4.0.5)
@@ -2769,16 +2769,16 @@ packages:
   '@tanstack/store@0.11.0':
     resolution: {integrity: sha512-WlzzCt3xi0G6pCAJu1U+2jiECwabETDpQDi3hfkFZvJii9AuZqEKbOiVarX1/bWhTNjU486yQtJCCasi/0q+Cw==}
 
-  '@tanstack/table-core@9.0.0-beta.31':
-    resolution: {integrity: sha512-B9XdGcv/8+NdhmIpVWnvQwNFL2UL81W6BvT/YZ8wrM9FpIvLrZjNXRxMUrjvKE8pmKwDFCndWTVSnRsIZYBT+Q==}
-    engines: {node: '>=16'}
+  '@tanstack/table-core@9.0.0-beta.33':
+    resolution: {integrity: sha512-m0puHF6M7BByw5N0bqYl9RJ1KvjGnNqxNh0Wo4Va3D8lt1GUgau9VIzcW1MLxJGQ/OjqbQ6IeMDNo7fOs04ExQ==}
+    engines: {node: '>=20'}
 
   '@tanstack/virtual-core@3.17.1':
     resolution: {integrity: sha512-VZyW2Uiml5tmBZwPGrSD3Sz73OxzljQMCmzYHsUTPEuTsERf5xwa+uWb01xEzkz3ZSYTjj8NEb/mKHvgKxyZdA==}
 
-  '@tanstack/vue-table@9.0.0-beta.31':
-    resolution: {integrity: sha512-78lyA0nXO2h/pR6vT4EC2fH90/qGjZ1zf1B1eF6yutXViHDxCZ2LAxGW3RIzzSQjyCiCG0O9X/6LopMqlp/VAA==}
-    engines: {node: '>=16'}
+  '@tanstack/vue-table@9.0.0-beta.33':
+    resolution: {integrity: sha512-HUCRyRgB11zoKk2QoXNOtNRkoGQayFumxCwSKHNdcWTJpqSV8VlB7GiWFlkuc/lypetWGtXdhDbzebfH4n/wkg==}
+    engines: {node: '>=20'}
     peerDependencies:
       vue: '>=3.2'
 
@@ -3511,8 +3511,8 @@ packages:
   caniuse-lite@1.0.30001797:
     resolution: {integrity: sha512-l8xKG+gwAIExZGl9FrF7KUwuOmk6wbEPC9Xoy/RtnWv1XG0Q4LFlagaLpUv3Kiza3W/wm27zy0yWJEieYKAP6w==}
 
-  caniuse-lite@1.0.30001800:
-    resolution: {integrity: sha512-MMHtuAz9Ys840zAY5F4k6fV5GaivZ9sPk+nz0mY+GYVzRBnYkN0mpqkSR92oWRQ19yQWo4HvBV/FnC16AJX8MA==}
+  caniuse-lite@1.0.30001802:
+    resolution: {integrity: sha512-vmv8ub2xwTNmljSKf82mtCk5JH7hC+YgzLj3P5zotvA0tPQ9016tdNNOG8WRca1IxOnhSsivB+J0z5FeE5LOUw==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -9607,16 +9607,16 @@ snapshots:
 
   '@tanstack/store@0.11.0': {}
 
-  '@tanstack/table-core@9.0.0-beta.31':
+  '@tanstack/table-core@9.0.0-beta.33':
     dependencies:
       '@tanstack/store': 0.11.0
 
   '@tanstack/virtual-core@3.17.1': {}
 
-  '@tanstack/vue-table@9.0.0-beta.31(vue@3.6.0-beta.17(typescript@6.0.3))':
+  '@tanstack/vue-table@9.0.0-beta.33(vue@3.6.0-beta.17(typescript@6.0.3))':
     dependencies:
       '@tanstack/store': 0.11.0
-      '@tanstack/table-core': 9.0.0-beta.31
+      '@tanstack/table-core': 9.0.0-beta.33
       vue: 3.6.0-beta.17(typescript@6.0.3)
 
   '@tanstack/vue-virtual@3.13.29(vue@3.6.0-beta.17(typescript@6.0.3))':
@@ -10365,7 +10365,7 @@ snapshots:
   browserslist@4.28.2:
     dependencies:
       baseline-browser-mapping: 2.10.42
-      caniuse-lite: 1.0.30001800
+      caniuse-lite: 1.0.30001802
       electron-to-chromium: 1.5.387
       node-releases: 2.0.50
       update-browserslist-db: 1.2.3(browserslist@4.28.2)
@@ -10441,7 +10441,7 @@ snapshots:
 
   caniuse-lite@1.0.30001797: {}
 
-  caniuse-lite@1.0.30001800: {}
+  caniuse-lite@1.0.30001802: {}
 
   ccount@2.0.1: {}
 
