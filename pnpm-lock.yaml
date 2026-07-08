@@ -148,8 +148,8 @@ importers:
         specifier: ^4.6.1
         version: 4.6.1(eslint@10.6.0(jiti@2.7.0))(oxlint@1.73.0)(tailwindcss@4.3.2)(typescript@6.0.3)
       eslint-plugin-oxlint:
-        specifier: ^1.72.0
-        version: 1.72.0(oxlint@1.73.0)
+        specifier: ^1.73.0
+        version: 1.73.0(oxlint@1.73.0)
       husky:
         specifier: ^9.1.7
         version: 9.1.7
@@ -3511,8 +3511,8 @@ packages:
   caniuse-lite@1.0.30001797:
     resolution: {integrity: sha512-l8xKG+gwAIExZGl9FrF7KUwuOmk6wbEPC9Xoy/RtnWv1XG0Q4LFlagaLpUv3Kiza3W/wm27zy0yWJEieYKAP6w==}
 
-  caniuse-lite@1.0.30001802:
-    resolution: {integrity: sha512-vmv8ub2xwTNmljSKf82mtCk5JH7hC+YgzLj3P5zotvA0tPQ9016tdNNOG8WRca1IxOnhSsivB+J0z5FeE5LOUw==}
+  caniuse-lite@1.0.30001803:
+    resolution: {integrity: sha512-g/uHREV2ZpK9qMalCsWaxmA6ol+DX8GYhuf3T40RKoP+oL7vhRJh8LNt73PCjpnR6l14FzfPrB5Yux4PKm2meg==}
 
   ccount@2.0.1:
     resolution: {integrity: sha512-eyrF0jiFpY+3drT6383f1qhkbGsLSifNAjA61IUjZjmLCWjItY6LB9ft9YhoDgwfmclB2zhu51Lc7+95b8NRAg==}
@@ -3925,8 +3925,8 @@ packages:
   ee-first@1.1.1:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
 
-  electron-to-chromium@1.5.387:
-    resolution: {integrity: sha512-TaxwufTFDufvPEoXdhwVrA3UdFWBeWGkYoJ1K8ldF1xe6gKfth6iRNS5lTQ5JPNOHdGQm8PT1QYKUqFLCiUefQ==}
+  electron-to-chromium@1.5.389:
+    resolution: {integrity: sha512-cEto7aeOqBfU1D+c5py5pE+ooscKE75JifxLBdFUZsqAxRS6y7kebtxAZvICszSl05gPjYHDTjY+lXpyGvpJbg==}
 
   emoji-regex-xs@2.0.1:
     resolution: {integrity: sha512-1QFuh8l7LqUcKe24LsPUNzjrzJQ7pgRwp1QMcZ5MX6mFplk2zQ08NVCM84++1cveaUUYtcCYHmeFEuNg16sU4g==}
@@ -4096,10 +4096,10 @@ packages:
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
 
-  eslint-plugin-oxlint@1.72.0:
-    resolution: {integrity: sha512-WBPQdXRRatC2/8wWZ16iM/p+Eg3YTwa7As8IouMWnoAUYPOqa6QW3/kExifTpU7e9tFta5MT36+Z4eAWsg35Ag==}
+  eslint-plugin-oxlint@1.73.0:
+    resolution: {integrity: sha512-2qsGYkwpas99+jLmB7F3W8Gv+7QkHIr67AMw10UTs/QAMCm2eO0Z8B8ROMvAgyKaWIitkcvH8DwLfTrHMeXzCw==}
     peerDependencies:
-      oxlint: ~1.72.0
+      oxlint: ~1.73.0
 
   eslint-plugin-regexp@3.1.0:
     resolution: {integrity: sha512-qGXIC3DIKZHcK1H9A9+Byz9gmndY6TTSRkSMTZpNXdyCw2ObSehRgccJv35n9AdUakEjQp5VFNLas6BMXizCZg==}
@@ -6301,6 +6301,9 @@ packages:
   std-env@4.1.0:
     resolution: {integrity: sha512-Rq7ybcX2RuC55r9oaPVEW7/xu3tj8u4GeBYHBWCychFtzMIr86A7e3PPEBPT37sHStKX3+TiX/Fr/ACmJLVlLQ==}
 
+  std-env@4.2.0:
+    resolution: {integrity: sha512-oCUKSupKTHX53EyjDtuZQ64pjLJ6yYCtpmEw0goYxtjG9KpbRe8KAsl2tBUGU9DyMcJ0RwJ8GqJAFzMXcXW1Rw==}
+
   streamx@2.27.0:
     resolution: {integrity: sha512-WZ189TKnHoAokYHvwzaAQMpd55cgUmFIcJFzBSgGcb886jau5DL+XdDhTWV4ps3FLvk+OORp0dLRTPsLZ21CSA==}
 
@@ -8497,7 +8500,7 @@ snapshots:
       defu: 6.1.7
       pathe: 2.0.3
       pkg-types: 2.3.1
-      std-env: 4.1.0
+      std-env: 4.2.0
 
   '@nuxt/telemetry@2.8.0(@nuxt/kit@4.4.8(magicast@0.5.3))':
     dependencies:
@@ -10365,8 +10368,8 @@ snapshots:
   browserslist@4.28.2:
     dependencies:
       baseline-browser-mapping: 2.10.42
-      caniuse-lite: 1.0.30001802
-      electron-to-chromium: 1.5.387
+      caniuse-lite: 1.0.30001803
+      electron-to-chromium: 1.5.389
       node-releases: 2.0.50
       update-browserslist-db: 1.2.3(browserslist@4.28.2)
 
@@ -10441,7 +10444,7 @@ snapshots:
 
   caniuse-lite@1.0.30001797: {}
 
-  caniuse-lite@1.0.30001802: {}
+  caniuse-lite@1.0.30001803: {}
 
   ccount@2.0.1: {}
 
@@ -10810,7 +10813,7 @@ snapshots:
 
   ee-first@1.1.1: {}
 
-  electron-to-chromium@1.5.387: {}
+  electron-to-chromium@1.5.389: {}
 
   emoji-regex-xs@2.0.1: {}
 
@@ -10999,7 +11002,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-oxlint@1.72.0(oxlint@1.73.0):
+  eslint-plugin-oxlint@1.73.0(oxlint@1.73.0):
     dependencies:
       jsonc-parser: 3.3.1
       oxlint: 1.73.0
@@ -12626,7 +12629,7 @@ snapshots:
     dependencies:
       '@nuxt/kit': 4.4.8(magicast@0.5.3)
       site-config-stack: 4.1.1(vue@3.6.0-beta.17(typescript@6.0.3))
-      std-env: 4.1.0
+      std-env: 4.2.0
       ufo: 1.6.4
     transitivePeerDependencies:
       - magicast
@@ -12822,7 +12825,7 @@ snapshots:
       pkg-types: 2.3.1
       radix3: 1.1.2
       sirv: 3.0.2
-      std-env: 4.1.0
+      std-env: 4.2.0
       ufo: 1.6.4
       vue: 3.6.0-beta.17(typescript@6.0.3)
     optionalDependencies:
@@ -14010,6 +14013,8 @@ snapshots:
   statuses@2.0.2: {}
 
   std-env@4.1.0: {}
+
+  std-env@4.2.0: {}
 
   streamx@2.27.0:
     dependencies:
