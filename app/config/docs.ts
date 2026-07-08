@@ -71,6 +71,11 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
+      {
+        title: 'Banknote Bento',
+        path: '/docs/components/banknote-bento',
+        badge: 'new',
+      },
       { title: 'Border Glow', path: '/docs/components/border-glow' },
       { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
       { title: 'Bubble Menu', path: '/docs/components/bubble-menu' },

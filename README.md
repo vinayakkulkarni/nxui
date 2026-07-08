@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>218 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>219 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (218)
+## Components (219)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
-> Paper Shaders depend on — so `npx shadcn-vue add` resolves 219 items total,
-> of which these 218 are user-facing components.
+> Paper Shaders depend on — so `npx shadcn-vue add` resolves 220 items total,
+> of which these 219 are user-facing components.
 
 ### Text Animations (33)
 
@@ -144,7 +144,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (66)
+### Components (67)
 
 | Component                                                                            | Description                                                                                                                                                         |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -152,6 +152,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Animated TOC](https://nxui.geoql.in/docs/components/animated-toc)                   | Table of contents with an SVG rail that snakes through nesting levels and a dot that glides along the curve to the active entry.                                    |
 | [Auth Modal](https://nxui.geoql.in/docs/components/auth-modal)                       | An authentication modal with social login buttons and email form.                                                                                                   |
 | [Aurora Accordion](https://nxui.geoql.in/docs/components/aurora-accordion)           | Accordion whose opened row detaches into its own card while an aurora gradient blooms behind the answer, then settles into a calm glow.                             |
+| [Banknote Bento](https://nxui.geoql.in/docs/components/banknote-bento)               | Engraving-style bento cards with duotone tints, serif captions, and an ironbow thermal card whose procedural heat field rises and falls over the artwork.           |
 | [Border Glow](https://nxui.geoql.in/docs/components/border-glow)                     | A CSS-driven directional glow card that tracks cursor position and proximity to edges with configurable colors and gradients.                                       |
 | [Bounce Cards](https://nxui.geoql.in/docs/components/bounce-cards)                   | Fan of image cards with staggered entrance and hover push animation.                                                                                                |
 | [Bubble Menu](https://nxui.geoql.in/docs/components/bubble-menu)                     | Animated full-screen pill navigation with staggered scale-in and rotation.                                                                                          |

@@ -667,6 +667,12 @@ const COMPONENTS: Record<
       'Auto-playing vertical stepper with growing connector bars and a crossfading preview card.',
     deps: ['motion-v'],
   },
+  'banknote-bento': {
+    title: 'Banknote Bento',
+    description:
+      'Engraving-style bento cards with duotone tints, serif captions, and an ironbow thermal card whose procedural heat field rises and falls over the artwork.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
   'typer-text': {
     title: 'Typer Text',
     description:
