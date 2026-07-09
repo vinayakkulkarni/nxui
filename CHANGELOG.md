@@ -1,5 +1,45 @@
 # Changelog
 
+## [0.0.14](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.13...nxui-v0.0.14) (2026-07-09)
+
+
+### Features
+
+* **components:** add aurora-accordion and animated-toc; restore ⌘K on component pages ([4bd876d](https://github.com/vinayakkulkarni/nxui/commit/4bd876d9e8ae8cbfefb7d1c9ec6545460a8dea81))
+* **components:** add banknote-bento ([8975008](https://github.com/vinayakkulkarni/nxui/commit/897500869173528093adaef8f6b64db611952077))
+* **components:** add dynamic-island-header and curved-drawer ([1c47c04](https://github.com/vinayakkulkarni/nxui/commit/1c47c04df5953bda02f9984d9286c5c97ce05c0a))
+* **components:** add nostalgia memory viewer ([7f25c00](https://github.com/vinayakkulkarni/nxui/commit/7f25c00097367650c565a24f4de360fbcd85e64d))
+* **components:** add podcast-player and typer-text ([cc820c7](https://github.com/vinayakkulkarni/nxui/commit/cc820c755a6b607ee0cb6deef68c572c443e2246))
+* **components:** rework banknote-bento to faithful port, add ripple-transition ([0149efb](https://github.com/vinayakkulkarni/nxui/commit/0149efb1c98423d10527286423f4654433c4f5ef))
+* **docs:** mark all six recent components with 'new' badge ([326f70f](https://github.com/vinayakkulkarni/nxui/commit/326f70feedbb1af9632442b4fa2033438aaee295))
+
+
+### Bug Fixes
+
+* **aurora-accordion:** remove duplicate AuroraAccordionSegment declaration ([dda1f3f](https://github.com/vinayakkulkarni/nxui/commit/dda1f3ff84853f278e8f85dd77ebec326a13b03b))
+* **deps:** Bump @iconify-json/lucide from 1.2.115 to 1.2.116 ([#94](https://github.com/vinayakkulkarni/nxui/issues/94)) ([7d570c6](https://github.com/vinayakkulkarni/nxui/commit/7d570c62774655f6e70ba974fb3dd2f3dc65e73b))
+* **deps:** Bump @iconify-json/simple-icons from 1.2.88 to 1.2.89 ([#93](https://github.com/vinayakkulkarni/nxui/issues/93)) ([766c2fa](https://github.com/vinayakkulkarni/nxui/commit/766c2fa64745a5d3aed4e3149acb941971eb433b))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.27 to 9.0.0-beta.31 ([#90](https://github.com/vinayakkulkarni/nxui/issues/90)) ([89aebca](https://github.com/vinayakkulkarni/nxui/commit/89aebca729c3da620894fad934c590d1086b1062))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.31 to 9.0.0-beta.33 ([#96](https://github.com/vinayakkulkarni/nxui/issues/96)) ([9c6f394](https://github.com/vinayakkulkarni/nxui/commit/9c6f394e99aa5f92d60228191443da050a6ffeb9))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.33 to 9.0.0-beta.36 ([#100](https://github.com/vinayakkulkarni/nxui/issues/100)) ([a12b54e](https://github.com/vinayakkulkarni/nxui/commit/a12b54e5d13a3109b4ce96dc52a468a37e008a98))
+* **deps:** Bump shiki from 4.3.0 to 4.3.1 ([#95](https://github.com/vinayakkulkarni/nxui/issues/95)) ([b9be629](https://github.com/vinayakkulkarni/nxui/commit/b9be6290a3b2a6e7e95cb127cf95e7b7875ed503))
+
+
+### Miscellaneous
+
+* **deps-dev:** Bump @commitlint/cli from 21.2.0 to 21.2.1 ([#103](https://github.com/vinayakkulkarni/nxui/issues/103)) ([11c9c36](https://github.com/vinayakkulkarni/nxui/commit/11c9c368e701dacea1acd22a5b809e7854a7aafb))
+* **deps-dev:** Bump eslint-plugin-better-tailwindcss ([#91](https://github.com/vinayakkulkarni/nxui/issues/91)) ([eb99994](https://github.com/vinayakkulkarni/nxui/commit/eb99994ccf272f42e514a081afd3bbba8b27382d))
+* **deps-dev:** Bump eslint-plugin-oxlint from 1.72.0 to 1.73.0 ([#98](https://github.com/vinayakkulkarni/nxui/issues/98)) ([c6f3dd9](https://github.com/vinayakkulkarni/nxui/commit/c6f3dd992d5cd0116677bfe533f39e90f45e73bc))
+* **deps-dev:** Bump oxfmt from 0.57.0 to 0.58.0 ([#99](https://github.com/vinayakkulkarni/nxui/issues/99)) ([5f829a0](https://github.com/vinayakkulkarni/nxui/commit/5f829a0171d55729fd2c799919d79bc533cd3642))
+* **deps-dev:** Bump oxlint from 1.72.0 to 1.73.0 ([#97](https://github.com/vinayakkulkarni/nxui/issues/97)) ([5ef5bc8](https://github.com/vinayakkulkarni/nxui/commit/5ef5bc81d6c73e49a570b10888b189cd9887dde4))
+* **deps-dev:** Bump tsx from 4.22.5 to 4.23.0 ([#92](https://github.com/vinayakkulkarni/nxui/issues/92)) ([cfedbf0](https://github.com/vinayakkulkarni/nxui/commit/cfedbf0043d50963ce174a1f15128629264080d4))
+* **deps-dev:** Bump wrangler from 4.107.0 to 4.108.0 ([#101](https://github.com/vinayakkulkarni/nxui/issues/101)) ([d497755](https://github.com/vinayakkulkarni/nxui/commit/d4977552b39ea6894dc5048412840f414aae147b))
+
+
+### Code Refactoring
+
+* address review findings for command palette + aurora accordion ([195b7ec](https://github.com/vinayakkulkarni/nxui/commit/195b7ec54e3d19c083be4a54ce7b437c6ec5adff))
+
 ## [0.0.13](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.12...nxui-v0.0.13) (2026-07-04)
 
 
