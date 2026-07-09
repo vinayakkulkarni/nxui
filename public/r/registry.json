@@ -460,6 +460,12 @@
       "description": "Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette."
     },
     {
+      "name": "ripple-transition",
+      "type": "registry:ui",
+      "title": "Ripple Transition",
+      "description": "WebGL image transitions with noisy refractive waves, chromatic edges, glow, and click-triggered ripple origins."
+    },
+    {
       "name": "pixel-snow",
       "type": "registry:ui",
       "title": "Pixel Snow",

@@ -152,6 +152,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Profile Card', path: '/docs/components/profile-card' },
       { title: 'Reflective Card', path: '/docs/components/reflective-card' },
       {
+        title: 'Ripple Transition',
+        path: '/docs/components/ripple-transition',
+        badge: 'new',
+      },
+      {
         title: 'Scroll Choreography',
         path: '/docs/components/scroll-choreography',
       },

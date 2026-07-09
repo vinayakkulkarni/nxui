@@ -495,6 +495,12 @@ const COMPONENTS: Record<
       'Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette.',
     deps: ['ogl', '@vueuse/core'],
   },
+  'ripple-transition': {
+    title: 'Ripple Transition',
+    description:
+      'WebGL image transitions with noisy refractive waves, chromatic edges, glow, and click-triggered ripple origins.',
+    deps: ['motion-v'],
+  },
   'pixel-snow': {
     title: 'Pixel Snow',
     description:

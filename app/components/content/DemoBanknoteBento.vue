@@ -1,34 +1,41 @@
 <script setup lang="ts">
   import BanknoteBento from '@registry/new-york/banknote-bento/BanknoteBento.vue';
 
+  // Public-domain engraving scans from Wikimedia Commons (CORS-enabled).
   const items = [
     {
-      src: 'https://images.unsplash.com/photo-1544413660-299165566b1d?q=80&w=800&auto=format',
+      // Martha Washington BEP-style stipple engraving — cropped to the eyes.
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Martha_Dandridge_Washington_%28Engraved_Portrait%29.jpg/960px-Martha_Dandridge_Washington_%28Engraved_Portrait%29.jpg',
       caption: 'the future of banking, with no fees.',
       captionPosition: 'top-left' as const,
-      tint: '#7c3aed',
+      ink: '#5b21b6',
       span: 'wide' as const,
       storeBadge: true,
+      focus: '50% 34%',
+      zoom: 2.4,
     },
     {
-      src: 'https://images.unsplash.com/photo-1548013146-72479768bada?q=80&w=600&auto=format',
+      // Doré, "The Deluge" — tall thermal card.
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Gustave_Dor%C3%A9_-_The_Holy_Bible_-_Plate_I%2C_The_Deluge.jpg/960px-Gustave_Dor%C3%A9_-_The_Holy_Bible_-_Plate_I%2C_The_Deluge.jpg',
       caption: 'liquidity in motion.',
-      captionPosition: 'top-left' as const,
-      tint: '#166534',
+      ink: '#14532d',
       span: 'tall' as const,
       thermal: true,
     },
     {
-      src: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=600&auto=format',
+      // Picturesque America waterfall wood engraving.
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Picturesque_America%3B_or%2C_The_land_we_live_in._A_delineation_by_pen_and_pencil_of_the_mountains%2C_rivers%2C_lakes%2C_forests%2C_water-falls%2C_shores%2C_ca%C3%B1ons%2C_valleys%2C_cities%2C_and_other_picturesque_features_of_%2814783892763%29.jpg/960px-thumbnail.jpg',
       caption: 'your safe haven.',
       captionPosition: 'bottom-left' as const,
-      tint: '#1e3a8a',
+      ink: '#1e3a8a',
     },
     {
-      src: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600&auto=format',
+      // Bad Homburg Kurhaus 1865 steel engraving.
+      src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Bad_Homburg_Kurhaus_1865_kleine_Aufl%C3%B6sung.jpg/960px-Bad_Homburg_Kurhaus_1865_kleine_Aufl%C3%B6sung.jpg',
       caption: 'built on rock-solid security.',
       captionPosition: 'top-right' as const,
-      tint: '#7f1d1d',
+      ink: '#7f1d1d',
+      captionColor: '#450a0a',
     },
   ];
 </script>
@@ -38,45 +45,47 @@
     :code="`<script setup lang=&quot;ts&quot;>
   import BanknoteBento from '~/components/ui/banknote-bento/BanknoteBento.vue';
 
+  // Engravings must be CORS-readable for the thermal card (canvas pixels).
   const items = [
     {
       src: '/engravings/portrait.jpg',
       caption: 'the future of banking, with no fees.',
-      tint: '#7c3aed',
+      ink: '#5b21b6', // violet intaglio ink
       span: 'wide',
       storeBadge: true,
+      focus: '50% 30%',
     },
     {
-      src: '/engravings/allegory.jpg',
+      src: '/engravings/deluge.jpg',
       caption: 'liquidity in motion.',
-      tint: '#166534',
+      ink: '#14532d',
       span: 'tall',
-      thermal: true, // ironbow heat field rises and falls
+      thermal: true, // thermal-camera cycle + typed caption
     },
     {
-      src: '/engravings/fjord.jpg',
+      src: '/engravings/waterfall.jpg',
       caption: 'your safe haven.',
       captionPosition: 'bottom-left',
-      tint: '#1e3a8a',
+      ink: '#1e3a8a',
     },
     {
-      src: '/engravings/palace.jpg',
+      src: '/engravings/kurhaus.jpg',
       caption: 'built on rock-solid security.',
       captionPosition: 'top-right',
-      tint: '#7f1d1d',
+      ink: '#7f1d1d',
     },
   ];
 </script>
 
 <template>
-  <BanknoteBento :items=&quot;items&quot; :thermal-cycle=&quot;8&quot; />
+  <BanknoteBento :items=&quot;items&quot; paper=&quot;#eae6da&quot; :thermal-cycle=&quot;9&quot; />
 </template>`"
   >
     <div
-      class="flex w-full items-center justify-center rounded-lg bg-stone-100 p-4 sm:p-8 dark:bg-stone-950"
+      class="flex w-full items-center justify-center rounded-lg bg-[#f2efe6] p-4 sm:p-8 dark:bg-stone-950"
     >
       <div class="w-full max-w-3xl">
-        <BanknoteBento :items="items" :thermal-cycle="8" />
+        <BanknoteBento :items="items" paper="#eae6da" :thermal-cycle="9" />
       </div>
     </div>
   </ComponentDemo>
