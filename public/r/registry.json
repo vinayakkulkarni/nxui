@@ -628,6 +628,12 @@
       "description": "SVG displacement map card that warps on cursor movement with lerp physics."
     },
     {
+      "name": "dithered-logo",
+      "type": "registry:ui",
+      "title": "Dithered Logo",
+      "description": "Renders any logo as a Floyd-Steinberg dithered particle field with cursor repulsion and click ripples."
+    },
+    {
       "name": "dock",
       "type": "registry:ui",
       "title": "Dock",

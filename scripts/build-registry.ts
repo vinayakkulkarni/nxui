@@ -661,6 +661,12 @@ const COMPONENTS: Record<
       'SVG displacement map card that warps on cursor movement with lerp physics.',
     deps: ['@vueuse/core'],
   },
+  'dithered-logo': {
+    title: 'Dithered Logo',
+    description:
+      'Renders any logo as a Floyd-Steinberg dithered particle field with cursor repulsion and click ripples.',
+    deps: ['@vueuse/core'],
+  },
   dock: {
     title: 'Dock',
     description:

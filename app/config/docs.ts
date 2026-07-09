@@ -96,6 +96,11 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       { title: 'Decay Card', path: '/docs/components/decay-card' },
+      {
+        title: 'Dithered Logo',
+        path: '/docs/components/dithered-logo',
+        badge: 'new',
+      },
       { title: 'Dock', path: '/docs/components/dock' },
       { title: 'Dome Gallery', path: '/docs/components/dome-gallery' },
       {

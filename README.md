@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>220 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>221 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (220)
+## Components (221)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
 > Paper Shaders depend on — so `npx shadcn-vue add` resolves 220 items total,
-> of which these 220 are user-facing components.
+> of which these 221 are user-facing components.
 
 ### Text Animations (33)
 
@@ -144,7 +144,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (68)
+### Components (69)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -166,6 +166,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Counter](https://nxui.geoql.in/docs/components/counter)                             | Animated number counter with spring-physics digit rolling and gradient fade overlays.                                                                                  |
 | [Curved Drawer](https://nxui.geoql.in/docs/components/curved-drawer)                 | Slide-in drawer whose inner edge bulges with velocity via SVG path morphing, settling straight at rest.                                                                |
 | [Decay Card](https://nxui.geoql.in/docs/components/decay-card)                       | SVG displacement map card that warps on cursor movement with lerp physics.                                                                                             |
+| [Dithered Logo](https://nxui.geoql.in/docs/components/dithered-logo)                 | Renders any logo as a Floyd-Steinberg dithered particle field with cursor repulsion and click ripples.                                                                 |
 | [Dock](https://nxui.geoql.in/docs/components/dock)                                   | A macOS-style dock with cursor-proximity magnification driven by configurable spring physics.                                                                          |
 | [Dome Gallery](https://nxui.geoql.in/docs/components/dome-gallery)                   | 3D dome-shaped image gallery with CSS transforms, drag interaction, and click-to-enlarge.                                                                              |
 | [Drag Reorder List](https://nxui.geoql.in/docs/components/drag-reorder-list)         | Drag-to-reorder list with lift, velocity tilt, spring-shifting siblings, and an empty-space cutout marking the drop slot.                                              |
