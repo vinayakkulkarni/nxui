@@ -69,7 +69,7 @@
     "@nuxt/eslint-config": "^1.16.0",
     "@nuxtjs/tailwindcss": "7.0.0-beta.1",
     "@types/opentype.js": "^1.3.10",
-    "@types/three": "^0.185.0",
+    "@types/three": "^0.185.1",
     "better-sqlite3": "^12.11.1",
     "eslint": "^10.6.0",
     "eslint-plugin-better-tailwindcss": "^4.6.1",
