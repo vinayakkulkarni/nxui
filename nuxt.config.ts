@@ -311,6 +311,11 @@ export default defineNuxtConfig({
     // nonce CSP covers every page; SSG hash CSP would conflict with the
     // per-request nonces and blow Cloudflare's 100-rule _headers cap.
     ssg: false,
+    // SRI breaks hydration behind Cloudflare's immutable edge cache: Vite
+    // injects __vite__mapDeps after content-hash naming, so a chunk filename
+    // can carry different bytes across deploys and the stale cached variant
+    // fails the integrity check (resource blocked, app init fails).
+    sri: false,
   },
 
   runtimeConfig: {
