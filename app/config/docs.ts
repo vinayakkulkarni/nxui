@@ -3,7 +3,10 @@ import type { NavGroup } from '~/types/docs';
 export const docsNav: NavGroup[] = [
   {
     title: 'Getting Started',
-    items: [{ title: 'Introduction', path: '/docs' }],
+    items: [
+      { title: 'Introduction', path: '/docs' },
+      { title: 'MCP', path: '/docs/mcp' },
+    ],
   },
   {
     title: 'Text Animations',

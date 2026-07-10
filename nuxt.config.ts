@@ -87,6 +87,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     'nuxt-schema-org',
     'nuxt-llms',
+    'nuxt-security',
     [
       'shadcn-nuxt',
       {
@@ -210,6 +211,13 @@ export default defineNuxtConfig({
   // Google AI Overviews / Gemini and Apple Intelligence.
   robots: {
     groups: [
+      {
+        userAgent: ['*'],
+        disallow: [''],
+        // Content Signals (contentsignals.org): declare AI usage preferences.
+        // nxui is open source and WANTS to be cited/used by AI systems.
+        contentSignal: ['search=yes', 'ai-input=yes', 'ai-train=yes'],
+      },
       { userAgent: ['GPTBot', 'ChatGPT-User', 'OAI-SearchBot'], allow: ['/'] },
       {
         userAgent: [
@@ -241,6 +249,70 @@ export default defineNuxtConfig({
     identity: 'Organization',
   },
 
+  // securityheaders.com A+: nonce-based CSP + the core six headers, applied
+  // at runtime by the worker (cloudflare.pages.routes below sends HTML
+  // through the worker, dodging the _headers file's 100-rule cap).
+  security: {
+    headers: {
+      contentSecurityPolicy: {
+        'base-uri': ["'none'"],
+        'font-src': ["'self'", 'https:', 'data:'],
+        'form-action': ["'self'"],
+        'frame-ancestors': ["'none'"],
+        // YouTube embed: music-player demo iframe
+        'frame-src': ["'self'", 'https://www.youtube.com'],
+        // Demo imagery: unsplash, picsum, pravatar, github avatars, wikimedia
+        'img-src': ["'self'", 'data:', 'blob:', 'https:'],
+        // Audio demos (soundhelix) + podcast player blobs
+        'media-src': ["'self'", 'data:', 'blob:', 'https:'],
+        'object-src': ["'none'"],
+        'script-src-attr': ["'none'"],
+        'style-src': ["'self'", 'https:', "'unsafe-inline'"],
+        'script-src': [
+          "'self'",
+          'https:',
+          "'unsafe-inline'",
+          "'strict-dynamic'",
+          "'nonce-{{nonce}}'",
+          // shiki v4 highlights client-side via the oniguruma WASM engine
+          "'wasm-unsafe-eval'",
+        ],
+        'worker-src': ["'self'", 'blob:'],
+        'upgrade-insecure-requests': true,
+      },
+      // credentialless/require-corp would block the YouTube iframe and
+      // CORP-less demo images; COEP is not graded by securityheaders.com.
+      crossOriginEmbedderPolicy: 'unsafe-none',
+      permissionsPolicy: {
+        // reflective-card demo uses the webcam; model-viewer can fullscreen
+        camera: ['self'],
+        'display-capture': [],
+        fullscreen: ['self'],
+        geolocation: [],
+        microphone: [],
+      },
+      strictTransportSecurity: {
+        maxAge: 31536000,
+        includeSubdomains: true,
+        preload: true,
+      },
+    },
+    // In-memory rate limiting crashes on Cloudflare Pages (nuxt-security#137)
+    // and is meaningless on stateless workers.
+    rateLimiter: false,
+    // Registry JSON + og assets are fetched cross-origin by external tools
+    // (shadcn-vue CLI, social crawlers); locking CORS to the site URL breaks
+    // them.
+    corsHandler: false,
+    // MCP tool-call bodies legitimately contain component source snippets
+    // ("<script setup>") that the XSS validator would reject with a 400.
+    xssValidator: false,
+    // All HTML is worker-routed (cloudflare.pages.routes below), so runtime
+    // nonce CSP covers every page; SSG hash CSP would conflict with the
+    // per-request nonces and blow Cloudflare's 100-rule _headers cap.
+    ssg: false,
+  },
+
   runtimeConfig: {
     public: {
       componentCount,
@@ -254,6 +326,21 @@ export default defineNuxtConfig({
   // card; a real HTTP 301 is followed to the tagged /docs page.
   routeRules: {
     '/': { redirect: { to: '/docs', statusCode: 301 } },
+    // Static-layer security headers: Nitro bakes routeRules headers into
+    // dist/_headers, which Cloudflare Pages applies to static-served
+    // responses (prerendered docs pages, assets). Worker-served HTML gets
+    // its CSP replaced at runtime by nuxt-security's per-request nonce
+    // version; static files keep this 'unsafe-inline' CSP since their
+    // build-time inline scripts (and Cloudflare edge-injected challenge
+    // scripts) cannot carry a per-request nonce.
+    '/**': {
+      headers: {
+        'Content-Security-Policy':
+          "base-uri 'none'; font-src 'self' https: data:; form-action 'self'; frame-ancestors 'none'; frame-src 'self' https://www.youtube.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; object-src 'none'; script-src 'self' https: 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' https: 'unsafe-inline'; worker-src 'self' blob:; upgrade-insecure-requests",
+        'Permissions-Policy':
+          'camera=(self), display-capture=(), fullscreen=(self), geolocation=(), microphone=()',
+      },
+    },
   },
 
   nitro: {
@@ -261,12 +348,32 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       failOnError: false,
+      // Emit docs/foo.html instead of docs/foo/index.html so the static
+      // layer serves the exact canonical URL with 200 instead of a 308
+      // trailing-slash redirect.
+      autoSubfolderIndex: false,
       // '/' intentionally excluded: prerendering it emits a 200 stub that
       // shadows the routeRules 301 above. Let the edge serve the redirect.
       routes: ['/robots.txt', ...docRoutes],
     },
     cloudflare: {
       nodeCompat: true,
+      pages: {
+        // Explicit include-list instead of the auto-generated exclude list,
+        // which overflows Cloudflare's 100-rule cap with 362 prerendered
+        // routes and randomly worker-routed most deep pages. Only the
+        // homepage (scanner target: Link header, markdown negotiation,
+        // nonce CSP) and the agent surfaces need the worker; every other
+        // path is served from the prerendered static layer. Keeping
+        // [...slug] pages static also sidesteps a workerd isolate-poisoning
+        // bug where one catch-all SSR corrupts the unctx app context and
+        // every later /docs SSR 500s (useColorMode state lost).
+        defaultRoutes: false,
+        routes: {
+          include: ['/docs', '/docs/', '/mcp', '/.well-known/*', '/raw/*'],
+          exclude: [],
+        },
+      },
     },
     experimental: {
       wasm: true,

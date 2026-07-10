@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "install-component",
+      "type": "skill-md",
+      "description": "Install any of the 220+ nxui animated Vue components into a project via the shadcn-vue CLI.",
+      "url": "https://nxui.geoql.in/.well-known/agent-skills/install-component/SKILL.md",
+      "digest": "sha256:ac4e9c79a0f594a5d7ed9a7dc15bf150453d8838ec9436f904f117015ebd709b"
+    },
+    {
+      "name": "search-components",
+      "type": "skill-md",
+      "description": "Search the nxui registry by name, title, or description using the public registry.json API or the remote MCP server.",
+      "url": "https://nxui.geoql.in/.well-known/agent-skills/search-components/SKILL.md",
+      "digest": "sha256:7cfed8c70125d191866e77995e087ff9c91bb286126a42ac466278c8eb9c4528"
+    }
+  ]
+}
