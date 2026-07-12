@@ -349,7 +349,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'cloudflare-pages',
+    preset: 'cloudflare_module',
     prerender: {
       crawlLinks: true,
       failOnError: false,
@@ -363,20 +363,34 @@ export default defineNuxtConfig({
     },
     cloudflare: {
       nodeCompat: true,
-      pages: {
-        // Explicit include-list instead of the auto-generated exclude list,
-        // which overflows Cloudflare's 100-rule cap with 362 prerendered
-        // routes and randomly worker-routed most deep pages. Only the
-        // homepage (scanner target: Link header, markdown negotiation,
-        // nonce CSP) and the agent surfaces need the worker; every other
-        // path is served from the prerendered static layer. Keeping
-        // [...slug] pages static also sidesteps a workerd isolate-poisoning
-        // bug where one catch-all SSR corrupts the unctx app context and
-        // every later /docs SSR 500s (useColorMode state lost).
-        defaultRoutes: false,
-        routes: {
-          include: ['/docs', '/docs/', '/mcp', '/.well-known/*', '/raw/*'],
-          exclude: [],
+      // deployConfig writes the merged binding spec to
+      // .output/server/wrangler.json at build time — the SINGLE source of
+      // truth for the Worker config; there is no hand-maintained
+      // wrangler.json. Deploy: wrangler deploy --config .output/server/wrangler.json
+      deployConfig: true,
+      wrangler: {
+        name: 'nxui',
+        compatibility_date: '2026-02-24',
+        compatibility_flags: ['nodejs_compat'],
+        workers_dev: false,
+        routes: [{ pattern: 'nxui.geoql.in', custom_domain: true }],
+        d1_databases: [
+          {
+            binding: 'DB',
+            database_name: 'nxui-db',
+            database_id: 'aa53f821-5591-4516-83c4-837095d0adcd',
+          },
+        ],
+        assets: {
+          // Worker Assets serve matching files BEFORE the worker by default
+          // (prerendered docs pages, registry JSON, _nuxt chunks — all get
+          // _headers applied). Worker-first paths: /docs needs the nonce
+          // CSP, Link header, and Accept: text/markdown negotiation from
+          // server middleware; / must serve the routeRules 301 instead of
+          // the prerendered meta-refresh stub (social crawlers don't follow
+          // meta refresh). Other dynamic routes (/mcp, /.well-known
+          // handlers) reach the worker anyway as asset misses.
+          run_worker_first: ['/', '/docs', '/docs/'],
         },
       },
     },
