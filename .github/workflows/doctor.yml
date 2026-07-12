@@ -40,4 +40,6 @@ jobs:
           threshold: ${{ vars.DOCTOR_THRESHOLD || '70' }}
           fail-on: error
           api-key: ${{ secrets.DOCTOR_API_KEY }}
-          project: ${{ github.repository }}
+          # Dashboard slug is geoql/nxui — NOT github.repository
+          # (vinayakkulkarni/nxui); a mismatched slug 404s the score push.
+          project: geoql/nxui
