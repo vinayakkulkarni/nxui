@@ -13,7 +13,8 @@ export default defineEventHandler(async (event) => {
 
   const path = getRequestURL(event).pathname;
   if (SKIP_PREFIXES.some((prefix) => path.startsWith(prefix))) return;
-  if (path === '/mcp' || path.startsWith('/.well-known/')) return;
+  if (path === '/mcp' || path === '/a2a' || path.startsWith('/.well-known/'))
+    return;
 
   appendResponseHeader(event, 'link', LINK_HEADER);
 

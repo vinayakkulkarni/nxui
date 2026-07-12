@@ -25,6 +25,16 @@ export default defineEventHandler((event) => {
         ],
       },
       {
+        anchor: `${ORIGIN}/a2a`,
+        'service-doc': [{ href: `${ORIGIN}/docs`, type: 'text/html' }],
+        describedby: [
+          {
+            href: `${ORIGIN}/.well-known/agent-card.json`,
+            type: 'application/json',
+          },
+        ],
+      },
+      {
         anchor: ORIGIN,
         'service-meta': [
           { href: `${ORIGIN}/llms.txt`, type: 'text/plain' },
