@@ -17,9 +17,16 @@ export default defineEventHandler(async (event) => {
 
   appendResponseHeader(event, 'link', LINK_HEADER);
 
+  if (path !== '/docs' && !path.startsWith('/docs/')) return;
+
+  // Both representations (HTML and markdown) of /docs* must carry
+  // Vary: Accept — the Workers cache stores variants per the response's
+  // Vary header, so an HTML entry cached without it would be served to
+  // Accept: text/markdown agents (and vice versa).
+  setResponseHeader(event, 'vary', 'Accept');
+
   const accept = getHeader(event, 'accept') ?? '';
   if (!accept.includes('text/markdown')) return;
-  if (path !== '/docs' && !path.startsWith('/docs/')) return;
 
   // @nuxt/content already serves each docs page as raw markdown under
   // /raw/**.md; relative event.$fetch stays in-process (an absolute self-URL
@@ -35,6 +42,5 @@ export default defineEventHandler(async (event) => {
   if (!markdown) return;
 
   setResponseHeader(event, 'content-type', 'text/markdown; charset=utf-8');
-  setResponseHeader(event, 'vary', 'Accept');
   return markdown;
 });
