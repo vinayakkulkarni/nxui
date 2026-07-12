@@ -188,6 +188,52 @@ import NodeDiagramNode from './NodeDiagramNode.vue'; // ✅ Explicit
 
 All demo components use `<ComponentDemo>`. Pass a `code` prop for the two-part card (live demo + collapsible source code). Without `code`, renders as simple demo wrapper.
 
+### Rule 13a: Demo Wrapper Sizing — Centered Widgets vs Full-Bleed Visuals
+
+The component docs pages use a **split layout**: docs text on the left, a full-height demo panel (~900px tall) on the right. `ComponentDemo`'s split mode forces its direct child to fill the panel via `*:size-full!`. Every `Demo*.vue` MUST wrap its demo in ONE of these two patterns — anything else floats at the top of the panel with dead space below (looks broken):
+
+**Pattern A — Centered widget** (lists, cards, TOCs, steppers, text demos, players — anything with intrinsic size):
+
+```vue
+<!-- ✅ CORRECT: size-full + flex centering; min-h-* only as a fallback floor -->
+<div class="flex size-full min-h-100 items-center justify-center p-6">
+  <DragReorderList v-model="tracks" />
+</div>
+
+<!-- ❌ WRONG: fixed height — centers within 400px, floats in the 900px panel -->
+<div class="flex h-100 w-full items-center justify-center p-6">
+
+<!-- ❌ WRONG: no items-center / no height — hugs the top-left -->
+<div class="flex w-full justify-center p-6">
+<div class="w-full p-4 sm:p-8">
+```
+
+**Pattern B — Full-bleed visual** (WebGL/canvas backgrounds, image effects, shaders — anything that should fill edge-to-edge):
+
+```vue
+<!-- ✅ CORRECT: relative size-full wrapper + absolutely-filled component -->
+<div class="relative size-full min-h-80">
+  <RippleTransition class="absolute inset-0 size-full" />
+  <!-- captions overlay, never stack below (they'd shrink the visual) -->
+  <p class="pointer-events-none absolute inset-x-0 bottom-4 z-10 text-center ...">
+    click anywhere to ripple from that point
+  </p>
+</div>
+
+<!-- ❌ WRONG: fixed height caps the visual at 400px inside the 900px panel -->
+<div class="w-full p-4 sm:p-8">
+  <RippleTransition class="h-80 sm:h-100" />
+  <p class="mt-3 ...">caption below shrinks and un-centers the visual</p>
+</div>
+```
+
+Key rules:
+
+- **Never use fixed heights** (`h-60`/`h-100`/`h-112`) on the demo wrapper — use `size-full` + `min-h-*` so it adapts to the split panel.
+- **Captions overlay full-bleed visuals** (`absolute bottom-4`), never flow below them.
+- WebGL registry components size themselves from their container (`rect.height`), so the wrapper must provide real height — `size-full` inside split mode does this; a bare `w-full` provides none.
+- **Verify visually before shipping**: `pnpm run dev`, open `/docs/<category>/<slug>`, confirm the demo is centered (Pattern A) or fills the panel (Pattern B) with no dead space below. This bug shipped on 5 of 12 "new"-badged demos because they were only checked in the old card layout, not the split layout.
+
 ### Rule 14: Faithful Ports from componentry.fun
 
 This is an EXACT replica of componentry.fun but for Vue. Port React/Framer Motion → Vue/motion-v. No React.
