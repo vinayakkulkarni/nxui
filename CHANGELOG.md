@@ -1,5 +1,44 @@
 # Changelog
 
+## [0.0.15](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.14...nxui-v0.0.15) (2026-07-12)
+
+
+### Features
+
+* **agent-ready:** remote MCP server, agent discovery surfaces, security headers ([4a65767](https://github.com/vinayakkulkarni/nxui/commit/4a657678f5bc3ff5b916e1677d0c13828efae43f))
+* **agent:** add a2a endpoint and agent card ([2cfa827](https://github.com/vinayakkulkarni/nxui/commit/2cfa827512159b67d35f0b2a567075b6a096e259))
+* **components:** add dithered-logo from componentry.fun ([cf26f83](https://github.com/vinayakkulkarni/nxui/commit/cf26f8312a97aea9ed5f1957a15c5dfb0d153ff2))
+* **deploy:** migrate from Cloudflare Pages to Cloudflare Workers ([ca2d5b6](https://github.com/vinayakkulkarni/nxui/commit/ca2d5b6e05ecfb5c814b2bd0f0f0995d91e6f5fe))
+* **docs:** add source code sheet + fix wrangler type errors ([41e0ccd](https://github.com/vinayakkulkarni/nxui/commit/41e0ccd44ed87241d6aada688792e6e5c4f9b011))
+* **docs:** add source code trigger to mobile bottom bar ([bb2cc2b](https://github.com/vinayakkulkarni/nxui/commit/bb2cc2bf657f66f2ff964cf32b3ff75edbae1646))
+* **quality:** nuxt-doctor 100/100 + Doctor CI workflow ([1d46948](https://github.com/vinayakkulkarni/nxui/commit/1d469480e5ed149662c01b03b2d07b711613bc17))
+
+
+### Bug Fixes
+
+* **agent:** set Vary: Accept on every /docs response ([6a02ff8](https://github.com/vinayakkulkarni/nxui/commit/6a02ff8f11bc589dc8f22155026b519e9826cf84))
+* **ci:** push doctor score to geoql/nxui dashboard slug ([fbbc2d3](https://github.com/vinayakkulkarni/nxui/commit/fbbc2d317c09d53875ed19134212df0d765fbc00))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.36 to 9.0.0-beta.37 ([#107](https://github.com/vinayakkulkarni/nxui/issues/107)) ([fd8ef56](https://github.com/vinayakkulkarni/nxui/commit/fd8ef5697b07f29c5146e5769cd6bbdf24978799))
+* **docs:** center or full-bleed new-badge demos in split panel ([bd532b4](https://github.com/vinayakkulkarni/nxui/commit/bd532b440c5f5bd235e28777b391f974588dbd5f))
+* **docs:** render MCP guide as a content page + Workers runtime config ([343bb41](https://github.com/vinayakkulkarni/nxui/commit/343bb41668b92159f6a931accc0c18197f3b47c8))
+* **security:** disable SRI — stale immutable-cached chunks fail integrity ([0c0f72e](https://github.com/vinayakkulkarni/nxui/commit/0c0f72e2b4d0137ad290cefca7d7e6c70434e16b))
+
+
+### Reverts
+
+* **ci:** doctor project slug back to github.repository ([ad96bd6](https://github.com/vinayakkulkarni/nxui/commit/ad96bd6d05fc5207b5e1231336cca49efaf4d522))
+
+
+### Documentation
+
+* **claude:** add Rule 13a — demo wrapper sizing for split panel ([15e481b](https://github.com/vinayakkulkarni/nxui/commit/15e481bcb0f5d5ac1a3928932d1f8a1fa7a6da8b))
+
+
+### Miscellaneous
+
+* **deps-dev:** Bump @types/three from 0.185.0 to 0.185.1 ([#106](https://github.com/vinayakkulkarni/nxui/issues/106)) ([1a13aa4](https://github.com/vinayakkulkarni/nxui/commit/1a13aa400a9c56c3820b2fb3b18d99a49661a46a))
+* **deps-dev:** Bump wrangler from 4.108.0 to 4.110.0 ([#105](https://github.com/vinayakkulkarni/nxui/issues/105)) ([d4648a9](https://github.com/vinayakkulkarni/nxui/commit/d4648a99a61b706a624a09574e5ab454c024c0a2))
+
 ## [0.0.14](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.13...nxui-v0.0.14) (2026-07-09)
 
 
