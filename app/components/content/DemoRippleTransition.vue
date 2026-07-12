@@ -24,14 +24,16 @@
   <!-- Click anywhere to ripple from that point -->
 </template>`"
   >
-    <div class="w-full p-4 sm:p-8">
+    <div class="relative size-full min-h-80">
       <RippleTransition
         auto-play
         :auto-play-interval="3600"
         auto-play-origin="random"
-        class="h-80 sm:h-100"
+        class="absolute inset-0 size-full"
       />
-      <p class="text-muted-foreground mt-3 text-center font-mono text-xs">
+      <p
+        class="text-muted-foreground pointer-events-none absolute inset-x-0 bottom-4 z-10 text-center font-mono text-xs"
+      >
         click anywhere to ripple from that point
       </p>
     </div>

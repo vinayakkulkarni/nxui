@@ -19,7 +19,7 @@
   />
 </template>`"
   >
-    <div class="flex h-60 w-full items-center justify-center p-8">
+    <div class="flex size-full min-h-60 items-center justify-center p-8">
       <TyperText
         text="design engineered by me :)"
         accent="#f97316"

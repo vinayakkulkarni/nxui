@@ -61,7 +61,7 @@
   />
 </template>`"
   >
-    <div class="flex w-full justify-center p-6">
+    <div class="flex size-full min-h-100 items-center justify-center p-6">
       <AuroraAccordion class="max-w-xl" :items="items" />
     </div>
   </ComponentDemo>
