@@ -5,6 +5,19 @@ const componentCount = readdirSync('registry/new-york', {
   withFileTypes: true,
 }).filter((d) => d.isDirectory()).length;
 
+// nitropack 2.13.4's bundled wrangler types predate Workers Cache GA and
+// observability traces GA; wrangler 4.108 supports both and nitro
+// defu-merges this block through untouched. Spreading a non-fresh object
+// skips TS excess-property checks without suppressions — inline again once
+// nitropack updates its bundled wrangler environment types.
+const workerRuntimeFeatures = {
+  cache: { enabled: true },
+  observability: {
+    logs: { enabled: true, invocation_logs: true },
+    traces: { enabled: true },
+  },
+};
+
 // Build the prerender route list from docsNav, only including paths whose
 // backing content/docs/{cat}/{slug}.md actually exists. This avoids
 // aborting prerender on missing pages (createError 404 with fatal: true).
@@ -250,8 +263,9 @@ export default defineNuxtConfig({
   },
 
   // securityheaders.com A+: nonce-based CSP + the core six headers, applied
-  // at runtime by the worker (cloudflare.pages.routes below sends HTML
-  // through the worker, dodging the _headers file's 100-rule cap).
+  // at runtime by the worker (assets.run_worker_first below sends HTML
+  // through the worker, dodging the _headers file's 100-rule cap — the cap
+  // applies to Workers static assets exactly as it did to Pages).
   security: {
     headers: {
       contentSecurityPolicy: {
@@ -297,8 +311,9 @@ export default defineNuxtConfig({
         preload: true,
       },
     },
-    // In-memory rate limiting crashes on Cloudflare Pages (nuxt-security#137)
-    // and is meaningless on stateless workers.
+    // In-memory rate limiting is meaningless on stateless Workers isolates
+    // (each isolate keeps its own counter) and crashed on Pages
+    // (nuxt-security#137).
     rateLimiter: false,
     // Registry JSON + og assets are fetched cross-origin by external tools
     // (shadcn-vue CLI, social crawlers); locking CORS to the site URL breaks
@@ -307,7 +322,7 @@ export default defineNuxtConfig({
     // MCP tool-call bodies legitimately contain component source snippets
     // ("<script setup>") that the XSS validator would reject with a 400.
     xssValidator: false,
-    // All HTML is worker-routed (cloudflare.pages.routes below), so runtime
+    // All HTML is worker-routed (assets.run_worker_first below), so runtime
     // nonce CSP covers every page; SSG hash CSP would conflict with the
     // per-request nonces and blow Cloudflare's 100-rule _headers cap.
     ssg: false,
@@ -332,12 +347,12 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { redirect: { to: '/docs', statusCode: 301 } },
     // Static-layer security headers: Nitro bakes routeRules headers into
-    // dist/_headers, which Cloudflare Pages applies to static-served
-    // responses (prerendered docs pages, assets). Worker-served HTML gets
-    // its CSP replaced at runtime by nuxt-security's per-request nonce
-    // version; static files keep this 'unsafe-inline' CSP since their
-    // build-time inline scripts (and Cloudflare edge-injected challenge
-    // scripts) cannot carry a per-request nonce.
+    // the _headers file, which Workers static assets apply to asset-served
+    // responses (prerendered docs pages, _nuxt chunks, registry JSON).
+    // Worker-served HTML gets its CSP replaced at runtime by nuxt-security's
+    // per-request nonce version; static files keep this 'unsafe-inline' CSP
+    // since their build-time inline scripts (and Cloudflare edge-injected
+    // challenge scripts) cannot carry a per-request nonce.
     '/**': {
       headers: {
         'Content-Security-Policy':
@@ -373,11 +388,7 @@ export default defineNuxtConfig({
         compatibility_date: '2026-06-16',
         compatibility_flags: ['nodejs_compat'],
         workers_dev: false,
-        cache: { enabled: true },
-        observability: {
-          logs: { enabled: true, invocation_logs: true },
-          traces: { enabled: true },
-        },
+        ...workerRuntimeFeatures,
         routes: [{ pattern: 'nxui.geoql.in', custom_domain: true }],
         d1_databases: [
           {

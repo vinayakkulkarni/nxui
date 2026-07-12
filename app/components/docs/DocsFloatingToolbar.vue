@@ -41,6 +41,9 @@
     <!-- Command palette (⌘K) — restores search on component pages -->
     <DocsCommandMenu compact />
 
+    <!-- Source code sheet (registry files) -->
+    <DocsSourceCode />
+
     <!-- Sidebar trigger (Sheet) -->
     <Sheet v-model:open="sidebarOpen">
       <SheetTrigger as-child>
