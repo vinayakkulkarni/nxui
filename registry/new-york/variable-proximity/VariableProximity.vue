@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useRafFn, useEventListener } from '@vueuse/core';
+  import { useRafFn, useEventListener, defaultWindow } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -22,13 +22,13 @@
   const letterRefs = ref<(HTMLSpanElement | null)[]>([]);
   const mousePos = ref({ x: 0, y: 0 });
 
-  useEventListener(window, 'mousemove', (e: MouseEvent) => {
+  useEventListener(defaultWindow, 'mousemove', (e: MouseEvent) => {
     if (!props.containerRef) return;
     const rect = props.containerRef.getBoundingClientRect();
     mousePos.value = { x: e.clientX - rect.left, y: e.clientY - rect.top };
   });
 
-  useEventListener(window, 'touchmove', (e: TouchEvent) => {
+  useEventListener(defaultWindow, 'touchmove', (e: TouchEvent) => {
     if (!props.containerRef || !e.touches[0]) return;
     const rect = props.containerRef.getBoundingClientRect();
     mousePos.value = {

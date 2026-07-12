@@ -1,3 +1,4 @@
+import type { H3Event } from 'h3';
 import type {
   JsonRpcRequest,
   JsonRpcResponse,
@@ -21,7 +22,7 @@ function failure(
   return { jsonrpc: '2.0', id, error: { code, message } };
 }
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: H3Event) => {
   setResponseHeader(event, 'access-control-allow-origin', '*');
   setResponseHeader(
     event,
@@ -46,7 +47,15 @@ export default defineEventHandler(async (event) => {
     return { error: 'Method not allowed.' };
   }
 
-  const body = await readBody<JsonRpcRequest | JsonRpcRequest[]>(event);
+  const body = await readValidatedBody(
+    event,
+    (data: unknown): JsonRpcRequest | JsonRpcRequest[] => {
+      if (typeof data !== 'object' || data === null) {
+        throw new TypeError('JSON-RPC payload must be an object or array');
+      }
+      return data as JsonRpcRequest | JsonRpcRequest[];
+    },
+  );
   const messages = Array.isArray(body) ? body : [body];
   const responses: JsonRpcResponse[] = [];
 

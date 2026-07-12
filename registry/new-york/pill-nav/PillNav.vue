@@ -34,12 +34,9 @@
   }>();
 
   const resolvedPillTextColor = ref(props.pillTextColor ?? props.baseColor);
-  watch(
-    () => [props.pillTextColor, props.baseColor],
-    () => {
-      resolvedPillTextColor.value = props.pillTextColor ?? props.baseColor;
-    },
-  );
+  watch([() => props.pillTextColor, () => props.baseColor], () => {
+    resolvedPillTextColor.value = props.pillTextColor ?? props.baseColor;
+  });
 
   const isMobileMenuOpen = ref(false);
   const navItemsRef = ref<HTMLElement | null>(null);

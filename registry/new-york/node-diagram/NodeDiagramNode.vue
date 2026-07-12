@@ -29,10 +29,12 @@
       : { opacity: 0.2 },
   );
 
+  const PROCESSING_TRANSITION = { duration: 1.5, repeat: Infinity };
+  const IDLE_TRANSITION = {};
   const processingTransition = computed(() =>
     props.node.status === 'processing'
-      ? { duration: 1.5, repeat: Infinity }
-      : {},
+      ? PROCESSING_TRANSITION
+      : IDLE_TRANSITION,
   );
 
   const glowStyle = computed(() => ({

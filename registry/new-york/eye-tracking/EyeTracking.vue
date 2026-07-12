@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref, provide, onMounted, onBeforeUnmount } from 'vue';
-  import { useEventListener } from '@vueuse/core';
+  import { useEventListener, defaultWindow } from '@vueuse/core';
   import type { EyeTrackingProps } from './types';
   import EyeTrackingEye from './EyeTrackingEye.vue';
   import { cn } from '~/lib/utils';
@@ -49,16 +49,8 @@
     }, 3000);
   }
 
-  useEventListener(
-    typeof window !== 'undefined' ? window : null,
-    'mousemove',
-    handlePointerMove,
-  );
-  useEventListener(
-    typeof window !== 'undefined' ? window : null,
-    'touchmove',
-    handlePointerMove,
-  );
+  useEventListener(defaultWindow, 'mousemove', handlePointerMove);
+  useEventListener(defaultWindow, 'touchmove', handlePointerMove);
 
   onMounted(() => {
     // Initial idle state

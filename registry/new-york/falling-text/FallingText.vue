@@ -49,16 +49,22 @@
   let wordBodies: WordBody[] = [];
 
   function buildTextHTML() {
-    if (!textRef.value) return;
+    const target = textRef.value;
+    if (!target) return;
+    target.replaceChildren();
     const words = props.text.split(' ');
-    const spans = words.map((word) => {
+    words.forEach((word, i) => {
       const isHighlighted = props.highlightWords.some((hw) =>
         word.startsWith(hw),
       );
-      const cls = isHighlighted ? `word ${props.highlightClass}` : 'word';
-      return `<span class="${cls}">${word}</span>`;
+      const span = document.createElement('span');
+      span.className = isHighlighted ? `word ${props.highlightClass}` : 'word';
+      span.textContent = word;
+      target.append(span);
+      if (i < words.length - 1) {
+        target.append(' ');
+      }
     });
-    textRef.value.innerHTML = spans.join(' ');
   }
 
   function startPhysics() {

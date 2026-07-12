@@ -52,9 +52,10 @@
     );
   }
 
+  const EMPTY_VNODES: VNode[] = [];
   const flatSlots = computed(() => {
     const slot = slots.default?.();
-    return slot ? flattenVNodes(slot) : [];
+    return slot ? flattenVNodes(slot) : EMPTY_VNODES;
   });
 
   const cardCount = computed(() => flatSlots.value.length);

@@ -4,6 +4,7 @@
     useEventListener,
     useResizeObserver,
     useStyleTag,
+    defaultWindow,
   } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
@@ -63,11 +64,11 @@
   );
   useStyleTag(fontCss);
 
-  useEventListener(window, 'mousemove', (e: MouseEvent) => {
+  useEventListener(defaultWindow, 'mousemove', (e: MouseEvent) => {
     cursor.value = { x: e.clientX, y: e.clientY };
   });
 
-  useEventListener(window, 'touchmove', (e: TouchEvent) => {
+  useEventListener(defaultWindow, 'touchmove', (e: TouchEvent) => {
     if (e.touches[0]) {
       cursor.value = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     }

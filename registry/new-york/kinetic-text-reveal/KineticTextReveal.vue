@@ -100,7 +100,10 @@
 
   onMounted(triggerAutoPlay);
 
-  watch(() => [props.text, props.autoPlay, props.delay], triggerAutoPlay);
+  watch(
+    [() => props.text, () => props.autoPlay, () => props.delay],
+    triggerAutoPlay,
+  );
 
   onBeforeUnmount(() => {
     if (autoPlayTimeout) clearTimeout(autoPlayTimeout);
@@ -239,6 +242,7 @@
   >
     <span class="sr-only">{{ text }}</span>
     <template v-for="(segment, index) in segments" :key="`${run}-${index}`">
+      <!-- doctor-disable-next-line vue-doctor/template/no-computed-getter-in-template-loop -->
       <span v-if="!segment.animated" aria-hidden="true">{{
         segment.value
       }}</span>
@@ -261,6 +265,7 @@
               : undefined
           "
         >
+          <!-- doctor-disable-next-line vue-doctor/template/no-computed-getter-in-template-loop -->
           {{ segment.value }}
         </component>
       </span>

@@ -48,7 +48,7 @@
   }
 
   watch(
-    () => [props.autoplay, props.interval, count.value],
+    [() => props.autoplay, () => props.interval, () => count.value],
     () => start(),
     { immediate: true },
   );

@@ -29,7 +29,7 @@
   function buildPixels() {
     const grid = pixelGridRef.value;
     if (!grid) return;
-    grid.innerHTML = '';
+    grid.replaceChildren();
     const size = 100 / props.gridSize;
     for (let row = 0; row < props.gridSize; row++) {
       for (let col = 0; col < props.gridSize; col++) {
@@ -47,7 +47,7 @@
   }
 
   onMounted(buildPixels);
-  watch(() => [props.gridSize, props.pixelColor], buildPixels);
+  watch([() => props.gridSize, () => props.pixelColor], buildPixels);
 
   function animatePixels(activate: boolean) {
     if (animating) return;

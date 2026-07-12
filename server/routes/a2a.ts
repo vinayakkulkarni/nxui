@@ -1,3 +1,4 @@
+import type { H3Event } from 'h3';
 import type { JsonRpcRequest, JsonRpcResponse } from '~/types/mcp';
 import type { A2aMessage, A2aSendMessageParams } from '~/types/a2a';
 
@@ -73,7 +74,7 @@ const UNSUPPORTED = [
   'GetExtendedAgentCard',
 ];
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: H3Event) => {
   setResponseHeader(event, 'access-control-allow-origin', '*');
   setResponseHeader(
     event,
@@ -95,8 +96,22 @@ export default defineEventHandler(async (event) => {
     };
   }
 
-  const body = await readBody<JsonRpcRequest>(event).catch(() => null);
-  if (!body || body.jsonrpc !== '2.0' || !body.method) {
+  const body = await readValidatedBody(
+    event,
+    (data: unknown): JsonRpcRequest => {
+      const candidate = data as JsonRpcRequest | null;
+      if (
+        candidate === null ||
+        typeof candidate !== 'object' ||
+        candidate.jsonrpc !== '2.0' ||
+        typeof candidate.method !== 'string'
+      ) {
+        throw new TypeError('Invalid JSON-RPC request');
+      }
+      return candidate;
+    },
+  ).catch(() => null);
+  if (!body) {
     return failure(null, -32600, 'Request payload validation error');
   }
 

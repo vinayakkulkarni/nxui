@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useTransform, useSpring } from 'motion-v';
-  import type { MotionValue } from 'framer-motion/dom';
+  import type { MotionValue } from 'motion-v';
   import type { CollectionSurferItem, CollectionSurferVariant } from './types';
 
   const props = defineProps<{

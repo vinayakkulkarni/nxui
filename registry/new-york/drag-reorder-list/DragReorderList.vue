@@ -4,7 +4,7 @@
   // Inspired by the "Design Engineering 101" drag interaction by @alyx_so.
   import { ref, computed, watch } from 'vue';
   import { motion } from 'motion-v';
-  import { useEventListener } from '@vueuse/core';
+  import { useEventListener, defaultWindow } from '@vueuse/core';
   import { cn } from '~/lib/utils';
   import type { DragReorderListProps } from './types';
 
@@ -105,9 +105,9 @@
     if (!props.showHandle) onPointerDown(item, e);
   }
 
-  useEventListener(window, 'pointermove', onPointerMove);
-  useEventListener(window, 'pointerup', onPointerUp);
-  useEventListener(window, 'pointercancel', onPointerUp);
+  useEventListener(defaultWindow, 'pointermove', onPointerMove);
+  useEventListener(defaultWindow, 'pointerup', onPointerUp);
+  useEventListener(defaultWindow, 'pointercancel', onPointerUp);
 
   const spring = computed(() => ({
     type: 'spring' as const,

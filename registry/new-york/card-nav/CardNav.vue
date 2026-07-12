@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref, computed, onMounted, nextTick } from 'vue';
-  import { useEventListener } from '@vueuse/core';
+  import { useEventListener, defaultWindow } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   interface CardNavLink {
@@ -127,7 +127,7 @@
     }
   }
 
-  useEventListener(window, 'resize', onResize);
+  useEventListener(defaultWindow, 'resize', onResize);
 
   onMounted(() => {
     cardVisible.value = displayedItems.value.map(() => false);

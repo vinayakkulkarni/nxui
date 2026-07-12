@@ -279,14 +279,16 @@
     },
   };
 
+  const EMPTY_NODES: NodeDiagramNodeData[] = [];
   const resolvedNodes = computed(() => {
     if (props.pattern) return patterns[props.pattern].nodes;
-    return props.nodes ?? [];
+    return props.nodes ?? EMPTY_NODES;
   });
 
+  const EMPTY_CONNECTIONS: NodeDiagramConnectionData[] = [];
   const resolvedConnections_ = computed(() => {
     if (props.pattern) return patterns[props.pattern].connections;
-    return props.connections ?? [];
+    return props.connections ?? EMPTY_CONNECTIONS;
   });
 
   const colorMode = useColorMode();

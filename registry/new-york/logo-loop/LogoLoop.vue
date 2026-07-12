@@ -159,7 +159,12 @@
   });
 
   watch(
-    () => [props.speed, props.direction, props.gap, props.logoHeight],
+    [
+      () => props.speed,
+      () => props.direction,
+      () => props.gap,
+      () => props.logoHeight,
+    ],
     () => updateDimensions(),
   );
 </script>

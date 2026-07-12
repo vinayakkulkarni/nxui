@@ -438,23 +438,23 @@ void main(){
   });
 
   watch(
-    () => [
-      props.wispDensity,
-      props.mouseTiltStrength,
-      props.horizontalBeamOffset,
-      props.verticalBeamOffset,
-      props.flowSpeed,
-      props.verticalSizing,
-      props.horizontalSizing,
-      props.fogIntensity,
-      props.fogScale,
-      props.wispSpeed,
-      props.wispIntensity,
-      props.flowStrength,
-      props.decay,
-      props.falloffStart,
-      props.fogFallSpeed,
-      props.color,
+    [
+      () => props.wispDensity,
+      () => props.mouseTiltStrength,
+      () => props.horizontalBeamOffset,
+      () => props.verticalBeamOffset,
+      () => props.flowSpeed,
+      () => props.verticalSizing,
+      () => props.horizontalSizing,
+      () => props.fogIntensity,
+      () => props.fogScale,
+      () => props.wispSpeed,
+      () => props.wispIntensity,
+      () => props.flowStrength,
+      () => props.decay,
+      () => props.falloffStart,
+      () => props.fogFallSpeed,
+      () => props.color,
     ],
     () => {
       if (!material) return;

@@ -241,20 +241,20 @@
   });
 
   watch(
-    () => [
-      props.imageSrc,
-      props.gridSize,
-      props.scale,
-      props.dotScale,
-      props.invert,
-      props.cornerRadius,
-      props.threshold,
-      props.contrast,
-      props.gamma,
-      props.blur,
-      props.diffusionStrength,
-      props.serpentine,
-      isMobile.value,
+    [
+      () => props.imageSrc,
+      () => props.gridSize,
+      () => props.scale,
+      () => props.dotScale,
+      () => props.invert,
+      () => props.cornerRadius,
+      () => props.threshold,
+      () => props.contrast,
+      () => props.gamma,
+      () => props.blur,
+      () => props.diffusionStrength,
+      () => props.serpentine,
+      () => isMobile.value,
     ],
     () => rebuild(props.imageSrc),
   );

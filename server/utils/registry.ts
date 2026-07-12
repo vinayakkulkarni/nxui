@@ -26,9 +26,10 @@ export async function getRegistryItem(
     return null;
   }
 
-  const assets = (
-    event.context.cloudflare?.env as { ASSETS?: CloudflareAssets } | undefined
-  )?.ASSETS;
+  const cloudflare = event.context.cloudflare as
+    | { env?: { ASSETS?: CloudflareAssets } }
+    | undefined;
+  const assets = cloudflare?.env?.ASSETS;
 
   if (assets) {
     const response = await assets.fetch(

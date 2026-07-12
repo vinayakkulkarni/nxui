@@ -259,12 +259,12 @@
   });
 
   watch(
-    () => [
-      props.ior,
-      props.thickness,
-      props.roughness,
-      props.chromaticAberration,
-      props.color,
+    [
+      () => props.ior,
+      () => props.thickness,
+      () => props.roughness,
+      () => props.chromaticAberration,
+      () => props.color,
     ],
     () => {
       if (!glassMesh) return;

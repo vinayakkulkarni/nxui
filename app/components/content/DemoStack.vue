@@ -32,6 +32,7 @@
             v-for="src in images"
             :key="src"
             :src="src"
+            alt="Stack demo card"
             class="size-full rounded-2xl object-cover"
           />
         </Stack>

@@ -1,0 +1,43 @@
+name: 'Doctor'
+
+on:
+  workflow_call:
+    secrets:
+      DOCTOR_API_KEY:
+        description: 'API key for pushing scores to app.the-doctor.report'
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  doctor:
+    name: 'Nuxt Doctor'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+
+      # Generates .nuxt/tsconfig.json via the `postinstall: nuxt prepare`
+      # hook. Without it, knip can't resolve nuxt.config.ts (it extends
+      # ./.nuxt/tsconfig.json) and errors out.
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Audit with nuxt-doctor
+        uses: geoql/doctor-action@v2
+        with:
+          framework: nuxt
+          threshold: ${{ vars.DOCTOR_THRESHOLD || '70' }}
+          fail-on: error
+          api-key: ${{ secrets.DOCTOR_API_KEY }}
+          project: ${{ github.repository }}

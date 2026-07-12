@@ -56,7 +56,8 @@
         {{ row.label }}
       </span>
 
-      <!-- Flap row -->
+      <!-- Flap row: row.value is a plain object property, not a ref -->
+      <!-- doctor-disable vue-doctor/template/no-computed-getter-in-template-loop -->
       <SplitFlapDisplayRow
         :text="row.value"
         :columns="props.columns"
@@ -68,6 +69,7 @@
         :accent-color="props.accentColor"
         :show-indicator="props.showIndicators"
       />
+      <!-- doctor-enable vue-doctor/template/no-computed-getter-in-template-loop -->
     </div>
   </div>
 </template>

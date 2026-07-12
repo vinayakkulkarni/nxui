@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed } from 'vue';
   import { motion, useTransform } from 'motion-v';
-  import type { MotionValue } from 'motion-dom';
+  import type { MotionValue } from 'motion-v';
 
   interface Props {
     i: number;

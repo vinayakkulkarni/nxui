@@ -6,7 +6,11 @@
     onMounted,
     onBeforeUnmount,
   } from 'vue';
-  import { useEventListener, useMediaQuery } from '@vueuse/core';
+  import {
+    useEventListener,
+    useMediaQuery,
+    defaultDocument,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   interface MagicBentoItem {
@@ -175,8 +179,8 @@
     cardEls.value.forEach((c) => c?.style.setProperty('--glow-intensity', '0'));
   }
 
-  useEventListener(document, 'mousemove', updateSpotlight);
-  useEventListener(document, 'mouseleave', hideSpotlight);
+  useEventListener(defaultDocument, 'mousemove', updateSpotlight);
+  useEventListener(defaultDocument, 'mouseleave', hideSpotlight);
 
   /* ── Particles ─────────────────────────────────────────── */
   const hoveredIdx = ref<number | null>(null);

@@ -1,3 +1,4 @@
+import type { H3Event } from 'h3';
 const ORIGIN = 'https://nxui.geoql.in';
 
 const LINK_HEADER = [
@@ -8,7 +9,7 @@ const LINK_HEADER = [
 
 const SKIP_PREFIXES = ['/api/', '/_nuxt/', '/r/', '/raw/', '/__nuxt_content/'];
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event: H3Event) => {
   if (event.method !== 'GET') return;
 
   const path = getRequestURL(event).pathname;

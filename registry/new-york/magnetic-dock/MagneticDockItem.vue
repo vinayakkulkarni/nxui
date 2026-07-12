@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { motion, AnimatePresence, useTransform, useSpring } from 'motion-v';
-  import type { MotionValue } from 'framer-motion/dom';
+  import type { MotionValue } from 'motion-v';
   import type { MagneticDockItemData } from './types';
   import { cn } from '~/lib/utils';
 

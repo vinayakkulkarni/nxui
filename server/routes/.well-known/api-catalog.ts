@@ -1,6 +1,7 @@
+import type { H3Event } from 'h3';
 const ORIGIN = 'https://nxui.geoql.in';
 
-export default defineEventHandler((event) => {
+export default defineEventHandler((event: H3Event) => {
   setResponseHeader(
     event,
     'content-type',

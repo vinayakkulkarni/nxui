@@ -1,7 +1,8 @@
+import type { H3Event } from 'h3';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-export default defineEventHandler((event) => {
+export default defineEventHandler((event: H3Event) => {
   const name = getRouterParam(event, 'name');
   if (!name) {
     throw createError({ statusCode: 400, message: 'Missing component name' });

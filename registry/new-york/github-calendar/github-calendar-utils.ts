@@ -1,6 +1,6 @@
 import type { GithubCalendarColorSchema } from './types';
 
-export const colorSchemas: Record<
+const colorSchemas: Record<
   GithubCalendarColorSchema,
   {
     level0: string;

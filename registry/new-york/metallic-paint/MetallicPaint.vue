@@ -496,25 +496,25 @@ void main(){
   }
 
   watch(
-    () => [
-      props.seed,
-      props.scale,
-      props.refraction,
-      props.blur,
-      props.liquid,
-      props.brightness,
-      props.contrast,
-      props.angle,
-      props.fresnel,
-      props.lightColor,
-      props.darkColor,
-      props.patternSharpness,
-      props.waveAmplitude,
-      props.noiseScale,
-      props.chromaticSpread,
-      props.distortion,
-      props.contour,
-      props.tintColor,
+    [
+      () => props.seed,
+      () => props.scale,
+      () => props.refraction,
+      () => props.blur,
+      () => props.liquid,
+      () => props.brightness,
+      () => props.contrast,
+      () => props.angle,
+      () => props.fresnel,
+      () => props.lightColor,
+      () => props.darkColor,
+      () => props.patternSharpness,
+      () => props.waveAmplitude,
+      () => props.noiseScale,
+      () => props.chromaticSpread,
+      () => props.distortion,
+      () => props.contour,
+      () => props.tintColor,
     ],
     () => {
       if (gl && textureReady) {
@@ -533,7 +533,8 @@ void main(){
 
   onMounted(() => {
     if (!initGL()) return;
-    const canvas = canvasRef.value!;
+    const canvas = canvasRef.value;
+    if (!canvas) return;
     const side = 1000 * devicePixelRatio;
     canvas.width = side;
     canvas.height = side;

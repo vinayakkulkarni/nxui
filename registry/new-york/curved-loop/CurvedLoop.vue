@@ -116,10 +116,7 @@
     currentDirection.value = velocity.value > 0 ? 'right' : 'left';
   }
 
-  watch(
-    () => [text.value, props.class],
-    () => updateSpacing(),
-  );
+  watch([() => text.value, () => props.class], () => updateSpacing());
 
   watch(spacing, (sp) => {
     if (sp && textPathRef.value) {

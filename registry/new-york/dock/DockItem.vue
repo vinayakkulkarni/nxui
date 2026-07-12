@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { motion, AnimatePresence, useSpring, useTransform } from 'motion-v';
-  import type { MotionValue } from 'framer-motion/dom';
+  import type { MotionValue } from 'motion-v';
   import type { DockItemData, DockSpringConfig } from './types';
   import { cn } from '~/lib/utils';
 

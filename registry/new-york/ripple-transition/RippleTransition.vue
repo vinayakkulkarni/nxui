@@ -301,19 +301,23 @@
   });
 
   watch(
-    () => [props.autoPlay, props.autoPlayInterval, props.autoPlayOrigin],
+    [
+      () => props.autoPlay,
+      () => props.autoPlayInterval,
+      () => props.autoPlayOrigin,
+    ],
     () => startAutoPlay(),
   );
 
   watch(
-    () => [
-      props.waveSpeed,
-      props.sigma,
-      props.waveFreq,
-      props.pushAmt,
-      props.caStrength,
-      props.glow,
-      props.noiseWarp,
+    [
+      () => props.waveSpeed,
+      () => props.sigma,
+      () => props.waveFreq,
+      () => props.pushAmt,
+      () => props.caStrength,
+      () => props.glow,
+      () => props.noiseWarp,
     ],
     () => renderFn?.(),
   );

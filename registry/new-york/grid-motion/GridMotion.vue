@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
-  import { useEventListener } from '@vueuse/core';
+  import { useEventListener, defaultWindow } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -31,7 +31,7 @@
   });
 
   const rowRefs = ref<Array<HTMLDivElement | null>>([]);
-  const mouseX = ref(typeof window !== 'undefined' ? window.innerWidth / 2 : 0);
+  const mouseX = ref(defaultWindow ? defaultWindow.innerWidth / 2 : 0);
   const rowPositions = ref<number[]>([0, 0, 0, 0]);
 
   let animationId = 0;

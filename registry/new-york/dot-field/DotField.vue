@@ -12,6 +12,7 @@
     useResizeObserver,
     useEventListener,
     useIntervalFn,
+    defaultWindow,
   } from '@vueuse/core';
   import type { DotFieldProps, DotFieldDot } from './types';
   import { cn } from '~/lib/utils';
@@ -114,7 +115,8 @@
     const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
-    const { w, h } = size;
+    const w = size.w;
+    const h = size.h;
     if (w === 0 || h === 0) return;
 
     const {
@@ -230,17 +232,14 @@
   }
 
   useResizeObserver(containerRef, doResize);
-  useEventListener(window, 'mousemove', onMouseMove, { passive: true });
-  useEventListener(window, 'resize', resize, { passive: true });
+  useEventListener(defaultWindow, 'mousemove', onMouseMove, { passive: true });
+  useEventListener(defaultWindow, 'resize', resize, { passive: true });
 
   useIntervalFn(updateMouseSpeed, 20);
 
-  watch(
-    () => [props.dotRadius, props.dotSpacing],
-    () => {
-      if (size.w > 0 && size.h > 0) buildDots(size.w, size.h);
-    },
-  );
+  watch([() => props.dotRadius, () => props.dotSpacing], () => {
+    if (size.w > 0 && size.h > 0) buildDots(size.w, size.h);
+  });
 
   onMounted(() => {
     doResize();

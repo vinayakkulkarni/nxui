@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import { defaultWindow } from '@vueuse/core';
   import type { TocHeading } from '~/types/docs';
 
   const route = useRoute();
@@ -77,17 +78,14 @@
 
   onMounted(() => {
     setTimeout(() => extractHeadings(), 500);
-
-    watch(
-      () => route.path,
-      () => setTimeout(() => extractHeadings(), 500),
-    );
-
-    window.addEventListener('scroll', findActiveHeading, { passive: true });
   });
 
-  onUnmounted(() => {
-    window.removeEventListener('scroll', findActiveHeading);
+  // Rendered markdown mounts ~async after navigation; debounce re-extraction
+  // instead of a hand-rolled setTimeout-in-watch (auto-cancels on re-fire).
+  watchDebounced(() => route.path, extractHeadings, { debounce: 500 });
+
+  useEventListener(defaultWindow, 'scroll', findActiveHeading, {
+    passive: true,
   });
 </script>
 

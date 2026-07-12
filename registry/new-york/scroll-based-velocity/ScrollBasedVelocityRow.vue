@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { useScroll, useRafFn } from '@vueuse/core';
+  import { useScroll, useRafFn, defaultWindow } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -18,7 +18,7 @@
 
   const baseX = ref(0);
   const directionFactor = ref(1);
-  const { y: scrollY } = useScroll(window);
+  const { y: scrollY } = useScroll(defaultWindow);
   const prevScrollY = ref(0);
 
   const x = computed(() => {

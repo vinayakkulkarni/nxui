@@ -244,10 +244,12 @@
             </button>
 
             <!-- eslint-disable vue/no-v-html -- highlightedHtml is trusted build-time Shiki output, never user input -->
+            <!-- doctor-disable vue-doctor/security/no-v-html -->
             <div
               class="shiki-wrapper max-h-[60vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:p-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
               v-html="highlightedHtml"
             ></div>
+            <!-- doctor-enable vue-doctor/security/no-v-html -->
             <!-- eslint-enable vue/no-v-html -->
           </div>
         </div>
@@ -381,10 +383,12 @@
             </button>
 
             <!-- eslint-disable vue/no-v-html -- highlightedHtml is trusted build-time Shiki output, never user input -->
+            <!-- doctor-disable vue-doctor/security/no-v-html -->
             <div
               class="shiki-wrapper max-h-[40vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:p-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
               v-html="highlightedHtml"
             ></div>
+            <!-- doctor-enable vue-doctor/security/no-v-html -->
             <!-- eslint-enable vue/no-v-html -->
           </div>
         </div>
