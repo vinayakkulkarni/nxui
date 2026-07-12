@@ -370,9 +370,14 @@ export default defineNuxtConfig({
       deployConfig: true,
       wrangler: {
         name: 'nxui',
-        compatibility_date: '2026-02-24',
+        compatibility_date: '2026-06-16',
         compatibility_flags: ['nodejs_compat'],
         workers_dev: false,
+        cache: { enabled: true },
+        observability: {
+          logs: { enabled: true, invocation_logs: true },
+          traces: { enabled: true },
+        },
         routes: [{ pattern: 'nxui.geoql.in', custom_domain: true }],
         d1_databases: [
           {
@@ -383,14 +388,16 @@ export default defineNuxtConfig({
         ],
         assets: {
           // Worker Assets serve matching files BEFORE the worker by default
-          // (prerendered docs pages, registry JSON, _nuxt chunks — all get
-          // _headers applied). Worker-first paths: /docs needs the nonce
-          // CSP, Link header, and Accept: text/markdown negotiation from
-          // server middleware; / must serve the routeRules 301 instead of
-          // the prerendered meta-refresh stub (social crawlers don't follow
-          // meta refresh). Other dynamic routes (/mcp, /.well-known
-          // handlers) reach the worker anyway as asset misses.
-          run_worker_first: ['/', '/docs', '/docs/'],
+          // (registry JSON, _nuxt chunks, og images — all get _headers
+          // applied). Worker-first paths: every /docs page needs the
+          // per-request nonce CSP (securityheaders.com A+; the static
+          // 'unsafe-inline' fallback grades A), Link header, and
+          // Accept: text/markdown negotiation from server middleware;
+          // / must serve the routeRules 301 instead of the prerendered
+          // meta-refresh stub (social crawlers don't follow meta refresh).
+          // Other dynamic routes (/mcp, /.well-known handlers) reach the
+          // worker anyway as asset misses.
+          run_worker_first: ['/', '/docs', '/docs/*'],
         },
       },
     },
