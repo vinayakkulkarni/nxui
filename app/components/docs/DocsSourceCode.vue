@@ -6,6 +6,11 @@
   import SheetTrigger from '~/components/ui/sheet/SheetTrigger.vue';
   import type { RegistryItem } from '~/types/mcp';
 
+  const props = defineProps<{
+    /** Mobile bottom-bar trigger styling (for DocsMobileSheet). */
+    mobile?: boolean;
+  }>();
+
   const route = useRoute();
   const open = ref(false);
   const item = ref<RegistryItem | null>(null);
@@ -39,7 +44,11 @@
   <Sheet v-model:open="open">
     <SheetTrigger as-child>
       <button
-        class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+        :class="
+          props.mobile
+            ? 'my-1.5 inline-flex size-9 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
+            : 'pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground'
+        "
         aria-label="View source code"
       >
         <Icon name="lucide:code-xml" class="size-4" />

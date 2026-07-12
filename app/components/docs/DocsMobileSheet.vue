@@ -114,6 +114,8 @@
       </SheetContent>
     </Sheet>
 
+    <DocsSourceCode mobile />
+
     <Sheet v-model:open="detailsOpen">
       <SheetTrigger as-child>
         <button
