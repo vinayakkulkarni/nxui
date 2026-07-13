@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { cn } from '~/lib/utils';
 
   interface FlowingMenuItem {
@@ -36,10 +36,11 @@
     Map<number, { show: boolean; y: string; innerY: string }>
   >(new Map());
 
-  // Dynamic repetition count based on viewport width
-  const repetitions = computed(() => {
-    if (typeof window === 'undefined') return 6;
-    return Math.max(4, Math.ceil(window.innerWidth / 200) + 2);
+  // Dynamic repetition count based on viewport width. A ref set on mount
+  // (not a computed) so SSR never touches window.
+  const repetitions = ref(6);
+  onMounted(() => {
+    repetitions.value = Math.max(4, Math.ceil(window.innerWidth / 200) + 2);
   });
 
   function distMetric(x: number, y: number, x2: number, y2: number) {

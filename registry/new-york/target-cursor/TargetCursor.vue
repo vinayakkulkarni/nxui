@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, reactive, computed, onMounted, onBeforeUnmount } from 'vue';
+  import { ref, reactive, onMounted, onBeforeUnmount } from 'vue';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -47,12 +47,12 @@
   let originalCursor = '';
   let activeTarget: Element | null = null;
 
-  const isMobile = computed(() => {
-    if (typeof window === 'undefined') return false;
-    return (
+  // Ref set on mount (not a computed) so SSR never touches window.
+  const isMobile = ref(false);
+  onMounted(() => {
+    isMobile.value =
       ('ontouchstart' in window || navigator.maxTouchPoints > 0) &&
-      window.innerWidth <= 768
-    );
+      window.innerWidth <= 768;
   });
 
   function lerp(a: number, b: number, t: number) {
