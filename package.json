@@ -28,8 +28,8 @@
   },
   "dependencies": {
     "@cf-wasm/og": "^0.4.0",
-    "@iconify-json/lucide": "^1.2.116",
-    "@iconify-json/simple-icons": "^1.2.89",
+    "@iconify-json/lucide": "^1.2.117",
+    "@iconify-json/simple-icons": "^1.2.90",
     "@nuxt/content": "^3.15.0",
     "@nuxt/icon": "^2.3.1",
     "@nuxtjs/color-mode": "^4.0.1",
@@ -37,7 +37,7 @@
     "@nuxtjs/robots": "^6.1.2",
     "@nuxtjs/sitemap": "^8.2.2",
     "@paper-design/shaders": "0.0.77",
-    "@tanstack/vue-table": "^9.0.0-beta.46",
+    "@tanstack/vue-table": "^9.0.0-beta.47",
     "@tweakpane/plugin-essentials": "^0.2.1",
     "@vueuse/core": "^14.3.0",
     "@vueuse/nuxt": "^14.3.0",
@@ -82,7 +82,7 @@
     "oxfmt": "^0.58.0",
     "oxlint": "^1.73.0",
     "tailwindcss": "^4.3.2",
-    "tsx": "^4.23.0",
+    "tsx": "^4.23.1",
     "typescript": "^6.0.3",
     "vue": "^3.6.0-beta.17",
     "vue-tsc": "^3.3.7",
@@ -91,5 +91,5 @@
   "engines": {
     "node": ">=24.11.0"
   },
-  "packageManager": "pnpm@11.10.0+sha512.0b7f8b98060031904c017e3a41eb187a16d40eeb829b95c4f8cb03681761fc4ab53dd219115b9b447f4dce1a05a214764461e7d3703392a9f32f9511ce8c86c8"
+  "packageManager": "pnpm@11.12.0+sha512.820a6fbd0d9f04c226638002aead1e45340a9139dd5dc077c1d83ef44aa2481c8eb6637b4c9aa696a3c7e35ba818e49cf27213e5f2b91138d09b7a3e26e898ba"
 }
