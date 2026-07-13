@@ -17,20 +17,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          # Pin the version so action-setup installs 11.12.0 directly instead
-          # of bootstrapping 11.7.0 then self-updating — that switch path hits
-          # a pnpm 11.7.0 crash (pnpm#12959) reading the peer-variant lockfile.
-          version: 11.12.0
-          run_install: false
-
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: '24'
-          cache: 'pnpm'
+
+      # Install pnpm via npm instead of pnpm/action-setup: the action bootstraps
+      # pnpm 11.7.0 then self-updates to the packageManager version, and that
+      # self-update crashes (pnpm#12959) reading the peer-variant lockfile.
+      - name: Install pnpm
+        run: npm install --global pnpm@latest
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/pnpm/store
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm-store-${{ runner.os }}-
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
