@@ -56,6 +56,9 @@ jobs:
         env:
           NITRO_PRESET: cloudflare-pages
           NODE_OPTIONS: --max-old-space-size=8192
+          # Baked into the browser bundle so the CI build matches production;
+          # empty on forks (secrets are withheld), which the SDK tolerates.
+          NUXT_PUBLIC_OPENPANEL_CLIENT_ID: ${{ secrets.NUXT_PUBLIC_OPENPANEL_CLIENT_ID }}
 
       - name: Build registry
         run: pnpm run build:registry

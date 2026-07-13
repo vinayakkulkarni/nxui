@@ -51,6 +51,7 @@ jobs:
       (needs.lint-branch.result == 'success' || needs.lint-branch.result == 'skipped') &&
       (needs.lint-pr.result == 'success' || needs.lint-pr.result == 'skipped')
     uses: ./.github/workflows/ci-node.yml
+    secrets: inherit
 
   doctor:
     name: 'Doctor'

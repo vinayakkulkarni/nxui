@@ -84,6 +84,13 @@ export default defineNuxtConfig({
         autoOutboundTracking: true,
       },
     ],
+    // OpenPanel product analytics (self-hosted at events.geoql.in),
+    // alongside Plausible. The module bundles the SDK into the app's own
+    // nonce'd module script (no external op1.js), so only connect-src needs
+    // events.geoql.in for the /track POST. The module copies every option
+    // below into runtimeConfig.public (browser-exposed), so clientSecret is
+    // absent here — it lives in the private runtimeConfig.openpanel block.
+    '@openpanel/nuxt',
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     'motion-v/nuxt',
@@ -109,6 +116,17 @@ export default defineNuxtConfig({
       },
     ],
   ],
+
+  openpanel: {
+    clientId: process.env.NUXT_PUBLIC_OPENPANEL_CLIENT_ID ?? '',
+    apiUrl: 'https://events.geoql.in/api',
+    trackScreenViews: true,
+    trackOutgoingLinks: true,
+    trackAttributes: true,
+    // proxy: false — a proxy handler hardcodes api.openpanel.dev and would
+    // bypass the self-hosted apiUrl; direct client POST is correct here.
+    proxy: false,
+  },
 
   vite: {
     build: {
@@ -270,6 +288,9 @@ export default defineNuxtConfig({
     headers: {
       contentSecurityPolicy: {
         'base-uri': ["'none'"],
+        // OpenPanel (events.geoql.in) + Plausible (analytics.geoql.in) event
+        // POSTs, plus demo components that fetch remote data over HTTPS.
+        'connect-src': ["'self'", 'https:'],
         'font-src': ["'self'", 'https:', 'data:'],
         'form-action': ["'self'"],
         'frame-ancestors': ["'none'"],
@@ -334,6 +355,12 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    // Server-only: never exposed to the client bundle. Used by
+    // server/utils/openpanel.ts to authenticate server-side track calls.
+    openpanel: {
+      clientId: process.env.NUXT_PUBLIC_OPENPANEL_CLIENT_ID ?? '',
+      clientSecret: process.env.NUXT_OPENPANEL_CLIENT_SECRET ?? '',
+    },
     public: {
       componentCount,
     },
@@ -356,7 +383,7 @@ export default defineNuxtConfig({
     '/**': {
       headers: {
         'Content-Security-Policy':
-          "base-uri 'none'; font-src 'self' https: data:; form-action 'self'; frame-ancestors 'none'; frame-src 'self' https://www.youtube.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; object-src 'none'; script-src 'self' https: 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' https: 'unsafe-inline'; worker-src 'self' blob:; upgrade-insecure-requests",
+          "base-uri 'none'; connect-src 'self' https:; font-src 'self' https: data:; form-action 'self'; frame-ancestors 'none'; frame-src 'self' https://www.youtube.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; object-src 'none'; script-src 'self' https: 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' https: 'unsafe-inline'; worker-src 'self' blob:; upgrade-insecure-requests",
         'Permissions-Policy':
           'camera=(self), display-capture=(), fullscreen=(self), geolocation=(), microphone=()',
       },

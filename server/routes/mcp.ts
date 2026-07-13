@@ -117,10 +117,9 @@ export default defineEventHandler(async (event: H3Event) => {
     responses.push(failure(id, -32601, `Method not found: ${message.method}`));
   }
 
-  trackPlausibleEvent(event, {
-    eventName: 'MCP Request',
+  trackOpenPanelEvent(event, 'mcp_request', {
+    method: messages[0]?.method ?? 'unknown',
     url: 'https://nxui.geoql.in/mcp',
-    props: { method: messages[0]?.method ?? 'unknown' },
   }).catch(() => {});
 
   if (responses.length === 0) {

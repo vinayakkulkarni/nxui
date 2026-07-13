@@ -18,10 +18,9 @@ export default defineEventHandler((event: H3Event) => {
     });
   }
 
-  trackPlausibleEvent(event, {
-    eventName: 'Registry Download',
+  trackOpenPanelEvent(event, 'registry_download', {
+    component: slug,
     url: `https://nxui.geoql.in/r/${slug}`,
-    props: { component: slug },
   }).catch(() => {});
 
   const content = readFileSync(filePath, 'utf-8');

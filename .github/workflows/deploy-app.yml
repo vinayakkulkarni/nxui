@@ -51,6 +51,16 @@ jobs:
         env:
           NITRO_PRESET: cloudflare_module
           NODE_OPTIONS: --max-old-space-size=8192
+          # Public OpenPanel client ID is baked into the browser bundle at
+          # build time (client-side analytics). Safe to expose; still sourced
+          # from a repo secret so it stays out of version control.
+          NUXT_PUBLIC_OPENPANEL_CLIENT_ID: ${{ secrets.NUXT_PUBLIC_OPENPANEL_CLIENT_ID }}
+
+      # NUXT_OPENPANEL_CLIENT_SECRET is managed as a Worker secret directly in
+      # the Cloudflare dashboard (Workers → nxui → Settings → Variables and
+      # secrets). server/utils/openpanel.ts reads it at runtime via
+      # useRuntimeConfig. It is intentionally NOT set here so deploys don't
+      # overwrite the dashboard-managed value.
 
       # nitro writes the merged wrangler config to .output/server/wrangler.json
       # via cloudflare.deployConfig (see nuxt.config.ts) — point --config at it.
