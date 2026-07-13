@@ -72,9 +72,13 @@
     role="menubar"
     aria-label="PlayStation navigation"
   >
-    <!-- Cross column sits at 38% on large screens, centered on small -->
+    <!-- One-cell anchor window: the rail slides through it so the ACTIVE
+         cell is always exactly on the anchor — centered on small screens,
+         at 38% on large -->
     <div class="absolute inset-0">
-      <div class="absolute top-[30%] left-1/2 -translate-x-1/2 sm:left-[38%]">
+      <div
+        class="absolute top-[26%] left-1/2 w-27 -translate-x-1/2 sm:top-[30%] sm:left-[38%]"
+      >
         <!-- Horizontal category rail -->
         <component
           :is="motion.div"
@@ -138,9 +142,11 @@
         <!-- Vertical item list -->
         <div class="relative mt-5">
           <!-- Pill cursor -->
+          <!-- Glass pill cursor: sits UNDER the icons so they stay sharp,
+               frosted via backdrop-blur with an inset top highlight -->
           <component
             :is="motion.div"
-            class="pointer-events-none absolute top-2 left-4 z-10 h-16 w-19 rounded-4xl border-2 border-white/70 bg-white/12 shadow-[0_0_28px_4px_rgba(255,255,255,0.35)]"
+            class="pointer-events-none absolute top-2 left-4 h-16 w-19 rounded-4xl border border-white/50 bg-white/10 shadow-[0_0_24px_2px_rgba(255,255,255,0.25),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-8px_16px_rgba(255,255,255,0.08)] backdrop-blur-md"
             :animate="{ y: itemIndex * ROW_H }"
             :transition="spring"
             aria-hidden="true"
@@ -151,14 +157,16 @@
               v-for="(item, ii) in activeCategory.items"
               :key="item.id"
               type="button"
-              class="relative flex w-full items-center"
+              class="relative flex w-max items-center"
               :style="{ height: `${ROW_H}px` }"
               role="menuitem"
               :aria-current="ii === itemIndex"
               @click="setItem(ii)"
             >
-              <!-- Item icon in the cross column -->
-              <span class="flex w-27 shrink-0 items-center justify-center">
+              <!-- Item icon in the cross column, above the glass pill -->
+              <span
+                class="relative z-10 flex w-27 shrink-0 items-center justify-center"
+              >
                 <Icon
                   :name="item.icon"
                   :class="
@@ -173,7 +181,9 @@
               </span>
 
               <!-- Label to the right -->
-              <span class="ml-4 hidden min-w-0 flex-col items-start sm:flex">
+              <span
+                class="ml-4 hidden min-w-0 flex-col items-start whitespace-nowrap sm:flex"
+              >
                 <component
                   :is="motion.span"
                   :animate="{
@@ -207,9 +217,9 @@
         </div>
       </div>
 
-      <!-- Small screens: active label under the cross -->
+      <!-- Small screens: active label under the cross, padded -->
       <div
-        class="absolute inset-x-0 bottom-6 flex flex-col items-center gap-0.5 text-center sm:hidden"
+        class="absolute inset-x-0 bottom-6 flex flex-col items-center gap-0.5 px-6 text-center sm:hidden"
       >
         <span class="text-lg font-semibold text-white drop-shadow-sm">
           {{ activeItem?.label }}

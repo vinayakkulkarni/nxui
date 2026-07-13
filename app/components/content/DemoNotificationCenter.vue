@@ -105,7 +105,7 @@
 </template>`"
   >
     <div
-      class="relative flex size-full min-h-100 flex-col items-center rounded-lg bg-neutral-950 p-4 sm:p-6"
+      class="relative flex size-full min-h-100 flex-col items-center rounded-lg bg-neutral-100 p-4 sm:p-6 dark:bg-neutral-950"
     >
       <div class="flex w-full justify-end sm:pr-10">
         <NotificationCenter v-model="items" align="right" />
@@ -114,7 +114,7 @@
       <button
         type="button"
         data-notification-center-ignore
-        class="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-lg bg-neutral-800 px-4 py-2 text-sm font-medium text-neutral-200 transition-colors hover:bg-neutral-700"
+        class="absolute bottom-6 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-lg bg-white px-4 py-2 text-sm font-medium text-neutral-700 shadow-sm transition-colors hover:bg-neutral-50 dark:bg-neutral-800 dark:text-neutral-200 dark:shadow-none dark:hover:bg-neutral-700"
         @click="addNotification"
       >
         <Icon name="lucide:plus" class="size-4" />

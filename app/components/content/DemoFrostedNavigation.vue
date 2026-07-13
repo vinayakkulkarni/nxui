@@ -11,6 +11,8 @@
     { id: 'serendipity', label: 'Serendipity', icon: 'lucide:sparkles' },
   ];
 
+  // Enough cards that the masonry ALWAYS overflows the demo panel —
+  // even on very tall screens — so the frost has content to melt.
   const cards = [
     { h: 'h-40', c: 'bg-orange-600', label: 'Top of Mind' },
     {
@@ -24,6 +26,16 @@
     { h: 'h-32', c: 'bg-indigo-900', label: 'Taste is what you notice' },
     { h: 'h-40', c: 'bg-amber-700', label: 'Give me something' },
     { h: 'h-28', c: 'bg-teal-800', label: 'Moment Hunt' },
+    { h: 'h-36', c: 'bg-violet-900', label: 'Save to mymind' },
+    { h: 'h-48', c: 'bg-stone-800', label: 'Reading List' },
+    { h: 'h-32', c: 'bg-sky-900', label: 'Logo Inspo' },
+    { h: 'h-44', c: 'bg-fuchsia-900', label: 'Typography' },
+    { h: 'h-28', c: 'bg-lime-900', label: 'Moodboard' },
+    { h: 'h-40', c: 'bg-cyan-900', label: 'Moment Hunt II' },
+    { h: 'h-36', c: 'bg-red-900', label: 'Serendipity' },
+    { h: 'h-48', c: 'bg-zinc-900', label: 'Quiet Notes' },
+    { h: 'h-32', c: 'bg-emerald-900', label: 'Field Studies' },
+    { h: 'h-44', c: 'bg-orange-900', label: 'Slow Ideas' },
   ];
 </script>
 

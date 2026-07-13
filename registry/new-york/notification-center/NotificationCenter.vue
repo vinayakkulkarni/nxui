@@ -3,6 +3,7 @@
   import { motion, AnimatePresence } from 'motion-v';
   import { onClickOutside, useIntervalFn } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import NotificationCenterRow from './NotificationCenterRow.vue';
   import type {
     NotificationCenterItem,
     NotificationCenterProps,
@@ -113,7 +114,7 @@
         v-if="open"
         :class="
           cn(
-            'absolute top-14 z-50 w-80 origin-top rounded-3xl border border-white/8 bg-neutral-900/90 p-3 shadow-2xl shadow-black/40 backdrop-blur-xl sm:w-88',
+            'absolute top-14 z-50 w-80 origin-top rounded-3xl border border-black/5 bg-white/90 p-3 shadow-2xl shadow-black/15 backdrop-blur-xl sm:w-88 dark:border-white/8 dark:bg-neutral-900/90 dark:shadow-black/40',
             align === 'right' ? 'right-0' : 'left-0',
           )
         "
@@ -123,13 +124,18 @@
         :transition="spring"
       >
         <div class="flex items-center justify-between px-2 pt-1 pb-3">
-          <div class="flex items-center gap-2 text-neutral-100">
-            <Icon name="lucide:bell" class="size-4 text-neutral-400" />
+          <div
+            class="flex items-center gap-2 text-neutral-900 dark:text-neutral-100"
+          >
+            <Icon
+              name="lucide:bell"
+              class="size-4 text-neutral-500 dark:text-neutral-400"
+            />
             <span class="text-base font-medium">{{ label }}</span>
           </div>
           <button
             type="button"
-            class="flex size-7 items-center justify-center rounded-full text-neutral-400 transition-colors hover:bg-white/10 hover:text-neutral-100"
+            class="flex size-7 items-center justify-center rounded-full text-neutral-500 transition-colors hover:bg-black/6 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-white/10 dark:hover:text-neutral-100"
             aria-label="Close notifications"
             @click="close"
           >
@@ -140,60 +146,21 @@
         <div class="flex max-h-96 flex-col gap-2 overflow-y-auto pr-0.5">
           <AnimatePresence>
             <component
-              :is="motion.button"
+              :is="motion.div"
               v-for="item in items"
               :key="item.id"
-              type="button"
-              layout
-              class="w-full cursor-pointer rounded-2xl bg-white/6 px-3.5 py-3 text-left transition-colors hover:bg-white/10"
+              layout="position"
               :initial="{ opacity: 0, y: -14, scale: 0.96 }"
               :animate="{ opacity: 1, y: 0, scale: 1 }"
               :exit="{ opacity: 0, x: 24, scale: 0.96 }"
               :transition="spring"
-              @click="toggleRow(item)"
             >
-              <div class="flex items-start gap-2.5">
-                <span
-                  class="relative mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-lg bg-white/8 text-base"
-                >
-                  {{ item.icon ?? '🔔' }}
-                  <span
-                    v-if="item.unread"
-                    class="absolute -top-1 -left-1 size-2.5 rounded-full bg-red-500"
-                  />
-                </span>
-                <div class="min-w-0 flex-1">
-                  <div class="flex items-baseline justify-between gap-2">
-                    <span
-                      :class="
-                        cn(
-                          'text-sm font-semibold text-neutral-100',
-                          expandedId !== item.id && 'truncate',
-                        )
-                      "
-                    >
-                      {{ item.title }}
-                    </span>
-                    <span
-                      class="shrink-0 text-[11px] whitespace-nowrap text-neutral-500"
-                    >
-                      · {{ relTime(item.timestamp) }}
-                    </span>
-                  </div>
-                  <component
-                    :is="motion.p"
-                    layout
-                    :class="
-                      cn(
-                        'mt-0.5 text-[13px]/relaxed text-neutral-400',
-                        expandedId !== item.id && 'truncate',
-                      )
-                    "
-                  >
-                    {{ item.message }}
-                  </component>
-                </div>
-              </div>
+              <NotificationCenterRow
+                :item="item"
+                :expanded="expandedId === item.id"
+                :time="relTime(item.timestamp)"
+                @toggle="toggleRow(item)"
+              />
             </component>
           </AnimatePresence>
 
