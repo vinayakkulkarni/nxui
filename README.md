@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>221 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>224 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (221)
+## Components (224)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
 > Paper Shaders depend on — so `npx shadcn-vue add` resolves 220 items total,
-> of which these 221 are user-facing components.
+> of which these 224 are user-facing components.
 
 ### Text Animations (33)
 
@@ -144,7 +144,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (69)
+### Components (72)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -178,6 +178,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Fluid Glass](https://nxui.geoql.in/docs/components/fluid-glass)                     | Three.js glass refraction effect with chromatic aberration shader in lens, bar, or cube mode.                                                                          |
 | [Flying Posters](https://nxui.geoql.in/docs/components/flying-posters)               | OGL-powered vertical scroll gallery with rotating poster distortion.                                                                                                   |
 | [Folder](https://nxui.geoql.in/docs/components/folder)                               | Pure CSS 3D folder with open/close animation and magnetic paper hover.                                                                                                 |
+| [Frosted Navigation](https://nxui.geoql.in/docs/components/frosted-navigation)       | Bottom navigation where content melts into a progressive frosted-glass gradient, with a serif search pill and spring-animated tabs.                                    |
 | [Github Calendar](https://nxui.geoql.in/docs/components/github-calendar)             | A premium, customizable visualization of GitHub contribution graphs with multiple color schemes and display variants.                                                  |
 | [Glass Icons](https://nxui.geoql.in/docs/components/glass-icons)                     | Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover.                                                                              |
 | [Glass Surface](https://nxui.geoql.in/docs/components/glass-surface)                 | SVG displacement-based glass distortion element with chromatic aberration and frosted backdrop filter.                                                                 |
@@ -193,10 +194,12 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Music Player](https://nxui.geoql.in/docs/components/music-player)                   | An interactive vinyl-record music player with swinging tonearm and animated rotation.                                                                                  |
 | [Node Diagram](https://nxui.geoql.in/docs/components/node-diagram)                   | An animated node diagram with glowing data pulses flowing through connections.                                                                                         |
 | [Nostalgia](https://nxui.geoql.in/docs/components/nostalgia)                         | Vintage slide-viewer that cycles through memories while a fan of polaroid thumbnails arcs around it and a year + serif title crossfade underneath.                     |
+| [Notification Center](https://nxui.geoql.in/docs/components/notification-center)     | Frosted notification panel with badged bell trigger, spring-animated rows that expand in place, and live relative timestamps.                                          |
 | [Orbit Card Stack](https://nxui.geoql.in/docs/components/orbit-card-stack)           | A stacked deck of profile cards that fans out into an orbital arc on hover, lifting the active card with spring physics.                                               |
 | [Orbit Images](https://nxui.geoql.in/docs/components/orbit-images)                   | Images orbiting along customizable path shapes including ellipse, circle, star, heart, infinity, and more.                                                             |
 | [Pill Nav](https://nxui.geoql.in/docs/components/pill-nav)                           | Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu.                                                                             |
 | [Pixel Card](https://nxui.geoql.in/docs/components/pixel-card)                       | Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.                                                                                     |
+| [PlayStation Navbar](https://nxui.geoql.in/docs/components/playstation-navbar)       | XMB-style cross-media navigation with a sliding category rail, glowing pill cursor, and full arrow-key control.                                                        |
 | [Podcast Player](https://nxui.geoql.in/docs/components/podcast-player)               | Expandable podcast episode card driving a real audio element — waveform seek with hover scrubber, chapters, speed cycling, volume, and a compact pill mode.            |
 | [Profile Card](https://nxui.geoql.in/docs/components/profile-card)                   | Holographic tilt card with pointer-tracking 3D transforms, rainbow shine effects, and avatar parallax.                                                                 |
 | [Reflective Card](https://nxui.geoql.in/docs/components/reflective-card)             | Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.                                                                      |

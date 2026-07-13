@@ -126,6 +126,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Flying Posters', path: '/docs/components/flying-posters' },
       { title: 'Fluid Glass', path: '/docs/components/fluid-glass' },
       { title: 'Folder', path: '/docs/components/folder' },
+      {
+        title: 'Frosted Navigation',
+        path: '/docs/components/frosted-navigation',
+        badge: 'new',
+      },
       { title: 'GitHub Calendar', path: '/docs/components/github-calendar' },
       { title: 'Glass Icons', path: '/docs/components/glass-icons' },
       { title: 'Glass Surface', path: '/docs/components/glass-surface' },
@@ -146,12 +151,22 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       {
+        title: 'Notification Center',
+        path: '/docs/components/notification-center',
+        badge: 'new',
+      },
+      {
         title: 'Orbit Card Stack',
         path: '/docs/components/orbit-card-stack',
       },
       { title: 'Orbit Images', path: '/docs/components/orbit-images' },
       { title: 'Pill Nav', path: '/docs/components/pill-nav' },
       { title: 'Pixel Card', path: '/docs/components/pixel-card' },
+      {
+        title: 'PlayStation Navbar',
+        path: '/docs/components/playstation-navbar',
+        badge: 'new',
+      },
       {
         title: 'Podcast Player',
         path: '/docs/components/podcast-player',

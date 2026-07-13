@@ -751,6 +751,24 @@ const COMPONENTS: Record<
       'Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.',
     deps: ['@vueuse/core'],
   },
+  'notification-center': {
+    title: 'Notification Center',
+    description:
+      'Frosted notification panel with badged bell trigger, spring-animated rows that expand in place, and live relative timestamps.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
+  'frosted-navigation': {
+    title: 'Frosted Navigation',
+    description:
+      'Bottom navigation where content melts into a progressive frosted-glass gradient, with a serif search pill and spring-animated tabs.',
+    deps: ['motion-v'],
+  },
+  'playstation-navbar': {
+    title: 'PlayStation Navbar',
+    description:
+      'XMB-style cross-media navigation with a sliding category rail, glowing pill cursor, and full arrow-key control.',
+    deps: ['motion-v'],
+  },
   stepper: {
     title: 'Stepper',
     description:
