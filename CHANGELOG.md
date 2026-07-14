@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.0.16](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.15...nxui-v0.0.16) (2026-07-14)
+
+
+### Features
+
+* add notification-center, frosted-navigation and playstation-navbar components ([#112](https://github.com/vinayakkulkarni/nxui/issues/112)) ([6f278e8](https://github.com/vinayakkulkarni/nxui/commit/6f278e827a13d1fc89cb4201dedf5542a77fc78e))
+* add OpenPanel product analytics alongside Plausible ([4b2edfe](https://github.com/vinayakkulkarni/nxui/commit/4b2edfe345335a69abd7dd4873dbaf059461cc3f))
+
+
+### Bug Fixes
+
+* **deps:** Bump @cf-wasm/og from 0.4.0 to 0.4.1 ([#114](https://github.com/vinayakkulkarni/nxui/issues/114)) ([cb37e27](https://github.com/vinayakkulkarni/nxui/commit/cb37e27d292f524362290c413f39b260916ca1a1))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.37 to 9.0.0-beta.46 ([#111](https://github.com/vinayakkulkarni/nxui/issues/111)) ([3b7e031](https://github.com/vinayakkulkarni/nxui/commit/3b7e03194ae8f9ce570af1d92885ba80598dab6a))
+* **deps:** Bump actions/checkout from 6 to 7 ([#108](https://github.com/vinayakkulkarni/nxui/issues/108)) ([4a500ab](https://github.com/vinayakkulkarni/nxui/commit/4a500ab2cf2af84ee0dc0696bbfefdc83842bb64))
+
+
+### Miscellaneous
+
+* bump dependencies ✨ ([7c6bf15](https://github.com/vinayakkulkarni/nxui/commit/7c6bf157c8ccf8bafd41e8b18b77e9425b20c70e))
+* **deps-dev:** Bump eslint from 10.6.0 to 10.7.0 ([#109](https://github.com/vinayakkulkarni/nxui/issues/109)) ([52a67bc](https://github.com/vinayakkulkarni/nxui/commit/52a67bc21bc74648877b1b2da76d292f243e1972))
+
 ## [0.0.15](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.14...nxui-v0.0.15) (2026-07-12)
 
 
