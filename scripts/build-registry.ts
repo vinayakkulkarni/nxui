@@ -715,6 +715,36 @@ const COMPONENTS: Record<
       'Accordion whose opened row detaches into its own card while an aurora gradient blooms behind the answer.',
     deps: ['motion-v'],
   },
+  'bouncy-accordion': {
+    title: 'Bouncy Accordion',
+    description:
+      'Accordion with a playful spring bounce — the open row detaches from its neighbors with animated corner radii and a gap that springs apart.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
+  'curved-input': {
+    title: 'Curved Input',
+    description:
+      'A real text input bent along a circular arc — SVG textPath rendering with a caret that rides the curve and arc-length scrolling.',
+    deps: ['@vueuse/core'],
+  },
+  'line-sidebar': {
+    title: 'Line Sidebar',
+    description:
+      'Line-and-rail sidebar navigation whose items shift, tint, and grow their markers as the cursor approaches, eased by a single rAF loop.',
+    deps: [],
+  },
+  'prism-gradient': {
+    title: 'Prism Gradient',
+    description:
+      'WebGL2 hero gradient — three colors swirled through sixteen iterations of sinusoidal distortion, tracking light and dark mode automatically.',
+    deps: [],
+  },
+  'silk-aurora': {
+    title: 'Silk Aurora',
+    description:
+      'Premium WebGL hero with satin-dark aurora ribbons, pearlescent highlights, fine film grain, and cursor depth.',
+    deps: [],
+  },
   'curved-drawer': {
     title: 'Curved Drawer',
     description:

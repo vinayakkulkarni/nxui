@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>224 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>229 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (224)
+## Components (229)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
 > Paper Shaders depend on — so `npx shadcn-vue add` resolves 220 items total,
-> of which these 224 are user-facing components.
+> of which these 229 are user-facing components.
 
 ### Text Animations (33)
 
@@ -144,7 +144,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (72)
+### Components (75)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -155,6 +155,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Banknote Bento](https://nxui.geoql.in/docs/components/banknote-bento)               | Vintage engravings as ink-on-paper banknote duotones with serif captions, plus a thermal-camera card whose heat boundary rises over the artwork and types its caption. |
 | [Border Glow](https://nxui.geoql.in/docs/components/border-glow)                     | A CSS-driven directional glow card that tracks cursor position and proximity to edges with configurable colors and gradients.                                          |
 | [Bounce Cards](https://nxui.geoql.in/docs/components/bounce-cards)                   | Fan of image cards with staggered entrance and hover push animation.                                                                                                   |
+| [Bouncy Accordion](https://nxui.geoql.in/docs/components/bouncy-accordion)           | Accordion with a playful spring bounce — the open row detaches from its neighbors with animated corner radii and a gap that springs apart.                             |
 | [Bubble Menu](https://nxui.geoql.in/docs/components/bubble-menu)                     | Animated full-screen pill navigation with staggered scale-in and rotation.                                                                                             |
 | [Card Nav](https://nxui.geoql.in/docs/components/card-nav)                           | Expandable navbar with staggered card reveal, hamburger toggle, and color-coded category panels.                                                                       |
 | [Card Swap](https://nxui.geoql.in/docs/components/card-swap)                         | Stacked card carousel that cycles the front card to the back with 3D transforms.                                                                                       |
@@ -165,6 +166,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Command Menu](https://nxui.geoql.in/docs/components/command-menu)                   | A spotlight-style command palette with keyboard navigation and fuzzy search.                                                                                           |
 | [Counter](https://nxui.geoql.in/docs/components/counter)                             | Animated number counter with spring-physics digit rolling and gradient fade overlays.                                                                                  |
 | [Curved Drawer](https://nxui.geoql.in/docs/components/curved-drawer)                 | Slide-in drawer whose inner edge bulges with velocity via SVG path morphing, settling straight at rest.                                                                |
+| [Curved Input](https://nxui.geoql.in/docs/components/curved-input)                   | A real text input bent along a circular arc — SVG textPath rendering with a caret that rides the curve and arc-length scrolling.                                       |
 | [Decay Card](https://nxui.geoql.in/docs/components/decay-card)                       | SVG displacement map card that warps on cursor movement with lerp physics.                                                                                             |
 | [Dithered Logo](https://nxui.geoql.in/docs/components/dithered-logo)                 | Renders any logo as a Floyd-Steinberg dithered particle field with cursor repulsion and click ripples.                                                                 |
 | [Dock](https://nxui.geoql.in/docs/components/dock)                                   | A macOS-style dock with cursor-proximity magnification driven by configurable spring physics.                                                                          |
@@ -186,6 +188,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Infinite Menu](https://nxui.geoql.in/docs/components/infinite-menu)                 | WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection.                                                                            |
 | [Lanyard](https://nxui.geoql.in/docs/components/lanyard)                             | Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model.                                                                  |
 | [Layered Stack](https://nxui.geoql.in/docs/components/layered-stack)                 | Stack of cards that fans out on hover, stacking back with random rotation on mouse leave.                                                                              |
+| [Line Sidebar](https://nxui.geoql.in/docs/components/line-sidebar)                   | Line-and-rail sidebar navigation whose items shift, tint, and grow their markers as the cursor approaches, eased by a single rAF loop.                                 |
 | [Mac Keyboard](https://nxui.geoql.in/docs/components/mac-keyboard)                   | An interactive Mac keyboard with real key tracking, sound effects, and visual feedback. Press keys on your keyboard to see them light up.                              |
 | [Magic Bento](https://nxui.geoql.in/docs/components/magic-bento)                     | Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism.                                                                          |
 | [Magnetic Dock](https://nxui.geoql.in/docs/components/magnetic-dock)                 | A macOS-style dock with magnetic hover magnification and genie effect.                                                                                                 |
@@ -275,13 +278,15 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Threads](https://nxui.geoql.in/docs/backgrounds/threads)                 | Animated Perlin noise thread lines with mouse-reactive distortion and configurable color.                                     |
 | [Waves](https://nxui.geoql.in/docs/backgrounds/waves)                     | Perlin noise-driven wave lines with cursor-reactive distortion.                                                               |
 
-### Hero Backgrounds (4)
+### Hero Backgrounds (6)
 
 | Component                                                                          | Description                                                                                                                                                                       |
 | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Animated Gradient](https://nxui.geoql.in/docs/hero-backgrounds/animated-gradient) | A beautiful, animated, and customizable WebGL gradient with noise capabilities. Supports built-in presets (Aurora, Oceanic, Amber, Toxic, Ghost) and fully custom configurations. |
 | [Dither Prism Hero](https://nxui.geoql.in/docs/hero-backgrounds/dither-prism-hero) | A prismatic dithered hero section with advanced WebGL shaders featuring ordered dithering, holographic iridescence, and floating particles.                                       |
 | [Hero Geometric](https://nxui.geoql.in/docs/hero-backgrounds/hero-geometric)       | A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering.                                                                    |
+| [Prism Gradient](https://nxui.geoql.in/docs/hero-backgrounds/prism-gradient)       | WebGL2 hero gradient — three colors swirled through sixteen iterations of sinusoidal distortion, tracking light and dark mode automatically.                                      |
+| [Silk Aurora](https://nxui.geoql.in/docs/hero-backgrounds/silk-aurora)             | Premium WebGL hero with satin-dark aurora ribbons, pearlescent highlights, fine film grain, and cursor depth that bends the light toward the pointer.                             |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
 
 ### Visual Effects (11)
