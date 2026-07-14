@@ -12,8 +12,8 @@ importers:
   .:
     dependencies:
       '@cf-wasm/og':
-        specifier: ^0.4.0
-        version: 0.4.0(react@19.2.7)
+        specifier: ^0.4.1
+        version: 0.4.1(react@19.2.7)
       '@iconify-json/lucide':
         specifier: ^1.2.117
         version: 1.2.117
@@ -361,14 +361,14 @@ packages:
       commander:
         optional: true
 
-  '@cf-wasm/og@0.4.0':
-    resolution: {integrity: sha512-w5zhwEdZWGd4CEMqUxgCo4IOsxuaAC9utju2Yc5Lk1OqesxfouIdRDGrRiZBZwf0AJVq4Dg01+SpJV8gVcXn8g==}
+  '@cf-wasm/og@0.4.1':
+    resolution: {integrity: sha512-oZJjA+5SZIeKOLmsBigpHofvr/IdxqaAPlRWGlD9cyibw8OCD0L38ub1xLeggqciOuLFWTIrDfg/5w8T6iBRmA==}
 
-  '@cf-wasm/resvg@0.3.4':
-    resolution: {integrity: sha512-CMgV0ynRszZvTaHif5yPFFW4ibkopIfnaQZnklC5p80neJR/DCAUKGUgOFGhIVD8Biziiu86TFC0IQYRJyfWdw==}
+  '@cf-wasm/resvg@0.3.5':
+    resolution: {integrity: sha512-0dTZFR7AEVrnchNR68VLWg/AL64e42q7WkT4Dc6PxMCRjnPuWrqY3qu01bN/w31pXgPIJTvnNHnqtw9WbZCUEw==}
 
-  '@cf-wasm/satori@0.3.6':
-    resolution: {integrity: sha512-IMN1uTnV7pfj/oGnkgUBC2W5W1cNHVMkT6mrzpRjXXCK7slF4OgjEHiX0GQPv/KLzajaalJB3exTaux6MYJ5sA==}
+  '@cf-wasm/satori@0.3.7':
+    resolution: {integrity: sha512-4/r2WRtriyrco0tvIJ5SiNRelxjUx4xk6Bt913uNAnINvkfWVh7em6Zz8bRKlRM7nbSf5hxsnDdoOKgHGkn2ww==}
 
   '@clack/core@1.4.3':
     resolution: {integrity: sha512-/kr3UWNtdJfxZtPgDqUOmG2pvwlmcLGheex5yiZKdwbzZJxhV+HMNR9QNmyY5cGwTNV6LrR7Jtp+KjhUAP1qBQ==}
@@ -7085,20 +7085,20 @@ snapshots:
       cac: 6.7.14
       citty: 0.2.2
 
-  '@cf-wasm/og@0.4.0(react@19.2.7)':
+  '@cf-wasm/og@0.4.1(react@19.2.7)':
     dependencies:
-      '@cf-wasm/resvg': 0.3.4
-      '@cf-wasm/satori': 0.3.6
+      '@cf-wasm/resvg': 0.3.5
+      '@cf-wasm/satori': 0.3.7
       '@hedgedoc/html-to-react': 2.1.1(react@19.2.7)
     transitivePeerDependencies:
       - react
 
-  '@cf-wasm/resvg@0.3.4':
+  '@cf-wasm/resvg@0.3.5':
     dependencies:
       '@resvg/resvg-wasm': 2.6.2
       '@resvg/resvg-wasm-legacy': '@resvg/resvg-wasm@2.4.1'
 
-  '@cf-wasm/satori@0.3.6':
+  '@cf-wasm/satori@0.3.7':
     dependencies:
       satori: 0.26.0
 
