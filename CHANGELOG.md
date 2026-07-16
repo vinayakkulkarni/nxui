@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.17](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.16...nxui-v0.0.17) (2026-07-16)
+
+
+### Bug Fixes
+
+* **deps:** Bump actions/setup-node from 6 to 7 ([#116](https://github.com/vinayakkulkarni/nxui/issues/116)) ([4b52689](https://github.com/vinayakkulkarni/nxui/commit/4b52689838e2f047c3e0db9a8b95120d47035fdb))
+* **deps:** Bump shadcn-nuxt from 2.7.4 to 2.8.0 ([#117](https://github.com/vinayakkulkarni/nxui/issues/117)) ([f16932a](https://github.com/vinayakkulkarni/nxui/commit/f16932a8a50889a43fad43178289a274838dfb1a))
+
+
+### Miscellaneous
+
+* bump pnpm to v11.13.1 ([fc6189f](https://github.com/vinayakkulkarni/nxui/commit/fc6189f947f5d2111b3b3ecc6f1647c9ff6fc752))
+* **deps-dev:** Bump oxlint from 1.73.0 to 1.74.0 ([#120](https://github.com/vinayakkulkarni/nxui/issues/120)) ([9206928](https://github.com/vinayakkulkarni/nxui/commit/9206928734123c067c22c64761ddce403679cf9a))
+* **deps-dev:** Bump wrangler from 4.110.0 to 4.111.0 ([#118](https://github.com/vinayakkulkarni/nxui/issues/118)) ([e97918d](https://github.com/vinayakkulkarni/nxui/commit/e97918d77b4a3d56497509de1374b3f0d4dbfc8a))
+
 ## [0.0.16](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.15...nxui-v0.0.16) (2026-07-14)
 
 
