@@ -3,6 +3,9 @@
   import { defineAsyncComponent } from 'vue';
   import { useClipboard } from '@vueuse/core';
   import { docsNav } from '~/config/docs';
+  import Tooltip from '~/components/ui/tooltip/Tooltip.vue';
+  import TooltipContent from '~/components/ui/tooltip/TooltipContent.vue';
+  import TooltipTrigger from '~/components/ui/tooltip/TooltipTrigger.vue';
 
   definePageMeta({ layout: 'component' });
 
@@ -282,14 +285,18 @@
         <DocsFpsMeter />
 
         <!-- Refresh button for animation demos -->
-        <button
-          v-if="demoRefreshable"
-          class="absolute top-4 right-4 z-10 grid size-9 place-items-center rounded-md border border-border bg-background/50 text-muted-foreground backdrop-blur-sm transition-all hover:bg-background hover:text-foreground"
-          aria-label="Replay animation"
-          @click="replay"
-        >
-          <Icon name="lucide:rotate-ccw" class="size-4" />
-        </button>
+        <Tooltip v-if="demoRefreshable">
+          <TooltipTrigger as-child>
+            <button
+              class="absolute top-4 right-4 z-10 grid size-9 place-items-center rounded-md border border-border bg-background/50 text-muted-foreground backdrop-blur-sm transition-all hover:bg-background hover:text-foreground"
+              aria-label="Replay animation"
+              @click="replay"
+            >
+              <Icon name="lucide:rotate-ccw" class="size-4" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>Replay</TooltipContent>
+        </Tooltip>
 
         <!-- Demo component (client-only: WebGL/canvas demos use browser APIs) -->
         <ClientOnly>
