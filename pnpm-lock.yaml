@@ -96,8 +96,8 @@ importers:
         specifier: ^2.10.1
         version: 2.10.1(vue@3.6.0-beta.17(typescript@6.0.3))
       shadcn-nuxt:
-        specifier: ^2.7.4
-        version: 2.7.4(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.2)(magicast@0.5.3)
+        specifier: ^2.8.0
+        version: 2.8.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.2)(magicast@0.5.3)
       shiki:
         specifier: ^4.3.1
         version: 4.3.1
@@ -4387,6 +4387,10 @@ packages:
     resolution: {integrity: sha512-Hs59xBNfUIunMFgWAbGX5cq6893IbWg4KnrjbYwX3tx0ztorVgTDA6B2sxf8ejHJ4wz8BqGUMYlnzNBer5NvGg==}
     engines: {node: '>= 4'}
 
+  ignore@7.0.6:
+    resolution: {integrity: sha512-BAg6QkE8W+TuQLrrw0Ugr7HegXduRuuj8/ti2kSOc+jz1dmx8/WNcjr6XGnq5YpDWxFwwaavqD0+jIUOKelTsw==}
+    engines: {node: '>= 4'}
+
   image-meta@0.2.2:
     resolution: {integrity: sha512-3MOLanc3sb3LNGWQl1RlQlNWURE5g32aUphrDyFeCsxBTk08iE3VNe4CwsUZ0Qs1X+EfX0+r29Sxdpza4B+yRA==}
 
@@ -5896,8 +5900,8 @@ packages:
     engines: {node: '>= 0.10'}
     hasBin: true
 
-  shadcn-nuxt@2.7.4:
-    resolution: {integrity: sha512-rAfC7KulGRtSqXLUaKtvXN+6CKp31IQDfAcooRR2U9HbTHyVUSDal6Yd0xGtNawtRJACYdeKwlKgZ1C5C/TAtA==}
+  shadcn-nuxt@2.8.0:
+    resolution: {integrity: sha512-0HKTjq8FeEbAKGGc6a7pd72kSLNiAhCK9JgjYlZ5mJ8DPlRNQ1LV8aarfP+BKLX6IYLevUvtZiCGS5TaPS7WLQ==}
 
   sharp@0.34.5:
     resolution: {integrity: sha512-Ou9I5Ft9WNcCbXrU9cMgPBcCK8LiwLqcbywW3t4oDV37n1pzpuNLsYiAV8eODnjbtQlSDwZ2cUEeQz4E54Hltg==}
@@ -7976,7 +7980,7 @@ snapshots:
       destr: 2.0.5
       errx: 0.1.0
       exsolve: 1.1.0
-      ignore: 7.0.5
+      ignore: 7.0.6
       jiti: 2.7.0
       klona: 2.0.6
       knitwork: 1.3.0
@@ -8002,7 +8006,7 @@ snapshots:
       destr: 2.0.5
       errx: 0.1.0
       exsolve: 1.1.0
-      ignore: 7.0.5
+      ignore: 7.0.6
       jiti: 2.7.0
       klona: 2.0.6
       mlly: 1.8.2
@@ -10850,7 +10854,7 @@ snapshots:
     dependencies:
       '@sindresorhus/merge-streams': 4.0.0
       fast-glob: 3.3.3
-      ignore: 7.0.5
+      ignore: 7.0.6
       is-path-inside: 4.0.0
       slash: 5.1.0
       unicorn-magic: 0.4.0
@@ -11082,6 +11086,8 @@ snapshots:
   ignore@5.3.2: {}
 
   ignore@7.0.5: {}
+
+  ignore@7.0.6: {}
 
   image-meta@0.2.2: {}
 
@@ -13267,7 +13273,7 @@ snapshots:
       safe-buffer: 5.2.1
       to-buffer: 1.2.2
 
-  shadcn-nuxt@2.7.4(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.2)(magicast@0.5.3):
+  shadcn-nuxt@2.8.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.2)(magicast@0.5.3):
     dependencies:
       '@nuxt/kit': 3.21.8(magicast@0.5.3)
       oxc-parser: 0.102.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.2)
