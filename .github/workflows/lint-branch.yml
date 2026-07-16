@@ -11,8 +11,13 @@ jobs:
 
     steps:
       - name: Check branch name
+        env:
+          # Pass the untrusted PR branch name through env, never interpolated
+          # directly into the shell script (avoids command injection via a
+          # crafted branch name). See actionlint's untrusted-input check.
+          BRANCH_NAME: ${{ github.head_ref }}
         run: |
-          branch="${{ github.head_ref }}"
+          branch="$BRANCH_NAME"
           pattern="^(feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert)/[a-z0-9]+(-[a-z0-9]+)*$"
 
           if [[ "$branch" =~ ^release-please-- ]] || [[ "$branch" =~ ^dependabot/ ]]; then

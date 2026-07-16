@@ -1,40 +1,47 @@
 name: Deploy App
 
 on:
-  push:
-    branches:
-      - main
+  workflow_call:
+    secrets:
+      CLOUDFLARE_API_TOKEN:
+        description: 'Cloudflare API token authorized to deploy the nxui Worker'
+        required: true
+      CLOUDFLARE_ACCOUNT_ID:
+        description: 'Cloudflare account containing the nxui Worker'
+        required: true
+      NUXT_PUBLIC_OPENPANEL_CLIENT_ID:
+        description: 'Public OpenPanel client ID baked into the production bundle'
+        required: false
   workflow_dispatch:
+
+# Production deployments are serialized and never cancelled mid-flight — a
+# second run waits for the active `wrangler deploy` to finish rather than
+# interrupting it and leaving the Worker in a half-applied state.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
 
 jobs:
   deploy:
     name: Deploy to Cloudflare Workers
     runs-on: ubuntu-latest
+    timeout-minutes: 20
+
     permissions:
       contents: read
-      deployments: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: '24'
-
-      # Install pnpm via npm instead of pnpm/action-setup: the action bootstraps
-      # pnpm 11.7.0 then self-updates to the packageManager version, and that
-      # self-update crashes (pnpm#12959) reading the peer-variant lockfile.
-      - name: Install pnpm
-        run: npm install --global pnpm@latest
-
-      - name: Cache pnpm store
-        uses: actions/cache@v4
-        with:
-          path: ~/.local/share/pnpm/store
-          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-store-${{ runner.os }}-
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -42,13 +49,13 @@ jobs:
       - name: Build app
         run: |
           max_attempts=3
-          for attempt in $(seq 1 $max_attempts); do
+          for attempt in $(seq 1 "$max_attempts"); do
             echo "Build attempt $attempt/$max_attempts..."
             if pnpm run build; then
               echo "Build succeeded on attempt $attempt"
               exit 0
             fi
-            if [ $attempt -lt $max_attempts ]; then
+            if [ "$attempt" -lt "$max_attempts" ]; then
               echo "Build failed, retrying in 15s..."
               sleep 15
             fi
@@ -58,19 +65,13 @@ jobs:
         env:
           NITRO_PRESET: cloudflare_module
           NODE_OPTIONS: --max-old-space-size=8192
-          # Public OpenPanel client ID is baked into the browser bundle at
-          # build time (client-side analytics). Safe to expose; still sourced
-          # from a repo secret so it stays out of version control.
           NUXT_PUBLIC_OPENPANEL_CLIENT_ID: ${{ secrets.NUXT_PUBLIC_OPENPANEL_CLIENT_ID }}
 
       # NUXT_OPENPANEL_CLIENT_SECRET is managed as a Worker secret directly in
-      # the Cloudflare dashboard (Workers → nxui → Settings → Variables and
-      # secrets). server/utils/openpanel.ts reads it at runtime via
-      # useRuntimeConfig. It is intentionally NOT set here so deploys don't
-      # overwrite the dashboard-managed value.
-
-      # nitro writes the merged wrangler config to .output/server/wrangler.json
-      # via cloudflare.deployConfig (see nuxt.config.ts) — point --config at it.
+      # the Cloudflare dashboard and read at runtime; it is intentionally not
+      # supplied here so deploys don't overwrite the dashboard-managed value.
+      # Nitro writes the merged wrangler config to .output/server/wrangler.json
+      # via cloudflare.deployConfig (see nuxt.config.ts).
       - name: Deploy to Cloudflare Workers
         run: pnpm exec wrangler deploy --config .output/server/wrangler.json
         env:
