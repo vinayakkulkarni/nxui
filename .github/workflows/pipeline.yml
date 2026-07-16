@@ -51,6 +51,7 @@ jobs:
     name: 'Deploy'
     needs: [ci-node, doctor]
     if: |
+      always() &&
       github.event_name == 'push' &&
       github.ref == 'refs/heads/main' &&
       needs.ci-node.result == 'success' &&
