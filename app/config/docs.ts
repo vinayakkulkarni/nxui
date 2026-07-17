@@ -81,6 +81,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Border Glow', path: '/docs/components/border-glow' },
       { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
+      {
+        title: 'Bouncy Accordion',
+        path: '/docs/components/bouncy-accordion',
+        badge: 'new',
+      },
       { title: 'Bubble Menu', path: '/docs/components/bubble-menu' },
       { title: 'Card Nav', path: '/docs/components/card-nav' },
       { title: 'Card Swap', path: '/docs/components/card-swap' },
@@ -96,6 +101,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Curved Drawer',
         path: '/docs/components/curved-drawer',
+        badge: 'new',
+      },
+      {
+        title: 'Curved Input',
+        path: '/docs/components/curved-input',
         badge: 'new',
       },
       { title: 'Decay Card', path: '/docs/components/decay-card' },
@@ -138,6 +148,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Infinite Menu', path: '/docs/components/infinite-menu' },
       { title: 'Lanyard', path: '/docs/components/lanyard' },
       { title: 'Layered Stack', path: '/docs/components/layered-stack' },
+      {
+        title: 'Line Sidebar',
+        path: '/docs/components/line-sidebar',
+        badge: 'new',
+      },
       { title: 'Mac Keyboard', path: '/docs/components/mac-keyboard' },
       { title: 'Magic Bento', path: '/docs/components/magic-bento' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
@@ -424,6 +439,16 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Hero Geometric',
         path: '/docs/hero-backgrounds/hero-geometric',
+      },
+      {
+        title: 'Prism Gradient',
+        path: '/docs/hero-backgrounds/prism-gradient',
+        badge: 'new',
+      },
+      {
+        title: 'Silk Aurora',
+        path: '/docs/hero-backgrounds/silk-aurora',
+        badge: 'new',
       },
       { title: 'WebGL Liquid', path: '/docs/hero-backgrounds/webgl-liquid' },
     ],
