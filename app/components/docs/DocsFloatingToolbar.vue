@@ -5,6 +5,9 @@
   import SheetDescription from '~/components/ui/sheet/SheetDescription.vue';
   import SheetTitle from '~/components/ui/sheet/SheetTitle.vue';
   import SheetTrigger from '~/components/ui/sheet/SheetTrigger.vue';
+  import Tooltip from '~/components/ui/tooltip/Tooltip.vue';
+  import TooltipContent from '~/components/ui/tooltip/TooltipContent.vue';
+  import TooltipTrigger from '~/components/ui/tooltip/TooltipTrigger.vue';
 
   const colorMode = useColorMode();
   const route = useRoute();
@@ -46,14 +49,19 @@
 
     <!-- Sidebar trigger (Sheet) -->
     <Sheet v-model:open="sidebarOpen">
-      <SheetTrigger as-child>
-        <button
-          class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
-          aria-label="Toggle navigation"
-        >
-          <Icon name="lucide:panel-left" class="size-4" />
-        </button>
-      </SheetTrigger>
+      <Tooltip>
+        <TooltipTrigger as-child>
+          <SheetTrigger as-child>
+            <button
+              class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+              aria-label="Toggle navigation"
+            >
+              <Icon name="lucide:panel-left" class="size-4" />
+            </button>
+          </SheetTrigger>
+        </TooltipTrigger>
+        <TooltipContent>Navigation</TooltipContent>
+      </Tooltip>
       <SheetContent side="left" class="w-72 p-0">
         <SheetTitle class="sr-only">Navigation</SheetTitle>
         <SheetDescription class="sr-only">
@@ -76,46 +84,66 @@
     </Sheet>
 
     <!-- GitHub link -->
-    <a
-      href="https://github.com/vinayakkulkarni/nxui"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
-    >
-      <Icon name="simple-icons:github" class="size-4" />
-      <span class="sr-only">GitHub</span>
-    </a>
+    <Tooltip>
+      <TooltipTrigger as-child>
+        <a
+          href="https://github.com/vinayakkulkarni/nxui"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+        >
+          <Icon name="simple-icons:github" class="size-4" />
+          <span class="sr-only">GitHub</span>
+        </a>
+      </TooltipTrigger>
+      <TooltipContent>GitHub</TooltipContent>
+    </Tooltip>
 
     <!-- Dark mode toggle -->
-    <button
-      class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
-      aria-label="Toggle theme"
-      @click="toggleColorMode"
-    >
-      <ClientOnly>
-        <Icon
-          :name="colorMode.value === 'dark' ? 'lucide:sun' : 'lucide:moon'"
-          class="size-4"
-        />
-        <template #fallback>
-          <Icon name="lucide:moon" class="size-4" />
-        </template>
-      </ClientOnly>
-    </button>
+    <Tooltip>
+      <TooltipTrigger as-child>
+        <button
+          class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+          aria-label="Toggle theme"
+          @click="toggleColorMode"
+        >
+          <ClientOnly>
+            <Icon
+              :name="colorMode.value === 'dark' ? 'lucide:sun' : 'lucide:moon'"
+              class="size-4"
+            />
+            <template #fallback>
+              <Icon name="lucide:moon" class="size-4" />
+            </template>
+          </ClientOnly>
+        </button>
+      </TooltipTrigger>
+      <TooltipContent>
+        <ClientOnly>
+          {{ colorMode.value === 'dark' ? 'Light mode' : 'Dark mode' }}
+          <template #fallback>Dark mode</template>
+        </ClientOnly>
+      </TooltipContent>
+    </Tooltip>
 
     <!-- FPS meter toggle -->
-    <button
-      class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 backdrop-blur-sm transition-colors"
-      :class="
-        showFps
-          ? 'text-foreground'
-          : 'text-muted-foreground hover:text-foreground'
-      "
-      :aria-label="showFps ? 'Hide FPS meter' : 'Show FPS meter'"
-      :aria-pressed="showFps"
-      @click="toggleFps"
-    >
-      <Icon name="lucide:gauge" class="size-4" />
-    </button>
+    <Tooltip>
+      <TooltipTrigger as-child>
+        <button
+          class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 backdrop-blur-sm transition-colors"
+          :class="
+            showFps
+              ? 'text-foreground'
+              : 'text-muted-foreground hover:text-foreground'
+          "
+          :aria-label="showFps ? 'Hide FPS meter' : 'Show FPS meter'"
+          :aria-pressed="showFps"
+          @click="toggleFps"
+        >
+          <Icon name="lucide:gauge" class="size-4" />
+        </button>
+      </TooltipTrigger>
+      <TooltipContent>{{ showFps ? 'Hide FPS' : 'Show FPS' }}</TooltipContent>
+    </Tooltip>
   </div>
 </template>

@@ -1,5 +1,8 @@
 <script setup lang="ts">
   import { docsNav } from '~/config/docs';
+  import Tooltip from '~/components/ui/tooltip/Tooltip.vue';
+  import TooltipContent from '~/components/ui/tooltip/TooltipContent.vue';
+  import TooltipTrigger from '~/components/ui/tooltip/TooltipTrigger.vue';
 
   const props = defineProps<{
     /** Compact icon-only trigger (for the floating toolbar). */
@@ -66,14 +69,18 @@
 
 <template>
   <!-- Compact icon-only trigger (floating toolbar on component pages) -->
-  <button
-    v-if="props.compact"
-    class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
-    aria-label="Search components (⌘K)"
-    @click="isOpen = true"
-  >
-    <Icon name="lucide:search" class="size-4" />
-  </button>
+  <Tooltip v-if="props.compact">
+    <TooltipTrigger as-child>
+      <button
+        class="pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+        aria-label="Search components (⌘K)"
+        @click="isOpen = true"
+      >
+        <Icon name="lucide:search" class="size-4" />
+      </button>
+    </TooltipTrigger>
+    <TooltipContent>Search (⌘K)</TooltipContent>
+  </Tooltip>
 
   <!-- Full search box (docs header) -->
   <button

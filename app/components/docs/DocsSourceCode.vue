@@ -4,6 +4,9 @@
   import SheetDescription from '~/components/ui/sheet/SheetDescription.vue';
   import SheetTitle from '~/components/ui/sheet/SheetTitle.vue';
   import SheetTrigger from '~/components/ui/sheet/SheetTrigger.vue';
+  import Tooltip from '~/components/ui/tooltip/Tooltip.vue';
+  import TooltipContent from '~/components/ui/tooltip/TooltipContent.vue';
+  import TooltipTrigger from '~/components/ui/tooltip/TooltipTrigger.vue';
   import type { RegistryItem } from '~/types/mcp';
 
   const props = defineProps<{
@@ -42,18 +45,23 @@
 
 <template>
   <Sheet v-model:open="open">
-    <SheetTrigger as-child>
-      <button
-        :class="
-          props.mobile
-            ? 'my-1.5 inline-flex size-9 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
-            : 'pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground'
-        "
-        aria-label="View source code"
-      >
-        <Icon name="lucide:code-xml" class="size-4" />
-      </button>
-    </SheetTrigger>
+    <Tooltip :disabled="props.mobile">
+      <TooltipTrigger as-child>
+        <SheetTrigger as-child>
+          <button
+            :class="
+              props.mobile
+                ? 'my-1.5 inline-flex size-9 shrink-0 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground'
+                : 'pointer-events-auto inline-flex size-7 items-center justify-center rounded-lg bg-background/80 text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground'
+            "
+            aria-label="View source code"
+          >
+            <Icon name="lucide:code-xml" class="size-4" />
+          </button>
+        </SheetTrigger>
+      </TooltipTrigger>
+      <TooltipContent>View source</TooltipContent>
+    </Tooltip>
     <SheetContent side="left" class="w-full max-w-full p-0 sm:max-w-xl">
       <SheetTitle class="sr-only">Source code</SheetTitle>
       <SheetDescription class="sr-only">
