@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   doctor:
@@ -38,7 +39,10 @@ jobs:
         uses: geoql/doctor-action@v2
         with:
           framework: nuxt
+          preset: recommended
           threshold: ${{ vars.DOCTOR_THRESHOLD || '70' }}
           fail-on: error
           api-key: ${{ secrets.DOCTOR_API_KEY }}
           project: ${{ github.repository }}
+          pr-comment: true
+          comment-mode: both
