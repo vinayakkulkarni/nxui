@@ -44,6 +44,7 @@ jobs:
       (needs.lint-branch.result == 'success' || needs.lint-branch.result == 'skipped')
     permissions:
       contents: read
+      pull-requests: write
     uses: ./.github/workflows/doctor.yml
     secrets: inherit
 
