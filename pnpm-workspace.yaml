@@ -4,6 +4,13 @@
 # 60 minutes still prevents publish-and-pivot attacks but unblocks normal flow.
 minimumReleaseAge: 60
 
+# Nuxt 4.5 declares unhead "^3.1.8", but Unhead 3.1.8 ships an invalid
+# unhead/dist/stream/iife.mjs that the Cloudflare preset build cannot parse,
+# aborting the CF Workers build (nuxt/nuxt#35670). Fixed in Unhead 3.2.0+;
+# pin the floor to >=3.2.1 so the Cloudflare build always resolves a good copy.
+overrides:
+  unhead: '>=3.2.1'
+
 # pnpm 11 blocks all package build scripts by default. The allowBuilds
 # map below is security-sensitive — true = postinstall runs; false = skipped.
 # Warning: pnpm auto-manages this block. Edits made while pnpm install is
