@@ -16,11 +16,6 @@ minimumReleaseAge: 60
 #   - workerd: Cloudflare Workers runtime used by wrangler
 #   - @parcel/watcher: falls back to polling; safe to skip native build
 #   - vue-demi: alias/symlink script; not required at runtime
-# Force the entire workspace onto Vite 8 even though @nuxt/vite-builder
-# (Nuxt 4.4.6) declares a "vite": "^7.3.2" peer dependency.
-overrides:
-  vite: ^8.1.4
-
 allowBuilds:
   '@parcel/watcher': false
   better-sqlite3: true
