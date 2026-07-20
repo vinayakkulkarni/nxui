@@ -54,7 +54,6 @@
   const tool = ref<SignatureEraserTool>('pen');
   const effectIndex = ref(EFFECT_ORDER.indexOf(props.effect));
   const cleared = ref(false);
-  const restoring = ref(false);
   const strokeCount = ref(0);
 
   const activeEffect = computed(
@@ -70,6 +69,7 @@
   let particles: Particle[] = [];
   let frame = 0;
   let restoreTimer: ReturnType<typeof setTimeout> | null = null;
+  let themeObserver: MutationObserver | null = null;
   const rewind = { active: false, t: 0, duration: 110 };
 
   const DESIGN_W = 560;
@@ -136,6 +136,17 @@
     ctx.drawImage(inkCanvas, 0, 0, width.value, height.value);
   }
 
+  function recolorInk(): void {
+    if (!inkCtx) return;
+    inkCtx.save();
+    inkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    inkCtx.globalCompositeOperation = 'source-in';
+    inkCtx.fillStyle = inkColor();
+    inkCtx.fillRect(0, 0, width.value, height.value);
+    inkCtx.restore();
+    paintInk();
+  }
+
   function resize(): void {
     const canvas = canvasRef.value;
     if (!canvas || width.value === 0 || height.value === 0) return;
@@ -160,7 +171,7 @@
   }
 
   function onPointerDown(ev: PointerEvent): void {
-    if (cleared.value || restoring.value) return;
+    if (cleared.value) return;
     const canvas = canvasRef.value;
     if (!canvas) return;
     drawing = true;
@@ -174,7 +185,7 @@
   }
 
   function onPointerMove(ev: PointerEvent): void {
-    if (!drawing || cleared.value || restoring.value || !inkCtx) return;
+    if (!drawing || cleared.value || !inkCtx) return;
     const canvas = canvasRef.value;
     if (!canvas) return;
     const pos = pointerPos(ev, canvas);
@@ -239,7 +250,7 @@
   }
 
   function clearSignature(): void {
-    if (cleared.value || restoring.value) return;
+    if (cleared.value) return;
     const samples = collectInkSamples();
     cleared.value = true;
     emit('cleared', activeEffect.value);
@@ -305,7 +316,6 @@
     }
     particles = [];
     rewind.active = false;
-    restoring.value = false;
     rebuildInk();
     paintInk();
     cleared.value = false;
@@ -395,10 +405,16 @@
   onMounted(() => {
     inkCanvas = document.createElement('canvas');
     resize();
+    themeObserver = new MutationObserver(recolorInk);
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
   });
 
   onBeforeUnmount(() => {
     if (restoreTimer) clearTimeout(restoreTimer);
+    themeObserver?.disconnect();
     pause();
   });
 </script>
@@ -472,7 +488,7 @@
     </div>
 
     <p
-      v-if="cleared && !restoring"
+      v-if="cleared"
       class="pointer-events-none absolute inset-x-0 bottom-4 text-center font-mono text-xs text-foreground/70"
     >
       <template v-if="activeEffect === 'rewind'">reassembling…</template>
