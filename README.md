@@ -305,7 +305,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Noise Texture](https://nxui.geoql.in/docs/visual-effects/noise-texture)               | A subtle noise overlay that adds texture and depth to any container.                                                     |
 | [Particle Galaxy](https://nxui.geoql.in/docs/visual-effects/particle-galaxy)           | A swirling 3D particle galaxy effect with spiral arms that responds to mouse movement.                                   |
 | [Pixel Canvas](https://nxui.geoql.in/docs/visual-effects/pixel-canvas)                 | An interactive pixel grid canvas that responds to mouse movement with customizable colors.                               |
-| [Pixel Wave](https://nxui.geoql.in/docs/visual-effects/pixel-wave)                     | A looping pixel-art ocean swell rendered on a dark LED grid of colored patches.                                          |
+| [Pixel Wave](https://nxui.geoql.in/docs/visual-effects/pixel-wave)                     | A looping pixel-art scene on a dark LED grid with four swappable presets (ocean, desert, hearth, mind).                  |
 
 ### Buttons (3)
 

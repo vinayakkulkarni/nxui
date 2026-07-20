@@ -1,6 +1,6 @@
 ---
 title: Pixel Wave
-description: A looping pixel-art ocean swell rendered on a dark LED grid of colored patches.
+description: A looping pixel-art scene rendered on a dark LED grid of colored patches, with four swappable presets.
 ---
 
 ::demo-pixel-wave
@@ -28,25 +28,33 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/pixel-wave.json"
 </template>
 ```
 
-A fixed 20×19 grid of square cells renders a rolling ocean swell. The grid
-never moves — the animation is pure cell-state: foam, turquoise crest, teal,
-ocean blue and deep navy bands turn on and off as two travelling sine layers
-morph the waterline through crest, trough, a near-black fade window, and a
-rebuild before the loop restarts. Empty cells keep a faint LED outline, so
-the display reads as a pixel patch panel even when the wave is gone.
+A fixed 20×19 grid of square cells renders a looping pixel-art scene. The
+grid never moves — the animation is pure cell-state: colored bands turn on
+and off as procedural fields morph through a crest, trough, near-black fade
+window, and a rebuild before the loop restarts. Empty cells keep a faint LED
+outline, so the display reads as a pixel patch panel even when the scene is
+gone.
+
+Four `scene` presets ship built in, each with its own palette and motion:
+
+- **`tahiti`** — a rolling ocean swell of foam, turquoise, teal and navy.
+- **`desert`** — sky bands over a pulsing sun disc and undulating dunes.
+- **`hearth`** — an inverted-triangle flame from white core to crimson tips.
+- **`mind`** — two sparse threads that drift, briefly meet, then separate.
 
 The canvas sizes itself to its container (cells scale to fit), honors
 `prefers-reduced-motion` by freezing on a static frame, and reports the
-current swell phase through the `phase` event so you can drive captions or
+current phase through the `phase` event so you can drive captions or
 accessibility status text.
 
 ## Props
 
-| Prop               | Type      | Default | Description                               |
-| ------------------ | --------- | ------- | ----------------------------------------- |
-| `speed`            | `number`  | `1`     | Animation speed multiplier                |
-| `vertical-padding` | `number`  | `0`     | Extra empty rows above and below the grid |
-| `animate`          | `boolean` | `true`  | Run the looping swell animation           |
+| Prop               | Type             | Default    | Description                                          |
+| ------------------ | ---------------- | ---------- | ---------------------------------------------------- |
+| `scene`            | `PixelWaveScene` | `'tahiti'` | Scene preset: `tahiti`, `desert`, `hearth` or `mind` |
+| `speed`            | `number`         | `1`        | Animation speed multiplier                           |
+| `vertical-padding` | `number`         | `0`        | Extra empty rows above and below the grid            |
+| `animate`          | `boolean`        | `true`     | Run the looping animation                            |
 
 ## Events
 
@@ -56,4 +64,5 @@ accessibility status text.
 
 ## Credits
 
-Inspired by a pixel-patch ocean wave experiment shared in the Vue community.
+Inspired by a series of pixel-patch scene experiments shared in the Vue
+community.
