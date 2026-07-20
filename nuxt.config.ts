@@ -439,23 +439,5 @@ export default defineNuxtConfig({
         },
       },
     },
-    experimental: {
-      wasm: true,
-    },
-    wasm: {
-      esmImport: true,
-      lazy: true,
-      silent: true,
-    },
-    rollupConfig: {
-      output: {
-        generatedCode: {
-          constBindings: true,
-        },
-      },
-    },
-    replace: {
-      'process.stdout': 'undefined',
-    },
   },
 });
