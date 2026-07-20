@@ -1,16 +1,24 @@
 <script setup lang="ts">
-  import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+  import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
   import { useElementSize, useMediaQuery, useRafFn } from '@vueuse/core';
-  import { computeField, phaseOf, WAVE_COLS, WAVE_ROWS } from './wave';
-  import type { PixelWavePhase } from './types';
+  import {
+    computeField,
+    phaseOf,
+    SCENE_PALETTES,
+    WAVE_COLS,
+    WAVE_ROWS,
+  } from './wave';
+  import type { PixelWavePhase, PixelWaveScene } from './types';
 
   const props = withDefaults(
     defineProps<{
+      scene?: PixelWaveScene;
       speed?: number;
       verticalPadding?: number;
       animate?: boolean;
     }>(),
     {
+      scene: 'tahiti',
       speed: 1,
       verticalPadding: 0,
       animate: true,
@@ -32,15 +40,7 @@
   let lastPhase: PixelWavePhase | '' = '';
   const field = new Uint8Array(WAVE_COLS * WAVE_ROWS);
 
-  const PALETTE: [number, number, number][] = [
-    [10, 14, 20], // 0 empty (near-black, rarely used)
-    [250, 250, 248], // 1 foam
-    [148, 163, 171], // 2 gray spray
-    [45, 212, 191], // 3 turquoise
-    [20, 158, 178], // 4 teal
-    [37, 99, 196], // 5 ocean blue
-    [19, 42, 99], // 6 deep navy
-  ];
+  const palette = computed(() => SCENE_PALETTES[props.scene]);
 
   function resize(): void {
     const canvas = canvasRef.value;
@@ -74,7 +74,8 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
 
-    computeField(Math.floor(frame), field);
+    computeField(props.scene, Math.floor(frame), field);
+    const pal = palette.value;
 
     const pad = props.verticalPadding;
     for (let row = 0; row < rows; row++) {
@@ -91,7 +92,7 @@
           ctx.lineWidth = 1;
           ctx.strokeRect(x + 0.5, y + 0.5, cell - 1, cell - 1);
         } else {
-          const [r, g, b] = PALETTE[inWave]!;
+          const [r, g, b] = pal[inWave]!;
           ctx.fillStyle = `rgb(${r} ${g} ${b})`;
           ctx.fillRect(x, y, cell, cell);
         }
@@ -113,6 +114,13 @@
   );
 
   watch([width, height], resize);
+
+  watch(
+    () => props.scene,
+    () => {
+      if (!props.animate || prefersReduced.value) draw();
+    },
+  );
 
   watch([() => props.animate, prefersReduced], () => {
     if (props.animate && !prefersReduced.value) {
