@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>229 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>231 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (229)
+## Components (231)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
-> Paper Shaders depend on — so `npx shadcn-vue add` resolves 220 items total,
-> of which these 229 are user-facing components.
+> Paper Shaders depend on — so `npx shadcn-vue add` resolves 232 items total,
+> of which these 231 are user-facing components.
 
 ### Text Animations (33)
 
@@ -144,7 +144,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (75)
+### Components (76)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -213,6 +213,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Scrub Input](https://nxui.geoql.in/docs/components/scrub-input)                     | An inline slider input styled as a pill, perfect for adjusting variables smoothly.                                                                                     |
 | [Showcase Card](https://nxui.geoql.in/docs/components/showcase-card)                 | A card with 3D tilt effect that responds to mouse movement for showcasing content.                                                                                     |
 | [Signature](https://nxui.geoql.in/docs/components/signature)                         | Animated handwriting effect that converts text to font glyph paths and reveals them with staggered SVG stroke animations.                                              |
+| [Signature Eraser](https://nxui.geoql.in/docs/components/signature-eraser)           | A signing canvas whose ink disintegrates into five physics-based particle effects.                                                                                     |
 | [Split Flap Display](https://nxui.geoql.in/docs/components/split-flap-display)       | An airport-style split flap display with staggered character flip animations and configurable rows.                                                                    |
 | [Spotlight Card](https://nxui.geoql.in/docs/components/spotlight-card)               | A card that follows the cursor with a spotlight glow effect on hover.                                                                                                  |
 | [Stack](https://nxui.geoql.in/docs/components/stack)                                 | Draggable card stack with spring animations and send-to-back gesture.                                                                                                  |
@@ -289,7 +290,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Silk Aurora](https://nxui.geoql.in/docs/hero-backgrounds/silk-aurora)             | Premium WebGL hero with satin-dark aurora ribbons, pearlescent highlights, fine film grain, and cursor depth that bends the light toward the pointer.                             |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
 
-### Visual Effects (11)
+### Visual Effects (12)
 
 | Component                                                                              | Description                                                                                                              |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
@@ -304,6 +305,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Noise Texture](https://nxui.geoql.in/docs/visual-effects/noise-texture)               | A subtle noise overlay that adds texture and depth to any container.                                                     |
 | [Particle Galaxy](https://nxui.geoql.in/docs/visual-effects/particle-galaxy)           | A swirling 3D particle galaxy effect with spiral arms that responds to mouse movement.                                   |
 | [Pixel Canvas](https://nxui.geoql.in/docs/visual-effects/pixel-canvas)                 | An interactive pixel grid canvas that responds to mouse movement with customizable colors.                               |
+| [Pixel Wave](https://nxui.geoql.in/docs/visual-effects/pixel-wave)                     | A looping pixel-art ocean swell rendered on a dark LED grid of colored patches.                                          |
 
 ### Buttons (3)
 
