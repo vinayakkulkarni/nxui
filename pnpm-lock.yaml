@@ -33,8 +33,8 @@ importers:
         specifier: ^3.0.2
         version: 3.0.2(magicast@0.5.3)
       '@nuxtjs/robots':
-        specifier: ^6.1.2
-        version: 6.1.2(8ea4a07cc2bc2ee36cd03b0339bed753)
+        specifier: ^6.1.3
+        version: 6.1.3(8ea4a07cc2bc2ee36cd03b0339bed753)
       '@nuxtjs/sitemap':
         specifier: ^8.2.2
         version: 8.2.2(8ea4a07cc2bc2ee36cd03b0339bed753)
@@ -1211,8 +1211,8 @@ packages:
   '@nuxtjs/plausible@3.0.2':
     resolution: {integrity: sha512-6z01a7XbggSmI4CTWCkDDmLHQNm7wob2dx1QnvpIoo+YEV19298+GsuvlBclXVxXSk7op8r8qJpw25xKo8mzQQ==}
 
-  '@nuxtjs/robots@6.1.2':
-    resolution: {integrity: sha512-1jEoIfhxl2goQ7hHyG4SGLnypK+N3N4oNEL7eTE7vO21+2yXcYqNUCUtm9E3CVFHz3X5wKzv7O83XV4daH9Ygg==}
+  '@nuxtjs/robots@6.1.3':
+    resolution: {integrity: sha512-t1EAXgJ5A3QfwVOzWrHCuojHhirKDtUMOuoUPBVvfxyDGKIsHwnif5+4vR9HQK2fdOZqiSE/TfBsWiZhjJleOw==}
     peerDependencies:
       zod: '>=3'
     peerDependenciesMeta:
@@ -8475,15 +8475,15 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxtjs/robots@6.1.2(8ea4a07cc2bc2ee36cd03b0339bed753)':
+  '@nuxtjs/robots@6.1.3(8ea4a07cc2bc2ee36cd03b0339bed753)':
     dependencies:
       '@fingerprintjs/botd': 2.0.0
-      '@nuxt/kit': 4.4.8(magicast@0.5.3)
+      '@nuxt/kit': 4.5.0(magic-string@1.0.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.1)(rolldown@1.2.0)(rollup@4.62.2)(vite@8.1.4(@types/node@26.1.0)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.48.0)(tsx@4.23.1)(yaml@2.9.0)))
       consola: 3.4.2
       defu: 6.1.7
       h3: 1.15.11
-      nuxt-site-config: 4.1.1(8ea4a07cc2bc2ee36cd03b0339bed753)
-      nuxtseo-shared: 5.3.2(c8073ed7bc9d7a1edd2b6c702154470d)
+      nuxt-site-config: 4.1.2(8ea4a07cc2bc2ee36cd03b0339bed753)
+      nuxtseo-shared: 5.3.3(835093c3395d1e816886b3646414be43)
       pathe: 2.0.3
       pkg-types: 2.3.1
       ufo: 1.6.4
