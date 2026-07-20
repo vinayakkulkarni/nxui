@@ -61,10 +61,10 @@ function globalIntensity(frame: number): number {
 function surfaceHeight(col: number, frame: number): number {
   const t = loopT(frame);
   const x = col / (WAVE_COLS - 1);
-  const crest = Math.sin(x * Math.PI + t * TAU * 2) * 2.6;
+  const crest = Math.sin(x * Math.PI + t * TAU * 2) * 3.4;
   const swell = Math.sin(x * TAU * 0.8 - t * TAU) * 2.2;
   const chop = Math.sin(x * TAU * 2.4 + t * TAU * 3) * 0.9;
-  const baseline = 11.4 + Math.sin(t * TAU) * 1.6;
+  const baseline = 13.2 + Math.sin(t * TAU) * 1.8;
   return baseline - (crest + swell + chop);
 }
 

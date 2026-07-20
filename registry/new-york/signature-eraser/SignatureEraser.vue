@@ -83,9 +83,13 @@
 
   function scaleStroke(stroke: SignatureEraserStroke): SignatureEraserStroke {
     const sx = width.value / DESIGN_W;
-    const sy = height.value / DESIGN_H;
+    const sy = Math.min(height.value / DESIGN_H, sx * 1.25);
+    const offsetY = (height.value - DESIGN_H * sy) / 2;
     return {
-      points: stroke.points.map((p) => ({ x: p.x * sx, y: p.y * sy })),
+      points: stroke.points.map((p) => ({
+        x: p.x * sx,
+        y: p.y * sy + offsetY,
+      })),
     };
   }
 
@@ -421,7 +425,7 @@
     >
       <button
         type="button"
-        class="flex h-7 items-center gap-1.5 rounded-full px-2.5 text-xs font-medium transition-colors"
+        class="flex h-9 items-center gap-1.5 rounded-full px-2.5 text-xs font-medium transition-colors sm:h-7"
         :class="
           tool === 'pen'
             ? 'bg-foreground text-background'
@@ -434,7 +438,7 @@
       </button>
       <button
         type="button"
-        class="flex h-7 items-center gap-1.5 rounded-full px-2.5 text-xs font-medium transition-colors"
+        class="flex h-9 items-center gap-1.5 rounded-full px-2.5 text-xs font-medium transition-colors sm:h-7"
         :class="
           tool === 'eraser'
             ? 'bg-foreground text-background'
@@ -450,7 +454,7 @@
     <div class="absolute top-3 right-3 flex items-center gap-1.5">
       <button
         type="button"
-        class="flex h-7 items-center gap-1.5 rounded-full border border-border/50 bg-background/80 px-2.5 font-mono text-xs text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
+        class="flex h-9 items-center gap-1.5 rounded-full border border-border/50 bg-background/80 px-2.5 font-mono text-xs text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground sm:h-7"
         title="Cycle erase effect"
         @click="cycleEffect"
       >
@@ -459,7 +463,7 @@
       </button>
       <button
         type="button"
-        class="flex h-7 items-center gap-1.5 rounded-full bg-foreground px-3 text-xs font-medium text-background transition-opacity hover:opacity-85 disabled:opacity-40"
+        class="flex h-9 items-center gap-1.5 rounded-full bg-foreground px-3 text-xs font-medium text-background transition-opacity hover:opacity-85 disabled:opacity-40 sm:h-7"
         :disabled="cleared"
         @click="clearSignature"
       >
@@ -469,7 +473,7 @@
 
     <p
       v-if="cleared && !restoring"
-      class="pointer-events-none absolute inset-x-0 bottom-4 text-center font-mono text-xs text-muted-foreground"
+      class="pointer-events-none absolute inset-x-0 bottom-4 text-center font-mono text-xs text-foreground/70"
     >
       <template v-if="activeEffect === 'rewind'">reassembling…</template>
       <template v-else>signature erased · {{ effectLabel }}</template>
