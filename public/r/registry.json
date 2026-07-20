@@ -466,6 +466,18 @@
       "description": "WebGL image transitions with noisy refractive waves, chromatic edges, glow, and click-triggered ripple origins."
     },
     {
+      "name": "signature-eraser",
+      "type": "registry:ui",
+      "title": "Signature Eraser",
+      "description": "A signing canvas whose ink disintegrates into physics particles — Thanos Snap, Black Hole, Explosion, Wind Sweep, and Rewind effects."
+    },
+    {
+      "name": "pixel-wave",
+      "type": "registry:ui",
+      "title": "Pixel Wave",
+      "description": "A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild."
+    },
+    {
       "name": "pixel-snow",
       "type": "registry:ui",
       "title": "Pixel Snow",
