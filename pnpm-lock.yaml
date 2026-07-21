@@ -48,8 +48,8 @@ importers:
         specifier: 0.0.77
         version: 0.0.77
       '@tanstack/vue-table':
-        specifier: ^9.0.0-beta.51
-        version: 9.0.0-beta.51(vue@3.6.0-beta.17(typescript@6.0.3))
+        specifier: ^9.0.0-beta.55
+        version: 9.0.0-beta.55(vue@3.6.0-beta.17(typescript@6.0.3))
       '@tweakpane/plugin-essentials':
         specifier: ^0.2.1
         version: 0.2.1(tweakpane@4.0.5)
@@ -2580,15 +2580,15 @@ packages:
   '@tanstack/store@0.11.0':
     resolution: {integrity: sha512-WlzzCt3xi0G6pCAJu1U+2jiECwabETDpQDi3hfkFZvJii9AuZqEKbOiVarX1/bWhTNjU486yQtJCCasi/0q+Cw==}
 
-  '@tanstack/table-core@9.0.0-beta.51':
-    resolution: {integrity: sha512-6x8qVMt7ZqqpLh2idih/FaEANN2C+PiTa6xocqQoMtlMCfUzGzuhLttO4TDGh4A+B/CT6JuDgfbkPXPPZ1WuyQ==}
+  '@tanstack/table-core@9.0.0-beta.55':
+    resolution: {integrity: sha512-kSSWcE+ffHAGoLUGDywYF9mMP15Xb/PNK6LLnYwsgfKURLaqR+HvsGYBes52PytT+zxhf1qMWcDdIqPVG3loIg==}
     engines: {node: '>=20'}
 
   '@tanstack/virtual-core@3.17.3':
     resolution: {integrity: sha512-8Np/TFELpI0ySuJoVmjvOrQYXH/8sTX0Biv9szhFhY39xOdAAY+smrMxjxOum/ux3eM8MUJQsEJ0/R0UpvC8dw==}
 
-  '@tanstack/vue-table@9.0.0-beta.51':
-    resolution: {integrity: sha512-aE8NMXGlDLQYBwSG7br6pzNzXlUOPM2OXt0Ja7Iy+h2uv0FCzqVWt8KgO3qwc2hbABiYuPjd/8V5Fj+jdbj/lg==}
+  '@tanstack/vue-table@9.0.0-beta.55':
+    resolution: {integrity: sha512-1EdORCLHbhPS59ZYd9UU/HrNqUWixILom+lHmyGGCyX1q23ftQ6tRjOlCCMHRtLVUxKdymf3u7Ry3Axy5RDILg==}
     engines: {node: '>=20'}
     peerDependencies:
       vue: '>=3.2'
@@ -9363,16 +9363,16 @@ snapshots:
 
   '@tanstack/store@0.11.0': {}
 
-  '@tanstack/table-core@9.0.0-beta.51':
+  '@tanstack/table-core@9.0.0-beta.55':
     dependencies:
       '@tanstack/store': 0.11.0
 
   '@tanstack/virtual-core@3.17.3': {}
 
-  '@tanstack/vue-table@9.0.0-beta.51(vue@3.6.0-beta.17(typescript@6.0.3))':
+  '@tanstack/vue-table@9.0.0-beta.55(vue@3.6.0-beta.17(typescript@6.0.3))':
     dependencies:
       '@tanstack/store': 0.11.0
-      '@tanstack/table-core': 9.0.0-beta.51
+      '@tanstack/table-core': 9.0.0-beta.55
       vue: 3.6.0-beta.17(typescript@6.0.3)
 
   '@tanstack/vue-virtual@3.13.31(vue@3.6.0-beta.17(typescript@6.0.3))':
