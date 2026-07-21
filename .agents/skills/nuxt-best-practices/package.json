@@ -1,6 +1,6 @@
 {
   "name": "nuxt-best-practices",
-  "version": "1.2.1",
+  "version": "1.7.0",
   "description": "Nuxt.js performance optimization best practices for AI agents",
   "license": "MIT",
   "author": {
@@ -8,8 +8,12 @@
     "email": "inbox.vinayak@gmail.com",
     "url": "https://vinayakkulkarni.dev"
   },
+  "type": "module",
   "scripts": {
-    "build": "bun run scripts/build.ts",
-    "validate": "bun run scripts/validate.ts"
+    "build": "node scripts/build.ts",
+    "validate": "node scripts/validate.ts"
+  },
+  "devDependencies": {
+    "yaml": "^2.9.0"
   }
 }

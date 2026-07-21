@@ -1,22 +1,26 @@
 ---
-title: Use Plain JS Objects for Satori Elements, NEVER React
+title: Build Satori Element Trees Without the React Runtime
 impact: CRITICAL
-impactDescription: Prevents React dependency contamination in Vue projects
+impactDescription: Avoids pulling the React runtime into a Vue project for OG generation
 tags: og-image, satori, react, vue, element-helper
 ---
 
-## Use Plain JS Objects for Satori Elements, NEVER React
+## Build Satori Element Trees Without the React Runtime
 
-Satori (the library that renders OG images) accepts plain JavaScript objects with `{ type, props }` shape. The `@cf-wasm/og` package exports an `html-to-react` utility, but **NEVER use it in Vue projects**. It imports React, which is a hard violation in Vue codebases. Instead, use a simple `el()` helper function.
+Satori renders OG images from **React-elements-like objects** — plain objects shaped `{ type, props: { style, children } }`. That element data model IS Satori's API and is unavoidable; the objects are React-element-_shaped_ by design. The thing to avoid in a Vue project is the React **runtime/package** dependency, not React's element shape.
+
+Concretely: `@cf-wasm/og` ships an `html-to-react` utility whose `t()` parser pulls in React. Don't use it in a Vue codebase — it adds React as a real dependency. Instead, construct the same `{ type, props }` objects yourself with a tiny `el()` helper (no React import).
+
+> If you prefer JSX ergonomics without React, Satori also ships an experimental `satori/jsx` JSX runtime — an officially-sanctioned alternative that needs no React package.
 
 **Incorrect (importing React utilities):**
 
 ```typescript
-// ❌ WRONG — NEVER import React or React-related utilities in a Vue project
+// ❌ WRONG — html-to-react's t() pulls the React runtime into a Vue project
 import { t } from '@cf-wasm/og/html-to-react';
 
 export default defineEventHandler(async (event) => {
-  // This pulls in React as a dependency — FORBIDDEN in Vue projects
+  // t() imports React — avoid this dependency in a Vue codebase
   const element = t('<div style="display:flex">Hello</div>');
   // ...
 });
@@ -27,8 +31,9 @@ export default defineEventHandler(async (event) => {
 ```typescript
 // ✅ CORRECT — Plain JS objects, zero React dependency
 
-// Satori element helper — creates { type, props } objects
-// Satori requires display:flex on divs with 2+ children, and chokes on children:[]
+// Satori element helper — creates { type, props } objects (React-element-shaped, no React)
+// Satori defaults `display` to flex; just don't override multi-child divs to a
+// non-flex value. It also chokes on children:[]
 function el(
   type: string,
   style: Record<string, unknown>,
@@ -77,4 +82,4 @@ el(
 );
 ```
 
-**HARD RULE: No React in Vue projects. Ever. Not even for OG image generation.**
+**RULE: In a Vue project, don't add the React runtime for OG generation.** The `{ type, props }` element objects Satori consumes are React-element-shaped — that's Satori's API, not a React dependency. Build them with `el()` (or `satori/jsx`), and avoid `html-to-react`'s `t()`, which imports React.

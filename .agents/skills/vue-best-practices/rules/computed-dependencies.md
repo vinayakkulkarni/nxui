@@ -1,39 +1,15 @@
 ---
-title: Minimize Computed Dependencies
+title: Understand Fine-Grained Dependency Tracking in Computeds
 impact: HIGH
-impactDescription: Reduces unnecessary recalculations
-tags: computed, dependencies, optimization
+impactDescription: Read only the properties you need to avoid over-tracking
+tags: computed, dependencies, reactivity, tracking
 ---
 
-## Minimize Computed Dependencies
+## Understand Fine-Grained Dependency Tracking in Computeds
 
-Computed properties recalculate when ANY dependency changes. Keep dependencies minimal and focused.
+Vue's reactivity tracks dependencies **per property**, not per object. Under the hood each property read runs `track(target, key)`, so a computed depends only on the exact keys it reads — not on the whole object that contains them. Over-tracking happens only when your code reads _more_ keys than it needs.
 
-**Incorrect (too many dependencies):**
-
-```vue
-<script setup>
-  import { reactive, computed } from 'vue';
-
-  const state = reactive({
-    user: {
-      name: 'John',
-      email: 'john@example.com',
-      preferences: { theme: 'dark', notifications: true },
-      lastLogin: new Date(),
-      sessionCount: 42,
-    },
-  });
-
-  // BAD: Depends on entire user object
-  // Recalculates when ANY user property changes
-  const greeting = computed(() => {
-    return `Hello, ${state.user.name}!`;
-  });
-</script>
-```
-
-**Correct (minimal dependencies):**
+**Per-property tracking (this is already optimal):**
 
 ```vue
 <script setup>
@@ -49,40 +25,60 @@ Computed properties recalculate when ANY dependency changes. Keep dependencies m
     },
   });
 
-  // GOOD: Only depends on user.name
-  // Only recalculates when name changes
-  const greeting = computed(() => {
-    return `Hello, ${state.user.name}!`;
+  // Reading state.user.name tracks ONLY the `name` key.
+  // This re-runs when name changes — NOT when email, lastLogin,
+  // sessionCount, or preferences change.
+  const greeting = computed(() => `Hello, ${state.user.name}!`);
+</script>
+```
+
+There is nothing to "minimize" here — accessing `state.user.name` does not make the computed depend on the entire `user` object.
+
+**Anti-pattern: reading far more keys than you need.**
+
+```vue
+<script setup>
+  import { reactive, computed } from 'vue';
+
+  const state = reactive({
+    user: { name: 'John', email: 'john@example.com', sessionCount: 42 },
+  });
+
+  // BAD: JSON.stringify walks EVERY key of state, so the computed now
+  // depends on every property and re-runs on any change.
+  const cacheKey = computed(() => JSON.stringify(state));
+
+  // BAD: spreading reads every own key of user — tracks all of them.
+  const copy = computed(() => ({ ...state.user }));
+
+  // BAD: iterating all keys to use just one.
+  const name = computed(() => {
+    for (const key of Object.keys(state.user)) {
+      if (key === 'name') return state.user[key];
+    }
   });
 </script>
 ```
 
-**Extract only needed properties:**
+**Good: read exactly the properties you need.**
 
 ```vue
 <script setup>
-  import { ref, computed } from 'vue'
+  import { reactive, computed } from 'vue';
 
-  const items = ref<Item[]>([...])
+  const state = reactive({
+    user: { name: 'John', email: 'john@example.com', sessionCount: 42 },
+  });
 
-  // BAD: Depends on entire items array
-  // Recalculates when ANY item changes
-  const expensiveComputed = computed(() => {
-    return items.value.some(item => item.status === 'active')
-  })
+  // GOOD: depends only on `name`
+  const displayName = computed(() => state.user.name);
 
-  // BETTER: Derive a simpler dependency first
-  const activeStatuses = computed(() =>
-    items.value.map(item => item.status)
-  )
-
-  const hasActiveItem = computed(() =>
-    activeStatuses.value.includes('active')
-  )
+  // GOOD: if you need a cache key, build it from the specific fields
+  const cacheKey = computed(() => `${state.user.name}:${state.user.email}`);
 </script>
 ```
 
-**Avoid computed chains with overlapping deps:**
+**Chaining computeds is fine — Vue does not multiply recomputation.**
 
 ```vue
 <script setup>
@@ -90,40 +86,47 @@ Computed properties recalculate when ANY dependency changes. Keep dependencies m
 
   const data = ref({ a: 1, b: 2, c: 3 });
 
-  // BAD: Overlapping dependencies cause extra recalculations
+  // Sharing `b` across two computeds does NOT cause "b counted twice".
+  // Each computed re-evaluates at most once per flush, regardless of how
+  // many downstream computeds depend on it.
   const sumAB = computed(() => data.value.a + data.value.b);
   const sumBC = computed(() => data.value.b + data.value.c);
-  const total = computed(() => sumAB.value + sumBC.value); // b counted twice
-
-  // BETTER: Direct calculation
-  const total = computed(() => data.value.a + data.value.b + data.value.c);
+  const total = computed(() => sumAB.value + sumBC.value);
 </script>
 ```
 
-**Use separate refs for independent values:**
+Chaining is a legitimate way to structure complex derivations. If you flatten a chain into one computed, do it for readability — not to avoid a recomputation cost that doesn't exist:
 
 ```vue
 <script setup>
   import { ref, computed } from 'vue';
 
-  // BAD: One reactive object
-  const form = reactive({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const data = ref({ a: 1, b: 2, c: 3 });
 
-  // Any change triggers this recompute
-  const isValid = computed(() => form.name && form.email);
-
-  // GOOD: Separate refs for truly independent values
-  const name = ref('');
-  const email = ref('');
-  const message = ref('');
-
-  // Only depends on name and email, not message
-  const isValid = computed(() => name.value && email.value);
+  // Equivalent result; flatten only when it reads more clearly.
+  const total = computed(() => data.value.a + data.value.b + data.value.c);
 </script>
 ```
 
-Reference: [Computed Best Practices](https://vuejs.org/guide/essentials/computed.html#best-practices)
+**Separate refs vs one reactive object — a readability choice, not a tracking one.**
+
+```vue
+<script setup>
+  import { reactive, ref, computed } from 'vue';
+
+  // A reactive object does NOT re-trigger this computed on unrelated key
+  // changes: reading form.name and form.email tracks only those two keys,
+  // so changing form.message does not invalidate isValid.
+  const form = reactive({ name: '', email: '', message: '' });
+  const isValid = computed(() => form.name && form.email);
+
+  // Splitting into separate refs is equally valid — choose based on how you
+  // want to group and pass the values around, not for a tracking benefit.
+  const name = ref('');
+  const email = ref('');
+  const message = ref('');
+  const isValidRefs = computed(() => name.value && email.value);
+</script>
+```
+
+Reference: [Reactivity in Depth](https://vuejs.org/guide/extras/reactivity-in-depth.html), [Computed Best Practices](https://vuejs.org/guide/essentials/computed.html#best-practices)

@@ -71,6 +71,16 @@ export default defineEventHandler(async (event) => {
   try {
     // Dynamic import — @cf-wasm/og/workerd only works on CF Workers, not Node.js dev
     const { ImageResponse } = await import('@cf-wasm/og/workerd');
+    const { cache } = await import('@cf-wasm/og/workerd');
+
+    // REQUIRED on Workers/Pages: give @cf-wasm/og the execution context so it
+    // can cache the fetched WASM/font assets across invocations. Nitro exposes
+    // the CF execution context on the h3 event.
+    const ctx = event.context.cloudflare?.context;
+    if (ctx) {
+      cache.setExecutionContext(ctx);
+    }
+
     const response = await ImageResponse.async(element, {
       width: 1200,
       height: 630,
@@ -97,9 +107,14 @@ export default defineEventHandler(async (event) => {
 
 - Use `await import('@cf-wasm/og/workerd')` — dynamic import is required for the Workerd runtime
 - Use `ImageResponse.async()` (not `new ImageResponse()`) for the async WASM initialization
+- Call `cache.setExecutionContext(ctx)` (from `@cf-wasm/og/workerd`) before `ImageResponse.async()` — the package README mandates this on Workers/Pages so it can persist fetched WASM/font assets. Obtain the context from `event.context.cloudflare?.context` in the Nitro/h3 handler.
 - Standard dimensions: `1200x630` pixels for OG images
 - The `el()` helper creates plain JS objects that Satori understands — see `og-no-react` rule
 - This route won't work in local `nuxt dev` (Node.js) — test on CF Workers preview or production
 - Add proper error handling with `createError` for debugging failed generations
 
-Reference: [@cf-wasm/og](https://github.com/nicepkg/cf-wasm)
+**Fonts:** Satori needs font data to render any text. `@cf-wasm/og` bundles Noto Sans as the default font, so the examples above work out of the box. To use custom fonts, pass them via the `GoogleFont` or `CustomFont` helpers from `@cf-wasm/og` in the `fonts` option — don't assume arbitrary `fontFamily` values will resolve without providing the font.
+
+**Workers limits:** Image generation is CPU- and memory-intensive. Stay within the Workers CPU-time limit, the 128 MB memory ceiling, and the 3 MB compressed script-size limit (free plan). Avoid loading multiple large font files into a single Worker — each font inflates both memory use and bundle size.
+
+Reference: [@cf-wasm/og](https://github.com/fineshopdesign/cf-wasm)

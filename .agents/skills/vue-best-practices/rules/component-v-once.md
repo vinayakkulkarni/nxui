@@ -1,6 +1,6 @@
 ---
 title: Use v-once for Static Content
-impact: CRITICAL
+impact: MEDIUM
 impactDescription: Eliminates re-render cost for static elements
 tags: component, v-once, static, performance
 ---
@@ -101,19 +101,29 @@ Content that never changes after initial render should use `v-once` to skip all 
 </template>
 ```
 
-**v-once with slots:**
+**v-once inside a slot:**
+
+Put `v-once` on the element inside the slot, not on the `<template>` slot tag.
 
 ```vue
 <!-- Parent component -->
 <template>
   <Card>
-    <template #header v-once>
-      <h2>Static Header</h2>
+    <template #header>
+      <h2 v-once>Static Header</h2>
     </template>
     <template #content>
       <p>{{ dynamicContent }}</p>
     </template>
   </Card>
+</template>
+```
+
+**v-once with v-for (render the list once):**
+
+```vue
+<template>
+  <li v-for="i in list" v-once>{{ i }}</li>
 </template>
 ```
 

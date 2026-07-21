@@ -1,6 +1,6 @@
 ---
 name: nuxt-best-practices
-description: Nuxt 3/4 performance optimization and architecture guidelines for building fast, maintainable full-stack applications. This skill should be used when writing, reviewing, or refactoring Nuxt code to ensure optimal patterns. Triggers on tasks involving data fetching, server routes, auto-imports, rendering modes, or Nuxt-specific features.
+description: Nuxt 4 performance optimization and architecture guidelines (current through Nuxt 4.5) for building fast, maintainable full-stack applications. This skill should be used when writing, reviewing, or refactoring Nuxt code to ensure optimal patterns. Triggers on tasks involving data fetching, server routes, auto-imports, rendering modes, layouts, named views, or Nuxt-specific features.
 license: MIT
 metadata:
   author: vinayakkulkarni
@@ -9,18 +9,19 @@ metadata:
 
 # Nuxt Best Practices
 
-Comprehensive performance optimization guide for Nuxt 3/4 applications. Contains 40+ rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
+Comprehensive performance optimization guide for Nuxt 4 applications (current: Nuxt 4.5, with notes for 3.x apps approaching EOL). Contains 23 rules across 9 categories, prioritized by impact to guide automated refactoring and code generation.
 
 ## When to Apply
 
 Reference these guidelines when:
 
 - Writing new Nuxt pages, components, or composables
-- Implementing data fetching (useFetch, useAsyncData)
+- Implementing data fetching (useFetch, useAsyncData, the 4.5 `enabled` option)
 - Creating server routes and API endpoints
 - Organizing types, composables, and auto-imports
 - Working with Nuxt modules and plugins
-- Configuring rendering modes (SSR, SSG, SPA)
+- Configuring rendering modes (SSR, SSG, SPA, 4.5 experimental SSR streaming)
+- Using layouts, named views, and NuxtLink prefetching (Nuxt 4.5 conventions)
 
 ## Rule Categories by Priority
 
@@ -31,9 +32,10 @@ Reference these guidelines when:
 | 3        | Server & API Routes         | HIGH        | `server-`    |
 | 4        | Rendering Modes             | HIGH        | `rendering-` |
 | 5        | State Management            | MEDIUM-HIGH | `state-`     |
-| 6        | Type Safety                 | MEDIUM      | `types-`     |
-| 7        | Modules & Plugins           | LOW-MEDIUM  | `modules-`   |
-| 8        | Performance & Deployment    | LOW         | `perf-`      |
+| 6        | Pages, Layouts & Navigation | MEDIUM      | `pages-`     |
+| 7        | Type Safety                 | MEDIUM      | `types-`     |
+| 8        | Modules & Plugins           | LOW-MEDIUM  | `modules-`   |
+| 9        | Performance & Deployment    | LOW         | `perf-`      |
 
 ## Quick Reference
 
@@ -45,6 +47,7 @@ Reference these guidelines when:
 - `data-transform` - Transform data at fetch time, not in template
 - `data-error-handling` - Always handle error and pending states
 - `data-refresh-patterns` - Use refresh() and clear() appropriately
+- `data-conditional-enabled` - Use the `enabled` option for conditional fetching (4.5+)
 
 ### 2. Auto-Imports & Organization (CRITICAL)
 
@@ -68,6 +71,7 @@ Reference these guidelines when:
 - `rendering-hybrid` - Use hybrid rendering for optimal performance
 - `rendering-prerender` - Prerender static pages at build time
 - `rendering-client-only` - Use ClientOnly for browser-specific components
+- `rendering-ssr-streaming` - Understand SSR streaming before enabling it (4.5+, experimental)
 
 ### 5. State Management (MEDIUM-HIGH)
 
@@ -76,22 +80,28 @@ Reference these guidelines when:
 - `state-hydration` - Handle hydration mismatches properly
 - `state-computed-over-watch` - Prefer computed over watch for derived state
 
-### 6. Type Safety (MEDIUM)
+### 6. Pages, Layouts & Navigation (MEDIUM)
+
+- `pages-use-layout` - Use useLayout to read the resolved layout (4.5+)
+- `pages-named-views` - Use the name@view.vue convention for named views (4.5+)
+- `pages-nuxtlink-custom-prefetch` - Wire prefetch manually in NuxtLink custom slots (4.5+)
+
+### 7. Type Safety (MEDIUM)
 
 - `types-no-inline` - Never define types inline in components/composables
 - `types-import-paths` - Use correct import paths (#shared, ~/, ~~/)
 - `types-no-any` - Never use `any` type
 - `types-zod-schemas` - Use Zod for runtime validation with type inference
-- `types-strict-emits` - Use kebab-case emits with full type definitions
+- `types-strict-emits` - Type emits fully; declare camelCase, listen kebab-case
 
-### 7. Modules & Plugins (LOW-MEDIUM)
+### 8. Modules & Plugins (LOW-MEDIUM)
 
 - `modules-order` - Module order matters in nuxt.config
 - `modules-runtime-vs-build` - Understand runtime vs build-time modules
 - `plugins-client-server` - Use .client.ts and .server.ts suffixes correctly
 - `plugins-provide-inject` - Use provide/inject for cross-cutting concerns
 
-### 8. Performance & Deployment (LOW)
+### 9. Performance & Deployment (LOW)
 
 - `perf-bundle-analysis` - Analyze and optimize bundle size
 - `perf-image-optimization` - Use nuxt/image for optimized images

@@ -1,11 +1,13 @@
 # Nuxt SEO Best Practices - Complete Reference
 
 > This file is auto-generated. Do not edit directly.
-> Edit individual rule files in the `rules/` directory and run `bun run build`.
+> Edit individual rule files in the `rules/` directory and run `pnpm build`.
 
 # Nuxt SEO Best Practices
 
 Comprehensive SEO optimization guide for Nuxt 4 applications deployed to Cloudflare Pages/Workers. Contains 11 rules across 4 categories, prioritized by impact to guide automated refactoring and code generation.
+
+> **Nuxt 4.5 note:** head management now runs on `unhead` v3 — `useHead` typing is stricter (type errors after upgrading are usually genuine tightening, not regressions) and promise input is no longer supported. All `useHead`/`useSeoMeta` examples in this skill use plain synchronous values and are v3-compatible.
 
 ## When to Apply
 
@@ -84,17 +86,16 @@ For the complete guide with all rules expanded: `AGENTS.md`
 
 ## Pin compatibilityDate, Never Use 'latest'
 
-Nuxt's `compatibilityDate` controls which Nitro runtime behaviors are active. Using `'latest'` resolves to a different date on every build, which can silently change how your app behaves in production.
+Nuxt's `compatibilityDate` pins the date Nitro uses to decide which deployment-preset features and default behaviors to enable, and it is forwarded to the `compatibility_date` in the generated Wrangler config. It is distinct from — but feeds — Cloudflare's Workers-runtime compatibility date. Leaving it unset (or on `'latest'`) means Nitro applies its newest default behavior, which can shift when you upgrade Nitro. Pin a date for reproducible builds.
 
-**Incorrect (using 'latest'):**
+**Incorrect (unset / using 'latest'):**
 
 ```typescript
-// ❌ WRONG — 'latest' resolves to a different date on each build
+// ❌ WRONG — Nitro applies its newest defaults, which can shift on upgrade
 // nuxt.config.ts
 export default defineNuxtConfig({
   compatibilityDate: 'latest',
-  // Today it might be 2025-07-18, tomorrow 2025-07-19
-  // Each date can change Nitro's internal behavior
+  // Behavior can change the next time you bump Nitro — not reproducible
 });
 ```
 
@@ -118,13 +119,13 @@ export default defineNuxtConfig({
 
 **How to find the right date:**
 
-- Use the date of your current Nuxt release
+- Use today's date (or your last-tested date)
+- If you rely on `nodejs_compat`, `compatibility_date` must be `>= 2024-09-23`
 - Check [Nitro changelog](https://github.com/unjs/nitro/releases) for what changed
 - Pin to the latest date that works with your deployment target
 
 **Real-world impact:** A `compatibilityDate` change can affect:
 
-- How `process.env` is handled in server routes
 - WASM module loading behavior
 - Node.js API compatibility layer
 - Response header defaults
@@ -145,7 +146,7 @@ Cloudflare Pages/Workers have specific requirements for WASM modules, Node.js AP
 // ❌ WRONG — Missing critical CF Workers config
 export default defineNuxtConfig({
   nitro: {
-    preset: 'cloudflare-pages',
+    preset: 'cloudflare_pages',
   },
 });
 ```
@@ -153,58 +154,93 @@ export default defineNuxtConfig({
 **Correct (full CF Pages config):**
 
 ```typescript
-// ✅ CORRECT — Full Cloudflare Pages configuration
+// ✅ CORRECT — Full Cloudflare configuration (single nitro block)
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-18',
 
   nitro: {
-    preset: 'cloudflare-pages',
-  },
+    // 'cloudflare_module' is the recommended preset for Workers deployments.
+    // Use 'cloudflare_pages' (underscore) if you deploy via Cloudflare Pages.
+    preset: 'cloudflare_module',
 
-  cloudflare: {
-    // Enable Node.js API compatibility (Buffer, crypto, etc.)
-    nodeCompat: true,
-  },
-
-  vite: {
-    // Replace process.stdout (not available in CF Workers)
-    define: {
-      'process.stdout': 'undefined',
-    },
-    ssr: {
-      // Externalize client-only libraries from server bundle
-      external: ['posthog-js'],
-    },
-  },
-
-  // WASM module support for @cf-wasm/og and similar packages
-  nitro: {
+    // WASM module support for @cf-wasm/og and similar packages
     wasm: {
       esmImport: true,
       lazy: true,
     },
   },
+
+  vite: {
+    ssr: {
+      // Externalize client-only libraries from server bundle
+      external: ['posthog-js'],
+    },
+  },
 });
+```
+
+**Enabling Node.js compatibility (Buffer, crypto, `process`, etc.):**
+
+There is no `cloudflare: { nodeCompat: true }` Nuxt key. Node.js compatibility comes from the `nodejs_compat` **compatibility flag** in your Wrangler config, which requires `compatibility_date >= 2024-09-23`:
+
+```jsonc
+// wrangler.jsonc
+{
+  "compatibility_date": "2024-09-23",
+  "compatibility_flags": ["nodejs_compat"],
+}
+```
+
+You can also let Nitro generate/merge this via the `nitro.cloudflare.wrangler` passthrough:
+
+```typescript
+// nuxt.config.ts
+export default defineNuxtConfig({
+  nitro: {
+    preset: 'cloudflare_module',
+    cloudflare: {
+      wrangler: {
+        compatibility_date: '2024-09-23',
+        compatibility_flags: ['nodejs_compat'],
+      },
+    },
+  },
+});
+```
+
+**`process.stdout` workaround (only without `nodejs_compat`):**
+
+If you have NOT enabled `nodejs_compat`, some libraries reference `process.stdout`, which doesn't exist on Workers. Stub it via Vite `define`:
+
+```typescript
+vite: {
+  define: {
+    // Only needed when nodejs_compat is NOT enabled.
+    // With the flag (compatibility_date >= 2024-09-23), `process` is natively supported.
+    'process.stdout': 'undefined',
+  },
+},
 ```
 
 **Configuration breakdown:**
 
-| Setting                           | Why                                                                     |
-| --------------------------------- | ----------------------------------------------------------------------- |
-| `compatibilityDate: '2025-07-18'` | Pinned date — never use `'latest'`                                      |
-| `cloudflare.nodeCompat: true`     | Enables `Buffer`, `crypto`, and other Node.js APIs on Workers           |
-| `process.stdout: 'undefined'`     | `process.stdout` doesn't exist on Workers — some libraries reference it |
-| `vite.ssr.external`               | Keeps client-only libraries out of the server bundle                    |
-| `wasm.esmImport: true`            | Allows `import wasm from './file.wasm'` syntax                          |
-| `wasm.lazy: true`                 | Lazy-loads WASM modules (required for CF Workers dynamic instantiation) |
+| Setting                                  | Why                                                                         |
+| ---------------------------------------- | --------------------------------------------------------------------------- |
+| `compatibilityDate: '2025-07-18'`        | Pinned date — never use `'latest'`                                          |
+| `nitro.preset: 'cloudflare_module'`      | Recommended preset for Workers (`cloudflare_pages` for Pages)               |
+| `compatibility_flags: ['nodejs_compat']` | Enables `Buffer`, `crypto`, `process`, and other Node.js APIs on Workers    |
+| `process.stdout: 'undefined'`            | Only without `nodejs_compat` — stubs the missing `process.stdout` reference |
+| `vite.ssr.external`                      | Keeps client-only libraries out of the server bundle                        |
+| `wasm.esmImport: true`                   | Allows `import wasm from './file.wasm'` syntax                              |
+| `wasm.lazy: true`                        | Lazy-loads WASM modules (required for CF Workers dynamic instantiation)     |
 
 **Common errors these settings fix:**
 
 ```
-# Without nodeCompat:
+# Without nodejs_compat flag:
 ReferenceError: Buffer is not defined
 
-# Without process.stdout replace:
+# Without process.stdout stub (and no nodejs_compat):
 TypeError: Cannot read properties of undefined (reading 'write')
 
 # Without wasm config:
@@ -214,9 +250,9 @@ CompileError: WebAssembly.instantiate() is not allowed
 Error: symbol 'a' already declared (esbuild on Linux CI)
 ```
 
-**Note:** The `process.stdout` replacement and `wasm` config may need to be in the top-level `vite` and `nitro` keys respectively — check your Nuxt version for the correct placement.
+**Note:** Declare `nitro` only ONCE — a duplicate `nitro:` key silently overrides the first (dropping your `preset`). Keep `preset`, `wasm`, and `cloudflare` inside the single `nitro` block.
 
-Reference: [Nuxt Cloudflare Deployment](https://nuxt.com/deploy/cloudflare) | [Nitro Cloudflare Preset](https://nitro.unjs.io/deploy/providers/cloudflare)
+Reference: [Nuxt Cloudflare Deployment](https://nuxt.com/deploy/cloudflare) | [Nitro Cloudflare Provider](https://nitro.build/deploy/providers/cloudflare)
 
 ---
 
@@ -233,7 +269,7 @@ Client-only libraries (analytics, tracking, browser APIs) should never be bundle
 ```typescript
 // ❌ WRONG — @posthog/nuxt registers its vue-plugin for both client AND server
 // This leaks ~4500 lines of minified posthog-js into the Nitro server bundle
-// On Linux CI, esbuild@0.27+ errors with "symbol 'a' already declared"
+// On Linux CI, recent esbuild versions error with "symbol 'a' already declared"
 
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],
@@ -306,7 +342,7 @@ WASM modules on Cloudflare Workers require specific Nitro configuration. Without
 // ❌ WRONG — WASM modules fail with "WebAssembly.instantiate() is not allowed"
 export default defineNuxtConfig({
   nitro: {
-    preset: 'cloudflare-pages',
+    preset: 'cloudflare_module',
     // Missing wasm config
   },
 });
@@ -318,7 +354,8 @@ export default defineNuxtConfig({
 // ✅ CORRECT — Enable WASM for CF Workers
 export default defineNuxtConfig({
   nitro: {
-    preset: 'cloudflare-pages',
+    // 'cloudflare_module' is recommended for Workers; 'cloudflare_pages' for Pages
+    preset: 'cloudflare_module',
     wasm: {
       // Allow import wasm from './module.wasm' syntax
       esmImport: true,
@@ -329,9 +366,9 @@ export default defineNuxtConfig({
 });
 ```
 
-**Why lazy loading matters:**
+**Why this config matters:**
 
-Cloudflare Workers don't allow `WebAssembly.instantiate()` at the top level during cold start. With `lazy: true`, WASM modules are loaded on first use, which is allowed by the Workers runtime. Without it, the module tries to instantiate at import time and fails.
+Cloudflare Workers disallow compiling WASM from arbitrary bytes at runtime (`WebAssembly.instantiate()` / `WebAssembly.compile()` on raw buffers). Setting `esmImport: true` makes each `.wasm` a first-class ES module that is compiled at deploy time (not from runtime bytes), and `lazy: true` defers instantiation until first use rather than at import. Together they satisfy the Workers restriction while keeping cold starts fast.
 
 **Packages that require this config:**
 
@@ -349,7 +386,7 @@ const { ImageResponse } = await import('@cf-wasm/og/workerd');
 
 **Testing note:** WASM-dependent routes won't work in local `nuxt dev` (Node.js runtime). Test on Cloudflare Workers preview (`wrangler pages dev`) or production deployment.
 
-Reference: [Nitro WASM Support](https://nitro.unjs.io/guide/wasm) | [Cloudflare Workers WASM](https://developers.cloudflare.com/workers/runtime-apis/webassembly/)
+Reference: [Nitro WASM Config](https://nitro.build/config#wasm) | [Cloudflare Workers WASM](https://developers.cloudflare.com/workers/runtime-apis/webassembly/)
 
 ---
 
@@ -431,6 +468,7 @@ export default defineNuxtConfig({
 - Canonical URL should **not** include query parameters unless they change the page content
 - Canonical URL should be **consistent** — pick either with or without trailing slash, never both
 - `og:url` should match the canonical URL exactly
+- The canonical must be present in the **server-rendered HTML** — Nuxt SSR via `useHead`/`usePageSeo` does this by default. Never inject it client-only: Google's guidance is that JavaScript shouldn't change the canonical, and a client-only tag may never be seen by the crawler.
 
 Reference: [Google Canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)
 
@@ -496,8 +534,8 @@ Social media platforms (Twitter, Facebook, LinkedIn, Discord, Slack) use Open Gr
 | `ogTitle`            | Title for social cards              | Yes         |
 | `ogDescription`      | Description for social cards        | Yes         |
 | `ogImage`            | **Full URL** to OG image            | Yes         |
-| `ogImageWidth`       | Image width (1200)                  | Yes         |
-| `ogImageHeight`      | Image height (630)                  | Yes         |
+| `ogImageWidth`       | Image width (1200)                  | Recommended |
+| `ogImageHeight`      | Image height (630)                  | Recommended |
 | `ogImageAlt`         | Image alt text                      | Recommended |
 | `ogSiteName`         | Site name                           | Recommended |
 | `twitterCard`        | Card type (`summary_large_image`)   | Yes         |
@@ -510,6 +548,7 @@ Social media platforms (Twitter, Facebook, LinkedIn, Discord, Slack) use Open Gr
 - OG image URL must be **absolute** (full URL with protocol and domain), not relative
 - Use `summary_large_image` for Twitter cards — it shows the full-width image
 - `ogImageWidth` and `ogImageHeight` help platforms render the correct aspect ratio without fetching the image first
+- **1200×630 is the de-facto social-platform convention, not an OGP spec requirement.** The Open Graph protocol lists `og:image:width` / `og:image:height` as optional structured properties (ogp.me) — supplying them is recommended for reliable previews, but they are not mandatory.
 - Use the `usePageSeo` composable (see `meta-use-page-seo` rule) to avoid duplicating this across pages
 
 **Head meta that should be set globally in `nuxt.config.ts`:**
@@ -532,7 +571,7 @@ export default defineNuxtConfig({
 });
 ```
 
-Reference: [Open Graph Protocol](https://ogp.me/) | [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards)
+Reference: [Open Graph Protocol](https://ogp.me/) | [X Cards](https://developer.x.com/en/docs/x-for-websites/cards/overview/abouts-cards) (`summary_large_image` is the standard large-preview card type)
 
 ---
 
@@ -656,6 +695,33 @@ app/composables/seo/
 - OG image URL is auto-generated from the path, pointing to the OG server route
 - Canonical URL prevents duplicate content issues
 
+**Perf: tree-shake purely static meta from the client bundle.**
+
+When the SEO meta for a page is entirely static (no reactive values), wrap the call in `if (import.meta.server) { ... }`. Nuxt renders it into the SSR HTML, and the block is tree-shaken from the client bundle — crawlers and social platforms still see the tags, but the client ships less JS:
+
+```typescript
+if (import.meta.server) {
+  useSeoMeta({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    // ...static tags only
+  });
+}
+```
+
+Do NOT do this for reactive meta (titles that depend on `ref`/route/fetched data) — reactive meta must run universally so it updates on client navigation.
+
+**Reactive titles need getters.** The plain-string signature above makes values static: they are captured once and won't update on client-side navigation. To support reactive values, accept getters (`() => string`) and pass them straight through to `useSeoMeta`, which unwraps getter syntax:
+
+```typescript
+useSeoMeta({
+  // Getter — re-evaluates on updates
+  title: () => `${pageTitle.value} · My App`,
+});
+```
+
+If you pass a bare reactive value without getter syntax, `useSeoMeta` receives the snapshot, not the reactive source, and the tag won't update.
+
 Reference: [Nuxt useSeoMeta](https://nuxt.com/docs/api/composables/use-seo-meta)
 
 ---
@@ -724,6 +790,18 @@ const ogImageUrl = `${baseUrl}/og${path}.png?v=2&title=${encodeURIComponent(titl
 ```
 
 **Important:** OG image URLs include query params (title, description), so each unique combination gets its own cached entry. This is the correct behavior — different content = different cache key.
+
+**Cloudflare caveat — a `Cache-Control` header alone does NOT edge-cache a Worker/Pages Function response.** Dynamically generated responses from Workers/Pages Functions bypass Cloudflare's default CDN cache. To actually cache them at the edge you must either explicitly store the response in the Cache API (`caches.default.put()` / `.match()`) or add a Cache Rule that caches the route. For Cloudflare-specific control without affecting browsers, use `CDN-Cache-Control` — it overrides `Cache-Control` for Cloudflare's CDN cache only, leaving the browser-facing `Cache-Control` (and `max-age`) untouched:
+
+```typescript
+setResponseHeaders(event, {
+  'Content-Type': 'image/png',
+  // Browser cache directive
+  'Cache-Control': 'public, max-age=31536000, immutable',
+  // Cloudflare edge cache directive (overrides the above for CF's CDN only)
+  'CDN-Cache-Control': 'public, max-age=31536000, immutable',
+});
+```
 
 ---
 
@@ -797,6 +875,16 @@ export default defineEventHandler(async (event) => {
   try {
     // Dynamic import — @cf-wasm/og/workerd only works on CF Workers, not Node.js dev
     const { ImageResponse } = await import('@cf-wasm/og/workerd');
+    const { cache } = await import('@cf-wasm/og/workerd');
+
+    // REQUIRED on Workers/Pages: give @cf-wasm/og the execution context so it
+    // can cache the fetched WASM/font assets across invocations. Nitro exposes
+    // the CF execution context on the h3 event.
+    const ctx = event.context.cloudflare?.context;
+    if (ctx) {
+      cache.setExecutionContext(ctx);
+    }
+
     const response = await ImageResponse.async(element, {
       width: 1200,
       height: 630,
@@ -823,31 +911,40 @@ export default defineEventHandler(async (event) => {
 
 - Use `await import('@cf-wasm/og/workerd')` — dynamic import is required for the Workerd runtime
 - Use `ImageResponse.async()` (not `new ImageResponse()`) for the async WASM initialization
+- Call `cache.setExecutionContext(ctx)` (from `@cf-wasm/og/workerd`) before `ImageResponse.async()` — the package README mandates this on Workers/Pages so it can persist fetched WASM/font assets. Obtain the context from `event.context.cloudflare?.context` in the Nitro/h3 handler.
 - Standard dimensions: `1200x630` pixels for OG images
 - The `el()` helper creates plain JS objects that Satori understands — see `og-no-react` rule
 - This route won't work in local `nuxt dev` (Node.js) — test on CF Workers preview or production
 - Add proper error handling with `createError` for debugging failed generations
 
-Reference: [@cf-wasm/og](https://github.com/nicepkg/cf-wasm)
+**Fonts:** Satori needs font data to render any text. `@cf-wasm/og` bundles Noto Sans as the default font, so the examples above work out of the box. To use custom fonts, pass them via the `GoogleFont` or `CustomFont` helpers from `@cf-wasm/og` in the `fonts` option — don't assume arbitrary `fontFamily` values will resolve without providing the font.
+
+**Workers limits:** Image generation is CPU- and memory-intensive. Stay within the Workers CPU-time limit, the 128 MB memory ceiling, and the 3 MB compressed script-size limit (free plan). Avoid loading multiple large font files into a single Worker — each font inflates both memory use and bundle size.
+
+Reference: [@cf-wasm/og](https://github.com/fineshopdesign/cf-wasm)
 
 ---
 
-### Use Plain JS Objects for Satori Elements, NEVER React
+### Build Satori Element Trees Without the React Runtime
 
-**Impact:** CRITICAL - Prevents React dependency contamination in Vue projects
+**Impact:** CRITICAL - Avoids pulling the React runtime into a Vue project for OG generation
 
-## Use Plain JS Objects for Satori Elements, NEVER React
+## Build Satori Element Trees Without the React Runtime
 
-Satori (the library that renders OG images) accepts plain JavaScript objects with `{ type, props }` shape. The `@cf-wasm/og` package exports an `html-to-react` utility, but **NEVER use it in Vue projects**. It imports React, which is a hard violation in Vue codebases. Instead, use a simple `el()` helper function.
+Satori renders OG images from **React-elements-like objects** — plain objects shaped `{ type, props: { style, children } }`. That element data model IS Satori's API and is unavoidable; the objects are React-element-_shaped_ by design. The thing to avoid in a Vue project is the React **runtime/package** dependency, not React's element shape.
+
+Concretely: `@cf-wasm/og` ships an `html-to-react` utility whose `t()` parser pulls in React. Don't use it in a Vue codebase — it adds React as a real dependency. Instead, construct the same `{ type, props }` objects yourself with a tiny `el()` helper (no React import).
+
+> If you prefer JSX ergonomics without React, Satori also ships an experimental `satori/jsx` JSX runtime — an officially-sanctioned alternative that needs no React package.
 
 **Incorrect (importing React utilities):**
 
 ```typescript
-// ❌ WRONG — NEVER import React or React-related utilities in a Vue project
+// ❌ WRONG — html-to-react's t() pulls the React runtime into a Vue project
 import { t } from '@cf-wasm/og/html-to-react';
 
 export default defineEventHandler(async (event) => {
-  // This pulls in React as a dependency — FORBIDDEN in Vue projects
+  // t() imports React — avoid this dependency in a Vue codebase
   const element = t('<div style="display:flex">Hello</div>');
   // ...
 });
@@ -858,8 +955,9 @@ export default defineEventHandler(async (event) => {
 ```typescript
 // ✅ CORRECT — Plain JS objects, zero React dependency
 
-// Satori element helper — creates { type, props } objects
-// Satori requires display:flex on divs with 2+ children, and chokes on children:[]
+// Satori element helper — creates { type, props } objects (React-element-shaped, no React)
+// Satori defaults `display` to flex; just don't override multi-child divs to a
+// non-flex value. It also chokes on children:[]
 function el(
   type: string,
   style: Record<string, unknown>,
@@ -908,7 +1006,7 @@ el(
 );
 ```
 
-**HARD RULE: No React in Vue projects. Ever. Not even for OG image generation.**
+**RULE: In a Vue project, don't add the React runtime for OG generation.** The `{ type, props }` element objects Satori consumes are React-element-shaped — that's Satori's API, not a React dependency. Build them with `el()` (or `satori/jsx`), and avoid `html-to-react`'s `t()`, which imports React.
 
 ---
 
@@ -1012,6 +1110,10 @@ useHead({
 | `Organization`       | Company/team pages                        |
 | `SoftwareSourceCode` | Open source project landing pages         |
 | `BreadcrumbList`     | Navigation breadcrumbs (per-page)         |
+
+**`applicationCategory` is an example.** `'DesignApplication'` above is just one schema.org value — pick the category that actually matches your app (e.g. `'BusinessApplication'`, `'DeveloperApplication'`, `'GameApplication'`, `'ProductivityApplication'`).
+
+**XSS caveat — only `innerHTML` trusted/static JSON.** `JSON.stringify` does NOT escape `<` or `>`, so any user-derived value containing `</script>` can break out of the script tag and inject markup. Only use the `innerHTML` pattern with static/trusted data. For any user-supplied value, escape `<`/`>` (e.g. replace `<` → `\u003c`, `>` → `\u003e`) before serializing, or route the payload through `useHeadSafe` so unhead sanitizes it.
 
 **Validation:** Use [Google's Rich Results Test](https://search.google.com/test/rich-results) to verify structured data.
 

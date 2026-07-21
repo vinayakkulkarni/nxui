@@ -121,4 +121,31 @@ app/composables/seo/
 - OG image URL is auto-generated from the path, pointing to the OG server route
 - Canonical URL prevents duplicate content issues
 
+**Perf: tree-shake purely static meta from the client bundle.**
+
+When the SEO meta for a page is entirely static (no reactive values), wrap the call in `if (import.meta.server) { ... }`. Nuxt renders it into the SSR HTML, and the block is tree-shaken from the client bundle — crawlers and social platforms still see the tags, but the client ships less JS:
+
+```typescript
+if (import.meta.server) {
+  useSeoMeta({
+    title: 'About Us',
+    description: 'Learn about our team.',
+    // ...static tags only
+  });
+}
+```
+
+Do NOT do this for reactive meta (titles that depend on `ref`/route/fetched data) — reactive meta must run universally so it updates on client navigation.
+
+**Reactive titles need getters.** The plain-string signature above makes values static: they are captured once and won't update on client-side navigation. To support reactive values, accept getters (`() => string`) and pass them straight through to `useSeoMeta`, which unwraps getter syntax:
+
+```typescript
+useSeoMeta({
+  // Getter — re-evaluates on updates
+  title: () => `${pageTitle.value} · My App`,
+});
+```
+
+If you pass a bare reactive value without getter syntax, `useSeoMeta` receives the snapshot, not the reactive source, and the tag won't update.
+
 Reference: [Nuxt useSeoMeta](https://nuxt.com/docs/api/composables/use-seo-meta)

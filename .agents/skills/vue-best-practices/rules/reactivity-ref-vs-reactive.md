@@ -1,15 +1,15 @@
 ---
-title: Use ref() for Primitives, reactive() for Objects
+title: Prefer ref() as the Primary Reactivity API
 impact: CRITICAL
 impactDescription: Prevents reactivity loss and unexpected bugs
 tags: reactivity, ref, reactive, primitives, objects
 ---
 
-## Use ref() for Primitives, reactive() for Objects
+## Prefer ref() as the Primary Reactivity API
 
-Using the wrong reactive wrapper leads to lost reactivity or unnecessary complexity.
+The official docs recommend using `ref()` as the primary API for declaring reactive state — for primitives _and_ objects. A `ref()` deep-wraps objects and arrays, so it gives you the same deep reactivity as `reactive()` without any of its limitations. Reach for `reactive()` only when you specifically want an object-only proxy and can live with its caveats.
 
-**Incorrect (reactive with primitive):**
+**Incorrect (reactive with a primitive):**
 
 ```typescript
 // reactive() doesn't work with primitives - this won't be reactive!
@@ -34,12 +34,38 @@ const isLoading = ref(false);
 count.value++;
 ```
 
-**Correct (reactive for objects):**
+**Correct (ref for objects too — the recommended default):**
+
+```typescript
+import { ref } from 'vue';
+
+// ref() deep-wraps the object: nested properties are reactive
+const user = ref({
+  name: 'John',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+  },
+});
+
+// Access through .value in script
+user.value.name = 'Jane';
+user.value.preferences.theme = 'light';
+
+// You can also replace the whole object without losing reactivity
+user.value = {
+  name: 'Ada',
+  email: 'ada@example.com',
+  preferences: { theme: 'light' },
+};
+```
+
+**Acceptable (reactive for object-only state):**
 
 ```typescript
 import { reactive } from 'vue';
 
-// Use reactive() for objects with multiple properties
+// reactive() works only for objects and avoids the .value ceremony
 const user = reactive({
   name: 'John',
   email: 'john@example.com',
@@ -53,13 +79,20 @@ user.name = 'Jane';
 user.preferences.theme = 'light';
 ```
 
+**Limitations of `reactive()` (per docs) — the reasons to prefer `ref()`:**
+
+1. It cannot hold primitive types (string, number, boolean) — only objects, arrays, and collection types.
+2. You cannot replace the whole object without losing the reactivity connection (e.g. `user = { ... }` on a reactive binding drops reactivity), so it is hard to swap out wholesale.
+3. Destructuring breaks reactivity — pulling a primitive property out of a reactive object detaches it (use `toRefs()` if you must destructure).
+
 **When to use which:**
 
-| Type                                 | Use                     | Reason                                           |
-| ------------------------------------ | ----------------------- | ------------------------------------------------ |
-| Primitives (string, number, boolean) | `ref()`                 | reactive() doesn't work with primitives          |
-| Single value that gets reassigned    | `ref()`                 | Can reassign `.value` directly                   |
-| Objects with nested properties       | `reactive()`            | Cleaner syntax, no `.value` needed               |
-| Arrays you iterate over              | `ref()` or `reactive()` | Both work; ref() if you reassign the whole array |
+| Type                                  | Use                   | Reason                                                        |
+| ------------------------------------- | --------------------- | ------------------------------------------------------------- |
+| Primitives (string, number, boolean)  | `ref()`               | reactive() doesn't work with primitives                       |
+| Single value that gets reassigned     | `ref()`               | Can reassign `.value` directly                                |
+| Objects with nested properties        | `ref()` (default)     | Primary recommended API; deep reactive, safe to replace whole |
+| Object-only state, no `.value` wanted | `reactive()` (opt-in) | Cleaner access, but accept the limitations above              |
+| Arrays you iterate over               | `ref()`               | Deep reactive and safe to reassign the whole array            |
 
-Reference: [Vue Reactivity Fundamentals](https://vuejs.org/guide/essentials/reactivity-fundamentals.html)
+Reference: [Vue Reactivity Fundamentals - Limitations of reactive()](https://vuejs.org/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive)

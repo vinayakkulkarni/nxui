@@ -188,4 +188,21 @@ routeRules: {
 },
 ```
 
+### What about SSR streaming (Nuxt 4.5+)?
+
+Nuxt 4.5's experimental `ssrStreaming` is **bot-aware**: requests from crawler user agents automatically fall back to the fully-buffered renderer, so search engines and AI crawlers still receive complete HTML in one response. Enabling streaming for human visitors does not hurt GEO. If you run niche crawlers you care about, extend the matcher:
+
+```ts
+export default defineNuxtConfig({
+  experimental: {
+    ssrStreaming: {
+      // These UAs get buffered (fully-rendered) HTML
+      botRegex: /googlebot|bingbot|gptbot|claudebot|perplexitybot/i,
+    },
+  },
+});
+```
+
+Note the default `botRegex` already targets indexing crawlers — only override it to ADD bots, and keep the defaults' spirit (see sibling skill `nuxt-best-practices` rule `rendering-ssr-streaming` for the full caveat list).
+
 Reference: [Nuxt 4 Rendering Modes](https://nuxt.com/docs/4.x/guide/concepts/rendering) · [Nitro Prerender](https://nitro.unjs.io/config#prerender) · [Nuxt `<ClientOnly>`](https://nuxt.com/docs/4.x/api/components/client-only) · [Nuxt SEO docs](https://nuxt.com/docs/4.x/getting-started/seo-meta) · sibling skill `nuxt-best-practices` (rendering modes section)

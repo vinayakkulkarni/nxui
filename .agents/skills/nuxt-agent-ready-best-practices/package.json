@@ -1,0 +1,19 @@
+{
+  "name": "nuxt-agent-ready-best-practices",
+  "version": "1.1.0",
+  "description": "Nuxt agent-readiness best practices for autonomous AI agents",
+  "license": "MIT",
+  "author": {
+    "name": "Vinayak Kulkarni",
+    "email": "inbox.vinayak@gmail.com",
+    "url": "https://vinayakkulkarni.dev"
+  },
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.ts",
+    "validate": "node scripts/validate.ts"
+  },
+  "devDependencies": {
+    "yaml": "^2.9.0"
+  }
+}

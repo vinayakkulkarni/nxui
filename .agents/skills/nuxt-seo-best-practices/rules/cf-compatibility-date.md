@@ -7,17 +7,16 @@ tags: cloudflare, nitro, nuxt-config, compatibility, deployment
 
 ## Pin compatibilityDate, Never Use 'latest'
 
-Nuxt's `compatibilityDate` controls which Nitro runtime behaviors are active. Using `'latest'` resolves to a different date on every build, which can silently change how your app behaves in production.
+Nuxt's `compatibilityDate` pins the date Nitro uses to decide which deployment-preset features and default behaviors to enable, and it is forwarded to the `compatibility_date` in the generated Wrangler config. It is distinct from — but feeds — Cloudflare's Workers-runtime compatibility date. Leaving it unset (or on `'latest'`) means Nitro applies its newest default behavior, which can shift when you upgrade Nitro. Pin a date for reproducible builds.
 
-**Incorrect (using 'latest'):**
+**Incorrect (unset / using 'latest'):**
 
 ```typescript
-// ❌ WRONG — 'latest' resolves to a different date on each build
+// ❌ WRONG — Nitro applies its newest defaults, which can shift on upgrade
 // nuxt.config.ts
 export default defineNuxtConfig({
   compatibilityDate: 'latest',
-  // Today it might be 2025-07-18, tomorrow 2025-07-19
-  // Each date can change Nitro's internal behavior
+  // Behavior can change the next time you bump Nitro — not reproducible
 });
 ```
 
@@ -41,13 +40,13 @@ export default defineNuxtConfig({
 
 **How to find the right date:**
 
-- Use the date of your current Nuxt release
+- Use today's date (or your last-tested date)
+- If you rely on `nodejs_compat`, `compatibility_date` must be `>= 2024-09-23`
 - Check [Nitro changelog](https://github.com/unjs/nitro/releases) for what changed
 - Pin to the latest date that works with your deployment target
 
 **Real-world impact:** A `compatibilityDate` change can affect:
 
-- How `process.env` is handled in server routes
 - WASM module loading behavior
 - Node.js API compatibility layer
 - Response header defaults

@@ -9,6 +9,11 @@ tags: template, v-for, key, lists, performance
 
 Keys help Vue track element identity for efficient updates. Without proper keys, Vue uses an "in-place patch" strategy that can cause bugs and poor performance.
 
+Two hard rules from the docs:
+
+- Keys **must be primitive values** — strings or numbers. Never bind an object as a `:key`.
+- Per the essential style guide, `:key` with `v-for` is **always required on components** (not merely recommended), so component state and DOM stay in sync.
+
 **Incorrect (no key or index as key):**
 
 ```vue
@@ -99,9 +104,11 @@ async function loadItems() {
 
 **When index IS acceptable:**
 
+Index keys are only acceptable for simple content with no components or stateful DOM elements, or when you are intentionally relying on Vue's default in-place patching for performance.
+
 ```vue
 <template>
-  <!-- OK: Static list that never reorders/filters -->
+  <!-- OK: Simple content, no components or stateful DOM elements -->
   <li v-for="(step, index) in staticSteps" :key="index">
     Step {{ index + 1 }}: {{ step }}
   </li>

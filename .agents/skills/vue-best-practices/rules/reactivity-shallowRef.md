@@ -1,7 +1,7 @@
 ---
 title: Use shallowRef() for Large Non-Reactive Data
 impact: CRITICAL
-impactDescription: 10-100× faster for large datasets
+impactDescription: Skips deep reactivity conversion for large structures
 tags: reactivity, shallowRef, performance, large-data
 ---
 
@@ -74,14 +74,12 @@ state.user = { name: 'Jane', email: 'jane@example.com' };
 state.user.name = 'Jane'; // Won't cause re-render!
 ```
 
-**Performance comparison:**
+**Why it helps:**
 
-```typescript
-// With ref() - 10,000 items
-// ~50-100ms to make reactive
+Reactivity overhead becomes noticeable only with large, deeply-nested structures — the docs cite renders that touch 100,000+ properties. `shallowRef` skips the deep conversion entirely: nested access is not wrapped in proxies, so only swapping `.value` (or calling `triggerRef`) triggers updates. For most app state the deep-reactivity cost is negligible and a plain `ref` is fine; reach for `shallowRef` when profiling shows a genuinely large structure is the bottleneck.
 
-// With shallowRef() - 10,000 items
-// ~1-2ms (just stores the reference)
-```
+**Caution:** Shallow data structures should only be used for root-level component state. Avoid nesting a shallow ref or shallow reactive object inside a deep reactive object — the mix produces an inconsistent, hard-to-reason-about reactivity graph.
 
-Reference: [shallowRef](https://vuejs.org/api/reactivity-advanced.html#shallowref)
+**For class instances that should never be made reactive at all**, `markRaw()` is the documented alternative — it flags an object so Vue skips making it (or anything holding it) reactive.
+
+Reference: [shallowRef](https://vuejs.org/api/reactivity-advanced.html#shallowref), [Reduce Reactivity Overhead for Large Immutable Structures](https://vuejs.org/guide/best-practices/performance.html#reduce-reactivity-overhead-for-large-immutable-structures)

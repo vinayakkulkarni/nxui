@@ -9,6 +9,8 @@ tags: reactivity, destructuring, reactive, refs
 
 Destructuring a reactive object breaks the reactivity connection. The destructured values become plain, non-reactive variables.
 
+**Note:** This rule concerns `reactive()` objects. Destructuring `defineProps()` is a deliberate exception — since Vue 3.5 destructured props are compiler-transformed to stay reactive, so `const { foo } = defineProps()` keeps `foo` reactive. See [Reactive Props Destructure](https://vuejs.org/guide/components/props.html#reactive-props-destructure).
+
 **Incorrect (loses reactivity):**
 
 ```typescript

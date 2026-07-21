@@ -62,9 +62,9 @@ export type CreateUserInput = z.infer<typeof createUserSchema>;
 import { userQuerySchema } from '#shared/schemas/user';
 
 export default defineEventHandler(async (event) => {
-  // Validates and returns typed object
-  // Throws 400 automatically on invalid input
-  const query = await getValidatedQuery(event, userQuerySchema.parse);
+  // Pass the Zod schema object directly (h3 v2 Standard-Schema support).
+  // Validates and returns typed object; throws 400 automatically on invalid input.
+  const query = await getValidatedQuery(event, userQuerySchema);
 
   // query is fully typed: { page: number, limit: number, search?: string, status?: 'active' | 'inactive' }
   return await getUsers(query);
@@ -75,12 +75,14 @@ import { createUserSchema } from '#shared/schemas/user';
 
 export default defineEventHandler(async (event) => {
   // Validates body against schema
-  const body = await readValidatedBody(event, createUserSchema.parse);
+  const body = await readValidatedBody(event, createUserSchema);
 
   // body is typed: { name: string, email: string, role: 'user' | 'admin' }
   return await createUser(body);
 });
 ```
+
+**Note:** Passing `schema.parse` also works — any validation function is accepted.
 
 **Using safeParse for custom error handling:**
 
@@ -116,7 +118,7 @@ const paramsSchema = z.object({
 });
 
 export default defineEventHandler(async (event) => {
-  const { id } = await getValidatedRouterParams(event, paramsSchema.parse);
+  const { id } = await getValidatedRouterParams(event, paramsSchema);
   return await getUser(id);
 });
 ```
@@ -131,4 +133,4 @@ export default defineEventHandler(async (event) => {
 | Default values       | ❌  | ✅        |
 | Schema reusability   | ❌  | ✅        |
 
-Reference: [Nitro Validation](https://nitro.unjs.io/guide/utils#validation)
+Reference: [h3 Request Utils](https://h3.dev/utils/request)

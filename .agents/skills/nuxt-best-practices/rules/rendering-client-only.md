@@ -45,6 +45,19 @@ Components that use browser-only APIs (window, document, localStorage, etc.) mus
 </template>
 ```
 
+**Note:** The default slot's content is tree-shaken out of the server build — CSS used by components inside it may not be inlined in the initial HTML, causing a flash of unstyled content (FOUC). Render a `#fallback` that reserves the same layout to minimise this.
+
+**Fallback via props (attribute alternative to the `#fallback` slot):**
+
+```vue
+<template>
+  <!-- fallback / fallback-tag render placeholder text until the client mounts -->
+  <ClientOnly fallback="Loading chart..." fallback-tag="span">
+    <ChartComponent :data="data" />
+  </ClientOnly>
+</template>
+```
+
 **Correct (using .client.vue suffix):**
 
 ```
@@ -56,24 +69,24 @@ components/
 
 ```vue
 <!-- Chart.client.vue - automatically client-only -->
-<script setup>
+<script setup lang="ts">
   // Safe to use browser APIs here
-  const canvas = ref<HTMLCanvasElement>()
+  const canvas = ref<HTMLCanvasElement>();
 
   onMounted(() => {
-    const ctx = canvas.value?.getContext('2d')
+    const ctx = canvas.value?.getContext('2d');
     // Initialize chart...
-  })
+  });
 </script>
 ```
 
 **Safe browser API access:**
 
 ```vue
-<script setup>
+<script setup lang="ts">
   // ✅ CORRECT - Check for client before using browser APIs
   const width = ref(0);
-  const savedSettings = (ref < Settings) | (null > null);
+  const savedSettings = ref<Settings | null>(null);
 
   onMounted(() => {
     // This only runs on client

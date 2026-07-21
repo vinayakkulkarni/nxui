@@ -73,6 +73,8 @@ Data fetching can fail or take time. Always handle `error` and `status`/`pending
 | `success` | Request completed successfully |
 | `error`   | Request failed                 |
 
+`pending` is still a supported boolean ref (equal to `status === 'pending'`) — not deprecated — but prefer `status` for the full lifecycle.
+
 **Using NuxtErrorBoundary for global error handling:**
 
 ```vue
@@ -136,4 +138,4 @@ export function useFetchWithNotification<T>(
 }
 ```
 
-Reference: [Nuxt Error Handling](https://nuxt.com/docs/getting-started/error-handling)
+Reference: [Nuxt Error Handling](https://nuxt.com/docs/getting-started/error-handling) | [useFetch](https://nuxt.com/docs/api/composables/use-fetch)

@@ -61,8 +61,8 @@ Social media platforms (Twitter, Facebook, LinkedIn, Discord, Slack) use Open Gr
 | `ogTitle`            | Title for social cards              | Yes         |
 | `ogDescription`      | Description for social cards        | Yes         |
 | `ogImage`            | **Full URL** to OG image            | Yes         |
-| `ogImageWidth`       | Image width (1200)                  | Yes         |
-| `ogImageHeight`      | Image height (630)                  | Yes         |
+| `ogImageWidth`       | Image width (1200)                  | Recommended |
+| `ogImageHeight`      | Image height (630)                  | Recommended |
 | `ogImageAlt`         | Image alt text                      | Recommended |
 | `ogSiteName`         | Site name                           | Recommended |
 | `twitterCard`        | Card type (`summary_large_image`)   | Yes         |
@@ -75,6 +75,7 @@ Social media platforms (Twitter, Facebook, LinkedIn, Discord, Slack) use Open Gr
 - OG image URL must be **absolute** (full URL with protocol and domain), not relative
 - Use `summary_large_image` for Twitter cards — it shows the full-width image
 - `ogImageWidth` and `ogImageHeight` help platforms render the correct aspect ratio without fetching the image first
+- **1200×630 is the de-facto social-platform convention, not an OGP spec requirement.** The Open Graph protocol lists `og:image:width` / `og:image:height` as optional structured properties (ogp.me) — supplying them is recommended for reliable previews, but they are not mandatory.
 - Use the `usePageSeo` composable (see `meta-use-page-seo` rule) to avoid duplicating this across pages
 
 **Head meta that should be set globally in `nuxt.config.ts`:**
@@ -97,4 +98,4 @@ export default defineNuxtConfig({
 });
 ```
 
-Reference: [Open Graph Protocol](https://ogp.me/) | [Twitter Cards](https://developer.twitter.com/en/docs/twitter-for-websites/cards)
+Reference: [Open Graph Protocol](https://ogp.me/) | [X Cards](https://developer.x.com/en/docs/x-for-websites/cards/overview/abouts-cards) (`summary_large_image` is the standard large-preview card type)

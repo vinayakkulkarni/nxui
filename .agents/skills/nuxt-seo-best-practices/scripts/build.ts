@@ -1,9 +1,9 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const RULES_DIR = join(import.meta.dir, '..', 'rules');
-const SKILL_FILE = join(import.meta.dir, '..', 'SKILL.md');
-const OUTPUT_FILE = join(import.meta.dir, '..', 'AGENTS.md');
+const RULES_DIR = join(import.meta.dirname, '..', 'rules');
+const SKILL_FILE = join(import.meta.dirname, '..', 'SKILL.md');
+const OUTPUT_FILE = join(import.meta.dirname, '..', 'AGENTS.md');
 
 interface RuleMeta {
   title: string;
@@ -64,7 +64,7 @@ function generateAgentsMd(skillBody: string, rules: string[]): string {
   return `# Nuxt SEO Best Practices - Complete Reference
 
 > This file is auto-generated. Do not edit directly.
-> Edit individual rule files in the \`rules/\` directory and run \`bun run build\`.
+> Edit individual rule files in the \`rules/\` directory and run \`pnpm build\`.
 
 ${skillBody.trim()}
 

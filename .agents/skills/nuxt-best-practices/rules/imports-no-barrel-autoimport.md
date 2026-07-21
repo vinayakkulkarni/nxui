@@ -61,7 +61,9 @@ export function useAuth() {
 
 ```typescript
 // ❌ WRONG - composables/auth/index.ts
-// This creates circular dependencies and duplicates
+// The problem arises specifically from double re-export: this feature
+// barrel is then re-exported by the root composables/index.ts, creating
+// a cycle and duplicate imports — not from the feature barrel existing alone.
 export * from './use-auth';
 export * from './use-session';
 
@@ -70,12 +72,12 @@ export * from './use-session';
 
 **Summary:**
 
-| Location                    | Barrel Export? | Reason                           |
-| --------------------------- | -------------- | -------------------------------- |
-| `composables/index.ts`      | ✅ Yes         | Enables nested auto-imports      |
-| `composables/auth/index.ts` | ❌ No          | Causes duplicates/circular deps  |
-| `server/utils/**`           | ❌ No          | Recursive scan - duplicates      |
-| `utils/index.ts`            | ✅ Yes         | Enables nested auto-imports      |
-| `shared/types/index.ts`     | ✅ Yes         | Organization (not auto-imported) |
+| Location                    | Barrel Export? | Reason                                                                                                  |
+| --------------------------- | -------------- | ------------------------------------------------------------------------------------------------------- |
+| `composables/index.ts`      | ✅ Yes         | Enables nested auto-imports                                                                             |
+| `composables/auth/index.ts` | ❌ No          | Causes duplicates/circular deps                                                                         |
+| `server/utils/**`           | ❌ No          | Recursive scan - duplicates                                                                             |
+| `utils/index.ts`            | ✅ Yes         | Enables nested auto-imports                                                                             |
+| `shared/types/index.ts`     | ✅ Yes         | top-level files in `shared/types/` ARE auto-imported (v3.14+); nested subdirs are not unless configured |
 
 Reference: [Nuxt Auto-imports](https://nuxt.com/docs/guide/concepts/auto-imports) | [Composables Directory](https://nuxt.com/docs/guide/directory-structure/composables)

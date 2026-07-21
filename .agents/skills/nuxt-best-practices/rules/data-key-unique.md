@@ -111,4 +111,21 @@ Nuxt uses keys to cache and deduplicate data fetching. Without unique keys, diff
 </script>
 ```
 
+**How auto-generated keys work (clarified in the Nuxt 4.5 docs):**
+
+`useFetch` derives its auto key from the URL, the fetch options, AND the source call-site location (behavior present throughout Nuxt 4.x; the docs spelled it out explicitly in 4.5). Two components calling the same URL get **different** auto keys and do NOT share state:
+
+```vue
+<script setup>
+  // ComponentA.vue and ComponentB.vue both call:
+  const { data } = await useFetch('/api/settings');
+  // Different call sites → different auto keys → two cache entries
+
+  // GOOD: To share state across components, use the same explicit key
+  const { data } = await useFetch('/api/settings', { key: 'app-settings' });
+</script>
+```
+
+The same applies to `useAsyncData`: the generated key is unique to the call location, so always pass an explicit key when wrapping it in a custom composable.
+
 Reference: [Nuxt Data Fetching - Keys](https://nuxt.com/docs/getting-started/data-fetching#keys)

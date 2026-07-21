@@ -9,6 +9,8 @@ tags: data-fetching, transform, pick, performance
 
 Transform and filter data in useFetch options rather than in templates or computed properties. This reduces the payload sent to the client and avoids repeated transformations.
 
+`transform`/`pick` shrink the client payload only — the full response is still fetched on the server. To reduce what's fetched, change the API itself.
+
 **Incorrect (transform in template/computed):**
 
 ```vue

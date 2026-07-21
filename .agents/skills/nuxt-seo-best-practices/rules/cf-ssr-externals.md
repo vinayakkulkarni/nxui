@@ -14,7 +14,7 @@ Client-only libraries (analytics, tracking, browser APIs) should never be bundle
 ```typescript
 // ❌ WRONG — @posthog/nuxt registers its vue-plugin for both client AND server
 // This leaks ~4500 lines of minified posthog-js into the Nitro server bundle
-// On Linux CI, esbuild@0.27+ errors with "symbol 'a' already declared"
+// On Linux CI, recent esbuild versions error with "symbol 'a' already declared"
 
 export default defineNuxtConfig({
   modules: ['@posthog/nuxt'],

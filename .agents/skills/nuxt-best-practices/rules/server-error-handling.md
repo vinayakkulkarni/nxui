@@ -9,6 +9,14 @@ tags: server, errors, api, error-handling
 
 Use Nuxt's `createError` utility for all API errors. It provides consistent error format, proper HTTP status codes, and integrates with Nuxt's error handling.
 
+**Note:** `statusCode`/`statusMessage` are legacy h3 aliases and still work, but current Nuxt docs use `status`/`statusText`.
+
+**Load-bearing behavior:** A `message` passed to `createError` in an API route does NOT propagate to the client. Use `statusText` for the short client-visible text and the `data` property for structured payloads — with `useFetch`, custom data is available at `error.value.data.data`.
+
+**`statusText` must be short HTTP-compliant text (printable ASCII);** longer detail belongs in `message` (server-side only) or `data`.
+
+**Security:** avoid putting dynamic user input into error messages/`statusText` — move any such detail into `data`.
+
 **Incorrect (throwing raw errors):**
 
 ```typescript
@@ -34,10 +42,11 @@ export default defineEventHandler(async (event) => {
   const user = await getUser(id);
 
   if (!user) {
+    // Don't interpolate user input into statusText — put it in data
     throw createError({
-      statusCode: 404,
-      statusMessage: 'Not Found',
-      message: `User with ID ${id} not found`,
+      status: 404,
+      statusText: 'Not Found',
+      data: { resource: 'user', id },
     });
   }
 
@@ -50,9 +59,8 @@ export default defineEventHandler(async (event) => {
 ```typescript
 // 400 Bad Request - Invalid input
 throw createError({
-  statusCode: 400,
-  statusMessage: 'Bad Request',
-  message: 'Invalid email format',
+  status: 400,
+  statusText: 'Bad Request',
   data: {
     field: 'email',
     reason: 'Must be a valid email address',
@@ -61,37 +69,33 @@ throw createError({
 
 // 401 Unauthorized - Not authenticated
 throw createError({
-  statusCode: 401,
-  statusMessage: 'Unauthorized',
-  message: 'Authentication required',
+  status: 401,
+  statusText: 'Unauthorized',
 });
 
 // 403 Forbidden - Not authorized
 throw createError({
-  statusCode: 403,
-  statusMessage: 'Forbidden',
-  message: 'You do not have permission to access this resource',
+  status: 403,
+  statusText: 'Forbidden',
 });
 
 // 404 Not Found
 throw createError({
-  statusCode: 404,
-  statusMessage: 'Not Found',
-  message: 'Resource not found',
+  status: 404,
+  statusText: 'Not Found',
 });
 
 // 409 Conflict - Duplicate
 throw createError({
-  statusCode: 409,
-  statusMessage: 'Conflict',
-  message: 'Email already registered',
+  status: 409,
+  statusText: 'Conflict',
+  data: { reason: 'Email already registered' },
 });
 
 // 422 Unprocessable Entity - Validation
 throw createError({
-  statusCode: 422,
-  statusMessage: 'Unprocessable Entity',
-  message: 'Validation failed',
+  status: 422,
+  statusText: 'Unprocessable Entity',
   data: {
     errors: validationErrors,
   },
@@ -99,9 +103,8 @@ throw createError({
 
 // 500 Internal Server Error
 throw createError({
-  statusCode: 500,
-  statusMessage: 'Internal Server Error',
-  message: 'An unexpected error occurred',
+  status: 500,
+  statusText: 'Internal Server Error',
 });
 ```
 
@@ -110,36 +113,32 @@ throw createError({
 ```typescript
 // server/utils/errors.ts
 export function notFound(resource: string, id?: string) {
+  // id is user input — keep it out of statusText, put it in data
   throw createError({
-    statusCode: 404,
-    statusMessage: 'Not Found',
-    message: id
-      ? `${resource} with ID ${id} not found`
-      : `${resource} not found`,
+    status: 404,
+    statusText: 'Not Found',
+    data: { resource, id },
   });
 }
 
-export function unauthorized(message = 'Authentication required') {
+export function unauthorized(statusText = 'Unauthorized') {
   throw createError({
-    statusCode: 401,
-    statusMessage: 'Unauthorized',
-    message,
+    status: 401,
+    statusText,
   });
 }
 
-export function forbidden(message = 'Permission denied') {
+export function forbidden(statusText = 'Forbidden') {
   throw createError({
-    statusCode: 403,
-    statusMessage: 'Forbidden',
-    message,
+    status: 403,
+    statusText,
   });
 }
 
-export function badRequest(message: string, data?: unknown) {
+export function badRequest(statusText: string, data?: unknown) {
   throw createError({
-    statusCode: 400,
-    statusMessage: 'Bad Request',
-    message,
+    status: 400,
+    statusText,
     data,
   });
 }
@@ -164,8 +163,13 @@ export default defineEventHandler(async (event) => {
   const { data, error } = await useFetch('/api/users/123');
 
   if (error.value) {
-    // error.value has shape: { statusCode, statusMessage, message, data }
-    console.error(error.value.message);
+    // error.value has shape: { status, statusText, data }
+    // The server `message` does NOT reach the client — read statusText/data.
+    console.error(error.value.statusText);
+
+    // Structured payload from createError({ data }) lands at error.value.data.data
+    const details = error.value.data?.data;
+    // e.g. { resource: 'user', id: '123' }
   }
 </script>
 ```
