@@ -355,13 +355,8 @@
           ctx.globalAlpha = 1;
         }
         ctx.fillStyle = color;
-        let landed = 0;
+        const t = Math.min(1, Math.max(0, eased * 1.15 - 0.15));
         for (const p of particles) {
-          if (frame < p.delay) {
-            landed += 1;
-            continue;
-          }
-          const t = Math.min(1, Math.max(0, eased * 1.15 - 0.15));
           const x = p.x + (p.ox - p.x) * t;
           const y = p.y + (p.oy - p.y) * t;
           // Particles ride in, then fade out as the real ink takes over.
@@ -369,12 +364,13 @@
           ctx.beginPath();
           ctx.arc(x, y, p.r, 0, Math.PI * 2);
           ctx.fill();
-          if (t >= 1) landed += 1;
         }
         ctx.globalAlpha = 1;
-        if (landed === particles.length && rewind.t > rewind.duration) {
+        // Completion is driven by the frame budget, not by per-particle
+        // float equality (eased only ever approaches 1, so `t >= 1` never
+        // trips). Once the tween window elapses, snap to the full ink.
+        if (rewind.t >= rewind.duration) {
           restore();
-          resume();
         }
         return;
       }
