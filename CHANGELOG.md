@@ -1,5 +1,53 @@
 # Changelog
 
+## [0.0.18](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.17...nxui-v0.0.18) (2026-07-21)
+
+
+### Features
+
+* add pixel wave component ([6fc77f2](https://github.com/vinayakkulkarni/nxui/commit/6fc77f265d15939c94e3eee5419ae4e5ab63cb0d))
+* add scene presets to pixel wave ([0d86eb3](https://github.com/vinayakkulkarni/nxui/commit/0d86eb3b236f0099dc145470ecc10fb71cafd794))
+* add signature eraser and pixel wave components ([527a301](https://github.com/vinayakkulkarni/nxui/commit/527a301489a94dc9a846fb7c524f11071a99d3a5))
+* add signature eraser component ([2c72c7e](https://github.com/vinayakkulkarni/nxui/commit/2c72c7eddc406f54ea03e2f5ad60fab472922a91))
+* register signature eraser and pixel wave ([0619053](https://github.com/vinayakkulkarni/nxui/commit/061905338a300552728b9a0c2dafb5a2d791122e))
+
+
+### Bug Fixes
+
+* **deps:** Bump @iconify-json/lucide from 1.2.117 to 1.2.118 ([#135](https://github.com/vinayakkulkarni/nxui/issues/135)) ([f685a7b](https://github.com/vinayakkulkarni/nxui/commit/f685a7bca1d6baa84ea30a600e8c0d99c4132fda))
+* **deps:** Bump @iconify-json/simple-icons from 1.2.90 to 1.2.91 ([#138](https://github.com/vinayakkulkarni/nxui/issues/138)) ([2c86c3e](https://github.com/vinayakkulkarni/nxui/commit/2c86c3e7d4d568464d10c5a0ef6ed842f6d15af7))
+* **deps:** Bump @nuxtjs/robots from 6.1.2 to 6.1.3 ([#129](https://github.com/vinayakkulkarni/nxui/issues/129)) ([34609b1](https://github.com/vinayakkulkarni/nxui/commit/34609b1dbd4ce30c69dfe6af50855e0b966bd44e))
+* **deps:** Bump @nuxtjs/sitemap from 8.2.2 to 8.2.3 ([#137](https://github.com/vinayakkulkarni/nxui/issues/137)) ([47c0323](https://github.com/vinayakkulkarni/nxui/commit/47c032364dd2c2d60d83e8d58dc02c2325c88290))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.51 to 9.0.0-beta.55 ([#134](https://github.com/vinayakkulkarni/nxui/issues/134)) ([5d5d99c](https://github.com/vinayakkulkarni/nxui/commit/5d5d99c65aa10f78e10ff793362284ee2d0773ef))
+* **deps:** Bump nuxt-schema-org from 6.2.3 to 6.2.7 ([#130](https://github.com/vinayakkulkarni/nxui/issues/130)) ([889bf8b](https://github.com/vinayakkulkarni/nxui/commit/889bf8bde64138db84efb4188ceec51f8c854cd2))
+* **deps:** Bump postprocessing from 6.39.2 to 6.39.3 ([#127](https://github.com/vinayakkulkarni/nxui/issues/127)) ([989e044](https://github.com/vinayakkulkarni/nxui/commit/989e044ca71b0a335bd625f1c6fa3a1649843874))
+* polish responsive signature and wave demos ([bc7f2ed](https://github.com/vinayakkulkarni/nxui/commit/bc7f2ede8ebeed2af2c1f9ec1ff8ffae037614cf))
+* refresh signature ink on theme changes ([3d9e8bd](https://github.com/vinayakkulkarni/nxui/commit/3d9e8bdd9b509445d67ff47a142fefdd776821b1))
+* require unhead 3.2.1 for Cloudflare builds ([60a95f9](https://github.com/vinayakkulkarni/nxui/commit/60a95f9ced91949e5d33772a824b4b0bdb30ee2a))
+* rewind completes on frame budget, not float equality ([bbb405f](https://github.com/vinayakkulkarni/nxui/commit/bbb405fab3ce44476a79c9efa898208ef698f5e6))
+* rewind fully reassembles the signature ([5a6d998](https://github.com/vinayakkulkarni/nxui/commit/5a6d998ae8a2cc3e538d53469028d74e141facef))
+
+
+### Documentation
+
+* add pixel wave demo and guide ([ec5ae06](https://github.com/vinayakkulkarni/nxui/commit/ec5ae06bd9ab6456b72e2339312fe16c24acc140))
+* add pixel wave preset switcher ([9838980](https://github.com/vinayakkulkarni/nxui/commit/9838980ae431379cb00ca46c43a680cccd82675d))
+* add signature eraser demo and guide ([b9e323c](https://github.com/vinayakkulkarni/nxui/commit/b9e323cf451ec3d0902b2970496239a157d39357))
+* update component catalog counts ([a998c64](https://github.com/vinayakkulkarni/nxui/commit/a998c64b3f04d29d0a258a04d6f330abd89d325a))
+* upgrade nuxt-skills ([5474fc0](https://github.com/vinayakkulkarni/nxui/commit/5474fc0b5f66bcc4a7c97ab846642d564bd780d8))
+
+
+### Miscellaneous
+
+* bump dependencies ✨ ([1a0f1d6](https://github.com/vinayakkulkarni/nxui/commit/1a0f1d632b786f3e4ce76f16da13df1e248806bd))
+* **deps-dev:** Bump eslint-plugin-better-tailwindcss ([#136](https://github.com/vinayakkulkarni/nxui/issues/136)) ([da8ad2b](https://github.com/vinayakkulkarni/nxui/commit/da8ad2b8ce069f5131a48e6f1da4abf901d64a24))
+* **deps-dev:** Bump lint-staged from 17.0.8 to 17.1.0 ([#131](https://github.com/vinayakkulkarni/nxui/issues/131)) ([93465d1](https://github.com/vinayakkulkarni/nxui/commit/93465d11e52a22d8da16752fa1739fd96808daf2))
+* **deps-dev:** Bump wrangler from 4.111.0 to 4.112.0 ([#128](https://github.com/vinayakkulkarni/nxui/issues/128)) ([b3a73dd](https://github.com/vinayakkulkarni/nxui/commit/b3a73dd7647e6ace7424db8f9e40232381cb168f))
+* **deps:** bump dependencies ✨ ([90e6778](https://github.com/vinayakkulkarni/nxui/commit/90e677814766901d377659e55bcbfc7b555960bf))
+* remove obsolete Nitro build workarounds ([a92618a](https://github.com/vinayakkulkarni/nxui/commit/a92618a0a2549ccf61b35517762564170becf50a))
+* update Nuxt to v4.5.0 ([#126](https://github.com/vinayakkulkarni/nxui/issues/126)) ([bdf57c5](https://github.com/vinayakkulkarni/nxui/commit/bdf57c51eca7d97b86515c60f2e3d935a4f8732e))
+* update nuxt to v4.5.0 and drop the Vite 8 override ([ea6eab8](https://github.com/vinayakkulkarni/nxui/commit/ea6eab840c9866e7d6a76791d31cc57a58f1cd8f))
+
 ## [0.0.17](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.16...nxui-v0.0.17) (2026-07-17)
 
 
