@@ -282,10 +282,10 @@
         maxLife: 1,
         delay: Math.random() * 30,
       }));
-      if (inkCtx) {
-        inkCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        inkCtx.clearRect(0, 0, width.value, height.value);
-      }
+      // Keep the full ink on inkCanvas: the rewind cross-fades the real
+      // strokes back in beneath the converging particles, so the signature
+      // reassembles completely rather than as a sparse dot scatter.
+      rebuildInk();
       resume();
     } else {
       particles = spawnParticles(
@@ -333,20 +333,28 @@
       frame += 1;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, width.value, height.value);
-      if (inkCanvas) ctx.drawImage(inkCanvas, 0, 0, width.value, height.value);
 
       if (particles.length === 0 && !rewind.active) {
+        if (inkCanvas)
+          ctx.drawImage(inkCanvas, 0, 0, width.value, height.value);
         pause();
         return;
       }
 
       const color = inkColor();
-      ctx.fillStyle = color;
 
       if (rewind.active) {
         rewind.t += 1;
         const eased =
           1 - Math.pow(1 - Math.min(1, rewind.t / rewind.duration), 3);
+        // Cross-fade the complete signature in beneath the converging
+        // particles so it reassembles fully, not as a sparse dot scatter.
+        if (inkCanvas) {
+          ctx.globalAlpha = eased;
+          ctx.drawImage(inkCanvas, 0, 0, width.value, height.value);
+          ctx.globalAlpha = 1;
+        }
+        ctx.fillStyle = color;
         let landed = 0;
         for (const p of particles) {
           if (frame < p.delay) {
@@ -356,8 +364,8 @@
           const t = Math.min(1, Math.max(0, eased * 1.15 - 0.15));
           const x = p.x + (p.ox - p.x) * t;
           const y = p.y + (p.oy - p.y) * t;
-          const alpha = 0.35 + 0.65 * t;
-          ctx.globalAlpha = alpha;
+          // Particles ride in, then fade out as the real ink takes over.
+          ctx.globalAlpha = (1 - t) * 0.9;
           ctx.beginPath();
           ctx.arc(x, y, p.r, 0, Math.PI * 2);
           ctx.fill();
@@ -370,6 +378,9 @@
         }
         return;
       }
+
+      if (inkCanvas) ctx.drawImage(inkCanvas, 0, 0, width.value, height.value);
+      ctx.fillStyle = color;
 
       particles = particles.filter((p) =>
         stepParticle(p, activeEffect.value, width.value, height.value, frame),
