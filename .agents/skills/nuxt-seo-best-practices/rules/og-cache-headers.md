@@ -65,3 +65,15 @@ const ogImageUrl = `${baseUrl}/og${path}.png?v=2&title=${encodeURIComponent(titl
 ```
 
 **Important:** OG image URLs include query params (title, description), so each unique combination gets its own cached entry. This is the correct behavior — different content = different cache key.
+
+**Cloudflare caveat — a `Cache-Control` header alone does NOT edge-cache a Worker/Pages Function response.** Dynamically generated responses from Workers/Pages Functions bypass Cloudflare's default CDN cache. To actually cache them at the edge you must either explicitly store the response in the Cache API (`caches.default.put()` / `.match()`) or add a Cache Rule that caches the route. For Cloudflare-specific control without affecting browsers, use `CDN-Cache-Control` — it overrides `Cache-Control` for Cloudflare's CDN cache only, leaving the browser-facing `Cache-Control` (and `max-age`) untouched:
+
+```typescript
+setResponseHeaders(event, {
+  'Content-Type': 'image/png',
+  // Browser cache directive
+  'Cache-Control': 'public, max-age=31536000, immutable',
+  // Cloudflare edge cache directive (overrides the above for CF's CDN only)
+  'CDN-Cache-Control': 'public, max-age=31536000, immutable',
+});
+```

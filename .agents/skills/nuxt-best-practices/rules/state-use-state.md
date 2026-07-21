@@ -9,6 +9,10 @@ tags: state, useState, ssr, hydration, shared-state
 
 In Nuxt, `useState` is SSR-safe and handles hydration correctly. Using plain `ref()` for shared state causes hydration mismatches and state leakage between server requests.
 
+**Serialization constraint:** `useState` data is serialized to JSON to transfer it from server to client — it must be a plain object/array/primitive. It must NOT contain classes, functions, or symbols, or you'll hit a `Cannot stringify arbitrary non-POJOs` error.
+
+**Reserved name:** `useState` is a reserved, compiler-transformed name — don't name your own functions `useState`.
+
 **Incorrect (plain ref for shared state):**
 
 ```typescript
@@ -53,8 +57,9 @@ export function useUser() {
   const user = useState<User | null>('user', () => null);
 
   async function fetchUser() {
-    const { data } = await useFetch('/api/me');
-    user.value = data.value;
+    // useFetch belongs in setup context only — use $fetch in imperative methods
+    const data = await $fetch('/api/me');
+    user.value = data;
   }
 
   return { user, fetchUser };

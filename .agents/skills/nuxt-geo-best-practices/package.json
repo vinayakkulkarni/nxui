@@ -8,8 +8,12 @@
     "email": "inbox.vinayak@gmail.com",
     "url": "https://vinayakkulkarni.dev"
   },
+  "type": "module",
   "scripts": {
-    "build": "bun run scripts/build.ts",
-    "validate": "bun run scripts/validate.ts"
+    "build": "node scripts/build.ts",
+    "validate": "node scripts/validate.ts"
+  },
+  "devDependencies": {
+    "yaml": "^2.9.0"
   }
 }

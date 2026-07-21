@@ -9,6 +9,10 @@ tags: server, config, environment, runtime-config
 
 In Nuxt, `runtimeConfig` is the SINGLE SOURCE OF TRUTH for configuration. Never use `process.env` directly in application code.
 
+**Serialization caveat:** runtime config is serialized — it must not contain functions, Sets, Maps, or other non-serializable values.
+
+**Security:** never expose private (non-`public`) runtime config to the client — don't render it in the template or pass it to `useState`.
+
 **Incorrect (direct process.env):**
 
 ```typescript
@@ -17,6 +21,10 @@ export default defineNuxtConfig({
   runtimeConfig: {
     oauth: {
       google: {
+        // A default referencing a DIFFERENTLY-named env var (GOOGLE_* here,
+        // not NUXT_OAUTH_GOOGLE_*) is read only at BUILD time and is baked in.
+        // At runtime Nuxt only overrides from the matching NUXT_-prefixed var,
+        // so this value CANNOT be changed at runtime and breaks in production.
         clientId: process.env.GOOGLE_CLIENT_ID, // NO!
         clientSecret: process.env.GOOGLE_CLIENT_SECRET, // NO!
       },
@@ -61,16 +69,10 @@ export default defineNuxtConfig({
 ```
 
 ```typescript
-// ✅ CORRECT - server/utils/auth.ts
-const config = useRuntimeConfig();
-
-if (config.oauth.google.clientId) {
-  // Fully typed configuration access
-}
-
 // ✅ CORRECT - server/api/payment.ts
+// Pass the event so per-request runtime env overrides apply (docs-recommended).
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig();
+  const config = useRuntimeConfig(event);
   const stripe = new Stripe(config.stripe.secretKey);
   // ...
 });

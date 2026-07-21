@@ -102,6 +102,10 @@ useHead({
 | `SoftwareSourceCode` | Open source project landing pages         |
 | `BreadcrumbList`     | Navigation breadcrumbs (per-page)         |
 
+**`applicationCategory` is an example.** `'DesignApplication'` above is just one schema.org value — pick the category that actually matches your app (e.g. `'BusinessApplication'`, `'DeveloperApplication'`, `'GameApplication'`, `'ProductivityApplication'`).
+
+**XSS caveat — only `innerHTML` trusted/static JSON.** `JSON.stringify` does NOT escape `<` or `>`, so any user-derived value containing `</script>` can break out of the script tag and inject markup. Only use the `innerHTML` pattern with static/trusted data. For any user-supplied value, escape `<`/`>` (e.g. replace `<` → `\u003c`, `>` → `\u003e`) before serializing, or route the payload through `useHeadSafe` so unhead sanitizes it.
+
 **Validation:** Use [Google's Rich Results Test](https://search.google.com/test/rich-results) to verify structured data.
 
 Reference: [Schema.org](https://schema.org/) | [Google Structured Data](https://developers.google.com/search/docs/appearance/structured-data)

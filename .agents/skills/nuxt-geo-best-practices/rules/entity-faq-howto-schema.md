@@ -104,7 +104,7 @@ Most AI search queries are question-shaped: _"how do I X"_, _"what's the best Y 
         'Step-by-step guide from a fresh Nuxt 4 project to a live Cloudflare Workers deployment with custom domain.',
       totalTime: 'PT5M', // ISO 8601 duration
       estimatedCost: { currency: 'USD', value: '0' },
-      supply: ['Cloudflare account', 'Node.js 20+', 'Bun or pnpm'],
+      supply: ['Cloudflare account', 'Node.js 20+', 'pnpm'],
       tool: ['Wrangler CLI', 'Nuxi CLI'],
       step: [
         {

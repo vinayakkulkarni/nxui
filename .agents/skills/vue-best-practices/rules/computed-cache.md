@@ -134,4 +134,12 @@ Computed properties are cached based on their reactive dependencies. Methods are
 </script>
 ```
 
+**Best practices (per docs):**
+
+Computed getters must be side-effect free — do no async work, no DOM mutation, no changing other state inside the getter. And never mutate the computed value itself; a computed is a read-only snapshot of derived state, so mutate the underlying source instead.
+
+**Computed Stability (Vue 3.4+):**
+
+A computed only triggers downstream effects when its returned value actually _changes_. Returning a fresh object or array on every run (e.g. `computed(() => ({ ...x }))`) defeats this — each run is a new reference, so every dependent re-runs even when nothing meaningful changed. Return primitives or stable references where possible so downstream effects fire only on real changes.
+
 Reference: [Computed Properties](https://vuejs.org/guide/essentials/computed.html)

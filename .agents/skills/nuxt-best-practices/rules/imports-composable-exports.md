@@ -7,7 +7,7 @@ tags: composables, types, organization, exports
 
 ## Composables Export Functions Only, Not Types
 
-Composable files should ONLY export functions. Import types from dedicated type files.
+Composable files should ONLY export functions. Import types from dedicated type files. This is a project convention — Nuxt does not enforce it — but keeping composables function-only keeps the architecture clean.
 
 **Incorrect (exporting types from composables):**
 
@@ -113,5 +113,7 @@ export function useAuth(): UseAuthReturn {
 | Constants               | ⚠️  | Move to separate constants file |
 | Types/Interfaces        | ❌  | Move to types directory         |
 | Classes                 | ❌  | Move to utils or services       |
+
+**Note:** `shared/types/` is an auto-import location — top-level files there are scanned automatically (v3.14+), so explicit `#shared/types/...` imports are optional for top-level files and required for nested ones.
 
 Reference: [Nuxt Composables](https://nuxt.com/docs/guide/directory-structure/composables)

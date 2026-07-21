@@ -83,6 +83,10 @@ Use `<KeepAlive>` to cache component instances when switching between them, pres
 </template>
 ```
 
+**`include`/`exclude` match against the component `name`:**
+
+Matching is performed against each component's `name` option — not the tag or file path. Since 3.2.34, a `<script setup>` SFC automatically infers its `name` from the **filename**, so `SearchForm.vue` matches `"SearchForm"` without any extra config. Only set `name` manually (via a separate `<script>` block or `defineOptions({ name: '...' })`) when the desired match name differs from the filename.
+
 **Limit cached instances:**
 
 ```vue
@@ -100,14 +104,14 @@ Use `<KeepAlive>` to cache component instances when switching between them, pres
 <script setup>
   import { onActivated, onDeactivated } from 'vue';
 
-  // Called when component is inserted from cache
+  // Called on initial mount AND every time it is re-inserted from the cache
   onActivated(() => {
     console.log('Component activated from cache');
     // Refresh data if needed
     fetchLatestData();
   });
 
-  // Called when component is removed to cache
+  // Called when removed from the DOM into the cache AND on unmount
   onDeactivated(() => {
     console.log('Component deactivated to cache');
     // Cleanup if needed

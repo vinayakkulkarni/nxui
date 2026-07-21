@@ -75,6 +75,8 @@ components/
 | `ui/form/Input.vue`         | `<UiFormInput />`         | Nested folders |
 | `dashboard/cards/Stats.vue` | `<DashboardCardsStats />` | Deep nesting   |
 
+**Note:** Nuxt automatically removes a filename segment that exactly matches its folder (`tokens/Tokens.vue` → `<Tokens>`), but does NOT dedupe partial overlaps like `Tokens` vs `Token` — hence `tokens/TokenCard.vue` → `<TokensTokenCard>`.
+
 **For shared/global components:**
 
 ```
@@ -89,15 +91,15 @@ components/
 ```typescript
 // nuxt.config.ts
 export default defineNuxtConfig({
-  components: {
-    dirs: [
-      {
-        path: '~/components/ui',
-        prefix: '', // No prefix for UI components
-      },
-    ],
-  },
+  components: [
+    {
+      path: '~/components/ui',
+      pathPrefix: false, // No folder-derived prefix for UI components
+    },
+  ],
 });
 ```
 
-Reference: [Nuxt Components Directory](https://nuxt.com/docs/guide/directory-structure/components)
+`pathPrefix: false` removes the folder-derived prefix; `prefix: 'X'` adds one.
+
+Reference: [Nuxt Components Directory](https://nuxt.com/docs/guide/directory-structure/app/components)

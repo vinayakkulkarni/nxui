@@ -1,15 +1,16 @@
 import { readdir, readFile } from 'node:fs/promises';
+import { parse as parseYaml } from 'yaml';
 import { join } from 'node:path';
 
-const RULES_DIR = join(import.meta.dir, '..', 'rules');
-const SKILL_FILE = join(import.meta.dir, '..', 'SKILL.md');
+const RULES_DIR = join(import.meta.dirname, '..', 'rules');
+const SKILL_FILE = join(import.meta.dirname, '..', 'SKILL.md');
 
 interface ValidationError {
   file: string;
   error: string;
 }
 
-function validateFrontmatter(
+function validateYamlFrontmatter(
   content: string,
   filename: string,
 ): ValidationError[] {
@@ -29,6 +30,35 @@ function validateFrontmatter(
       file: filename,
       error: 'Invalid frontmatter (missing closing ---)',
     });
+    return errors;
+  }
+
+  const frontmatter = content.slice(4, endIndex);
+  try {
+    parseYaml(frontmatter);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    errors.push({
+      file: filename,
+      error: `Invalid YAML frontmatter: ${message}`,
+    });
+  }
+
+  return errors;
+}
+
+function validateFrontmatter(
+  content: string,
+  filename: string,
+): ValidationError[] {
+  const errors = validateYamlFrontmatter(content, filename);
+
+  if (!content.startsWith('---\n')) {
+    return errors;
+  }
+
+  const endIndex = content.indexOf('\n---\n', 4);
+  if (endIndex === -1) {
     return errors;
   }
 
@@ -59,6 +89,7 @@ async function validateSkillFile(): Promise<ValidationError[]> {
   const errors: ValidationError[] = [];
   try {
     const skillContent = await readFile(SKILL_FILE, 'utf-8');
+    errors.push(...validateYamlFrontmatter(skillContent, 'SKILL.md'));
     if (!skillContent.includes('name: nuxt-geo-best-practices')) {
       errors.push({
         file: 'SKILL.md',

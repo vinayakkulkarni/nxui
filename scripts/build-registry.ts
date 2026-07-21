@@ -501,6 +501,18 @@ const COMPONENTS: Record<
       'WebGL image transitions with noisy refractive waves, chromatic edges, glow, and click-triggered ripple origins.',
     deps: ['motion-v'],
   },
+  'signature-eraser': {
+    title: 'Signature Eraser',
+    description:
+      'A signing canvas whose ink disintegrates into physics particles — Thanos Snap, Black Hole, Explosion, Wind Sweep, and Rewind effects.',
+    deps: ['@vueuse/core'],
+  },
+  'pixel-wave': {
+    title: 'Pixel Wave',
+    description:
+      'A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild.',
+    deps: ['@vueuse/core'],
+  },
   'pixel-snow': {
     title: 'Pixel Snow',
     description:

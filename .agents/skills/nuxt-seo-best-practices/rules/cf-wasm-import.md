@@ -15,7 +15,7 @@ WASM modules on Cloudflare Workers require specific Nitro configuration. Without
 // ❌ WRONG — WASM modules fail with "WebAssembly.instantiate() is not allowed"
 export default defineNuxtConfig({
   nitro: {
-    preset: 'cloudflare-pages',
+    preset: 'cloudflare_module',
     // Missing wasm config
   },
 });
@@ -27,7 +27,8 @@ export default defineNuxtConfig({
 // ✅ CORRECT — Enable WASM for CF Workers
 export default defineNuxtConfig({
   nitro: {
-    preset: 'cloudflare-pages',
+    // 'cloudflare_module' is recommended for Workers; 'cloudflare_pages' for Pages
+    preset: 'cloudflare_module',
     wasm: {
       // Allow import wasm from './module.wasm' syntax
       esmImport: true,
@@ -38,9 +39,9 @@ export default defineNuxtConfig({
 });
 ```
 
-**Why lazy loading matters:**
+**Why this config matters:**
 
-Cloudflare Workers don't allow `WebAssembly.instantiate()` at the top level during cold start. With `lazy: true`, WASM modules are loaded on first use, which is allowed by the Workers runtime. Without it, the module tries to instantiate at import time and fails.
+Cloudflare Workers disallow compiling WASM from arbitrary bytes at runtime (`WebAssembly.instantiate()` / `WebAssembly.compile()` on raw buffers). Setting `esmImport: true` makes each `.wasm` a first-class ES module that is compiled at deploy time (not from runtime bytes), and `lazy: true` defers instantiation until first use rather than at import. Together they satisfy the Workers restriction while keeping cold starts fast.
 
 **Packages that require this config:**
 
@@ -58,4 +59,4 @@ const { ImageResponse } = await import('@cf-wasm/og/workerd');
 
 **Testing note:** WASM-dependent routes won't work in local `nuxt dev` (Node.js runtime). Test on Cloudflare Workers preview (`wrangler pages dev`) or production deployment.
 
-Reference: [Nitro WASM Support](https://nitro.unjs.io/guide/wasm) | [Cloudflare Workers WASM](https://developers.cloudflare.com/workers/runtime-apis/webassembly/)
+Reference: [Nitro WASM Config](https://nitro.build/config#wasm) | [Cloudflare Workers WASM](https://developers.cloudflare.com/workers/runtime-apis/webassembly/)

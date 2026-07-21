@@ -50,7 +50,7 @@ project/
 │       ├── auth.ts               # OAuthProviderUIConfig, LoginFormState
 │       ├── billing.ts            # TierInfo, ButtonConfig
 │       └── navigation.ts         # SidebarState, NavItem
-├── shared/
+├── shared/                       # available since Nuxt 3.14+
 │   └── types/                    # Shared between client & server
 │       ├── auth.ts               # User, Session, OAuthProviderId
 │       ├── token.ts              # ApiToken, TokenMetadata
@@ -84,6 +84,8 @@ import type { InternalConfig } from '~~/server/types/internal';
 | API request/response | `shared/types/` | `#shared/types/...`   | User, ApiToken, responses           |
 | Database entities    | `shared/types/` | `#shared/types/...`   | DB models used by both              |
 | Server internals     | `server/types/` | `~~/server/types/...` | Middleware context, internal config |
+
+**Note:** `shared/types/` top-level files are auto-imported (v3.14+); `app/types/` and `server/types/` are plain import targets (no auto-import).
 
 **Why this matters:**
 

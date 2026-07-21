@@ -121,7 +121,7 @@ const { name, email, isLoading, loadUser } = useUser();
 
 ```typescript
 // composables/useFetch.ts
-import { ref, shallowRef } from 'vue';
+import { ref, shallowRef, computed } from 'vue';
 
 export function useFetch<T>(url: string) {
   const data = shallowRef<T | null>(null);

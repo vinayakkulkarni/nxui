@@ -207,6 +207,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
       { title: 'Signature', path: '/docs/components/signature' },
       {
+        title: 'Signature Eraser',
+        path: '/docs/components/signature-eraser',
+        badge: 'new',
+      },
+      {
         title: 'Split Flap Display',
         path: '/docs/components/split-flap-display',
       },
@@ -257,6 +262,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/visual-effects/particle-galaxy',
       },
       { title: 'Pixel Canvas', path: '/docs/visual-effects/pixel-canvas' },
+      {
+        title: 'Pixel Wave',
+        path: '/docs/visual-effects/pixel-wave',
+        badge: 'new',
+      },
     ],
   },
   {

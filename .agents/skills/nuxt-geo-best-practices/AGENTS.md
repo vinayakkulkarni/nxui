@@ -1,7 +1,7 @@
 # Nuxt GEO Best Practices - Complete Reference
 
 > This file is auto-generated. Do not edit directly.
-> Edit individual rule files in the `rules/` directory and run `bun run build`.
+> Edit individual rule files in the `rules/` directory and run `pnpm build`.
 
 # Nuxt GEO Best Practices
 
@@ -39,6 +39,8 @@ Nuxt 4 ships first-class SEO/meta primitives. Read these before reinventing anyt
 - **[`useHead`](https://nuxt.com/docs/4.x/api/composables/use-head)** — generic head manager (used here for JSON-LD `script` injection).
 
 The `usePageGeo` composable in `page-use-page-geo.md` is a thin wrapper over these primitives; it is **not** a replacement for them.
+
+> **Nuxt 4.5 note:** head management now runs on `unhead` v3 — stricter `useHead` typing and no promise input. The `useHead` JSON-LD injection patterns in this skill use plain synchronous values and are v3-compatible. Also, 4.5's experimental SSR streaming is bot-aware: crawlers automatically receive fully-buffered HTML, so enabling it does not hurt GEO (see `ai-ssr-for-crawlers`).
 
 ## Evidence Base
 
@@ -850,6 +852,23 @@ routeRules: {
   },
 },
 ```
+
+### What about SSR streaming (Nuxt 4.5+)?
+
+Nuxt 4.5's experimental `ssrStreaming` is **bot-aware**: requests from crawler user agents automatically fall back to the fully-buffered renderer, so search engines and AI crawlers still receive complete HTML in one response. Enabling streaming for human visitors does not hurt GEO. If you run niche crawlers you care about, extend the matcher:
+
+```ts
+export default defineNuxtConfig({
+  experimental: {
+    ssrStreaming: {
+      // These UAs get buffered (fully-rendered) HTML
+      botRegex: /googlebot|bingbot|gptbot|claudebot|perplexitybot/i,
+    },
+  },
+});
+```
+
+Note the default `botRegex` already targets indexing crawlers — only override it to ADD bots, and keep the defaults' spirit (see sibling skill `nuxt-best-practices` rule `rendering-ssr-streaming` for the full caveat list).
 
 Reference: [Nuxt 4 Rendering Modes](https://nuxt.com/docs/4.x/guide/concepts/rendering) · [Nitro Prerender](https://nitro.unjs.io/config#prerender) · [Nuxt `<ClientOnly>`](https://nuxt.com/docs/4.x/api/components/client-only) · [Nuxt SEO docs](https://nuxt.com/docs/4.x/getting-started/seo-meta) · sibling skill `nuxt-best-practices` (rendering modes section)
 
@@ -1896,7 +1915,7 @@ Most AI search queries are question-shaped: _"how do I X"_, _"what's the best Y 
         'Step-by-step guide from a fresh Nuxt 4 project to a live Cloudflare Workers deployment with custom domain.',
       totalTime: 'PT5M', // ISO 8601 duration
       estimatedCost: { currency: 'USD', value: '0' },
-      supply: ['Cloudflare account', 'Node.js 20+', 'Bun or pnpm'],
+      supply: ['Cloudflare account', 'Node.js 20+', 'pnpm'],
       tool: ['Wrangler CLI', 'Nuxi CLI'],
       step: [
         {

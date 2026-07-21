@@ -1,13 +1,13 @@
 ---
 title: Use v-memo for Expensive List Items
-impact: CRITICAL
-impactDescription: Skip re-renders for unchanged items in large lists
+impact: MEDIUM
+impactDescription: Rarely-needed micro-optimization for very large lists (1000+ items)
 tags: component, v-memo, lists, performance, memoization
 ---
 
 ## Use v-memo for Expensive List Items
 
-For large lists where each item is expensive to render, use `v-memo` to skip re-rendering items when their dependencies haven't changed.
+`v-memo` is a rarely-needed micro-optimization. For very large lists where each item is expensive to render, it can skip re-rendering items when their dependencies haven't changed. The Vue docs cite lists of 1000+ items as the case where it earns its keep — reach for it only after profiling.
 
 **Incorrect (all items re-render):**
 
@@ -60,6 +60,10 @@ For large lists where each item is expensive to render, use `v-memo` to skip re-
 </script>
 ```
 
+**Must be on the same element as `v-for`:**
+
+When using `v-memo` with `v-for`, they **must** be placed on the same element — `v-memo` does not work inside `v-for`. The `:key` value is automatically part of the memo comparison, so there is no need to include `item.id` in the deps array.
+
 **How v-memo works:**
 
 ```vue
@@ -108,13 +112,13 @@ For large lists where each item is expensive to render, use `v-memo` to skip re-
 
 **When to use v-memo:**
 
-| Scenario                              | Use v-memo?  |
-| ------------------------------------- | ------------ |
-| List with 100+ items                  | Yes          |
-| Items have expensive child components | Yes          |
-| Selection state changes frequently    | Yes          |
-| Simple text-only items                | Probably not |
-| Small lists (< 50 items)              | Usually not  |
+| Scenario                               | Use v-memo?  |
+| -------------------------------------- | ------------ |
+| List with 1000+ items                  | Yes          |
+| Items have expensive child components  | Yes          |
+| Selection state changes frequently     | Yes          |
+| Simple text-only items                 | Probably not |
+| Small or moderate lists (< 1000 items) | Usually not  |
 
 **Pitfall - forgetting dependencies:**
 

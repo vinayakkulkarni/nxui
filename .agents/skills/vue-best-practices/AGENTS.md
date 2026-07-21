@@ -1,11 +1,11 @@
 # Vue Best Practices - Complete Reference
 
 > This file is auto-generated. Do not edit directly.
-> Edit individual rule files in the `rules/` directory and run `bun run build`.
+> Edit individual rule files in the `rules/` directory and run `pnpm build`.
 
 # Vue Best Practices
 
-Comprehensive performance optimization guide for Vue.js applications. Contains 40+ rules across 8 categories, prioritized by impact to guide automated refactoring and code generation.
+Comprehensive performance optimization guide for Vue.js applications (verified against the official Vue 3.5+ docs). Contains 18 rules across 5 categories, prioritized by impact to guide automated refactoring and code generation.
 
 ## When to Apply
 
@@ -20,80 +20,48 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category                 | Impact      | Prefix        |
-| -------- | ------------------------ | ----------- | ------------- |
-| 1        | Reactivity Fundamentals  | CRITICAL    | `reactivity-` |
-| 2        | Component Performance    | CRITICAL    | `component-`  |
-| 3        | Computed & Watchers      | HIGH        | `computed-`   |
-| 4        | Template Optimization    | MEDIUM-HIGH | `template-`   |
-| 5        | Composition API Patterns | MEDIUM      | `composable-` |
-| 6        | State Management         | MEDIUM      | `state-`      |
-| 7        | Async & Data Fetching    | LOW-MEDIUM  | `async-`      |
-| 8        | Advanced Patterns        | LOW         | `advanced-`   |
+| Priority | Category                 | Impact      | Prefix                 |
+| -------- | ------------------------ | ----------- | ---------------------- |
+| 1        | Reactivity Fundamentals  | CRITICAL    | `reactivity-`          |
+| 2        | Component Performance    | CRITICAL    | `component-`           |
+| 3        | Computed & Watchers      | HIGH        | `computed-` / `watch-` |
+| 4        | Template Optimization    | MEDIUM-HIGH | `template-`            |
+| 5        | Composition API Patterns | MEDIUM      | `composable-`          |
 
 ## Quick Reference
 
 ### 1. Reactivity Fundamentals (CRITICAL)
 
-- `reactivity-ref-vs-reactive` - Use ref() for primitives, reactive() for objects
+- `reactivity-ref-vs-reactive` - Prefer ref() as the primary reactivity API
 - `reactivity-avoid-destructure` - Don't destructure reactive objects
-- `reactivity-toRefs` - Use toRefs() when destructuring is needed
+- `reactivity-toRefs` - Use toRefs()/getters when destructuring is needed
 - `reactivity-shallowRef` - Use shallowRef() for large non-reactive data
-- `reactivity-raw-values` - Use toRaw() for read-only operations on large data
+- `reactivity-raw-values` - Treat toRaw() as a narrow escape hatch
 
 ### 2. Component Performance (CRITICAL)
 
-- `component-v-once` - Use v-once for static content
-- `component-v-memo` - Use v-memo for expensive list items
 - `component-async` - Use defineAsyncComponent for heavy components
 - `component-keep-alive` - Cache component state with KeepAlive
-- `component-functional` - Prefer functional components for stateless UI
+- `component-v-memo` - v-memo micro-optimization for 1000+ item lists
+- `component-v-once` - Use v-once for static content
+- `component-functional` - Keep stateless components simple
 
 ### 3. Computed & Watchers (HIGH)
 
 - `computed-cache` - Use computed() for derived values, not methods
-- `computed-getter-only` - Avoid setters in computed when possible
-- `computed-dependencies` - Minimize computed dependencies
-- `watch-immediate` - Avoid immediate watchers, use computed instead
+- `computed-dependencies` - Understand fine-grained per-property dependency tracking
 - `watch-deep-avoid` - Avoid deep watchers on large objects
-- `watch-cleanup` - Always cleanup async watchers
 
 ### 4. Template Optimization (MEDIUM-HIGH)
 
 - `template-v-show-vs-if` - v-show for frequent toggles, v-if for rare
-- `template-key-attribute` - Always use unique keys in v-for
+- `template-key-attribute` - Always use unique primitive keys in v-for
 - `template-avoid-v-if-v-for` - Never use v-if and v-for on same element
-- `template-static-hoisting` - Let compiler hoist static content
-- `template-event-modifiers` - Use event modifiers instead of JS handlers
 
 ### 5. Composition API Patterns (MEDIUM)
 
 - `composable-single-responsibility` - One concern per composable
 - `composable-return-refs` - Return refs, not reactive objects
-- `composable-cleanup` - Handle cleanup in composables
-- `composable-lazy-init` - Lazy initialize expensive resources
-- `composable-provide-inject` - Use provide/inject for deep prop drilling
-
-### 6. State Management (MEDIUM)
-
-- `state-pinia-stores` - Split stores by domain
-- `state-getters` - Use getters for computed state
-- `state-actions-mutations` - Keep mutations simple, logic in actions
-- `state-subscription-cleanup` - Cleanup store subscriptions
-
-### 7. Async & Data Fetching (LOW-MEDIUM)
-
-- `async-suspense` - Use Suspense for async component loading
-- `async-error-boundaries` - Handle async errors gracefully
-- `async-stale-while-revalidate` - Implement SWR pattern for data fetching
-- `async-abort-controller` - Cancel pending requests on unmount
-
-### 8. Advanced Patterns (LOW)
-
-- `advanced-custom-directives` - Create directives for DOM manipulation
-- `advanced-render-functions` - Use render functions for dynamic templates
-- `advanced-teleport` - Use Teleport for modals and overlays
-- `advanced-transition-groups` - Optimize list transitions
 
 ## How to Use
 
@@ -153,7 +121,7 @@ Heavy components that aren't needed immediately should be loaded asynchronously 
 
 ```vue
 <script setup>
-  import { defineAsyncComponent, ref } from 'vue';
+  import { defineAsyncComponent } from 'vue';
 
   // Lazy load - only fetched when rendered
   const HeavyChart = defineAsyncComponent(() => import('./HeavyChart.vue'));
@@ -190,12 +158,14 @@ Heavy components that aren't needed immediately should be loaded asynchronously 
     loadingComponent: LoadingSpinner,
     errorComponent: ErrorDisplay,
     delay: 200, // Show loading after 200ms
-    timeout: 10000, // Timeout after 10s
+    timeout: 10000, // Timeout after 10s (default is Infinity)
   });
 </script>
 ```
 
-**With Suspense (Vue 3.3+):**
+**With Suspense (experimental):**
+
+`<Suspense>` has existed since Vue 3.0 and is still experimental; its API may change ([suspense.html](https://vuejs.org/guide/built-ins/suspense.html)).
 
 ```vue
 <template>
@@ -215,6 +185,21 @@ Heavy components that aren't needed immediately should be loaded asynchronously 
   const HeavyChart = defineAsyncComponent(() => import('./HeavyChart.vue'));
 </script>
 ```
+
+**Lazy hydration (SSR, Vue 3.5+):**
+
+Async components can control when they hydrate on the client via the `hydrate` option. Vue ships strategies `hydrateOnIdle`, `hydrateOnVisible`, `hydrateOnMediaQuery`, and `hydrateOnInteraction`.
+
+```typescript
+import { defineAsyncComponent, hydrateOnVisible } from 'vue';
+
+const HeavyChart = defineAsyncComponent({
+  loader: () => import('./HeavyChart.vue'),
+  hydrate: hydrateOnVisible(),
+});
+```
+
+Reference: [Lazy Hydration](https://vuejs.org/guide/components/async.html#lazy-hydration)
 
 **Route-level code splitting (Vue Router):**
 
@@ -251,15 +236,15 @@ Reference: [Async Components](https://vuejs.org/guide/components/async.html)
 
 ---
 
-### Use Functional Approach for Stateless Components
+### Keep Stateless Components Simple
 
-**Impact:** MEDIUM - Slightly faster render, clearer intent
+**Impact:** MEDIUM - Clearer intent for stateless UI; negligible render difference in Vue 3
 
-## Use Functional Approach for Stateless Components
+## Keep Stateless Components Simple
 
 For simple, stateless presentational components, keep them lightweight without unnecessary features.
 
-**Note:** In Vue 3, all components are effectively optimized. The "functional" concept from Vue 2 is less relevant, but keeping components simple still matters.
+**Note:** In Vue 3, all components are effectively optimized. Vue 2's performance motivation for functional components is largely irrelevant in Vue 3 — the render delta versus a stateful component is negligible. Keeping components simple still matters for clarity, not speed.
 
 **Overly complex for simple presentation:**
 
@@ -356,16 +341,26 @@ For simple, stateless presentational components, keep them lightweight without u
 </script>
 ```
 
-**Render functions for highly dynamic components:**
+### True functional components
+
+Vue 3 also supports genuinely functional components — a plain function that receives `props` and a context object and returns vnodes. They hold no state and no component instance.
 
 ```typescript
 // For components with very dynamic rendering logic
 import { h } from 'vue';
 
-export default function DynamicHeading(props: { level: number }, { slots }) {
+function DynamicHeading(props, { slots }) {
   return h(`h${props.level}`, slots.default?.());
 }
+
+// Props/emits must be declared explicitly on the function
+DynamicHeading.props = ['level'];
 ```
+
+Documented caveats:
+
+- Props are **not** automatically camelized unless you declare `DynamicHeading.props` — without a `props` declaration, all attributes passed by the parent appear in `props` verbatim (e.g. `some-prop` stays `some-prop`).
+- Only `class`, `style`, and `on*` event listeners fall through to the root element by default; other attributes do not.
 
 **Using JSX/TSX for complex dynamic rendering:**
 
@@ -487,6 +482,10 @@ Use `<KeepAlive>` to cache component instances when switching between them, pres
 </template>
 ```
 
+**`include`/`exclude` match against the component `name`:**
+
+Matching is performed against each component's `name` option — not the tag or file path. Since 3.2.34, a `<script setup>` SFC automatically infers its `name` from the **filename**, so `SearchForm.vue` matches `"SearchForm"` without any extra config. Only set `name` manually (via a separate `<script>` block or `defineOptions({ name: '...' })`) when the desired match name differs from the filename.
+
 **Limit cached instances:**
 
 ```vue
@@ -504,14 +503,14 @@ Use `<KeepAlive>` to cache component instances when switching between them, pres
 <script setup>
   import { onActivated, onDeactivated } from 'vue';
 
-  // Called when component is inserted from cache
+  // Called on initial mount AND every time it is re-inserted from the cache
   onActivated(() => {
     console.log('Component activated from cache');
     // Refresh data if needed
     fetchLatestData();
   });
 
-  // Called when component is removed to cache
+  // Called when removed from the DOM into the cache AND on unmount
   onDeactivated(() => {
     console.log('Component deactivated to cache');
     // Cleanup if needed
@@ -550,11 +549,11 @@ Reference: [KeepAlive](https://vuejs.org/guide/built-ins/keep-alive.html)
 
 ### Use v-memo for Expensive List Items
 
-**Impact:** CRITICAL - Skip re-renders for unchanged items in large lists
+**Impact:** MEDIUM - Rarely-needed micro-optimization for very large lists (1000+ items)
 
 ## Use v-memo for Expensive List Items
 
-For large lists where each item is expensive to render, use `v-memo` to skip re-rendering items when their dependencies haven't changed.
+`v-memo` is a rarely-needed micro-optimization. For very large lists where each item is expensive to render, it can skip re-rendering items when their dependencies haven't changed. The Vue docs cite lists of 1000+ items as the case where it earns its keep — reach for it only after profiling.
 
 **Incorrect (all items re-render):**
 
@@ -607,6 +606,10 @@ For large lists where each item is expensive to render, use `v-memo` to skip re-
 </script>
 ```
 
+**Must be on the same element as `v-for`:**
+
+When using `v-memo` with `v-for`, they **must** be placed on the same element — `v-memo` does not work inside `v-for`. The `:key` value is automatically part of the memo comparison, so there is no need to include `item.id` in the deps array.
+
 **How v-memo works:**
 
 ```vue
@@ -655,13 +658,13 @@ For large lists where each item is expensive to render, use `v-memo` to skip re-
 
 **When to use v-memo:**
 
-| Scenario                              | Use v-memo?  |
-| ------------------------------------- | ------------ |
-| List with 100+ items                  | Yes          |
-| Items have expensive child components | Yes          |
-| Selection state changes frequently    | Yes          |
-| Simple text-only items                | Probably not |
-| Small lists (< 50 items)              | Usually not  |
+| Scenario                               | Use v-memo?  |
+| -------------------------------------- | ------------ |
+| List with 1000+ items                  | Yes          |
+| Items have expensive child components  | Yes          |
+| Selection state changes frequently     | Yes          |
+| Simple text-only items                 | Probably not |
+| Small or moderate lists (< 1000 items) | Usually not  |
 
 **Pitfall - forgetting dependencies:**
 
@@ -686,7 +689,7 @@ Reference: [v-memo](https://vuejs.org/api/built-in-directives.html#v-memo)
 
 ### Use v-once for Static Content
 
-**Impact:** CRITICAL - Eliminates re-render cost for static elements
+**Impact:** MEDIUM - Eliminates re-render cost for static elements
 
 ## Use v-once for Static Content
 
@@ -784,19 +787,29 @@ Content that never changes after initial render should use `v-once` to skip all 
 </template>
 ```
 
-**v-once with slots:**
+**v-once inside a slot:**
+
+Put `v-once` on the element inside the slot, not on the `<template>` slot tag.
 
 ```vue
 <!-- Parent component -->
 <template>
   <Card>
-    <template #header v-once>
-      <h2>Static Header</h2>
+    <template #header>
+      <h2 v-once>Static Header</h2>
     </template>
     <template #content>
       <p>{{ dynamicContent }}</p>
     </template>
   </Card>
+</template>
+```
+
+**v-once with v-for (render the list once):**
+
+```vue
+<template>
+  <li v-for="i in list" v-once>{{ i }}</li>
 </template>
 ```
 
@@ -924,7 +937,7 @@ const { name, email, isLoading, loadUser } = useUser();
 
 ```typescript
 // composables/useFetch.ts
-import { ref, shallowRef } from 'vue';
+import { ref, shallowRef, computed } from 'vue';
 
 export function useFetch<T>(url: string) {
   const data = shallowRef<T | null>(null);
@@ -1287,43 +1300,27 @@ Computed properties are cached based on their reactive dependencies. Methods are
 </script>
 ```
 
+**Best practices (per docs):**
+
+Computed getters must be side-effect free — do no async work, no DOM mutation, no changing other state inside the getter. And never mutate the computed value itself; a computed is a read-only snapshot of derived state, so mutate the underlying source instead.
+
+**Computed Stability (Vue 3.4+):**
+
+A computed only triggers downstream effects when its returned value actually _changes_. Returning a fresh object or array on every run (e.g. `computed(() => ({ ...x }))`) defeats this — each run is a new reference, so every dependent re-runs even when nothing meaningful changed. Return primitives or stable references where possible so downstream effects fire only on real changes.
+
 Reference: [Computed Properties](https://vuejs.org/guide/essentials/computed.html)
 
 ---
 
-### Minimize Computed Dependencies
+### Understand Fine-Grained Dependency Tracking in Computeds
 
-**Impact:** HIGH - Reduces unnecessary recalculations
+**Impact:** HIGH - Read only the properties you need to avoid over-tracking
 
-## Minimize Computed Dependencies
+## Understand Fine-Grained Dependency Tracking in Computeds
 
-Computed properties recalculate when ANY dependency changes. Keep dependencies minimal and focused.
+Vue's reactivity tracks dependencies **per property**, not per object. Under the hood each property read runs `track(target, key)`, so a computed depends only on the exact keys it reads — not on the whole object that contains them. Over-tracking happens only when your code reads _more_ keys than it needs.
 
-**Incorrect (too many dependencies):**
-
-```vue
-<script setup>
-  import { reactive, computed } from 'vue';
-
-  const state = reactive({
-    user: {
-      name: 'John',
-      email: 'john@example.com',
-      preferences: { theme: 'dark', notifications: true },
-      lastLogin: new Date(),
-      sessionCount: 42,
-    },
-  });
-
-  // BAD: Depends on entire user object
-  // Recalculates when ANY user property changes
-  const greeting = computed(() => {
-    return `Hello, ${state.user.name}!`;
-  });
-</script>
-```
-
-**Correct (minimal dependencies):**
+**Per-property tracking (this is already optimal):**
 
 ```vue
 <script setup>
@@ -1339,40 +1336,60 @@ Computed properties recalculate when ANY dependency changes. Keep dependencies m
     },
   });
 
-  // GOOD: Only depends on user.name
-  // Only recalculates when name changes
-  const greeting = computed(() => {
-    return `Hello, ${state.user.name}!`;
+  // Reading state.user.name tracks ONLY the `name` key.
+  // This re-runs when name changes — NOT when email, lastLogin,
+  // sessionCount, or preferences change.
+  const greeting = computed(() => `Hello, ${state.user.name}!`);
+</script>
+```
+
+There is nothing to "minimize" here — accessing `state.user.name` does not make the computed depend on the entire `user` object.
+
+**Anti-pattern: reading far more keys than you need.**
+
+```vue
+<script setup>
+  import { reactive, computed } from 'vue';
+
+  const state = reactive({
+    user: { name: 'John', email: 'john@example.com', sessionCount: 42 },
+  });
+
+  // BAD: JSON.stringify walks EVERY key of state, so the computed now
+  // depends on every property and re-runs on any change.
+  const cacheKey = computed(() => JSON.stringify(state));
+
+  // BAD: spreading reads every own key of user — tracks all of them.
+  const copy = computed(() => ({ ...state.user }));
+
+  // BAD: iterating all keys to use just one.
+  const name = computed(() => {
+    for (const key of Object.keys(state.user)) {
+      if (key === 'name') return state.user[key];
+    }
   });
 </script>
 ```
 
-**Extract only needed properties:**
+**Good: read exactly the properties you need.**
 
 ```vue
 <script setup>
-  import { ref, computed } from 'vue'
+  import { reactive, computed } from 'vue';
 
-  const items = ref<Item[]>([...])
+  const state = reactive({
+    user: { name: 'John', email: 'john@example.com', sessionCount: 42 },
+  });
 
-  // BAD: Depends on entire items array
-  // Recalculates when ANY item changes
-  const expensiveComputed = computed(() => {
-    return items.value.some(item => item.status === 'active')
-  })
+  // GOOD: depends only on `name`
+  const displayName = computed(() => state.user.name);
 
-  // BETTER: Derive a simpler dependency first
-  const activeStatuses = computed(() =>
-    items.value.map(item => item.status)
-  )
-
-  const hasActiveItem = computed(() =>
-    activeStatuses.value.includes('active')
-  )
+  // GOOD: if you need a cache key, build it from the specific fields
+  const cacheKey = computed(() => `${state.user.name}:${state.user.email}`);
 </script>
 ```
 
-**Avoid computed chains with overlapping deps:**
+**Chaining computeds is fine — Vue does not multiply recomputation.**
 
 ```vue
 <script setup>
@@ -1380,43 +1397,50 @@ Computed properties recalculate when ANY dependency changes. Keep dependencies m
 
   const data = ref({ a: 1, b: 2, c: 3 });
 
-  // BAD: Overlapping dependencies cause extra recalculations
+  // Sharing `b` across two computeds does NOT cause "b counted twice".
+  // Each computed re-evaluates at most once per flush, regardless of how
+  // many downstream computeds depend on it.
   const sumAB = computed(() => data.value.a + data.value.b);
   const sumBC = computed(() => data.value.b + data.value.c);
-  const total = computed(() => sumAB.value + sumBC.value); // b counted twice
-
-  // BETTER: Direct calculation
-  const total = computed(() => data.value.a + data.value.b + data.value.c);
+  const total = computed(() => sumAB.value + sumBC.value);
 </script>
 ```
 
-**Use separate refs for independent values:**
+Chaining is a legitimate way to structure complex derivations. If you flatten a chain into one computed, do it for readability — not to avoid a recomputation cost that doesn't exist:
 
 ```vue
 <script setup>
   import { ref, computed } from 'vue';
 
-  // BAD: One reactive object
-  const form = reactive({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const data = ref({ a: 1, b: 2, c: 3 });
 
-  // Any change triggers this recompute
-  const isValid = computed(() => form.name && form.email);
-
-  // GOOD: Separate refs for truly independent values
-  const name = ref('');
-  const email = ref('');
-  const message = ref('');
-
-  // Only depends on name and email, not message
-  const isValid = computed(() => name.value && email.value);
+  // Equivalent result; flatten only when it reads more clearly.
+  const total = computed(() => data.value.a + data.value.b + data.value.c);
 </script>
 ```
 
-Reference: [Computed Best Practices](https://vuejs.org/guide/essentials/computed.html#best-practices)
+**Separate refs vs one reactive object — a readability choice, not a tracking one.**
+
+```vue
+<script setup>
+  import { reactive, ref, computed } from 'vue';
+
+  // A reactive object does NOT re-trigger this computed on unrelated key
+  // changes: reading form.name and form.email tracks only those two keys,
+  // so changing form.message does not invalidate isValid.
+  const form = reactive({ name: '', email: '', message: '' });
+  const isValid = computed(() => form.name && form.email);
+
+  // Splitting into separate refs is equally valid — choose based on how you
+  // want to group and pass the values around, not for a tracking benefit.
+  const name = ref('');
+  const email = ref('');
+  const message = ref('');
+  const isValidRefs = computed(() => name.value && email.value);
+</script>
+```
+
+Reference: [Reactivity in Depth](https://vuejs.org/guide/extras/reactivity-in-depth.html), [Computed Best Practices](https://vuejs.org/guide/essentials/computed.html#best-practices)
 
 ---
 
@@ -1427,6 +1451,8 @@ Reference: [Computed Best Practices](https://vuejs.org/guide/essentials/computed
 ## Don't Destructure Reactive Objects
 
 Destructuring a reactive object breaks the reactivity connection. The destructured values become plain, non-reactive variables.
+
+**Note:** This rule concerns `reactive()` objects. Destructuring `defineProps()` is a deliberate exception — since Vue 3.5 destructured props are compiler-transformed to stay reactive, so `const { foo } = defineProps()` keeps `foo` reactive. See [Reactive Props Destructure](https://vuejs.org/guide/components/props.html#reactive-props-destructure).
 
 **Incorrect (loses reactivity):**
 
@@ -1516,66 +1542,48 @@ Reference: [Reactivity Fundamentals - Limitations](https://vuejs.org/guide/essen
 
 ---
 
-### Use toRaw() for Read-Only Operations on Large Data
+### Treat toRaw() as a Narrow Escape Hatch, Not a Read Optimization
 
-**Impact:** HIGH - Avoids proxy overhead in tight loops
+**Impact:** HIGH - Avoids fragile, untracked reads on reactive data
 
-## Use toRaw() for Read-Only Operations on Large Data
+## Treat toRaw() as a Narrow Escape Hatch, Not a Read Optimization
 
-When performing read-only operations (filtering, searching, serialization) on large reactive data, use `toRaw()` to work with the underlying object directly, avoiding proxy overhead.
+The documented fix for reactivity overhead on large data is `shallowRef` / `shallowReactive` (see the shallowRef rule) — reach for those, not for sprinkling `toRaw()` at every read site. `toRaw()` is an escape hatch, and the docs are explicit: it is **NOT** recommended to hold a persistent reference to the original object, and it should be used **with caution**.
 
-**Incorrect (proxy overhead in loops):**
+**Prefer shallow reactivity for large read-heavy data:**
 
 ```typescript
-import { ref } from 'vue';
+import { shallowRef } from 'vue';
 
-const items = ref<Item[]>(generateLargeDataset(10000));
+// GOOD: skip deep proxying up front, so reads never pay proxy overhead
+const items = shallowRef<Item[]>(generateLargeDataset(10000));
 
 function searchItems(query: string) {
-  // BAD: Each access goes through reactive proxy
+  // No per-item proxy: items.value is a plain array
   return items.value.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase()),
   );
 }
-
-function serializeData() {
-  // BAD: JSON.stringify with reactive proxy is slower
-  return JSON.stringify(items.value);
-}
 ```
 
-**Correct (using toRaw):**
+**toRaw() as an escape hatch (use with caution):**
 
 ```typescript
 import { ref, toRaw } from 'vue';
 
 const items = ref<Item[]>(generateLargeDataset(10000));
 
-function searchItems(query: string) {
-  // Get raw array - no proxy overhead
-  const rawItems = toRaw(items.value);
-  return rawItems.filter((item) =>
-    item.name.toLowerCase().includes(query.toLowerCase()),
-  );
-}
-
-function serializeData() {
-  // Much faster serialization
-  return JSON.stringify(toRaw(items.value));
+function snapshotForExternalLib() {
+  // Escape hatch: hand a non-proxied object to code that can't handle proxies.
+  // Do NOT store this reference long-term — mutating it won't trigger updates,
+  // and Vue may replace the underlying raw object.
+  return toRaw(items.value);
 }
 ```
 
-**When to use toRaw:**
+> Docs: "It is **not** recommended to hold a persistent reference to the original object. Use with caution." — [toRaw](https://vuejs.org/api/reactivity-advanced.html#toraw)
 
-| Scenario                                                 | Use toRaw? |
-| -------------------------------------------------------- | ---------- |
-| Iterating over large arrays (1000+ items)                | Yes        |
-| JSON serialization                                       | Yes        |
-| Passing to external libraries that don't need reactivity | Yes        |
-| Comparison operations                                    | Yes        |
-| Modifying data (need reactivity to trigger)              | No         |
-
-**Performance-critical search example:**
+**Raw reads inside a computed are untracked — a trap:**
 
 ```typescript
 import { ref, toRaw, computed } from 'vue';
@@ -1583,12 +1591,14 @@ import { ref, toRaw, computed } from 'vue';
 const allProducts = ref<Product[]>([]);
 const searchQuery = ref('');
 
-// Use toRaw in computed for large datasets
 const filteredProducts = computed(() => {
-  const query = searchQuery.value.toLowerCase();
+  const query = searchQuery.value.toLowerCase(); // tracks searchQuery
   if (!query) return allProducts.value;
 
-  // Use raw data for filtering
+  // WARNING: toRaw() reads are NOT tracked. This only recomputes on future
+  // changes because the reactive source (allProducts.value) is read first to
+  // establish tracking. If you read ONLY the raw object, the computed would
+  // never invalidate. Prefer shallowRef for this case instead of toRaw here.
   const raw = toRaw(allProducts.value);
   return raw.filter(
     (p) =>
@@ -1598,32 +1608,47 @@ const filteredProducts = computed(() => {
 });
 ```
 
-**Sending to Web Workers:**
+The reactive source must still be read to establish tracking; the raw read itself contributes no dependency. If you find yourself doing this, a `shallowRef` for `allProducts` is the cleaner, less fragile fix.
+
+**Legitimate use case — non-cloneable proxies (Web Workers, structured clone):**
 
 ```typescript
-import { toRaw } from 'vue';
+import { ref, toRaw } from 'vue';
 
 const data = ref(complexData);
 
-// Web Workers can't handle reactive proxies
+// Reactive proxies are not structured-cloneable, so postMessage would throw.
+// toRaw() unwraps to the plain object the worker can receive.
 worker.postMessage(toRaw(data.value));
 ```
 
-**Note:** The returned value from `toRaw()` should be treated as read-only. Mutating it won't trigger reactivity updates.
+This is the canonical `toRaw()` case: an API (`postMessage`, `structuredClone`, IndexedDB) rejects proxies and you need the plain object for a one-shot hand-off.
+
+**When toRaw() is appropriate:**
+
+| Scenario                                                             | Use toRaw?                              |
+| -------------------------------------------------------------------- | --------------------------------------- |
+| Passing to an API that rejects proxies (Web Worker, structuredClone) | Yes — one-shot hand-off                 |
+| Large read-heavy datasets                                            | No — use `shallowRef`/`shallowReactive` |
+| Reads inside a computed                                              | No — untracked; use shallow reactivity  |
+| Holding a long-lived reference to the raw object                     | No — docs advise against it             |
+| Modifying data (need reactivity to trigger)                          | No                                      |
+
+**Note:** The value returned from `toRaw()` should be treated as read-only. Mutating it won't trigger reactivity updates.
 
 Reference: [toRaw](https://vuejs.org/api/reactivity-advanced.html#toraw)
 
 ---
 
-### Use ref() for Primitives, reactive() for Objects
+### Prefer ref() as the Primary Reactivity API
 
 **Impact:** CRITICAL - Prevents reactivity loss and unexpected bugs
 
-## Use ref() for Primitives, reactive() for Objects
+## Prefer ref() as the Primary Reactivity API
 
-Using the wrong reactive wrapper leads to lost reactivity or unnecessary complexity.
+The official docs recommend using `ref()` as the primary API for declaring reactive state — for primitives _and_ objects. A `ref()` deep-wraps objects and arrays, so it gives you the same deep reactivity as `reactive()` without any of its limitations. Reach for `reactive()` only when you specifically want an object-only proxy and can live with its caveats.
 
-**Incorrect (reactive with primitive):**
+**Incorrect (reactive with a primitive):**
 
 ```typescript
 // reactive() doesn't work with primitives - this won't be reactive!
@@ -1648,12 +1673,38 @@ const isLoading = ref(false);
 count.value++;
 ```
 
-**Correct (reactive for objects):**
+**Correct (ref for objects too — the recommended default):**
+
+```typescript
+import { ref } from 'vue';
+
+// ref() deep-wraps the object: nested properties are reactive
+const user = ref({
+  name: 'John',
+  email: 'john@example.com',
+  preferences: {
+    theme: 'dark',
+  },
+});
+
+// Access through .value in script
+user.value.name = 'Jane';
+user.value.preferences.theme = 'light';
+
+// You can also replace the whole object without losing reactivity
+user.value = {
+  name: 'Ada',
+  email: 'ada@example.com',
+  preferences: { theme: 'light' },
+};
+```
+
+**Acceptable (reactive for object-only state):**
 
 ```typescript
 import { reactive } from 'vue';
 
-// Use reactive() for objects with multiple properties
+// reactive() works only for objects and avoids the .value ceremony
 const user = reactive({
   name: 'John',
   email: 'john@example.com',
@@ -1667,22 +1718,29 @@ user.name = 'Jane';
 user.preferences.theme = 'light';
 ```
 
+**Limitations of `reactive()` (per docs) — the reasons to prefer `ref()`:**
+
+1. It cannot hold primitive types (string, number, boolean) — only objects, arrays, and collection types.
+2. You cannot replace the whole object without losing the reactivity connection (e.g. `user = { ... }` on a reactive binding drops reactivity), so it is hard to swap out wholesale.
+3. Destructuring breaks reactivity — pulling a primitive property out of a reactive object detaches it (use `toRefs()` if you must destructure).
+
 **When to use which:**
 
-| Type                                 | Use                     | Reason                                           |
-| ------------------------------------ | ----------------------- | ------------------------------------------------ |
-| Primitives (string, number, boolean) | `ref()`                 | reactive() doesn't work with primitives          |
-| Single value that gets reassigned    | `ref()`                 | Can reassign `.value` directly                   |
-| Objects with nested properties       | `reactive()`            | Cleaner syntax, no `.value` needed               |
-| Arrays you iterate over              | `ref()` or `reactive()` | Both work; ref() if you reassign the whole array |
+| Type                                  | Use                   | Reason                                                        |
+| ------------------------------------- | --------------------- | ------------------------------------------------------------- |
+| Primitives (string, number, boolean)  | `ref()`               | reactive() doesn't work with primitives                       |
+| Single value that gets reassigned     | `ref()`               | Can reassign `.value` directly                                |
+| Objects with nested properties        | `ref()` (default)     | Primary recommended API; deep reactive, safe to replace whole |
+| Object-only state, no `.value` wanted | `reactive()` (opt-in) | Cleaner access, but accept the limitations above              |
+| Arrays you iterate over               | `ref()`               | Deep reactive and safe to reassign the whole array            |
 
-Reference: [Vue Reactivity Fundamentals](https://vuejs.org/guide/essentials/reactivity-fundamentals.html)
+Reference: [Vue Reactivity Fundamentals - Limitations of reactive()](https://vuejs.org/guide/essentials/reactivity-fundamentals.html#limitations-of-reactive)
 
 ---
 
 ### Use shallowRef() for Large Non-Reactive Data
 
-**Impact:** CRITICAL - 10-100× faster for large datasets
+**Impact:** CRITICAL - Skips deep reactivity conversion for large structures
 
 ## Use shallowRef() for Large Non-Reactive Data
 
@@ -1753,17 +1811,15 @@ state.user = { name: 'Jane', email: 'jane@example.com' };
 state.user.name = 'Jane'; // Won't cause re-render!
 ```
 
-**Performance comparison:**
+**Why it helps:**
 
-```typescript
-// With ref() - 10,000 items
-// ~50-100ms to make reactive
+Reactivity overhead becomes noticeable only with large, deeply-nested structures — the docs cite renders that touch 100,000+ properties. `shallowRef` skips the deep conversion entirely: nested access is not wrapped in proxies, so only swapping `.value` (or calling `triggerRef`) triggers updates. For most app state the deep-reactivity cost is negligible and a plain `ref` is fine; reach for `shallowRef` when profiling shows a genuinely large structure is the bottleneck.
 
-// With shallowRef() - 10,000 items
-// ~1-2ms (just stores the reference)
-```
+**Caution:** Shallow data structures should only be used for root-level component state. Avoid nesting a shallow ref or shallow reactive object inside a deep reactive object — the mix produces an inconsistent, hard-to-reason-about reactivity graph.
 
-Reference: [shallowRef](https://vuejs.org/api/reactivity-advanced.html#shallowref)
+**For class instances that should never be made reactive at all**, `markRaw()` is the documented alternative — it flags an object so Vue skips making it (or anything holding it) reactive.
+
+Reference: [shallowRef](https://vuejs.org/api/reactivity-advanced.html#shallowref), [Reduce Reactivity Overhead for Large Immutable Structures](https://vuejs.org/guide/best-practices/performance.html#reduce-reactivity-overhead-for-large-immutable-structures)
 
 ---
 
@@ -1868,7 +1924,42 @@ const countRef = toRef(state, 'count');
 countRef.value++; // Updates state.count
 ```
 
-**Props pattern with toRefs:**
+**Since Vue 3.3, `toRef()` also has a normalization signature** that accepts a getter, which is the idiomatic way to pass a live value into a composable:
+
+```typescript
+import { toRef, toValue } from 'vue';
+
+// toRef(() => x) normalizes a getter into a readonly ref
+const titleRef = toRef(() => props.title);
+
+// Inside a composable, use toValue() to consume MaybeRefOrGetter inputs
+// (accepts a plain value, a ref, or a getter)
+function useFeature(input: MaybeRefOrGetter<string>) {
+  const value = toValue(input); // resolves ref | getter | raw value
+  // ...
+}
+```
+
+**Passing a prop into a composable (recommended):**
+
+Since Vue 3.5 destructured props are reactive, and the docs-recommended way to feed a prop into a composable is a getter — this keeps the value live without snapshotting it:
+
+```vue
+<script setup>
+  const props = defineProps<{
+    title: string
+    count: number
+  }>()
+
+  // GOOD: pass a getter so the composable tracks the latest prop value
+  useFeature(() => props.title)
+
+  // GOOD (3.3+): toRef with a getter produces a readonly ref
+  const countRef = toRef(() => props.count)
+</script>
+```
+
+**Props pattern with toRefs (valid but legacy):**
 
 ```vue
 <script setup>
@@ -1879,12 +1970,13 @@ countRef.value++; // Updates state.count
     count: number
   }>()
 
-  // Convert props to refs for use in composables
+  // Still works, but a getter (above) is now the preferred way to
+  // pass a single prop into a composable
   const { title, count } = toRefs(props)
 </script>
 ```
 
-Reference: [toRefs](https://vuejs.org/api/reactivity-utilities.html#torefs)
+Reference: [toRefs](https://vuejs.org/api/reactivity-utilities.html#torefs), [toValue](https://vuejs.org/api/reactivity-utilities.html#tovalue)
 
 ---
 
@@ -2020,6 +2112,11 @@ Reference: [Style Guide - v-if with v-for](https://vuejs.org/style-guide/rules-e
 
 Keys help Vue track element identity for efficient updates. Without proper keys, Vue uses an "in-place patch" strategy that can cause bugs and poor performance.
 
+Two hard rules from the docs:
+
+- Keys **must be primitive values** — strings or numbers. Never bind an object as a `:key`.
+- Per the essential style guide, `:key` with `v-for` is **always required on components** (not merely recommended), so component state and DOM stay in sync.
+
 **Incorrect (no key or index as key):**
 
 ```vue
@@ -2110,9 +2207,11 @@ async function loadItems() {
 
 **When index IS acceptable:**
 
+Index keys are only acceptable for simple content with no components or stateful DOM elements, or when you are intentionally relying on Vue's default in-place patching for performance.
+
 ```vue
 <template>
-  <!-- OK: Static list that never reorders/filters -->
+  <!-- OK: Simple content, no components or stateful DOM elements -->
   <li v-for="(step, index) in staticSteps" :key="index">
     Step {{ index + 1 }}: {{ step }}
   </li>
@@ -2278,6 +2377,8 @@ Reference: [v-if vs v-show](https://vuejs.org/guide/essentials/conditional.html#
 
 Deep watchers traverse entire object trees on every change. For large objects, this is expensive and often unnecessary.
 
+**Implicit vs. explicit deep — know which you have:** `watch(reactiveObj, cb)` — watching a reactive object directly — is **implicitly deep**; it fires on every nested mutation. A getter source like `watch(() => obj.prop, cb)` is **shallow** by default and only fires when the returned value is replaced, unless you pass `{ deep: true }`. This governs when `deep` is even needed: you only reach for it on getter/ref sources.
+
 **Incorrect (deep watch on large object):**
 
 ```vue
@@ -2367,6 +2468,21 @@ Deep watchers traverse entire object trees on every change. For large objects, t
 </script>
 ```
 
+**Cap traversal depth (Vue 3.5+):**
+
+`deep` can also be a number, limiting how many levels Vue traverses — the documented middle ground between a shallow watch and a full deep traversal.
+
+```vue
+<script setup>
+  import { reactive, watch } from 'vue';
+
+  const state = reactive({ nested: { level1: { level2: 'deep' } } });
+
+  // Only traverse two levels deep, not the entire tree
+  watch(() => state.nested, saveState, { deep: 2 });
+</script>
+```
+
 **Use watchEffect for reactive tracking:**
 
 ```vue
@@ -2388,6 +2504,8 @@ Deep watchers traverse entire object trees on every change. For large objects, t
   });
 </script>
 ```
+
+**Caveat:** `watchEffect` only tracks dependencies accessed **synchronously before the first `await`**. Anything read after an `await` inside the callback is not tracked.
 
 **Alternative: Derive a watched value:**
 
@@ -2414,12 +2532,14 @@ Deep watchers traverse entire object trees on every change. For large objects, t
 
 **When deep watch is acceptable:**
 
-| Scenario                              | Use deep?                     |
-| ------------------------------------- | ----------------------------- |
-| Small config object (< 20 properties) | OK                            |
-| User preferences                      | OK                            |
-| Form state                            | Consider splitting            |
-| Large arrays                          | No - watch length or computed |
-| API response cache                    | No                            |
+| Scenario            | Use deep?                     |
+| ------------------- | ----------------------------- |
+| Small config object | OK                            |
+| User preferences    | OK                            |
+| Form state          | Consider splitting            |
+| Large arrays        | No - watch length or computed |
+| API response cache  | No                            |
+
+The "small config object" threshold is a rule-of-thumb (roughly under a couple dozen properties), not a number from the Vue docs — profile if unsure.
 
 Reference: [Watchers](https://vuejs.org/guide/essentials/watchers.html)

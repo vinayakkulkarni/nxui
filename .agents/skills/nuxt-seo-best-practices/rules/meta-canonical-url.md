@@ -79,5 +79,6 @@ export default defineNuxtConfig({
 - Canonical URL should **not** include query parameters unless they change the page content
 - Canonical URL should be **consistent** — pick either with or without trailing slash, never both
 - `og:url` should match the canonical URL exactly
+- The canonical must be present in the **server-rendered HTML** — Nuxt SSR via `useHead`/`usePageSeo` does this by default. Never inject it client-only: Google's guidance is that JavaScript shouldn't change the canonical, and a client-only tag may never be seen by the crawler.
 
 Reference: [Google Canonical URLs](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls)

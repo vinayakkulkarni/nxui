@@ -9,6 +9,8 @@ tags: watch, deep, performance, optimization
 
 Deep watchers traverse entire object trees on every change. For large objects, this is expensive and often unnecessary.
 
+**Implicit vs. explicit deep — know which you have:** `watch(reactiveObj, cb)` — watching a reactive object directly — is **implicitly deep**; it fires on every nested mutation. A getter source like `watch(() => obj.prop, cb)` is **shallow** by default and only fires when the returned value is replaced, unless you pass `{ deep: true }`. This governs when `deep` is even needed: you only reach for it on getter/ref sources.
+
 **Incorrect (deep watch on large object):**
 
 ```vue
@@ -98,6 +100,21 @@ Deep watchers traverse entire object trees on every change. For large objects, t
 </script>
 ```
 
+**Cap traversal depth (Vue 3.5+):**
+
+`deep` can also be a number, limiting how many levels Vue traverses — the documented middle ground between a shallow watch and a full deep traversal.
+
+```vue
+<script setup>
+  import { reactive, watch } from 'vue';
+
+  const state = reactive({ nested: { level1: { level2: 'deep' } } });
+
+  // Only traverse two levels deep, not the entire tree
+  watch(() => state.nested, saveState, { deep: 2 });
+</script>
+```
+
 **Use watchEffect for reactive tracking:**
 
 ```vue
@@ -119,6 +136,8 @@ Deep watchers traverse entire object trees on every change. For large objects, t
   });
 </script>
 ```
+
+**Caveat:** `watchEffect` only tracks dependencies accessed **synchronously before the first `await`**. Anything read after an `await` inside the callback is not tracked.
 
 **Alternative: Derive a watched value:**
 
@@ -145,12 +164,14 @@ Deep watchers traverse entire object trees on every change. For large objects, t
 
 **When deep watch is acceptable:**
 
-| Scenario                              | Use deep?                     |
-| ------------------------------------- | ----------------------------- |
-| Small config object (< 20 properties) | OK                            |
-| User preferences                      | OK                            |
-| Form state                            | Consider splitting            |
-| Large arrays                          | No - watch length or computed |
-| API response cache                    | No                            |
+| Scenario            | Use deep?                     |
+| ------------------- | ----------------------------- |
+| Small config object | OK                            |
+| User preferences    | OK                            |
+| Form state          | Consider splitting            |
+| Large arrays        | No - watch length or computed |
+| API response cache  | No                            |
+
+The "small config object" threshold is a rule-of-thumb (roughly under a couple dozen properties), not a number from the Vue docs — profile if unsure.
 
 Reference: [Watchers](https://vuejs.org/guide/essentials/watchers.html)

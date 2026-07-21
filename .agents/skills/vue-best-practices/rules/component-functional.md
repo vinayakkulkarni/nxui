@@ -1,15 +1,15 @@
 ---
-title: Use Functional Approach for Stateless Components
+title: Keep Stateless Components Simple
 impact: MEDIUM
-impactDescription: Slightly faster render, clearer intent
+impactDescription: Clearer intent for stateless UI; negligible render difference in Vue 3
 tags: component, functional, stateless, performance
 ---
 
-## Use Functional Approach for Stateless Components
+## Keep Stateless Components Simple
 
 For simple, stateless presentational components, keep them lightweight without unnecessary features.
 
-**Note:** In Vue 3, all components are effectively optimized. The "functional" concept from Vue 2 is less relevant, but keeping components simple still matters.
+**Note:** In Vue 3, all components are effectively optimized. Vue 2's performance motivation for functional components is largely irrelevant in Vue 3 — the render delta versus a stateful component is negligible. Keeping components simple still matters for clarity, not speed.
 
 **Overly complex for simple presentation:**
 
@@ -106,16 +106,26 @@ For simple, stateless presentational components, keep them lightweight without u
 </script>
 ```
 
-**Render functions for highly dynamic components:**
+### True functional components
+
+Vue 3 also supports genuinely functional components — a plain function that receives `props` and a context object and returns vnodes. They hold no state and no component instance.
 
 ```typescript
 // For components with very dynamic rendering logic
 import { h } from 'vue';
 
-export default function DynamicHeading(props: { level: number }, { slots }) {
+function DynamicHeading(props, { slots }) {
   return h(`h${props.level}`, slots.default?.());
 }
+
+// Props/emits must be declared explicitly on the function
+DynamicHeading.props = ['level'];
 ```
+
+Documented caveats:
+
+- Props are **not** automatically camelized unless you declare `DynamicHeading.props` — without a `props` declaration, all attributes passed by the parent appear in `props` verbatim (e.g. `some-prop` stays `some-prop`).
+- Only `class`, `style`, and `on*` event listeners fall through to the root element by default; other attributes do not.
 
 **Using JSX/TSX for complex dynamic rendering:**
 

@@ -34,7 +34,7 @@ Heavy components that aren't needed immediately should be loaded asynchronously 
 
 ```vue
 <script setup>
-  import { defineAsyncComponent, ref } from 'vue';
+  import { defineAsyncComponent } from 'vue';
 
   // Lazy load - only fetched when rendered
   const HeavyChart = defineAsyncComponent(() => import('./HeavyChart.vue'));
@@ -71,12 +71,14 @@ Heavy components that aren't needed immediately should be loaded asynchronously 
     loadingComponent: LoadingSpinner,
     errorComponent: ErrorDisplay,
     delay: 200, // Show loading after 200ms
-    timeout: 10000, // Timeout after 10s
+    timeout: 10000, // Timeout after 10s (default is Infinity)
   });
 </script>
 ```
 
-**With Suspense (Vue 3.3+):**
+**With Suspense (experimental):**
+
+`<Suspense>` has existed since Vue 3.0 and is still experimental; its API may change ([suspense.html](https://vuejs.org/guide/built-ins/suspense.html)).
 
 ```vue
 <template>
@@ -96,6 +98,21 @@ Heavy components that aren't needed immediately should be loaded asynchronously 
   const HeavyChart = defineAsyncComponent(() => import('./HeavyChart.vue'));
 </script>
 ```
+
+**Lazy hydration (SSR, Vue 3.5+):**
+
+Async components can control when they hydrate on the client via the `hydrate` option. Vue ships strategies `hydrateOnIdle`, `hydrateOnVisible`, `hydrateOnMediaQuery`, and `hydrateOnInteraction`.
+
+```typescript
+import { defineAsyncComponent, hydrateOnVisible } from 'vue';
+
+const HeavyChart = defineAsyncComponent({
+  loader: () => import('./HeavyChart.vue'),
+  hydrate: hydrateOnVisible(),
+});
+```
+
+Reference: [Lazy Hydration](https://vuejs.org/guide/components/async.html#lazy-hydration)
 
 **Route-level code splitting (Vue Router):**
 

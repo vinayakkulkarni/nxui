@@ -7,9 +7,11 @@ tags: composables, imports, circular-dependencies, organization
 
 ## Use Direct Imports Between Composables
 
-When a composable calls another composable, use direct relative imports, NOT Nuxt's auto-import. This prevents circular dependency warnings.
+In a flat top-level `composables/` layout, calling one composable from another via auto-import is officially supported and fine — Nuxt endorses it ("You can use a composable within another composable using auto imports").
 
-**Incorrect (auto-import between composables):**
+This direct-import rule applies specifically WHEN you use a root `composables/index.ts` barrel to expose composables from nested subdirectories. In that setup, composable → composable calls must use direct relative imports to avoid a dependency cycle routed through the barrel.
+
+**Incorrect (auto-import routed through the root barrel):**
 
 ```typescript
 // ❌ WRONG - app/composables/dashboard/use-dashboard.ts
@@ -59,7 +61,7 @@ export function useDashboard() {
 The root `composables/index.ts` barrel file re-exports all composables:
 
 ```typescript
-// composables/index.ts (required for Nuxt auto-import)
+// composables/index.ts (required only to auto-import composables in nested subdirectories)
 export { useAuth } from './auth/use-auth';
 export { useTokens } from './tokens/use-tokens';
 export { useDashboard } from './dashboard/use-dashboard';
@@ -84,9 +86,10 @@ import { useToast } from '../toast/use-toast';
 const { user } = useAuth(); // Auto-imported
 const { tokens } = useTokens(); // Auto-imported
 
-// ✅ In server code - import explicitly
+// ✅ In server code - server/utils/ is auto-imported recursively,
+// so helpers are already available without an explicit import
 // server/api/data.ts
-import { someUtil } from '~~/server/utils/helpers';
+const result = someUtil(); // Auto-imported from server/utils/
 ```
 
 **Common composable imports to add:**
@@ -102,10 +105,11 @@ import { useToast } from '../toast/use-toast';
 
 **Rule summary:**
 
-| Location                | Import Method     | Example                               |
-| ----------------------- | ----------------- | ------------------------------------- |
-| Composable → Composable | Direct relative   | `import { useAuth } from '../auth'`   |
-| Component → Composable  | Auto-import       | `const { user } = useAuth()`          |
-| Server → Server util    | Direct with alias | `import { x } from '~~/server/utils'` |
+| Location                                  | Import Method   | Example                             |
+| ----------------------------------------- | --------------- | ----------------------------------- |
+| Composable → Composable (via root barrel) | Direct relative | `import { useAuth } from '../auth'` |
+| Composable → Composable (flat top-level)  | Auto-import     | `const { user } = useAuth()`        |
+| Component → Composable                    | Auto-import     | `const { user } = useAuth()`        |
+| Server → Server util                      | Auto-import     | `const x = someUtil()`              |
 
 Reference: [Nuxt Auto-imports](https://nuxt.com/docs/guide/concepts/auto-imports)

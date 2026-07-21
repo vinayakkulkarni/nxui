@@ -1,77 +1,67 @@
 ---
-title: Use kebab-case Emits with Full Type Definitions
+title: Type Emits Fully with camelCase Declarations
 impact: MEDIUM
 impactDescription: Ensures consistent event naming and type safety
-tags: types, emits, vue, conventions, kebab-case
+tags: types, emits, vue, conventions, v-model
 ---
 
-## Use kebab-case Emits with Full Type Definitions
+## Type Emits Fully with camelCase Declarations
 
-All Vue component emits MUST use kebab-case consistently across `defineEmits`, `emit()` calls, and template event handlers.
+Declare and emit events in camelCase; listen in kebab-case in templates. Vue's automatic case transformation bridges the two, so this is the documented convention — NOT kebab-case declarations. Always type emits fully with the 3.3+ named-tuple syntax; never use untyped emits.
 
-**Incorrect (camelCase emits):**
-
-```vue
-<script setup lang="ts">
-  // ❌ WRONG - camelCase in defineEmits
-  const emit = defineEmits<{
-    manageSubscription: []; // NO! Use kebab-case
-    toggleVisibility: [id: string, visible: boolean]; // NO!
-    updateValue: [value: number]; // NO!
-  }>();
-
-  // Inconsistent emit calls
-  emit('manageSubscription');
-  emit('toggleVisibility', id, true);
-</script>
-```
-
-**Correct (kebab-case everywhere):**
+**Incorrect (kebab-case declarations / untyped emits):**
 
 ```vue
 <script setup lang="ts">
-  // ✅ CORRECT - kebab-case with quotes in defineEmits
+  // ❌ WRONG - kebab-case in defineEmits contradicts Vue's convention
   const emit = defineEmits<{
     'manage-subscription': [];
-    'toggle-visibility': [id: string, visible: boolean];
     'update-value': [value: number];
   }>();
 
-  // Consistent emit calls
-  emit('manage-subscription');
-  emit('toggle-visibility', id, true);
-  emit('update-value', 42);
+  // ❌ WRONG - untyped emits (no payload types)
+  const emit = defineEmits(['manageSubscription', 'updateValue']);
 </script>
 ```
 
-**Parent component usage:**
+**Correct (camelCase declarations, 3.3+ named-tuple syntax):**
+
+```vue
+<script setup lang="ts">
+  // ✅ CORRECT - declare emits in camelCase with typed payloads
+  const emit = defineEmits<{
+    change: [id: number];
+    updateValue: [value: string];
+  }>();
+
+  // Emit in camelCase
+  emit('change', 1);
+  emit('updateValue', 'hello');
+</script>
+```
+
+**Parent component usage (listen in kebab-case):**
 
 ```vue
 <template>
-  <!-- kebab-case in template event handlers -->
-  <ChildComponent
-    @manage-subscription="handleManageSubscription"
-    @toggle-visibility="handleToggleVisibility"
-    @update-value="handleUpdateValue"
-  />
+  <!-- Listen in kebab-case — Vue transforms camelCase ↔ kebab-case automatically -->
+  <ChildComponent @change="handleChange" @update-value="handleUpdateValue" />
 </template>
 
 <script setup lang="ts">
-  function handleManageSubscription() {
+  function handleChange(id: number) {
     // ...
   }
 
-  function handleToggleVisibility(id: string, visible: boolean) {
-    // ...
-  }
-
-  function handleUpdateValue(value: number) {
+  function handleUpdateValue(value: string) {
     // ...
   }
 </script>
 ```
 
-**With v-model:**
+**With v-model — the event MUST be `update:modelValue` (camelCase):**
+
+`v-model` requires the event name `update:modelValue` matching the `modelValue` prop. `'update:model-value'` (kebab-case) breaks `v-model`.
 
 ```vue
 <!-- Child component -->
@@ -80,13 +70,13 @@ All Vue component emits MUST use kebab-case consistently across `defineEmits`, `
     modelValue: string;
   }>();
 
-  // v-model emits use 'update:modelValue' pattern
+  // ✅ CORRECT - camelCase 'update:modelValue' matches the modelValue prop
   const emit = defineEmits<{
-    'update:model-value': [value: string]; // kebab-case
+    'update:modelValue': [value: string];
   }>();
 
   function updateValue(newValue: string) {
-    emit('update:model-value', newValue);
+    emit('update:modelValue', newValue);
   }
 </script>
 
@@ -98,6 +88,22 @@ All Vue component emits MUST use kebab-case consistently across `defineEmits`, `
 </template>
 ```
 
+**Preferred (Vue 3.4+): use `defineModel()` for v-model bindings:**
+
+`defineModel()` is the modern macro for v-model — it wires the `modelValue` prop and `update:modelValue` event for you.
+
+```vue
+<!-- Child component -->
+<script setup lang="ts">
+  // Two-way binding — no manual prop + emit needed
+  const model = defineModel<string>();
+
+  function updateValue(newValue: string) {
+    model.value = newValue;
+  }
+</script>
+```
+
 **Named function handlers (avoid inline arrows):**
 
 ```vue
@@ -105,15 +111,19 @@ All Vue component emits MUST use kebab-case consistently across `defineEmits`, `
 <template>
   <LayerTree
     @toggle-visibility="
-      (layerId, visible) => emit('toggle-layer-visibility', layerId, visible)
+      (layerId, visible) => emit('toggleLayerVisibility', layerId, visible)
     "
   />
 </template>
 
 <!-- ✅ CORRECT - Named function -->
-<script setup>
+<script setup lang="ts">
+  const emit = defineEmits<{
+    toggleLayerVisibility: [layerId: string, visible: boolean];
+  }>();
+
   function handleToggleVisibility(layerId: string, visible: boolean) {
-    emit('toggle-layer-visibility', layerId, visible)
+    emit('toggleLayerVisibility', layerId, visible);
   }
 </script>
 
@@ -124,17 +134,18 @@ All Vue component emits MUST use kebab-case consistently across `defineEmits`, `
 
 **The pattern summary:**
 
-| Location           | Format                  | Example                          |
-| ------------------ | ----------------------- | -------------------------------- |
-| `defineEmits` type | `'kebab-case'` (quoted) | `'manage-subscription': []`      |
-| `emit()` call      | `'kebab-case'`          | `emit('manage-subscription')`    |
-| Template `@event`  | `@kebab-case`           | `@manage-subscription="handler"` |
+| Location           | Format                          | Example                        |
+| ------------------ | ------------------------------- | ------------------------------ |
+| `defineEmits` type | camelCase, typed named-tuple    | `updateValue: [value: string]` |
+| `emit()` call      | camelCase                       | `emit('updateValue', v)`       |
+| Template `@event`  | kebab-case (auto-transformed)   | `@update-value="handler"`      |
+| v-model event      | `update:modelValue` (camelCase) | `emit('update:modelValue', v)` |
 
-**Why kebab-case?**
+**Why this convention?**
 
-1. Consistency with HTML attribute conventions
-2. Makes event names grep-able across templates and scripts
-3. Avoids confusion between JS camelCase and HTML kebab-case
-4. Matches Vue's official style guide
+1. Matches Vue's documented case-transformation behavior (declare/emit camelCase, listen kebab-case)
+2. `update:modelValue` must stay camelCase or `v-model` breaks
+3. Full payload typing catches wrong-argument bugs at compile time
+4. `defineModel()` removes the manual prop+emit boilerplate for two-way bindings
 
-Reference: [Vue Style Guide - Events](https://vuejs.org/style-guide/rules-strongly-recommended.html#component-event-casing)
+Reference: [Typing Component Emits](https://vuejs.org/guide/typescript/composition-api.html#typing-component-emits) | [Component Events](https://vuejs.org/guide/components/events.html)

@@ -54,18 +54,9 @@ import { formatDate } from '#shared/utils/date';
 | `~~/`      | Project root | Server code     | `~~/server/types/`   |
 | `#imports` | Auto-imports | Anywhere        | `#imports`           |
 
-**Configure shared alias in nuxt.config:**
+**No manual configuration needed:** `#shared` is configured automatically by Nuxt for the root `shared/` directory (v3.14+) — no manual alias or `extends` config required.
 
-```typescript
-// nuxt.config.ts
-export default defineNuxtConfig({
-  alias: {
-    '#shared': '../shared', // If shared is at project root
-  },
-  // Or use layers
-  extends: ['./shared'],
-});
-```
+**Note:** only top-level `shared/utils/` and `shared/types/` files are auto-imported; everything else in `shared/` needs an explicit `#shared/...` import.
 
 **Type-only imports:**
 
