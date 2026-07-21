@@ -30,7 +30,7 @@
   "dependencies": {
     "@cf-wasm/og": "^0.4.1",
     "@iconify-json/lucide": "^1.2.118",
-    "@iconify-json/simple-icons": "^1.2.90",
+    "@iconify-json/simple-icons": "^1.2.91",
     "@nuxt/content": "^3.15.0",
     "@nuxt/icon": "^2.3.1",
     "@nuxtjs/color-mode": "^4.0.1",
