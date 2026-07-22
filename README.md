@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (233)
+## Components (235)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
-> Paper Shaders depend on — so `npx shadcn-vue add` resolves 234 items total,
-> of which these 233 are user-facing components.
+> Paper Shaders depend on — so `npx shadcn-vue add` resolves 236 items total,
+> of which these 235 are user-facing components.
 
 ### Text Animations (33)
 
@@ -144,7 +144,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (78)
+### Components (80)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -164,6 +164,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Circle Input](https://nxui.geoql.in/docs/components/circle-input)                   | A segmented character input rendered as a row of circular cells that auto-types words, collapses to a single circle, and spreads back out.                             |
 | [Circular Gallery](https://nxui.geoql.in/docs/components/circular-gallery)           | OGL-powered curved image gallery with drag/scroll navigation and wave deformation.                                                                                     |
 | [Collection Surfer](https://nxui.geoql.in/docs/components/collection-surfer)         | A 3D scroll-driven collection viewer where items surf along a perspective track. Perfect for immersive showcases.                                                      |
+| [Color Picker](https://nxui.geoql.in/docs/components/color-picker)                   | A color swatch that blooms into a radial rosette of hue and pastel petals with a vertical lightness arc.                                                               |
 | [Command Menu](https://nxui.geoql.in/docs/components/command-menu)                   | A spotlight-style command palette with keyboard navigation and fuzzy search.                                                                                           |
 | [Counter](https://nxui.geoql.in/docs/components/counter)                             | Animated number counter with spring-physics digit rolling and gradient fade overlays.                                                                                  |
 | [Curved Drawer](https://nxui.geoql.in/docs/components/curved-drawer)                 | Slide-in drawer whose inner edge bulges with velocity via SVG path morphing, settling straight at rest.                                                                |
@@ -185,6 +186,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Github Calendar](https://nxui.geoql.in/docs/components/github-calendar)             | A premium, customizable visualization of GitHub contribution graphs with multiple color schemes and display variants.                                                  |
 | [Glass Icons](https://nxui.geoql.in/docs/components/glass-icons)                     | Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover.                                                                              |
 | [Glass Surface](https://nxui.geoql.in/docs/components/glass-surface)                 | SVG displacement-based glass distortion element with chromatic aberration and frosted backdrop filter.                                                                 |
+| [Gooey Dropdown](https://nxui.geoql.in/docs/components/gooey-dropdown)               | A pill trigger whose menu items stretch out of it with a gooey metaball merge before snapping into discrete buttons.                                                   |
 | [Gooey Nav](https://nxui.geoql.in/docs/components/gooey-nav)                         | Particle-burst navigation with SVG gooey filter effect and spring animation.                                                                                           |
 | [Infinite Menu](https://nxui.geoql.in/docs/components/infinite-menu)                 | WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection.                                                                            |
 | [Lanyard](https://nxui.geoql.in/docs/components/lanyard)                             | Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model.                                                                  |

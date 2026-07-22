@@ -490,6 +490,18 @@
       "description": "A segmented character input rendered as a row of circular cells that auto-types words, collapses to a single circle, and spreads back out."
     },
     {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "A color swatch that blooms into a radial rosette of hue and pastel petals with a vertical lightness arc."
+    },
+    {
+      "name": "gooey-dropdown",
+      "type": "registry:ui",
+      "title": "Gooey Dropdown",
+      "description": "A pill trigger whose menu items stretch out of it with a gooey metaball merge before snapping into discrete buttons."
+    },
+    {
       "name": "pixel-snow",
       "type": "registry:ui",
       "title": "Pixel Snow",

@@ -101,6 +101,11 @@ export const docsNav: NavGroup[] = [
         title: 'Collection Surfer',
         path: '/docs/components/collection-surfer',
       },
+      {
+        title: 'Color Picker',
+        path: '/docs/components/color-picker',
+        badge: 'new',
+      },
       { title: 'Command Menu', path: '/docs/components/command-menu' },
       { title: 'Counter', path: '/docs/components/counter' },
       {
@@ -149,6 +154,11 @@ export const docsNav: NavGroup[] = [
       { title: 'GitHub Calendar', path: '/docs/components/github-calendar' },
       { title: 'Glass Icons', path: '/docs/components/glass-icons' },
       { title: 'Glass Surface', path: '/docs/components/glass-surface' },
+      {
+        title: 'Gooey Dropdown',
+        path: '/docs/components/gooey-dropdown',
+        badge: 'new',
+      },
       { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
       { title: 'Infinite Menu', path: '/docs/components/infinite-menu' },
       { title: 'Lanyard', path: '/docs/components/lanyard' },

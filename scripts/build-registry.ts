@@ -525,6 +525,18 @@ const COMPONENTS: Record<
       'A segmented character input rendered as a row of circular cells that auto-types words, collapses to a single circle, and spreads back out.',
     deps: ['motion-v', '@vueuse/core'],
   },
+  'color-picker': {
+    title: 'Color Picker',
+    description:
+      'A color swatch that blooms into a radial rosette of hue and pastel petals with a vertical lightness arc.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
+  'gooey-dropdown': {
+    title: 'Gooey Dropdown',
+    description:
+      'A pill trigger whose menu items stretch out of it with a gooey metaball merge before snapping into discrete buttons.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
   'pixel-snow': {
     title: 'Pixel Snow',
     description:
