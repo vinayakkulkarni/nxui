@@ -160,6 +160,11 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
+      {
+        title: 'Holo Cloth',
+        path: '/docs/components/holo-cloth',
+        badge: 'new',
+      },
       { title: 'Infinite Menu', path: '/docs/components/infinite-menu' },
       { title: 'Lanyard', path: '/docs/components/lanyard' },
       { title: 'Layered Stack', path: '/docs/components/layered-stack' },

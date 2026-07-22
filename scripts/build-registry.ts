@@ -537,6 +537,12 @@ const COMPONENTS: Record<
       'A pill trigger whose menu items stretch out of it with a gooey metaball merge before snapping into discrete buttons.',
     deps: ['motion-v', '@vueuse/core'],
   },
+  'holo-cloth': {
+    title: 'Holo Cloth',
+    description:
+      'A grabbable sheet of simulated cloth draped in an iridescent holo-foil material, floating in zero gravity.',
+    deps: ['three'],
+  },
   'pixel-snow': {
     title: 'Pixel Snow',
     description:

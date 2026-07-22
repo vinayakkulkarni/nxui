@@ -502,6 +502,12 @@
       "description": "A pill trigger whose menu items stretch out of it with a gooey metaball merge before snapping into discrete buttons."
     },
     {
+      "name": "holo-cloth",
+      "type": "registry:ui",
+      "title": "Holo Cloth",
+      "description": "A grabbable sheet of simulated cloth draped in an iridescent holo-foil material, floating in zero gravity."
+    },
+    {
       "name": "pixel-snow",
       "type": "registry:ui",
       "title": "Pixel Snow",

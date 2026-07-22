@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (235)
+## Components (236)
 
 > The registry also ships one internal helper, `paper-shader-mount`, that the
-> Paper Shaders depend on — so `npx shadcn-vue add` resolves 236 items total,
-> of which these 235 are user-facing components.
+> Paper Shaders depend on — so `npx shadcn-vue add` resolves 237 items total,
+> of which these 236 are user-facing components.
 
 ### Text Animations (33)
 
@@ -144,7 +144,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (80)
+### Components (81)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -188,6 +188,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Glass Surface](https://nxui.geoql.in/docs/components/glass-surface)                 | SVG displacement-based glass distortion element with chromatic aberration and frosted backdrop filter.                                                                 |
 | [Gooey Dropdown](https://nxui.geoql.in/docs/components/gooey-dropdown)               | A pill trigger whose menu items stretch out of it with a gooey metaball merge before snapping into discrete buttons.                                                   |
 | [Gooey Nav](https://nxui.geoql.in/docs/components/gooey-nav)                         | Particle-burst navigation with SVG gooey filter effect and spring animation.                                                                                           |
+| [Holo Cloth](https://nxui.geoql.in/docs/components/holo-cloth)                       | A grabbable sheet of simulated cloth draped in an iridescent holo-foil material, floating in zero gravity.                                                             |
 | [Infinite Menu](https://nxui.geoql.in/docs/components/infinite-menu)                 | WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection.                                                                            |
 | [Lanyard](https://nxui.geoql.in/docs/components/lanyard)                             | Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model.                                                                  |
 | [Layered Stack](https://nxui.geoql.in/docs/components/layered-stack)                 | Stack of cards that fans out on hover, stacking back with random rotation on mouse leave.                                                                              |
