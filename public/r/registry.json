@@ -478,6 +478,18 @@
       "description": "A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild."
     },
     {
+      "name": "stacked-list",
+      "type": "registry:ui",
+      "title": "Stacked List",
+      "description": "A media list that rests as an overlapping deck and fans into a full column on hover, with the first row anchoring the stack."
+    },
+    {
+      "name": "circle-input",
+      "type": "registry:ui",
+      "title": "Circle Input",
+      "description": "A segmented character input rendered as a row of circular cells that auto-types words, collapses to a single circle, and spreads back out."
+    },
+    {
       "name": "pixel-snow",
       "type": "registry:ui",
       "title": "Pixel Snow",

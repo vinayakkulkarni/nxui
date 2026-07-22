@@ -513,6 +513,18 @@ const COMPONENTS: Record<
       'A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild.',
     deps: ['@vueuse/core'],
   },
+  'stacked-list': {
+    title: 'Stacked List',
+    description:
+      'A media list that rests as an overlapping deck and fans into a full column on hover, with the first row anchoring the stack.',
+    deps: ['motion-v'],
+  },
+  'circle-input': {
+    title: 'Circle Input',
+    description:
+      'A segmented character input rendered as a row of circular cells that auto-types words, collapses to a single circle, and spreads back out.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
   'pixel-snow': {
     title: 'Pixel Snow',
     description:

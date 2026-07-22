@@ -91,6 +91,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Card Swap', path: '/docs/components/card-swap' },
       { title: 'Carousel', path: '/docs/components/carousel' },
       { title: 'Chroma Grid', path: '/docs/components/chroma-grid' },
+      {
+        title: 'Circle Input',
+        path: '/docs/components/circle-input',
+        badge: 'new',
+      },
       { title: 'Circular Gallery', path: '/docs/components/circular-gallery' },
       {
         title: 'Collection Surfer',
@@ -217,6 +222,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Spotlight Card', path: '/docs/components/spotlight-card' },
       { title: 'Stack', path: '/docs/components/stack' },
+      {
+        title: 'Stacked List',
+        path: '/docs/components/stacked-list',
+        badge: 'new',
+      },
       { title: 'Staggered Menu', path: '/docs/components/staggered-menu' },
       { title: 'Stepper', path: '/docs/components/stepper' },
       { title: 'Sticker Peel', path: '/docs/components/sticker-peel' },
