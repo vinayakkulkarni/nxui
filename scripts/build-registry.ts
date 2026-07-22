@@ -513,6 +513,36 @@ const COMPONENTS: Record<
       'A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild.',
     deps: ['@vueuse/core'],
   },
+  'stacked-list': {
+    title: 'Stacked List',
+    description:
+      'A media list that rests as an overlapping deck and fans into a full column on hover, with the first row anchoring the stack.',
+    deps: ['motion-v'],
+  },
+  'circle-input': {
+    title: 'Circle Input',
+    description:
+      'A segmented character input rendered as a row of circular cells that auto-types words, collapses to a single circle, and spreads back out.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
+  'color-picker': {
+    title: 'Color Picker',
+    description:
+      'A color swatch that blooms into a radial rosette of hue and pastel petals with a vertical lightness arc.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
+  'gooey-dropdown': {
+    title: 'Gooey Dropdown',
+    description:
+      'A pill trigger whose menu items stretch out of it with a gooey metaball merge before snapping into discrete buttons.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
+  'holo-cloth': {
+    title: 'Holo Cloth',
+    description:
+      'A grabbable sheet of simulated cloth draped in an iridescent holo-foil material, floating in zero gravity.',
+    deps: ['three'],
+  },
   'pixel-snow': {
     title: 'Pixel Snow',
     description:

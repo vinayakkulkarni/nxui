@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { ListboxItemEmits, ListboxItemProps } from 'reka-ui';
-  import type { HTMLAttributes } from 'vue';
+  import type { ComponentPublicInstance, HTMLAttributes } from 'vue';
   import { reactiveOmit, useCurrentElement } from '@vueuse/core';
   import { ListboxItem, useForwardPropsEmits, useId } from 'reka-ui';
   import { computed, onMounted, onUnmounted, ref } from 'vue';
@@ -36,7 +36,7 @@
     }
   });
 
-  const itemRef = ref();
+  const itemRef = ref<ComponentPublicInstance | null>(null);
   const currentElement = useCurrentElement(itemRef);
   onMounted(() => {
     if (!(currentElement.value instanceof HTMLElement)) return;

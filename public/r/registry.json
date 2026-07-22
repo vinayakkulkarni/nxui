@@ -478,6 +478,36 @@
       "description": "A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild."
     },
     {
+      "name": "stacked-list",
+      "type": "registry:ui",
+      "title": "Stacked List",
+      "description": "A media list that rests as an overlapping deck and fans into a full column on hover, with the first row anchoring the stack."
+    },
+    {
+      "name": "circle-input",
+      "type": "registry:ui",
+      "title": "Circle Input",
+      "description": "A segmented character input rendered as a row of circular cells that auto-types words, collapses to a single circle, and spreads back out."
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "A color swatch that blooms into a radial rosette of hue and pastel petals with a vertical lightness arc."
+    },
+    {
+      "name": "gooey-dropdown",
+      "type": "registry:ui",
+      "title": "Gooey Dropdown",
+      "description": "A pill trigger whose menu items stretch out of it with a gooey metaball merge before snapping into discrete buttons."
+    },
+    {
+      "name": "holo-cloth",
+      "type": "registry:ui",
+      "title": "Holo Cloth",
+      "description": "A grabbable sheet of simulated cloth draped in an iridescent holo-foil material, floating in zero gravity."
+    },
+    {
       "name": "pixel-snow",
       "type": "registry:ui",
       "title": "Pixel Snow",

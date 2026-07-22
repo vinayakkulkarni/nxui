@@ -9,7 +9,7 @@ minimumReleaseAge: 60
 # aborting the CF Workers build (nuxt/nuxt#35670). Fixed in Unhead 3.2.0+;
 # pin the floor to >=3.2.1 so the Cloudflare build always resolves a good copy.
 overrides:
-  unhead: '>=3.2.1'
+  unhead: '>=3.2.3'
 
 # pnpm 11 blocks all package build scripts by default. The allowBuilds
 # map below is security-sensitive — true = postinstall runs; false = skipped.
