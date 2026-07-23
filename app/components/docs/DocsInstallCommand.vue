@@ -16,7 +16,7 @@
 
   const selected = ref<PackageManager>('npm');
 
-  const baseUrl = useRuntimeConfig().public?.siteUrl ?? 'https://nxui.geoql.in';
+  const baseUrl = useSiteConfig().url ?? 'https://nxui.geoql.in';
   const componentUrl = computed(() => `${baseUrl}/r/${props.component}.json`);
   const command = computed(
     () => `${COMMANDS[selected.value]} "${componentUrl.value}"`,
