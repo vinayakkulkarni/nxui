@@ -313,8 +313,7 @@ export function drawParticles(
 ): void {
   ctx.clearRect(0, 0, canvasW * dpr, canvasH * dpr);
 
-  const buckets: number[][] = new Array(126);
-  for (let i = 0; i < 126; i++) buckets[i] = [];
+  const buckets: number[][] = Array.from({ length: 126 }, () => []);
 
   for (let i = 0; i < sys.count; i++) {
     const bucket =

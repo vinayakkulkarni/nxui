@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["typescript", "vue", "import"],
+  "plugins": ["typescript", "vue", "import", "unicorn"],
   "ignorePatterns": [
     ".nuxt",
     ".output",
@@ -11,4 +11,17 @@
     "*.min.js",
     "*.min.css",
   ],
+  "rules": {
+    // Registry/app helper .ts files are kebab-case, Vue SFCs are PascalCase.
+    // Guards against camelCase helper files (the holoMaterial.ts drift class).
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": { "kebabCase": true, "pascalCase": true },
+        // Acronym components (WebGLLiquid.vue, ASCIIText.vue) are valid
+        // PascalCase; the camelCase drift class never has 2+ caps runs.
+        "ignore": ["[A-Z]{2,}"],
+      },
+    ],
+  },
 }
