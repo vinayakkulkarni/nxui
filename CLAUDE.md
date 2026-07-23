@@ -10,7 +10,7 @@
 ```bash
 pnpm install            # Install dependencies
 pnpm run dev            # Start dev server (localhost:3000)
-pnpm run build          # Production build (Cloudflare Pages)
+pnpm run build          # Production build (Cloudflare Workers)
 pnpm run lint           # Run oxlint
 pnpm run lint:fix       # Fix lint issues
 pnpm run format         # Format with oxfmt
@@ -27,7 +27,7 @@ pnpm run update:deps    # Interactively update all deps (taze)
 
 - **Domain**: `nxui.geoql.in` (NOT nxui.dev)
 - **Port target**: React/Framer Motion → Vue 3/motion-v
-- **Deploy**: Cloudflare Pages with D1 database for content
+- **Deploy**: Cloudflare Workers (NITRO_PRESET `cloudflare_module`) with D1 database for @nuxt/content at runtime
 
 ---
 
@@ -35,7 +35,7 @@ pnpm run update:deps    # Interactively update all deps (taze)
 
 | Layer           | Technology                                       | Version                                                           |
 | --------------- | ------------------------------------------------ | ----------------------------------------------------------------- |
-| Framework       | Nuxt 4                                           | v4.4.2 (`future.compatibilityVersion: 4`)                         |
+| Framework       | Nuxt 4                                           | v4.5+ (`future.compatibilityVersion: 5`)                          |
 | UI              | Vue 3 Composition API                            | v3.5+                                                             |
 | Styling         | Tailwind CSS v4                                  | `@nuxtjs/tailwindcss` v7 (wraps `@tailwindcss/vite` — no PostCSS) |
 | Animation       | motion-v                                         | v2.0.1 (Vue Framer Motion equivalent)                             |
@@ -110,6 +110,11 @@ export interface MyProps {
 // Import: import type { MyProps } from '~/types/components';
 ```
 
+**Carve-outs:**
+
+- **Registry components** keep types in a per-directory `./types.ts` (NOT `~/types/`) so CLI-installed copies stay self-contained. Inline `interface`/`type` inside a registry `.vue` is still wrong — put it in the dir's `types.ts`.
+- **Local inference aliases** may stay inline: `type AddBinding = typeof pane.addBinding` has no meaning outside its file; moving it to `~/types/` is worse.
+
 ### Rule 2: No `any` — Ever
 
 Use `unknown` with type guards. No `as any`, no `@ts-ignore`, no `@ts-expect-error`.
@@ -136,9 +141,11 @@ Always `<script setup lang="ts">`. Never Options API. Never `defineComponent()`.
 <Icon name="lucide:check" class="size-4" />
 ```
 
+**Carve-out:** structural SVG is permitted — filters (`feGaussianBlur`, `feDisplacementMap`, gooey metaballs), `textPath`, `clipPath`, gradients, masks have no Iconify equivalent. Rule 5 bans decorative-icon `<svg>` only.
+
 ### Rule 6: Vue Components Under 100 Lines
 
-Exception: registry components (self-contained). Extract sub-components or composables when too large.
+Applies to reusable components (`app/components/**`). Exceptions: registry components (self-contained), pages (`app/pages/**`), and demo wrappers (`Demo*.vue`) may exceed it. Extract sub-components or composables when a reusable component grows too large.
 
 ### Rule 7: No Inline Arrow Functions with Multiple Params in Templates
 
@@ -159,6 +166,10 @@ Exception: registry components (self-contained). Extract sub-components or compo
 ### Rule 9: Composable Naming
 
 kebab-case files, camelCase exports: `use-sidebar.ts` → `useSidebar()`.
+
+### Rule 9a: Helper File Naming — kebab-case, enforced
+
+ALL non-Vue `.ts` files (registry helpers, app utils, scripts) are **kebab-case**; `.vue` SFCs are **PascalCase**. Exported symbols stay camelCase: `useGalaxyInteractions()` lives in `use-galaxy-interactions.ts`, `createHoloMaterial()` in `holo-material.ts`. Enforced by `unicorn/filename-case` in `.oxlintrc.jsonc` (acronym files like `WebGLLiquid.vue`, `ASCIIText.vue` are ignored via `[A-Z]{2,}` pattern). NEVER commit camelCase helper files (`holoMaterial.ts` was the drift that triggered this rule).
 
 ### Rule 10: Use VueUse Extensively
 
@@ -298,9 +309,10 @@ Light mode: neutral oklch (no hue). Dark mode: oklch with hue 270 (purple tint).
 
 Each registry component: `registry/new-york/ComponentName/`
 
-- Main file: `ComponentName.vue`
+- Main file: `ComponentName.vue` (PascalCase)
 - Sub-components: `ComponentNamePart.vue`
-- Types: imported from `~/types/components`
+- Helpers: `kebab-case.ts` (Rule 9a)
+- Types: per-directory `./types.ts`, imported via `import type { X } from './types'` — NEVER `~/types/` (a `~/` import breaks CLI-installed copies in user projects)
 
 The `@registry` alias maps to `../registry` (set in `nuxt.config.ts`).
 
@@ -436,12 +448,15 @@ This project uses the following skills in `.agents/skills/`:
 
 ### Known Conflicts (CLAUDE.md Wins)
 
-| Skill Says                             | CLAUDE.md Says (Use This)                          |
-| -------------------------------------- | -------------------------------------------------- |
-| Use `useFetch`/`useAsyncData` for data | Static docs site — no dynamic data fetching needed |
-| Use Pinia for state management         | No Pinia — use `ref`/`reactive` + composables      |
-| Use `#shared` imports                  | No `shared/` directory — use `~/types/`            |
-| Create barrel exports                  | Only if truly needed for auto-import               |
+| Skill Says                             | CLAUDE.md Says (Use This)                                                                                     |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Use `useFetch`/`useAsyncData` for data | Static docs site — no dynamic data fetching needed                                                            |
+| Use Pinia for state management         | No Pinia — use `ref`/`reactive` + composables                                                                 |
+| Use `#shared` imports                  | No `shared/` directory — use `~/types/`                                                                       |
+| Create barrel exports                  | Only if truly needed for auto-import                                                                          |
+| Module-scope `ref` singletons          | Use `useState()` for SSR-safe shared state — module-scope `ref` risks cross-request leaks on Workers isolates |
+| Use Zod for server route validation    | Hand-rolled type guards in `server/` — no extra dep (intentional)                                             |
+| Use `nuxt-og-image` for OG images      | Removed — Satori WASM crashes on CF Workers; OG built via `scripts/build-og-images.ts`                        |
 
 ### What Skills Add (Not Covered Here)
 
