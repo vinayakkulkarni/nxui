@@ -15,3 +15,5 @@ export interface WebGLLiquidProps {
   revealDuration?: number;
   class?: string;
 }
+
+export type WebGLLiquidUniforms = Record<string, WebGLUniformLocation>;

@@ -15,3 +15,5 @@ export interface ClosingPlasmaProps {
   lightColorC?: string;
   class?: string;
 }
+
+export type ClosingPlasmaUniforms = Record<string, WebGLUniformLocation>;

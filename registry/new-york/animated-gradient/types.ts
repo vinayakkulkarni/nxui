@@ -45,3 +45,22 @@ export interface AnimatedGradientProps {
   radius?: string;
   class?: string;
 }
+
+export interface AnimatedGradientPresetParams {
+  color1: string;
+  color2: string;
+  color3: string;
+  rotation: number;
+  proportion: number;
+  scale: number;
+  speed: number;
+  distortion: number;
+  swirl: number;
+  swirlIterations: number;
+  softness: number;
+  offset: number;
+  shape: AnimatedGradientPatternShape;
+  shapeSize: number;
+}
+
+export type AnimatedGradientUniforms = Record<string, WebGLUniformLocation>;

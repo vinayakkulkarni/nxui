@@ -1,7 +1,12 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
   import { useRafFn, useResizeObserver, useEventListener } from '@vueuse/core';
-  import type { EditorialOrbsProps } from './types';
+  import type {
+    EditorialOrbsProps,
+    EditorialOrb as Orb,
+    EditorialOrbsTextSpan as TextSpan,
+    EditorialOrbsPullQuote as PullQuote,
+  } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<EditorialOrbsProps>(), {
@@ -11,34 +16,6 @@
     showPullQuotes: true,
     className: undefined,
   });
-
-  /* ── Internal types ────────────────────────────── */
-  interface Orb {
-    x: number;
-    y: number;
-    vx: number;
-    vy: number;
-    r: number;
-    color: string;
-    glow: string;
-    active: boolean;
-  }
-
-  interface TextSpan {
-    word: string;
-    x: number;
-    y: number;
-    width: number;
-    isDropCap: boolean;
-  }
-
-  interface PullQuote {
-    x: number;
-    y: number;
-    w: number;
-    h: number;
-    text: string;
-  }
 
   /* ── DOM refs ─────────────────────────────────── */
   const containerRef = ref<HTMLElement | null>(null);

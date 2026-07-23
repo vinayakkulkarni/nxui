@@ -1,16 +1,7 @@
 <script setup lang="ts">
+  import type { StickyScrollCardProps as Props } from './types';
   import { computed } from 'vue';
   import { motion, useTransform } from 'motion-v';
-  import type { MotionValue } from 'motion-v';
-
-  interface Props {
-    i: number;
-    title: string;
-    src: string;
-    progress: MotionValue<number>;
-    range: [number, number];
-    targetScale: number;
-  }
 
   const props = defineProps<Props>();
 

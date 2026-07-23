@@ -1,35 +1,20 @@
 <script setup lang="ts">
   import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
-  import type { AnimatedGradientProps } from './types';
+  import type {
+    AnimatedGradientProps,
+    AnimatedGradientPatternShape as PatternShape,
+    AnimatedGradientPresetName as PresetName,
+    AnimatedGradientPresetParams as PresetParams,
+    AnimatedGradientUniforms as Uniforms,
+  } from './types';
   import { cn } from '~/lib/utils';
-
-  type PatternShape = 'Checks' | 'Stripes' | 'Edge';
 
   const PatternShapes: Record<PatternShape, number> = {
     Checks: 0,
     Stripes: 1,
     Edge: 2,
   };
-
-  interface PresetParams {
-    color1: string;
-    color2: string;
-    color3: string;
-    rotation: number;
-    proportion: number;
-    scale: number;
-    speed: number;
-    distortion: number;
-    swirl: number;
-    swirlIterations: number;
-    softness: number;
-    offset: number;
-    shape: PatternShape;
-    shapeSize: number;
-  }
-
-  type PresetName = 'Aurora' | 'Oceanic' | 'Amber' | 'Toxic' | 'Ghost';
 
   const presets: Record<PresetName, PresetParams> = {
     Aurora: {
@@ -131,7 +116,6 @@
   let rafId = 0;
   let startTime = 0;
 
-  type Uniforms = Record<string, WebGLUniformLocation>;
   const uniforms: Uniforms = {};
 
   const params = computed((): PresetParams => {

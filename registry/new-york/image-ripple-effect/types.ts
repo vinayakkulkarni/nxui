@@ -1,3 +1,5 @@
+import type * as THREE from 'three';
+
 export interface RippleImageItem {
   src: string;
   alt?: string;
@@ -14,4 +16,11 @@ export interface ImageRippleEffectProps {
   waveGrowth?: number;
   waveSpawnThreshold?: number;
   class?: string;
+}
+
+export interface ImageRippleWaveMesh {
+  mesh: THREE.Mesh;
+  material: THREE.MeshBasicMaterial;
+  active: boolean;
+  age: number;
 }

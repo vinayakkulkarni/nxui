@@ -1,7 +1,10 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
-  import type { ClosingPlasmaProps } from './types';
+  import type {
+    ClosingPlasmaProps,
+    ClosingPlasmaUniforms as Uniforms,
+  } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<ClosingPlasmaProps>(), {
@@ -142,7 +145,6 @@ void main(){
   const mouse = { x: 0.5, y: 0.5 };
   const targetMouse = { x: 0.5, y: 0.5 };
 
-  type Uniforms = Record<string, WebGLUniformLocation>;
   const uniforms: Uniforms = {};
 
   function compileShader(

@@ -1,7 +1,10 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
-  import type { WebGLLiquidProps } from './types';
+  import type {
+    WebGLLiquidProps,
+    WebGLLiquidUniforms as Uniforms,
+  } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<WebGLLiquidProps>(), {
@@ -118,7 +121,6 @@ void main(){
   let rafId = 0;
   let startTime = 0;
 
-  type Uniforms = Record<string, WebGLUniformLocation>;
   const uniforms: Uniforms = {};
 
   function compileShader(
