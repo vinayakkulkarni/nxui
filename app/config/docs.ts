@@ -51,7 +51,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Typer Text',
         path: '/docs/text-animations/typer-text',
-        badge: 'new',
       },
       {
         title: 'Variable Proximity',
@@ -66,18 +65,15 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Animated TOC',
         path: '/docs/components/animated-toc',
-        badge: 'new',
       },
       {
         title: 'Aurora Accordion',
         path: '/docs/components/aurora-accordion',
-        badge: 'new',
       },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       {
         title: 'Banknote Bento',
         path: '/docs/components/banknote-bento',
-        badge: 'new',
       },
       { title: 'Border Glow', path: '/docs/components/border-glow' },
       { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
@@ -111,7 +107,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Curved Drawer',
         path: '/docs/components/curved-drawer',
-        badge: 'new',
       },
       {
         title: 'Curved Input',
@@ -122,19 +117,16 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Dithered Logo',
         path: '/docs/components/dithered-logo',
-        badge: 'new',
       },
       { title: 'Dock', path: '/docs/components/dock' },
       { title: 'Dome Gallery', path: '/docs/components/dome-gallery' },
       {
         title: 'Drag Reorder List',
         path: '/docs/components/drag-reorder-list',
-        badge: 'new',
       },
       {
         title: 'Dynamic Island Header',
         path: '/docs/components/dynamic-island-header',
-        badge: 'new',
       },
       { title: 'Elastic Slider', path: '/docs/components/elastic-slider' },
       { title: 'Eye Tracking', path: '/docs/components/eye-tracking' },
@@ -149,7 +141,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Frosted Navigation',
         path: '/docs/components/frosted-navigation',
-        badge: 'new',
       },
       { title: 'GitHub Calendar', path: '/docs/components/github-calendar' },
       { title: 'Glass Icons', path: '/docs/components/glass-icons' },
@@ -183,12 +174,10 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Nostalgia',
         path: '/docs/components/nostalgia',
-        badge: 'new',
       },
       {
         title: 'Notification Center',
         path: '/docs/components/notification-center',
-        badge: 'new',
       },
       {
         title: 'Orbit Card Stack',
@@ -200,19 +189,16 @@ export const docsNav: NavGroup[] = [
       {
         title: 'PlayStation Navbar',
         path: '/docs/components/playstation-navbar',
-        badge: 'new',
       },
       {
         title: 'Podcast Player',
         path: '/docs/components/podcast-player',
-        badge: 'new',
       },
       { title: 'Profile Card', path: '/docs/components/profile-card' },
       { title: 'Reflective Card', path: '/docs/components/reflective-card' },
       {
         title: 'Ripple Transition',
         path: '/docs/components/ripple-transition',
-        badge: 'new',
       },
       {
         title: 'Scroll Choreography',
@@ -257,7 +243,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Visual Stepper',
         path: '/docs/components/visual-stepper',
-        badge: 'new',
       },
     ],
   },
