@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { ref, onMounted, watch, nextTick } from 'vue';
+  import type { ComponentPublicInstance } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
 
@@ -42,6 +43,16 @@
   const navItemsRef = ref<HTMLElement | null>(null);
   const circleRefs = ref<(HTMLElement | null)[]>([]);
   const pillRefs = ref<(HTMLElement | null)[]>([]);
+
+  function setPillRef(el: Element | ComponentPublicInstance | null, i: number) {
+    if (el instanceof HTMLElement) {
+      pillRefs.value[i] = el;
+    } else if (el && '$el' in el) {
+      pillRefs.value[i] = el.$el as HTMLElement;
+    } else {
+      pillRefs.value[i] = null;
+    }
+  }
 
   interface CircleLayout {
     diameter: number;
@@ -175,11 +186,7 @@
           >
             <a
               v-if="isExternalLink(item.href)"
-              :ref="
-                (el) => {
-                  pillRefs[i] = el as HTMLElement;
-                }
-              "
+              :ref="(el) => setPillRef(el, i)"
               role="menuitem"
               :href="item.href"
               :class="['pill', { 'is-active': activeHref === item.href }]"
@@ -218,11 +225,7 @@
             </a>
             <NuxtLink
               v-else
-              :ref="
-                (el) => {
-                  pillRefs[i] = (el as any)?.$el as HTMLElement;
-                }
-              "
+              :ref="(el) => setPillRef(el, i)"
               role="menuitem"
               :to="item.href"
               :class="['pill', { 'is-active': activeHref === item.href }]"
