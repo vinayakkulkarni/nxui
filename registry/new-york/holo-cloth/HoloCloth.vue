@@ -14,11 +14,15 @@
   import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass.js';
   import { cn } from '~/lib/utils';
   import { ClothSim } from './cloth';
-  import { createHoloMaterial } from './holoMaterial';
-  import type { HoloUniforms } from './holoMaterial';
+  import { createHoloMaterial } from './holo-material';
+  import type { HoloUniforms } from './holo-material';
   import { makeWeaveNormalMap } from './textures';
-  import { BAKED_POSE } from './bakedPose';
-  import type { HoloClothProps, HoloClothPreset } from './types';
+  import { BAKED_POSE } from './baked-pose';
+  import type {
+    HoloClothProps,
+    HoloClothPreset,
+    HoloClothMaterialBundle as MaterialBundle,
+  } from './types';
 
   const props = withDefaults(defineProps<HoloClothProps>(), {
     preset: 'holo',
@@ -29,25 +33,6 @@
     quality: 'high',
     class: '',
   });
-
-  interface MaterialBundle {
-    baseColor: string;
-    holoIntensity: number;
-    holoScale: number;
-    bandFreq: number;
-    saturation: number;
-    hueShift: number;
-    sparkle: number;
-    specTint: number;
-    iridescence: number;
-    metalness: number;
-    sheen: number;
-    bump: number;
-    bumpTiling: number;
-    roughness: number;
-    clearcoat: number;
-    coatRoughness: number;
-  }
 
   // Preset bundles lifted verbatim from the upstream tool.
   const PRESETS: Record<HoloClothPreset, MaterialBundle> = {

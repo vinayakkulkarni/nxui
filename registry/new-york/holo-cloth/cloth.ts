@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { BAKED_POSE } from './bakedPose';
+import { BAKED_POSE } from './baked-pose';
 
 export interface ClothPhysicsParams {
   /** 0..0.6 — how fast motion dies out (gel viscosity). */

@@ -2,8 +2,8 @@
   import { useResizeObserver } from '@vueuse/core';
   import * as THREE from 'three';
   import type { ParticleGalaxyBlendMode } from './types';
-  import { createGalaxyParticles } from './createGalaxyParticles';
-  import { useGalaxyInteractions } from './useGalaxyInteractions';
+  import { createGalaxyParticles } from './create-galaxy-particles';
+  import { useGalaxyInteractions } from './use-galaxy-interactions';
 
   const props = withDefaults(
     defineProps<{

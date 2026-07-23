@@ -17,3 +17,22 @@ export interface HoloClothProps {
   quality?: HoloClothQuality;
   class?: string;
 }
+
+export interface HoloClothMaterialBundle {
+  baseColor: string;
+  holoIntensity: number;
+  holoScale: number;
+  bandFreq: number;
+  saturation: number;
+  hueShift: number;
+  sparkle: number;
+  specTint: number;
+  iridescence: number;
+  metalness: number;
+  sheen: number;
+  bump: number;
+  bumpTiling: number;
+  roughness: number;
+  clearcoat: number;
+  coatRoughness: number;
+}
