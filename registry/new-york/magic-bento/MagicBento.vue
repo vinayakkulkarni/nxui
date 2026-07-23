@@ -1,11 +1,6 @@
 <script setup lang="ts">
-  import {
-    type ComponentPublicInstance,
-    ref,
-    computed,
-    onMounted,
-    onBeforeUnmount,
-  } from 'vue';
+  import type { ComponentPublicInstance } from 'vue';
+  import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
   import {
     useEventListener,
     useMediaQuery,
