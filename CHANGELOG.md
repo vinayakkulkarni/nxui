@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.0.19](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.18...nxui-v0.0.19) (2026-07-24)
+
+
+### Bug Fixes
+
+* **deps:** Bump @nuxt/content from 3.15.1 to 3.15.2 ([#144](https://github.com/vinayakkulkarni/nxui/issues/144)) ([eec4efa](https://github.com/vinayakkulkarni/nxui/commit/eec4efa00cddfacbae69635b127106c49accb018))
+
+
+### Miscellaneous
+
+* **deps-dev:** Bump lint-staged from 17.1.1 to 17.2.0 ([#143](https://github.com/vinayakkulkarni/nxui/issues/143)) ([ef3ba1e](https://github.com/vinayakkulkarni/nxui/commit/ef3ba1eb13e091d5a9c9eae0d0a87f17f526214e))
+* **deps-dev:** Bump wrangler from 4.113.0 to 4.114.0 ([#142](https://github.com/vinayakkulkarni/nxui/issues/142)) ([b00464a](https://github.com/vinayakkulkarni/nxui/commit/b00464a0b8e4f1c32385c9bf4647e93ceadc24d6))
+
 ## [0.0.18](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.17...nxui-v0.0.18) (2026-07-23)
 
 
