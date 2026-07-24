@@ -259,6 +259,7 @@
 
         <!-- Installation -->
         <DocsInstallTabs :component="componentSlug" class="mt-8" />
+        <DocsKeepInMind class="mt-4" />
       </div>
       <!-- Sticky footer: navigation -->
       <div class="shrink-0 px-4 pb-2 pt-1 lg:px-10 lg:pb-4 lg:pt-2">
@@ -400,6 +401,7 @@
           </div>
         </div>
         <DocsInstallTabs :component="componentSlug" class="mt-6" />
+        <DocsKeepInMind class="mt-4" />
         <div class="mt-6 border-t border-border/50 pt-4">
           <DocsComponentNavigation
             :prev="prevItem ?? null"
