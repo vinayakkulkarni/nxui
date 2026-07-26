@@ -40,6 +40,8 @@
         <input
           ref="localInputRef"
           :value="query"
+          type="search"
+          aria-label="Search documentation"
           placeholder="Search documentation..."
           class="flex-1 bg-transparent text-base font-normal text-foreground outline-none placeholder:text-muted-foreground"
           @input="
@@ -48,7 +50,8 @@
         />
         <button
           v-if="query"
-          class="rounded-md px-2 py-1 text-xs text-muted-foreground hover:bg-accent hover:text-accent-foreground transition-colors"
+          type="button"
+          class="rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           @click="emit('update:query', '')"
         >
           Clear
