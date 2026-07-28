@@ -83,7 +83,7 @@
     "lint-staged": "^17.2.0",
     "nuxt-security": "^2.6.0",
     "oxfmt": "^0.60.0",
-    "oxlint": "^1.75.0",
+    "oxlint": "^1.76.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.1",
     "typescript": "^6.0.3",
