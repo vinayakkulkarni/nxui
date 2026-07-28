@@ -721,6 +721,12 @@ const COMPONENTS: Record<
       'Auto-playing vertical stepper with growing connector bars and a crossfading preview card.',
     deps: ['motion-v'],
   },
+  'warp-gallery': {
+    title: 'Warp Gallery',
+    description:
+      'An infinite image strip that bends like liquid glass under scroll velocity, with prismatic chromatic-aberration fringes.',
+    deps: ['ogl', '@vueuse/core'],
+  },
   'banknote-bento': {
     title: 'Banknote Bento',
     description:

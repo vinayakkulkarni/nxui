@@ -244,6 +244,11 @@ export const docsNav: NavGroup[] = [
         title: 'Visual Stepper',
         path: '/docs/components/visual-stepper',
       },
+      {
+        title: 'Warp Gallery',
+        path: '/docs/components/warp-gallery',
+        badge: 'new',
+      },
     ],
   },
   {

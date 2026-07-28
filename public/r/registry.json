@@ -688,6 +688,12 @@
       "description": "Auto-playing vertical stepper with growing connector bars and a crossfading preview card."
     },
     {
+      "name": "warp-gallery",
+      "type": "registry:ui",
+      "title": "Warp Gallery",
+      "description": "An infinite image strip that bends like liquid glass under scroll velocity, with prismatic chromatic-aberration fringes."
+    },
+    {
       "name": "banknote-bento",
       "type": "registry:ui",
       "title": "Banknote Bento",
