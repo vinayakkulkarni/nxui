@@ -90,8 +90,8 @@ importers:
         specifier: ^2.0.0
         version: 2.0.0
       postprocessing:
-        specifier: ^6.39.3
-        version: 6.39.3(three@0.185.1)
+        specifier: ^6.39.4
+        version: 6.39.4(three@0.185.1)
       reka-ui:
         specifier: ^2.10.1
         version: 2.10.1(vue@3.6.0-rc.2(typescript@6.0.3))
@@ -5553,8 +5553,8 @@ packages:
     resolution: {integrity: sha512-KBDEIpLrvpv16pp3K0Fw+UCoZfopFjjgeB+0tA/aaThfEE74kKDLrgg603YvOWJyg3+WYtyq3xYsQWsIyZlPqQ==}
     engines: {node: ^10 || ^12 || >=14}
 
-  postprocessing@6.39.3:
-    resolution: {integrity: sha512-h5H1iuN96aRkU06CzJ8d/FqFe3Qs2bI7LiGHTzOI5T5mQqjzovi2t1EkRHb8qkHgoD9cTJDb4uA30AkSxsFB7A==}
+  postprocessing@6.39.4:
+    resolution: {integrity: sha512-oAS/PjAbc/xT3OzjUrGsorJ4J064XwhVD2t0OwKLP/E8QwDMUJ0oOv6ZI1SYMtLchv4g0ySEx+JcLy92+48vlA==}
     peerDependencies:
       three: '>= 0.168.0 < 0.186.0'
 
@@ -13004,7 +13004,7 @@ snapshots:
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
-  postprocessing@6.39.3(three@0.185.1):
+  postprocessing@6.39.4(three@0.185.1):
     dependencies:
       three: 0.185.1
 
