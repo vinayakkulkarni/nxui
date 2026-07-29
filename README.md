@@ -193,6 +193,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Lanyard](https://nxui.geoql.in/docs/components/lanyard)                             | Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model.                                                                  |
 | [Layered Stack](https://nxui.geoql.in/docs/components/layered-stack)                 | Stack of cards that fans out on hover, stacking back with random rotation on mouse leave.                                                                              |
 | [Line Sidebar](https://nxui.geoql.in/docs/components/line-sidebar)                   | Line-and-rail sidebar navigation whose items shift, tint, and grow their markers as the cursor approaches, eased by a single rAF loop.                                 |
+| [Liquid Glass Carousel](https://nxui.geoql.in/docs/components/liquid-glass-carousel) | Infinite scroll-driven portfolio carousel drawn through a liquid-glass lens, with focus mode and an entry animation.                                                   |
 | [Mac Keyboard](https://nxui.geoql.in/docs/components/mac-keyboard)                   | An interactive Mac keyboard with real key tracking, sound effects, and visual feedback. Press keys on your keyboard to see them light up.                              |
 | [Magic Bento](https://nxui.geoql.in/docs/components/magic-bento)                     | Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism.                                                                          |
 | [Magnetic Dock](https://nxui.geoql.in/docs/components/magnetic-dock)                 | A macOS-style dock with magnetic hover magnification and genie effect.                                                                                                 |
@@ -229,7 +230,6 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Testimonial Marquee](https://nxui.geoql.in/docs/components/testimonial-marquee)     | An infinite scrolling marquee of testimonial cards with smooth animation.                                                                                              |
 | [Tilted Card](https://nxui.geoql.in/docs/components/tilted-card)                     | 3D tilting card that follows cursor with spring damping and tooltip caption.                                                                                           |
 | [Visual Stepper](https://nxui.geoql.in/docs/components/visual-stepper)               | Auto-playing vertical stepper with growing connector bars and a crossfading preview card.                                                                              |
-| [Warp Gallery](https://nxui.geoql.in/docs/components/warp-gallery)                   | An infinite image strip that bends like liquid glass under scroll velocity, with prismatic chromatic-aberration fringes.                                               |
 
 ### Backgrounds (49)
 

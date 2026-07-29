@@ -164,6 +164,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/line-sidebar',
         badge: 'new',
       },
+      {
+        title: 'Liquid Glass Carousel',
+        path: '/docs/components/liquid-glass-carousel',
+        badge: 'new',
+      },
       { title: 'Mac Keyboard', path: '/docs/components/mac-keyboard' },
       { title: 'Magic Bento', path: '/docs/components/magic-bento' },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
@@ -243,11 +248,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Visual Stepper',
         path: '/docs/components/visual-stepper',
-      },
-      {
-        title: 'Warp Gallery',
-        path: '/docs/components/warp-gallery',
-        badge: 'new',
       },
     ],
   },
