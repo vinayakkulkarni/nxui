@@ -114,7 +114,13 @@
     else boot();
   });
   watch(
-    () => [props.items, props.config, props.lens, props.focus, props.entry],
+    [
+      () => props.items,
+      () => props.config,
+      () => props.lens,
+      () => props.focus,
+      () => props.entry,
+    ],
     () => {
       teardown();
       boot();

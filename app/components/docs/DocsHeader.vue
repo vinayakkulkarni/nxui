@@ -16,9 +16,7 @@
           >
             <Icon name="lucide:component" class="size-4 text-white" />
           </div>
-          <span
-            class="bg-linear-to-r from-foreground to-foreground/70 bg-clip-text text-lg font-bold tracking-tight text-transparent"
-          >
+          <span class="text-lg font-bold tracking-tight text-foreground">
             NXUI
           </span>
         </NuxtLink>

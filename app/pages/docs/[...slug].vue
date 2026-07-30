@@ -194,7 +194,7 @@
 
         <!-- Title -->
         <h1
-          class="mb-3 bg-linear-to-r from-foreground to-foreground/70 bg-clip-text font-display text-2xl font-bold text-transparent lg:text-4xl"
+          class="mb-3 font-display text-2xl font-bold text-foreground lg:text-4xl"
           style="letter-spacing: -0.04em; line-height: 1.1"
         >
           {{ page.title }}
