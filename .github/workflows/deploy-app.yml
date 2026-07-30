@@ -77,3 +77,30 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      # A deploy replaces the `/_nuxt/*` asset set, and the static asset layer
+      # answers misses itself with the `_headers` policy for that prefix —
+      # `max-age=31536000, immutable`. One miss during the swap therefore pins a
+      # broken chunk URL at the edge for a year, and no later deploy can evict
+      # it. Purging after the new manifest is live clears both stale documents
+      # and cached misses; hashed assets re-warm on first request. Requires the
+      # Zone -> Cache Purge scope, and is a recovery net rather than the fix, so
+      # a token without that scope must not fail an otherwise good deploy.
+      - name: Purge CDN cache
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_ZONE_ID" ]; then
+            echo 'CLOUDFLARE_ZONE_ID not set - skipping purge.'
+            exit 0
+          fi
+          status=$(curl -sS -o /tmp/purge.json -w '%{http_code}' -X POST \
+            "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H 'Content-Type: application/json' \
+            --data '{"purge_everything":true}')
+          cat /tmp/purge.json
+          test "$status" = '200'
+

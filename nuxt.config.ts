@@ -366,6 +366,16 @@ export default defineNuxtConfig({
     },
   },
 
+  // A 404 on a `/_nuxt/*` chunk rejects its dynamic import and renders
+  // NUXT_E1005 instead of the page. `automatic-immediate` (not the default
+  // `automatic`, which only recovers errors raised during route navigation)
+  // also recovers the initial load, so a client holding a document older than
+  // the current asset manifest reloads onto the live one. `reloadNuxtApp`
+  // rate-limits itself, so a genuinely missing chunk cannot reload-loop.
+  experimental: {
+    emitRouteChunkError: 'automatic-immediate',
+  },
+
   compatibilityDate: '2025-07-18',
 
   // Edge 301 from bare root to /docs. Social crawlers don't run client-side
@@ -373,6 +383,17 @@ export default defineNuxtConfig({
   // card; a real HTTP 301 is followed to the tagged /docs page.
   routeRules: {
     '/': { redirect: { to: '/docs', statusCode: 301 } },
+    // Worker-rendered HTML must not outlive a deploy in a CDN cache. Each page
+    // embeds content-hashed `/_nuxt/*` URLs, and `wrangler deploy` drops the
+    // previous asset set once the new manifest is live — so a page held at the
+    // edge past that point 404s every dynamic import it references and the app
+    // falls over with NUXT_E1005. Browsers always revalidate (`max-age=0`) and
+    // the edge may hold a copy for a minute, which bounds the exposure to one
+    // s-maxage window instead of Cloudflare's heuristic TTL.
+    '/docs': { headers: { 'cache-control': 'public, max-age=0, s-maxage=60' } },
+    '/docs/**': {
+      headers: { 'cache-control': 'public, max-age=0, s-maxage=60' },
+    },
     // Static-layer security headers: Nitro bakes routeRules headers into
     // the _headers file, which Workers static assets apply to asset-served
     // responses (prerendered docs pages, _nuxt chunks, registry JSON).
