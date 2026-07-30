@@ -103,4 +103,3 @@ jobs:
             --data '{"purge_everything":true}')
           cat /tmp/purge.json
           test "$status" = '200'
-
