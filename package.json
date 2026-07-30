@@ -42,7 +42,7 @@
     "@paper-design/shaders": "0.0.78",
     "@tanstack/vue-table": "^9.0.0-beta.58",
     "@tweakpane/plugin-essentials": "^0.2.1",
-    "@vueuse/core": "^14.3.0",
+    "@vueuse/core": "^14.4.0",
     "@vueuse/nuxt": "^14.3.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
