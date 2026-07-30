@@ -688,6 +688,12 @@
       "description": "Auto-playing vertical stepper with growing connector bars and a crossfading preview card."
     },
     {
+      "name": "liquid-glass-carousel",
+      "type": "registry:ui",
+      "title": "Liquid Glass Carousel",
+      "description": "An infinite scroll-driven portfolio carousel drawn through a liquid-glass lens, with focus mode and an entry animation."
+    },
+    {
       "name": "banknote-bento",
       "type": "registry:ui",
       "title": "Banknote Bento",

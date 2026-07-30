@@ -92,7 +92,7 @@
               Animated
             </h2>
             <h2
-              class="mt-2 pb-2 pr-4 text-5xl font-serif italic tracking-tight text-transparent bg-clip-text bg-linear-to-br from-white via-white/90 to-white/40 drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] md:text-7xl"
+              class="mt-2 pb-2 pr-4 font-serif text-5xl italic tracking-tight text-white/85 drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] md:text-7xl"
             >
               Gradient
             </h2>

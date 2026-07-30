@@ -721,6 +721,12 @@ const COMPONENTS: Record<
       'Auto-playing vertical stepper with growing connector bars and a crossfading preview card.',
     deps: ['motion-v'],
   },
+  'liquid-glass-carousel': {
+    title: 'Liquid Glass Carousel',
+    description:
+      'An infinite scroll-driven portfolio carousel drawn through a liquid-glass lens, with focus mode and an entry animation.',
+    deps: ['three', 'motion-v', '@vueuse/core'],
+  },
   'banknote-bento': {
     title: 'Banknote Bento',
     description:
