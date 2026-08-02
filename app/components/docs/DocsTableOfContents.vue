@@ -134,9 +134,9 @@
           class="space-y-3 rounded-2xl border border-border/50 bg-muted/20 p-4 backdrop-blur-sm dark:border-white/6 dark:bg-white/2"
         >
           <div class="space-y-1">
-            <h4 class="text-sm font-medium tracking-tight text-foreground">
+            <h3 class="text-sm font-medium tracking-tight text-foreground">
               Need custom components?
-            </h4>
+            </h3>
             <p class="text-xs/relaxed text-muted-foreground">
               Get bespoke UI components &amp; stunning websites tailored for
               your brand.

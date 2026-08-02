@@ -1,4 +1,6 @@
 import { readdirSync, existsSync } from 'node:fs';
+import { readdir, rm } from 'node:fs/promises';
+import { join, sep } from 'node:path';
 import { docsNav } from './app/config/docs';
 
 const componentCount = readdirSync('registry/new-york', {
@@ -374,6 +376,35 @@ export default defineNuxtConfig({
   // rate-limits itself, so a genuinely missing chunk cannot reload-loop.
   experimental: {
     emitRouteChunkError: 'automatic-immediate',
+  },
+
+  // Prerendering runs for the crawl, not for the HTML: crawlLinks discovers
+  // every docs route so their _payload.json (client-side navigation) and the
+  // sitemap are generated. The HTML itself is never served — run_worker_first
+  // sends every /docs request to the worker, which renders on demand (each
+  // response carries a fresh CSP nonce). Deleting it after the crawl keeps the
+  // payloads and sitemap while dropping ~15 MB from every asset upload. This
+  // only holds on Workers; under Pages the static HTML *was* the page.
+  hooks: {
+    'nitro:init': (nitro) => {
+      nitro.hooks.hook('prerender:done', async () => {
+        const publicDir = nitro.options.output.publicDir;
+        const entries = await readdir(publicDir, { recursive: true });
+        const unusedHtml = entries.filter(
+          (entry) =>
+            entry.endsWith('.html') &&
+            (entry === 'docs.html' || entry.startsWith(`docs${sep}`)),
+        );
+        await Promise.all(
+          unusedHtml.map((entry) =>
+            rm(join(publicDir, entry), { force: true }),
+          ),
+        );
+        nitro.logger.info(
+          `Removed ${unusedHtml.length} worker-rendered HTML files from the asset upload.`,
+        );
+      });
+    },
   },
 
   compatibilityDate: '2025-07-18',
