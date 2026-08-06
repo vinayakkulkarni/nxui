@@ -99,24 +99,28 @@
 
 <template>
   <ComponentDemo :code="currentVariant.code">
-    <div class="flex flex-col items-center justify-center gap-6 w-full py-4">
-      <div class="zoom-[0.55] md:zoom-[0.7]">
-        <GithubCalendar v-bind="currentVariant.props" />
-      </div>
-      <div class="flex gap-2">
-        <button
-          v-for="(variant, index) in variants"
-          :key="variant.label"
-          class="px-3 py-1 text-xs rounded-full transition-colors"
-          :class="
-            activeTab === index
-              ? 'bg-foreground text-background'
-              : 'bg-muted text-muted-foreground hover:bg-muted/80'
-          "
-          @click="handleTabClick(index)"
-        >
-          {{ variant.label }}
-        </button>
+    <div class="relative size-full min-h-100 overflow-y-auto">
+      <div
+        class="flex min-h-full flex-col items-center justify-center gap-6 py-4"
+      >
+        <div class="zoom-[0.55] md:zoom-[0.7]">
+          <GithubCalendar v-bind="currentVariant.props" />
+        </div>
+        <div class="flex gap-2">
+          <button
+            v-for="(variant, index) in variants"
+            :key="variant.label"
+            class="px-3 py-1 text-xs rounded-full transition-colors"
+            :class="
+              activeTab === index
+                ? 'bg-foreground text-background'
+                : 'bg-muted text-muted-foreground hover:bg-muted/80'
+            "
+            @click="handleTabClick(index)"
+          >
+            {{ variant.label }}
+          </button>
+        </div>
       </div>
     </div>
   </ComponentDemo>
