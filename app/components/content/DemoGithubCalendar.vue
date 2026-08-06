@@ -61,6 +61,33 @@
   \x3CGithubCalendar username="vinayakkulkarni" color-schema="orange" :show-total="false" />
 \x3C/template>`,
     },
+    {
+      label: 'Top Contributions',
+      props: {
+        username: 'vinayakkulkarni',
+        colorSchema: 'blue',
+        topContributions: [
+          { repo: 'orchid-ai', count: 412, emoji: '🦑' },
+          { repo: 'antimetal', count: 124, emoji: '🛡️' },
+          { repo: 'supermemory', count: 69, emoji: '🧠' },
+        ],
+      },
+      code: `\x3Cscript setup lang="ts">
+  import GithubCalendar from '~/components/ui/GithubCalendar.vue';
+\x3C/script>
+
+\x3Ctemplate>
+  \x3CGithubCalendar
+    username="vinayakkulkarni"
+    color-schema="blue"
+    :top-contributions="[
+      { repo: 'orchid-ai', count: 412, emoji: '🦑' },
+      { repo: 'antimetal', count: 124, emoji: '🛡️' },
+      { repo: 'supermemory', count: 69, emoji: '🧠' },
+    ]"
+  />
+\x3C/template>`,
+    },
   ];
 
   const currentVariant = computed(() => variants[activeTab.value]!);
