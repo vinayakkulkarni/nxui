@@ -49,7 +49,7 @@ jobs:
             dependencies
             deps
 
-      - uses: marocchino/sticky-pull-request-comment@v3
+      - uses: marocchino/sticky-pull-request-comment@v3.0.5
         if: always() && (steps.lint_pr_title.outputs.error_message != null)
         with:
           header: pr-title-lint-error
@@ -70,7 +70,7 @@ jobs:
             - `feat(ui): add Button variant`
             - `refactor!: drop Node.js 18 support`
 
-      - uses: marocchino/sticky-pull-request-comment@v3
+      - uses: marocchino/sticky-pull-request-comment@v3.0.5
         if: steps.lint_pr_title.outputs.error_message == null
         with:
           header: pr-title-lint-error

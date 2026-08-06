@@ -75,6 +75,12 @@ const COMPONENTS: Record<
       'Versatile text animation component with multiple animation types and split modes.',
     deps: ['@vueuse/core', 'motion-v'],
   },
+  'numbered-reveal': {
+    title: 'Numbered Reveal',
+    description:
+      'A scroll-driven editorial list of numbered sections that rise into view with staggered easing.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'true-focus': {
     title: 'True Focus',
     description:
@@ -186,8 +192,15 @@ const COMPONENTS: Record<
   },
   'github-calendar': {
     title: 'GitHub Calendar',
-    description: 'A GitHub-style contribution heatmap calendar.',
-    deps: ['@vueuse/core'],
+    description:
+      'A GitHub-style contribution heatmap calendar with optional top-contribution chips.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'art-gallery': {
+    title: 'Art Gallery',
+    description:
+      'A museum-style painting showcase with crossfading featured artwork, poetic captions, and thumbnail navigation.',
+    deps: ['motion-v'],
   },
   'magnetic-dock': {
     title: 'Magnetic Dock',
@@ -696,6 +709,18 @@ const COMPONENTS: Record<
     description:
       '3D tilting card that follows cursor with spring damping and tooltip caption.',
     deps: ['@vueuse/core'],
+  },
+  'timezone-companion': {
+    title: 'Timezone Companion',
+    description:
+      'Two timezone tools in one: a meeting-overlap finder with a find-best-time scrubber, and a live world clock with day-phase badges.',
+    deps: ['motion-v'],
+  },
+  'weather-forecast': {
+    title: 'Weather Forecast',
+    description:
+      'A compact weekly forecast with unit toggle, spring-animated condition hero, and hover-driven day chips.',
+    deps: ['motion-v'],
   },
   'decay-card': {
     title: 'Decay Card',
@@ -1454,11 +1479,11 @@ const COMPONENTS: Record<
       'Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links.',
     deps: ['@vueuse/core'],
   },
-  'sticker-peel': {
-    title: 'Sticker Peel',
+  'holo-sticker': {
+    title: 'Holo Sticker',
     description:
-      'Interactive sticker peel effect with CSS clip-path, SVG lighting filters, and drag interaction.',
-    deps: ['@vueuse/core'],
+      'A die-cut holographic sticker rendered in WebGL: rainbow foil sweeps with your cursor, embossed ink relief, page-curled peel, and exploded production layers.',
+    deps: ['three', '@vueuse/core'],
   },
   'target-cursor': {
     title: 'Target Cursor',
