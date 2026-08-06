@@ -235,7 +235,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Staggered Menu', path: '/docs/components/staggered-menu' },
       { title: 'Stepper', path: '/docs/components/stepper' },
-      { title: 'Sticker Peel', path: '/docs/components/sticker-peel' },
+      {
+        title: 'Holo Sticker',
+        path: '/docs/components/holo-sticker',
+        badge: 'new',
+      },
       {
         title: 'Sticky Scroll Cards',
         path: '/docs/components/sticky-scroll-cards',
