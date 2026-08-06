@@ -15,6 +15,15 @@ export interface GithubContributionData {
   totalContributions: number;
 }
 
+export interface GithubTopContribution {
+  /** Repository name, e.g. 'orchid-ai'. */
+  repo: string;
+  /** Contribution count in the period. */
+  count: number;
+  /** Optional emoji or icon name for the repo. */
+  emoji?: string;
+}
+
 export type GithubCalendarColorSchema =
   | 'green'
   | 'blue'

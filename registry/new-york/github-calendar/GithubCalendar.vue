@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
+  import { motion } from 'motion-v';
   import type {
     GithubContributionData,
     GithubCalendarColorSchema,
     GithubCalendarVariant,
     GithubCalendarShape,
+    GithubTopContribution,
   } from './types';
   import { cn } from '~/lib/utils';
   import GithubCalendarGrid from './GithubCalendarGrid.vue';
@@ -19,6 +21,8 @@
       glowIntensity?: number;
       showTotal?: boolean;
       colorSchema?: GithubCalendarColorSchema;
+      /** Optional "Top contributions in" repos shown under the grid. */
+      topContributions?: GithubTopContribution[];
       class?: string;
     }>(),
     {
@@ -27,6 +31,7 @@
       glowIntensity: 5,
       showTotal: true,
       colorSchema: 'green',
+      topContributions: undefined,
       class: '',
     },
   );
@@ -98,6 +103,38 @@
         :glow-intensity="glowIntensity"
         :color-schema="colorSchema"
       />
+
+      <!-- Top contributions -->
+      <div
+        v-if="topContributions && topContributions.length > 0"
+        class="mt-4 border-t border-border/50 pt-4"
+      >
+        <p class="text-xs font-medium text-muted-foreground">
+          Top contributions in:
+        </p>
+        <div class="mt-2.5 flex flex-wrap gap-2">
+          <component
+            :is="motion.div"
+            v-for="(top, i) in topContributions"
+            :key="top.repo"
+            :initial="{ opacity: 0, y: 12, scale: 0.9 }"
+            :animate="{ opacity: 1, y: 0, scale: 1 }"
+            :transition="{
+              delay: 0.1 + i * 0.07,
+              type: 'spring',
+              stiffness: 300,
+              damping: 24,
+            }"
+            class="flex items-center gap-2 rounded-full border border-border/60 bg-muted/40 py-1.5 pl-2 pr-3 text-xs dark:border-white/6"
+          >
+            <span class="text-sm leading-none">{{ top.emoji ?? '🐙' }}</span>
+            <span class="font-medium">{{ top.repo }}</span>
+            <span class="tabular-nums text-muted-foreground">{{
+              top.count
+            }}</span>
+          </component>
+        </div>
+      </div>
     </div>
   </div>
 </template>
