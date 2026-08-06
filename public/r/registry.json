@@ -1420,10 +1420,10 @@
       "description": "Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links."
     },
     {
-      "name": "sticker-peel",
+      "name": "holo-sticker",
       "type": "registry:ui",
-      "title": "Sticker Peel",
-      "description": "Interactive sticker peel effect with CSS clip-path, SVG lighting filters, and drag interaction."
+      "title": "Holo Sticker",
+      "description": "A die-cut holographic sticker rendered in WebGL: rainbow foil sweeps with your cursor, embossed ink relief, page-curled peel, and exploded production layers."
     },
     {
       "name": "target-cursor",

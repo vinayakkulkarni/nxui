@@ -1454,11 +1454,11 @@ const COMPONENTS: Record<
       'Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links.',
     deps: ['@vueuse/core'],
   },
-  'sticker-peel': {
-    title: 'Sticker Peel',
+  'holo-sticker': {
+    title: 'Holo Sticker',
     description:
-      'Interactive sticker peel effect with CSS clip-path, SVG lighting filters, and drag interaction.',
-    deps: ['@vueuse/core'],
+      'A die-cut holographic sticker rendered in WebGL: rainbow foil sweeps with your cursor, embossed ink relief, page-curled peel, and exploded production layers.',
+    deps: ['three', '@vueuse/core'],
   },
   'target-cursor': {
     title: 'Target Cursor',
