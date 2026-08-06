@@ -68,9 +68,8 @@
     timer = 0;
   }
 
-  watch(
-    [() => props.autoplayInterval, () => props.artworks.length],
-    () => startAutoplay(),
+  watch([() => props.autoplayInterval, () => props.artworks.length], () =>
+    startAutoplay(),
   );
   onMounted(startAutoplay);
   onBeforeUnmount(stopAutoplay);

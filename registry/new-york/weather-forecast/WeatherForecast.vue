@@ -67,9 +67,8 @@
     timer = 0;
   }
 
-  watch(
-    [() => props.autoplayInterval, () => props.days.length],
-    () => startAutoplay(),
+  watch([() => props.autoplayInterval, () => props.days.length], () =>
+    startAutoplay(),
   );
   watch(
     () => props.unit,
