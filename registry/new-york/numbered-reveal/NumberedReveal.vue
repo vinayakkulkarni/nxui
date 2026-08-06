@@ -1,6 +1,5 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import { useIntersectionObserver } from '@vueuse/core';
+  import { ref, nextTick, onMounted, onBeforeUnmount } from 'vue';
   import { motion } from 'motion-v';
   import type { RevealSection } from './types';
   import { cn } from '~/lib/utils';
@@ -35,20 +34,29 @@
   );
 
   const root = ref<HTMLElement | null>(null);
-  const visible = ref(0);
+  const revealed = ref<boolean[]>(props.sections.map(() => false));
 
-  useIntersectionObserver(
-    root,
-    ([entry]) => {
-      if (!entry.isIntersecting) return;
-      visible.value = props.sections.length;
-    },
-    { threshold: 0.2 },
-  );
+  let observer: IntersectionObserver | null = null;
 
-  const sections = computed(() =>
-    props.stagger ? props.sections : props.sections.slice(0, visible.value),
-  );
+  onMounted(async () => {
+    await nextTick();
+    observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const index = Number((entry.target as HTMLElement).dataset.reveal);
+          if (entry.isIntersecting && !revealed.value[index]) {
+            revealed.value[index] = true;
+          }
+        }
+      },
+      { threshold: 0.15 },
+    );
+    root.value?.querySelectorAll<HTMLElement>('[data-reveal]').forEach((el) => {
+      observer?.observe(el);
+    });
+  });
+
+  onBeforeUnmount(() => observer?.disconnect());
 </script>
 
 <template>
@@ -57,12 +65,17 @@
       :is="motion.div"
       v-for="(section, i) in sections"
       :key="section.number"
+      :data-reveal="i"
       :initial="{ opacity: 0, y: 28 }"
       :animate="{
-        opacity: i < visible ? 1 : 0,
-        y: i < visible ? 0 : 28,
+        opacity: revealed[i] ? 1 : 0,
+        y: revealed[i] ? 0 : 28,
       }"
-      :transition="{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: i * 0.12 }"
+      :transition="{
+        duration: 0.7,
+        ease: [0.22, 1, 0.36, 1],
+        delay: props.stagger ? i * 0.12 : 0,
+      }"
       class="flex gap-6 border-t border-border/60 pt-6"
     >
       <span class="font-mono text-sm text-muted-foreground/70">
