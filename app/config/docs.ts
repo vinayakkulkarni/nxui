@@ -42,6 +42,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Shiny Text', path: '/docs/text-animations/shiny-text' },
       { title: 'Shuffle', path: '/docs/text-animations/shuffle' },
       { title: 'Split Text', path: '/docs/text-animations/split-text' },
+      {
+        title: 'Numbered Reveal',
+        path: '/docs/text-animations/numbered-reveal',
+        badge: 'new',
+      },
       { title: 'Text Animate', path: '/docs/text-animations/text-animate' },
       { title: 'Text Cursor', path: '/docs/text-animations/text-cursor' },
       { title: 'Text Pressure', path: '/docs/text-animations/text-pressure' },
@@ -69,6 +74,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Aurora Accordion',
         path: '/docs/components/aurora-accordion',
+      },
+      {
+        title: 'Art Gallery',
+        path: '/docs/components/art-gallery',
+        badge: 'new',
       },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       {
@@ -151,6 +161,11 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
+      {
+        title: 'Holo Sticker',
+        path: '/docs/components/holo-sticker',
+        badge: 'new',
+      },
       {
         title: 'Holo Cloth',
         path: '/docs/components/holo-cloth',
@@ -248,10 +263,20 @@ export const docsNav: NavGroup[] = [
         title: 'Testimonial Marquee',
         path: '/docs/components/testimonial-marquee',
       },
+      {
+        title: 'Timezone Companion',
+        path: '/docs/components/timezone-companion',
+        badge: 'new',
+      },
       { title: 'Tilted Card', path: '/docs/components/tilted-card' },
       {
         title: 'Visual Stepper',
         path: '/docs/components/visual-stepper',
+      },
+      {
+        title: 'Weather Forecast',
+        path: '/docs/components/weather-forecast',
+        badge: 'new',
       },
     ],
   },
