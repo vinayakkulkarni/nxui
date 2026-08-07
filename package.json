@@ -76,7 +76,7 @@
     "better-sqlite3": "^13.0.2",
     "eslint": "^10.8.0",
     "eslint-plugin-better-tailwindcss": "^4.7.0",
-    "eslint-plugin-oxlint": "^1.76.0",
+    "eslint-plugin-oxlint": "^1.77.0",
     "h3": "1.15.11",
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
