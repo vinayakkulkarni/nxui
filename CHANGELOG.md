@@ -1,5 +1,56 @@
 # Changelog
 
+## [0.0.19](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.18...nxui-v0.0.19) (2026-08-07)
+
+
+### Features
+
+* **components:** add liquid-glass-carousel ([#155](https://github.com/vinayakkulkarni/nxui/issues/155)) ([e5fc4b1](https://github.com/vinayakkulkarni/nxui/commit/e5fc4b1b08b65c039483a6c2fe079afac9c04ce3))
+* **docs:** add an error boundary and label the palette search input ([0eeb1a4](https://github.com/vinayakkulkarni/nxui/commit/0eeb1a41979c059b21a82cf4969a18c5fc72b716))
+* **docs:** add Keep in mind attribution card to component pages ([469ef53](https://github.com/vinayakkulkarni/nxui/commit/469ef5397bb12f1820861af48a34fe1d7f5b7d44))
+
+
+### Bug Fixes
+
+* **deploy:** stop stale HTML and cached asset 404s from breaking the site ([e0ae690](https://github.com/vinayakkulkarni/nxui/commit/e0ae6900082066db37dd30d4280c19234721a81a))
+* **deps:** Bump @iconify-json/lucide from 1.2.118 to 1.2.120 ([#149](https://github.com/vinayakkulkarni/nxui/issues/149)) ([a41e2ec](https://github.com/vinayakkulkarni/nxui/commit/a41e2ec039d228c9f91d29ef505e43d387614107))
+* **deps:** Bump @iconify-json/simple-icons from 1.2.91 to 1.2.92 ([#147](https://github.com/vinayakkulkarni/nxui/issues/147)) ([d1a0070](https://github.com/vinayakkulkarni/nxui/commit/d1a00700328c284479625fd62c660d55c6cb48fe))
+* **deps:** Bump @nuxt/content from 3.15.1 to 3.15.2 ([#144](https://github.com/vinayakkulkarni/nxui/issues/144)) ([eec4efa](https://github.com/vinayakkulkarni/nxui/commit/eec4efa00cddfacbae69635b127106c49accb018))
+* **deps:** Bump @nuxt/icon from 2.3.1 to 2.4.1 ([#157](https://github.com/vinayakkulkarni/nxui/issues/157)) ([49624de](https://github.com/vinayakkulkarni/nxui/commit/49624ded0ee20f0df482db9869ea1bea84066b15))
+* **deps:** Bump @nuxtjs/sitemap from 8.3.0 to 8.3.1 ([#159](https://github.com/vinayakkulkarni/nxui/issues/159)) ([55ae0af](https://github.com/vinayakkulkarni/nxui/commit/55ae0af8a44d0546a9467f43a5c5ed19a2f6bb7d))
+* **deps:** Bump @nuxtjs/sitemap from 8.3.1 to 8.3.2 ([#169](https://github.com/vinayakkulkarni/nxui/issues/169)) ([ecdebab](https://github.com/vinayakkulkarni/nxui/commit/ecdebab94111ff59c514f5900952d798dc5baf17))
+* **deps:** Bump @paper-design/shaders from 0.0.77 to 0.0.78 ([#150](https://github.com/vinayakkulkarni/nxui/issues/150)) ([9aa4d81](https://github.com/vinayakkulkarni/nxui/commit/9aa4d816d4fb56e7404a7911007929e7dcfffccb))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.55 to 9.0.0-beta.58 ([#148](https://github.com/vinayakkulkarni/nxui/issues/148)) ([5b5a133](https://github.com/vinayakkulkarni/nxui/commit/5b5a13330a7df420cadbf6bacba44eb2115c1440))
+* **deps:** Bump @tanstack/vue-table from 9.0.0-beta.58 to 9.0.0-beta.64 ([#166](https://github.com/vinayakkulkarni/nxui/issues/166)) ([6346372](https://github.com/vinayakkulkarni/nxui/commit/6346372c430faf23bc55d18d67b86f277d4f2790))
+* **deps:** Bump @vueuse/core from 14.3.0 to 14.4.0 ([#161](https://github.com/vinayakkulkarni/nxui/issues/161)) ([701a5c2](https://github.com/vinayakkulkarni/nxui/commit/701a5c2546239f10322609975cda76db4b17c2ed))
+* **deps:** Bump @vueuse/nuxt from 14.3.0 to 14.4.0 ([#167](https://github.com/vinayakkulkarni/nxui/issues/167)) ([222b415](https://github.com/vinayakkulkarni/nxui/commit/222b4152c9a4717378cd6fee4304811c9697f728))
+* **deps:** Bump nuxt from 4.5.0 to 4.5.1 ([#158](https://github.com/vinayakkulkarni/nxui/issues/158)) ([e6b2685](https://github.com/vinayakkulkarni/nxui/commit/e6b2685818b48b20c71f88d0729e521655d87a79))
+* **deps:** Bump nuxt-schema-org from 6.2.7 to 6.2.8 ([#160](https://github.com/vinayakkulkarni/nxui/issues/160)) ([5e312ee](https://github.com/vinayakkulkarni/nxui/commit/5e312eea03b50bc1050348616059f7efb6e63c95))
+* **deps:** Bump pnpm/action-setup from 6 to 6.0.9 ([#171](https://github.com/vinayakkulkarni/nxui/issues/171)) ([6cc9a23](https://github.com/vinayakkulkarni/nxui/commit/6cc9a231e1abfa1b1a8a2e5902d22eefda940b9f))
+* **deps:** Bump pnpm/action-setup from 6.0.9 to 6.0.10 ([#172](https://github.com/vinayakkulkarni/nxui/issues/172)) ([3e90fc4](https://github.com/vinayakkulkarni/nxui/commit/3e90fc4ed981271f102a3b844b71e53cc5bc7879))
+* **deps:** Bump postprocessing from 6.39.3 to 6.39.4 ([#153](https://github.com/vinayakkulkarni/nxui/issues/153)) ([0d1c6b3](https://github.com/vinayakkulkarni/nxui/commit/0d1c6b329ca85ccf1d735b91d9a7c41f88cb0f3f))
+* **deps:** Bump shadcn-nuxt from 2.8.0 to 2.8.1 ([#163](https://github.com/vinayakkulkarni/nxui/issues/163)) ([55d8510](https://github.com/vinayakkulkarni/nxui/commit/55d8510c3d603a81933ff4b75222c06e74f57e9d))
+
+
+### Performance Improvements
+
+* drop unused prerendered HTML and fix docs heading order ([#164](https://github.com/vinayakkulkarni/nxui/issues/164)) ([691d98f](https://github.com/vinayakkulkarni/nxui/commit/691d98f7a639f5adfa3d2a295fcc06cdc170bfc8))
+
+
+### Miscellaneous
+
+* bump dependencies ✨ ([418a889](https://github.com/vinayakkulkarni/nxui/commit/418a88951cdacbe1a5795489815b5bbef05baf84))
+* **deps-dev:** Bump better-sqlite3 from 13.0.1 to 13.0.2 ([#162](https://github.com/vinayakkulkarni/nxui/issues/162)) ([0d90612](https://github.com/vinayakkulkarni/nxui/commit/0d9061200e274af9839f17b8d4121f5e2ecc70c5))
+* **deps-dev:** Bump eslint from 10.7.0 to 10.8.0 ([#146](https://github.com/vinayakkulkarni/nxui/issues/146)) ([56f2351](https://github.com/vinayakkulkarni/nxui/commit/56f2351212bdaaa307564cef0bfbfaafebd2160b))
+* **deps-dev:** Bump eslint-plugin-oxlint from 1.75.0 to 1.76.0 ([#154](https://github.com/vinayakkulkarni/nxui/issues/154)) ([227fd1e](https://github.com/vinayakkulkarni/nxui/commit/227fd1ec35ff5cebdaac2c3f3c329e23075e1667))
+* **deps-dev:** Bump eslint-plugin-oxlint from 1.76.0 to 1.77.0 ([#174](https://github.com/vinayakkulkarni/nxui/issues/174)) ([877b5c3](https://github.com/vinayakkulkarni/nxui/commit/877b5c363f4cd0d90489761a9e60f272520cf38e))
+* **deps-dev:** Bump lint-staged from 17.1.1 to 17.2.0 ([#143](https://github.com/vinayakkulkarni/nxui/issues/143)) ([ef3ba1e](https://github.com/vinayakkulkarni/nxui/commit/ef3ba1eb13e091d5a9c9eae0d0a87f17f526214e))
+* **deps-dev:** Bump oxfmt from 0.60.0 to 0.61.0 ([#151](https://github.com/vinayakkulkarni/nxui/issues/151)) ([94c799c](https://github.com/vinayakkulkarni/nxui/commit/94c799cd4f3f11f1223e7489b694ab8ae006e5ba))
+* **deps-dev:** Bump oxlint from 1.75.0 to 1.76.0 ([#152](https://github.com/vinayakkulkarni/nxui/issues/152)) ([2466b0b](https://github.com/vinayakkulkarni/nxui/commit/2466b0b447e69d417a8f6409d39aa841a812da39))
+* **deps-dev:** Bump wrangler from 4.113.0 to 4.114.0 ([#142](https://github.com/vinayakkulkarni/nxui/issues/142)) ([b00464a](https://github.com/vinayakkulkarni/nxui/commit/b00464a0b8e4f1c32385c9bf4647e93ceadc24d6))
+* **deps-dev:** Bump wrangler from 4.114.0 to 4.115.0 ([#156](https://github.com/vinayakkulkarni/nxui/issues/156)) ([da43112](https://github.com/vinayakkulkarni/nxui/commit/da431124a8a340046962120ea80f91d3396db742))
+* **deps-dev:** Bump wrangler from 4.115.0 to 4.116.0 ([#168](https://github.com/vinayakkulkarni/nxui/issues/168)) ([296bb3e](https://github.com/vinayakkulkarni/nxui/commit/296bb3e5e3e4cc2278d89c5733c7cf05b653dee7))
+
 ## [0.0.18](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.17...nxui-v0.0.18) (2026-07-23)
 
 
