@@ -1,11 +1,11 @@
 ---
 title: Art Gallery
-description: A museum-style painting showcase with crossfading featured artwork, poetic captions, and thumbnail navigation.
+description: An editorial gallery where classic paintings alternate with headline text that melts into ink as it leaves.
 ---
 
 # Art Gallery
 
-A museum-style painting showcase. The featured artwork crossfades with a slow Ken Burns zoom while its title and a poetic caption rise in; the thumbnail strip below jumps to any painting. Hover pauses the rotation.
+An editorial scroll: full-bleed classic paintings alternate with big rounded display type that _melts_ — each line deeper in a block dissolves harder, letterforms collapsing into ink blobs through a gooey SVG filter, like wet paint refusing to hold a word.
 
 ## Usage
 
@@ -15,14 +15,37 @@ A museum-style painting showcase. The featured artwork crossfades with a slow Ke
 </script>
 
 <template>
-  <ArtGallery class="h-120" />
+  <ArtGallery class="h-150" />
 </template>
+```
+
+## Custom panels
+
+```vue
+<ArtGallery
+  :panels="[
+    {
+      type: 'image',
+      src: '/paintings/prometheus.jpg',
+      alt: 'Prometheus Bound',
+    },
+    {
+      type: 'lines',
+      lines: ['Ground Pigment', 'Falling Shadow', 'Held Silence'],
+    },
+    {
+      type: 'paragraph',
+      text: 'We collect the paintings that hold their breath.',
+    },
+  ]"
+/>
 ```
 
 ## Props
 
-| Prop                | Type        | Default    | Description                         |
-| ------------------- | ----------- | ---------- | ----------------------------------- |
-| `artworks`          | `Artwork[]` | 5 defaults | `{ title, caption, image }[]`       |
-| `autoplay-interval` | `number`    | `4000`     | ms between crossfades; `0` disables |
-| `class`             | `string`    | `''`       | Additional classes                  |
+| Prop     | Type                | Default          | Description                              |
+| -------- | ------------------- | ---------------- | ---------------------------------------- |
+| `panels` | `ArtGalleryPanel[]` | curated defaults | `image` \| `lines` \| `paragraph` panels |
+| `class`  | `string`            | `''`             | Additional classes                       |
+
+The melt uses `feGaussianBlur` + an alpha-contrast `feColorMatrix` — pure SVG, no canvas — so the text stays selectable markup underneath.

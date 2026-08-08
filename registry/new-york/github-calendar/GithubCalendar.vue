@@ -10,8 +10,9 @@
   } from './types';
   import { cn } from '~/lib/utils';
   import GithubCalendarGrid from './GithubCalendarGrid.vue';
+  import { isFlatContributionData, toWeeks } from './github-calendar-utils';
 
-  const GITHUB_API_URL = 'https://github-contributions-api.deno.dev';
+  const GITHUB_API_URL = 'https://github-contributions-api.jogruber.de/v4';
 
   const props = withDefaults(
     defineProps<{
@@ -23,6 +24,11 @@
       colorSchema?: GithubCalendarColorSchema;
       /** Optional "Top contributions in" repos shown under the grid. */
       topContributions?: GithubTopContribution[];
+      /**
+       * Same-origin proxy endpoint (`/api/...`) tried first — the public API
+       * sends no CORS headers, so direct browser calls can fail.
+       */
+      apiProxy?: string;
       class?: string;
     }>(),
     {
@@ -32,6 +38,7 @@
       showTotal: true,
       colorSchema: 'green',
       topContributions: undefined,
+      apiProxy: '/api/github-contributions',
       class: '',
     },
   );
@@ -40,20 +47,32 @@
   const error = ref<string | null>(null);
   const data = ref<GithubContributionData | null>(null);
 
-  onMounted(async () => {
-    try {
-      const response = await fetch(`${GITHUB_API_URL}/${props.username}.json`);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch contributions for @${props.username}`);
-      }
-      const json = (await response.json()) as GithubContributionData;
-      data.value = json;
-    } catch (err) {
-      error.value =
-        err instanceof Error ? err.message : 'An unknown error occurred';
-    } finally {
-      loading.value = false;
+  async function fetchJson(url: string): Promise<GithubContributionData> {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch contributions for @${props.username}`);
     }
+    const json: unknown = await response.json();
+    if (isFlatContributionData(json)) return toWeeks(json);
+    return json as GithubContributionData;
+  }
+
+  onMounted(async () => {
+    const sources = [
+      ...(props.apiProxy ? [`${props.apiProxy}/${props.username}`] : []),
+      `${GITHUB_API_URL}/${props.username}?y=last`,
+    ];
+    for (const url of sources) {
+      try {
+        data.value = await fetchJson(url);
+        error.value = null;
+        break;
+      } catch (err) {
+        error.value =
+          err instanceof Error ? err.message : 'An unknown error occurred';
+      }
+    }
+    loading.value = false;
   });
 </script>
 

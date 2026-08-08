@@ -1,11 +1,11 @@
 ---
 title: Weather Forecast
-description: A compact weekly forecast strip with unit toggle, animated condition hero, and hover-driven day chips.
+description: A weather card with a colored orb glowing behind frosted glass — the forecast reads through the blur.
 ---
 
 # Weather Forecast
 
-A compact weather widget: a city header with a °F/°C toggle, a spring-animated hero showing the condition and temperature for the selected day, and a five-day strip that swaps the hero on hover — or on its own, auto-advancing through the week.
+A weather card built around one idea: the condition lives as a soft gradient **orb** behind a frosted-glass panel. Switch days and the orb crossfades to that day's palette — burnt amber for sun, slate for rain — while the temperature, condition and icon spring in over the glass.
 
 ## Usage
 
@@ -15,22 +15,24 @@ A compact weather widget: a city header with a °F/°C toggle, a spring-animated
 </script>
 
 <template>
-  <WeatherForecast city="Chicago" class="h-120" />
+  <WeatherForecast city="Chicago" />
 </template>
 ```
 
 ## Props
 
-| Prop                | Type           | Default       | Description                            |
-| ------------------- | -------------- | ------------- | -------------------------------------- |
-| `city`              | `string`       | `'Chicago'`   | City shown in the header               |
-| `days`              | `WeatherDay[]` | 5-day default | `{ day, date, condition, temp }[]`     |
-| `unit`              | `'f' \| 'c'`   | `'f'`         | Initial temperature unit               |
-| `autoplay-interval` | `number`       | `3000`        | ms between auto-advances; `0` disables |
-| `class`             | `string`       | `''`          | Additional classes                     |
+| Prop                | Type           | Default       | Description                                      |
+| ------------------- | -------------- | ------------- | ------------------------------------------------ |
+| `city`              | `string`       | `'Chicago'`   | City shown in the header                         |
+| `days`              | `WeatherDay[]` | 5-day default | `{ day, date, condition, temp }[]` (temps in °F) |
+| `unit`              | `'f' \| 'c'`   | `'f'`         | Initial temperature unit                         |
+| `autoplay-interval` | `number`       | `3200`        | ms between auto-advances; `0` disables           |
+| `class`             | `string`       | `''`          | Additional classes                               |
 
 ## Events
 
 | Event    | Payload        | Description                         |
 | -------- | -------------- | ----------------------------------- |
 | `change` | `(day, index)` | Fires when the selected day changes |
+
+Conditions map to orb palettes: `Sunny`, `Partly cloudy`, `Cloudy`, `Rain`, `Snow`, `Storm`.

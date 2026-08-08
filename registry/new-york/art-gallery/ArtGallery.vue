@@ -1,152 +1,153 @@
 <script setup lang="ts">
-  import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue';
-  import { motion, AnimatePresence } from 'motion-v';
-  import type { Artwork } from './types';
+  import { useId } from 'vue';
+  import type { ArtGalleryPanel } from './types';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
     defineProps<{
-      artworks?: Artwork[];
-      autoplayInterval?: number;
+      panels?: ArtGalleryPanel[];
       class?: string;
     }>(),
     {
-      artworks: () => [
+      panels: () => [
         {
-          title: 'Ground Pigment',
-          caption: 'The first coat, still wet enough to dream.',
-          image:
-            'https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=1200&auto=format&fit=crop',
+          type: 'image',
+          src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Peter_Paul_Rubens_-_Prometheus_Bound.jpg/1920px-Peter_Paul_Rubens_-_Prometheus_Bound.jpg',
+          alt: 'Prometheus Bound — Peter Paul Rubens',
         },
         {
-          title: 'Falling Shadow',
-          caption: 'A body of light, caught between two rooms.',
-          image:
-            'https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=1200&auto=format&fit=crop',
+          type: 'lines',
+          lines: [
+            'Ground Pigment',
+            'Falling Shadow',
+            'Warm Flesh',
+            'Suspended Gesture',
+            'Held Silence',
+          ],
         },
         {
-          title: 'Warm Flesh',
-          caption: 'The wine that never spills from a tilted cup.',
-          image:
-            'https://images.unsplash.com/photo-1578301978018-3005759f48f7?q=80&w=1200&auto=format&fit=crop',
+          type: 'image',
+          src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/The_Night_Watch_-_HD.jpg/1920px-The_Night_Watch_-_HD.jpg',
+          alt: 'The Night Watch — Rembrandt',
         },
         {
-          title: 'Suspended Gesture',
-          caption: 'The note that never finishes leaving the reed.',
-          image:
-            'https://images.unsplash.com/photo-1549490349-8643362247b5?q=80&w=1200&auto=format&fit=crop',
+          type: 'paragraph',
+          text: 'We collect the paintings that hold their breath. The wine that never spills from a tilted cup, the note that never finishes leaving the reed, the eye that has been watching the same doorway since the seventeenth century.',
         },
         {
-          title: 'Held Silence',
-          caption: 'The eye that has watched the same doorway since.',
-          image:
-            'https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=1200&auto=format&fit=crop',
+          type: 'image',
+          src: 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Frans_Hals_-_The_Merry_Drinker_-_WGA11095.jpg',
+          alt: 'The Merry Drinker — Frans Hals',
+        },
+        {
+          type: 'lines',
+          lines: ['Tilted Cups', 'Unfinished Notes', 'Patient Eyes'],
+        },
+        {
+          type: 'image',
+          src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/El_Greco_-_The_Burial_of_the_Count_of_Orgaz.JPG/1280px-El_Greco_-_The_Burial_of_the_Count_of_Orgaz.JPG',
+          alt: 'The Burial of the Count of Orgaz — El Greco',
         },
       ],
-      autoplayInterval: 4000,
       class: '',
     },
   );
 
-  const active = ref(0);
-  const featured = computed(() => props.artworks[active.value]!);
+  const uid = useId().replace(/[^a-z0-9]/gi, '');
 
-  function selectArtwork(index: number) {
-    active.value = index;
-  }
+  /** Goo strength per line depth: readable first line → dissolved last. */
+  const meltLevels = [0.9, 2.2, 3.4, 4.8, 6.4, 8];
 
-  let timer = 0;
-  function startAutoplay() {
-    stopAutoplay();
-    if (!props.autoplayInterval) return;
-    timer = window.setInterval(() => {
-      selectArtwork((active.value + 1) % props.artworks.length);
-    }, props.autoplayInterval);
+  function meltFilter(lineIndex: number, total: number): string {
+    const t = total <= 1 ? 0 : lineIndex / (total - 1);
+    const level = Math.min(
+      meltLevels.length - 1,
+      Math.round(t * (meltLevels.length - 1)),
+    );
+    return `url(#${uid}-melt-${level})`;
   }
-  function stopAutoplay() {
-    if (timer) window.clearInterval(timer);
-    timer = 0;
-  }
-
-  watch([() => props.autoplayInterval, () => props.artworks.length], () =>
-    startAutoplay(),
-  );
-  onMounted(startAutoplay);
-  onBeforeUnmount(stopAutoplay);
 </script>
 
 <template>
   <div
     :class="
       cn(
-        'w-full max-w-lg overflow-hidden rounded-3xl border border-border/60 bg-card shadow-xl shadow-black/5 dark:border-white/6',
+        'relative size-full overflow-y-auto overscroll-contain bg-[#f2f1ee]',
         props.class,
       )
     "
   >
-    <!-- featured painting -->
-    <div class="relative aspect-4/3 overflow-hidden bg-muted">
-      <AnimatePresence mode="sync">
-        <component
-          :is="motion.img"
-          :key="featured.title"
-          :src="featured.image"
-          :alt="featured.title"
-          :initial="{ opacity: 0, scale: 1.08 }"
-          :animate="{ opacity: 1, scale: 1 }"
-          :exit="{ opacity: 0 }"
-          :transition="{ duration: 1.1, ease: 'easeInOut' }"
-          class="absolute inset-0 size-full object-cover"
-          @mouseenter="stopAutoplay"
-          @mouseleave="startAutoplay"
-        />
-      </AnimatePresence>
-      <div
-        class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent"
-      ></div>
-    </div>
-
-    <!-- title + caption -->
-    <div class="p-5">
-      <AnimatePresence mode="wait">
-        <component
-          :is="motion.div"
-          :key="featured.title"
-          :initial="{ opacity: 0, y: 16 }"
-          :animate="{ opacity: 1, y: 0 }"
-          :exit="{ opacity: 0, y: -10 }"
-          :transition="{ duration: 0.5, ease: 'easeOut' }"
+    <!--
+      Gooey melt: blur + alpha-contrast collapses letterforms into blobs.
+      One filter per intensity step; lines deeper in a block melt harder.
+    -->
+    <svg class="pointer-events-none absolute size-0" aria-hidden="true">
+      <defs>
+        <filter
+          v-for="(std, i) in meltLevels"
+          :id="`${uid}-melt-${i}`"
+          :key="i"
+          x="-20%"
+          y="-40%"
+          width="140%"
+          height="180%"
         >
-          <p class="text-lg font-medium tracking-tight">{{ featured.title }}</p>
-          <p class="mt-1 text-sm text-muted-foreground italic">
-            {{ featured.caption }}
-          </p>
-        </component>
-      </AnimatePresence>
-
-      <!-- thumbnails -->
-      <div class="mt-5 flex items-center gap-2">
-        <button
-          v-for="(art, i) in artworks"
-          :key="art.title"
-          type="button"
-          :class="
-            cn(
-              'relative h-14 flex-1 overflow-hidden rounded-lg border transition-all duration-300',
-              i === active
-                ? 'border-primary ring-2 ring-primary/30'
-                : 'border-transparent opacity-50 hover:opacity-90',
-            )
-          "
-          @click="selectArtwork(i)"
-        >
-          <img
-            :src="art.image"
-            :alt="art.title"
-            class="size-full object-cover"
+          <feGaussianBlur
+            in="SourceGraphic"
+            :stdDeviation="std"
+            result="blur"
           />
-        </button>
+          <feColorMatrix
+            in="blur"
+            mode="matrix"
+            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"
+          />
+        </filter>
+      </defs>
+    </svg>
+
+    <template v-for="(panel, pi) in panels" :key="pi">
+      <!-- full-bleed painting -->
+      <div v-if="panel.type === 'image'" class="w-full">
+        <img
+          :src="panel.src"
+          :alt="panel.alt ?? ''"
+          class="block h-105 w-full object-cover"
+          loading="lazy"
+        />
       </div>
-    </div>
+
+      <!-- big melting list -->
+      <div
+        v-else-if="panel.type === 'lines'"
+        class="flex flex-col items-center gap-1 px-6 py-16"
+      >
+        <p
+          v-for="(line, li) in panel.lines"
+          :key="line"
+          class="text-center text-5xl font-black tracking-tight text-zinc-950 sm:text-6xl"
+          :style="{ filter: meltFilter(li, panel.lines!.length) }"
+        >
+          {{ line }}
+        </p>
+      </div>
+
+      <!-- melting paragraph -->
+      <div v-else class="mx-auto max-w-3xl px-6 py-16">
+        <p
+          v-for="(line, li) in (panel.text ?? '').match(/[^.]+\.?/g) ?? []"
+          :key="li"
+          class="text-center text-2xl/snug font-bold tracking-tight text-zinc-950 sm:text-3xl"
+          :style="{
+            filter: meltFilter(
+              li,
+              ((panel.text ?? '').match(/[^.]+\.?/g) ?? []).length,
+            ),
+          }"
+        >
+          {{ line.trim() }}
+        </p>
+      </div>
+    </template>
   </div>
 </template>
