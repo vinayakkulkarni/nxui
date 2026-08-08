@@ -1,15 +1,17 @@
-export interface Artwork {
-  /** Painting title. */
-  title: string;
-  /** Poetic one-liner shown under the title. */
-  caption: string;
-  /** Image URL. */
-  image: string;
+export interface ArtGalleryPanel {
+  /** 'image' = full-bleed painting; 'lines' = big melting list; 'paragraph' = melting prose. */
+  type: 'image' | 'lines' | 'paragraph';
+  /** Image URL (type 'image'). */
+  src?: string;
+  /** Alt text (type 'image'). */
+  alt?: string;
+  /** Lines of display text (type 'lines'). */
+  lines?: string[];
+  /** Prose text (type 'paragraph'). */
+  text?: string;
 }
 
 export interface ArtGalleryProps {
-  artworks?: Artwork[];
-  /** Seconds before the featured artwork auto-advances; 0 disables. */
-  autoplayInterval?: number;
+  panels?: ArtGalleryPanel[];
   class?: string;
 }

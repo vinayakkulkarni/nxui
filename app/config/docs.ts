@@ -18,6 +18,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Curved Loop', path: '/docs/text-animations/curved-loop' },
       { title: 'Decrypted Text', path: '/docs/text-animations/decrypted-text' },
       {
+        title: 'Depth Dive',
+        path: '/docs/text-animations/depth-dive',
+        badge: 'new',
+      },
+      {
         title: 'Editorial Orbs',
         path: '/docs/text-animations/editorial-orbs',
       },
@@ -42,11 +47,6 @@ export const docsNav: NavGroup[] = [
       { title: 'Shiny Text', path: '/docs/text-animations/shiny-text' },
       { title: 'Shuffle', path: '/docs/text-animations/shuffle' },
       { title: 'Split Text', path: '/docs/text-animations/split-text' },
-      {
-        title: 'Numbered Reveal',
-        path: '/docs/text-animations/numbered-reveal',
-        badge: 'new',
-      },
       { title: 'Text Animate', path: '/docs/text-animations/text-animate' },
       { title: 'Text Cursor', path: '/docs/text-animations/text-cursor' },
       { title: 'Text Pressure', path: '/docs/text-animations/text-pressure' },

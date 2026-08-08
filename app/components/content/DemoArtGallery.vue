@@ -9,11 +9,16 @@
 </script>
 
 <template>
-  <ArtGallery class=&quot;h-120&quot; />
+  <ArtGallery class=&quot;h-150&quot; />
 </template>`"
   >
-    <div class="flex size-full min-h-100 items-center justify-center p-6">
-      <ArtGallery />
+    <div class="relative size-full min-h-100">
+      <ArtGallery class="absolute inset-0 size-full" />
+      <p
+        class="pointer-events-none absolute inset-x-0 bottom-4 z-10 text-center text-xs text-zinc-500"
+      >
+        scroll — the words melt as the paintings pass
+      </p>
     </div>
   </ComponentDemo>
 </template>

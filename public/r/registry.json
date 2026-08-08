@@ -22,10 +22,10 @@
       "description": "Versatile text animation component with multiple animation types and split modes."
     },
     {
-      "name": "numbered-reveal",
+      "name": "depth-dive",
       "type": "registry:ui",
-      "title": "Numbered Reveal",
-      "description": "A scroll-driven editorial list of numbered sections that rise into view with staggered easing."
+      "title": "Depth Dive",
+      "description": "A manifesto you scroll through: text sections float in 3D space, dissolve as you pass through them, and warp with scroll velocity."
     },
     {
       "name": "true-focus",
@@ -157,7 +157,7 @@
       "name": "art-gallery",
       "type": "registry:ui",
       "title": "Art Gallery",
-      "description": "A museum-style painting showcase with crossfading featured artwork, poetic captions, and thumbnail navigation."
+      "description": "An editorial gallery where classic paintings alternate with headline text that melts into ink through a gooey SVG filter."
     },
     {
       "name": "magnetic-dock",
@@ -679,13 +679,13 @@
       "name": "timezone-companion",
       "type": "registry:ui",
       "title": "Timezone Companion",
-      "description": "Two timezone tools in one: a meeting-overlap finder with a find-best-time scrubber, and a live world clock with day-phase badges."
+      "description": "Two timezone tools: a meeting-overlap hour grid with a draggable scrubber, and a dark world clock scrubbed by a tick ruler."
     },
     {
       "name": "weather-forecast",
       "type": "registry:ui",
       "title": "Weather Forecast",
-      "description": "A compact weekly forecast with unit toggle, spring-animated condition hero, and hover-driven day chips."
+      "description": "A weather card with a colored condition orb glowing behind frosted glass, unit toggle, and hover-driven day chips."
     },
     {
       "name": "decay-card",

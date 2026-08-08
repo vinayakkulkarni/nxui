@@ -75,11 +75,11 @@ const COMPONENTS: Record<
       'Versatile text animation component with multiple animation types and split modes.',
     deps: ['@vueuse/core', 'motion-v'],
   },
-  'numbered-reveal': {
-    title: 'Numbered Reveal',
+  'depth-dive': {
+    title: 'Depth Dive',
     description:
-      'A scroll-driven editorial list of numbered sections that rise into view with staggered easing.',
-    deps: ['@vueuse/core', 'motion-v'],
+      'A manifesto you scroll through: text sections float in 3D space, dissolve as you pass through them, and warp with scroll velocity.',
+    deps: ['three'],
   },
   'true-focus': {
     title: 'True Focus',
@@ -199,8 +199,8 @@ const COMPONENTS: Record<
   'art-gallery': {
     title: 'Art Gallery',
     description:
-      'A museum-style painting showcase with crossfading featured artwork, poetic captions, and thumbnail navigation.',
-    deps: ['motion-v'],
+      'An editorial gallery where classic paintings alternate with headline text that melts into ink through a gooey SVG filter.',
+    deps: [],
   },
   'magnetic-dock': {
     title: 'Magnetic Dock',
@@ -713,13 +713,13 @@ const COMPONENTS: Record<
   'timezone-companion': {
     title: 'Timezone Companion',
     description:
-      'Two timezone tools in one: a meeting-overlap finder with a find-best-time scrubber, and a live world clock with day-phase badges.',
-    deps: ['motion-v'],
+      'Two timezone tools: a meeting-overlap hour grid with a draggable scrubber, and a dark world clock scrubbed by a tick ruler.',
+    deps: ['@vueuse/core'],
   },
   'weather-forecast': {
     title: 'Weather Forecast',
     description:
-      'A compact weekly forecast with unit toggle, spring-animated condition hero, and hover-driven day chips.',
+      'A weather card with a colored condition orb glowing behind frosted glass, unit toggle, and hover-driven day chips.',
     deps: ['motion-v'],
   },
   'decay-card': {

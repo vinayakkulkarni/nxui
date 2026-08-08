@@ -9,10 +9,12 @@
 </script>
 
 <template>
-  <WeatherForecast city=&quot;Chicago&quot; class=&quot;h-120&quot; />
+  <WeatherForecast city=&quot;Chicago&quot; />
 </template>`"
   >
-    <div class="flex size-full min-h-100 items-center justify-center p-6">
+    <div
+      class="flex size-full min-h-100 items-center justify-center bg-zinc-200/60 p-6 dark:bg-zinc-950/40"
+    >
       <WeatherForecast />
     </div>
   </ComponentDemo>
