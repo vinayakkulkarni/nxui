@@ -9,7 +9,12 @@
 
   /** UTC hour under the scrubber, fractional while dragging. */
   const utcHour = ref(11);
-  const gridRef = ref<HTMLElement | null>(null);
+  /**
+   * Measured on the scrub track itself, NOT on a row inside `v-for` —
+   * a ref inside `v-for` resolves to an array, so getBoundingClientRect()
+   * throws and every pointer interaction silently dies.
+   */
+  const trackRef = ref<HTMLElement | null>(null);
   const dragging = ref(false);
   const sweeping = ref(false);
 
@@ -28,6 +33,18 @@
     () => props.cities.filter((c) => inWork(c, snapped.value)).length,
   );
 
+  /**
+   * Working runs have soft edges in the reference: the first and last hour
+   * of a run sit at reduced opacity, the core is solid, and the hour under
+   * the scrubber is fully lit.
+   */
+  function hourOpacity(city: TimezoneCity, hour: number): number {
+    if (hour === snapped.value) return 1;
+    const edge =
+      !inWork(city, (hour + 23) % 24) || !inWork(city, (hour + 1) % 24);
+    return edge ? 0.45 : 0.9;
+  }
+
   const statusLabel = computed(() => {
     const n = workingCount.value;
     if (n === 0) return 'Off hours everywhere';
@@ -42,17 +59,26 @@
   });
 
   function localTimeLabel(city: TimezoneCity): string {
-    const minutes =
-      (((snapped.value * 60 + city.offsetMinutes) % 1440) + 1440) % 1440;
+    const raw = snapped.value * 60 + city.offsetMinutes;
+    const minutes = ((raw % 1440) + 1440) % 1440;
     const hh = String(Math.floor(minutes / 60)).padStart(2, '0');
     const mm = String(minutes % 60).padStart(2, '0');
     return `${hh}:${mm}`;
   }
 
+  /** `+1d` / `-1d` when a city's local time crosses the date line. */
+  function dayShiftLabel(city: TimezoneCity): string {
+    const raw = snapped.value * 60 + city.offsetMinutes;
+    if (raw >= 1440) return '+1d';
+    if (raw < 0) return '-1d';
+    return '';
+  }
+
   function hourFromEvent(e: PointerEvent): number {
-    const grid = gridRef.value;
-    if (!grid) return utcHour.value;
-    const rect = grid.getBoundingClientRect();
+    const track = trackRef.value;
+    if (!track) return utcHour.value;
+    const rect = track.getBoundingClientRect();
+    if (rect.width === 0) return utcHour.value;
     const x = Math.min(Math.max(e.clientX - rect.left, 0), rect.width);
     return Math.min(23, Math.max(0, (x / rect.width) * 24 - 0.5));
   }
@@ -62,6 +88,7 @@
     sweeping.value = false;
     utcHour.value = hourFromEvent(e);
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+    e.preventDefault();
   }
   function onPointerMove(e: PointerEvent) {
     if (!dragging.value) return;
@@ -133,7 +160,7 @@
     <div class="rounded-3xl bg-white p-4 dark:bg-zinc-950">
       <!-- hour axis -->
       <div
-        class="mb-1.5 ml-28 mr-12 flex justify-between font-mono text-[9px] text-zinc-400"
+        class="mb-1.5 ml-28 mr-14 flex justify-between font-mono text-[9px] text-zinc-400"
       >
         <span>00</span><span>06</span><span>12</span><span>18</span
         ><span>UTC</span>
@@ -161,43 +188,48 @@
                 {{ city.zone }}
               </p>
             </div>
-            <div ref="gridRef" class="flex flex-1 gap-0.75">
+            <div class="flex flex-1 gap-0.75">
               <div
                 v-for="h in 24"
                 :key="h"
-                class="h-7 flex-1 rounded-[5px] transition-colors duration-200"
+                class="h-7 flex-1 rounded-[5px] transition-all duration-200"
                 :class="!inWork(city, h - 1) && 'bg-zinc-100 dark:bg-zinc-800'"
                 :style="
                   inWork(city, h - 1)
                     ? {
                         backgroundColor: city.color,
-                        opacity: h - 1 === snapped ? 1 : 0.82,
+                        opacity: hourOpacity(city, h - 1),
                       }
                     : undefined
                 "
               ></div>
             </div>
             <span
-              class="w-10 text-right font-mono text-[10px] tabular-nums"
+              class="w-14 shrink-0 text-right font-mono text-[10px] tabular-nums"
               :class="
                 inWork(city, snapped)
                   ? 'font-semibold text-orange-500'
                   : 'text-zinc-400'
               "
             >
-              {{ localTimeLabel(city) }}
+              {{ localTimeLabel(city)
+              }}<span class="ml-0.5 text-[8px] text-zinc-400">{{
+                dayShiftLabel(city)
+              }}</span>
             </span>
           </div>
         </div>
 
-        <!-- scrubber -->
+        <!-- scrubber: the track is the measured element AND the hit area -->
         <div
-          class="absolute inset-y-0 left-28 right-12 cursor-ew-resize touch-none"
+          ref="trackRef"
+          class="absolute inset-y-0 left-28 right-14 cursor-ew-resize touch-none select-none"
           @pointerdown="onPointerDown"
           @pointermove="onPointerMove"
         >
           <div
-            class="pointer-events-none absolute -inset-y-1.5 w-4 -translate-x-1/2 rounded-lg border-2 border-zinc-900 bg-transparent transition-transform dark:border-zinc-100"
+            class="pointer-events-none absolute -inset-y-1.5 w-4 -translate-x-1/2 rounded-lg border-2 border-zinc-900 bg-transparent dark:border-zinc-100"
+            :class="!dragging && 'transition-[left] duration-150'"
             :style="{ left: scrubberLeft }"
           >
             <span
