@@ -1,12 +1,7 @@
 <script setup lang="ts">
   import { ref, onMounted } from 'vue';
   import { cn } from '~/lib/utils';
-
-  interface FlowingMenuItem {
-    link: string;
-    text: string;
-    image: string;
-  }
+  import type { FlowingMenuItem } from './types';
 
   withDefaults(
     defineProps<{

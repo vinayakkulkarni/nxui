@@ -1,22 +1,11 @@
 import type { H3Event } from 'h3';
 import { createError, defineEventHandler, getRouterParam, setHeader } from 'h3';
-
-interface FlatContribution {
-  date: string;
-  count: number;
-  level: number;
-}
-
-interface FlatContributionData {
-  total: Record<string, number>;
-  contributions: FlatContribution[];
-}
-
-interface GithubEvent {
-  type: string;
-  repo: { name: string };
-  payload: { size?: number; distinct_size?: number };
-}
+import type {
+  FlatContributionData,
+  GithubEvent,
+  GithubTopRepo,
+  GithubCalendarDay,
+} from '~/types/github';
 
 function isFlatContributionData(value: unknown): value is FlatContributionData {
   if (!value || typeof value !== 'object') return false;
@@ -66,7 +55,7 @@ const COUNTED_EVENTS = new Set([
  */
 async function fetchTopContributions(
   username: string,
-): Promise<{ repo: string; count: number; owner: string }[]> {
+): Promise<GithubTopRepo[]> {
   const response = await fetch(
     `https://api.github.com/users/${username}/events/public?per_page=100`,
     {
@@ -103,6 +92,32 @@ async function fetchTopContributions(
  * working even when the public API's CORS policy or hosting changes —
  * the previous upstream (Deno Deploy Classic) was sunset entirely.
  */
+defineRouteMeta({
+  openAPI: {
+    tags: ['registry'],
+    summary: 'GitHub contribution calendar proxy',
+    description:
+      "Same-origin proxy returning a user's contribution weeks, yearly total and top repositories by recent public activity.",
+    parameters: [
+      {
+        name: 'username',
+        in: 'path',
+        required: true,
+        schema: { type: 'string' },
+        description: 'GitHub login',
+      },
+    ],
+    responses: {
+      200: {
+        description: 'Contribution weeks, total and top repositories',
+        content: { 'application/json': { schema: { type: 'object' } } },
+      },
+      400: { description: 'Invalid username' },
+      502: { description: 'Malformed upstream payload' },
+    },
+  },
+});
+
 export default defineEventHandler(async (event: H3Event) => {
   const username = getRouterParam(event, 'username') ?? '';
   if (!/^[a-z0-9-]{1,39}$/i.test(username)) {
@@ -126,13 +141,8 @@ export default defineEventHandler(async (event: H3Event) => {
     });
   }
 
-  const weeks: {
-    color: string;
-    contributionCount: number;
-    contributionLevel: (typeof LEVELS)[number];
-    date: string;
-  }[][] = [];
-  let week: (typeof weeks)[number] = [];
+  const weeks: GithubCalendarDay[][] = [];
+  let week: GithubCalendarDay[] = [];
   for (const day of data.contributions) {
     const dow = new Date(`${day.date}T00:00:00Z`).getUTCDay();
     if (dow === 0 && week.length > 0) {
@@ -151,6 +161,7 @@ export default defineEventHandler(async (event: H3Event) => {
   const topContributions = await fetchTopContributions(username);
 
   setHeader(event, 'cache-control', 'public, max-age=3600, s-maxage=3600');
+  setHeader(event, 'x-content-type-options', 'nosniff');
   return {
     contributions: weeks,
     totalContributions: Object.values(data.total).reduce(

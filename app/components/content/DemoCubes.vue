@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="flex h-100 w-full items-center justify-center rounded-lg bg-background p-4"
+      class="flex size-full min-h-100 items-center justify-center rounded-lg bg-background p-4"
     >
       <Cubes
         :grid-size="10"

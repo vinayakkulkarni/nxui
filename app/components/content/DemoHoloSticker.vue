@@ -2,12 +2,7 @@
   import HoloSticker from '@registry/new-york/holo-sticker/HoloSticker.vue';
   import type { StickerSettings } from '@registry/new-york/holo-sticker/types';
 
-  interface Preset {
-    label: string;
-    settings: Partial<StickerSettings>;
-  }
-
-  const presets: Preset[] = [
+  const presets: DemoSettingsPreset<StickerSettings>[] = [
     {
       label: 'Holo',
       settings: { finish: 'holo', holoIntensity: 0.85, bands: 12, grain: 0.15 },
@@ -43,6 +38,7 @@
   <ComponentDemo
     :code="`<script setup lang=&quot;ts&quot;>
   import HoloSticker from '~/components/ui/holo-sticker/HoloSticker.vue';
+  import type { DemoSettingsPreset } from '~/types/components';
 </script>
 
 <template>

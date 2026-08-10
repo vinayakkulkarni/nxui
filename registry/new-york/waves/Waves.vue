@@ -6,6 +6,7 @@
     defaultWindow,
   } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import type { WavePoint } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -43,13 +44,6 @@
   let ctx: CanvasRenderingContext2D | null = null;
   let animationId = 0;
   let boundingRect = { width: 0, height: 0, left: 0, top: 0 };
-
-  interface WavePoint {
-    x: number;
-    y: number;
-    wave: { x: number; y: number };
-    cursor: { x: number; y: number; vx: number; vy: number };
-  }
 
   let lines: WavePoint[][] = [];
   const mouse = {

@@ -2,12 +2,7 @@
   import TimezoneCompanion from '@registry/new-york/timezone-companion/TimezoneCompanion.vue';
   import type { TimezoneMode } from '@registry/new-york/timezone-companion/types';
 
-  interface Preset {
-    label: string;
-    mode: TimezoneMode;
-  }
-
-  const presets: Preset[] = [
+  const presets: DemoModePreset<TimezoneMode>[] = [
     { label: 'Meeting Finder', mode: 'meeting' },
     { label: 'World Clock', mode: 'clock' },
   ];
@@ -24,6 +19,7 @@
   <ComponentDemo
     :code="`<script setup lang=&quot;ts&quot;>
   import TimezoneCompanion from '~/components/ui/timezone-companion/TimezoneCompanion.vue';
+  import type { DemoModePreset } from '~/types/components';
 </script>
 
 <template>

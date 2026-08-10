@@ -48,7 +48,7 @@
   >
     <div
       ref="container"
-      class="relative h-100 w-full overflow-y-auto rounded-lg bg-neutral-100 dark:bg-neutral-900/40"
+      class="relative size-full min-h-100 overflow-y-auto rounded-lg bg-neutral-100 dark:bg-neutral-900/40"
     >
       <div class="sticky top-4 z-10 flex justify-center px-4">
         <DynamicIslandHeader
@@ -65,7 +65,7 @@
         v-for="section in sections"
         :id="section.id"
         :key="section.id"
-        class="flex h-80 items-center justify-center"
+        class="flex min-h-80 items-center justify-center"
       >
         <span
           class="font-display text-6xl text-neutral-300 italic dark:text-neutral-700"

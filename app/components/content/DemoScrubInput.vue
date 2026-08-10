@@ -12,7 +12,9 @@
   <ScrubInput label='Opacity' :default-value='75' :min='0' :max='100' />
 </template>`"
   >
-    <div class="flex h-50 w-full items-center justify-center rounded-lg">
+    <div
+      class="flex size-full min-h-100 items-center justify-center rounded-lg"
+    >
       <ScrubInput label="Opacity" :default-value="75" :min="0" :max="100" />
     </div>
   </ComponentDemo>

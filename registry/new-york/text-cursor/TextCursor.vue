@@ -2,13 +2,7 @@
   import { useEventListener } from '@vueuse/core';
   import { motion, AnimatePresence } from 'motion-v';
   import { cn } from '~/lib/utils';
-
-  interface TrailItem {
-    id: number;
-    x: number;
-    y: number;
-    angle: number;
-  }
+  import type { TrailItem } from './types';
 
   const props = withDefaults(
     defineProps<{

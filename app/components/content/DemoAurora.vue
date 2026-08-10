@@ -19,8 +19,11 @@
   </div>
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
       <Aurora
+        class="absolute inset-0 size-full"
         :color-stops="['#5227FF', '#7cff67', '#5227FF']"
         :amplitude="1.0"
         :blend="0.5"

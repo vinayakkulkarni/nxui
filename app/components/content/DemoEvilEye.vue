@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="h-100 w-full overflow-hidden rounded-lg bg-background dark:bg-black"
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background dark:bg-black"
     >
       <ClientOnly><EvilEye /></ClientOnly>
     </div>

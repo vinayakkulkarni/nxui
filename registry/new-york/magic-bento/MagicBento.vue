@@ -7,13 +7,7 @@
     defaultDocument,
   } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-
-  interface MagicBentoItem {
-    title: string;
-    description: string;
-    label?: string;
-    color?: string;
-  }
+  import type { MagicBentoItem } from './types';
 
   const props = withDefaults(
     defineProps<{

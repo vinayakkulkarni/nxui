@@ -65,14 +65,35 @@ export interface GeometricShape {
   delay: number;
 }
 
-export interface StaggeredEntryOptions {
-  initial?: Record<string, number>;
-  animate?: Record<string, number>;
-  duration?: number;
-  baseDelay?: number;
-  staggerDelay?: number;
-}
-
 export interface DocsMobileSheetProps {
   title?: string;
+}
+
+export type PackageManager = 'npm' | 'pnpm' | 'yarn' | 'bun';
+
+export interface DemoPreset<TProps = Record<string, unknown>> {
+  label: string;
+  props: TProps;
+}
+
+export interface DemoModePreset<TMode> {
+  label: string;
+  mode: TMode;
+}
+
+export interface DemoScenePreset<TScene> {
+  label: string;
+  scene: TScene;
+  title: string;
+  caption: string;
+}
+
+export interface DemoNamedPreset<TPreset> {
+  label: string;
+  preset: TPreset;
+}
+
+export interface DemoSettingsPreset<TSettings> {
+  label: string;
+  settings: Partial<TSettings>;
 }

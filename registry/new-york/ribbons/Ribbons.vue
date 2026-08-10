@@ -3,6 +3,7 @@
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { Renderer, Transform, Vec3, Color, Polyline } from 'ogl';
   import { cn } from '~/lib/utils';
+  import type { Line } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -36,15 +37,6 @@
       class: '',
     },
   );
-
-  interface Line {
-    spring: number;
-    friction: number;
-    mouseVelocity: InstanceType<typeof Vec3>;
-    mouseOffset: InstanceType<typeof Vec3>;
-    points: InstanceType<typeof Vec3>[];
-    polyline: InstanceType<typeof Polyline>;
-  }
 
   const containerRef = ref<HTMLDivElement>();
   let rendererRef: InstanceType<typeof Renderer> | null = null;

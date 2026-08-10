@@ -2,14 +2,7 @@
   import PixelWave from '@registry/new-york/pixel-wave/PixelWave.vue';
   import type { PixelWaveScene } from '@registry/new-york/pixel-wave/types';
 
-  interface Preset {
-    label: string;
-    scene: PixelWaveScene;
-    title: string;
-    caption: string;
-  }
-
-  const presets: Preset[] = [
+  const presets: DemoScenePreset<PixelWaveScene>[] = [
     {
       label: 'Tahiti',
       scene: 'tahiti',
@@ -52,6 +45,7 @@
   <ComponentDemo
     :code="`<script setup lang=&quot;ts&quot;>
   import PixelWave from '~/components/ui/pixel-wave/PixelWave.vue';
+  import type { DemoScenePreset } from '~/types/components';
 </script>
 
 <template>

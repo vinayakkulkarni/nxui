@@ -18,6 +18,7 @@
   });
 
   const socialTitle = 'MCP · nxui';
+  const ogImageUrl = 'https://nxui.geoql.in/og/docs/mcp.png';
   useSeoMeta({
     title: page.value?.title,
     description: page.value?.description,
@@ -26,10 +27,14 @@
     ogType: 'website',
     ogUrl: 'https://nxui.geoql.in/docs/mcp',
     ogSiteName: 'nxui',
+    ogImage: ogImageUrl,
+    ogImageWidth: 1200,
+    ogImageHeight: 630,
     twitterCard: 'summary_large_image',
     twitterSite: '@vinayakkulkarni',
     twitterTitle: socialTitle,
     twitterDescription: page.value?.description,
+    twitterImage: ogImageUrl,
   });
 </script>
 

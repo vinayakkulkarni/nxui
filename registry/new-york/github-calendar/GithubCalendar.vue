@@ -55,8 +55,11 @@
   const expanded = ref(false);
 
   /** Prop override wins; otherwise the repos the proxy derived from the API. */
+  const EMPTY_TOP_REPOS: GithubTopContribution[] = [];
+
   const topRepos = computed<GithubTopContribution[]>(
-    () => props.topContributions ?? data.value?.topContributions ?? [],
+    () =>
+      props.topContributions ?? data.value?.topContributions ?? EMPTY_TOP_REPOS,
   );
 
   function avatarUrl(top: GithubTopContribution): string {

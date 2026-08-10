@@ -6,13 +6,7 @@
     useIntersectionObserver,
   } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-
-  interface MasonryItem {
-    id: string | number;
-    img: string;
-    height: number;
-    url?: string;
-  }
+  import type { MasonryItem } from './types';
 
   const props = withDefaults(
     defineProps<{

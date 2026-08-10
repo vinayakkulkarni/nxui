@@ -12,8 +12,11 @@
   <Threads :color='[1, 1, 1]' :amplitude='1' :distance='0' :enable-mouse-interaction='true' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
       <Threads
+        class="absolute inset-0 size-full"
         :color="[1, 1, 1]"
         :amplitude="1"
         :distance="0"

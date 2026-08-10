@@ -2,6 +2,7 @@
   import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import type { Dot } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -31,19 +32,6 @@
       class: '',
     },
   );
-
-  interface Dot {
-    cx: number;
-    cy: number;
-    xOffset: number;
-    yOffset: number;
-    vx: number;
-    vy: number;
-    returning: boolean;
-    returnT: number;
-    startX: number;
-    startY: number;
-  }
 
   function hexToRgb(hex: string) {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

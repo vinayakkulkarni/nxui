@@ -3,12 +3,7 @@
   import type { ComponentPublicInstance } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-
-  interface NavItem {
-    label: string;
-    href: string;
-    ariaLabel?: string;
-  }
+  import type { CircleLayout, NavItem } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -52,13 +47,6 @@
     } else {
       pillRefs.value[i] = null;
     }
-  }
-
-  interface CircleLayout {
-    diameter: number;
-    delta: number;
-    originY: number;
-    pillHeight: number;
   }
 
   const circleLayouts = ref<CircleLayout[]>([]);

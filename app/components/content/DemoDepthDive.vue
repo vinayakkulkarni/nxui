@@ -1,12 +1,7 @@
 <script setup lang="ts">
   import DepthDive from '@registry/new-york/depth-dive/DepthDive.vue';
 
-  interface Preset {
-    label: string;
-    props: Record<string, unknown>;
-  }
-
-  const presets: Preset[] = [
+  const presets: DemoPreset[] = [
     { label: 'Manifesto', props: {} },
     {
       label: 'Psychedelic',
@@ -49,6 +44,7 @@
   <ComponentDemo
     :code="`<script setup lang=&quot;ts&quot;>
   import DepthDive from '~/components/ui/depth-dive/DepthDive.vue';
+  import type { DemoPreset } from '~/types/components';
 </script>
 
 <template>

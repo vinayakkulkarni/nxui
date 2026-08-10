@@ -23,7 +23,7 @@
 </template>`"
   >
     <div
-      class="relative h-100 w-full overflow-hidden rounded-lg bg-neutral-950"
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-neutral-950"
     >
       <Strands
         :colors="['#FF4242', '#7C3AED', '#06B6D4', '#EAB308']"
