@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import { ref, onMounted } from 'vue';
-  import { motion } from 'motion-v';
+  import { ref, computed, onMounted } from 'vue';
+  import { motion, AnimatePresence } from 'motion-v';
   import type {
     GithubContributionData,
     GithubCalendarColorSchema,
@@ -22,8 +22,13 @@
       glowIntensity?: number;
       showTotal?: boolean;
       colorSchema?: GithubCalendarColorSchema;
-      /** Optional "Top contributions in" repos shown under the grid. */
+      /**
+       * Overrides the repos shown under the grid. Omit to use the live
+       * top-contribution data returned by the proxy.
+       */
       topContributions?: GithubTopContribution[];
+      /** Render the collapsible "Top contributions in" footer. */
+      showTopContributions?: boolean;
       /**
        * Same-origin proxy endpoint (`/api/...`) tried first — the public API
        * sends no CORS headers, so direct browser calls can fail.
@@ -38,6 +43,7 @@
       showTotal: true,
       colorSchema: 'green',
       topContributions: undefined,
+      showTopContributions: true,
       apiProxy: '/api/github-contributions',
       class: '',
     },
@@ -46,6 +52,20 @@
   const loading = ref(true);
   const error = ref<string | null>(null);
   const data = ref<GithubContributionData | null>(null);
+  const expanded = ref(false);
+
+  /** Prop override wins; otherwise the repos the proxy derived from the API. */
+  const topRepos = computed<GithubTopContribution[]>(
+    () => props.topContributions ?? data.value?.topContributions ?? [],
+  );
+
+  function avatarUrl(top: GithubTopContribution): string {
+    return `https://github.com/${top.owner ?? props.username}.png?size=64`;
+  }
+
+  function repoUrl(top: GithubTopContribution): string {
+    return `https://github.com/${top.owner ?? props.username}/${top.repo}`;
+  }
 
   async function fetchJson(url: string): Promise<GithubContributionData> {
     const response = await fetch(url);
@@ -93,67 +113,140 @@
     </div>
 
     <!-- Data loaded -->
-    <div v-else-if="data" class="flex flex-col gap-2">
-      <!-- Header -->
-      <div v-if="showTotal" class="flex items-center justify-between px-1">
-        <div class="flex items-center gap-2">
-          <svg
-            height="16"
-            viewBox="0 0 16 16"
-            width="16"
-            class="fill-current text-muted-foreground"
-          >
-            <path
-              d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
-            />
-          </svg>
-          <span class="font-semibold text-sm">@{{ username }}</span>
-        </div>
-        <span class="text-sm text-muted-foreground">
-          {{ data.totalContributions }} contributions in the last year
-        </span>
-      </div>
+    <div
+      v-else-if="data"
+      class="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-4 shadow-sm"
+    >
+      <!-- Header + grid collapse away while the repo list is open -->
+      <AnimatePresence initial="false">
+        <component
+          :is="motion.div"
+          v-if="!expanded"
+          key="grid"
+          :initial="{ opacity: 0, height: 0 }"
+          :animate="{ opacity: 1, height: 'auto' }"
+          :exit="{ opacity: 0, height: 0 }"
+          :transition="{ type: 'spring', stiffness: 260, damping: 30 }"
+          class="flex flex-col gap-2 overflow-hidden"
+        >
+          <div v-if="showTotal" class="flex items-center justify-between px-1">
+            <span class="text-sm font-semibold">
+              {{ data.totalContributions }} contributions in the last year
+            </span>
+            <span class="text-xs text-muted-foreground">@{{ username }}</span>
+          </div>
 
-      <!-- Grid -->
-      <GithubCalendarGrid
-        :weeks="data.contributions"
-        :variant="variant"
-        :shape="shape"
-        :glow-intensity="glowIntensity"
-        :color-schema="colorSchema"
-      />
+          <GithubCalendarGrid
+            :weeks="data.contributions"
+            :variant="variant"
+            :shape="shape"
+            :glow-intensity="glowIntensity"
+            :color-schema="colorSchema"
+          />
+        </component>
+      </AnimatePresence>
 
       <!-- Top contributions -->
       <div
-        v-if="topContributions && topContributions.length > 0"
-        class="mt-4 border-t border-border/50 pt-4"
+        v-if="showTopContributions && topRepos.length > 0"
+        :class="
+          cn(
+            'flex items-center justify-between gap-3',
+            !expanded && 'border-t border-border/50 pt-3',
+          )
+        "
       >
-        <p class="text-xs font-medium text-muted-foreground">
-          Top contributions in:
-        </p>
-        <div class="mt-2.5 flex flex-wrap gap-2">
-          <component
-            :is="motion.div"
-            v-for="(top, i) in topContributions"
-            :key="top.repo"
-            :initial="{ opacity: 0, y: 12, scale: 0.9 }"
-            :animate="{ opacity: 1, y: 0, scale: 1 }"
-            :transition="{
-              delay: 0.1 + i * 0.07,
-              type: 'spring',
-              stiffness: 300,
-              damping: 24,
-            }"
-            class="flex items-center gap-2 rounded-full border border-border/60 bg-muted/40 py-1.5 pl-2 pr-3 text-xs dark:border-white/6"
+        <p class="text-sm text-muted-foreground">Top contributions in:</p>
+
+        <div class="flex items-center gap-2">
+          <!-- collapsed: stacked avatars -->
+          <AnimatePresence initial="false">
+            <component
+              :is="motion.div"
+              v-if="!expanded"
+              key="stack"
+              :initial="{ opacity: 0, scale: 0.8 }"
+              :animate="{ opacity: 1, scale: 1 }"
+              :exit="{ opacity: 0, scale: 0.8 }"
+              :transition="{ type: 'spring', stiffness: 340, damping: 26 }"
+              class="flex items-center -space-x-2"
+            >
+              <img
+                v-for="top in topRepos"
+                :key="top.repo"
+                :src="avatarUrl(top)"
+                :alt="`${top.owner ?? username}/${top.repo}`"
+                class="size-6 rounded-full ring-2 ring-card"
+                loading="lazy"
+              />
+            </component>
+          </AnimatePresence>
+
+          <button
+            type="button"
+            class="flex size-6 items-center justify-center rounded-full border border-border/70 text-muted-foreground transition-colors hover:text-foreground"
+            :aria-expanded="expanded"
+            :aria-label="
+              expanded ? 'Hide top repositories' : 'Show top repositories'
+            "
+            @click="expanded = !expanded"
           >
-            <span class="text-sm leading-none">{{ top.emoji ?? '🐙' }}</span>
-            <span class="font-medium">{{ top.repo }}</span>
-            <span class="tabular-nums text-muted-foreground">{{
-              top.count
-            }}</span>
-          </component>
+            <component
+              :is="motion.span"
+              :animate="{ rotate: expanded ? 180 : 0 }"
+              :transition="{ type: 'spring', stiffness: 320, damping: 24 }"
+              class="flex"
+            >
+              <Icon name="lucide:chevron-down" class="size-3.5" />
+            </component>
+          </button>
         </div>
       </div>
+
+      <!-- expanded: repo rows -->
+      <AnimatePresence initial="false">
+        <component
+          :is="motion.div"
+          v-if="expanded && showTopContributions"
+          key="repos"
+          :initial="{ opacity: 0, height: 0 }"
+          :animate="{ opacity: 1, height: 'auto' }"
+          :exit="{ opacity: 0, height: 0 }"
+          :transition="{ type: 'spring', stiffness: 260, damping: 30 }"
+          class="overflow-hidden"
+        >
+          <ul class="flex flex-col pt-1">
+            <li v-for="(top, i) in topRepos" :key="top.repo">
+              <component
+                :is="motion.a"
+                :href="repoUrl(top)"
+                target="_blank"
+                rel="noopener noreferrer"
+                :initial="{ opacity: 0, y: 8 }"
+                :animate="{ opacity: 1, y: 0 }"
+                :transition="{
+                  delay: i * 0.05,
+                  type: 'spring',
+                  stiffness: 320,
+                  damping: 26,
+                }"
+                class="flex items-center gap-3 rounded-xl p-2 transition-colors hover:bg-muted/60"
+              >
+                <img
+                  :src="avatarUrl(top)"
+                  :alt="`${top.owner ?? username} avatar`"
+                  class="size-7 rounded-full"
+                  loading="lazy"
+                />
+                <span class="flex-1 truncate text-sm">{{ top.repo }}</span>
+                <span class="text-sm tabular-nums text-muted-foreground">
+                  {{ top.count }}
+                </span>
+              </component>
+            </li>
+          </ul>
+        </component>
+      </AnimatePresence>
     </div>
   </div>
 </template>
