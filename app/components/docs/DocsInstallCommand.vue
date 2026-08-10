@@ -1,9 +1,8 @@
 <script setup lang="ts">
+  import type { PackageManager } from '~/types/components';
   const props = defineProps<{
     component: string;
   }>();
-
-  type PackageManager = 'npm' | 'pnpm' | 'yarn' | 'bun';
 
   const PACKAGE_MANAGERS: PackageManager[] = ['npm', 'pnpm', 'yarn', 'bun'];
 
@@ -56,7 +55,7 @@
             v-for="pm in PACKAGE_MANAGERS"
             :key="pm"
             :class="[
-              'rounded px-2 py-1 text-xs font-medium transition-all',
+              'rounded-sm px-2 py-1 text-xs font-medium transition-all',
               selected === pm
                 ? 'bg-white dark:bg-zinc-800 text-foreground shadow-sm'
                 : 'text-muted-foreground hover:text-foreground',

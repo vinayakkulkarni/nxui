@@ -20,7 +20,7 @@
   </div>
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <LetterGlitch
         :glitch-colors="['#2b4539', '#61dca3', '#61b3dc']"
         :glitch-speed="50"

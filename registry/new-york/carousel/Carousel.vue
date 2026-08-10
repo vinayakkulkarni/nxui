@@ -1,12 +1,7 @@
 <script setup lang="ts">
   import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
   import { cn } from '~/lib/utils';
-
-  interface CarouselItem {
-    title: string;
-    description: string;
-    id: number | string;
-  }
+  import type { CarouselItem } from './types';
 
   const props = withDefaults(
     defineProps<{

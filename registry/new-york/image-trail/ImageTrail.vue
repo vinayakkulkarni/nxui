@@ -2,6 +2,7 @@
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import type { TrailImage } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -23,17 +24,6 @@
       class: '',
     },
   );
-
-  interface TrailImage {
-    x: number;
-    y: number;
-    opacity: number;
-    scale: number;
-    rotation: number;
-    zIndex: number;
-    birth: number;
-    index: number;
-  }
 
   const containerRef = ref<HTMLDivElement | null>(null);
   const activeImages = ref<TrailImage[]>([]);

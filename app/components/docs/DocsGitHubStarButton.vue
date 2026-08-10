@@ -9,11 +9,9 @@
     if (stars.value !== null && isFresh) return;
 
     try {
-      const res = await fetch(
+      const data = await $fetch<{ stargazers_count?: number }>(
         'https://api.github.com/repos/vinayakkulkarni/nxui',
       );
-      if (!res.ok) return;
-      const data = await res.json();
       if (typeof data.stargazers_count === 'number') {
         stars.value = data.stargazers_count;
         cacheTimestamp.value = Date.now();

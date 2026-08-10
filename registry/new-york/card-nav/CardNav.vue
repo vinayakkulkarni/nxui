@@ -2,19 +2,7 @@
   import { ref, computed, onMounted, nextTick } from 'vue';
   import { useEventListener, defaultWindow } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-
-  interface CardNavLink {
-    label: string;
-    href: string;
-    ariaLabel?: string;
-  }
-
-  interface CardNavItem {
-    label: string;
-    bgColor: string;
-    textColor: string;
-    links: CardNavLink[];
-  }
+  import type { CardNavItem } from './types';
 
   const props = withDefaults(
     defineProps<{

@@ -12,7 +12,7 @@
   <Silk :speed='5' :scale='1' color='#7B7481' :noise-intensity='1.5' :rotation='0' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <Silk
         :speed="5"
         :scale="1"

@@ -20,34 +20,38 @@
   </TargetCursor>
 </template>`"
   >
-    <TargetCursor
-      :spin-duration="2"
-      :hide-default-cursor="true"
-      class="h-100 overflow-hidden rounded-xl bg-card p-8"
-    >
-      <p class="mb-6 text-3xl font-black text-card-foreground">Hover Below.</p>
-      <div class="grid grid-cols-3 gap-4 mb-2">
-        <p
-          class="cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400"
-        >
-          THIS
+    <div class="relative size-full min-h-80">
+      <TargetCursor
+        :spin-duration="2"
+        :hide-default-cursor="true"
+        class="absolute inset-0 size-full overflow-hidden rounded-xl bg-card p-8"
+      >
+        <p class="mb-6 text-3xl font-black text-card-foreground">
+          Hover Below.
         </p>
-        <p
-          class="cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400"
-        >
-          FEELS
-        </p>
-        <p
-          class="cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400"
-        >
-          QUITE
-        </p>
-        <p
-          class="col-span-3 cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400"
-        >
-          SNAPPY!
-        </p>
-      </div>
-    </TargetCursor>
+        <div class="grid grid-cols-3 gap-4 mb-2">
+          <p
+            class="cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400"
+          >
+            THIS
+          </p>
+          <p
+            class="cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400"
+          >
+            FEELS
+          </p>
+          <p
+            class="cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400"
+          >
+            QUITE
+          </p>
+          <p
+            class="col-span-3 cursor-target rounded-2xl border border-dashed border-violet-400 px-6 py-2 text-center text-xl font-black text-violet-400"
+          >
+            SNAPPY!
+          </p>
+        </div>
+      </TargetCursor>
+    </div>
   </ComponentDemo>
 </template>

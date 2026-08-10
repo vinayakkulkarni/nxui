@@ -17,7 +17,7 @@
   </GradientText>
 </template>`"
   >
-    <div class="flex h-50 w-full items-center justify-center">
+    <div class="flex size-full min-h-100 items-center justify-center">
       <GradientText class="text-4xl font-bold">Gradient Text</GradientText>
     </div>
   </ComponentDemo>

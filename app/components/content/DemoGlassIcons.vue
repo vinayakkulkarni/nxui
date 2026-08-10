@@ -30,7 +30,9 @@
   <GlassIcons :items=&quot;items&quot; />
 </template>`"
   >
-    <div class="flex h-100 w-full items-center justify-center rounded-lg">
+    <div
+      class="flex size-full min-h-100 items-center justify-center rounded-lg"
+    >
       <GlassIcons :items="items" />
     </div>
   </ComponentDemo>

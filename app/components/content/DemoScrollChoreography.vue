@@ -20,7 +20,7 @@
   />
 </template>`"
   >
-    <div class="relative h-150 w-full overflow-y-auto">
+    <div class="relative size-full min-h-80 overflow-y-auto">
       <ScrollChoreography
         :images="{
           topLeft:

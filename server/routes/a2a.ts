@@ -74,8 +74,29 @@ const UNSUPPORTED = [
   'GetExtendedAgentCard',
 ];
 
+defineRouteMeta({
+  openAPI: {
+    tags: ['a2a'],
+    summary: 'A2A JSON-RPC endpoint',
+    description:
+      'Agent-to-Agent endpoint. POST JSON-RPC 2.0 message/send requests to query the nxui component registry.',
+    requestBody: {
+      required: true,
+      content: { 'application/json': { schema: { type: 'object' } } },
+    },
+    responses: {
+      200: {
+        description: 'JSON-RPC response',
+        content: { 'application/json': { schema: { type: 'object' } } },
+      },
+      405: { description: 'Method not allowed — POST JSON-RPC to /a2a' },
+    },
+  },
+});
+
 export default defineEventHandler(async (event: H3Event) => {
   setResponseHeader(event, 'access-control-allow-origin', '*');
+  setResponseHeader(event, 'x-content-type-options', 'nosniff');
   setResponseHeader(
     event,
     'access-control-allow-headers',

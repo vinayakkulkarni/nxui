@@ -3,6 +3,7 @@
   import { useResizeObserver } from '@vueuse/core';
   import * as THREE from 'three';
   import { cn } from '~/lib/utils';
+  import type { Particle } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -42,18 +43,6 @@
       class: '',
     },
   );
-
-  interface Particle {
-    t: number;
-    speed: number;
-    mx: number;
-    my: number;
-    mz: number;
-    cx: number;
-    cy: number;
-    cz: number;
-    randomRadiusOffset: number;
-  }
 
   const containerRef = ref<HTMLElement | null>(null);
 

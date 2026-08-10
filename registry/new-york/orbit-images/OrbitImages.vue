@@ -2,22 +2,7 @@
   import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-
-  interface OrbitItem {
-    src: string;
-    alt?: string;
-  }
-
-  type OrbitShape =
-    | 'ellipse'
-    | 'circle'
-    | 'square'
-    | 'rectangle'
-    | 'triangle'
-    | 'star'
-    | 'heart'
-    | 'infinity'
-    | 'wave';
+  import type { OrbitItem, OrbitShape } from './types';
 
   const props = withDefaults(
     defineProps<{

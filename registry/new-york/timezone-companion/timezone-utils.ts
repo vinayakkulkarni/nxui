@@ -67,19 +67,18 @@ const ZONE_ALIASES: Record<string, string> = {
   'Atlantic/Faeroe': 'Atlantic/Faroe',
 };
 
-/** Canonical zone id, resolving legacy aliases. */
-export function canonicalZone(timeZone: string): string {
+function canonicalZone(timeZone: string): string {
   return ZONE_ALIASES[timeZone] ?? timeZone;
 }
 
 /** Human city label from an IANA zone id: `Asia/Kolkata` → `Kolkata`. */
-export function cityNameFromZone(timeZone: string): string {
+function cityNameFromZone(timeZone: string): string {
   const leaf = canonicalZone(timeZone).split('/').pop() ?? timeZone;
   return leaf.replaceAll('_', ' ');
 }
 
 /** The viewer's own IANA zone, falling back to UTC when unavailable. */
-export function detectTimeZone(): string {
+function detectTimeZone(): string {
   try {
     return canonicalZone(
       Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',

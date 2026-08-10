@@ -20,7 +20,9 @@
   <GhostCursor color='#B19EEF' :trail-length='50' :bloom-strength='0.1' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
       <GhostCursor
         :color="ghostColor"
         :mix-blend-mode="blendMode"

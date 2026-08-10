@@ -12,8 +12,13 @@
   <FluidGlass mode='lens' :chromatic-aberration='0.06' :ior='1.5' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg">
-      <FluidGlass mode="lens" :chromatic-aberration="0.06" :ior="1.5" />
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
+      <FluidGlass
+        class="absolute inset-0 size-full"
+        mode="lens"
+        :chromatic-aberration="0.06"
+        :ior="1.5"
+      />
     </div>
   </ComponentDemo>
 </template>

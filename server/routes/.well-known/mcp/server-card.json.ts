@@ -1,7 +1,24 @@
 import type { H3Event } from 'h3';
+
+defineRouteMeta({
+  openAPI: {
+    tags: ['discovery'],
+    summary: 'MCP server card',
+    description:
+      'Model Context Protocol server card describing the transport, protocol version and capabilities of the nxui MCP server.',
+    responses: {
+      200: {
+        description: 'The MCP server card',
+        content: { 'application/json': { schema: { type: 'object' } } },
+      },
+    },
+  },
+});
+
 export default defineEventHandler((event: H3Event) => {
   setResponseHeader(event, 'content-type', 'application/json');
   setResponseHeader(event, 'cache-control', 'public, max-age=3600');
+  setResponseHeader(event, 'x-content-type-options', 'nosniff');
   return {
     $schema:
       'https://static.modelcontextprotocol.io/schemas/2025-11-25/server-card.schema.json',

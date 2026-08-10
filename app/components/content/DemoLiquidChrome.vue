@@ -21,7 +21,7 @@
   </div>
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <LiquidChrome
         :base-color="[0.1, 0.1, 0.1]"
         :speed="0.2"

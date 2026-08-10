@@ -2,11 +2,7 @@
   import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-
-  interface GalleryImage {
-    src: string;
-    alt?: string;
-  }
+  import type { GalleryImage, TileItem } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -100,15 +96,6 @@
   function wrapAngleSigned(deg: number): number {
     const a = (((deg + 180) % 360) + 360) % 360;
     return a - 180;
-  }
-
-  interface TileItem {
-    x: number;
-    y: number;
-    sizeX: number;
-    sizeY: number;
-    src: string;
-    alt: string;
   }
 
   const items = computed<TileItem[]>(() => {

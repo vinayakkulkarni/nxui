@@ -11,6 +11,7 @@
     Texture,
   } from 'ogl';
   import { cn } from '~/lib/utils';
+  import type { MediaState } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -131,15 +132,6 @@ void main() {
     const geometry = new Plane(gl, { heightSegments: 1, widthSegments: 100 });
 
     // Create media items
-    interface MediaState {
-      plane: InstanceType<typeof Mesh>;
-      program: InstanceType<typeof Program>;
-      y: number;
-      height: number;
-      heightTotal: number;
-      extra: number;
-    }
-
     const medias: MediaState[] = [];
     const padding = 5;
 

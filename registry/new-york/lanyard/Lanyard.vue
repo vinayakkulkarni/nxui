@@ -4,6 +4,7 @@
   import * as THREE from 'three';
   import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
   import { cn } from '~/lib/utils';
+  import type { RopeNode } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -47,12 +48,6 @@
   let animationId = 0;
 
   // Rope physics state
-  interface RopeNode {
-    position: THREE.Vector3;
-    prevPosition: THREE.Vector3;
-    fixed: boolean;
-  }
-
   let ropeNodes: RopeNode[] = [];
   let cardMesh: THREE.Group | undefined;
   let bandLine: THREE.Mesh | undefined;
