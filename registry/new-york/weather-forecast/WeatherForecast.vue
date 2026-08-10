@@ -15,11 +15,11 @@
     {
       city: 'Chicago',
       days: () => [
-        { day: 'Mon', date: 3, condition: 'Sunny', temp: 88 },
+        { day: 'Mon', date: 3, condition: 'Sunny', temp: 97 },
         { day: 'Tue', date: 4, condition: 'Partly cloudy', temp: 92 },
-        { day: 'Wed', date: 5, condition: 'Cloudy', temp: 78 },
-        { day: 'Thu', date: 6, condition: 'Rain', temp: 64 },
-        { day: 'Fri', date: 7, condition: 'Sunny', temp: 81 },
+        { day: 'Wed', date: 5, condition: 'Cloudy', temp: 79 },
+        { day: 'Thu', date: 6, condition: 'Rain', temp: 72 },
+        { day: 'Fri', date: 7, condition: 'Sunny', temp: 85 },
       ],
       unit: 'f',
       autoplayInterval: 3200,
@@ -46,19 +46,79 @@
     Storm: 'lucide:cloud-lightning',
   };
 
-  /** Orb gradient per condition — the soft sphere behind the glass. */
-  const orbGradient: Record<string, string> = {
-    Sunny:
-      'radial-gradient(circle at 38% 35%, #7a3d1c 0%, #a85a24 34%, #e8a34b 68%, #f6c877 100%)',
-    'Partly cloudy':
-      'radial-gradient(circle at 40% 38%, #5d3420 0%, #8a4f28 40%, #d9924a 75%, #efb96f 100%)',
-    Cloudy:
-      'radial-gradient(circle at 40% 38%, #4a4a52 0%, #6e6e78 45%, #a3a3ad 78%, #c9c9d1 100%)',
-    Rain: 'radial-gradient(circle at 40% 38%, #24303f 0%, #3a5068 45%, #6d8aa5 78%, #9fb6c9 100%)',
-    Snow: 'radial-gradient(circle at 40% 38%, #7d8798 0%, #a5b2c4 45%, #d3dceb 78%, #eef2f9 100%)',
-    Storm:
-      'radial-gradient(circle at 40% 38%, #241f33 0%, #3d3554 45%, #6a5f8a 78%, #948ab0 100%)',
-  };
+  /**
+   * Orb color is driven by TEMPERATURE, not by condition — the reference
+   * sweeps hot orange → amber → neutral grey → cool blue as the temp falls,
+   * so two different days that share a condition still look different.
+   * Stops are [tempF, coreRGB, rimRGB].
+   */
+  const ORB_STOPS: [
+    number,
+    [number, number, number],
+    [number, number, number],
+  ][] = [
+    [105, [236, 143, 32], [248, 191, 108]],
+    [97, [226, 124, 28], [243, 176, 90]],
+    [92, [122, 61, 32], [232, 163, 75]],
+    [86, [108, 74, 50], [214, 170, 118]],
+    [79, [90, 90, 98], [201, 201, 209]],
+    [72, [91, 114, 144], [159, 182, 201]],
+    [58, [45, 70, 105], [138, 164, 205]],
+  ];
+
+  function mixChannel(a: number, b: number, t: number): number {
+    return Math.round(a + (b - a) * t);
+  }
+
+  /** Interpolate the orb's core + rim color for an arbitrary temperature. */
+  function orbColors(tempF: number): { core: string; rim: string } {
+    const stops = ORB_STOPS;
+    let lo = stops[0]!;
+    let hi = stops[stops.length - 1]!;
+    for (let i = 0; i < stops.length - 1; i++) {
+      const a = stops[i]!;
+      const b = stops[i + 1]!;
+      if (tempF <= a[0] && tempF >= b[0]) {
+        lo = a;
+        hi = b;
+        break;
+      }
+    }
+    const span = lo[0] - hi[0];
+    const t = span === 0 ? 0 : Math.min(1, Math.max(0, (lo[0] - tempF) / span));
+    const core = lo[1].map((c, i) => mixChannel(c, hi[1][i]!, t));
+    const rim = lo[2].map((c, i) => mixChannel(c, hi[2][i]!, t));
+    return {
+      core: `rgb(${core.join(' ')})`,
+      rim: `rgb(${rim.join(' ')})`,
+    };
+  }
+
+  /** Live orb temperature — springs between days so the color morphs. */
+  const orbTemp = ref(props.days[1]?.temp ?? 80);
+  const orbStyle = computed(() => {
+    const { core, rim } = orbColors(orbTemp.value);
+    return {
+      background: `radial-gradient(circle at 38% 34%, ${core} 0%, ${core} 22%, ${rim} 72%, ${rim} 100%)`,
+    };
+  });
+
+  let orbRaf = 0;
+  /** Ease the orb temperature toward the active day so the gradient morphs. */
+  function animateOrbTo(target: number) {
+    cancelAnimationFrame(orbRaf);
+    const from = orbTemp.value;
+    const delta = target - from;
+    if (Math.abs(delta) < 0.01) return;
+    const start = performance.now();
+    const duration = 700;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      orbTemp.value = from + delta * (1 - (1 - t) ** 3);
+      if (t < 1) orbRaf = requestAnimationFrame(tick);
+    };
+    orbRaf = requestAnimationFrame(tick);
+  }
 
   function displayTemp(f: number): number {
     return unit.value === 'f' ? f : Math.round(((f - 32) * 5) / 9);
@@ -67,6 +127,7 @@
   function selectDay(index: number) {
     if (index === active.value) return;
     active.value = index;
+    animateOrbTo(props.days[index]!.temp);
     emit('change', props.days[index]!, index);
   }
 
@@ -91,8 +152,14 @@
     (u) => (unit.value = u),
   );
 
-  onMounted(startAutoplay);
-  onBeforeUnmount(stopAutoplay);
+  onMounted(() => {
+    orbTemp.value = current.value.temp;
+    startAutoplay();
+  });
+  onBeforeUnmount(() => {
+    stopAutoplay();
+    cancelAnimationFrame(orbRaf);
+  });
 </script>
 
 <template>
@@ -156,19 +223,16 @@
       </div>
     </div>
 
-    <!-- the orb -->
+    <!--
+      The orb: one persistent sphere whose gradient morphs with temperature.
+      Keying it on the day would hard-swap the color; the reference blends
+      the outgoing and incoming hue through the transition.
+    -->
     <div class="relative z-0 flex h-38 items-end justify-center">
-      <component
-        :is="motion.div"
-        :key="current.condition"
-        :initial="{ opacity: 0, scale: 0.86 }"
-        :animate="{ opacity: 1, scale: 1 }"
-        :transition="{ duration: 0.9, ease: 'easeOut' }"
+      <div
         class="absolute -bottom-24 size-52 rounded-full"
-        :style="{
-          background: orbGradient[current.condition] ?? orbGradient.Cloudy,
-        }"
-      ></component>
+        :style="orbStyle"
+      ></div>
     </div>
 
     <!-- frosted glass panel -->
