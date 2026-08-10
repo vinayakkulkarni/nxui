@@ -57,10 +57,14 @@
     (m) => (mode.value = m),
   );
 
-  /** Clock mode reads a home-first ordering: Warsaw-style demo cities. */
+  /**
+   * Clock rows carry IANA zones so offsets follow daylight saving, and the
+   * viewer's own zone replaces the first row at mount.
+   */
   const clockCities: TimezoneCity[] = [
     {
       name: 'Warsaw',
+      timeZone: 'Europe/Warsaw',
       zone: 'CEST',
       offsetMinutes: 120,
       workStart: 9,
@@ -69,6 +73,7 @@
     },
     {
       name: 'San Francisco',
+      timeZone: 'America/Los_Angeles',
       zone: 'PDT',
       offsetMinutes: -420,
       workStart: 9,
@@ -77,6 +82,7 @@
     },
     {
       name: 'New York',
+      timeZone: 'America/New_York',
       zone: 'EDT',
       offsetMinutes: -240,
       workStart: 9,
@@ -85,6 +91,7 @@
     },
     {
       name: 'New Delhi',
+      timeZone: 'Asia/Kolkata',
       zone: 'IST',
       offsetMinutes: 330,
       workStart: 9,

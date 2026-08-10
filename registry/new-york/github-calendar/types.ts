@@ -13,6 +13,8 @@ export interface GithubContributionDay {
 export interface GithubContributionData {
   contributions: GithubContributionDay[][];
   totalContributions: number;
+  /** Top repositories by recent activity, supplied by the proxy route. */
+  topContributions?: GithubTopContribution[];
 }
 
 export interface GithubTopContribution {
@@ -20,7 +22,9 @@ export interface GithubTopContribution {
   repo: string;
   /** Contribution count in the period. */
   count: number;
-  /** Optional emoji or icon name for the repo. */
+  /** Repository owner login, used to build the avatar URL. */
+  owner?: string;
+  /** Optional emoji shown instead of the owner avatar. */
   emoji?: string;
 }
 
