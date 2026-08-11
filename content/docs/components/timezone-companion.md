@@ -1,15 +1,16 @@
 ---
 title: Timezone Companion
-description: Two timezone tools — a meeting-overlap grid with a draggable scrubber, and a dark world clock with a tick ruler.
+description: A meeting-overlap finder — every city is a row of 24 hour blocks, colored inside working hours, with a draggable scrubber and a best-time sweep.
 ---
 
 # Timezone Companion
 
-Two faithful timezone tools behind one mode switch.
+A meeting-overlap finder for distributed teams.
 
-**Meeting Finder** — every city is a row of 24 hour blocks, colored where that city is inside working hours. A full-height scrubber drags across the grid; the footer counts who's reachable ("2 of 4 in working hours", "late in London") and _Find best time_ sweeps the scrubber to the widest overlap.
+Every city is a row of 24 hour blocks, colored where that city is inside working hours. A full-height scrubber drags across the grid; the footer counts who's reachable ("2 of 4 in working hours", "late in London") and _Find best time_ sweeps the scrubber to the widest overlap.
 
-**World Clock** — a dark widget: drag the tick ruler to scrub time forward and back, and every city row updates its rolling clock, day relation (`YESTERDAY`), and day-phase badge (`NIGHT`, `BEFORE WORK`, `WORKING`, `WRAPPING UP`).
+::demo-timezone-companion
+::
 
 ## Usage
 
@@ -19,16 +20,15 @@ Two faithful timezone tools behind one mode switch.
 </script>
 
 <template>
-  <TimezoneCompanion mode="meeting" />
+  <TimezoneCompanion />
 </template>
 ```
 
-The `TimezoneMeeting` and `TimezoneClock` sub-components are also exported for standalone use.
+The `TimezoneMeeting` sub-component is also exported for standalone use.
 
 ## Props
 
-| Prop     | Type                   | Default                      | Description                                                  |
-| -------- | ---------------------- | ---------------------------- | ------------------------------------------------------------ |
-| `mode`   | `'meeting' \| 'clock'` | `'meeting'`                  | Which tool renders                                           |
-| `cities` | `TimezoneCity[]`       | SF / NY / São Paulo / London | `{ name, zone, offsetMinutes, workStart, workEnd, color }[]` |
-| `class`  | `string`               | `''`                         | Additional classes                                           |
+| Prop     | Type             | Default                      | Description                                                  |
+| -------- | ---------------- | ---------------------------- | ------------------------------------------------------------ |
+| `cities` | `TimezoneCity[]` | SF / NY / São Paulo / London | `{ name, zone, offsetMinutes, workStart, workEnd, color }[]` |
+| `class`  | `string`         | `''`                         | Additional classes                                           |

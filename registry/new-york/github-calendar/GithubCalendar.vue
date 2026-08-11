@@ -53,6 +53,16 @@
   const error = ref<string | null>(null);
   const data = ref<GithubContributionData | null>(null);
   const expanded = ref(false);
+  const cardRef = ref<HTMLElement | null>(null);
+  /** Width of the card while the grid is visible — held while expanded so the repo list does not collapse the card. */
+  const fullWidth = ref(0);
+
+  function toggleExpanded() {
+    if (!expanded.value && cardRef.value) {
+      fullWidth.value = cardRef.value.offsetWidth;
+    }
+    expanded.value = !expanded.value;
+  }
 
   /** Prop override wins; otherwise the repos the proxy derived from the API. */
   const EMPTY_TOP_REPOS: GithubTopContribution[] = [];
@@ -118,7 +128,16 @@
     <!-- Data loaded -->
     <div
       v-else-if="data"
-      class="flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-4 shadow-sm"
+      ref="cardRef"
+      :class="
+        cn(
+          'flex flex-col gap-2 rounded-2xl border border-border/60 bg-card p-4 shadow-sm',
+          expanded && fullWidth > 0 && 'w-fit',
+        )
+      "
+      :style="
+        expanded && fullWidth > 0 ? { minWidth: `${fullWidth}px` } : undefined
+      "
     >
       <!-- Header + grid collapse away while the repo list is open -->
       <AnimatePresence initial="false">
@@ -192,7 +211,7 @@
             :aria-label="
               expanded ? 'Hide top repositories' : 'Show top repositories'
             "
-            @click="expanded = !expanded"
+            @click="toggleExpanded"
           >
             <component
               :is="motion.span"
