@@ -980,6 +980,12 @@ const COMPONENTS: Record<
       'Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax.',
     deps: ['@vueuse/core'],
   },
+  'receipt-printer': {
+    title: 'Receipt Printer',
+    description:
+      'A checkout state that turns payment processing into a printed order receipt, with a stepped paper feed, a status screen and a serrated paper tear.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'reflective-card': {
     title: 'Reflective Card',
     description:

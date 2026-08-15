@@ -207,6 +207,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/podcast-player',
       },
       { title: 'Profile Card', path: '/docs/components/profile-card' },
+      {
+        title: 'Receipt Printer',
+        path: '/docs/components/receipt-printer',
+        badge: 'new',
+      },
       { title: 'Reflective Card', path: '/docs/components/reflective-card' },
       {
         title: 'Ripple Transition',
