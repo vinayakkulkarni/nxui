@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { inject } from 'vue';
+  import { computed, inject } from 'vue';
   import { AnimatePresence, motion } from 'motion-v';
   import { RECEIPT_PRINTER_CONTEXT_KEY } from './receipt-printer-context';
   import type { ReceiptPrinterStage } from './types';
@@ -26,7 +26,7 @@
     complete: 'Order complete',
   };
 
-  const isComplete = context.value.stage === 'complete';
+  const isComplete = computed(() => context.value.stage === 'complete');
 </script>
 
 <template>
