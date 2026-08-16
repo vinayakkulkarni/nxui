@@ -74,9 +74,9 @@
   }
 
   function setFeedY(y: string): void {
-    const paper = wrapRef.value?.querySelector<HTMLElement>('.paper-surface');
-    if (paper) {
-      paper.style.translate = `0 ${y}`;
+    const sheet = wrapRef.value?.querySelector<HTMLElement>('.receipt-sheet');
+    if (sheet) {
+      sheet.style.translate = `0 ${y}`;
     }
   }
 
@@ -157,7 +157,7 @@
       :transition="{
         opacity: { duration: context.animate ? 0.16 : 0, ease: EASE_OUT },
       }"
-      class="relative isolate before:pointer-events-none before:absolute before:inset-x-3 before:top-3 before:bottom-4 before:z-0 before:rounded-sm before:shadow-[0_8px_24px_rgba(24,24,27,0.24)] before:content-[''] after:pointer-events-none after:absolute after:inset-x-[8%] after:bottom-0 after:z-0 after:h-3 after:translate-y-1.5 after:rounded-full after:bg-zinc-900/10 after:blur-lg after:content-[''] dark:before:shadow-[0_8px_24px_rgba(250,250,250,0.2)] dark:after:bg-zinc-50/10"
+      class="receipt-sheet relative isolate before:pointer-events-none before:absolute before:inset-x-3 before:top-3 before:bottom-4 before:z-0 before:rounded-sm before:shadow-[0_8px_24px_rgba(24,24,27,0.24)] before:content-[''] after:pointer-events-none after:absolute after:inset-x-[8%] after:bottom-0 after:z-0 after:h-3 after:translate-y-1.5 after:rounded-full after:bg-zinc-900/10 after:blur-lg after:content-[''] dark:before:shadow-[0_8px_24px_rgba(250,250,250,0.2)] dark:after:bg-zinc-50/10"
     >
       <slot />
     </component>
