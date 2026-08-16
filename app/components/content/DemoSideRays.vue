@@ -22,7 +22,7 @@
 </template>`"
   >
     <div
-      class="relative h-100 w-full overflow-hidden rounded-lg bg-neutral-950"
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-neutral-950"
     >
       <SideRays
         ray-color1="#EAB308"

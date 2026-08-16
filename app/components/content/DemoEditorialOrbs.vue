@@ -13,7 +13,9 @@
   <EditorialOrbs class=&quot;size-full&quot; :orb-count=&quot;5&quot; />
 </template>`"
   >
-    <div class="relative h-125 w-full overflow-hidden rounded-lg bg-zinc-950">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-zinc-950"
+    >
       <EditorialOrbs class="size-full" />
     </div>
   </ComponentDemo>

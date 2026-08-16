@@ -1,15 +1,7 @@
 <script setup lang="ts">
   import { ref, computed } from 'vue';
   import { cn } from '~/lib/utils';
-
-  interface BubbleMenuItem {
-    label: string;
-    href?: string;
-    ariaLabel?: string;
-    rotation?: number;
-    hoverBgColor?: string;
-    hoverTextColor?: string;
-  }
+  import type { BubbleMenuItem } from './types';
 
   const props = withDefaults(
     defineProps<{

@@ -29,7 +29,7 @@
 </template>`"
   >
     <div
-      class="relative flex h-50 w-full items-center justify-center overflow-hidden rounded-lg bg-white dark:bg-zinc-900"
+      class="relative size-full min-h-80 flex items-center justify-center overflow-hidden rounded-lg bg-white dark:bg-zinc-900"
     >
       <PillNav :items="items" active-href="#">
         <template #logo>

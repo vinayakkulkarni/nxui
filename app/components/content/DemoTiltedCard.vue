@@ -24,7 +24,9 @@
   />
 </template>`"
   >
-    <div class="flex h-100 w-full items-center justify-center rounded-lg">
+    <div
+      class="flex size-full min-h-100 items-center justify-center rounded-lg"
+    >
       <TiltedCard
         image-src="https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?q=80&w=500&auto=format"
         alt-text="Demo image"

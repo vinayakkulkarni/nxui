@@ -49,7 +49,7 @@
   </ScrollSplitCard>
 </template>`"
   >
-    <div class="relative h-150 w-full overflow-y-auto">
+    <div class="relative size-full min-h-80 overflow-y-auto">
       <ScrollSplitCard
         image-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200"
         start-hint="Scroll down"

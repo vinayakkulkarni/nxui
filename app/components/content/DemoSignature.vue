@@ -8,7 +8,7 @@
     :code="`<Signature text='Hello World' :font-size='48' :duration='2' />`"
   >
     <div
-      class="flex h-50 w-full items-center justify-center rounded-lg bg-background"
+      class="flex size-full min-h-100 items-center justify-center rounded-lg bg-background"
     >
       <Signature text="Hello World" :font-size="48" :duration="2" />
     </div>

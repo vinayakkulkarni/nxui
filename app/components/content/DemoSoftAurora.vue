@@ -12,8 +12,8 @@
   <SoftAurora color1=&quot;#f7f7f7&quot; color2=&quot;#e100ff&quot; />
 </template>`"
   >
-    <div class="h-100 w-full overflow-hidden rounded-lg">
-      <ClientOnly><SoftAurora /></ClientOnly>
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
+      <ClientOnly><SoftAurora class="absolute inset-0 size-full" /></ClientOnly>
     </div>
   </ComponentDemo>
 </template>

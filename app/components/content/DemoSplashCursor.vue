@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="relative h-100 w-full overflow-hidden rounded-lg bg-background"
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
       style="contain: paint"
     >
       <SplashCursor

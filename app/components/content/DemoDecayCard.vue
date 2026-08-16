@@ -15,7 +15,7 @@
 </template>`"
   >
     <div
-      class="flex h-125 w-full items-center justify-center rounded-lg bg-background"
+      class="flex size-full min-h-100 items-center justify-center rounded-lg bg-background"
     >
       <DecayCard
         :width="300"

@@ -11,15 +11,13 @@
     watch,
   } from 'vue';
   import { cn } from '~/lib/utils';
-
-  type SplitMode = 'words' | 'characters' | 'lines';
-  type RevealDirection = 'up' | 'down' | 'left' | 'right';
-  type StaggerOrigin = 'start' | 'end' | 'center' | 'edges' | 'random' | number;
-
-  export interface KineticTextRevealRef {
-    play: () => void;
-    reset: () => void;
-  }
+  import type {
+    KineticTextRevealRef,
+    RevealDirection,
+    Segment,
+    SplitMode,
+    StaggerOrigin,
+  } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -110,12 +108,6 @@
   });
 
   const offset = computed(() => getOffset(props.direction, props.distance));
-
-  interface Segment {
-    value: string;
-    animated: boolean;
-    index: number;
-  }
 
   function splitIntoGraphemes(value: string): string[] {
     if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {

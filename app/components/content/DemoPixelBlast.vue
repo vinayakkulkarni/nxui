@@ -12,8 +12,11 @@
   <PixelBlast color='#B19EEF' :pixel-size='3' variant='square' :enable-ripples='true' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
       <PixelBlast
+        class="absolute inset-0 size-full"
         color="#B19EEF"
         :pixel-size="3"
         variant="square"

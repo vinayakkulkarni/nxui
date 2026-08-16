@@ -22,6 +22,12 @@
       "description": "Versatile text animation component with multiple animation types and split modes."
     },
     {
+      "name": "depth-dive",
+      "type": "registry:ui",
+      "title": "Depth Dive",
+      "description": "A manifesto you scroll through: text sections float in 3D space, dissolve as you pass through them, and warp with scroll velocity."
+    },
+    {
       "name": "true-focus",
       "type": "registry:ui",
       "title": "True Focus",
@@ -145,7 +151,13 @@
       "name": "github-calendar",
       "type": "registry:ui",
       "title": "GitHub Calendar",
-      "description": "A GitHub-style contribution heatmap calendar."
+      "description": "A GitHub-style contribution heatmap calendar with optional top-contribution chips."
+    },
+    {
+      "name": "art-gallery",
+      "type": "registry:ui",
+      "title": "Art Gallery",
+      "description": "An editorial gallery where classic paintings alternate with headline text that melts into ink through a gooey SVG filter."
     },
     {
       "name": "magnetic-dock",
@@ -664,6 +676,18 @@
       "description": "3D tilting card that follows cursor with spring damping and tooltip caption."
     },
     {
+      "name": "timezone-companion",
+      "type": "registry:ui",
+      "title": "Timezone Companion",
+      "description": "Two timezone tools: a meeting-overlap hour grid with a draggable scrubber, and a dark world clock scrubbed by a tick ruler."
+    },
+    {
+      "name": "weather-forecast",
+      "type": "registry:ui",
+      "title": "Weather Forecast",
+      "description": "A weather card with a colored condition orb glowing behind frosted glass, unit toggle, and hover-driven day chips."
+    },
+    {
       "name": "decay-card",
       "type": "registry:ui",
       "title": "Decay Card",
@@ -920,6 +944,12 @@
       "type": "registry:ui",
       "title": "Profile Card",
       "description": "Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax."
+    },
+    {
+      "name": "receipt-printer",
+      "type": "registry:ui",
+      "title": "Receipt Printer",
+      "description": "A checkout state that turns payment processing into a printed order receipt, with a stepped paper feed, a status screen and a serrated paper tear."
     },
     {
       "name": "reflective-card",
@@ -1420,10 +1450,10 @@
       "description": "Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links."
     },
     {
-      "name": "sticker-peel",
+      "name": "holo-sticker",
       "type": "registry:ui",
-      "title": "Sticker Peel",
-      "description": "Interactive sticker peel effect with CSS clip-path, SVG lighting filters, and drag interaction."
+      "title": "Holo Sticker",
+      "description": "A die-cut holographic sticker rendered in WebGL: rainbow foil sweeps with your cursor, embossed ink relief, page-curled peel, and exploded production layers."
     },
     {
       "name": "target-cursor",

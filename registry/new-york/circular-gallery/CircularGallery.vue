@@ -11,11 +11,7 @@
     Transform,
   } from 'ogl';
   import { cn } from '~/lib/utils';
-
-  interface GalleryItem {
-    image: string;
-    text: string;
-  }
+  import type { GalleryItem, MediaItem } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -104,16 +100,6 @@
 
     // Double items for infinite loop
     const doubled = [...props.items, ...props.items];
-
-    interface MediaItem {
-      plane: InstanceType<typeof Mesh>;
-      program: InstanceType<typeof Program>;
-      x: number;
-      width: number;
-      widthTotal: number;
-      extra: number;
-      scale: number;
-    }
 
     const medias: MediaItem[] = [];
 

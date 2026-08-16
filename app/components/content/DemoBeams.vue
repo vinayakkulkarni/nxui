@@ -12,7 +12,9 @@
   <Beams :beam-width='2' :beam-height='15' :beam-number='12' light-color='#ffffff' :speed='2' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
       <Beams
         :beam-width="2"
         :beam-height="15"

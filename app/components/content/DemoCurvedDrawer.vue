@@ -36,7 +36,7 @@
 </template>`"
   >
     <div
-      class="relative h-100 w-full overflow-hidden rounded-lg bg-neutral-900"
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-neutral-900"
     >
       <div class="flex h-full items-center justify-center gap-8">
         <button

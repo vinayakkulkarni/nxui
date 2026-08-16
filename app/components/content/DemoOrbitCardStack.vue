@@ -14,7 +14,7 @@
 <template>
   <ComponentDemo :code="code">
     <div
-      class="relative flex h-125 w-full items-center justify-center overflow-hidden rounded-lg bg-muted/30"
+      class="flex size-full min-h-100 items-center justify-center overflow-hidden rounded-lg bg-muted/30"
     >
       <OrbitCardStack />
     </div>

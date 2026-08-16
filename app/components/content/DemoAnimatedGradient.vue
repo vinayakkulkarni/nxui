@@ -75,13 +75,13 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative h-100 w-full">
+    <div class="relative size-full min-h-80">
       <ClientOnly>
         <AnimatedGradient
           :key="activeTab"
           :config="currentTab.config"
           :noise="{ opacity: 0.2, scale: 1 }"
-          class="h-full min-h-full rounded-lg"
+          class="absolute inset-0 size-full rounded-lg"
         >
           <div
             class="flex size-full flex-col items-center justify-center pointer-events-none"

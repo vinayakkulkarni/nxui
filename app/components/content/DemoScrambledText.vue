@@ -16,7 +16,7 @@
   />
 </template>`"
   >
-    <div class="flex h-50 w-full items-center justify-center p-8">
+    <div class="flex size-full min-h-100 items-center justify-center p-8">
       <ScrambledText
         text="Move your cursor over this text to scramble it."
         :radius="100"

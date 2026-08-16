@@ -12,8 +12,9 @@
   <Galaxy :star-count='2000' :speed='0.5' :star-size='2' star-color='#ffffff' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <Galaxy
+        class="absolute inset-0 size-full"
         :star-count="2000"
         :speed="0.5"
         :star-size="2"

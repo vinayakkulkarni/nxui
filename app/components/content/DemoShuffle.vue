@@ -12,7 +12,7 @@
   <Shuffle text=&quot;Shuffle Text&quot; class=&quot;text-4xl font-bold&quot; />
 </template>`"
   >
-    <div class="flex h-50 w-full items-center justify-center">
+    <div class="flex size-full min-h-100 items-center justify-center">
       <Shuffle text="Shuffle Text" class="text-4xl font-bold" />
     </div>
   </ComponentDemo>

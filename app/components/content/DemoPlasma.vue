@@ -15,8 +15,13 @@
   </div>
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg">
-      <Plasma color="#4f46e5" :speed="1" direction="forward" />
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
+      <Plasma
+        class="absolute inset-0 size-full"
+        color="#4f46e5"
+        :speed="1"
+        direction="forward"
+      />
     </div>
   </ComponentDemo>
 </template>

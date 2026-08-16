@@ -12,8 +12,8 @@
   <Prism />
 </template>`"
   >
-    <div class="h-100 w-full overflow-hidden rounded-lg">
-      <ClientOnly><Prism /></ClientOnly>
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
+      <ClientOnly><Prism class="absolute inset-0 size-full" /></ClientOnly>
     </div>
   </ComponentDemo>
 </template>
