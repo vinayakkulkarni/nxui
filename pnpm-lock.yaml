@@ -24,8 +24,8 @@ importers:
         specifier: ^3.15.2
         version: 3.15.2(@valibot/to-json-schema@1.7.1(valibot@1.4.2(typescript@6.0.3)))(better-sqlite3@13.0.3)(esbuild@0.28.2)(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(rollup@4.62.3)(supports-color@10.2.2)(valibot@1.4.2(typescript@6.0.3))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))
       '@nuxt/icon':
-        specifier: ^2.4.1
-        version: 2.4.1(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))(vue@3.6.0-rc.2(typescript@6.0.3))
+        specifier: ^2.5.0
+        version: 2.5.0(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))(vue@3.6.0-rc.2(typescript@6.0.3))
       '@nuxtjs/color-mode':
         specifier: ^4.0.1
         version: 4.0.1(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))
@@ -1006,8 +1006,8 @@ packages:
   '@iconify-json/simple-icons@1.2.93':
     resolution: {integrity: sha512-/XhANjfGYOuqvSR3TmUnkQkINvQ4GVjVuukvymRbxtVFBvIq/yiXJqCDycKcQPT401OYT9H2vIY6ihAlz1QIAw==}
 
-  '@iconify/collections@1.0.716':
-    resolution: {integrity: sha512-m8C/lJEObmxLYnhkVnBR1msMnQLoXRWAeH7e7KctZfc5HeHaP8T5MMgZtYwYbLrSwtVmKf+6FqA97qVaniryBg==}
+  '@iconify/collections@1.0.724':
+    resolution: {integrity: sha512-wl26lugNV8a3z1bsJyNceAnGeOCrvkXdZmw1Yvs40qLlz90EzMYPYA2OLFITzC9ALx6Ar3vyzEKo7ZNNKw0zjg==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -1307,6 +1307,11 @@ packages:
     peerDependencies:
       vite: '>=6.0'
 
+  '@nuxt/devtools-kit@3.4.1':
+    resolution: {integrity: sha512-6ltPm2yUW8GvDdf3VJna7+flLi+ej7xRfSr+S4ovevKt/CuPf9EqYOn1jW7Kw/U1MXt/71zkn+/O2vu3G6O9Hg==}
+    peerDependencies:
+      vite: '>=6.0'
+
   '@nuxt/devtools-kit@4.0.0-alpha.7':
     resolution: {integrity: sha512-Tgh+tSejh1GnZjdjgWyc4qCxskeX08XuSQBYMn/4SIV5AubeqYeAOMBD2qSmHOXjMCUpgyzpEhODcP3sgdgGRA==}
     peerDependencies:
@@ -1340,8 +1345,8 @@ packages:
     peerDependencies:
       eslint: ^9.0.0 || ^10.0.0
 
-  '@nuxt/icon@2.4.1':
-    resolution: {integrity: sha512-fOY3kiT6OoL4bWXVmMLc1VgoCm1PxIGSBmsSaLO090NEgtd1ub441dZ7MEoOD5UIilWzba1kCWdwJcAkGCOwLg==}
+  '@nuxt/icon@2.5.0':
+    resolution: {integrity: sha512-EBczSfd3QmAD7GoSmJ5jCPvQ5zzNaPPuWPU9DSMcBuBM10A3JIvjaMLEOEniHQRz4iVPb05cJRO/JdC60oiiwg==}
 
   '@nuxt/kit@3.21.11':
     resolution: {integrity: sha512-0Xi3tgwN77w43Q8GCPIrvWmF1J7Peehkts44E0uKNIml9lB8WoUn8YxyUjxBv47XtVR86NWoWALAT+/IEMHJEA==}
@@ -5542,6 +5547,9 @@ packages:
   ohash@2.0.11:
     resolution: {integrity: sha512-RdR9FQrFwNBNXAr4GixM8YaRZRJ5PUWbKYbE5eOsrwAjJW0q2REGcf79oYPsLyskQCZG1PLN+S/K1V00joZAoQ==}
 
+  ohash@2.0.12:
+    resolution: {integrity: sha512-65S/5gk9YSsaRjcyf7Nfa6h/d3E8/1gslpXfI4W7Dxn/oap8IKRuNT5VXkLQ1YFKIEg4apRY4Pj6aiwFzrDdmw==}
+
   on-change@6.0.2:
     resolution: {integrity: sha512-08+12qcOVEA0fS9g/VxKS27HaT94nRutUT77J2dr8zv/unzXopvhBuF8tNLWsoLQ5IgrQ6eptGeGqUYat82U1w==}
     engines: {node: '>=20'}
@@ -8061,7 +8069,7 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify/collections@1.0.716':
+  '@iconify/collections@1.0.724':
     dependencies:
       '@iconify/types': 2.0.0
 
@@ -8436,6 +8444,18 @@ snapshots:
       - rolldown
       - unplugin
 
+  '@nuxt/devtools-kit@3.4.1(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))':
+    dependencies:
+      '@nuxt/kit': 4.5.2(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))
+      execa: 8.0.1
+      vite: 8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)
+    transitivePeerDependencies:
+      - magic-string
+      - magicast
+      - oxc-parser
+      - rolldown
+      - unplugin
+
   '@nuxt/devtools-kit@4.0.0-alpha.7(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))':
     dependencies:
       '@nuxt/kit': 4.5.2(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))
@@ -8564,18 +8584,18 @@ snapshots:
       - supports-color
       - typescript
 
-  '@nuxt/icon@2.4.1(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))(vue@3.6.0-rc.2(typescript@6.0.3))':
+  '@nuxt/icon@2.5.0(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))(vue@3.6.0-rc.2(typescript@6.0.3))':
     dependencies:
-      '@iconify/collections': 1.0.716
+      '@iconify/collections': 1.0.724
       '@iconify/types': 2.0.0
       '@iconify/utils': 3.1.4
       '@iconify/vue': 5.0.1(vue@3.6.0-rc.2(typescript@6.0.3))
-      '@nuxt/devtools-kit': 3.3.1(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))
-      '@nuxt/kit': 4.5.1(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))
+      '@nuxt/devtools-kit': 3.4.1(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0))
+      '@nuxt/kit': 4.5.2(magic-string@1.1.0)(magicast@0.5.3)(oxc-parser@0.140.0)(rolldown@1.2.0)(unplugin@3.3.0(esbuild@0.28.2)(rolldown@1.2.0)(rollup@4.62.3)(vite@8.1.5(@types/node@26.1.1)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.49.0)(tsx@4.23.12)(yaml@2.9.0)))
       consola: 3.4.2
       local-pkg: 1.2.1
       mlly: 1.8.2
-      ohash: 2.0.11
+      ohash: 2.0.12
       picomatch: 4.0.5
       std-env: 4.2.0
       tinyglobby: 0.2.17
@@ -13428,6 +13448,8 @@ snapshots:
   ogl@1.0.11: {}
 
   ohash@2.0.11: {}
+
+  ohash@2.0.12: {}
 
   on-change@6.0.2: {}
 
