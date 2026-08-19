@@ -48,7 +48,7 @@
     "clsx": "^2.1.1",
     "gl-matrix": "^4.0.0-beta.2",
     "matter-js": "^0.20.0",
-    "motion-v": "^2.3.0",
+    "motion-v": "^2.4.0",
     "nuxt": "^4.5.1",
     "nuxt-llms": "^0.2.0",
     "nuxt-schema-org": "^6.2.8",
