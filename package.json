@@ -82,7 +82,7 @@
     "is-ci": "^4.1.0",
     "lint-staged": "^17.3.0",
     "nuxt-security": "^2.6.0",
-    "oxfmt": "^0.63.0",
+    "oxfmt": "^0.64.0",
     "oxlint": "^1.79.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.12",
