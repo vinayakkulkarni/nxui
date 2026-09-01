@@ -89,7 +89,7 @@
     "typescript": "^6.0.3",
     "vue": "^3.6.0-rc.5",
     "vue-tsc": "^3.3.10",
-    "wrangler": "^4.125.0"
+    "wrangler": "^4.127.1"
   },
   "engines": {
     "node": ">=24.11.0"
