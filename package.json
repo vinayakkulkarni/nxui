@@ -34,7 +34,7 @@
     "@nuxt/content": "^3.16.0",
     "@nuxt/icon": "^2.5.1",
     "@nuxtjs/color-mode": "^4.0.1",
-    "@nuxtjs/plausible": "^3.0.2",
+    "@nuxtjs/plausible": "^4.0.0",
     "@nuxtjs/robots": "^6.2.0",
     "@nuxtjs/sitemap": "^8.4.0",
     "@openpanel/nuxt": "^0.4.1",
