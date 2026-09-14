@@ -54,7 +54,7 @@
     "nuxt-schema-org": "^6.2.8",
     "ogl": "^1.0.11",
     "opentype.js": "^2.0.0",
-    "postprocessing": "^6.39.4",
+    "postprocessing": "^6.39.5",
     "reka-ui": "^2.10.4",
     "shadcn-nuxt": "^2.8.2",
     "shiki": "^4.4.3",
