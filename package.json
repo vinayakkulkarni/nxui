@@ -80,7 +80,7 @@
     "h3": "1.15.11",
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
-    "lint-staged": "^17.3.0",
+    "lint-staged": "^17.5.1",
     "nuxt-security": "^2.6.0",
     "oxfmt": "^0.65.0",
     "oxlint": "^1.82.0",
