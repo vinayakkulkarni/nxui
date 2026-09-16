@@ -375,7 +375,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ### Prerequisites
 
 - [Node.js 24+](https://nodejs.org)
-- [pnpm 11.3+](https://pnpm.io) (recommended: install via `corepack enable`)
+- [pnpm 12+](https://pnpm.io) (recommended: install via `corepack enable`)
 
 ### Setup
 
