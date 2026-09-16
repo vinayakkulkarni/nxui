@@ -119,6 +119,18 @@ export default defineNuxtConfig({
     ],
   ],
 
+  // @nuxt/content's build-time database uses Node's built-in SQLite
+  // (node:sqlite) rather than the native better-sqlite3 addon. Node 24 ships
+  // node:sqlite, so this removes the node-gyp compile step entirely — a clean
+  // install works on any machine (and in CI) with no native toolchain,
+  // because pnpm 12's standalone builds no longer bundle node-gyp.
+  // Only the local/build database is affected; production reads the D1 binding.
+  content: {
+    experimental: {
+      sqliteConnector: 'native',
+    },
+  },
+
   openpanel: {
     clientId: process.env.NUXT_PUBLIC_OPENPANEL_CLIENT_ID ?? '',
     apiUrl: 'https://events.geoql.in/api',
