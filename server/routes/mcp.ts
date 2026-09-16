@@ -7,6 +7,26 @@ import type {
 
 const PROTOCOL_VERSION = '2025-06-18';
 
+defineRouteMeta({
+  openAPI: {
+    tags: ['mcp'],
+    summary: 'MCP JSON-RPC endpoint',
+    description:
+      'Stateless streamable-http Model Context Protocol server exposing the nxui component registry as tools. POST JSON-RPC 2.0 messages.',
+    requestBody: {
+      required: true,
+      content: { 'application/json': { schema: { type: 'object' } } },
+    },
+    responses: {
+      200: {
+        description: 'JSON-RPC response',
+        content: { 'application/json': { schema: { type: 'object' } } },
+      },
+      405: { description: 'Method not allowed — POST JSON-RPC to /mcp' },
+    },
+  },
+});
+
 function success(
   id: number | string | null,
   result: Record<string, unknown>,
@@ -24,6 +44,7 @@ function failure(
 
 export default defineEventHandler(async (event: H3Event) => {
   setResponseHeader(event, 'access-control-allow-origin', '*');
+  setResponseHeader(event, 'x-content-type-options', 'nosniff');
   setResponseHeader(
     event,
     'access-control-allow-headers',

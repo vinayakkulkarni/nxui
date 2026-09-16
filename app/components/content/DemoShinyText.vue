@@ -12,7 +12,7 @@
   <ShinyText text=&quot;Shiny Text&quot; :speed=&quot;2&quot; color=&quot;#b5b5b5&quot; shine-color=&quot;#ffffff&quot; />
 </template>`"
   >
-    <div class="flex h-50 w-full items-center justify-center">
+    <div class="flex size-full min-h-100 items-center justify-center">
       <ShinyText text="Shiny Text" class="text-4xl font-bold" />
     </div>
   </ComponentDemo>

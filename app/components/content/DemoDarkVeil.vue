@@ -12,7 +12,9 @@
   <DarkVeil :hue-shift='120' :speed='0.5' :noise-intensity='0.05' :scanline-intensity='0.15' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
       <DarkVeil
         :hue-shift="120"
         :speed="0.5"

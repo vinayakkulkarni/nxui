@@ -12,7 +12,7 @@
   <ShapeGrid direction='diagonal' border-color='#271E37' hover-fill-color='#222222' :square-size='40' :speed='0.5' />
 </template>`"
   >
-    <div class="h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <ClientOnly
         ><ShapeGrid
           direction="diagonal"

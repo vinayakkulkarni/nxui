@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { useRafFn } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import type { LetterState } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -33,15 +34,6 @@
 
   const mouseX = ref(-9999);
   const mouseY = ref(-9999);
-
-  interface LetterState {
-    originX: number;
-    originY: number;
-    x: number;
-    y: number;
-    vx: number;
-    vy: number;
-  }
 
   const letterStates = ref<LetterState[]>([]);
 

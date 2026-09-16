@@ -12,8 +12,11 @@
   <MetaBalls color='#ffffff' :speed='0.3' :ball-count='15' cursor-ball-color='#ffffff' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
       <MetaBalls
+        class="absolute inset-0 size-full"
         color="#ffffff"
         :speed="0.3"
         :ball-count="15"

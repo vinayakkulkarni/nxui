@@ -2,17 +2,7 @@
   import { ref, computed, onBeforeUnmount } from 'vue';
   import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-
-  interface MenuItem {
-    label: string;
-    link: string;
-    ariaLabel?: string;
-  }
-
-  interface SocialItem {
-    label: string;
-    link: string;
-  }
+  import type { MenuItem, SocialItem } from './types';
 
   const props = withDefaults(
     defineProps<{

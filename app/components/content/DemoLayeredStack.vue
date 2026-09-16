@@ -19,7 +19,7 @@
   </LayeredStack>
 </template>`"
   >
-    <div class="flex h-100 w-full items-center justify-center">
+    <div class="flex size-full min-h-100 items-center justify-center">
       <ClientOnly>
         <LayeredStack class="grid grid-cols-3 gap-4 p-8">
           <div

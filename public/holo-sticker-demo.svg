@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#3b2f63"/>
+      <stop offset="55%" stop-color="#241c46"/>
+      <stop offset="100%" stop-color="#120d26"/>
+    </radialGradient>
+    <linearGradient id="stripeA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff4d8d"/>
+      <stop offset="100%" stop-color="#ff9a3d"/>
+    </linearGradient>
+    <linearGradient id="stripeB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3da5ff"/>
+      <stop offset="100%" stop-color="#9d6bff"/>
+    </linearGradient>
+    <linearGradient id="stripeC" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2ee6a8"/>
+      <stop offset="100%" stop-color="#3d8bff"/>
+    </linearGradient>
+  </defs>
+  <!-- die-cut star badge -->
+  <g>
+    <path d="M512 96 L620 300 L840 330 L678 486 L726 704 L512 600 L298 704 L346 486 L184 330 L404 300 Z"
+          fill="url(#bg)" stroke="#ffffff" stroke-width="28" stroke-linejoin="round"/>
+    <path d="M512 96 L620 300 L840 330 L678 486 L726 704 L512 600 L298 704 L346 486 L184 330 L404 300 Z"
+          fill="none" stroke="url(#stripeA)" stroke-width="10" stroke-linejoin="round" opacity="0.85"/>
+    <text x="512" y="468" font-family="Arial, Helvetica, sans-serif" font-size="150"
+          font-weight="800" fill="#ffffff" text-anchor="middle" letter-spacing="6">
+      NX
+    </text>
+    <text x="512" y="604" font-family="Arial, Helvetica, sans-serif" font-size="64"
+          font-weight="600" fill="#9d8fd0" text-anchor="middle" letter-spacing="14">
+      UI
+    </text>
+    <circle cx="512" cy="176" r="18" fill="url(#stripeC)"/>
+  </g>
+</svg>

@@ -1,6 +1,23 @@
 import type { H3Event } from 'h3';
 const ORIGIN = 'https://nxui.geoql.in';
 
+defineRouteMeta({
+  openAPI: {
+    tags: ['discovery'],
+    summary: 'RFC 9727 API catalog',
+    description:
+      'Linkset describing the machine-readable services this site exposes: the component registry, the MCP server and the A2A endpoint.',
+    responses: {
+      200: {
+        description: 'An RFC 9727 linkset document',
+        content: {
+          'application/linkset+json': { schema: { type: 'object' } },
+        },
+      },
+    },
+  },
+});
+
 export default defineEventHandler((event: H3Event) => {
   setResponseHeader(
     event,
@@ -8,6 +25,7 @@ export default defineEventHandler((event: H3Event) => {
     'application/linkset+json; charset=utf-8',
   );
   setResponseHeader(event, 'cache-control', 'public, max-age=3600');
+  setResponseHeader(event, 'x-content-type-options', 'nosniff');
   return {
     linkset: [
       {

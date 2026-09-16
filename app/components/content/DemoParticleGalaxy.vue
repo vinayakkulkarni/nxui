@@ -116,7 +116,7 @@
         />
         <template #fallback>
           <div
-            class="flex h-100 w-full items-center justify-center rounded-lg bg-background"
+            class="flex size-full min-h-100 items-center justify-center rounded-lg bg-background"
           >
             <span class="text-sm text-foreground/50">Loading galaxy...</span>
           </div>

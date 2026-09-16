@@ -75,6 +75,12 @@ const COMPONENTS: Record<
       'Versatile text animation component with multiple animation types and split modes.',
     deps: ['@vueuse/core', 'motion-v'],
   },
+  'depth-dive': {
+    title: 'Depth Dive',
+    description:
+      'A manifesto you scroll through: text sections float in 3D space, dissolve as you pass through them, and warp with scroll velocity.',
+    deps: ['three'],
+  },
   'true-focus': {
     title: 'True Focus',
     description:
@@ -186,8 +192,15 @@ const COMPONENTS: Record<
   },
   'github-calendar': {
     title: 'GitHub Calendar',
-    description: 'A GitHub-style contribution heatmap calendar.',
-    deps: ['@vueuse/core'],
+    description:
+      'A GitHub-style contribution heatmap calendar with optional top-contribution chips.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'art-gallery': {
+    title: 'Art Gallery',
+    description:
+      'An editorial gallery where classic paintings alternate with headline text that melts into ink through a gooey SVG filter.',
+    deps: [],
   },
   'magnetic-dock': {
     title: 'Magnetic Dock',
@@ -697,6 +710,18 @@ const COMPONENTS: Record<
       '3D tilting card that follows cursor with spring damping and tooltip caption.',
     deps: ['@vueuse/core'],
   },
+  'timezone-companion': {
+    title: 'Timezone Companion',
+    description:
+      'Two timezone tools: a meeting-overlap hour grid with a draggable scrubber, and a dark world clock scrubbed by a tick ruler.',
+    deps: ['@vueuse/core'],
+  },
+  'weather-forecast': {
+    title: 'Weather Forecast',
+    description:
+      'A weather card with a colored condition orb glowing behind frosted glass, unit toggle, and hover-driven day chips.',
+    deps: ['motion-v'],
+  },
   'decay-card': {
     title: 'Decay Card',
     description:
@@ -954,6 +979,12 @@ const COMPONENTS: Record<
     description:
       'Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax.',
     deps: ['@vueuse/core'],
+  },
+  'receipt-printer': {
+    title: 'Receipt Printer',
+    description:
+      'A checkout state that turns payment processing into a printed order receipt, with a stepped paper feed, a status screen and a serrated paper tear.',
+    deps: ['@vueuse/core', 'motion-v'],
   },
   'reflective-card': {
     title: 'Reflective Card',
@@ -1454,11 +1485,11 @@ const COMPONENTS: Record<
       'Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links.',
     deps: ['@vueuse/core'],
   },
-  'sticker-peel': {
-    title: 'Sticker Peel',
+  'holo-sticker': {
+    title: 'Holo Sticker',
     description:
-      'Interactive sticker peel effect with CSS clip-path, SVG lighting filters, and drag interaction.',
-    deps: ['@vueuse/core'],
+      'A die-cut holographic sticker rendered in WebGL: rainbow foil sweeps with your cursor, embossed ink relief, page-curled peel, and exploded production layers.',
+    deps: ['three', '@vueuse/core'],
   },
   'target-cursor': {
     title: 'Target Cursor',

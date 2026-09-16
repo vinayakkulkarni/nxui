@@ -18,6 +18,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Curved Loop', path: '/docs/text-animations/curved-loop' },
       { title: 'Decrypted Text', path: '/docs/text-animations/decrypted-text' },
       {
+        title: 'Depth Dive',
+        path: '/docs/text-animations/depth-dive',
+        badge: 'new',
+      },
+      {
         title: 'Editorial Orbs',
         path: '/docs/text-animations/editorial-orbs',
       },
@@ -70,6 +75,11 @@ export const docsNav: NavGroup[] = [
         title: 'Aurora Accordion',
         path: '/docs/components/aurora-accordion',
       },
+      {
+        title: 'Art Gallery',
+        path: '/docs/components/art-gallery',
+        badge: 'new',
+      },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       {
         title: 'Banknote Bento',
@@ -80,7 +90,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Bouncy Accordion',
         path: '/docs/components/bouncy-accordion',
-        badge: 'new',
       },
       { title: 'Bubble Menu', path: '/docs/components/bubble-menu' },
       { title: 'Card Nav', path: '/docs/components/card-nav' },
@@ -90,7 +99,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Circle Input',
         path: '/docs/components/circle-input',
-        badge: 'new',
       },
       { title: 'Circular Gallery', path: '/docs/components/circular-gallery' },
       {
@@ -100,7 +108,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Color Picker',
         path: '/docs/components/color-picker',
-        badge: 'new',
       },
       { title: 'Command Menu', path: '/docs/components/command-menu' },
       { title: 'Counter', path: '/docs/components/counter' },
@@ -111,7 +118,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Curved Input',
         path: '/docs/components/curved-input',
-        badge: 'new',
       },
       { title: 'Decay Card', path: '/docs/components/decay-card' },
       {
@@ -148,13 +154,16 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Gooey Dropdown',
         path: '/docs/components/gooey-dropdown',
-        badge: 'new',
       },
       { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
       {
+        title: 'Holo Sticker',
+        path: '/docs/components/holo-sticker',
+        badge: 'new',
+      },
+      {
         title: 'Holo Cloth',
         path: '/docs/components/holo-cloth',
-        badge: 'new',
       },
       { title: 'Infinite Menu', path: '/docs/components/infinite-menu' },
       { title: 'Lanyard', path: '/docs/components/lanyard' },
@@ -162,12 +171,10 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Line Sidebar',
         path: '/docs/components/line-sidebar',
-        badge: 'new',
       },
       {
         title: 'Liquid Glass Carousel',
         path: '/docs/components/liquid-glass-carousel',
-        badge: 'new',
       },
       { title: 'Mac Keyboard', path: '/docs/components/mac-keyboard' },
       { title: 'Magic Bento', path: '/docs/components/magic-bento' },
@@ -200,6 +207,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/podcast-player',
       },
       { title: 'Profile Card', path: '/docs/components/profile-card' },
+      {
+        title: 'Receipt Printer',
+        path: '/docs/components/receipt-printer',
+        badge: 'new',
+      },
       { title: 'Reflective Card', path: '/docs/components/reflective-card' },
       {
         title: 'Ripple Transition',
@@ -220,7 +232,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Signature Eraser',
         path: '/docs/components/signature-eraser',
-        badge: 'new',
       },
       {
         title: 'Split Flap Display',
@@ -231,11 +242,14 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Stacked List',
         path: '/docs/components/stacked-list',
-        badge: 'new',
       },
       { title: 'Staggered Menu', path: '/docs/components/staggered-menu' },
       { title: 'Stepper', path: '/docs/components/stepper' },
-      { title: 'Sticker Peel', path: '/docs/components/sticker-peel' },
+      {
+        title: 'Holo Sticker',
+        path: '/docs/components/holo-sticker',
+        badge: 'new',
+      },
       {
         title: 'Sticky Scroll Cards',
         path: '/docs/components/sticky-scroll-cards',
@@ -244,10 +258,20 @@ export const docsNav: NavGroup[] = [
         title: 'Testimonial Marquee',
         path: '/docs/components/testimonial-marquee',
       },
+      {
+        title: 'Timezone Companion',
+        path: '/docs/components/timezone-companion',
+        badge: 'new',
+      },
       { title: 'Tilted Card', path: '/docs/components/tilted-card' },
       {
         title: 'Visual Stepper',
         path: '/docs/components/visual-stepper',
+      },
+      {
+        title: 'Weather Forecast',
+        path: '/docs/components/weather-forecast',
+        badge: 'new',
       },
     ],
   },
@@ -280,7 +304,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Pixel Wave',
         path: '/docs/visual-effects/pixel-wave',
-        badge: 'new',
       },
     ],
   },
@@ -468,12 +491,10 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Prism Gradient',
         path: '/docs/hero-backgrounds/prism-gradient',
-        badge: 'new',
       },
       {
         title: 'Silk Aurora',
         path: '/docs/hero-backgrounds/silk-aurora',
-        badge: 'new',
       },
       { title: 'WebGL Liquid', path: '/docs/hero-backgrounds/webgl-liquid' },
     ],

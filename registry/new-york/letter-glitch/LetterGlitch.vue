@@ -2,6 +2,7 @@
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import type { Letter } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -33,13 +34,6 @@
   const fontSize = 16;
   const charWidth = 10;
   const charHeight = 20;
-
-  interface Letter {
-    char: string;
-    color: string;
-    targetColor: string;
-    colorProgress: number;
-  }
 
   let letters: Letter[] = [];
   let grid = { columns: 0, rows: 0 };

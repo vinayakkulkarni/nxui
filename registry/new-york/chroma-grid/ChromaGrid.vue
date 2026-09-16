@@ -2,16 +2,7 @@
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-
-  interface ChromaGridItem {
-    image: string;
-    title: string;
-    subtitle?: string;
-    handle?: string;
-    borderColor?: string;
-    gradient?: string;
-    url?: string;
-  }
+  import type { ChromaGridItem } from './types';
 
   const props = withDefaults(
     defineProps<{

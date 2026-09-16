@@ -90,3 +90,75 @@ export function getShapeClass(shape: string) {
 export function getGlowColor(schema: GithubCalendarColorSchema) {
   return glowColorMap[schema];
 }
+
+interface FlatContribution {
+  date: string;
+  count: number;
+  level: number;
+}
+
+export interface FlatContributionData {
+  total: Record<string, number>;
+  contributions: FlatContribution[];
+}
+
+const LEVELS = [
+  'NONE',
+  'FIRST_QUARTILE',
+  'SECOND_QUARTILE',
+  'THIRD_QUARTILE',
+  'FOURTH_QUARTILE',
+] as const;
+
+export function isFlatContributionData(
+  value: unknown,
+): value is FlatContributionData {
+  if (!value || typeof value !== 'object') return false;
+  const record = value as Record<string, unknown>;
+  return (
+    typeof record.total === 'object' &&
+    record.total !== null &&
+    Array.isArray(record.contributions) &&
+    (record.contributions.length === 0 ||
+      typeof (record.contributions[0] as Record<string, unknown>).level ===
+        'number')
+  );
+}
+
+/** Convert the flat per-day API shape into GitHub-style week columns. */
+export function toWeeks(flat: FlatContributionData): {
+  contributions: {
+    color: string;
+    contributionCount: number;
+    contributionLevel: (typeof LEVELS)[number];
+    date: string;
+  }[][];
+  totalContributions: number;
+} {
+  const weeks: {
+    color: string;
+    contributionCount: number;
+    contributionLevel: (typeof LEVELS)[number];
+    date: string;
+  }[][] = [];
+  let week: (typeof weeks)[number] = [];
+  for (const day of flat.contributions) {
+    const dow = new Date(`${day.date}T00:00:00Z`).getUTCDay();
+    if (dow === 0 && week.length > 0) {
+      weeks.push(week);
+      week = [];
+    }
+    week.push({
+      color: '',
+      contributionCount: day.count,
+      contributionLevel: LEVELS[Math.min(4, Math.max(0, day.level))]!,
+      date: day.date,
+    });
+  }
+  if (week.length > 0) weeks.push(week);
+  const totalContributions = Object.values(flat.total).reduce(
+    (sum, n) => sum + n,
+    0,
+  );
+  return { contributions: weeks, totalContributions };
+}

@@ -3,13 +3,7 @@
   import { useResizeObserver } from '@vueuse/core';
   import { mat4, quat, vec2, vec3 } from 'gl-matrix';
   import { cn } from '~/lib/utils';
-
-  interface MenuItem {
-    image: string;
-    link?: string;
-    title?: string;
-    description?: string;
-  }
+  import type { Face, MenuItem, VertexData } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -106,18 +100,6 @@ void main() {
 }`;
 
   // ---- Geometry classes ----
-  interface Face {
-    a: number;
-    b: number;
-    c: number;
-  }
-
-  interface VertexData {
-    position: vec3;
-    normal: vec3;
-    uv: vec2;
-  }
-
   class Geometry {
     vertices: VertexData[] = [];
     faces: Face[] = [];

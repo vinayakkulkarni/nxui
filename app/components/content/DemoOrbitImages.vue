@@ -40,7 +40,7 @@
 </template>`"
   >
     <div
-      class="flex h-100 w-full items-center justify-center overflow-hidden rounded-lg bg-background"
+      class="flex size-full min-h-100 items-center justify-center overflow-hidden rounded-lg bg-background"
     >
       <div class="scale-50 sm:scale-75 md:scale-100 origin-center">
         <OrbitImages

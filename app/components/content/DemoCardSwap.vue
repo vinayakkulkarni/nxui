@@ -22,7 +22,7 @@
   </CardSwap>
 </template>`"
   >
-    <div class="flex h-125 w-full flex-col overflow-hidden lg:flex-row">
+    <div class="flex size-full min-h-100 flex-col overflow-hidden lg:flex-row">
       <div
         class="flex w-full flex-col items-center justify-center px-6 py-8 text-center lg:w-1/2 lg:items-start lg:pl-24 lg:text-left"
       >
@@ -32,7 +32,7 @@
         </h3>
         <p class="text-xl text-muted-foreground">Just look at it go!</p>
       </div>
-      <div class="relative h-100 w-full lg:h-full lg:w-1/2">
+      <div class="relative size-full min-h-80 lg:h-full lg:w-1/2">
         <CardSwap
           :card-distance="60"
           :vertical-distance="70"

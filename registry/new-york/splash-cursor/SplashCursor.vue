@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { cn } from '~/lib/utils';
+  import type { DoubleFBO, FBO, Pointer } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -132,19 +133,6 @@
       BACK_COLOR: props.backColor,
       TRANSPARENT: props.transparent,
     };
-
-    interface Pointer {
-      id: number;
-      texcoordX: number;
-      texcoordY: number;
-      prevTexcoordX: number;
-      prevTexcoordY: number;
-      deltaX: number;
-      deltaY: number;
-      down: boolean;
-      moved: boolean;
-      color: { r: number; g: number; b: number };
-    }
 
     const pointers: Pointer[] = [
       {
@@ -491,25 +479,6 @@
     );
     gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
     gl.enableVertexAttribArray(0);
-
-    interface FBO {
-      texture: WebGLTexture;
-      fbo: WebGLFramebuffer;
-      width: number;
-      height: number;
-      texelSizeX: number;
-      texelSizeY: number;
-      attach: (id: number) => number;
-    }
-    interface DoubleFBO {
-      width: number;
-      height: number;
-      texelSizeX: number;
-      texelSizeY: number;
-      read: FBO;
-      write: FBO;
-      swap: () => void;
-    }
 
     function blit(target: FBO | null, clear = false) {
       if (target == null) {

@@ -4,22 +4,7 @@
   import { motion } from 'motion-v';
   import * as opentype from 'opentype.js';
   import { cn } from '~/lib/utils';
-
-  interface SignatureCharPath {
-    d: string;
-  }
-
-  interface SignatureProps {
-    text?: string;
-    color?: string;
-    fontSize?: number;
-    duration?: number;
-    delay?: number;
-    class?: string;
-    inView?: boolean;
-    once?: boolean;
-    fontUrl?: string;
-  }
+  import type { SignatureCharPath, SignatureProps } from './types';
 
   const props = withDefaults(defineProps<SignatureProps>(), {
     text: 'Signature',

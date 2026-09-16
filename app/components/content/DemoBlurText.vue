@@ -13,7 +13,7 @@
   <BlurText text=&quot;Blur Text Effect&quot; by=&quot;words&quot; :delay=&quot;200&quot; />
 </template>`"
   >
-    <div class="flex h-50 w-full items-center justify-center">
+    <div class="flex size-full min-h-100 items-center justify-center">
       <BlurText
         text="Blur Text Effect"
         by="words"

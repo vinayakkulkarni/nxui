@@ -20,9 +20,10 @@
 </template>`"
   >
     <div
-      class="relative h-100 w-full overflow-hidden rounded-lg bg-neutral-950"
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-neutral-950"
     >
       <Lightfall
+        class="absolute inset-0 size-full"
         :colors="['#A6C8FF', '#5227FF', '#FF9FFC']"
         background-color="#0A29FF"
         :speed="0.5"

@@ -13,7 +13,7 @@
 </template>`"
   >
     <div
-      class="relative h-100 w-full overflow-hidden rounded-lg bg-neutral-950"
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-neutral-950"
     >
       <Ferrofluid
         :colors="['#4F46E5', '#06B6D4', '#E0F2FE']"

@@ -47,7 +47,7 @@ pnpm run update:deps    # Interactively update all deps (taze)
 | Highlighting    | shiki                                            | v4.0.2                                                            |
 | Class Utils     | class-variance-authority + clsx + tailwind-merge |                                                                   |
 | Types           | TypeScript                                       | v6.0+ strict                                                      |
-| Package Manager | pnpm                                             | v11.3.0                                                           |
+| Package Manager | pnpm                                             | v12.4.2                                                           |
 
 ---
 

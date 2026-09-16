@@ -2,6 +2,7 @@
   import { ref, onMounted, onBeforeUnmount, watch, nextTick } from 'vue';
   import Matter from 'matter-js';
   import { cn } from '~/lib/utils';
+  import type { WordBody } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -40,11 +41,6 @@
   let runner: Matter.Runner | null = null;
   let animFrame: number | null = null;
   let observer: IntersectionObserver | null = null;
-
-  interface WordBody {
-    elem: HTMLElement;
-    body: Matter.Body;
-  }
 
   let wordBodies: WordBody[] = [];
 

@@ -22,7 +22,7 @@
 <template>
   <ComponentDemo refreshable :code="code">
     <div
-      class="flex h-50 w-full items-center justify-center rounded-lg bg-background p-6"
+      class="flex size-full min-h-100 items-center justify-center rounded-lg bg-background p-6"
     >
       <KineticTextReveal
         text="Animate every word"

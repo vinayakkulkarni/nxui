@@ -53,12 +53,12 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative h-125 w-full overflow-hidden">
+    <div class="relative size-full min-h-80 overflow-hidden">
       <ClientOnly>
         <HeroGeometric
           :key="activeTab"
           v-bind="currentTab.props"
-          class="h-full"
+          class="absolute inset-0 size-full"
         />
         <template #fallback>
           <div class="flex size-full items-center justify-center bg-blue-50">

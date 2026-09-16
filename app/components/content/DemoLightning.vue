@@ -14,8 +14,16 @@
   </div>
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
-      <Lightning :hue="230" :speed="1" :intensity="1" :size="1" />
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
+      <Lightning
+        class="absolute inset-0 size-full"
+        :hue="230"
+        :speed="1"
+        :intensity="1"
+        :size="1"
+      />
     </div>
   </ComponentDemo>
 </template>

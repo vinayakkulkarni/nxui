@@ -12,7 +12,7 @@
   <DomeGallery :grayscale='true' />
 </template>`"
   >
-    <div class="relative h-125 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <DomeGallery :grayscale="true" />
     </div>
   </ComponentDemo>

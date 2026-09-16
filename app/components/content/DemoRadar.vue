@@ -12,7 +12,7 @@
   <Radar />
 </template>`"
   >
-    <div class="h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <ClientOnly><Radar /></ClientOnly>
     </div>
   </ComponentDemo>

@@ -12,7 +12,9 @@
   <BlobCursor fill-color='#5227FF' :trail-count='3' blob-type='circle' />
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg bg-background">
+    <div
+      class="relative size-full min-h-80 overflow-hidden rounded-lg bg-background"
+    >
       <BlobCursor fill-color="#5227FF" :trail-count="3" blob-type="circle">
         <div class="flex size-full items-center justify-center">
           <p class="relative z-10 text-lg text-foreground">Move your cursor</p>

@@ -12,7 +12,7 @@
   <LineWaves :brightness=&quot;0.2&quot; :rotation=&quot;-45&quot; />
 </template>`"
   >
-    <div class="h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <ClientOnly><LineWaves /></ClientOnly>
     </div>
   </ComponentDemo>

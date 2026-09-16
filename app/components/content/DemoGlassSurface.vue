@@ -29,7 +29,7 @@
     full-width
     class="p-0"
   >
-    <div class="relative h-125 overflow-y-auto overscroll-contain">
+    <div class="relative size-full min-h-80 overflow-y-auto overscroll-contain">
       <!-- Tall wrapper creating scroll height -->
       <div class="relative min-h-375">
         <!-- Sticky glass surface, centered in viewport -->

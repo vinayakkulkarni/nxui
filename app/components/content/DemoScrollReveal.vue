@@ -27,7 +27,7 @@
     <div class="flex size-full items-center justify-center">
       <div
         ref="scrollContainer"
-        class="relative h-100 w-full max-w-3xl overflow-y-auto overscroll-contain rounded-xl border border-border/30"
+        class="relative size-full min-h-80 max-w-3xl overflow-y-auto overscroll-contain rounded-xl border border-border/30"
       >
         <p
           class="pointer-events-none sticky top-[85%] z-10 text-center text-sm text-muted-foreground/30"

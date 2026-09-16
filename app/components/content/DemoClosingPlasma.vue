@@ -52,12 +52,12 @@
 
 <template>
   <ComponentDemo :code="currentTab.code" full-width class="p-0">
-    <div class="relative h-100 w-full">
+    <div class="relative size-full min-h-80">
       <ClientOnly>
         <ClosingPlasma
           :key="activeTab"
           v-bind="currentTab.props"
-          class="h-full rounded-lg"
+          class="absolute inset-0 size-full rounded-lg"
         >
           <div class="flex size-full items-center justify-center">
             <p class="text-lg font-semibold text-white/80 dark:text-white/80">

@@ -26,7 +26,9 @@
   <AnimatedList :items='items' :show-gradients='true' :enable-arrow-navigation='true' />
 </template>`"
   >
-    <div class="flex h-100 w-full items-center justify-center rounded-lg">
+    <div
+      class="flex size-full min-h-100 items-center justify-center rounded-lg"
+    >
       <AnimatedList
         :items="items"
         :show-gradients="true"

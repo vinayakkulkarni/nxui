@@ -20,7 +20,7 @@
   </div>
 </template>`"
   >
-    <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
       <Balatro
         color1="#DE443B"
         color2="#006BB4"

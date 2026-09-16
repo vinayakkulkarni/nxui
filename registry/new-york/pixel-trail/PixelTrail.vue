@@ -2,6 +2,7 @@
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import type { Pixel } from './types';
 
   const props = withDefaults(
     defineProps<{
@@ -24,12 +25,6 @@
   const canvasRef = ref<HTMLCanvasElement | null>(null);
   let ctx: CanvasRenderingContext2D | null = null;
   let animId = 0;
-
-  interface Pixel {
-    x: number;
-    y: number;
-    birth: number;
-  }
 
   const pixels: Pixel[] = [];
   const filterId = `goo-filter-${Math.random().toString(36).slice(2, 9)}`;
