@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.20](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.19...nxui-v0.0.20) (2026-09-19)
+
+
+### Bug Fixes
+
+* **deps:** resolve vue to a single stable copy ([#251](https://github.com/vinayakkulkarni/nxui/issues/251)) ([293ed74](https://github.com/vinayakkulkarni/nxui/commit/293ed746cb33484cf3beb8e6fe627fb30a6fff0e))
+
 ## [0.0.19](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.18...nxui-v0.0.19) (2026-09-16)
 
 
