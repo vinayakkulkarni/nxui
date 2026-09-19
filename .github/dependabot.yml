@@ -29,3 +29,14 @@ updates:
       prefix: fix
       prefix-development: chore
       include: scope
+    # Vue must resolve to ONE version across the whole graph. Nuxt declares a
+    # caret range on the stable line, so a prerelease pin from this manifest
+    # (e.g. 3.6.0-rc.x) is NOT satisfied by Nuxt's range — pnpm then installs a
+    # second Vue copy and the SSR renderer can no longer see Nuxt's
+    # runtime-core instance. useNuxtApp() falls back to a stale global context
+    # and every SSR render after the first one per isolate returns 500.
+    # Do not let a prerelease Vue in through an automated bump; move the whole
+    # graph to 3.6 deliberately, once Nuxt accepts it.
+    ignore:
+      - dependency-name: vue
+        versions: ['>=3.6.0-0']
