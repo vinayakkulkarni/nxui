@@ -1,11 +1,11 @@
 ---
 title: Control Card
-description: A frosted-glass device card with a power switch, a level slider and an accent glow that blooms when on.
+description: A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.
 ---
 
 # Control Card
 
-A frosted-glass card for devices and toggles. Switching it on fills the icon with the accent color, blooms a soft glow behind the card and enables the level slider. Place it over a colorful background for the full glass effect.
+A frosted-glass card for smart-home and device dashboards. The round power button fills with the accent color when on. The card blurs whatever is behind it, so place it over a photo or a colorful background.
 
 ::demo-control-card
 ::
@@ -18,35 +18,30 @@ A frosted-glass card for devices and toggles. Switching it on fills the icon wit
   import ControlCard from '~/components/ui/control-card/ControlCard.vue';
 
   const on = ref(true);
-  const brightness = ref(72);
 </script>
 
 <template>
   <ControlCard
     v-model:on="on"
-    v-model:level="brightness"
-    name="Ceiling lights"
-    location="Living room"
-    icon="lamp-ceiling"
-    stat="4 bulbs"
-    level-label="Brightness"
-    color="oklch(0.8 0.16 80)"
+    category="Wi-Fi"
+    name="Starlink Internet"
+    icon="wifi"
+    :stat="{ icon: 'gauge', value: 'Speed ~ 1GB', label: 'Active' }"
   />
 </template>
 ```
 
 ## Props
 
-| Prop            | Type      | Default            | Description                                   |
-| --------------- | --------- | ------------------ | --------------------------------------------- |
-| `name`          | `string`  | —                  | Device name                                   |
-| `location`      | `string`  | `''`               | Where the device is                           |
-| `icon`          | `string`  | `'power'`          | Lucide icon name without the prefix           |
-| `stat`          | `string`  | `''`               | Reading shown while on                        |
-| `level-label`   | `string`  | `''`               | Label for the level slider; hidden when empty |
-| `level-unit`    | `string`  | `'%'`              | Unit appended to the level                    |
-| `color`         | `string`  | `'var(--chart-4)'` | Accent color while on                         |
-| `v-model:on`    | `boolean` | `false`            | Power state                                   |
-| `v-model:level` | `number`  | `60`               | Slider value from 0 to 100                    |
+| Prop         | Type                                             | Default                  | Description                         |
+| ------------ | ------------------------------------------------ | ------------------------ | ----------------------------------- |
+| `category`   | `string`                                         | —                        | Device type                         |
+| `name`       | `string`                                         | —                        | Device name                         |
+| `icon`       | `string`                                         | —                        | Lucide icon name without the prefix |
+| `stat`       | `{ icon: string; value: string; label: string }` | —                        | Reading shown in the boxed row      |
+| `color`      | `string`                                         | `'oklch(0.55 0.22 264)'` | Power button color while on         |
+| `v-model:on` | `boolean`                                        | `false`                  | Power state                         |
+
+The text is white by design, so the card needs a darker or busy backdrop to stay legible.
 
 Motion respects `prefers-reduced-motion`.
