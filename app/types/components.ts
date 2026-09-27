@@ -97,3 +97,22 @@ export interface DemoSettingsPreset<TSettings> {
   label: string;
   settings: Partial<TSettings>;
 }
+
+export type DemoOrderStatus = 'Paid' | 'Pending' | 'Refunded' | 'Failed';
+
+export interface DemoOrderRow {
+  id: string;
+  customer: string;
+  email: string;
+  status: DemoOrderStatus;
+  amount: number;
+  change: number;
+}
+
+/** One scripted step of the status-panel demo's simulated incident. */
+export interface DemoStatusStep {
+  serviceId: string;
+  status: 'operational' | 'degraded' | 'down' | 'maintenance';
+  message: string;
+  level: 'info' | 'warning' | 'error' | 'success';
+}

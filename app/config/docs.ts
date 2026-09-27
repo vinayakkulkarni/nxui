@@ -20,7 +20,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Depth Dive',
         path: '/docs/text-animations/depth-dive',
-        badge: 'new',
       },
       {
         title: 'Editorial Orbs',
@@ -78,7 +77,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Art Gallery',
         path: '/docs/components/art-gallery',
-        badge: 'new',
       },
       { title: 'Auth Modal', path: '/docs/components/auth-modal' },
       {
@@ -159,7 +157,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Holo Sticker',
         path: '/docs/components/holo-sticker',
-        badge: 'new',
       },
       {
         title: 'Holo Cloth',
@@ -210,7 +207,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Receipt Printer',
         path: '/docs/components/receipt-printer',
-        badge: 'new',
       },
       { title: 'Reflective Card', path: '/docs/components/reflective-card' },
       {
@@ -248,7 +244,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Holo Sticker',
         path: '/docs/components/holo-sticker',
-        badge: 'new',
       },
       {
         title: 'Sticky Scroll Cards',
@@ -261,7 +256,6 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Timezone Companion',
         path: '/docs/components/timezone-companion',
-        badge: 'new',
       },
       { title: 'Tilted Card', path: '/docs/components/tilted-card' },
       {
@@ -271,8 +265,47 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Weather Forecast',
         path: '/docs/components/weather-forecast',
+      },
+    ],
+  },
+  {
+    title: 'Dashboard',
+    items: [
+      {
+        title: 'Control Card',
+        path: '/docs/dashboard/control-card',
         badge: 'new',
       },
+      { title: 'Data Table', path: '/docs/dashboard/data-table', badge: 'new' },
+      { title: 'KPI Card', path: '/docs/dashboard/kpi-card', badge: 'new' },
+      {
+        title: 'KPI Carousel',
+        path: '/docs/dashboard/kpi-carousel',
+        badge: 'new',
+      },
+      {
+        title: 'Status Panel',
+        path: '/docs/dashboard/status-panel',
+        badge: 'new',
+      },
+    ],
+  },
+  {
+    title: 'Charts',
+    items: [
+      { title: 'Area Chart', path: '/docs/charts/area-chart', badge: 'new' },
+      { title: 'Donut Chart', path: '/docs/charts/donut-chart', badge: 'new' },
+      {
+        title: 'Progress Ring',
+        path: '/docs/charts/progress-ring',
+        badge: 'new',
+      },
+      {
+        title: 'Radial Gauge',
+        path: '/docs/charts/radial-gauge',
+        badge: 'new',
+      },
+      { title: 'Sparkline', path: '/docs/charts/sparkline', badge: 'new' },
     ],
   },
   {

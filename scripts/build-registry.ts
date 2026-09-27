@@ -53,6 +53,21 @@ interface RegistryIndex {
 const PAPER_SHADER_MOUNT = 'paper-shader-mount';
 const PAPER_SHADER_MOUNT_URL = `https://nxui.geoql.in/r/${PAPER_SHADER_MOUNT}.json`;
 
+/**
+ * Shared chart engine (hand-rolled, TanStack Charts-compatible API) installed
+ * once and referenced by every chart component.
+ */
+const CHART_LIB = 'chart';
+const CHART_LIB_URL = `https://nxui.geoql.in/r/${CHART_LIB}.json`;
+const CHART_COMPONENTS = new Set([
+  'area-chart',
+  'donut-chart',
+  'kpi-card',
+  'progress-ring',
+  'radial-gauge',
+  'sparkline',
+]);
+
 const COMPONENTS: Record<
   string,
   { title: string; description: string; deps: string[] }
@@ -1497,6 +1512,72 @@ const COMPONENTS: Record<
       'Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.',
     deps: [],
   },
+  chart: {
+    title: 'Chart',
+    description:
+      'Dependency-free SVG chart engine with the TanStack Charts API. Swap to @tanstack/vue-charts by editing one file.',
+    deps: ['@vueuse/core'],
+  },
+  sparkline: {
+    title: 'Sparkline',
+    description:
+      'A compact trend line with a shaded area that rises into place, sized for KPI cards and table cells.',
+    deps: ['@vueuse/core'],
+  },
+  'area-chart': {
+    title: 'Area Chart',
+    description:
+      'A responsive area chart with axes and grid lines whose values rise from the baseline on mount.',
+    deps: ['@vueuse/core'],
+  },
+  'donut-chart': {
+    title: 'Donut Chart',
+    description:
+      'A donut chart that sweeps in clockwise, with a counting total in the center and a legend that lifts its slice on hover.',
+    deps: ['@vueuse/core'],
+  },
+  'radial-gauge': {
+    title: 'Radial Gauge',
+    description:
+      'A 270° gauge with a rounded value arc, threshold colors, and a readout that counts up to the value.',
+    deps: ['@vueuse/core'],
+  },
+  'progress-ring': {
+    title: 'Progress Ring',
+    description:
+      'A circular progress indicator with rounded ends and a percentage that counts up with the ring.',
+    deps: ['@vueuse/core'],
+  },
+  'kpi-card': {
+    title: 'KPI Card',
+    description:
+      'A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.',
+    deps: ['@vueuse/core'],
+  },
+  'kpi-carousel': {
+    title: 'KPI Carousel',
+    description:
+      'A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.',
+    deps: ['@vueuse/core'],
+  },
+  'control-card': {
+    title: 'Control Card',
+    description:
+      'A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.',
+    deps: [],
+  },
+  'data-table': {
+    title: 'Data Table',
+    description:
+      'A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.',
+    deps: ['@tanstack/vue-table'],
+  },
+  'status-panel': {
+    title: 'Status Panel',
+    description:
+      'Service health lamps with an overall status, uptime and latency, plus a live event log.',
+    deps: [],
+  },
 };
 
 function buildRegistryItem(slug: string): RegistryItem | null {
@@ -1514,7 +1595,8 @@ function buildRegistryItem(slug: string): RegistryItem | null {
   }
 
   const isMount = slug === PAPER_SHADER_MOUNT;
-  const itemType: RegistryItemType = isMount ? 'registry:lib' : 'registry:ui';
+  const isLib = isMount || slug === CHART_LIB;
+  const itemType: RegistryItemType = isLib ? 'registry:lib' : 'registry:ui';
   const files: RegistryFile[] = [];
 
   // Sorted so registry JSON is deterministic across runtimes/filesystems.
@@ -1539,6 +1621,10 @@ function buildRegistryItem(slug: string): RegistryItem | null {
   }
 
   const needsMount = !isMount && slug.startsWith('paper-');
+  const registryDependencies = [
+    ...(needsMount ? [PAPER_SHADER_MOUNT_URL] : []),
+    ...(CHART_COMPONENTS.has(slug) ? [CHART_LIB_URL] : []),
+  ];
 
   return {
     $schema: 'https://shadcn-vue.com/schema/registry-item.json',
@@ -1547,7 +1633,7 @@ function buildRegistryItem(slug: string): RegistryItem | null {
     title: meta.title,
     description: meta.description,
     dependencies: meta.deps,
-    ...(needsMount ? { registryDependencies: [PAPER_SHADER_MOUNT_URL] } : {}),
+    ...(registryDependencies.length > 0 ? { registryDependencies } : {}),
     files,
   };
 }
