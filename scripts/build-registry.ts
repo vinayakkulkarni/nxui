@@ -62,10 +62,16 @@ const CHART_LIB_URL = `https://nxui.geoql.in/r/${CHART_LIB}.json`;
 const CHART_COMPONENTS = new Set([
   'area-chart',
   'donut-chart',
+  'kpi-card',
   'progress-ring',
   'radial-gauge',
   'sparkline',
 ]);
+
+/** Components that render another nxui component, keyed by the dependent. */
+const COMPONENT_DEPENDENCIES: Record<string, string[]> = {
+  'kpi-card': ['sparkline'],
+};
 
 const COMPONENTS: Record<
   string,
@@ -1547,6 +1553,36 @@ const COMPONENTS: Record<
       'A circular progress indicator with rounded ends and a percentage that counts up with the ring.',
     deps: ['@vueuse/core'],
   },
+  'kpi-card': {
+    title: 'KPI Card',
+    description:
+      'A metric card with a counting value, a good-or-bad delta pill, an optional sparkline and an avatar stack.',
+    deps: ['@vueuse/core'],
+  },
+  'kpi-carousel': {
+    title: 'KPI Carousel',
+    description:
+      'A carousel of best, worst and neutral headline metrics with tone badges, dots, arrows and keyboard support.',
+    deps: ['@vueuse/core'],
+  },
+  'control-card': {
+    title: 'Control Card',
+    description:
+      'A frosted-glass device card with a power switch, a level slider and an accent glow that blooms when on.',
+    deps: [],
+  },
+  'data-table': {
+    title: 'Data Table',
+    description:
+      'A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.',
+    deps: ['@tanstack/vue-table'],
+  },
+  'status-panel': {
+    title: 'Status Panel',
+    description:
+      'Service health lamps with an overall status, uptime and latency, plus a live event log.',
+    deps: [],
+  },
 };
 
 function buildRegistryItem(slug: string): RegistryItem | null {
@@ -1593,6 +1629,9 @@ function buildRegistryItem(slug: string): RegistryItem | null {
   const registryDependencies = [
     ...(needsMount ? [PAPER_SHADER_MOUNT_URL] : []),
     ...(CHART_COMPONENTS.has(slug) ? [CHART_LIB_URL] : []),
+    ...(COMPONENT_DEPENDENCIES[slug] ?? []).map(
+      (name) => `https://nxui.geoql.in/r/${name}.json`,
+    ),
   ];
 
   return {
