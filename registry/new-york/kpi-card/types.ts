@@ -1,29 +1,28 @@
-export type KpiValueFormat = 'number' | 'currency' | 'percent' | 'compact';
+export type KpiAccent = 'violet' | 'emerald' | 'blue' | 'rose' | 'amber';
 
-export interface KpiAvatar {
-  src: string;
-  alt: string;
+export interface KpiPerson {
+  /** Shown as initials when `src` is missing or fails to load. */
+  name: string;
+  src?: string;
+}
+
+export interface KpiAccentStyle {
+  icon: string;
+  glow: string;
 }
 
 export interface KpiCardProps {
   label: string;
   value: number;
-  format?: KpiValueFormat;
-  /** ISO 4217 code used when `format` is `currency`. */
-  currency?: string;
-  /** Percent change against the comparison period, e.g. `12.4` or `-3.1`. */
-  delta?: number;
-  /** Shown after the delta, e.g. `vs last month`. */
-  deltaLabel?: string;
-  /** Treats a falling value as good news, e.g. churn or latency. */
-  invertDelta?: boolean;
   /** Lucide icon name without the prefix, e.g. `users`. */
-  icon?: string;
-  /** Recent values; renders a sparkline when two or more are given. */
-  trend?: number[];
+  icon: string;
+  /** Tints the icon box and the corner glow. */
+  accent?: KpiAccent;
   /** People behind the metric, shown as an overlapping stack. */
-  avatars?: KpiAvatar[];
-  /** Avatars shown before collapsing the rest into `+N`. */
-  maxAvatars?: number;
+  people?: KpiPerson[];
+  /** People shown before collapsing the rest into `+N`. */
+  maxPeople?: number;
+  /** Shows the actions button; listen to `menu` to open your own menu. */
+  showMenu?: boolean;
   class?: string;
 }

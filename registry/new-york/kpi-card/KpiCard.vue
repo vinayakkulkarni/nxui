@@ -1,158 +1,137 @@
 <script setup lang="ts">
-  import { computed } from 'vue';
-  import Sparkline from '../sparkline/Sparkline.vue';
+  import { computed, ref } from 'vue';
   import { useChartTween } from '../chart/use-chart-tween';
-  import type { KpiCardProps } from './types';
+  import type { KpiAccent, KpiAccentStyle, KpiCardProps } from './types';
 
   const props = withDefaults(defineProps<KpiCardProps>(), {
-    format: 'number',
-    currency: 'USD',
-    delta: undefined,
-    deltaLabel: '',
-    invertDelta: false,
-    icon: '',
-    trend: () => [],
-    avatars: () => [],
-    maxAvatars: 4,
+    accent: 'violet',
+    people: () => [],
+    maxPeople: 3,
+    showMenu: true,
     class: '',
   });
 
-  const shown = useChartTween(() => props.value, 1100);
+  const emit = defineEmits<{ menu: [event: MouseEvent] }>();
 
-  const formatter = computed(() => {
-    switch (props.format) {
-      case 'currency':
-        return new Intl.NumberFormat('en-US', {
-          style: 'currency',
-          currency: props.currency,
-          maximumFractionDigits: 0,
-        });
-      case 'percent':
-        return new Intl.NumberFormat('en-US', {
-          style: 'percent',
-          maximumFractionDigits: 1,
-        });
-      case 'compact':
-        return new Intl.NumberFormat('en-US', {
-          notation: 'compact',
-          maximumFractionDigits: 1,
-        });
-      default:
-        return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 });
-    }
-  });
-
-  // Percent values are passed as percentages (42.5), Intl expects fractions.
+  const shown = useChartTween(() => props.value, 1000);
   const display = computed(() =>
-    formatter.value.format(
-      props.format === 'percent' ? shown.value / 100 : shown.value,
+    new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(
+      shown.value,
     ),
   );
 
-  const good = computed(() => {
-    if (props.delta === undefined || props.delta === 0) return null;
-    return props.invertDelta ? props.delta < 0 : props.delta > 0;
-  });
+  const ACCENTS: Record<KpiAccent, KpiAccentStyle> = {
+    violet: {
+      icon: 'text-violet-600 dark:text-violet-400',
+      glow: 'from-violet-500/12',
+    },
+    emerald: {
+      icon: 'text-emerald-600 dark:text-emerald-400',
+      glow: 'from-emerald-500/12',
+    },
+    blue: {
+      icon: 'text-blue-600 dark:text-blue-400',
+      glow: 'from-blue-500/12',
+    },
+    rose: {
+      icon: 'text-rose-600 dark:text-rose-400',
+      glow: 'from-rose-500/12',
+    },
+    amber: {
+      icon: 'text-amber-600 dark:text-amber-400',
+      glow: 'from-amber-500/12',
+    },
+  };
 
-  const deltaText = computed(() => {
-    if (props.delta === undefined) return '';
-    const sign = props.delta > 0 ? '+' : '';
-    return `${sign}${props.delta.toFixed(1)}%`;
-  });
-
-  const trendColor = computed(() => {
-    if (good.value === null) return 'var(--chart-1)';
-    return good.value ? 'var(--chart-2)' : 'var(--chart-5)';
-  });
-
-  const visibleAvatars = computed(() =>
-    props.avatars.slice(0, props.maxAvatars),
+  const visible = computed(() => props.people.slice(0, props.maxPeople));
+  const hidden = computed(() =>
+    Math.max(0, props.people.length - props.maxPeople),
   );
-  const hiddenAvatars = computed(() =>
-    Math.max(0, props.avatars.length - props.maxAvatars),
-  );
+
+  // Images that fail to load fall back to initials.
+  const failed = ref(new Set<string>());
+
+  function initial(name: string): string {
+    return name.trim().charAt(0).toUpperCase();
+  }
+
+  function onImageError(name: string): void {
+    failed.value = new Set(failed.value).add(name);
+  }
+
+  function onMenu(event: MouseEvent): void {
+    emit('menu', event);
+  }
 </script>
 
 <template>
   <article
     :class="[
-      'flex flex-col gap-4 rounded-2xl border bg-card p-5 text-card-foreground shadow-sm',
+      'relative flex flex-col overflow-hidden rounded-2xl border bg-card p-4 text-card-foreground shadow-sm',
       props.class,
     ]"
   >
-    <header class="flex items-center justify-between gap-3">
-      <p class="text-sm text-muted-foreground">{{ props.label }}</p>
-      <span
-        v-if="props.icon"
-        class="flex size-8 items-center justify-center rounded-lg bg-muted text-muted-foreground"
-      >
-        <Icon :name="`lucide:${props.icon}`" class="size-4" />
-      </span>
-    </header>
-
-    <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-      <span class="text-3xl font-semibold tracking-tight tabular-nums">
-        {{ display }}
-      </span>
-      <span
-        v-if="props.delta !== undefined"
-        :class="[
-          'inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 text-xs font-medium tabular-nums',
-          good === null
-            ? 'bg-muted text-muted-foreground'
-            : good
-              ? 'bg-emerald-500/12 text-emerald-700 dark:text-emerald-400'
-              : 'bg-rose-500/12 text-rose-700 dark:text-rose-400',
-        ]"
-      >
-        <Icon
-          :name="
-            props.delta > 0
-              ? 'lucide:arrow-up-right'
-              : props.delta < 0
-                ? 'lucide:arrow-down-right'
-                : 'lucide:minus'
-          "
-          class="size-3.5"
-        />
-        {{ deltaText }}
-      </span>
-      <span v-if="props.deltaLabel" class="text-xs text-muted-foreground">
-        {{ props.deltaLabel }}
-      </span>
-    </div>
-
-    <Sparkline
-      v-if="props.trend.length > 1"
-      :data="props.trend"
-      :color="trendColor"
-      :height="44"
-      :aria-label="`${props.label} trend`"
+    <div
+      aria-hidden="true"
+      :class="[
+        'pointer-events-none absolute inset-0 bg-radial-[at_15%_0%] to-transparent to-60%',
+        ACCENTS[props.accent].glow,
+      ]"
     />
 
-    <footer
-      v-if="props.avatars.length"
-      class="flex items-center justify-between gap-3 border-t pt-3"
-    >
-      <div class="flex -space-x-2">
-        <img
-          v-for="avatar in visibleAvatars"
-          :key="avatar.src"
-          :src="avatar.src"
-          :alt="avatar.alt"
-          width="28"
-          height="28"
-          loading="lazy"
-          class="size-7 rounded-full bg-muted object-cover ring-2 ring-card"
-        />
+    <header class="relative flex items-start justify-between">
+      <span
+        :class="[
+          'flex size-9 items-center justify-center rounded-lg border bg-background shadow-xs',
+          ACCENTS[props.accent].icon,
+        ]"
+      >
+        <Icon :name="`lucide:${props.icon}`" class="size-4.5" />
+      </span>
+      <button
+        v-if="props.showMenu"
+        type="button"
+        :aria-label="`${props.label} actions`"
+        class="-mr-1 flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+        @click="onMenu"
+      >
+        <Icon name="lucide:ellipsis-vertical" class="size-4" />
+      </button>
+    </header>
+
+    <p class="relative mt-5 text-sm">{{ props.label }}</p>
+
+    <div class="relative mt-1 flex items-end justify-between gap-3">
+      <span class="text-2xl font-semibold tracking-tight tabular-nums">
+        {{ display }}
+      </span>
+      <div v-if="props.people.length" class="flex -space-x-1.5">
+        <template v-for="person in visible" :key="person.name">
+          <img
+            v-if="person.src && !failed.has(person.name)"
+            :src="person.src"
+            :alt="person.name"
+            width="24"
+            height="24"
+            loading="lazy"
+            class="size-6 rounded-full bg-muted object-cover ring-2 ring-card"
+            @error="onImageError(person.name)"
+          />
+          <span
+            v-else
+            :title="person.name"
+            class="flex size-6 items-center justify-center rounded-full bg-muted text-[0.625rem] font-medium text-muted-foreground ring-2 ring-card"
+          >
+            {{ initial(person.name) }}
+          </span>
+        </template>
         <span
-          v-if="hiddenAvatars"
-          class="flex size-7 items-center justify-center rounded-full bg-muted text-[0.6875rem] font-medium text-muted-foreground ring-2 ring-card"
+          v-if="hidden"
+          class="flex size-6 items-center justify-center rounded-full bg-muted text-[0.625rem] font-medium text-muted-foreground ring-2 ring-card"
         >
-          +{{ hiddenAvatars }}
+          +{{ hidden }}
         </span>
       </div>
-      <slot name="footer" />
-    </footer>
+    </div>
   </article>
 </template>

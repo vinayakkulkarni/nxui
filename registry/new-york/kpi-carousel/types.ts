@@ -1,26 +1,28 @@
 export type KpiTone = 'best' | 'worst' | 'neutral';
 
-export interface KpiToneStyle {
-  badge: string;
-  label: string;
-  icon: string;
-  glow: string;
-}
-
 export interface KpiCarouselItem {
-  /** Short heading, e.g. `Best performer`. */
+  /** Card heading, e.g. `Best Contributor`. */
   title: string;
-  /** Pre-formatted headline value, e.g. `$48.2k`. */
-  value: string;
-  /** Supporting line under the value. */
+  /** Supporting line under the heading. */
   caption: string;
+  /** Headline value on the right, e.g. `TCS` or `45.52`. */
+  value: string;
+  /** Percent change shown under the value, e.g. `4.2`. Omit to hide. */
+  delta?: number;
   tone: KpiTone;
 }
 
+export interface KpiToneStyle {
+  card: string;
+  title: string;
+  delta: string;
+}
+
 export interface KpiCarouselProps {
+  /** Panel heading, e.g. `Active Top Names`. */
+  title: string;
   items: KpiCarouselItem[];
-  /** Advances automatically every N ms; `0` disables autoplay. */
+  /** Advances automatically every N ms; `0` (default) disables autoplay. */
   interval?: number;
-  ariaLabel?: string;
   class?: string;
 }

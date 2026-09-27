@@ -1,11 +1,11 @@
 ---
 title: KPI Carousel
-description: A carousel of best, worst and neutral headline metrics with tone badges, dots, arrows and keyboard support.
+description: A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.
 ---
 
 # KPI Carousel
 
-A carousel for headline metrics, each tagged as best, worst or neutral with a matching badge and glow. It autoplays and pauses while the pointer or keyboard focus is inside. Arrow keys move between slides.
+A titled panel that pages through metric cards. Each card is tinted by its tone — green for best, red for worst, blue for neutral — with the value and change on the right. The neighbouring cards peek in at the edges, and the arrows, dots and arrow keys move between them. Stack several panels for a top/bottom/neutral summary.
 
 ::demo-kpi-carousel
 ::
@@ -19,32 +19,40 @@ A carousel for headline metrics, each tagged as best, worst or neutral with a ma
 
   const items: KpiCarouselItem[] = [
     {
-      title: 'Top region',
-      value: '$184.3k',
-      caption: 'North America grew 18%.',
+      title: 'Best Contributor',
+      caption: 'Most significant contributor',
+      value: 'TCS',
+      delta: 4.2,
       tone: 'best',
     },
     {
-      title: 'Lowest conversion',
-      value: '1.2%',
-      caption: 'Mobile checkout dropped.',
+      title: 'Worst Contributor',
+      caption: 'Most significant contributor',
+      value: 'RELNC',
+      delta: 0.26,
       tone: 'worst',
+    },
+    {
+      title: 'Neutral Contributor',
+      caption: 'Most neutral contributor',
+      value: '45.52',
+      tone: 'neutral',
     },
   ];
 </script>
 
 <template>
-  <KpiCarousel :items="items" />
+  <KpiCarousel title="Active Top Names" :items="items" />
 </template>
 ```
 
 ## Props
 
-| Prop         | Type                                                                                        | Default         | Description                                 |
-| ------------ | ------------------------------------------------------------------------------------------- | --------------- | ------------------------------------------- |
-| `items`      | `{ title: string; value: string; caption: string; tone: 'best' \| 'worst' \| 'neutral' }[]` | —               | Slides in order                             |
-| `v-model`    | `number`                                                                                    | `0`             | Index of the active slide                   |
-| `interval`   | `number`                                                                                    | `5000`          | Autoplay delay in ms; `0` disables autoplay |
-| `aria-label` | `string`                                                                                    | `'Key metrics'` | Accessible name of the carousel             |
+| Prop       | Type                                        | Default | Description                                                                  |
+| ---------- | ------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
+| `title`    | `string`                                    | —       | Panel heading                                                                |
+| `items`    | `{ title; caption; value; delta?; tone }[]` | —       | `tone` is `'best'`, `'worst'` or `'neutral'`; omit `delta` for a large value |
+| `v-model`  | `number`                                    | `0`     | Index of the active card                                                     |
+| `interval` | `number`                                    | `0`     | Autoplay delay in ms; `0` disables autoplay                                  |
 
 Motion respects `prefers-reduced-motion`.

@@ -8,8 +8,7 @@
   import type { KpiCarouselProps, KpiTone, KpiToneStyle } from './types';
 
   const props = withDefaults(defineProps<KpiCarouselProps>(), {
-    interval: 5000,
-    ariaLabel: 'Key metrics',
+    interval: 0,
     class: '',
   });
 
@@ -45,7 +44,7 @@
     }
   }
 
-  // Autoplay pauses while the pointer or keyboard focus is inside.
+  // Optional autoplay, paused while the pointer or keyboard focus is inside.
   useIntervalFn(
     () => {
       if (props.interval > 0 && !hovered.value && !focused.value) next();
@@ -55,32 +54,35 @@
 
   const TONES: Record<KpiTone, KpiToneStyle> = {
     best: {
-      badge: 'bg-emerald-500/12 text-emerald-700 dark:text-emerald-400',
-      label: 'Best',
-      icon: 'lucide:trophy',
-      glow: 'from-emerald-500/14',
+      card: 'border-emerald-600/40 bg-linear-to-br from-emerald-500/18 to-emerald-500/6 dark:border-emerald-500/40 dark:from-emerald-500/25 dark:to-emerald-900/20',
+      title: 'text-emerald-700 dark:text-emerald-400',
+      delta: 'text-emerald-700 dark:text-emerald-400',
     },
     worst: {
-      badge: 'bg-rose-500/12 text-rose-700 dark:text-rose-400',
-      label: 'Needs attention',
-      icon: 'lucide:triangle-alert',
-      glow: 'from-rose-500/14',
+      card: 'border-rose-600/40 bg-linear-to-br from-rose-500/18 to-rose-500/6 dark:border-rose-500/40 dark:from-rose-500/25 dark:to-rose-900/20',
+      title: 'text-rose-700 dark:text-rose-500',
+      delta: 'text-rose-700 dark:text-rose-500',
     },
     neutral: {
-      badge: 'bg-muted text-muted-foreground',
-      label: 'Steady',
-      icon: 'lucide:activity',
-      glow: 'from-foreground/6',
+      card: 'border-sky-600/40 bg-linear-to-br from-sky-500/15 to-sky-500/5 dark:border-sky-500/45 dark:from-sky-500/20 dark:to-sky-900/20',
+      title: 'text-foreground',
+      delta: 'text-sky-700 dark:text-sky-400',
     },
   };
 
+  // Each slide is the full viewport width plus the track gap, so the
+  // neighbouring cards peek into the panel padding on either side.
   const trackStyle = computed(() => ({
-    transform: `translateX(-${active.value * 100}%)`,
+    transform: `translateX(calc(${active.value} * -1 * (100% + 0.75rem)))`,
     transition:
       motion.value === 'reduce'
         ? 'none'
-        : 'transform 520ms cubic-bezier(0.22, 1, 0.36, 1)',
+        : 'transform 480ms cubic-bezier(0.22, 1, 0.36, 1)',
   }));
+
+  function deltaText(delta: number): string {
+    return `${delta > 0 ? '+' : ''}${delta.toFixed(2)}%`;
+  }
 
   function setFocused(value: boolean): void {
     focused.value = value;
@@ -90,90 +92,105 @@
 <template>
   <section
     ref="root"
-    :class="['w-full', props.class]"
+    :class="[
+      'w-full overflow-hidden rounded-2xl border border-dashed bg-card p-4 text-card-foreground',
+      props.class,
+    ]"
     role="region"
     aria-roledescription="carousel"
-    :aria-label="props.ariaLabel"
+    :aria-label="props.title"
     @focusin="setFocused(true)"
     @focusout="setFocused(false)"
     @keydown="onKeydown"
   >
-    <div class="overflow-hidden rounded-2xl border bg-card shadow-sm">
-      <div class="flex" :style="trackStyle">
-        <article
-          v-for="(item, index) in props.items"
-          :key="item.title"
-          class="relative w-full shrink-0 overflow-hidden p-6"
-          role="group"
-          aria-roledescription="slide"
-          :aria-label="`${index + 1} of ${count}: ${item.title}`"
-          :aria-hidden="index !== active"
-        >
-          <div
-            :class="[
-              'pointer-events-none absolute inset-0 bg-radial-[at_100%_0%] to-transparent to-70%',
-              TONES[item.tone].glow,
-            ]"
-          />
-          <div class="relative flex flex-col gap-4">
-            <span
-              :class="[
-                'inline-flex w-fit items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium',
-                TONES[item.tone].badge,
-              ]"
-            >
-              <Icon :name="TONES[item.tone].icon" class="size-3.5" />
-              {{ TONES[item.tone].label }}
-            </span>
-            <div>
-              <p class="text-sm text-muted-foreground">{{ item.title }}</p>
-              <p
-                class="mt-1 text-4xl font-semibold tracking-tight tabular-nums"
-              >
-                {{ item.value }}
-              </p>
-            </div>
-            <p class="text-sm text-muted-foreground">{{ item.caption }}</p>
-          </div>
-        </article>
-      </div>
-    </div>
-
-    <div class="mt-4 flex items-center justify-between">
-      <div class="flex items-center gap-1.5">
-        <button
-          v-for="(item, index) in props.items"
-          :key="item.title"
-          type="button"
-          :aria-label="`Show ${item.title}`"
-          :aria-current="index === active"
-          :class="[
-            'h-1.5 rounded-full transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
-            index === active
-              ? 'w-6 bg-foreground'
-              : 'w-1.5 bg-muted-foreground/40 hover:bg-muted-foreground',
-          ]"
-          @click="go(index)"
-        />
-      </div>
-      <div class="flex gap-2">
+    <header class="mb-3 flex items-center justify-between gap-3">
+      <h3 class="text-base font-medium">{{ props.title }}</h3>
+      <div class="flex gap-1.5">
         <button
           type="button"
-          aria-label="Previous metric"
-          class="flex size-9 items-center justify-center rounded-full border bg-card text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+          :aria-label="`Previous in ${props.title}`"
+          class="flex size-7 items-center justify-center rounded-full border bg-muted/60 text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
           @click="previous"
         >
           <Icon name="lucide:chevron-left" class="size-4" />
         </button>
         <button
           type="button"
-          aria-label="Next metric"
-          class="flex size-9 items-center justify-center rounded-full border bg-card text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+          :aria-label="`Next in ${props.title}`"
+          class="flex size-7 items-center justify-center rounded-full border bg-muted/60 text-foreground transition-colors hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
           @click="next"
         >
           <Icon name="lucide:chevron-right" class="size-4" />
         </button>
       </div>
+    </header>
+
+    <div class="flex gap-3" :style="trackStyle">
+      <article
+        v-for="(item, index) in props.items"
+        :key="`${item.title}-${index}`"
+        :class="[
+          'flex w-full shrink-0 items-center justify-between gap-4 rounded-xl border p-4',
+          TONES[item.tone].card,
+        ]"
+        role="group"
+        aria-roledescription="slide"
+        :aria-label="`${index + 1} of ${count}: ${item.title}`"
+        :aria-hidden="index !== active"
+      >
+        <div class="min-w-0">
+          <p
+            :class="['truncate text-base font-medium', TONES[item.tone].title]"
+          >
+            {{ item.title }}
+          </p>
+          <p class="mt-1 truncate text-sm text-muted-foreground">
+            {{ item.caption }}
+          </p>
+        </div>
+        <div class="flex shrink-0 flex-col items-end">
+          <span
+            :class="[
+              'font-medium tracking-tight tabular-nums',
+              item.delta === undefined ? 'text-3xl' : 'text-xl',
+            ]"
+          >
+            {{ item.value }}
+          </span>
+          <span
+            v-if="item.delta !== undefined"
+            :class="[
+              'mt-1 inline-flex items-center gap-1 text-base font-medium tabular-nums',
+              TONES[item.tone].delta,
+            ]"
+          >
+            {{ deltaText(item.delta) }}
+            <Icon
+              :name="
+                item.delta < 0 ? 'lucide:trending-down' : 'lucide:trending-up'
+              "
+              class="size-4"
+            />
+          </span>
+        </div>
+      </article>
+    </div>
+
+    <div class="mt-3 flex justify-center gap-1.5">
+      <button
+        v-for="(item, index) in props.items"
+        :key="`dot-${item.title}-${index}`"
+        type="button"
+        :aria-label="`Show ${item.title}`"
+        :aria-current="index === active"
+        :class="[
+          'size-1.5 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
+          index === active
+            ? 'bg-muted-foreground'
+            : 'bg-muted-foreground/30 hover:bg-muted-foreground/60',
+        ]"
+        @click="go(index)"
+      />
     </div>
   </section>
 </template>

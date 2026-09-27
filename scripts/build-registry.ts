@@ -68,11 +68,6 @@ const CHART_COMPONENTS = new Set([
   'sparkline',
 ]);
 
-/** Components that render another nxui component, keyed by the dependent. */
-const COMPONENT_DEPENDENCIES: Record<string, string[]> = {
-  'kpi-card': ['sparkline'],
-};
-
 const COMPONENTS: Record<
   string,
   { title: string; description: string; deps: string[] }
@@ -1556,19 +1551,19 @@ const COMPONENTS: Record<
   'kpi-card': {
     title: 'KPI Card',
     description:
-      'A metric card with a counting value, a good-or-bad delta pill, an optional sparkline and an avatar stack.',
+      'A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.',
     deps: ['@vueuse/core'],
   },
   'kpi-carousel': {
     title: 'KPI Carousel',
     description:
-      'A carousel of best, worst and neutral headline metrics with tone badges, dots, arrows and keyboard support.',
+      'A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.',
     deps: ['@vueuse/core'],
   },
   'control-card': {
     title: 'Control Card',
     description:
-      'A frosted-glass device card with a power switch, a level slider and an accent glow that blooms when on.',
+      'A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.',
     deps: [],
   },
   'data-table': {
@@ -1629,9 +1624,6 @@ function buildRegistryItem(slug: string): RegistryItem | null {
   const registryDependencies = [
     ...(needsMount ? [PAPER_SHADER_MOUNT_URL] : []),
     ...(CHART_COMPONENTS.has(slug) ? [CHART_LIB_URL] : []),
-    ...(COMPONENT_DEPENDENCIES[slug] ?? []).map(
-      (name) => `https://nxui.geoql.in/r/${name}.json`,
-    ),
   ];
 
   return {
