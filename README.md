@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (247)
+## Components (252)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 249 items total, of which these 247 are
+> on — so `npx shadcn-vue add` resolves 254 items total, of which these 252 are
 > user-facing components.
 
 ### Text Animations (33)
@@ -303,6 +303,16 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Prism Gradient](https://nxui.geoql.in/docs/hero-backgrounds/prism-gradient)       | WebGL2 hero gradient — three colors swirled through sixteen iterations of sinusoidal distortion, tracking light and dark mode automatically.                                      |
 | [Silk Aurora](https://nxui.geoql.in/docs/hero-backgrounds/silk-aurora)             | Premium WebGL hero with satin-dark aurora ribbons, pearlescent highlights, fine film grain, and cursor depth that bends the light toward the pointer.                             |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
+
+### Dashboard (5)
+
+| Component                                                         | Description                                                                                                 |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card) | A frosted-glass device card with a power switch, a level slider and an accent glow that blooms when on.     |
+| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)     | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.     |
+| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)         | A metric card with a counting value, a good-or-bad delta pill, an optional sparkline and an avatar stack.   |
+| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel) | A carousel of best, worst and neutral headline metrics with tone badges, dots, arrows and keyboard support. |
+| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel) | Service health lamps with an overall status, uptime and latency, plus a live event log.                     |
 
 ### Charts (5)
 
