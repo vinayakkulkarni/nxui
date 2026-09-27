@@ -72,11 +72,12 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (242)
+## Components (247)
 
-> The registry also ships one internal helper, `paper-shader-mount`, that the
-> Paper Shaders depend on — so `npx shadcn-vue add` resolves 243 items total,
-> of which these 242 are user-facing components.
+> The registry also ships two internal helpers — `paper-shader-mount`, which
+> the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
+> on — so `npx shadcn-vue add` resolves 249 items total, of which these 247 are
+> user-facing components.
 
 ### Text Animations (33)
 
@@ -302,6 +303,18 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Prism Gradient](https://nxui.geoql.in/docs/hero-backgrounds/prism-gradient)       | WebGL2 hero gradient — three colors swirled through sixteen iterations of sinusoidal distortion, tracking light and dark mode automatically.                                      |
 | [Silk Aurora](https://nxui.geoql.in/docs/hero-backgrounds/silk-aurora)             | Premium WebGL hero with satin-dark aurora ribbons, pearlescent highlights, fine film grain, and cursor depth that bends the light toward the pointer.                             |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
+
+### Charts (5)
+
+Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/charts) API. Swap to `@tanstack/vue-charts` by editing one file — see any chart's docs page.
+
+| Component                                                        | Description                                                                                                             |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| [Area Chart](https://nxui.geoql.in/docs/charts/area-chart)       | A responsive area chart with axes and grid lines whose values rise from the baseline on mount.                          |
+| [Donut Chart](https://nxui.geoql.in/docs/charts/donut-chart)     | A donut chart that sweeps in clockwise, with a counting total in the center and a legend that lifts its slice on hover. |
+| [Progress Ring](https://nxui.geoql.in/docs/charts/progress-ring) | A circular progress indicator with rounded ends and a percentage that counts up with the ring.                          |
+| [Radial Gauge](https://nxui.geoql.in/docs/charts/radial-gauge)   | A 270° gauge with a rounded value arc, threshold colors, and a readout that counts up to the value.                     |
+| [Sparkline](https://nxui.geoql.in/docs/charts/sparkline)         | A compact trend line with a shaded area that rises into place, sized for KPI cards and table cells.                     |
 
 ### Visual Effects (12)
 

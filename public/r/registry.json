@@ -1460,6 +1460,42 @@
       "type": "registry:ui",
       "title": "Target Cursor",
       "description": "Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking."
+    },
+    {
+      "name": "chart",
+      "type": "registry:lib",
+      "title": "Chart",
+      "description": "Dependency-free SVG chart engine with the TanStack Charts API. Swap to @tanstack/vue-charts by editing one file."
+    },
+    {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "title": "Sparkline",
+      "description": "A compact trend line with a shaded area that rises into place, sized for KPI cards and table cells."
+    },
+    {
+      "name": "area-chart",
+      "type": "registry:ui",
+      "title": "Area Chart",
+      "description": "A responsive area chart with axes and grid lines whose values rise from the baseline on mount."
+    },
+    {
+      "name": "donut-chart",
+      "type": "registry:ui",
+      "title": "Donut Chart",
+      "description": "A donut chart that sweeps in clockwise, with a counting total in the center and a legend that lifts its slice on hover."
+    },
+    {
+      "name": "radial-gauge",
+      "type": "registry:ui",
+      "title": "Radial Gauge",
+      "description": "A 270° gauge with a rounded value arc, threshold colors, and a readout that counts up to the value."
+    },
+    {
+      "name": "progress-ring",
+      "type": "registry:ui",
+      "title": "Progress Ring",
+      "description": "A circular progress indicator with rounded ends and a percentage that counts up with the ring."
     }
   ]
 }
