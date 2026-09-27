@@ -269,6 +269,28 @@ export const docsNav: NavGroup[] = [
     ],
   },
   {
+    title: 'Dashboard',
+    items: [
+      {
+        title: 'Control Card',
+        path: '/docs/dashboard/control-card',
+        badge: 'new',
+      },
+      { title: 'Data Table', path: '/docs/dashboard/data-table', badge: 'new' },
+      { title: 'KPI Card', path: '/docs/dashboard/kpi-card', badge: 'new' },
+      {
+        title: 'KPI Carousel',
+        path: '/docs/dashboard/kpi-carousel',
+        badge: 'new',
+      },
+      {
+        title: 'Status Panel',
+        path: '/docs/dashboard/status-panel',
+        badge: 'new',
+      },
+    ],
+  },
+  {
     title: 'Charts',
     items: [
       { title: 'Area Chart', path: '/docs/charts/area-chart', badge: 'new' },
