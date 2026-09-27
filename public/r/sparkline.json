@@ -1,0 +1,29 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "sparkline",
+  "type": "registry:ui",
+  "title": "Sparkline",
+  "description": "A compact trend line with a shaded area that rises into place, sized for KPI cards and table cells.",
+  "dependencies": ["@vueuse/core"],
+  "registryDependencies": ["https://nxui.geoql.in/r/chart.json"],
+  "files": [
+    {
+      "path": "registry/new-york/sparkline/Sparkline.vue",
+      "content": "<script setup lang=\"ts\">\n  import { computed } from 'vue';\n  import {\n    Chart,\n    areaY,\n    defineChart,\n    lineY,\n    scaleLinear,\n  } from '../chart/chart-backend';\n  import { useChartTween } from '../chart/use-chart-tween';\n  import type { SparklineProps } from './types';\n\n  const props = withDefaults(defineProps<SparklineProps>(), {\n    color: 'var(--chart-1)',\n    height: 48,\n    strokeWidth: 2,\n    fill: true,\n    ariaLabel: 'Trend',\n    class: '',\n  });\n\n  const progress = useChartTween(1);\n\n  const domain = computed<[number, number]>(() => {\n    const min = Math.min(...props.data);\n    const max = Math.max(...props.data);\n    return min === max ? [min - 1, max + 1] : [min, max];\n  });\n\n  // Values rise from the floor of the domain, which stays fixed while they do.\n  const rows = computed(() => {\n    const [floor] = domain.value;\n    return props.data.map((value, index) => ({\n      index,\n      value: floor + (value - floor) * progress.value,\n    }));\n  });\n\n  const definition = computed(() =>\n    defineChart({\n      marks: [\n        areaY(rows.value, {\n          x: 'index',\n          y: 'value',\n          y1: domain.value[0],\n          fill: props.color,\n          fillOpacity: props.fill ? 0.14 : 0,\n        }),\n        lineY(rows.value, {\n          x: 'index',\n          y: 'value',\n          stroke: props.color,\n          strokeWidth: props.strokeWidth,\n        }),\n      ],\n      scales: {\n        x: { scale: scaleLinear, axis: false },\n        y: { scale: scaleLinear().domain(domain.value), axis: false },\n      },\n    }),\n  );\n</script>\n\n<template>\n  <Chart\n    :definition=\"definition\"\n    :height=\"props.height\"\n    v-bind=\"{ ariaLabel: props.ariaLabel }\"\n    :class=\"props.class\"\n  />\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/sparkline/Sparkline.vue"
+    },
+    {
+      "path": "registry/new-york/sparkline/index.ts",
+      "content": "export { default as Sparkline } from './Sparkline.vue';\nexport type { SparklineProps } from './types';\n",
+      "type": "registry:ui",
+      "target": "components/ui/sparkline/index.ts"
+    },
+    {
+      "path": "registry/new-york/sparkline/types.ts",
+      "content": "export interface SparklineProps {\n  /** Series values in order. */\n  data: number[];\n  /** Any CSS color. Defaults to `var(--chart-1)`. */\n  color?: string;\n  height?: number;\n  strokeWidth?: number;\n  /** Shades the area under the line. */\n  fill?: boolean;\n  ariaLabel?: string;\n  class?: string;\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/sparkline/types.ts"
+    }
+  ]
+}
