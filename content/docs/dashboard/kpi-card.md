@@ -1,11 +1,11 @@
 ---
 title: KPI Card
-description: A metric card with a counting value, a good-or-bad delta pill, an optional sparkline and an avatar stack.
+description: A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.
 ---
 
 # KPI Card
 
-A metric card for dashboards. The value counts up on mount, the delta pill turns green or red by whether the change is good news (set `invert-delta` for metrics like churn), and an optional sparkline and avatar stack show the trend and the people behind it.
+A compact metric card for dashboard summary rows. The icon sits in a small box tinted by `accent`, a matching glow fills the top corner, and the value counts up on mount. People behind the metric show as an overlapping stack; anyone without a photo, or whose photo fails to load, shows as an initial.
 
 ::demo-kpi-card
 ::
@@ -15,37 +15,39 @@ A metric card for dashboards. The value counts up on mount, the delta pill turns
 ```vue
 <script setup lang="ts">
   import KpiCard from '~/components/ui/kpi-card/KpiCard.vue';
+  import type { KpiPerson } from '~/components/ui/kpi-card/types';
+
+  const people: KpiPerson[] = [
+    { name: 'Maya', src: '/avatars/maya.jpg' },
+    { name: 'Leo' },
+    { name: 'Ava', src: '/avatars/ava.jpg' },
+  ];
 </script>
 
 <template>
   <KpiCard
-    label="Monthly revenue"
-    :value="48210"
-    format="currency"
-    :delta="12.4"
-    delta-label="vs last month"
-    icon="dollar-sign"
-    :trend="[12, 18, 15, 22, 19, 27, 24, 31, 36, 41]"
+    label="Total Users"
+    :value="356"
+    icon="users"
+    accent="violet"
+    :people="people"
+    @menu="openMenu"
   />
 </template>
 ```
 
 ## Props
 
-| Prop           | Type                                               | Default    | Description                                 |
-| -------------- | -------------------------------------------------- | ---------- | ------------------------------------------- |
-| `label`        | `string`                                           | —          | Metric name                                 |
-| `value`        | `number`                                           | —          | Current value; counts up on mount           |
-| `format`       | `'number' \| 'currency' \| 'percent' \| 'compact'` | `'number'` | How the value is formatted                  |
-| `currency`     | `string`                                           | `'USD'`    | ISO 4217 code for `currency` format         |
-| `delta`        | `number`                                           | —          | Percent change, e.g. `12.4` or `-3.1`       |
-| `delta-label`  | `string`                                           | `''`       | Text after the delta, e.g. `vs last month`  |
-| `invert-delta` | `boolean`                                          | `false`    | Treats a falling value as good news         |
-| `icon`         | `string`                                           | `''`       | Lucide icon name without the prefix         |
-| `trend`        | `number[]`                                         | `[]`       | Renders a sparkline with two or more values |
-| `avatars`      | `{ src: string; alt: string }[]`                   | `[]`       | People behind the metric                    |
-| `max-avatars`  | `number`                                           | `4`        | Avatars shown before `+N`                   |
+| Prop         | Type                                                   | Default    | Description                         |
+| ------------ | ------------------------------------------------------ | ---------- | ----------------------------------- |
+| `label`      | `string`                                               | —          | Metric name                         |
+| `value`      | `number`                                               | —          | Current value; counts up on mount   |
+| `icon`       | `string`                                               | —          | Lucide icon name without the prefix |
+| `accent`     | `'violet' \| 'emerald' \| 'blue' \| 'rose' \| 'amber'` | `'violet'` | Tints the icon and corner glow      |
+| `people`     | `{ name: string; src?: string }[]`                     | `[]`       | People behind the metric            |
+| `max-people` | `number`                                               | `3`        | People shown before `+N`            |
+| `show-menu`  | `boolean`                                              | `true`     | Shows the actions button            |
 
-KPI Card uses the Sparkline component when `trend` is set; the CLI installs it for you.
+The actions button emits `menu` with the click event, so you can open your own dropdown.
 
 Motion respects `prefers-reduced-motion`.

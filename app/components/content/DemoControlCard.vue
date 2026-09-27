@@ -2,12 +2,9 @@
   import { ref } from 'vue';
   import ControlCard from '@registry/new-york/control-card/ControlCard.vue';
 
-  const lights = ref(true);
-  const brightness = ref(72);
-  const thermostat = ref(true);
-  const temperature = ref(44);
-  const speaker = ref(false);
-  const volume = ref(35);
+  const wifi = ref(true);
+  const tv = ref(true);
+  const car = ref(true);
   const purifier = ref(false);
 </script>
 
@@ -18,71 +15,55 @@
   import ControlCard from '~/components/ui/control-card/ControlCard.vue';
 
   const on = ref(true);
-  const brightness = ref(72);
 </script>
 
 <template>
+  <!-- Place over a photo or colorful background for the glass effect -->
   <ControlCard
     v-model:on=&quot;on&quot;
-    v-model:level=&quot;brightness&quot;
-    name=&quot;Ceiling lights&quot;
-    location=&quot;Living room&quot;
-    icon=&quot;lamp-ceiling&quot;
-    stat=&quot;4 bulbs&quot;
-    level-label=&quot;Brightness&quot;
-    color=&quot;oklch(0.8 0.16 80)&quot;
+    category=&quot;Wi-Fi&quot;
+    name=&quot;Starlink Internet&quot;
+    icon=&quot;wifi&quot;
+    :stat=&quot;{ icon: 'gauge', value: 'Speed ~ 1GB', label: 'Active' }&quot;
   />
 </template>`"
   >
     <div
-      class="relative flex size-full min-h-100 items-center justify-center overflow-hidden p-6"
+      class="relative flex size-full min-h-100 items-center justify-center overflow-hidden bg-neutral-700 bg-[url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1600&q=80&auto=format&fit=crop')] bg-cover bg-center p-6"
     >
-      <div
-        aria-hidden="true"
-        class="absolute inset-0 bg-radial-[at_20%_20%] from-amber-300/30 via-transparent to-transparent dark:from-amber-500/15"
-      />
-      <div
-        aria-hidden="true"
-        class="absolute inset-0 bg-radial-[at_85%_80%] from-sky-400/30 via-transparent to-transparent dark:from-sky-500/15"
-      />
-      <div class="relative grid w-full max-w-2xl gap-4 sm:grid-cols-2">
+      <div aria-hidden="true" class="absolute inset-0 bg-black/15" />
+      <div class="relative grid w-full max-w-3xl gap-4 sm:grid-cols-2">
         <ControlCard
-          v-model:on="lights"
-          v-model:level="brightness"
-          name="Ceiling lights"
-          location="Living room"
-          icon="lamp-ceiling"
-          stat="4 bulbs"
-          level-label="Brightness"
-          color="oklch(0.8 0.16 80)"
+          v-model:on="wifi"
+          category="Wi-Fi"
+          name="Starlink Internet"
+          icon="wifi"
+          :stat="{ icon: 'gauge', value: 'Speed ~ 1GB', label: 'Active' }"
         />
         <ControlCard
-          v-model:on="thermostat"
-          v-model:level="temperature"
-          name="Thermostat"
-          location="Hallway"
-          icon="thermometer"
-          stat="21.5°C"
-          level-label="Target"
-          color="oklch(0.7 0.19 35)"
+          v-model:on="tv"
+          category="TV"
+          name="LG 45 UHD TV 4K"
+          icon="monitor"
+          :stat="{ icon: 'clock', value: '1h 45m', label: 'Screen time' }"
         />
         <ControlCard
-          v-model:on="speaker"
-          v-model:level="volume"
-          name="Speaker"
-          location="Kitchen"
-          icon="speaker"
-          stat="Playing"
-          level-label="Volume"
-          color="oklch(0.65 0.2 290)"
+          v-model:on="car"
+          category="Car"
+          name="Tesla Model S"
+          icon="car"
+          :stat="{
+            icon: 'battery-charging',
+            value: '53%',
+            label: 'Battery charge',
+          }"
         />
         <ControlCard
           v-model:on="purifier"
-          name="Air purifier"
-          location="Bedroom"
-          icon="wind"
-          stat="PM2.5 · 8 µg/m³"
-          color="oklch(0.72 0.14 200)"
+          category="Air Purifier"
+          name="Dyson Formaldehyde BP04"
+          icon="fan"
+          :stat="{ icon: 'clock', value: '4h3m ago', label: 'Last cleaned' }"
         />
       </div>
     </div>
