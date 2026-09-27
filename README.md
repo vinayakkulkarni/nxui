@@ -306,13 +306,13 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 
 ### Dashboard (5)
 
-| Component                                                         | Description                                                                                                 |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card) | A frosted-glass device card with a power switch, a level slider and an accent glow that blooms when on.     |
-| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)     | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.     |
-| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)         | A metric card with a counting value, a good-or-bad delta pill, an optional sparkline and an avatar stack.   |
-| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel) | A carousel of best, worst and neutral headline metrics with tone badges, dots, arrows and keyboard support. |
-| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel) | Service health lamps with an overall status, uptime and latency, plus a live event log.                     |
+| Component                                                         | Description                                                                                                      |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card) | A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo. |
+| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)     | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.          |
+| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)         | A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.        |
+| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel) | A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.     |
+| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel) | Service health lamps with an overall status, uptime and latency, plus a live event log.                          |
 
 ### Charts (5)
 

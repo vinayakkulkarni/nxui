@@ -1,2 +1,2 @@
 export { default as KpiCard } from './KpiCard.vue';
-export type { KpiAvatar, KpiCardProps, KpiValueFormat } from './types';
+export type { KpiAccent, KpiCardProps, KpiPerson } from './types';
