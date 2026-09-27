@@ -476,7 +476,7 @@ export default defineNuxtConfig({
       deployConfig: true,
       wrangler: {
         name: 'nxui',
-        compatibility_date: '2026-06-16',
+        compatibility_date: '2026-09-08',
         compatibility_flags: ['nodejs_compat'],
         workers_dev: false,
         ...workerRuntimeFeatures,
