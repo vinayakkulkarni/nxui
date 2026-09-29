@@ -52,6 +52,12 @@
       "description": "A canvas-based noise texture overlay for adding grain and texture to backgrounds."
     },
     {
+      "name": "button-evolution",
+      "type": "registry:ui",
+      "title": "Button Evolution",
+      "description": "One button restyled across 40 years of desktop UI — scrub a timeline from 1986 to 2026 and watch the year roll over."
+    },
+    {
       "name": "fizzy-button",
       "type": "registry:ui",
       "title": "Fizzy Button",
