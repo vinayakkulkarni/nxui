@@ -344,11 +344,6 @@ export const docsNav: NavGroup[] = [
     title: 'Buttons',
     items: [
       {
-        title: 'Button Evolution',
-        path: '/docs/buttons/button-evolution',
-        badge: 'new',
-      },
-      {
         title: 'Chaos Button',
         path: '/docs/buttons/chaos-button',
         badge: 'new',
