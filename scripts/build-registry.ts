@@ -120,6 +120,12 @@ const COMPONENTS: Record<
       'A canvas-based noise texture overlay for adding grain and texture to backgrounds.',
     deps: ['@vueuse/core'],
   },
+  'button-evolution': {
+    title: 'Button Evolution',
+    description:
+      'One button restyled across 40 years of desktop UI — scrub a timeline from 1986 to 2026 and watch the year roll over.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'fizzy-button': {
     title: 'Fizzy Button',
     description:
