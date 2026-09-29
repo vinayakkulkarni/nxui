@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (252)
+## Components (254)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 254 items total, of which these 252 are
+> on — so `npx shadcn-vue add` resolves 256 items total, of which these 254 are
 > user-facing components.
 
 ### Text Animations (33)
@@ -343,13 +343,15 @@ Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/chart
 | [Pixel Canvas](https://nxui.geoql.in/docs/visual-effects/pixel-canvas)                 | An interactive pixel grid canvas that responds to mouse movement with customizable colors.                               |
 | [Pixel Wave](https://nxui.geoql.in/docs/visual-effects/pixel-wave)                     | A looping pixel-art scene on a dark LED grid with four swappable presets (ocean, desert, hearth, mind).                  |
 
-### Buttons (3)
+### Buttons (5)
 
-| Component                                                                               | Description                                                                            |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [Interactive Hover Button](https://nxui.geoql.in/docs/buttons/interactive-hover-button) | A button with a slide-and-reveal hover effect that transitions content and background. |
-| [Pulsating Button](https://nxui.geoql.in/docs/buttons/pulsating-button)                 | Vue port of the pulsating-button component from componentry.fun.                       |
-| [Shimmer Button](https://nxui.geoql.in/docs/buttons/shimmer-button)                     | A button with a rotating shimmer/glow effect.                                          |
+| Component                                                                               | Description                                                                                                      |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [Chaos Button](https://nxui.geoql.in/docs/buttons/chaos-button)                         | A pill button filled with drifting neon lines from a WebGL shader that tighten and scatter while pressed.        |
+| [Fizzy Button](https://nxui.geoql.in/docs/buttons/fizzy-button)                         | A button that starts to fizz as your pointer approaches, then floods with rising particles and inverts on hover. |
+| [Interactive Hover Button](https://nxui.geoql.in/docs/buttons/interactive-hover-button) | A button with a slide-and-reveal hover effect that transitions content and background.                           |
+| [Pulsating Button](https://nxui.geoql.in/docs/buttons/pulsating-button)                 | Vue port of the pulsating-button component from componentry.fun.                                                 |
+| [Shimmer Button](https://nxui.geoql.in/docs/buttons/shimmer-button)                     | A button with a rotating shimmer/glow effect.                                                                    |
 
 ### Paper Shaders (29)
 
