@@ -52,6 +52,18 @@
       "description": "A canvas-based noise texture overlay for adding grain and texture to backgrounds."
     },
     {
+      "name": "fizzy-button",
+      "type": "registry:ui",
+      "title": "Fizzy Button",
+      "description": "A button that starts to fizz as your pointer approaches, then floods with rising particles and inverts on hover."
+    },
+    {
+      "name": "chaos-button",
+      "type": "registry:ui",
+      "title": "Chaos Button",
+      "description": "A pill button filled with drifting neon lines from a WebGL shader that tighten and scatter while pressed."
+    },
+    {
       "name": "shimmer-button",
       "type": "registry:ui",
       "title": "Shimmer Button",

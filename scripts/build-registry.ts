@@ -120,6 +120,18 @@ const COMPONENTS: Record<
       'A canvas-based noise texture overlay for adding grain and texture to backgrounds.',
     deps: ['@vueuse/core'],
   },
+  'fizzy-button': {
+    title: 'Fizzy Button',
+    description:
+      'A button that starts to fizz as your pointer approaches, then floods with rising particles and inverts on hover.',
+    deps: ['@vueuse/core'],
+  },
+  'chaos-button': {
+    title: 'Chaos Button',
+    description:
+      'A pill button filled with drifting neon lines from a WebGL shader that tighten and scatter while pressed.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'shimmer-button': {
     title: 'Shimmer Button',
     description: 'A button with a shimmer/shine animation effect.',
