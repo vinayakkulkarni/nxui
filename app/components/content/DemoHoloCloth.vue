@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import HoloCloth from '@registry/new-york/holo-cloth/HoloCloth.vue';
   import type { HoloClothPreset } from '@registry/new-york/holo-cloth/types';
+  import type { DemoNamedPreset } from '~/types/components';
 
   const presets: DemoNamedPreset<HoloClothPreset>[] = [
     { label: 'Holo', preset: 'holo' },

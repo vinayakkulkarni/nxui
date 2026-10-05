@@ -2,7 +2,6 @@
   import type { DialogContentEmits, DialogContentProps } from 'reka-ui';
   import type { HTMLAttributes } from 'vue';
   import { reactiveOmit } from '@vueuse/core';
-  import { X } from 'lucide-vue-next';
   import {
     DialogClose,
     DialogContent,
@@ -57,7 +56,7 @@
         <DialogClose
           class="absolute top-4 right-4 p-0.5 transition-colors rounded-md hover:bg-secondary"
         >
-          <X class="size-4" />
+          <Icon name="lucide:x" class="size-4" />
           <span class="sr-only">Close</span>
         </DialogClose>
       </DialogContent>

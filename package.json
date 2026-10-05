@@ -46,7 +46,7 @@
     "@vueuse/nuxt": "^15.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "gl-matrix": "^4.0.0-beta.2",
+    "gl-matrix": "4.0.0-beta.2",
     "matter-js": "^0.20.0",
     "motion-v": "^2.5.2",
     "nuxt": "^4.5.2",

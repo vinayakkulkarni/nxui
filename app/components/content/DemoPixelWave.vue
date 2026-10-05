@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import PixelWave from '@registry/new-york/pixel-wave/PixelWave.vue';
   import type { PixelWaveScene } from '@registry/new-york/pixel-wave/types';
+  import type { DemoScenePreset } from '~/types/components';
 
   const presets: DemoScenePreset<PixelWaveScene>[] = [
     {
