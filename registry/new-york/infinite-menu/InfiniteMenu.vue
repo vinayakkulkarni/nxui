@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver } from '@vueuse/core';
+  import type { QuatLike, Vec2Like, Vec3Like } from 'gl-matrix';
   import { mat4, quat, vec2, vec3 } from 'gl-matrix';
   import { cn } from '~/lib/utils';
   import type { Face, MenuItem, VertexData } from './types';
@@ -378,7 +379,7 @@ void main() {
     rotationVelocity = 0;
     rotationAxis = vec3.fromValues(1, 0, 0);
     snapDirection = vec3.fromValues(0, 0, -1);
-    snapTargetDirection: vec3 | null = null;
+    snapTargetDirection: Vec3Like | null = null;
     private EPSILON = 0.1;
     private IDENTITY_QUAT = quat.create();
     private pointerPos = vec2.create();
@@ -438,7 +439,7 @@ void main() {
         );
         vec2.scale(midPointerPos, midPointerPos, INTENSITY);
 
-        if (vec2.sqrLen(midPointerPos) > this.EPSILON) {
+        if (vec2.squaredLength(midPointerPos) > this.EPSILON) {
           vec2.add(midPointerPos, this.previousPointerPos, midPointerPos);
           const p = this.project(midPointerPos);
           const q = this.project(this.previousPointerPos);
@@ -512,9 +513,9 @@ void main() {
     }
 
     quatFromVectors(
-      a: vec3,
-      b: vec3,
-      out: quat,
+      a: Vec3Like,
+      b: Vec3Like,
+      out: QuatLike,
       angleFactor: number = 1,
     ): void {
       const axis = vec3.cross(vec3.create(), a, b);
@@ -524,7 +525,7 @@ void main() {
       quat.setAxisAngle(out, axis, angle);
     }
 
-    private project(pos: vec2): vec3 {
+    private project(pos: Vec2Like): Vec3Like {
       const r = 2;
       const w = this.canvas.clientWidth;
       const h = this.canvas.clientHeight;
@@ -561,7 +562,7 @@ void main() {
     > = {};
     private discVAO: WebGLVertexArrayObject | null = null;
     private discBufferIndices: Uint16Array = new Uint16Array(0);
-    private instancePositions: vec3[] = [];
+    private instancePositions: Vec3Like[] = [];
     private DISC_INSTANCE_COUNT = 0;
     private discInstances: {
       matricesArray: Float32Array;
@@ -707,7 +708,7 @@ void main() {
           i * 16 * 4,
           16,
         );
-        mat4.identity(instanceMatrixArray as unknown as mat4);
+        mat4.identity(instanceMatrixArray);
         matrices.push(instanceMatrixArray);
       }
 
@@ -867,7 +868,7 @@ void main() {
           matrix,
           mat4.fromTranslation(mat4.create(), [0, 0, -this.SPHERE_RADIUS]),
         );
-        mat4.copy(this.discInstances.matrices[ndx] as unknown as mat4, matrix);
+        mat4.copy(this.discInstances.matrices[ndx], matrix);
       }
 
       gl.bindBuffer(gl.ARRAY_BUFFER, this.discInstances.buffer);
@@ -1021,7 +1022,7 @@ void main() {
       return nearestVertexIndex;
     }
 
-    private getVertexWorldPosition(index: number): vec3 {
+    private getVertexWorldPosition(index: number): Vec3Like {
       return vec3.transformQuat(
         vec3.create(),
         this.instancePositions[index],

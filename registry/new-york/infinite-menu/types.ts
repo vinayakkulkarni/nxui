@@ -1,4 +1,4 @@
-import type { vec2, vec3 } from 'gl-matrix';
+import type { Vec2Like, Vec3Like } from 'gl-matrix';
 
 export interface MenuItem {
   image: string;
@@ -14,7 +14,7 @@ export interface Face {
 }
 
 export interface VertexData {
-  position: vec3;
-  normal: vec3;
-  uv: vec2;
+  position: Vec3Like;
+  normal: Vec3Like;
+  uv: Vec2Like;
 }

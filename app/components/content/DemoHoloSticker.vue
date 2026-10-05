@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import HoloSticker from '@registry/new-york/holo-sticker/HoloSticker.vue';
   import type { StickerSettings } from '@registry/new-york/holo-sticker/types';
+  import type { DemoSettingsPreset } from '~/types/components';
 
   const presets: DemoSettingsPreset<StickerSettings>[] = [
     {
