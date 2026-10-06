@@ -553,6 +553,12 @@ const COMPONENTS: Record<
       'A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild.',
     deps: ['@vueuse/core'],
   },
+  'progress-stepper': {
+    title: 'Progress Stepper',
+    description:
+      'A vertical process timeline with a single rail, spinning in-progress markers, drawn-in checks and nested sub-steps that unfold under the active step.',
+    deps: ['motion-v', '@vueuse/core'],
+  },
   'stacked-list': {
     title: 'Stacked List',
     description:
