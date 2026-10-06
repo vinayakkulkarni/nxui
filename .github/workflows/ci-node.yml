@@ -35,6 +35,9 @@ jobs:
       - name: Format check
         run: pnpm run format:check
 
+      - name: Typecheck
+        run: pnpm run typecheck
+
       - name: Verify registry output is committed
         run: |
           pnpm run build:registry

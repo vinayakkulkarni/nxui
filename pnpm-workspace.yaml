@@ -9,6 +9,10 @@ shamefullyHoist: true
 # an upstream patch release (e.g. cloudflare/wrangler, cloudflare/miniflare).
 # 60 minutes still prevents publish-and-pivot attacks but unblocks normal flow.
 minimumReleaseAge: 60
+# v-tweakpane is maintained in this repo's own org and published from CI
+# with npm provenance, so its fresh releases need no maturity wait.
+minimumReleaseAgeExclude:
+  - v-tweakpane
 
 # Nuxt 4.5 declares unhead "^3.1.8", but Unhead 3.1.8 ships an invalid
 # unhead/dist/stream/iife.mjs that the Cloudflare preset build cannot parse,
