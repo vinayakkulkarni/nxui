@@ -1,9 +1,13 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperImageDithering from '@registry/new-york/paper-image-dithering/PaperImageDithering.vue';
+  import type { PaperImageDitheringType } from '@registry/new-york/paper-image-dithering/types';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
+  const params = reactive<{
+    type: PaperImageDitheringType;
+    colorSteps: number;
+  }>({
     type: '8x8',
     colorSteps: 2,
   });

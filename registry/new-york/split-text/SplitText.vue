@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import { useIntersectionObserver } from '@vueuse/core';
-  import { motion } from 'motion-v';
+  import { motion, type VariantType } from 'motion-v';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -9,8 +9,8 @@
       by?: 'chars' | 'words';
       delay?: number;
       duration?: number;
-      from?: Record<string, unknown>;
-      to?: Record<string, unknown>;
+      from?: VariantType;
+      to?: VariantType;
       threshold?: number;
       class?: string;
     }>(),

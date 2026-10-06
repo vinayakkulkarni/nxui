@@ -22,23 +22,24 @@
     },
   );
 
-  const VARIANTS: Record<
-    string,
-    {
-      activeColor: string | null;
-      gap: number;
-      speed: number;
-      colors: string;
-      noFocus: boolean;
-    }
-  > = {
-    default: {
-      activeColor: null,
-      gap: 5,
-      speed: 35,
-      colors: '#f8fafc,#f1f5f9,#cbd5e1',
-      noFocus: false,
-    },
+  interface VariantConfig {
+    activeColor: string | null;
+    gap: number;
+    speed: number;
+    colors: string;
+    noFocus: boolean;
+  }
+
+  const DEFAULT_VARIANT: VariantConfig = {
+    activeColor: null,
+    gap: 5,
+    speed: 35,
+    colors: '#f8fafc,#f1f5f9,#cbd5e1',
+    noFocus: false,
+  };
+
+  const VARIANTS: Record<string, VariantConfig> = {
+    default: DEFAULT_VARIANT,
     blue: {
       activeColor: '#e0f2fe',
       gap: 10,
@@ -62,7 +63,7 @@
     },
   };
 
-  const cfg = computed(() => VARIANTS[props.variant] ?? VARIANTS.default);
+  const cfg = computed(() => VARIANTS[props.variant] ?? DEFAULT_VARIANT);
   const finalGap = computed(() => props.gap ?? cfg.value.gap);
   const finalSpeed = computed(() => props.speed ?? cfg.value.speed);
   const finalColors = computed(() => props.colors ?? cfg.value.colors);
@@ -182,7 +183,7 @@
 
     for (let x = 0; x < w; x += gp) {
       for (let y = 0; y < h; y += gp) {
-        const c = colorsArr[Math.floor(Math.random() * colorsArr.length)];
+        const c = colorsArr[Math.floor(Math.random() * colorsArr.length)] ?? '';
         const dx = x - w / 2;
         const dy = y - h / 2;
         const dist = reducedMotion.value ? 0 : Math.sqrt(dx * dx + dy * dy);

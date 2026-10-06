@@ -16,7 +16,7 @@
     const match = url.match(
       /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([^&?]+)/,
     );
-    return match ? match[1] : null;
+    return match?.[1] ?? null;
   };
 
   const youtubeId = computed(() =>

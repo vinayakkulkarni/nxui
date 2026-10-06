@@ -63,8 +63,9 @@
 
   function getPushed(transform: string, offset: number): string {
     const match = transform.match(/translate\(([-\d.]+)px\)/);
-    if (match) {
-      const cur = Number.parseFloat(match[1]);
+    const matched = match?.[1];
+    if (matched !== undefined) {
+      const cur = Number.parseFloat(matched);
       return transform.replace(
         /translate\([^)]*\)/,
         `translate(${cur + offset}px)`,

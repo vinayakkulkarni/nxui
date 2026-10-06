@@ -156,6 +156,10 @@ void main(){
 
   useResizeObserver(hostRef, resize);
 
+  function uniformLoc(name: string): WebGLUniformLocation | null {
+    return uniforms[name] ?? null;
+  }
+
   function render(now: number) {
     if (!gl || !uniforms.u_time) return;
     const elapsed = Math.max(0, (now - startTime - props.delayMs) / 1000);
@@ -170,15 +174,15 @@ void main(){
     gl.clearColor(0, 0, 0, 0);
     gl.clear(gl.COLOR_BUFFER_BIT);
     gl.uniform1f(uniforms.u_time, elapsed);
-    gl.uniform3f(uniforms.u_colorDeep, deep[0], deep[1], deep[2]);
-    gl.uniform3f(uniforms.u_colorMid, mid[0], mid[1], mid[2]);
-    gl.uniform3f(uniforms.u_colorHighlight, hl[0], hl[1], hl[2]);
-    gl.uniform1f(uniforms.u_speed, props.speed);
-    gl.uniform1f(uniforms.u_flowStrength, props.flowStrength);
-    gl.uniform1f(uniforms.u_grain, props.grain);
-    gl.uniform1f(uniforms.u_contrast, props.contrast);
-    gl.uniform1f(uniforms.u_opacity, props.opacity);
-    gl.uniform1f(uniforms.u_reveal, revealProgress);
+    gl.uniform3f(uniformLoc('u_colorDeep'), deep[0], deep[1], deep[2]);
+    gl.uniform3f(uniformLoc('u_colorMid'), mid[0], mid[1], mid[2]);
+    gl.uniform3f(uniformLoc('u_colorHighlight'), hl[0], hl[1], hl[2]);
+    gl.uniform1f(uniformLoc('u_speed'), props.speed);
+    gl.uniform1f(uniformLoc('u_flowStrength'), props.flowStrength);
+    gl.uniform1f(uniformLoc('u_grain'), props.grain);
+    gl.uniform1f(uniformLoc('u_contrast'), props.contrast);
+    gl.uniform1f(uniformLoc('u_opacity'), props.opacity);
+    gl.uniform1f(uniformLoc('u_reveal'), revealProgress);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     rafId = requestAnimationFrame(render);
   }

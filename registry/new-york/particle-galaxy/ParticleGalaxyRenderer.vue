@@ -92,7 +92,8 @@
     const loop = () => {
       timer.update();
       const elapsed = timer.getElapsed();
-      if (material) material.uniforms.uTime.value = elapsed;
+      const timeUniform = material?.uniforms.uTime;
+      if (timeUniform) timeUniform.value = elapsed;
       if (particles) {
         state.currentRotation.x +=
           (state.targetRotation.x - state.currentRotation.x) * props.damping;

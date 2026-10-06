@@ -159,7 +159,8 @@ void main(){
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    if (planeMat) planeMat.uniforms.uResolution.value.set(width, height);
+    const uResolution = planeMat?.uniforms.uResolution;
+    if (uResolution) uResolution.value.set(width, height);
   }
 
   useResizeObserver(containerRef, resize);
@@ -168,14 +169,35 @@ void main(){
     if (!renderer || !scene || !camera || !planeMat || !timer) return;
     timer.update();
     const t = timer.getElapsed() * props.speed;
-    planeMat.uniforms.uTime.value = t;
-    planeMat.uniforms.uMouse.value.set(0.5, 0.5);
-    planeMat.uniforms.uMouseIntensity.value = 0.8;
-    planeMat.uniforms.uColor1.value.set(props.color1);
-    planeMat.uniforms.uColor2.value.set(props.color2);
-    planeMat.uniforms.uColor3.value.set(props.color3);
-    planeMat.uniforms.uDitherIntensity.value = props.ditherIntensity;
-    planeMat.uniforms.uPrismIntensity.value = props.prismIntensity;
+    const {
+      uTime,
+      uMouse,
+      uMouseIntensity,
+      uColor1,
+      uColor2,
+      uColor3,
+      uDitherIntensity,
+      uPrismIntensity,
+    } = planeMat.uniforms;
+    if (
+      !uTime ||
+      !uMouse ||
+      !uMouseIntensity ||
+      !uColor1 ||
+      !uColor2 ||
+      !uColor3 ||
+      !uDitherIntensity ||
+      !uPrismIntensity
+    )
+      return;
+    uTime.value = t;
+    uMouse.value.set(0.5, 0.5);
+    uMouseIntensity.value = 0.8;
+    uColor1.value.set(props.color1);
+    uColor2.value.set(props.color2);
+    uColor3.value.set(props.color3);
+    uDitherIntensity.value = props.ditherIntensity;
+    uPrismIntensity.value = props.prismIntensity;
 
     // Animate particles
     if (pointsGeo && particlePhases) {

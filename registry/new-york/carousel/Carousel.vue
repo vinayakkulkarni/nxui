@@ -59,12 +59,12 @@
   const trackItemOffset = computed(() => itemWidth.value + GAP);
 
   const itemsForRender = computed(() => {
-    if (!props.loop || props.items.length === 0) return props.items;
-    return [
-      props.items[props.items.length - 1],
-      ...props.items,
-      props.items[0],
-    ];
+    const first = props.items[0];
+    const last = props.items[props.items.length - 1];
+    if (!props.loop || first === undefined || last === undefined) {
+      return props.items;
+    }
+    return [last, ...props.items, first];
   });
 
   const position = ref(props.loop ? 1 : 0);

@@ -57,8 +57,8 @@
     isAnimating = true;
 
     const [front, ...rest] = order;
-    const frontEl = cardRefs.value[front];
-    if (!frontEl) {
+    const frontEl = front === undefined ? undefined : cardRefs.value[front];
+    if (front === undefined || !frontEl) {
       isAnimating = false;
       return;
     }

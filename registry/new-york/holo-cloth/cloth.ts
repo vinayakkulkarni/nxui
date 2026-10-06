@@ -23,6 +23,11 @@ interface GrabState {
 const SUBSTEP = 1 / 120;
 const MAX_SUBSTEPS = 4;
 
+/** Bounds-checked read for typed arrays under noUncheckedIndexedAccess. */
+function at(arr: ArrayLike<number>, i: number): number {
+  return arr[i] ?? 0;
+}
+
 /**
  * Verlet cloth in zero gravity. No external forces — motion only comes from
  * user interaction, and heavy velocity damping makes it settle like it is
@@ -144,8 +149,8 @@ export class ClothSim {
           const i10 = (y0 * bc + x0 + 1) * 3 + c;
           const i01 = ((y0 + 1) * bc + x0) * 3 + c;
           const i11 = ((y0 + 1) * bc + x0 + 1) * 3 + c;
-          const v0 = bp.data[i00] * (1 - fx) + bp.data[i10] * fx;
-          const v1 = bp.data[i01] * (1 - fx) + bp.data[i11] * fx;
+          const v0 = at(bp.data, i00) * (1 - fx) + at(bp.data, i10) * fx;
+          const v1 = at(bp.data, i01) * (1 - fx) + at(bp.data, i11) * fx;
           const s = c === 0 ? sx : c === 1 ? sy : sz;
           this.positions[k + c] = (v0 * (1 - fy) + v1 * fy) * s;
         }
@@ -162,8 +167,8 @@ export class ClothSim {
     const stepX = this.width / this.segX;
     const stepY = this.height / this.segY;
     for (let c = 0; c < this.cA.length; c++) {
-      const ia = this.cA[c],
-        ib = this.cB[c];
+      const ia = at(this.cA, c),
+        ib = at(this.cB, c);
       const ax = ia % this.cols,
         ay = Math.floor(ia / this.cols);
       const bx = ib % this.cols,
@@ -183,9 +188,9 @@ export class ClothSim {
   poke(strength = 0.5) {
     const p = this.positions;
     const ci = Math.floor(Math.random() * this.count);
-    const cx = p[ci * 3],
-      cy = p[ci * 3 + 1],
-      cz = p[ci * 3 + 2];
+    const cx = at(p, ci * 3),
+      cy = at(p, ci * 3 + 1),
+      cz = at(p, ci * 3 + 2);
     const dir = new THREE.Vector3(
       Math.random() - 0.5,
       Math.random() - 0.5,
@@ -195,16 +200,16 @@ export class ClothSim {
       .multiplyScalar(strength * 0.09);
     const radius = Math.max(this.width, this.height) * 0.28;
     for (let i = 0; i < this.count; i++) {
-      const dx = p[i * 3] - cx,
-        dy = p[i * 3 + 1] - cy,
-        dz = p[i * 3 + 2] - cz;
+      const dx = at(p, i * 3) - cx,
+        dy = at(p, i * 3 + 1) - cy,
+        dz = at(p, i * 3 + 2) - cz;
       const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
       if (d > radius) continue;
       const w = 1 - d / radius;
       const s = w * w * (3 - 2 * w); // smoothstep
-      this.prev[i * 3] -= dir.x * s;
-      this.prev[i * 3 + 1] -= dir.y * s;
-      this.prev[i * 3 + 2] -= dir.z * s;
+      this.prev[i * 3] = at(this.prev, i * 3) - dir.x * s;
+      this.prev[i * 3 + 1] = at(this.prev, i * 3 + 1) - dir.y * s;
+      this.prev[i * 3 + 2] = at(this.prev, i * 3 + 2) - dir.z * s;
     }
   }
 
@@ -216,9 +221,9 @@ export class ClothSim {
     const offsets: number[] = [];
     let best = Infinity;
     for (let i = 0; i < this.count; i++) {
-      const dx = p[i * 3] - point.x;
-      const dy = p[i * 3 + 1] - point.y;
-      const dz = p[i * 3 + 2] - point.z;
+      const dx = at(p, i * 3) - point.x;
+      const dy = at(p, i * 3 + 1) - point.y;
+      const dz = at(p, i * 3 + 2) - point.z;
       const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
       best = Math.min(best, d);
       if (d > radius) continue;
@@ -274,11 +279,11 @@ export class ClothSim {
         az = 0,
         cnt = 0;
       for (let j = 0; j < 4; j++) {
-        const ni = nb[i * 4 + j];
+        const ni = at(nb, i * 4 + j);
         if (ni < 0) continue;
-        ax += p[ni * 3];
-        ay += p[ni * 3 + 1];
-        az += p[ni * 3 + 2];
+        ax += at(p, ni * 3);
+        ay += at(p, ni * 3 + 1);
+        az += at(p, ni * 3 + 2);
         cnt++;
       }
       if (cnt === 0) {
@@ -286,13 +291,13 @@ export class ClothSim {
         continue;
       }
       const inv = 1 / cnt;
-      const lx = ax * inv - p[i * 3];
-      const ly = ay * inv - p[i * 3 + 1];
-      const lz = az * inv - p[i * 3 + 2];
+      const lx = ax * inv - at(p, i * 3);
+      const ly = ay * inv - at(p, i * 3 + 1);
+      const lz = az * inv - at(p, i * 3 + 2);
       const c =
-        (lx * normals[i * 3] +
-          ly * normals[i * 3 + 1] +
-          lz * normals[i * 3 + 2]) *
+        (lx * at(normals, i * 3) +
+          ly * at(normals, i * 3 + 1) +
+          lz * at(normals, i * 3 + 2)) *
         invStep;
       tmp[i] = Math.min(1, Math.max(0, c * gain));
     }
@@ -301,12 +306,12 @@ export class ClothSim {
       let sum = 0,
         cnt = 0;
       for (let j = 0; j < 4; j++) {
-        const ni = nb[i * 4 + j];
+        const ni = at(nb, i * 4 + j);
         if (ni < 0) continue;
-        sum += tmp[ni];
+        sum += at(tmp, ni);
         cnt++;
       }
-      out[i] = cnt > 0 ? tmp[i] * 0.5 + (sum / cnt) * 0.5 : tmp[i];
+      out[i] = cnt > 0 ? at(tmp, i) * 0.5 + (sum / cnt) * 0.5 : at(tmp, i);
     }
   }
 
@@ -329,8 +334,8 @@ export class ClothSim {
     // integrate: damping expressed per 60Hz-frame, converted to substep rate
     const damp = Math.pow(1 - Math.min(params.viscosity, 0.99), SUBSTEP * 60);
     for (let i = 0; i < n * 3; i++) {
-      const cur = p[i];
-      const vel = (cur - prev[i]) * damp;
+      const cur = at(p, i);
+      const vel = (cur - at(prev, i)) * damp;
       prev[i] = cur;
       p[i] = cur + vel;
     }
@@ -345,18 +350,18 @@ export class ClothSim {
           az = 0,
           cnt = 0;
         for (let j = 0; j < 4; j++) {
-          const ni = nb[i * 4 + j];
+          const ni = at(nb, i * 4 + j);
           if (ni < 0) continue;
-          ax += p[ni * 3];
-          ay += p[ni * 3 + 1];
-          az += p[ni * 3 + 2];
+          ax += at(p, ni * 3);
+          ay += at(p, ni * 3 + 1);
+          az += at(p, ni * 3 + 2);
           cnt++;
         }
         if (cnt === 0) continue;
         const inv = 1 / cnt;
-        p[i * 3] += (ax * inv - p[i * 3]) * k;
-        p[i * 3 + 1] += (ay * inv - p[i * 3 + 1]) * k;
-        p[i * 3 + 2] += (az * inv - p[i * 3 + 2]) * k;
+        p[i * 3] = at(p, i * 3) + (ax * inv - at(p, i * 3)) * k;
+        p[i * 3 + 1] = at(p, i * 3 + 1) + (ay * inv - at(p, i * 3 + 1)) * k;
+        p[i * 3 + 2] = at(p, i * 3 + 2) + (az * inv - at(p, i * 3 + 2)) * k;
       }
     }
 
@@ -370,23 +375,29 @@ export class ClothSim {
     const nc = cA.length;
     for (let it = 0; it < iters; it++) {
       for (let c = 0; c < nc; c++) {
-        const ia = cA[c] * 3,
-          ib = cB[c] * 3;
-        const dx = p[ib] - p[ia];
-        const dy = p[ib + 1] - p[ia + 1];
-        const dz = p[ib + 2] - p[ia + 2];
+        const ia = at(cA, c) * 3,
+          ib = at(cB, c) * 3;
+        const pax = at(p, ia),
+          pay = at(p, ia + 1),
+          paz = at(p, ia + 2);
+        const pbx = at(p, ib),
+          pby = at(p, ib + 1),
+          pbz = at(p, ib + 2);
+        const dx = pbx - pax;
+        const dy = pby - pay;
+        const dz = pbz - paz;
         const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
         if (d < 1e-9) continue;
-        const diff = ((d - cRest[c]) / d) * 0.5 * stiff * cMul[c];
+        const diff = ((d - at(cRest, c)) / d) * 0.5 * stiff * at(cMul, c);
         const ox = dx * diff,
           oy = dy * diff,
           oz = dz * diff;
-        p[ia] += ox;
-        p[ia + 1] += oy;
-        p[ia + 2] += oz;
-        p[ib] -= ox;
-        p[ib + 1] -= oy;
-        p[ib + 2] -= oz;
+        p[ia] = pax + ox;
+        p[ia + 1] = pay + oy;
+        p[ia + 2] = paz + oz;
+        p[ib] = pbx - ox;
+        p[ib + 1] = pby - oy;
+        p[ib + 2] = pbz - oz;
       }
       this.applyGrab();
     }
@@ -396,15 +407,15 @@ export class ClothSim {
     const g = this.grab;
     if (!g) return;
     const p = this.positions;
-    for (let k = 0; k < g.indices.length; k++) {
-      const i = g.indices[k] * 3;
-      const w = g.weights[k];
-      const tx = g.target.x + g.offsets[k * 3];
-      const ty = g.target.y + g.offsets[k * 3 + 1];
-      const tz = g.target.z + g.offsets[k * 3 + 2];
-      p[i] += (tx - p[i]) * w;
-      p[i + 1] += (ty - p[i + 1]) * w;
-      p[i + 2] += (tz - p[i + 2]) * w;
+    for (const [k, index] of g.indices.entries()) {
+      const i = index * 3;
+      const w = at(g.weights, k);
+      const tx = g.target.x + at(g.offsets, k * 3);
+      const ty = g.target.y + at(g.offsets, k * 3 + 1);
+      const tz = g.target.z + at(g.offsets, k * 3 + 2);
+      p[i] = at(p, i) + (tx - at(p, i)) * w;
+      p[i + 1] = at(p, i + 1) + (ty - at(p, i + 1)) * w;
+      p[i + 2] = at(p, i + 2) + (tz - at(p, i + 2)) * w;
     }
   }
 }

@@ -1,9 +1,15 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperHalftoneCmyk from '@registry/new-york/paper-halftone-cmyk/PaperHalftoneCmyk.vue';
+  import type { PaperHalftoneCmykType } from '@registry/new-york/paper-halftone-cmyk/types';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
+  const params = reactive<{
+    size: number;
+    contrast: number;
+    softness: number;
+    type: PaperHalftoneCmykType;
+  }>({
     size: 0.2,
     contrast: 1,
     softness: 1,

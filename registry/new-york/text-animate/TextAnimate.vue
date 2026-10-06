@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { useIntersectionObserver } from '@vueuse/core';
   import { motion, AnimatePresence } from 'motion-v';
+  import type { VariantType } from 'motion-v';
   import type { AnimationType, SplitBy } from './types';
   import { cn } from '~/lib/utils';
 
@@ -60,7 +61,7 @@
     },
   };
 
-  const itemVariantsMap: Record<AnimationType, Record<string, unknown>> = {
+  const itemVariantsMap: Record<AnimationType, Record<string, VariantType>> = {
     'fade-in': {
       hidden: { opacity: 0 },
       show: { opacity: 1, transition: { duration: props.duration } },

@@ -1,9 +1,21 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperGrainGradient from '@registry/new-york/paper-grain-gradient/PaperGrainGradient.vue';
+  import type { PaperGrainGradientShape } from '@registry/new-york/paper-grain-gradient/types';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
+  const params = reactive<{
+    colorBack: string;
+    color1: string;
+    color2: string;
+    color3: string;
+    color4: string;
+    softness: number;
+    intensity: number;
+    noise: number;
+    shape: PaperGrainGradientShape;
+    speed: number;
+  }>({
     colorBack: '#000000',
     color1: '#7300ff',
     color2: '#eba8ff',

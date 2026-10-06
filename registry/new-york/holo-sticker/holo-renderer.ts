@@ -5,6 +5,16 @@ import { peelAngles } from './sticker-settings';
 const SEGS = 160;
 const MAXD = 160; // distance-field range in pixels
 
+function uniformOf(
+  material: THREE.ShaderMaterial,
+  name: string,
+): THREE.IUniform {
+  const uniform = material.uniforms[name];
+  if (!uniform)
+    throw new Error(`holo-renderer: missing shader uniform ${name}`);
+  return uniform;
+}
+
 /** Exact euclidean distance transform of a binary mask (Felzenszwalb). */
 function edt(inside: Uint8Array, W: number, H: number): Float32Array {
   const INF = 1e20;
@@ -21,11 +31,11 @@ function edt(inside: Uint8Array, W: number, H: number): Float32Array {
     z[0] = -INF;
     z[1] = INF;
     for (let q = 1; q < len; q++) {
-      let s =
-        (f[q] + q * q - (f[v[k]!]! + v[k]! * v[k]!)) / (2 * q - 2 * v[k]!);
+      const fq = f[q] ?? 0;
+      let s = (fq + q * q - (f[v[k]!]! + v[k]! * v[k]!)) / (2 * q - 2 * v[k]!);
       while (s <= z[k]!) {
         k--;
-        s = (f[q] + q * q - (f[v[k]!]! + v[k]! * v[k]!)) / (2 * q - 2 * v[k]!);
+        s = (fq + q * q - (f[v[k]!]! + v[k]! * v[k]!)) / (2 * q - 2 * v[k]!);
       }
       k++;
       v[k] = q;
@@ -436,8 +446,9 @@ const LAYER_MATERIAL_PRESETS: Record<
 };
 
 /** Metal/roughness per finish preset. */
+const DEFAULT_FINISH = { metal: 0.6, rough: 0.18 };
 const FINISH_PARAMS: Record<string, { metal: number; rough: number }> = {
-  holo: { metal: 0.6, rough: 0.18 },
+  holo: DEFAULT_FINISH,
   glitter: { metal: 0.65, rough: 0.3 },
   gloss: { metal: 0.3, rough: 0.06 },
   matte: { metal: 0.05, rough: 0.8 },
@@ -620,9 +631,9 @@ export class HoloRenderer {
     tex.colorSpace = THREE.NoColorSpace;
     tex.premultiplyAlpha = false;
 
-    const old = this.material.uniforms.uMap.value as THREE.Texture | null;
+    const old = uniformOf(this.material, 'uMap').value as THREE.Texture | null;
     old?.dispose();
-    this.material.uniforms.uMap.value = tex;
+    uniformOf(this.material, 'uMap').value = tex;
     this.mapAspect = ow / oh;
 
     // height map for the relief: the vinyl plateaus over the artwork and
@@ -654,14 +665,15 @@ export class HoloRenderer {
     htex.colorSpace = THREE.NoColorSpace;
     htex.generateMipmaps = true;
     htex.minFilter = THREE.LinearMipmapLinearFilter;
-    const oldH = this.material.uniforms.uHeight.value as THREE.Texture | null;
+    const oldH = uniformOf(this.material, 'uHeight')
+      .value as THREE.Texture | null;
     oldH?.dispose();
-    this.material.uniforms.uHeight.value = htex;
+    uniformOf(this.material, 'uHeight').value = htex;
 
     // ---- exploded production layers: backing / kiss-cut blank / art ----
     for (const m of this.layerMeshes) {
       this.mesh.remove(m);
-      (m.material as THREE.ShaderMaterial).uniforms.uMap.value?.dispose?.();
+      uniformOf(m.material as THREE.ShaderMaterial, 'uMap').value?.dispose?.();
       (m.material as THREE.ShaderMaterial).dispose();
     }
     this.layerMeshes = [];
@@ -756,6 +768,7 @@ export class HoloRenderer {
     const ang = peelAngles[s.peelDirection];
     const d = new THREE.Vector2(Math.cos(ang), Math.sin(ang));
     const pos = this.geometry.attributes.position;
+    if (!pos) return;
     const sx = aspect >= 1 ? 1 : aspect;
     const sy = aspect >= 1 ? 1 / aspect : 1;
 
@@ -803,7 +816,7 @@ export class HoloRenderer {
     }
     pos.needsUpdate = true;
     this.geometry.computeVertexNormals();
-    this.material.uniforms.uCurlH.value = Math.max(0.15, ext * 0.7);
+    uniformOf(this.material, 'uCurlH').value = Math.max(0.15, ext * 0.7);
   }
 
   render(input: { settings: StickerSettings; imgAspect: number }) {
@@ -819,14 +832,15 @@ export class HoloRenderer {
     this.material.visible = !s.layersOn || this.layerMeshes.length === 0;
     for (let i = 0; i < this.layerMeshes.length; i++) {
       this.layerMeshes[i]!.position.z = 0;
-      const u = (this.layerMeshes[i]!.material as THREE.ShaderMaterial)
-        .uniforms;
-      u.uLift.value = 0.004 + i * s.layerDepth;
+      const layerMaterial = this.layerMeshes[i]!
+        .material as THREE.ShaderMaterial;
+      const u = (name: string) => uniformOf(layerMaterial, name);
+      u('uLift').value = 0.004 + i * s.layerDepth;
       const presetHolo = this.layerMeshes[i]!.userData.presetHolo as
         | number
         | undefined;
       if (presetHolo !== undefined) {
-        u.uHolo.value = presetHolo * Math.min(1, s.holoIntensity / 0.85);
+        u('uHolo').value = presetHolo * Math.min(1, s.holoIntensity / 0.85);
       }
     }
 
@@ -834,14 +848,14 @@ export class HoloRenderer {
     this.tilt.lerp(this.tiltTarget, 0.09);
     this.mesh.rotation.set(-this.tilt.y * 0.38, this.tilt.x * 0.42, 0);
 
-    const u = this.material.uniforms;
-    u.uHolo.value = s.holoIntensity;
-    u.uBands.value = s.bands;
-    u.uHue.value = s.hueShift;
-    u.uGrain.value = s.grain;
-    u.uPattern.value =
+    const u = (name: string) => uniformOf(this.material, name);
+    u('uHolo').value = s.holoIntensity;
+    u('uBands').value = s.bands;
+    u('uHue').value = s.hueShift;
+    u('uGrain').value = s.grain;
+    u('uPattern').value =
       s.pattern === 'linear' ? 0 : s.pattern === 'radial' ? 1 : 2;
-    u.uOverlay.value =
+    u('uOverlay').value =
       s.overlay === 'none'
         ? 0
         : s.overlay === 'triangles'
@@ -850,13 +864,13 @@ export class HoloRenderer {
             ? 2
             : 3;
     // smooth ramp so shading terms fade in with the peel instead of popping
-    u.uPeelOn.value = Math.min(1, s.peelAmount / 0.05);
-    u.uInk.value = s.ink;
-    u.uRelief.value = s.relief;
-    const fin = FINISH_PARAMS[s.finish] ?? FINISH_PARAMS.holo;
-    u.uMetal.value = fin.metal;
-    u.uRough.value = fin.rough;
-    (u.uLight.value as THREE.Vector2).set(s.light.x, s.light.y);
+    u('uPeelOn').value = Math.min(1, s.peelAmount / 0.05);
+    u('uInk').value = s.ink;
+    u('uRelief').value = s.relief;
+    const fin = FINISH_PARAMS[s.finish] ?? DEFAULT_FINISH;
+    u('uMetal').value = fin.metal;
+    u('uRough').value = fin.rough;
+    (u('uLight').value as THREE.Vector2).set(s.light.x, s.light.y);
 
     // blob shadow follows sticker size, offset away from the light
     const ba = this.mapAspect;
@@ -882,11 +896,11 @@ export class HoloRenderer {
   }
 
   dispose() {
-    this.material.uniforms.uMap.value?.dispose?.();
-    this.material.uniforms.uHeight.value?.dispose?.();
+    uniformOf(this.material, 'uMap').value?.dispose?.();
+    uniformOf(this.material, 'uHeight').value?.dispose?.();
     this.material.dispose();
     for (const m of this.layerMeshes) {
-      (m.material as THREE.ShaderMaterial).uniforms.uMap.value?.dispose?.();
+      uniformOf(m.material as THREE.ShaderMaterial, 'uMap').value?.dispose?.();
       (m.material as THREE.ShaderMaterial).dispose();
     }
     this.geometry.dispose();
