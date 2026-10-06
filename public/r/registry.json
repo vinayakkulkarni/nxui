@@ -52,6 +52,18 @@
       "description": "A canvas-based noise texture overlay for adding grain and texture to backgrounds."
     },
     {
+      "name": "fizzy-button",
+      "type": "registry:ui",
+      "title": "Fizzy Button",
+      "description": "A button that starts to fizz as your pointer approaches, then floods with rising particles and inverts on hover."
+    },
+    {
+      "name": "chaos-button",
+      "type": "registry:ui",
+      "title": "Chaos Button",
+      "description": "A pill button filled with drifting neon lines from a WebGL shader that tighten and scatter while pressed."
+    },
+    {
       "name": "shimmer-button",
       "type": "registry:ui",
       "title": "Shimmer Button",
@@ -488,6 +500,12 @@
       "type": "registry:ui",
       "title": "Pixel Wave",
       "description": "A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild."
+    },
+    {
+      "name": "progress-stepper",
+      "type": "registry:ui",
+      "title": "Progress Stepper",
+      "description": "A vertical process timeline with a single rail, spinning in-progress markers, drawn-in checks and nested sub-steps that unfold under the active step."
     },
     {
       "name": "stacked-list",
@@ -1460,6 +1478,72 @@
       "type": "registry:ui",
       "title": "Target Cursor",
       "description": "Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking."
+    },
+    {
+      "name": "chart",
+      "type": "registry:lib",
+      "title": "Chart",
+      "description": "Dependency-free SVG chart engine with the TanStack Charts API. Swap to @tanstack/vue-charts by editing one file."
+    },
+    {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "title": "Sparkline",
+      "description": "A compact trend line with a shaded area that rises into place, sized for KPI cards and table cells."
+    },
+    {
+      "name": "area-chart",
+      "type": "registry:ui",
+      "title": "Area Chart",
+      "description": "A responsive area chart with axes and grid lines whose values rise from the baseline on mount."
+    },
+    {
+      "name": "donut-chart",
+      "type": "registry:ui",
+      "title": "Donut Chart",
+      "description": "A donut chart that sweeps in clockwise, with a counting total in the center and a legend that lifts its slice on hover."
+    },
+    {
+      "name": "radial-gauge",
+      "type": "registry:ui",
+      "title": "Radial Gauge",
+      "description": "A 270° gauge with a rounded value arc, threshold colors, and a readout that counts up to the value."
+    },
+    {
+      "name": "progress-ring",
+      "type": "registry:ui",
+      "title": "Progress Ring",
+      "description": "A circular progress indicator with rounded ends and a percentage that counts up with the ring."
+    },
+    {
+      "name": "kpi-card",
+      "type": "registry:ui",
+      "title": "KPI Card",
+      "description": "A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials."
+    },
+    {
+      "name": "kpi-carousel",
+      "type": "registry:ui",
+      "title": "KPI Carousel",
+      "description": "A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours."
+    },
+    {
+      "name": "control-card",
+      "type": "registry:ui",
+      "title": "Control Card",
+      "description": "A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo."
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change."
+    },
+    {
+      "name": "status-panel",
+      "type": "registry:ui",
+      "title": "Status Panel",
+      "description": "Service health lamps with an overall status, uptime and latency, plus a live event log."
     }
   ]
 }

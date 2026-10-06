@@ -72,11 +72,12 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (242)
+## Components (255)
 
-> The registry also ships one internal helper, `paper-shader-mount`, that the
-> Paper Shaders depend on — so `npx shadcn-vue add` resolves 243 items total,
-> of which these 242 are user-facing components.
+> The registry also ships two internal helpers — `paper-shader-mount`, which
+> the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
+> on — so `npx shadcn-vue add` resolves 257 items total, of which these 255 are
+> user-facing components.
 
 ### Text Animations (33)
 
@@ -146,7 +147,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (82)
+### Components (83)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -214,6 +215,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [PlayStation Navbar](https://nxui.geoql.in/docs/components/playstation-navbar)       | XMB-style cross-media navigation with a sliding category rail, glowing pill cursor, and full arrow-key control.                                                        |
 | [Podcast Player](https://nxui.geoql.in/docs/components/podcast-player)               | Expandable podcast episode card driving a real audio element — waveform seek with hover scrubber, chapters, speed cycling, volume, and a compact pill mode.            |
 | [Profile Card](https://nxui.geoql.in/docs/components/profile-card)                   | Holographic tilt card with pointer-tracking 3D transforms, rainbow shine effects, and avatar parallax.                                                                 |
+| [Progress Stepper](https://nxui.geoql.in/docs/components/progress-stepper)           | A vertical process timeline with a single rail, spinning in-progress markers, drawn-in checks and nested sub-steps that unfold under the active step.                  |
 | [Receipt Printer](https://nxui.geoql.in/docs/components/receipt-printer)             | A checkout state that turns payment processing into a printed order receipt — stepped paper feed, status screen, serrated paper tear.                                  |
 | [Reflective Card](https://nxui.geoql.in/docs/components/reflective-card)             | Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.                                                                      |
 | [Ripple Transition](https://nxui.geoql.in/docs/components/ripple-transition)         | WebGL image transitions with noisy refractive waves, chromatic edges, glow, and click-triggered ripple origins.                                                        |
@@ -303,6 +305,28 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Silk Aurora](https://nxui.geoql.in/docs/hero-backgrounds/silk-aurora)             | Premium WebGL hero with satin-dark aurora ribbons, pearlescent highlights, fine film grain, and cursor depth that bends the light toward the pointer.                             |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
 
+### Dashboard (5)
+
+| Component                                                         | Description                                                                                                      |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card) | A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo. |
+| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)     | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.          |
+| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)         | A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.        |
+| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel) | A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.     |
+| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel) | Service health lamps with an overall status, uptime and latency, plus a live event log.                          |
+
+### Charts (5)
+
+Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/charts) API. Swap to `@tanstack/vue-charts` by editing one file — see any chart's docs page.
+
+| Component                                                        | Description                                                                                                             |
+| ---------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| [Area Chart](https://nxui.geoql.in/docs/charts/area-chart)       | A responsive area chart with axes and grid lines whose values rise from the baseline on mount.                          |
+| [Donut Chart](https://nxui.geoql.in/docs/charts/donut-chart)     | A donut chart that sweeps in clockwise, with a counting total in the center and a legend that lifts its slice on hover. |
+| [Progress Ring](https://nxui.geoql.in/docs/charts/progress-ring) | A circular progress indicator with rounded ends and a percentage that counts up with the ring.                          |
+| [Radial Gauge](https://nxui.geoql.in/docs/charts/radial-gauge)   | A 270° gauge with a rounded value arc, threshold colors, and a readout that counts up to the value.                     |
+| [Sparkline](https://nxui.geoql.in/docs/charts/sparkline)         | A compact trend line with a shaded area that rises into place, sized for KPI cards and table cells.                     |
+
 ### Visual Effects (12)
 
 | Component                                                                              | Description                                                                                                              |
@@ -320,13 +344,15 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Pixel Canvas](https://nxui.geoql.in/docs/visual-effects/pixel-canvas)                 | An interactive pixel grid canvas that responds to mouse movement with customizable colors.                               |
 | [Pixel Wave](https://nxui.geoql.in/docs/visual-effects/pixel-wave)                     | A looping pixel-art scene on a dark LED grid with four swappable presets (ocean, desert, hearth, mind).                  |
 
-### Buttons (3)
+### Buttons (5)
 
-| Component                                                                               | Description                                                                            |
-| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [Interactive Hover Button](https://nxui.geoql.in/docs/buttons/interactive-hover-button) | A button with a slide-and-reveal hover effect that transitions content and background. |
-| [Pulsating Button](https://nxui.geoql.in/docs/buttons/pulsating-button)                 | Vue port of the pulsating-button component from componentry.fun.                       |
-| [Shimmer Button](https://nxui.geoql.in/docs/buttons/shimmer-button)                     | A button with a rotating shimmer/glow effect.                                          |
+| Component                                                                               | Description                                                                                                      |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [Chaos Button](https://nxui.geoql.in/docs/buttons/chaos-button)                         | A pill button filled with drifting neon lines from a WebGL shader that tighten and scatter while pressed.        |
+| [Fizzy Button](https://nxui.geoql.in/docs/buttons/fizzy-button)                         | A button that starts to fizz as your pointer approaches, then floods with rising particles and inverts on hover. |
+| [Interactive Hover Button](https://nxui.geoql.in/docs/buttons/interactive-hover-button) | A button with a slide-and-reveal hover effect that transitions content and background.                           |
+| [Pulsating Button](https://nxui.geoql.in/docs/buttons/pulsating-button)                 | Vue port of the pulsating-button component from componentry.fun.                                                 |
+| [Shimmer Button](https://nxui.geoql.in/docs/buttons/shimmer-button)                     | A button with a rotating shimmer/glow effect.                                                                    |
 
 ### Paper Shaders (29)
 

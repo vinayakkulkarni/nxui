@@ -1,0 +1,29 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "radial-gauge",
+  "type": "registry:ui",
+  "title": "Radial Gauge",
+  "description": "A 270° gauge with a rounded value arc, threshold colors, and a readout that counts up to the value.",
+  "dependencies": ["@vueuse/core"],
+  "registryDependencies": ["https://nxui.geoql.in/r/chart.json"],
+  "files": [
+    {
+      "path": "registry/new-york/radial-gauge/RadialGauge.vue",
+      "content": "<script setup lang=\"ts\">\n  import { computed } from 'vue';\n  import { Chart, defineChart, polar, radialArc } from '../chart/chart-backend';\n  import { useChartTween } from '../chart/use-chart-tween';\n  import type { RadialGaugeProps } from './types';\n\n  const props = withDefaults(defineProps<RadialGaugeProps>(), {\n    min: 0,\n    max: 100,\n    label: '',\n    unit: '',\n    size: 220,\n    thickness: 16,\n    sweep: 270,\n    color: 'var(--chart-2)',\n    thresholds: () => [],\n    ariaLabel: '',\n    class: '',\n  });\n\n  const clamped = computed(() =>\n    Math.min(props.max, Math.max(props.min, props.value)),\n  );\n  const shown = useChartTween(() => clamped.value, 1100);\n\n  const fraction = computed(() => {\n    const span = props.max - props.min;\n    return span === 0 ? 0 : (shown.value - props.min) / span;\n  });\n\n  const tone = computed(() => {\n    const band = [...props.thresholds]\n      .sort((a, b) => a.from - b.from)\n      .filter((t) => clamped.value >= t.from)\n      .at(-1);\n    return band?.color ?? props.color;\n  });\n\n  const angles = computed(() => {\n    const half = ((props.sweep / 2) * Math.PI) / 180;\n    return { start: -half, end: half };\n  });\n\n  const definition = computed(() => {\n    const { start, end } = angles.value;\n    const outer = props.size / 2 - 4;\n    const shape = {\n      startAngle: 'a',\n      endAngle: 'b',\n      innerRadius: outer - props.thickness,\n      outerRadius: outer,\n      cornerRadius: props.thickness / 2,\n    } as const;\n    return defineChart({\n      marks: [\n        polar({\n          marks: [\n            radialArc([{ a: start, b: end }], {\n              ...shape,\n              fill: 'var(--muted)',\n            }),\n            radialArc(\n              [{ a: start, b: start + (end - start) * fraction.value }],\n              {\n                ...shape,\n                fill: tone.value,\n              },\n            ),\n          ],\n          scales: { angle: null, radius: null },\n        }),\n      ],\n      scales: { x: null, y: null },\n    });\n  });\n\n  const readout = computed(() => `${Math.round(shown.value)}${props.unit}`);\n  const accessibleName = computed(\n    () =>\n      props.ariaLabel ||\n      `${props.label || 'Gauge'}: ${Math.round(clamped.value)}${props.unit}`,\n  );\n</script>\n\n<template>\n  <div\n    :class=\"['relative', props.class]\"\n    :style=\"{ width: `${props.size}px`, height: `${props.size}px` }\"\n  >\n    <Chart\n      :definition=\"definition\"\n      :width=\"props.size\"\n      :height=\"props.size\"\n      v-bind=\"{ ariaLabel: accessibleName }\"\n    />\n    <div\n      class=\"pointer-events-none absolute inset-0 flex flex-col items-center justify-center\"\n    >\n      <span\n        class=\"text-4xl font-semibold tracking-tight tabular-nums text-foreground\"\n      >\n        {{ readout }}\n      </span>\n      <span v-if=\"props.label\" class=\"mt-1 text-xs text-muted-foreground\">\n        {{ props.label }}\n      </span>\n    </div>\n    <div\n      class=\"pointer-events-none absolute inset-x-0 bottom-[12%] flex justify-between px-[22%] text-xs tabular-nums text-muted-foreground\"\n    >\n      <span>{{ props.min }}</span>\n      <span>{{ props.max }}</span>\n    </div>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/radial-gauge/RadialGauge.vue"
+    },
+    {
+      "path": "registry/new-york/radial-gauge/index.ts",
+      "content": "export { default as RadialGauge } from './RadialGauge.vue';\nexport type { RadialGaugeProps, RadialGaugeThreshold } from './types';\n",
+      "type": "registry:ui",
+      "target": "components/ui/radial-gauge/index.ts"
+    },
+    {
+      "path": "registry/new-york/radial-gauge/types.ts",
+      "content": "export interface RadialGaugeThreshold {\n  /** The band applies from this value upward. */\n  from: number;\n  color: string;\n}\n\nexport interface RadialGaugeProps {\n  value: number;\n  min?: number;\n  max?: number;\n  /** Caption under the value. */\n  label?: string;\n  /** Appended to the value, e.g. `%` or ` ms`. */\n  unit?: string;\n  /** Diameter in pixels. */\n  size?: number;\n  thickness?: number;\n  /** Arc sweep in degrees, centered on 12 o'clock. */\n  sweep?: number;\n  /** Any CSS color. Ignored when `thresholds` match. */\n  color?: string;\n  /** Colors the value arc by the highest band the value reaches. */\n  thresholds?: RadialGaugeThreshold[];\n  ariaLabel?: string;\n  class?: string;\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/radial-gauge/types.ts"
+    }
+  ]
+}

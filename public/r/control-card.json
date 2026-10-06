@@ -1,0 +1,28 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "control-card",
+  "type": "registry:ui",
+  "title": "Control Card",
+  "description": "A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "registry/new-york/control-card/ControlCard.vue",
+      "content": "<script setup lang=\"ts\">\n  import { computed } from 'vue';\n  import type { ControlCardProps } from './types';\n\n  const props = withDefaults(defineProps<ControlCardProps>(), {\n    stat: undefined,\n    color: 'oklch(0.55 0.22 264)',\n    class: '',\n  });\n\n  const on = defineModel<boolean>('on', { default: false });\n\n  const accent = computed(() => ({ '--control-accent': props.color }));\n\n  function toggle(): void {\n    on.value = !on.value;\n  }\n</script>\n\n<template>\n  <article\n    :class=\"[\n      'flex flex-col gap-6 rounded-3xl border border-white/30 bg-white/12 p-5 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)] backdrop-blur-2xl backdrop-saturate-150',\n      props.class,\n    ]\"\n    :style=\"accent\"\n  >\n    <header class=\"flex items-start justify-between gap-4\">\n      <Icon :name=\"`lucide:${props.icon}`\" class=\"mt-1 size-7 text-white/90\" />\n      <button\n        type=\"button\"\n        role=\"switch\"\n        :aria-checked=\"on\"\n        :aria-label=\"`${props.name} power`\"\n        :class=\"[\n          'flex size-12 shrink-0 items-center justify-center rounded-full transition-[background-color,box-shadow,color] duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white',\n          on\n            ? 'bg-(--control-accent) text-white shadow-[0_6px_20px_-6px_var(--control-accent)]'\n            : 'border border-white/30 bg-white/15 text-white/80 hover:bg-white/25',\n        ]\"\n        @click=\"toggle\"\n      >\n        <Icon :name=\"on ? 'lucide:power' : 'lucide:power-off'\" class=\"size-5\" />\n      </button>\n    </header>\n\n    <div>\n      <p class=\"text-sm text-white/70\">{{ props.category }}</p>\n      <p class=\"mt-1 truncate text-xl font-medium\">{{ props.name }}</p>\n    </div>\n\n    <div v-if=\"props.stat\" class=\"flex items-center gap-3\">\n      <span\n        class=\"flex size-11 shrink-0 items-center justify-center rounded-xl border border-white/30 bg-white/10\"\n      >\n        <Icon\n          :name=\"`lucide:${props.stat.icon}`\"\n          class=\"size-5 text-white/90\"\n        />\n      </span>\n      <div class=\"min-w-0\">\n        <p class=\"truncate text-base font-medium tabular-nums\">\n          {{ props.stat.value }}\n        </p>\n        <p class=\"truncate text-sm text-white/65\">{{ props.stat.label }}</p>\n      </div>\n    </div>\n  </article>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/control-card/ControlCard.vue"
+    },
+    {
+      "path": "registry/new-york/control-card/index.ts",
+      "content": "export { default as ControlCard } from './ControlCard.vue';\nexport type { ControlCardProps, ControlCardStat } from './types';\n",
+      "type": "registry:ui",
+      "target": "components/ui/control-card/index.ts"
+    },
+    {
+      "path": "registry/new-york/control-card/types.ts",
+      "content": "export interface ControlCardStat {\n  /** Lucide icon name without the prefix, e.g. `gauge`. */\n  icon: string;\n  /** Reading, e.g. `Speed ~ 1GB`. */\n  value: string;\n  /** Caption under the reading, e.g. `Active`. */\n  label: string;\n}\n\nexport interface ControlCardProps {\n  /** Device type, e.g. `Wi-Fi`. */\n  category: string;\n  /** Device name, e.g. `Starlink Internet`. */\n  name: string;\n  /** Lucide icon name without the prefix, e.g. `wifi`. */\n  icon: string;\n  stat?: ControlCardStat;\n  /** Power button color while on. Any CSS color. */\n  color?: string;\n  class?: string;\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/control-card/types.ts"
+    }
+  ]
+}
