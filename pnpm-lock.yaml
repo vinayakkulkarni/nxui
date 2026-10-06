@@ -276,8 +276,8 @@ importers:
         specifier: ^4.0.5
         version: 4.0.5
       v-tweakpane:
-        specifier: ^0.3.2
-        version: 0.3.2(@tweakpane/plugin-essentials@0.2.1(tweakpane@4.0.5))(tweakpane@4.0.5)(vue@3.5.43(typescript@6.0.3))
+        specifier: ^0.3.4
+        version: 0.3.4(@tweakpane/plugin-essentials@0.2.1(tweakpane@4.0.5))(tweakpane@4.0.5)(vue@3.5.43(typescript@6.0.3))
       vue-sonner:
         specifier: ^2.0.9
         version: 2.0.9(db68d4036c22caea1ebaebbcefae81d0)
@@ -6731,12 +6731,11 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
-  v-tweakpane@0.3.2:
-    resolution: {integrity: sha512-i1rzqM0w9xkQ/biGDDKJMLu59WacGBUg4Uw8oK/9RpZuJILbu2GBX4+HgV7iFctMwetje1ZU3b9XSAXo5BPRBg==}
-    engines: {node: '>=16.0.0', npm: '>=8.19.2'}
+  v-tweakpane@0.3.4:
+    resolution: {integrity: sha512-UXLauFJMbCvjG5nl/gK54AfCCKG7Bf9LWvr5CvQlRy/KwuALqwE2T93XgmHNSar+5MTjAd3vI7gswFQZ3DeFBg==}
     peerDependencies:
       '@tweakpane/plugin-essentials': ^0.2.1
-      tweakpane: ^4.0.3
+      tweakpane: ^4.0.4
       vue: ^3.4.7
 
   valibot@1.5.0:
@@ -14332,7 +14331,7 @@ snapshots:
 
   util-deprecate@1.0.2: {}
 
-  v-tweakpane@0.3.2(@tweakpane/plugin-essentials@0.2.1(tweakpane@4.0.5))(tweakpane@4.0.5)(vue@3.5.43(typescript@6.0.3)):
+  v-tweakpane@0.3.4(@tweakpane/plugin-essentials@0.2.1(tweakpane@4.0.5))(tweakpane@4.0.5)(vue@3.5.43(typescript@6.0.3)):
     dependencies:
       '@tweakpane/plugin-essentials': 0.2.1(tweakpane@4.0.5)
       tweakpane: 4.0.5

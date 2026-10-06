@@ -3,7 +3,7 @@
   // Wraps v-tweakpane; parent receives the Pane instance via
   // on-pane-created and adds bindings against its reactive params.
   import { VTweakpane } from 'v-tweakpane';
-  import 'v-tweakpane/dist/v-tweakpane.css';
+  import 'v-tweakpane/dist/index.css';
   import type { Pane } from 'tweakpane';
 
   defineProps<{
