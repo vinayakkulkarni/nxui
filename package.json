@@ -51,7 +51,7 @@
     "motion-v": "^2.5.2",
     "nuxt": "^4.5.2",
     "nuxt-llms": "^0.2.0",
-    "nuxt-schema-org": "^6.3.2",
+    "nuxt-schema-org": "^6.4.3",
     "ogl": "^1.0.11",
     "opentype.js": "^2.0.0",
     "postprocessing": "^6.39.5",
