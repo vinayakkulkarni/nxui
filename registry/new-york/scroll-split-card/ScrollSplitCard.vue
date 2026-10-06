@@ -166,7 +166,7 @@
   let scrollParent: HTMLElement | Window | null = null;
 
   onMounted(() => {
-    scrollParent = findScrollParent(containerRef.value);
+    scrollParent = findScrollParent(containerRef.value ?? null);
   });
 
   function updateScroll() {

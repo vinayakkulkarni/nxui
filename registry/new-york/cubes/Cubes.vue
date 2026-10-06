@@ -87,11 +87,11 @@
 
       // Lerp current toward target
       const lerpFactor = 0.15;
-      for (let i = 0; i < cubeRotations.value.length; i++) {
-        cubeRotations.value[i].x +=
-          (targetRots[i].x - cubeRotations.value[i].x) * lerpFactor;
-        cubeRotations.value[i].y +=
-          (targetRots[i].y - cubeRotations.value[i].y) * lerpFactor;
+      for (const [i, rotation] of cubeRotations.value.entries()) {
+        const target = targetRots[i];
+        if (!target) continue;
+        rotation.x += (target.x - rotation.x) * lerpFactor;
+        rotation.y += (target.y - rotation.y) * lerpFactor;
       }
     }
     animationId = requestAnimationFrame(update);

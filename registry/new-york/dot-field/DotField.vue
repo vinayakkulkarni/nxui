@@ -161,8 +161,7 @@
     ctx.fillStyle = '#000';
     ctx.beginPath();
 
-    for (let i = 0; i < dots.length; i++) {
-      const d = dots[i];
+    for (const [i, d] of dots.entries()) {
       const dx = d.ax - mouse.x;
       const dy = d.ay - mouse.y;
       const distSq = dx * dx + dy * dy;

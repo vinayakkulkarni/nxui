@@ -41,8 +41,8 @@
 
   useIntersectionObserver(
     containerRef,
-    ([{ isIntersecting }]) => {
-      if (isIntersecting && !hasAnimated.value) {
+    ([entry]) => {
+      if (entry?.isIntersecting && !hasAnimated.value) {
         isVisible.value = true;
         hasAnimated.value = true;
       }

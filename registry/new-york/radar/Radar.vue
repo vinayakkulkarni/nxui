@@ -118,8 +118,8 @@
     });
     container.appendChild(gl.canvas);
 
-    const currentMouse = [0.5, 0.5];
-    let targetMouse = [0.5, 0.5];
+    const currentMouse: [number, number] = [0.5, 0.5];
+    let targetMouse: [number, number] = [0.5, 0.5];
 
     const geometry = new Triangle(gl);
     const program = new Program(gl, {
@@ -186,10 +186,10 @@
     function update(time: number) {
       animId = requestAnimationFrame(update);
       program.uniforms.uTime.value = time * 0.001;
-      currentMouse[0] += 0.05 * (targetMouse[0]! - currentMouse[0]!);
-      currentMouse[1] += 0.05 * (targetMouse[1]! - currentMouse[1]!);
-      (program.uniforms.uMouse.value as Float32Array)[0] = currentMouse[0]!;
-      (program.uniforms.uMouse.value as Float32Array)[1] = currentMouse[1]!;
+      currentMouse[0] += 0.05 * (targetMouse[0] - currentMouse[0]);
+      currentMouse[1] += 0.05 * (targetMouse[1] - currentMouse[1]);
+      (program.uniforms.uMouse.value as Float32Array)[0] = currentMouse[0];
+      (program.uniforms.uMouse.value as Float32Array)[1] = currentMouse[1];
       renderer.render({ scene: mesh });
     }
     animId = requestAnimationFrame(update);

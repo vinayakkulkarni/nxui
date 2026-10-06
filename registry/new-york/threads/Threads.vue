@@ -26,8 +26,8 @@
   let program: Program | null = null;
   let mesh: Mesh | null = null;
   let rafId = 0;
-  const currentMouse = [0.5, 0.5];
-  const targetMouse = [0.5, 0.5];
+  const currentMouse: [number, number] = [0.5, 0.5];
+  const targetMouse: [number, number] = [0.5, 0.5];
 
   const vertexShader = `
 attribute vec2 position;

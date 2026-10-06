@@ -67,10 +67,10 @@
       const localX = mouseX - rect.left;
       const localY = mouseY - rect.top;
 
-      for (let i = 0; i < blobPositions.value.length; i++) {
+      for (const [i, pos] of blobPositions.value.entries()) {
         const lerp = i === 0 ? props.fastLerp : props.slowLerp;
-        blobPositions.value[i].x += (localX - blobPositions.value[i].x) * lerp;
-        blobPositions.value[i].y += (localY - blobPositions.value[i].y) * lerp;
+        pos.x += (localX - pos.x) * lerp;
+        pos.y += (localY - pos.y) * lerp;
       }
     }
     animationId = requestAnimationFrame(update);

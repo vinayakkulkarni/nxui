@@ -115,6 +115,10 @@
   const tmpH = new Vector3();
   const tmpI = new Vector3();
 
+  function sizeAt(index: number): number {
+    return sizeData[index] ?? 1;
+  }
+
   function initPhysics() {
     positionData = new Float32Array(3 * props.count).fill(0);
     velocityData = new Float32Array(3 * props.count).fill(0);
@@ -155,7 +159,7 @@
     for (let i = startIdx; i < props.count; i++) {
       const base = 3 * i;
       tmpB.fromArray(velocityData, base);
-      tmpB.y -= delta * props.gravity * sizeData[i];
+      tmpB.y -= delta * props.gravity * sizeAt(i);
       tmpB.multiplyScalar(props.friction);
       tmpB.clampLength(0, props.maxVelocity);
 
@@ -170,13 +174,13 @@
       const base = 3 * i;
       tmpA.fromArray(positionData, base);
       tmpB.fromArray(velocityData, base);
-      const radius = sizeData[i];
+      const radius = sizeAt(i);
 
       for (let j = i + 1; j < props.count; j++) {
         const otherBase = 3 * j;
         tmpC.fromArray(positionData, otherBase);
         tmpD.fromArray(velocityData, otherBase);
-        const otherRadius = sizeData[j];
+        const otherRadius = sizeAt(j);
 
         tmpE.copy(tmpC).sub(tmpA);
         const dist = tmpE.length();
@@ -208,7 +212,7 @@
         tmpI.fromArray(positionData, 0);
         tmpE.copy(tmpI).sub(tmpA);
         const dist = tmpE.length();
-        const sumR = radius + sizeData[0];
+        const sumR = radius + sizeAt(0);
         if (dist < sumR) {
           const diff = sumR - dist;
           tmpF.copy(tmpE.normalize()).multiplyScalar(diff);
@@ -251,7 +255,7 @@
       if (i === 0 && !props.followCursor) {
         dummy.scale.setScalar(0);
       } else {
-        dummy.scale.setScalar(sizeData[i]);
+        dummy.scale.setScalar(sizeAt(i));
       }
       dummy.updateMatrix();
       sphereMesh.setMatrixAt(i, dummy.matrix);
@@ -413,11 +417,13 @@ RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometr
         const scaled = ratio * (colorObjs.length - 1);
         const idx = Math.floor(scaled);
         const start = colorObjs[idx];
+        if (!start) continue;
         if (idx >= colorObjs.length - 1) {
           sphereMesh.setColorAt(i, start);
         } else {
           const alpha = scaled - idx;
           const end = colorObjs[idx + 1];
+          if (!end) continue;
           const c = new Color(
             start.r + alpha * (end.r - start.r),
             start.g + alpha * (end.g - start.g),
@@ -476,7 +482,9 @@ RE_Direct_Scattering(directLight, vUv, geometryPosition, geometryNormal, geometr
     // Visibility observer
     const intObserver = new IntersectionObserver(
       (entries) => {
-        isVisible = entries[0].isIntersecting;
+        const entry = entries[0];
+        if (!entry) return;
+        isVisible = entry.isIntersecting;
         if (isVisible && !isRunning) {
           isRunning = true;
           clockRef?.reset();

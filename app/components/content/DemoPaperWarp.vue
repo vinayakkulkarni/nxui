@@ -1,7 +1,10 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperWarp from '@registry/new-york/paper-warp/PaperWarp.vue';
+  import type { PaperWarpShape } from '@registry/new-york/paper-warp/types';
   import type { Pane } from 'tweakpane';
+
+  const initialShape: PaperWarpShape = 'edge';
 
   const params = reactive({
     color1: '#121212',
@@ -14,7 +17,7 @@
     swirl: 0.9,
     swirlIterations: 0,
     shapeScale: 0,
-    shape: 'edge',
+    shape: initialShape,
     speed: 0,
   });
 

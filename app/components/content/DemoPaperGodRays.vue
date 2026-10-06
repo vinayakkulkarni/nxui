@@ -45,7 +45,7 @@
         :colors="[params.color1, params.color2, params.color3, params.color4]"
         :intensity="params.intensity"
         :bloom="params.bloom"
-        offset-y="-0.55"
+        :offset-y="-0.55"
       />
       <ShaderPane title="God Rays" @on-pane-created="onPaneCreated" />
     </div>

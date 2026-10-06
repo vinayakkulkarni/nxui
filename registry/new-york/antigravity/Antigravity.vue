@@ -168,8 +168,7 @@
     const targetY = virtualMouse.y;
     const globalRotation = elapsed * props.rotationSpeed;
 
-    for (let i = 0; i < particles.length; i++) {
-      const p = particles[i];
+    for (const [i, p] of particles.entries()) {
       p.t += p.speed / 2;
 
       const projectionFactor = 1 - p.cz / 50;
@@ -227,7 +226,9 @@
   }
 
   useResizeObserver(containerRef, (entries) => {
-    const { width, height } = entries[0].contentRect;
+    const entry = entries[0];
+    if (!entry) return;
+    const { width, height } = entry.contentRect;
     if (!renderer || !camera || width <= 0 || height <= 0) return;
     renderer.setSize(width, height);
     camera.aspect = width / height;

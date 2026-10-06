@@ -1,4 +1,4 @@
-import type { Highlighter } from 'shiki';
+import type { Highlighter } from 'shiki/bundle/web';
 
 let highlighterPromise: Promise<Highlighter> | null = null;
 

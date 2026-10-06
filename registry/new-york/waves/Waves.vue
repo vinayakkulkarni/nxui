@@ -105,16 +105,25 @@
     141, 128, 195, 78, 66, 215, 61, 156, 180,
   ];
   const perm = Array.from<number>({ length: 512 });
-  const gradP = Array.from<number>({ length: 512 });
+  const gradP = Array.from<Grad>({ length: 512 });
+  const fallbackGrad = new Grad(0, 0);
+
+  function permAt(i: number): number {
+    return perm[i] ?? 0;
+  }
+  function gradAt(i: number): Grad {
+    return gradP[i] ?? fallbackGrad;
+  }
 
   function seedNoise(seed: number) {
     if (seed > 0 && seed < 1) seed *= 65536;
     seed = Math.floor(seed);
     if (seed < 256) seed |= seed << 8;
     for (let i = 0; i < 256; i++) {
-      const v = i & 1 ? p[i] ^ (seed & 255) : p[i] ^ ((seed >> 8) & 255);
+      const base = p[i] ?? 0;
+      const v = i & 1 ? base ^ (seed & 255) : base ^ ((seed >> 8) & 255);
       perm[i] = perm[i + 256] = v;
-      gradP[i] = gradP[i + 256] = grad3[v % 12];
+      gradP[i] = gradP[i + 256] = grad3[v % 12] ?? fallbackGrad;
     }
   }
 
@@ -132,10 +141,10 @@
     y -= Y;
     X &= 255;
     Y &= 255;
-    const n00 = gradP[X + perm[Y]].dot2(x, y);
-    const n01 = gradP[X + perm[Y + 1]].dot2(x, y - 1);
-    const n10 = gradP[X + 1 + perm[Y]].dot2(x - 1, y);
-    const n11 = gradP[X + 1 + perm[Y + 1]].dot2(x - 1, y - 1);
+    const n00 = gradAt(X + permAt(Y)).dot2(x, y);
+    const n01 = gradAt(X + permAt(Y + 1)).dot2(x, y - 1);
+    const n10 = gradAt(X + 1 + permAt(Y)).dot2(x - 1, y);
+    const n11 = gradAt(X + 1 + permAt(Y + 1)).dot2(x - 1, y - 1);
     const u = fade(x);
     return lerp(lerp(n00, n10, u), lerp(n01, n11, u), fade(y));
   }
@@ -226,12 +235,14 @@
     ctx.beginPath();
     ctx.strokeStyle = props.lineColor;
     for (const points of lines) {
-      let p1 = moved(points[0], false);
+      const first = points[0];
+      if (!first) continue;
+      let p1 = moved(first, false);
       ctx.moveTo(p1.x, p1.y);
-      for (let idx = 0; idx < points.length; idx++) {
+      for (const [idx, point] of points.entries()) {
         const isLast = idx === points.length - 1;
-        p1 = moved(points[idx], !isLast);
-        const p2 = moved(points[idx + 1] || points[points.length - 1], !isLast);
+        p1 = moved(point, !isLast);
+        const p2 = moved(points[idx + 1] ?? point, !isLast);
         ctx.lineTo(p1.x, p1.y);
         if (isLast) ctx.moveTo(p2.x, p2.y);
       }
@@ -269,7 +280,9 @@
   }
 
   useResizeObserver(containerRef, (entries) => {
-    const rect = entries[0].contentRect;
+    const entry = entries[0];
+    if (!entry) return;
+    const rect = entry.contentRect;
     boundingRect = { width: rect.width, height: rect.height, left: 0, top: 0 };
     const canvas = canvasRef.value;
     if (canvas) {

@@ -56,17 +56,16 @@
     ctx.font = `${props.fontSize}px monospace`;
 
     for (let i = 0; i < columns.value.length; i++) {
-      const char = chars[Math.floor(Math.random() * chars.length)];
+      const column = columns.value[i];
+      if (column === undefined) continue;
+      const char = chars.charAt(Math.floor(Math.random() * chars.length));
       const x = i * props.fontSize;
-      const y = columns.value[i] * props.fontSize;
+      const y = column * props.fontSize;
 
       ctx.fillText(char, x, y);
 
-      if (y > canvas.height && Math.random() > 0.975) {
-        columns.value[i] = 0;
-      }
-
-      columns.value[i]++;
+      const resetColumn = y > canvas.height && Math.random() > 0.975;
+      columns.value[i] = (resetColumn ? 0 : column) + 1;
     }
   });
 

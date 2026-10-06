@@ -213,7 +213,7 @@
     } else if (props.trigger === 'scroll' && containerRef.value) {
       observer = new IntersectionObserver(
         ([entry]) => {
-          if (entry.isIntersecting) {
+          if (entry?.isIntersecting) {
             effectStarted.value = true;
             observer?.disconnect();
           }

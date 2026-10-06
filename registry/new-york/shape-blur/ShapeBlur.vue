@@ -23,6 +23,7 @@
       circleSize?: number;
       circleEdge?: number;
       shapeColor?: string;
+      class?: string;
     }>(),
     {
       variation: 0,
@@ -160,13 +161,14 @@ void main() {
     container.appendChild(renderer.domElement);
 
     const geo = new PlaneGeometry(1, 1);
+    const pixelRatioUniform = { value: Math.min(window.devicePixelRatio, 2) };
     const material = new ShaderMaterial({
       vertexShader: VERT,
       fragmentShader: FRAG,
       uniforms: {
         u_mouse: { value: vMouseDamp },
         u_resolution: { value: vResolution },
-        u_pixelRatio: { value: Math.min(window.devicePixelRatio, 2) },
+        u_pixelRatio: pixelRatioUniform,
         u_shapeSize: { value: props.shapeSize },
         u_roundness: { value: props.roundness },
         u_borderSize: { value: props.borderSize },
@@ -198,7 +200,7 @@ void main() {
       camera.updateProjectionMatrix();
       quad.scale.set(w, h, 1);
       vResolution.set(w, h).multiplyScalar(dpr);
-      material.uniforms.u_pixelRatio.value = dpr;
+      pixelRatioUniform.value = dpr;
     }
     resize();
     useResizeObserver(containerRef, resize);

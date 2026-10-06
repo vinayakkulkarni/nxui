@@ -135,7 +135,7 @@ void main() {
     const medias: MediaState[] = [];
     const padding = 5;
 
-    for (let i = 0; i < props.items.length; i++) {
+    for (const [i, item] of props.items.entries()) {
       const tex = new Texture(gl, { generateMipmaps: false });
       const program = new Program(gl, {
         depthTest: false,
@@ -154,7 +154,7 @@ void main() {
 
       const img = new Image();
       img.crossOrigin = 'anonymous';
-      img.src = props.items[i];
+      img.src = item;
       img.onload = () => {
         tex.image = img;
         program.uniforms.uImageSize.value = [

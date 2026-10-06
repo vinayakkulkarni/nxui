@@ -25,8 +25,9 @@
     },
   );
 
+  const linear = (p: number) => p;
   const curveFns: Record<string, (p: number) => number> = {
-    linear: (p: number) => p,
+    linear,
     bezier: (p: number) => p * p * (3 - 2 * p),
     'ease-in': (p: number) => p * p,
     'ease-out': (p: number) => 1 - (1 - p) ** 2,
@@ -47,7 +48,7 @@
   const blurDivs = computed(() => {
     const divs: Array<{ key: number; style: Record<string, string> }> = [];
     const increment = 100 / props.divCount;
-    const curveFn = curveFns[props.curve] || curveFns.linear;
+    const curveFn = curveFns[props.curve] ?? linear;
     const direction = getGradientDirection(props.position);
 
     for (let i = 1; i <= props.divCount; i++) {

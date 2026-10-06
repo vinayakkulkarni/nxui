@@ -1,6 +1,10 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperHalftoneDots from '@registry/new-york/paper-halftone-dots/PaperHalftoneDots.vue';
+  import type {
+    PaperHalftoneDotsGrid,
+    PaperHalftoneDotsType,
+  } from '@registry/new-york/paper-halftone-dots/types';
   import type { Pane } from 'tweakpane';
 
   const params = reactive({
@@ -9,8 +13,8 @@
     size: 0.5,
     radius: 1.25,
     contrast: 0.4,
-    grid: 'hex',
-    type: 'gooey',
+    grid: 'hex' as PaperHalftoneDotsGrid,
+    type: 'gooey' as PaperHalftoneDotsType,
   });
 
   function onPaneCreated(pane: Pane) {

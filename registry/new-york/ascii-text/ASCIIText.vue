@@ -201,12 +201,13 @@
   }
 
   function onTouchMove(e: TouchEvent) {
-    if (e.touches.length > 0) {
+    const touch = e.touches[0];
+    if (touch) {
       const bounds = containerRef.value?.getBoundingClientRect();
       if (bounds) {
         mousePos = {
-          x: e.touches[0].clientX - bounds.left,
-          y: e.touches[0].clientY - bounds.top,
+          x: touch.clientX - bounds.left,
+          y: touch.clientY - bounds.top,
         };
       }
     }
@@ -231,7 +232,8 @@
       return;
 
     const time = Date.now() * 0.001;
-    material.uniforms.uTime.value = Math.sin(time);
+    const uTime = material.uniforms.uTime;
+    if (uTime) uTime.value = Math.sin(time);
 
     const { width, height } = containerRef.value?.getBoundingClientRect() ?? {
       width: 0,
@@ -254,10 +256,10 @@
       for (let y = 0; y < h; y++) {
         for (let x = 0; x < w; x++) {
           const i = (x + y * w) * 4;
-          const r = imgData[i];
-          const g = imgData[i + 1];
-          const b = imgData[i + 2];
-          const a = imgData[i + 3];
+          const r = imgData[i] ?? 0;
+          const g = imgData[i + 1] ?? 0;
+          const b = imgData[i + 2] ?? 0;
+          const a = imgData[i + 3] ?? 0;
           if (a === 0) {
             str += ' ';
             continue;
@@ -301,7 +303,9 @@
   }
 
   useResizeObserver(containerRef, (entries) => {
-    const { width, height } = entries[0].contentRect;
+    const entry = entries[0];
+    if (!entry) return;
+    const { width, height } = entry.contentRect;
     if (width > 0 && height > 0) {
       setSize(width, height);
     }

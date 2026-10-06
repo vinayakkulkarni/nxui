@@ -14,8 +14,16 @@ minimumReleaseAge: 60
 # unhead/dist/stream/iife.mjs that the Cloudflare preset build cannot parse,
 # aborting the CF Workers build (nuxt/nuxt#35670). Fixed in Unhead 3.2.0+;
 # pin the floor to >=3.2.1 so the Cloudflare build always resolves a good copy.
+#
+# remark-mdc 3.11.1 wraps the emphasis/strong stringify handlers in plain
+# functions without `.attention`. mdast-util-to-markdown >=2.1.3 serializes
+# emphasis/strong through that hook and otherwise re-enters the handler, so
+# stringify recurses forever ("Maximum call stack size exceeded" on
+# /llms-full.txt). Pin it for remark-mdc only until upstream ships a fix:
+# https://github.com/nuxt-content/remark-mdc/issues/161
 overrides:
   unhead: '>=3.4.2'
+  remark-mdc>mdast-util-to-markdown: 2.1.2
 
 # pnpm blocks all package build scripts by default. The allowBuilds
 # map below is security-sensitive — true = postinstall runs; false = skipped.

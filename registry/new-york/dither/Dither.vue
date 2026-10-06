@@ -184,30 +184,33 @@ void main(){
 
   useResizeObserver(containerRef, resize);
 
+  function uniformLoc(name: string): WebGLUniformLocation | null {
+    return uniforms[name] ?? null;
+  }
+
   function render(now: number) {
     if (!gl) return;
     const elapsed = (now - startTime) / 1000;
     const time = props.disableAnimation ? 0 : elapsed;
 
-    gl.uniform1f(uniforms.u_time, time);
-    gl.uniform2f(uniforms.u_mousePos, mouse.x, mouse.y);
-    gl.uniform1f(uniforms.u_waveSpeed, props.waveSpeed);
-    gl.uniform1f(uniforms.u_waveFrequency, props.waveFrequency);
-    gl.uniform1f(uniforms.u_waveAmplitude, props.waveAmplitude);
+    gl.uniform1f(uniformLoc('u_time'), time);
+    gl.uniform2f(uniformLoc('u_mousePos'), mouse.x, mouse.y);
+    gl.uniform1f(uniformLoc('u_waveSpeed'), props.waveSpeed);
+    gl.uniform1f(uniformLoc('u_waveFrequency'), props.waveFrequency);
+    gl.uniform1f(uniformLoc('u_waveAmplitude'), props.waveAmplitude);
     gl.uniform3f(
-      uniforms.u_waveColor,
+      uniformLoc('u_waveColor'),
       props.waveColor[0],
       props.waveColor[1],
       props.waveColor[2],
     );
     gl.uniform1i(
-      uniforms.u_enableMouseInteraction,
+      uniformLoc('u_enableMouseInteraction'),
       props.enableMouseInteraction ? 1 : 0,
     );
-    gl.uniform1f(uniforms.u_mouseRadius, props.mouseRadius);
-    gl.uniform1f(uniforms.u_colorNum, props.colorNum);
-    gl.uniform1f(uniforms.u_pixelSize, props.pixelSize);
-    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    gl.uniform1f(uniformLoc('u_mouseRadius'), props.mouseRadius);
+    gl.uniform1f(uniformLoc('u_colorNum'), props.colorNum);
+    gl.uniform1f(uniformLoc('u_pixelSize'), props.pixelSize);
     rafId = requestAnimationFrame(render);
   }
 

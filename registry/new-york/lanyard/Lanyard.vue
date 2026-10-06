@@ -97,6 +97,7 @@
       for (let i = 0; i < ropeNodes.length - 1; i++) {
         const a = ropeNodes[i];
         const b = ropeNodes[i + 1];
+        if (!a || !b) continue;
         const diff = b.position.clone().sub(a.position);
         const dist = diff.length();
         if (dist < 0.0001) continue;
@@ -219,9 +220,9 @@
 
     raycaster.setFromCamera(pointer, camera);
     const intersects = raycaster.intersectObjects(cardMesh.children, true);
-    if (intersects.length > 0) {
+    const cardNode = ropeNodes[ropeNodes.length - 1];
+    if (intersects.length > 0 && cardNode) {
       isDragging = true;
-      const cardNode = ropeNodes[ropeNodes.length - 1];
       const vec = new THREE.Vector3(pointer.x, pointer.y, 0.5).unproject(
         camera,
       );
@@ -240,7 +241,8 @@
     pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
 
-    if (isDragging) {
+    const dragNode = ropeNodes[ropeNodes.length - 1];
+    if (isDragging && dragNode) {
       const vec = new THREE.Vector3(pointer.x, pointer.y, 0.5).unproject(
         camera,
       );
@@ -248,9 +250,8 @@
       const point = camera.position
         .clone()
         .add(dir.multiplyScalar(camera.position.length()));
-      const cardNode = ropeNodes[ropeNodes.length - 1];
-      cardNode.position.copy(point.sub(dragOffset));
-      cardNode.prevPosition.copy(cardNode.position);
+      dragNode.position.copy(point.sub(dragOffset));
+      dragNode.prevPosition.copy(dragNode.position);
       // Wake up all nodes
       for (const node of ropeNodes) {
         if (node.fixed) continue;
@@ -372,6 +373,7 @@
           for (let i = 0; i < ropeNodes.length - 1; i++) {
             const a = ropeNodes[i];
             const b = ropeNodes[i + 1];
+            if (!a || !b) continue;
             const diff = b.position.clone().sub(a.position);
             const dist = diff.length();
             if (dist < 0.0001) continue;
@@ -387,14 +389,14 @@
       updateBand();
 
       // Update card position & rotation
-      if (cardMesh) {
-        const cardNode = ropeNodes[ropeNodes.length - 1];
+      const cardNode = ropeNodes[ropeNodes.length - 1];
+      if (cardMesh && cardNode) {
         cardMesh.position.copy(cardNode.position);
         cardMesh.position.y -= 1.2;
 
         // Calculate card rotation from velocity
-        if (ropeNodes.length >= 2) {
-          const prev = ropeNodes[ropeNodes.length - 2];
+        const prev = ropeNodes[ropeNodes.length - 2];
+        if (prev) {
           const dir = cardNode.position.clone().sub(prev.position).normalize();
           const angle = Math.atan2(dir.x, dir.y);
           cardMesh.rotation.z = -angle * 0.3;

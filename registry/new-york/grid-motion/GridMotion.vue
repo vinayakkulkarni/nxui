@@ -70,13 +70,15 @@
         const direction = i % 2 === 0 ? 1 : -1;
         const target =
           ((mouseX.value / w) * MAX_MOVE - MAX_MOVE / 2) * direction;
-        const factor =
-          EASE_SPEED / (1 + inertiaFactors[i % inertiaFactors.length]);
-        rowPositions.value[i] += (target - rowPositions.value[i]) * factor;
+        const inertia = inertiaFactors[i % inertiaFactors.length] ?? 0;
+        const factor = EASE_SPEED / (1 + inertia);
+        const position = rowPositions.value[i] ?? 0;
+        const nextPosition = position + (target - position) * factor;
+        rowPositions.value[i] = nextPosition;
 
         const row = rowRefs.value[i];
         if (row) {
-          row.style.transform = `translateX(${rowPositions.value[i]}px)`;
+          row.style.transform = `translateX(${nextPosition}px)`;
         }
       }
     }

@@ -107,8 +107,9 @@ void main() {
 
     addVertex(...args: number[]): this {
       for (let i = 0; i < args.length; i += 3) {
+        const [x = 0, y = 0, z = 0] = args.slice(i, i + 3);
         this.vertices.push({
-          position: vec3.fromValues(args[i], args[i + 1], args[i + 2]),
+          position: vec3.fromValues(x, y, z),
           normal: vec3.create(),
           uv: vec2.create(),
         });
@@ -118,13 +119,16 @@ void main() {
 
     addFace(...args: number[]): this {
       for (let i = 0; i < args.length; i += 3) {
-        this.faces.push({ a: args[i], b: args[i + 1], c: args[i + 2] });
+        const [a = 0, b = 0, c = 0] = args.slice(i, i + 3);
+        this.faces.push({ a, b, c });
       }
       return this;
     }
 
     get lastVertex(): VertexData {
-      return this.vertices[this.vertices.length - 1];
+      const vertex = this.vertices[this.vertices.length - 1];
+      if (!vertex) throw new Error('Geometry has no vertices');
+      return vertex;
     }
 
     subdivide(divisions: number = 1): this {
@@ -177,10 +181,11 @@ void main() {
       cache: Record<string, number>,
     ): number {
       const cacheKey = ndxA < ndxB ? `k_${ndxB}_${ndxA}` : `k_${ndxA}_${ndxB}`;
-      if (Object.prototype.hasOwnProperty.call(cache, cacheKey))
-        return cache[cacheKey];
-      const a = this.vertices[ndxA].position;
-      const b = this.vertices[ndxB].position;
+      const cached = cache[cacheKey];
+      if (cached !== undefined) return cached;
+      const a = this.vertices[ndxA]?.position;
+      const b = this.vertices[ndxB]?.position;
+      if (!a || !b) throw new Error('Invalid vertex index');
       const ndx = this.vertices.length;
       cache[cacheKey] = ndx;
       this.addVertex(
@@ -342,14 +347,17 @@ void main() {
   ): WebGLProgram | null {
     const program = gl.createProgram();
     if (!program) return null;
-    const types = [gl.VERTEX_SHADER, gl.FRAGMENT_SHADER] as const;
-    for (let i = 0; i < 2; i++) {
-      const shader = createShader(gl, types[i], shaderSources[i]);
+    const stages: Array<[number, string]> = [
+      [gl.VERTEX_SHADER, shaderSources[0]],
+      [gl.FRAGMENT_SHADER, shaderSources[1]],
+    ];
+    for (const [type, source] of stages) {
+      const shader = createShader(gl, type, source);
       if (shader) gl.attachShader(program, shader);
     }
     if (attribLocations) {
-      for (const attrib in attribLocations) {
-        gl.bindAttribLocation(program, attribLocations[attrib], attrib);
+      for (const [attrib, location] of Object.entries(attribLocations)) {
+        gl.bindAttribLocation(program, location, attrib);
       }
     }
     gl.linkProgram(program);
@@ -374,7 +382,7 @@ void main() {
   // ---- ArcballControl ----
   class ArcballControl {
     isPointerDown = false;
-    orientation = quat.create();
+    orientation: QuatLike = quat.create();
     pointerRotation = quat.create();
     rotationVelocity = 0;
     rotationAxis = vec3.fromValues(1, 0, 0);
@@ -497,14 +505,14 @@ void main() {
       quat.normalize(this._combinedQuat, this._combinedQuat);
 
       const rad =
-        Math.acos(Math.min(1, Math.max(-1, this._combinedQuat[3]))) * 2.0;
+        Math.acos(Math.min(1, Math.max(-1, this._combinedQuat.w))) * 2.0;
       const s = Math.sin(rad / 2.0);
       let rv = 0;
       if (s > 0.000001) {
         rv = rad / (2 * Math.PI);
-        this.rotationAxis[0] = this._combinedQuat[0] / s;
-        this.rotationAxis[1] = this._combinedQuat[1] / s;
-        this.rotationAxis[2] = this._combinedQuat[2] / s;
+        this.rotationAxis[0] = this._combinedQuat.x / s;
+        this.rotationAxis[1] = this._combinedQuat.y / s;
+        this.rotationAxis[2] = this._combinedQuat.z / s;
       }
 
       const RV_INTENSITY = 0.5 * timeScale;
@@ -779,10 +787,10 @@ void main() {
             }),
         ),
       ).then((images) => {
-        for (let i = 0; i < images.length; i++) {
+        for (const [i, image] of images.entries()) {
           const x = (i % this.atlasSize) * cellSize;
           const y = Math.floor(i / this.atlasSize) * cellSize;
-          ctx.drawImage(images[i], x, y, cellSize, cellSize);
+          ctx.drawImage(image, x, y, cellSize, cellSize);
         }
         gl.bindTexture(gl.TEXTURE_2D, this.tex);
         gl.texImage2D(
@@ -831,10 +839,10 @@ void main() {
       if (!this.discInstances) return;
       const scale = 0.25;
       const SCALE_INTENSITY = 0.6;
-      for (let ndx = 0; ndx < this.instancePositions.length; ndx++) {
+      for (const [ndx, instancePosition] of this.instancePositions.entries()) {
         const p = vec3.transformQuat(
           vec3.create(),
-          this.instancePositions[ndx],
+          instancePosition,
           this.control.orientation,
         );
         const s =
@@ -868,7 +876,8 @@ void main() {
           matrix,
           mat4.fromTranslation(mat4.create(), [0, 0, -this.SPHERE_RADIUS]),
         );
-        mat4.copy(this.discInstances.matrices[ndx], matrix);
+        const instanceMatrix = this.discInstances.matrices[ndx];
+        if (instanceMatrix) mat4.copy(instanceMatrix, matrix);
       }
 
       gl.bindBuffer(gl.ARRAY_BUFFER, this.discInstances.buffer);
@@ -903,15 +912,15 @@ void main() {
       );
       gl.uniform3f(
         this.discLocations.uCameraPosition as WebGLUniformLocation,
-        this.camera.position[0],
-        this.camera.position[1],
-        this.camera.position[2],
+        this.camera.position.x,
+        this.camera.position.y,
+        this.camera.position.z,
       );
       gl.uniform4f(
         this.discLocations.uRotationAxisVelocity as WebGLUniformLocation,
-        this.control.rotationAxis[0],
-        this.control.rotationAxis[1],
-        this.control.rotationAxis[2],
+        this.control.rotationAxis.x,
+        this.control.rotationAxis.y,
+        this.control.rotationAxis.z,
         this.smoothRotationVelocity * 1.1,
       );
       gl.uniform1i(
@@ -953,7 +962,7 @@ void main() {
     private updateProjectionMatrix(): void {
       this.camera.aspect = this.gl.canvas.width / this.gl.canvas.height;
       const height = this.SPHERE_RADIUS * 0.35;
-      const distance = this.camera.position[2];
+      const distance = this.camera.position.z;
       this.camera.fov =
         this.camera.aspect > 1
           ? 2 * Math.atan(height / distance)
@@ -998,8 +1007,8 @@ void main() {
         damping = 7 / timeScale;
       }
 
-      this.camera.position[2] +=
-        (cameraTargetZ - this.camera.position[2]) / damping;
+      this.camera.position.z +=
+        (cameraTargetZ - this.camera.position.z) / damping;
       this.updateCameraMatrix();
     }
 
@@ -1012,8 +1021,8 @@ void main() {
       const nt = vec3.transformQuat(vec3.create(), n, inversOrientation);
       let maxD = -1;
       let nearestVertexIndex = 0;
-      for (let i = 0; i < this.instancePositions.length; ++i) {
-        const d = vec3.dot(nt, this.instancePositions[i]);
+      for (const [i, instancePosition] of this.instancePositions.entries()) {
+        const d = vec3.dot(nt, instancePosition);
         if (d > maxD) {
           maxD = d;
           nearestVertexIndex = i;
@@ -1023,9 +1032,11 @@ void main() {
     }
 
     private getVertexWorldPosition(index: number): Vec3Like {
+      const position = this.instancePositions[index];
+      if (!position) throw new Error(`Invalid vertex index: ${index}`);
       return vec3.transformQuat(
         vec3.create(),
-        this.instancePositions[index],
+        position,
         this.control.orientation,
       );
     }
@@ -1054,9 +1065,10 @@ void main() {
       canvasRef.value,
       props.items,
       (index: number) => {
-        const itemIndex = index % props.items.length;
-        activeItem.value = props.items[itemIndex];
-        emit('itemChange', props.items[itemIndex]);
+        const item = props.items[index % props.items.length];
+        if (!item) return;
+        activeItem.value = item;
+        emit('itemChange', item);
       },
       (moving: boolean) => {
         isMoving.value = moving;

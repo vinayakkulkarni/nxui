@@ -49,12 +49,12 @@
 
   function hexToVec3(hex: string): Vector3 {
     const h = hex.replace('#', '').trim();
-    const vals =
+    const vals: [number, number, number] =
       h.length === 3
         ? [
-            Number.parseInt(h[0] + h[0], 16),
-            Number.parseInt(h[1] + h[1], 16),
-            Number.parseInt(h[2] + h[2], 16),
+            Number.parseInt(h.charAt(0).repeat(2), 16),
+            Number.parseInt(h.charAt(1).repeat(2), 16),
+            Number.parseInt(h.charAt(2).repeat(2), 16),
           ]
         : [
             Number.parseInt(h.slice(0, 2), 16),
@@ -164,7 +164,7 @@ void main(){
     const w = containerRef.value.clientWidth || 1;
     const h = containerRef.value.clientHeight || 1;
     webglRenderer.setSize(w, h, false);
-    mat.uniforms.uCanvas.value.set(w, h);
+    mat.uniforms.uCanvas?.value.set(w, h);
   }
 
   useResizeObserver(containerRef, resize);
@@ -182,29 +182,32 @@ void main(){
       .filter(Boolean)
       .slice(0, MAX_COLORS)
       .map(hexToVec3);
-    for (let i = 0; i < colorsArr.length && i < MAX_COLORS; i++)
-      uColorsArray[i].copy(colorsArr[i]);
+    for (const [i, vec] of uColorsArray.entries()) {
+      const c = colorsArr[i];
+      if (c) vec.copy(c);
+    }
 
     const deg = ((props.rotation % 360) * Math.PI) / 180;
+    const uniforms = {
+      uCanvas: { value: new Vector2(1, 1) },
+      uTime: { value: 0 },
+      uSpeed: { value: props.speed },
+      uRot: { value: new Vector2(Math.cos(deg), Math.sin(deg)) },
+      uColorCount: { value: colorsArr.length },
+      uColors: { value: uColorsArray },
+      uTransparent: { value: props.transparent ? 1 : 0 },
+      uScale: { value: props.scale },
+      uFrequency: { value: props.frequency },
+      uWarpStrength: { value: props.warpStrength },
+      uPointer: { value: new Vector2(0, 0) },
+      uMouseInfluence: { value: props.mouseInfluence },
+      uParallax: { value: props.parallax },
+      uNoise: { value: props.noise },
+    };
     mat = new ShaderMaterial({
       vertexShader: vert,
       fragmentShader: frag,
-      uniforms: {
-        uCanvas: { value: new Vector2(1, 1) },
-        uTime: { value: 0 },
-        uSpeed: { value: props.speed },
-        uRot: { value: new Vector2(Math.cos(deg), Math.sin(deg)) },
-        uColorCount: { value: colorsArr.length },
-        uColors: { value: uColorsArray },
-        uTransparent: { value: props.transparent ? 1 : 0 },
-        uScale: { value: props.scale },
-        uFrequency: { value: props.frequency },
-        uWarpStrength: { value: props.warpStrength },
-        uPointer: { value: new Vector2(0, 0) },
-        uMouseInfluence: { value: props.mouseInfluence },
-        uParallax: { value: props.parallax },
-        uNoise: { value: props.noise },
-      },
+      uniforms,
       premultipliedAlpha: true,
       transparent: true,
     });
@@ -232,33 +235,34 @@ void main(){
       timer.update();
       const dt = timer.getDelta();
       const elapsed = timer.getElapsed();
-      mat.uniforms.uTime.value = elapsed;
-      mat.uniforms.uSpeed.value = props.speed;
-      mat.uniforms.uScale.value = props.scale;
-      mat.uniforms.uFrequency.value = props.frequency;
-      mat.uniforms.uWarpStrength.value = props.warpStrength;
-      mat.uniforms.uMouseInfluence.value = props.mouseInfluence;
-      mat.uniforms.uParallax.value = props.parallax;
-      mat.uniforms.uNoise.value = props.noise;
-      mat.uniforms.uTransparent.value = props.transparent ? 1 : 0;
+      uniforms.uTime.value = elapsed;
+      uniforms.uSpeed.value = props.speed;
+      uniforms.uScale.value = props.scale;
+      uniforms.uFrequency.value = props.frequency;
+      uniforms.uWarpStrength.value = props.warpStrength;
+      uniforms.uMouseInfluence.value = props.mouseInfluence;
+      uniforms.uParallax.value = props.parallax;
+      uniforms.uNoise.value = props.noise;
+      uniforms.uTransparent.value = props.transparent ? 1 : 0;
 
       const totalDeg = (props.rotation % 360) + props.autoRotate * elapsed;
       const rad = (totalDeg * Math.PI) / 180;
-      mat.uniforms.uRot.value.set(Math.cos(rad), Math.sin(rad));
+      uniforms.uRot.value.set(Math.cos(rad), Math.sin(rad));
 
       const updatedColors = (props.colors || [])
         .filter(Boolean)
         .slice(0, MAX_COLORS)
         .map(hexToVec3);
-      for (let i = 0; i < MAX_COLORS; i++) {
-        if (i < updatedColors.length) uColorsArray[i].copy(updatedColors[i]);
-        else uColorsArray[i].set(0, 0, 0);
+      for (const [i, vec] of uColorsArray.entries()) {
+        const c = updatedColors[i];
+        if (c) vec.copy(c);
+        else vec.set(0, 0, 0);
       }
-      mat.uniforms.uColorCount.value = updatedColors.length;
+      uniforms.uColorCount.value = updatedColors.length;
 
       const amt = Math.min(1, dt * 8);
       pointerCurrent.lerp(pointerTarget, amt);
-      mat.uniforms.uPointer.value.copy(pointerCurrent);
+      uniforms.uPointer.value.copy(pointerCurrent);
 
       webglRenderer.render(scene, camera);
       rafId = requestAnimationFrame(update);

@@ -42,9 +42,9 @@
       return `rgba(${r}, ${g}, ${b}, ${props.glareOpacity})`;
     }
     if (/^[0-9A-F]{3}$/i.test(hex)) {
-      const r = Number.parseInt(hex[0] + hex[0], 16);
-      const g = Number.parseInt(hex[1] + hex[1], 16);
-      const b = Number.parseInt(hex[2] + hex[2], 16);
+      const r = Number.parseInt(hex.charAt(0).repeat(2), 16);
+      const g = Number.parseInt(hex.charAt(1).repeat(2), 16);
+      const b = Number.parseInt(hex.charAt(2).repeat(2), 16);
       return `rgba(${r}, ${g}, ${b}, ${props.glareOpacity})`;
     }
     return props.glareColor;

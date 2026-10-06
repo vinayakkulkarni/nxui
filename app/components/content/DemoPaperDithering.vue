@@ -1,9 +1,20 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperDithering from '@registry/new-york/paper-dithering/PaperDithering.vue';
+  import type {
+    PaperDitheringShape,
+    PaperDitheringType,
+  } from '@registry/new-york/paper-dithering/types';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
+  const params = reactive<{
+    colorBack: string;
+    colorFront: string;
+    shape: PaperDitheringShape;
+    type: PaperDitheringType;
+    size: number;
+    speed: number;
+  }>({
     colorBack: '#000000',
     colorFront: '#00b2ff',
     shape: 'sphere',

@@ -195,7 +195,7 @@ void main() {
     const stops = (props.linesGradient ?? []).slice(0, 8);
     stops.forEach((hex, i) => {
       const c = hexToVec3(hex);
-      gradientValues[i].set(c.x, c.y, c.z);
+      gradientValues[i]?.set(c.x, c.y, c.z);
     });
 
     const uniforms = {

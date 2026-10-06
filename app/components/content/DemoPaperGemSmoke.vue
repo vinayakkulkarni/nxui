@@ -1,9 +1,18 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperGemSmoke from '@registry/new-york/paper-gem-smoke/PaperGemSmoke.vue';
+  import type { PaperGemSmokeShape } from '@registry/new-york/paper-gem-smoke/types';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
+  const params = reactive<{
+    color1: string;
+    color2: string;
+    colorBack: string;
+    colorInner: string;
+    innerGlow: number;
+    outerGlow: number;
+    shape: PaperGemSmokeShape;
+  }>({
     color1: '#333333',
     color2: '#e7e6df',
     colorBack: '#f0efea',

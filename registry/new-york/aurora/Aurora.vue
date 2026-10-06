@@ -100,8 +100,9 @@ void main() {
 }`;
 
   useResizeObserver(containerRef, (entries) => {
-    if (!renderer || !containerRef.value) return;
-    const { width, height } = entries[0].contentRect;
+    const entry = entries[0];
+    if (!renderer || !containerRef.value || !entry) return;
+    const { width, height } = entry.contentRect;
     renderer.setSize(width, height);
   });
 

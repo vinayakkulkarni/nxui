@@ -24,6 +24,7 @@
   const paused = ref(false);
 
   const count = computed(() => props.items.length);
+  const activeItem = computed(() => props.items[active.value]);
 
   function goTo(index: number) {
     active.value = ((index % count.value) + count.value) % count.value;
@@ -135,9 +136,9 @@
               :transition="{ duration: 0.55, ease: 'easeOut' }"
             >
               <img
-                v-if="items[active]"
-                :src="items[active].src"
-                :alt="items[active].title"
+                v-if="activeItem"
+                :src="activeItem.src"
+                :alt="activeItem.title"
                 class="size-full object-cover brightness-90 contrast-105"
                 :class="monochrome && 'grayscale'"
                 draggable="false"

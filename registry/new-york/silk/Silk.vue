@@ -130,7 +130,8 @@ void main() {
 
     function update() {
       if (!renderer || !material) return;
-      material.uniforms.uTime.value += 0.004;
+      const uTime = material.uniforms.uTime;
+      if (uTime) uTime.value += 0.004;
       renderer.render(scene, camera);
       rafId = requestAnimationFrame(update);
     }

@@ -14,6 +14,7 @@
     Timer,
     GLSL3,
   } from 'three';
+  import type { IUniform } from 'three';
   import { cn } from '~/lib/utils';
 
   const MAX_CLICKS = 10;
@@ -57,9 +58,27 @@
     },
   );
 
+  type PixelBlastUniforms = {
+    uResolution: IUniform<Vector2>;
+    uTime: IUniform<number>;
+    uColor: IUniform<Vector3>;
+    uClickPos: IUniform<Vector2[]>;
+    uClickTimes: IUniform<Float32Array>;
+    uShapeType: IUniform<number>;
+    uPixelSize: IUniform<number>;
+    uScale: IUniform<number>;
+    uDensity: IUniform<number>;
+    uPixelJitter: IUniform<number>;
+    uEnableRipples: IUniform<number>;
+    uRippleSpeed: IUniform<number>;
+    uRippleThickness: IUniform<number>;
+    uRippleIntensity: IUniform<number>;
+    uEdgeFade: IUniform<number>;
+  };
+
   const containerRef = ref<HTMLDivElement>();
   let webglRenderer: WebGLRenderer | null = null;
-  let mat: ShaderMaterial | null = null;
+  let uniforms: PixelBlastUniforms | null = null;
   let rafId = 0;
   let clock: Timer | null = null;
   let clickIx = 0;
@@ -223,30 +242,28 @@ void main(){
 }`;
 
   function resize() {
-    if (!containerRef.value || !webglRenderer || !mat) return;
+    if (!containerRef.value || !webglRenderer || !uniforms) return;
     const w = containerRef.value.clientWidth || 1;
     const h = containerRef.value.clientHeight || 1;
     webglRenderer.setSize(w, h, false);
-    mat.uniforms.uResolution.value.set(
+    uniforms.uResolution.value.set(
       webglRenderer.domElement.width,
       webglRenderer.domElement.height,
     );
-    mat.uniforms.uPixelSize.value =
-      props.pixelSize * webglRenderer.getPixelRatio();
+    uniforms.uPixelSize.value = props.pixelSize * webglRenderer.getPixelRatio();
   }
 
   useResizeObserver(containerRef, resize);
 
   useEventListener(containerRef, 'pointerdown', (e: PointerEvent) => {
-    if (!mat || !webglRenderer) return;
+    if (!uniforms || !webglRenderer) return;
     const rect = webglRenderer.domElement.getBoundingClientRect();
     const scaleX = webglRenderer.domElement.width / rect.width;
     const scaleY = webglRenderer.domElement.height / rect.height;
     const fx = (e.clientX - rect.left) * scaleX;
     const fy = (rect.height - (e.clientY - rect.top)) * scaleY;
-    (mat.uniforms.uClickPos.value as Vector2[])[clickIx].set(fx, fy);
-    (mat.uniforms.uClickTimes.value as Float32Array)[clickIx] = mat.uniforms
-      .uTime.value as number;
+    uniforms.uClickPos.value[clickIx]?.set(fx, fy);
+    uniforms.uClickTimes.value[clickIx] = uniforms.uTime.value;
     clickIx = (clickIx + 1) % MAX_CLICKS;
   });
 
@@ -267,28 +284,30 @@ void main(){
     containerRef.value.appendChild(webglRenderer.domElement);
 
     const c = new Color(props.color);
-    mat = new ShaderMaterial({
+    const shaderUniforms: PixelBlastUniforms = {
+      uResolution: { value: new Vector2(0, 0) },
+      uTime: { value: 0 },
+      uColor: { value: new Vector3(c.r, c.g, c.b) },
+      uClickPos: {
+        value: Array.from({ length: MAX_CLICKS }, () => new Vector2(-1, -1)),
+      },
+      uClickTimes: { value: new Float32Array(MAX_CLICKS) },
+      uShapeType: { value: SHAPE_MAP[props.variant] ?? 0 },
+      uPixelSize: { value: props.pixelSize * webglRenderer.getPixelRatio() },
+      uScale: { value: props.patternScale },
+      uDensity: { value: props.patternDensity },
+      uPixelJitter: { value: props.pixelSizeJitter },
+      uEnableRipples: { value: props.enableRipples ? 1 : 0 },
+      uRippleSpeed: { value: props.rippleSpeed },
+      uRippleThickness: { value: props.rippleThickness },
+      uRippleIntensity: { value: props.rippleIntensityScale },
+      uEdgeFade: { value: props.edgeFade },
+    };
+    uniforms = shaderUniforms;
+    const mat = new ShaderMaterial({
       vertexShader: VERTEX_SRC,
       fragmentShader: FRAGMENT_SRC,
-      uniforms: {
-        uResolution: { value: new Vector2(0, 0) },
-        uTime: { value: 0 },
-        uColor: { value: new Vector3(c.r, c.g, c.b) },
-        uClickPos: {
-          value: Array.from({ length: MAX_CLICKS }, () => new Vector2(-1, -1)),
-        },
-        uClickTimes: { value: new Float32Array(MAX_CLICKS) },
-        uShapeType: { value: SHAPE_MAP[props.variant] ?? 0 },
-        uPixelSize: { value: props.pixelSize * webglRenderer.getPixelRatio() },
-        uScale: { value: props.patternScale },
-        uDensity: { value: props.patternDensity },
-        uPixelJitter: { value: props.pixelSizeJitter },
-        uEnableRipples: { value: props.enableRipples ? 1 : 0 },
-        uRippleSpeed: { value: props.rippleSpeed },
-        uRippleThickness: { value: props.rippleThickness },
-        uRippleIntensity: { value: props.rippleIntensityScale },
-        uEdgeFade: { value: props.edgeFade },
-      },
+      uniforms: shaderUniforms,
       transparent: true,
       depthTest: false,
       depthWrite: false,
@@ -304,22 +323,22 @@ void main(){
 
     function update() {
       rafId = requestAnimationFrame(update);
-      if (!webglRenderer || !mat || !clock) return;
+      if (!webglRenderer || !uniforms || !clock) return;
 
       clock.update();
-      mat.uniforms.uTime.value = timeOffset + clock.getElapsed() * props.speed;
-      mat.uniforms.uShapeType.value = SHAPE_MAP[props.variant] ?? 0;
-      mat.uniforms.uScale.value = props.patternScale;
-      mat.uniforms.uDensity.value = props.patternDensity;
-      mat.uniforms.uPixelJitter.value = props.pixelSizeJitter;
-      mat.uniforms.uEnableRipples.value = props.enableRipples ? 1 : 0;
-      mat.uniforms.uRippleSpeed.value = props.rippleSpeed;
-      mat.uniforms.uRippleThickness.value = props.rippleThickness;
-      mat.uniforms.uRippleIntensity.value = props.rippleIntensityScale;
-      mat.uniforms.uEdgeFade.value = props.edgeFade;
+      uniforms.uTime.value = timeOffset + clock.getElapsed() * props.speed;
+      uniforms.uShapeType.value = SHAPE_MAP[props.variant] ?? 0;
+      uniforms.uScale.value = props.patternScale;
+      uniforms.uDensity.value = props.patternDensity;
+      uniforms.uPixelJitter.value = props.pixelSizeJitter;
+      uniforms.uEnableRipples.value = props.enableRipples ? 1 : 0;
+      uniforms.uRippleSpeed.value = props.rippleSpeed;
+      uniforms.uRippleThickness.value = props.rippleThickness;
+      uniforms.uRippleIntensity.value = props.rippleIntensityScale;
+      uniforms.uEdgeFade.value = props.edgeFade;
 
       const col = new Color(props.color);
-      (mat.uniforms.uColor.value as Vector3).set(col.r, col.g, col.b);
+      uniforms.uColor.value.set(col.r, col.g, col.b);
 
       webglRenderer.render(scene, camera);
     }

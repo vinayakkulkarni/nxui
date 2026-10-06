@@ -58,6 +58,7 @@
     const now = performance.now();
     for (let i = activeImages.value.length - 1; i >= 0; i--) {
       const img = activeImages.value[i];
+      if (!img) continue;
       const age = now - img.birth;
       if (age > props.fadeOutDuration) {
         activeImages.value.splice(i, 1);

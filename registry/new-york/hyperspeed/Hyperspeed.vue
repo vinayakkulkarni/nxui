@@ -72,8 +72,23 @@
   }
 
   function pickRandom<T>(arr: T | T[]): T {
-    if (Array.isArray(arr)) return arr[Math.floor(Math.random() * arr.length)];
+    if (Array.isArray(arr)) {
+      const picked = arr[Math.floor(Math.random() * arr.length)];
+      if (picked === undefined) throw new Error('pickRandom: empty array');
+      return picked;
+    }
     return arr;
+  }
+
+  function toInstancedGeometry(
+    geometry: THREE.BufferGeometry,
+  ): THREE.InstancedBufferGeometry {
+    const instanced = new THREE.InstancedBufferGeometry();
+    instanced.setIndex(geometry.index);
+    for (const [name, attribute] of Object.entries(geometry.attributes)) {
+      instanced.setAttribute(name, attribute);
+    }
+    return instanced;
   }
 
   function lerp(
@@ -450,7 +465,7 @@
         new THREE.Vector3(0, 0, -1),
       );
       const geometry = new THREE.TubeGeometry(curve, 40, 1, 8, false);
-      const instanced = new THREE.InstancedBufferGeometry().copy(geometry);
+      const instanced = toInstancedGeometry(geometry);
       instanced.instanceCount = options.lightPairsPerRoadWay * 2;
 
       const laneWidth = options.roadWidth / options.lanesPerRoad;
@@ -524,9 +539,9 @@
     }
 
     update(time: number): void {
-      if (this.mesh)
-        (this.mesh.material as THREE.ShaderMaterial).uniforms.uTime.value =
-          time;
+      if (!this.mesh) return;
+      const uTime = (this.mesh.material as THREE.ShaderMaterial).uniforms.uTime;
+      if (uTime) uTime.value = time;
     }
   }
 
@@ -552,7 +567,7 @@
     init(): void {
       const options = this.options;
       const geometry = new THREE.PlaneGeometry(1, 1);
-      const instanced = new THREE.InstancedBufferGeometry().copy(geometry);
+      const instanced = toInstancedGeometry(geometry);
       const totalSticks = options.totalSideLightSticks;
       instanced.instanceCount = totalSticks;
       const stickoffset = options.length / (totalSticks - 1);
@@ -617,9 +632,9 @@
     }
 
     update(time: number): void {
-      if (this.mesh)
-        (this.mesh.material as THREE.ShaderMaterial).uniforms.uTime.value =
-          time;
+      if (!this.mesh) return;
+      const uTime = (this.mesh.material as THREE.ShaderMaterial).uniforms.uTime;
+      if (uTime) uTime.value = time;
     }
   }
 
@@ -779,7 +794,7 @@
       this.scene.background = null;
 
       const fog = new THREE.Fog(
-        options.colors.background,
+        options.colors.background ?? 0x000000,
         options.length * 0.2,
         options.length * 500,
       );

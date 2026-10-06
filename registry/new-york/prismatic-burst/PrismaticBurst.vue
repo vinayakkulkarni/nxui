@@ -2,6 +2,7 @@
   import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { Renderer, Program, Triangle, Mesh, Texture } from 'ogl';
+  import type { OGLRenderingContext } from 'ogl';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(
@@ -32,7 +33,9 @@
   function hexToRgb01(hex: string): [number, number, number] {
     let h = hex.trim();
     if (h.startsWith('#')) h = h.slice(1);
-    if (h.length === 3) h = h[0] + h[0] + h[1] + h[1] + h[2] + h[2];
+    if (h.length === 3) {
+      h = Array.from(h, (ch) => ch + ch).join('');
+    }
     const intVal = Number.parseInt(h, 16);
     if (Number.isNaN(intVal)) return [1, 1, 1];
     return [
@@ -44,15 +47,15 @@
 
   const containerRef = ref<HTMLDivElement>();
   let renderer: InstanceType<typeof Renderer> | null = null;
-  let glContext: WebGL2RenderingContext | null = null;
+  let glContext: OGLRenderingContext | null = null;
   let programRef: InstanceType<typeof Program> | null = null;
   let meshRef: InstanceType<typeof Mesh> | null = null;
   let gradTexRef: InstanceType<typeof Texture> | null = null;
   let animationId = 0;
   let accumTime = 0;
   let lastTime = 0;
-  const mouseTarget = [0.5, 0.5];
-  const mouseSmooth = [0.5, 0.5];
+  const mouseTarget: [number, number] = [0.5, 0.5];
+  const mouseSmooth: [number, number] = [0.5, 0.5];
 
   const VERT = `#version 300 es
 in vec2 position;
@@ -232,8 +235,8 @@ void main(){
       const capped = colors.slice(0, 64);
       count = capped.length;
       const data = new Uint8Array(count * 4);
-      for (let i = 0; i < count; i++) {
-        const [r, g, b] = hexToRgb01(capped[i]);
+      for (const [i, color] of capped.entries()) {
+        const [r, g, b] = hexToRgb01(color);
         data[i * 4 + 0] = Math.round(r * 255);
         data[i * 4 + 1] = Math.round(g * 255);
         data[i * 4 + 2] = Math.round(b * 255);
@@ -288,15 +291,15 @@ void main(){
 
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     renderer = new Renderer({ dpr, alpha: false, antialias: false, webgl: 2 });
-    const gl = renderer.gl as WebGL2RenderingContext;
+    const gl = renderer.gl;
     glContext = gl;
     gl.canvas.style.width = '100%';
     gl.canvas.style.height = '100%';
     if (props.mixBlendMode && props.mixBlendMode !== 'none') {
-      (gl.canvas as HTMLCanvasElement).style.mixBlendMode = props.mixBlendMode;
+      gl.canvas.style.mixBlendMode = props.mixBlendMode;
     }
     renderer.setSize(container.clientWidth || 1, container.clientHeight || 1);
-    container.appendChild(gl.canvas as HTMLCanvasElement);
+    container.appendChild(gl.canvas);
 
     const white = new Uint8Array([255, 255, 255, 255]);
     gradTexRef = new Texture(gl, {

@@ -152,9 +152,8 @@
       imageTexture = tex;
       imageTexture.minFilter = THREE.LinearFilter;
       imageTexture.magFilter = THREE.LinearFilter;
-      if (compositeMaterial) {
-        compositeMaterial.uniforms.uTexture.value = imageTexture;
-      }
+      const uTexture = compositeMaterial?.uniforms.uTexture;
+      if (uTexture) uTexture.value = imageTexture;
     });
   }
 
@@ -234,7 +233,8 @@
     renderer.render(waveScene, camera);
 
     // Use fboA as displacement for final composite
-    compositeMaterial.uniforms.uDisplacement.value = fboA.texture;
+    const uDisplacement = compositeMaterial.uniforms.uDisplacement;
+    if (uDisplacement) uDisplacement.value = fboA.texture;
 
     // Render final composite to screen
     renderer.setRenderTarget(null);
@@ -315,9 +315,9 @@
   watch(
     () => props.distortionStrength,
     (val) => {
-      if (compositeMaterial) {
-        compositeMaterial.uniforms.uDistortionStrength.value = val;
-      }
+      const uDistortionStrength =
+        compositeMaterial?.uniforms.uDistortionStrength;
+      if (uDistortionStrength) uDistortionStrength.value = val;
     },
   );
 

@@ -200,24 +200,25 @@ void main() {
       lastTime = now;
 
       for (const line of lines) {
-        tmp
-          .copy(mouse)
-          .add(line.mouseOffset)
-          .sub(line.points[0])
-          .multiply(line.spring);
+        const head = line.points[0];
+        if (!head) continue;
+        tmp.copy(mouse).add(line.mouseOffset).sub(head).multiply(line.spring);
         line.mouseVelocity.add(tmp).multiply(line.friction);
-        line.points[0].add(line.mouseVelocity);
+        head.add(line.mouseVelocity);
 
         for (let i = 1; i < line.points.length; i++) {
+          const point = line.points[i];
+          const previous = line.points[i - 1];
+          if (!point || !previous) continue;
           if (Number.isFinite(props.maxAge) && props.maxAge > 0) {
             const segmentDelay = props.maxAge / (line.points.length - 1);
             const alpha = Math.min(
               1,
               (dt * props.speedMultiplier) / segmentDelay,
             );
-            line.points[i].lerp(line.points[i - 1], alpha);
+            point.lerp(previous, alpha);
           } else {
-            line.points[i].lerp(line.points[i - 1], 0.9);
+            point.lerp(previous, 0.9);
           }
         }
         const prog = line.polyline.mesh.program;

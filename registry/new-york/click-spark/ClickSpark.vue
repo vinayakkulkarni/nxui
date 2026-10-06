@@ -89,6 +89,7 @@
       let i = sparks.length;
       while (i--) {
         const spark = sparks[i];
+        if (!spark) continue;
         const elapsed = timestamp - spark.startTime;
         if (elapsed >= props.duration) {
           sparks.splice(i, 1);

@@ -81,8 +81,9 @@ void main() {
 }`;
 
   useResizeObserver(containerRef, (entries) => {
-    if (!renderer || !programRef) return;
-    const { width, height } = entries[0].contentRect;
+    const entry = entries[0];
+    if (!renderer || !programRef || !entry) return;
+    const { width, height } = entry.contentRect;
     renderer.setSize(width, height);
     const gl = renderer.gl;
     const resUniform = programRef.uniforms.uResolution.value as Float32Array;
@@ -102,14 +103,9 @@ void main() {
   });
 
   useEventListener(containerRef, 'touchmove', (e: TouchEvent) => {
-    if (
-      !props.interactive ||
-      !containerRef.value ||
-      !programRef ||
-      e.touches.length === 0
-    )
-      return;
+    if (!props.interactive || !containerRef.value || !programRef) return;
     const touch = e.touches[0];
+    if (!touch) return;
     const rect = containerRef.value.getBoundingClientRect();
     const mouseUniform = programRef.uniforms.uMouse.value as Float32Array;
     mouseUniform[0] = (touch.clientX - rect.left) / rect.width;

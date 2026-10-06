@@ -37,13 +37,13 @@
 
   function hexToRgb(hex: string): [number, number, number] {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return m
-      ? [
-          Number.parseInt(m[1], 16) / 255,
-          Number.parseInt(m[2], 16) / 255,
-          Number.parseInt(m[3], 16) / 255,
-        ]
-      : [1, 1, 1];
+    if (!m) return [1, 1, 1];
+    const [, r = '', g = '', b = ''] = m;
+    return [
+      Number.parseInt(r, 16) / 255,
+      Number.parseInt(g, 16) / 255,
+      Number.parseInt(b, 16) / 255,
+    ];
   }
 
   function originToFlip(origin: string): [number, number] {

@@ -59,7 +59,8 @@
         containerRef.value.querySelectorAll<HTMLSpanElement>('span');
       if (items.length) {
         const mid = Math.floor(items.length / 2);
-        const rect = items[mid].getBoundingClientRect();
+        const rect = items[mid]?.getBoundingClientRect();
+        if (!rect) return;
         onPointerMove({
           clientX: rect.x,
           clientY: rect.y,

@@ -90,12 +90,10 @@
       keyboardNav.value = true;
       selectedIndex.value = Math.max(selectedIndex.value - 1, 0);
     } else if (e.key === 'Enter') {
-      if (
-        selectedIndex.value >= 0 &&
-        selectedIndex.value < props.items.length
-      ) {
+      const item = props.items[selectedIndex.value];
+      if (selectedIndex.value >= 0 && item !== undefined) {
         e.preventDefault();
-        emit('select', props.items[selectedIndex.value], selectedIndex.value);
+        emit('select', item, selectedIndex.value);
       }
     }
   });
@@ -180,7 +178,5 @@
         :style="{ opacity: bottomGradientOpacity }"
       ></div>
     </template>
-    <!-- Trigger scroll into view -->
-    <span v-if="scrollIntoView" class="hidden"></span>
   </div>
 </template>

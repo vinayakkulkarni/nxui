@@ -86,9 +86,7 @@ void main() {
     camera.bottom = -hh;
     camera.updateProjectionMatrix();
 
-    if (material) {
-      material.uniforms.resolution.value.set(width, height, 1, 1);
-    }
+    material?.uniforms.resolution?.value.set(width, height, 1, 1);
   }
 
   useResizeObserver(containerRef, handleResize);
@@ -175,13 +173,13 @@ void main() {
       animationId = requestAnimationFrame(animate);
       if (!renderer || !scene || !camera || !material || !dataTexture) return;
 
-      material.uniforms.time.value += 0.05;
+      uniforms.time.value += 0.05;
 
       const texData = dataTexture.image.data as Float32Array;
       const relax = props.relaxation;
       for (let i = 0; i < size * size; i++) {
-        texData[i * 4] *= relax;
-        texData[i * 4 + 1] *= relax;
+        texData[i * 4] = (texData[i * 4] ?? 0) * relax;
+        texData[i * 4 + 1] = (texData[i * 4 + 1] ?? 0) * relax;
       }
 
       const gridMouseX = size * mouseState.x;
@@ -195,8 +193,12 @@ void main() {
           if (distSq < maxDistSq) {
             const index = 4 * (i + size * j);
             const power = Math.min(maxDist / Math.sqrt(distSq), 10);
-            texData[index] += props.strength * 100 * mouseState.vX * power;
-            texData[index + 1] -= props.strength * 100 * mouseState.vY * power;
+            texData[index] =
+              (texData[index] ?? 0) +
+              props.strength * 100 * mouseState.vX * power;
+            texData[index + 1] =
+              (texData[index + 1] ?? 0) -
+              props.strength * 100 * mouseState.vY * power;
           }
         }
       }

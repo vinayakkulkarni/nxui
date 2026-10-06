@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperLiquidMetal from '@registry/new-york/paper-liquid-metal/PaperLiquidMetal.vue';
+  import type { PaperLiquidMetalShape } from '@registry/new-york/paper-liquid-metal/types';
   import type { Pane } from 'tweakpane';
 
   const params = reactive({
@@ -9,7 +10,7 @@
     contour: 0.4,
     distortion: 0.07,
     repetition: 2,
-    shape: 'diamond',
+    shape: 'diamond' as PaperLiquidMetalShape,
   });
 
   function onPaneCreated(pane: Pane) {

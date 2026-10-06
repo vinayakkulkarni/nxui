@@ -299,6 +299,15 @@ void main(){
 }
 `;
 
+  function requireUniform(
+    material: THREE.ShaderMaterial,
+    name: string,
+  ): THREE.IUniform {
+    const uniform = material.uniforms[name];
+    if (!uniform) throw new Error(`GridScan: missing shader uniform ${name}`);
+    return uniform;
+  }
+
   function srgbColor(hex: string): THREE.Color {
     return new THREE.Color(hex).convertSRGBToLinear();
   }
@@ -475,9 +484,10 @@ void main(){
         if (shaderMaterial) {
           const buf = Array.from({ length: MAX_SCANS }, () => 0);
           for (let i = 0; i < scanStarts.length && i < MAX_SCANS; i++)
-            buf[i] = scanStarts[i];
-          shaderMaterial.uniforms.uScanStarts.value = buf;
-          shaderMaterial.uniforms.uScanCount.value = scanStarts.length;
+            buf[i] = scanStarts[i] ?? 0;
+          requireUniform(shaderMaterial, 'uScanStarts').value = buf;
+          requireUniform(shaderMaterial, 'uScanCount').value =
+            scanStarts.length;
         }
       }
     };
@@ -511,8 +521,8 @@ void main(){
         lookCurrent.x * skewScale,
         -lookCurrent.y * yBoost * skewScale,
       );
-      shaderMaterial.uniforms.uSkew.value.set(skew.x, skew.y);
-      shaderMaterial.uniforms.iTime.value = now / 1000;
+      requireUniform(shaderMaterial, 'uSkew').value.set(skew.x, skew.y);
+      requireUniform(shaderMaterial, 'iTime').value = now / 1000;
 
       renderer.clear(true, true, true);
       if (composer) {
@@ -529,7 +539,7 @@ void main(){
     const container = containerRef.value;
     if (!container || !renderer || !shaderMaterial) return;
     renderer.setSize(container.clientWidth, container.clientHeight);
-    shaderMaterial.uniforms.iResolution.value.set(
+    requireUniform(shaderMaterial, 'iResolution').value.set(
       container.clientWidth,
       container.clientHeight,
       renderer.getPixelRatio(),
@@ -561,28 +571,29 @@ void main(){
     ],
     () => {
       if (!shaderMaterial) return;
-      const u = shaderMaterial.uniforms;
-      u.uLineThickness.value = props.lineThickness;
-      u.uLinesColor.value.copy(srgbColor(props.linesColor));
-      u.uScanColor.value.copy(srgbColor(props.scanColor));
-      u.uGridScale.value = props.gridScale;
-      u.uLineStyle.value =
+      const material = shaderMaterial;
+      const u = (name: string) => requireUniform(material, name);
+      u('uLineThickness').value = props.lineThickness;
+      u('uLinesColor').value.copy(srgbColor(props.linesColor));
+      u('uScanColor').value.copy(srgbColor(props.scanColor));
+      u('uGridScale').value = props.gridScale;
+      u('uLineStyle').value =
         props.lineStyle === 'dashed' ? 1 : props.lineStyle === 'dotted' ? 2 : 0;
-      u.uLineJitter.value = Math.max(0, Math.min(1, props.lineJitter));
-      u.uBloomOpacity.value = Math.max(0, props.bloomIntensity);
-      u.uNoise.value = Math.max(0, props.noiseIntensity);
-      u.uScanGlow.value = props.scanGlow;
-      u.uScanOpacity.value = Math.max(0, Math.min(1, props.scanOpacity));
-      u.uScanDirection.value =
+      u('uLineJitter').value = Math.max(0, Math.min(1, props.lineJitter));
+      u('uBloomOpacity').value = Math.max(0, props.bloomIntensity);
+      u('uNoise').value = Math.max(0, props.noiseIntensity);
+      u('uScanGlow').value = props.scanGlow;
+      u('uScanOpacity').value = Math.max(0, Math.min(1, props.scanOpacity));
+      u('uScanDirection').value =
         props.scanDirection === 'backward'
           ? 1
           : props.scanDirection === 'pingpong'
             ? 2
             : 0;
-      u.uScanSoftness.value = props.scanSoftness;
-      u.uPhaseTaper.value = props.scanPhaseTaper;
-      u.uScanDuration.value = Math.max(0.05, props.scanDuration);
-      u.uScanDelay.value = Math.max(0.0, props.scanDelay);
+      u('uScanSoftness').value = props.scanSoftness;
+      u('uPhaseTaper').value = props.scanPhaseTaper;
+      u('uScanDuration').value = Math.max(0.05, props.scanDuration);
+      u('uScanDelay').value = Math.max(0.0, props.scanDelay);
 
       if (bloomEffect) {
         bloomEffect.blendMode.opacity.value = Math.max(0, props.bloomIntensity);

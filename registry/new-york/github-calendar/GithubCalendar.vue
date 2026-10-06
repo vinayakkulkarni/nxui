@@ -140,7 +140,7 @@
       "
     >
       <!-- Header + grid collapse away while the repo list is open -->
-      <AnimatePresence initial="false">
+      <AnimatePresence>
         <component
           :is="motion.div"
           v-if="!expanded"
@@ -182,7 +182,7 @@
 
         <div class="flex items-center gap-2">
           <!-- collapsed: stacked avatars -->
-          <AnimatePresence initial="false">
+          <AnimatePresence>
             <component
               :is="motion.div"
               v-if="!expanded"
@@ -226,7 +226,7 @@
       </div>
 
       <!-- expanded: repo rows -->
-      <AnimatePresence initial="false">
+      <AnimatePresence>
         <component
           :is="motion.div"
           v-if="expanded && showTopContributions"

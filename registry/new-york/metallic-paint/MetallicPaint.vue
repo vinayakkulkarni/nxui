@@ -57,6 +57,10 @@
   let gl: WebGL2RenderingContext | null = null;
   let program: WebGLProgram | null = null;
   let uniforms: Record<string, WebGLUniformLocation | null> = {};
+
+  function loc(name: string): WebGLUniformLocation | null {
+    return uniforms[name] ?? null;
+  }
   let glTexture: WebGLTexture | null = null;
   let animTime = 0;
   let lastTime = 0;
@@ -206,13 +210,13 @@ void main(){
 
   function hexToRgb(hex: string): [number, number, number] {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-      ? [
-          Number.parseInt(result[1], 16) / 255,
-          Number.parseInt(result[2], 16) / 255,
-          Number.parseInt(result[3], 16) / 255,
-        ]
-      : [1, 1, 1];
+    if (!result) return [1, 1, 1];
+    const [, r = '', g = '', b = ''] = result;
+    return [
+      Number.parseInt(r, 16) / 255,
+      Number.parseInt(g, 16) / 255,
+      Number.parseInt(b, 16) / 255,
+    ];
   }
 
   function processImage(img: HTMLImageElement): ImageData {
@@ -258,14 +262,15 @@ void main(){
 
     for (let i = 0; i < size; i++) {
       const idx = i * 4;
-      const r = data[idx];
-      const g = data[idx + 1];
-      const b = data[idx + 2];
-      const a = data[idx + 3];
+      const r = data[idx] ?? 0;
+      const g = data[idx + 1] ?? 0;
+      const b = data[idx + 2] ?? 0;
+      const a = data[idx + 3] ?? 0;
       const isBackground =
         (r > 250 && g > 250 && b > 250 && a === 255) || a < 5;
-      alphaValues[i] = isBackground ? 0 : a / 255;
-      shapeMask[i] = alphaValues[i] > 0.1 ? 1 : 0;
+      const alpha = isBackground ? 0 : a / 255;
+      alphaValues[i] = alpha;
+      shapeMask[i] = alpha > 0.1 ? 1 : 0;
     }
 
     for (let y = 0; y < height; y++) {
@@ -298,29 +303,32 @@ void main(){
           const idx = y * width + x;
           if (!shapeMask[idx] || boundaryMask[idx]) continue;
           const sum =
-            (shapeMask[idx + 1] ? u[idx + 1] : 0) +
-            (shapeMask[idx - 1] ? u[idx - 1] : 0) +
-            (shapeMask[idx + width] ? u[idx + width] : 0) +
-            (shapeMask[idx - width] ? u[idx - width] : 0);
+            (shapeMask[idx + 1] ? (u[idx + 1] ?? 0) : 0) +
+            (shapeMask[idx - 1] ? (u[idx - 1] ?? 0) : 0) +
+            (shapeMask[idx + width] ? (u[idx + width] ?? 0) : 0) +
+            (shapeMask[idx - width] ? (u[idx - width] ?? 0) : 0);
           const newVal = (C + sum) / 4;
-          u[idx] = omega * newVal + (1 - omega) * u[idx];
+          u[idx] = omega * newVal + (1 - omega) * (u[idx] ?? 0);
         }
       }
     }
 
     let maxVal = 0;
-    for (let i = 0; i < size; i++) if (u[i] > maxVal) maxVal = u[i];
+    for (let i = 0; i < size; i++) {
+      const v = u[i] ?? 0;
+      if (v > maxVal) maxVal = v;
+    }
     if (maxVal === 0) maxVal = 1;
 
     const outData = ctx.createImageData(width, height);
     for (let i = 0; i < size; i++) {
       const px = i * 4;
-      const depth = u[i] / maxVal;
+      const depth = (u[i] ?? 0) / maxVal;
       const gray = Math.round(255 * (1 - depth * depth));
       outData.data[px] = gray;
       outData.data[px + 1] = gray;
       outData.data[px + 2] = gray;
-      outData.data[px + 3] = Math.round(alphaValues[i] * 255);
+      outData.data[px + 3] = Math.round((alphaValues[i] ?? 0) * 255);
     }
 
     return outData;
@@ -408,39 +416,39 @@ void main(){
       gl.UNSIGNED_BYTE,
       new Uint8Array(imgData.data.buffer),
     );
-    gl.uniform1i(uniforms.u_tex, 0);
+    gl.uniform1i(loc('u_tex'), 0);
 
     imgRatio = imgData.width / imgData.height;
-    gl.uniform1f(uniforms.u_imgRatio, imgRatio);
-    gl.uniform1f(uniforms.u_ratio, 1);
+    gl.uniform1f(loc('u_imgRatio'), imgRatio);
+    gl.uniform1f(loc('u_ratio'), 1);
 
     glTexture = tex;
   }
 
   function setUniforms() {
     if (!gl) return;
-    gl.uniform1f(uniforms.u_seed, props.seed);
-    gl.uniform1f(uniforms.u_scale, props.scale);
-    gl.uniform1f(uniforms.u_refract, props.refraction);
-    gl.uniform1f(uniforms.u_blur, props.blur);
-    gl.uniform1f(uniforms.u_liquid, props.liquid);
-    gl.uniform1f(uniforms.u_bright, props.brightness);
-    gl.uniform1f(uniforms.u_contrast, props.contrast);
-    gl.uniform1f(uniforms.u_angle, props.angle);
-    gl.uniform1f(uniforms.u_fresnel, props.fresnel);
+    gl.uniform1f(loc('u_seed'), props.seed);
+    gl.uniform1f(loc('u_scale'), props.scale);
+    gl.uniform1f(loc('u_refract'), props.refraction);
+    gl.uniform1f(loc('u_blur'), props.blur);
+    gl.uniform1f(loc('u_liquid'), props.liquid);
+    gl.uniform1f(loc('u_bright'), props.brightness);
+    gl.uniform1f(loc('u_contrast'), props.contrast);
+    gl.uniform1f(loc('u_angle'), props.angle);
+    gl.uniform1f(loc('u_fresnel'), props.fresnel);
 
     const light = hexToRgb(props.lightColor);
     const dark = hexToRgb(props.darkColor);
     const tint = hexToRgb(props.tintColor);
-    gl.uniform3f(uniforms.u_lightColor, light[0], light[1], light[2]);
-    gl.uniform3f(uniforms.u_darkColor, dark[0], dark[1], dark[2]);
-    gl.uniform1f(uniforms.u_sharp, props.patternSharpness);
-    gl.uniform1f(uniforms.u_wave, props.waveAmplitude);
-    gl.uniform1f(uniforms.u_noise, props.noiseScale);
-    gl.uniform1f(uniforms.u_chroma, props.chromaticSpread);
-    gl.uniform1f(uniforms.u_distort, props.distortion);
-    gl.uniform1f(uniforms.u_contour, props.contour);
-    gl.uniform3f(uniforms.u_tint, tint[0], tint[1], tint[2]);
+    gl.uniform3f(loc('u_lightColor'), light[0], light[1], light[2]);
+    gl.uniform3f(loc('u_darkColor'), dark[0], dark[1], dark[2]);
+    gl.uniform1f(loc('u_sharp'), props.patternSharpness);
+    gl.uniform1f(loc('u_wave'), props.waveAmplitude);
+    gl.uniform1f(loc('u_noise'), props.noiseScale);
+    gl.uniform1f(loc('u_chroma'), props.chromaticSpread);
+    gl.uniform1f(loc('u_distort'), props.distortion);
+    gl.uniform1f(loc('u_contour'), props.contour);
+    gl.uniform3f(loc('u_tint'), tint[0], tint[1], tint[2]);
   }
 
   function loadImage(src: string) {
@@ -481,7 +489,7 @@ void main(){
       animTime += delta * props.speed;
     }
 
-    gl.uniform1f(uniforms.u_time, animTime);
+    gl.uniform1f(loc('u_time'), animTime);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
   }
 

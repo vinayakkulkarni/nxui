@@ -8,12 +8,13 @@
     class?: string;
   }>();
 
-  const context = inject(RECEIPT_PRINTER_CONTEXT_KEY);
-  if (!context) {
+  const injectedContext = inject(RECEIPT_PRINTER_CONTEXT_KEY);
+  if (!injectedContext) {
     throw new Error(
       'ReceiptPrinter.Output must be used inside ReceiptPrinter.',
     );
   }
+  const context = injectedContext;
 
   const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 

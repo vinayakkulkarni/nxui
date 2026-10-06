@@ -273,18 +273,20 @@
       const now = performance.now();
       const t = (now - start) / 1000;
       if (!shaderMaterial || !composer) return;
+      const { iMouse, iPrevMouse, iOpacity, iTime } = shaderMaterial.uniforms;
+      if (!iMouse || !iPrevMouse || !iOpacity || !iTime) return;
 
       if (pointerActive) {
         velocity.set(
-          currentMouse.x - shaderMaterial.uniforms.iMouse.value.x,
-          currentMouse.y - shaderMaterial.uniforms.iMouse.value.y,
+          currentMouse.x - iMouse.value.x,
+          currentMouse.y - iMouse.value.y,
         );
-        shaderMaterial.uniforms.iMouse.value.copy(currentMouse);
+        iMouse.value.copy(currentMouse);
         fadeOpacity = 1.0;
       } else {
         velocity.multiplyScalar(props.inertia);
         if (velocity.lengthSq() > 1e-6) {
-          shaderMaterial.uniforms.iMouse.value.add(velocity);
+          iMouse.value.add(velocity);
         }
         const dt = now - lastMoveTime;
         if (dt > props.fadeDelayMs) {
@@ -298,15 +300,15 @@
 
       const N = trailBuf.length;
       head = (head + 1) % N;
-      trailBuf[head].copy(shaderMaterial.uniforms.iMouse.value);
-      const arr = shaderMaterial.uniforms.iPrevMouse.value;
+      trailBuf[head]?.copy(iMouse.value);
+      const arr = iPrevMouse.value;
       for (let i = 0; i < N; i++) {
         const srcIdx = (head - i + N) % N;
         arr[i].copy(trailBuf[srcIdx]);
       }
 
-      shaderMaterial.uniforms.iOpacity.value = fadeOpacity;
-      shaderMaterial.uniforms.iTime.value = t;
+      iOpacity.value = fadeOpacity;
+      iTime.value = t;
       if (filmPass?.uniforms?.iTime) filmPass.uniforms.iTime.value = t;
 
       composer.render();
@@ -364,18 +366,20 @@
         const now = performance.now();
         const t = (now - start) / 1000;
         if (!shaderMaterial || !composer) return;
+        const { iMouse, iPrevMouse, iOpacity, iTime } = shaderMaterial.uniforms;
+        if (!iMouse || !iPrevMouse || !iOpacity || !iTime) return;
 
         if (pointerActive) {
           velocity.set(
-            currentMouse.x - shaderMaterial.uniforms.iMouse.value.x,
-            currentMouse.y - shaderMaterial.uniforms.iMouse.value.y,
+            currentMouse.x - iMouse.value.x,
+            currentMouse.y - iMouse.value.y,
           );
-          shaderMaterial.uniforms.iMouse.value.copy(currentMouse);
+          iMouse.value.copy(currentMouse);
           fadeOpacity = 1.0;
         } else {
           velocity.multiplyScalar(props.inertia);
           if (velocity.lengthSq() > 1e-6) {
-            shaderMaterial.uniforms.iMouse.value.add(velocity);
+            iMouse.value.add(velocity);
           }
           const dt = now - lastMoveTime;
           if (dt > props.fadeDelayMs) {
@@ -389,14 +393,14 @@
 
         const N = trailBuf.length;
         head = (head + 1) % N;
-        trailBuf[head].copy(shaderMaterial.uniforms.iMouse.value);
-        const arr = shaderMaterial.uniforms.iPrevMouse.value;
+        trailBuf[head]?.copy(iMouse.value);
+        const arr = iPrevMouse.value;
         for (let i = 0; i < N; i++) {
           arr[i].copy(trailBuf[(head - i + N) % N]);
         }
 
-        shaderMaterial.uniforms.iOpacity.value = fadeOpacity;
-        shaderMaterial.uniforms.iTime.value = t;
+        iOpacity.value = fadeOpacity;
+        iTime.value = t;
         if (filmPass?.uniforms?.iTime) filmPass.uniforms.iTime.value = t;
 
         composer!.render();
@@ -427,8 +431,10 @@
     composer.setSize(w, h);
     const wpx = Math.max(1, Math.floor(w * dpr));
     const hpx = Math.max(1, Math.floor(h * dpr));
-    shaderMaterial.uniforms.iResolution.value.set(wpx, hpx, 1);
-    shaderMaterial.uniforms.iScale.value = calculateScale(host);
+    const { iResolution, iScale } = shaderMaterial.uniforms;
+    if (!iResolution || !iScale) return;
+    iResolution.value.set(wpx, hpx, 1);
+    iScale.value = calculateScale(host);
   }
 
   useResizeObserver(containerRef, () => {
@@ -440,23 +446,23 @@
     () => {
       if (!shaderMaterial) return;
       const c = new THREE.Color(props.color);
-      shaderMaterial.uniforms.iBaseColor.value.set(c.r, c.g, c.b);
+      shaderMaterial.uniforms.iBaseColor?.value.set(c.r, c.g, c.b);
     },
   );
 
   watch(
     () => props.brightness,
     () => {
-      if (shaderMaterial)
-        shaderMaterial.uniforms.iBrightness.value = props.brightness;
+      const iBrightness = shaderMaterial?.uniforms.iBrightness;
+      if (iBrightness) iBrightness.value = props.brightness;
     },
   );
 
   watch(
     () => props.edgeIntensity,
     () => {
-      if (shaderMaterial)
-        shaderMaterial.uniforms.iEdgeIntensity.value = props.edgeIntensity;
+      const iEdgeIntensity = shaderMaterial?.uniforms.iEdgeIntensity;
+      if (iEdgeIntensity) iEdgeIntensity.value = props.edgeIntensity;
     },
   );
 

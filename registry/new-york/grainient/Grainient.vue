@@ -28,10 +28,11 @@
   function hexToRgb(hex: string): Float32Array {
     const r = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
     if (!r) return new Float32Array([1, 1, 1]);
+    const [, rr = '', gg = '', bb = ''] = r;
     return new Float32Array([
-      Number.parseInt(r[1], 16) / 255,
-      Number.parseInt(r[2], 16) / 255,
-      Number.parseInt(r[3], 16) / 255,
+      Number.parseInt(rr, 16) / 255,
+      Number.parseInt(gg, 16) / 255,
+      Number.parseInt(bb, 16) / 255,
     ]);
   }
 

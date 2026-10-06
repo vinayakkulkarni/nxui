@@ -210,7 +210,7 @@ void main() {
     const w = containerRef.value.clientWidth;
     const h = containerRef.value.clientHeight;
     webglRenderer.setSize(w, h);
-    mat.uniforms.uResolution.value.set(w, h);
+    mat.uniforms.uResolution?.value.set(w, h);
   }
 
   useResizeObserver(containerRef, resize);
@@ -239,30 +239,32 @@ void main() {
     webglRenderer.domElement.style.display = 'block';
     containerRef.value.appendChild(webglRenderer.domElement);
 
+    const uniforms = {
+      uTime: { value: 0 },
+      uResolution: {
+        value: new Vector2(
+          containerRef.value.clientWidth,
+          containerRef.value.clientHeight,
+        ),
+      },
+      uFlakeSize: { value: props.flakeSize },
+      uMinFlakeSize: { value: props.minFlakeSize },
+      uPixelResolution: { value: props.pixelResolution },
+      uSpeed: { value: props.speed },
+      uDepthFade: { value: props.depthFade },
+      uFarPlane: { value: props.farPlane },
+      uColor: { value: colorVector.value.clone() },
+      uBrightness: { value: props.brightness },
+      uGamma: { value: props.gamma },
+      uDensity: { value: props.density },
+      uVariant: { value: variantValue.value },
+      uDirection: { value: (props.direction * Math.PI) / 180 },
+    };
+
     mat = new ShaderMaterial({
       vertexShader,
       fragmentShader,
-      uniforms: {
-        uTime: { value: 0 },
-        uResolution: {
-          value: new Vector2(
-            containerRef.value.clientWidth,
-            containerRef.value.clientHeight,
-          ),
-        },
-        uFlakeSize: { value: props.flakeSize },
-        uMinFlakeSize: { value: props.minFlakeSize },
-        uPixelResolution: { value: props.pixelResolution },
-        uSpeed: { value: props.speed },
-        uDepthFade: { value: props.depthFade },
-        uFarPlane: { value: props.farPlane },
-        uColor: { value: colorVector.value.clone() },
-        uBrightness: { value: props.brightness },
-        uGamma: { value: props.gamma },
-        uDensity: { value: props.density },
-        uVariant: { value: variantValue.value },
-        uDirection: { value: (props.direction * Math.PI) / 180 },
-      },
+      uniforms,
       transparent: true,
     });
 
@@ -275,19 +277,19 @@ void main() {
       rafId = requestAnimationFrame(update);
       if (!webglRenderer || !mat) return;
 
-      mat.uniforms.uTime.value = (performance.now() - startTime) * 0.001;
-      mat.uniforms.uFlakeSize.value = props.flakeSize;
-      mat.uniforms.uMinFlakeSize.value = props.minFlakeSize;
-      mat.uniforms.uPixelResolution.value = props.pixelResolution;
-      mat.uniforms.uSpeed.value = props.speed;
-      mat.uniforms.uDepthFade.value = props.depthFade;
-      mat.uniforms.uFarPlane.value = props.farPlane;
-      mat.uniforms.uBrightness.value = props.brightness;
-      mat.uniforms.uGamma.value = props.gamma;
-      mat.uniforms.uDensity.value = props.density;
-      mat.uniforms.uVariant.value = variantValue.value;
-      mat.uniforms.uDirection.value = (props.direction * Math.PI) / 180;
-      mat.uniforms.uColor.value.copy(colorVector.value);
+      uniforms.uTime.value = (performance.now() - startTime) * 0.001;
+      uniforms.uFlakeSize.value = props.flakeSize;
+      uniforms.uMinFlakeSize.value = props.minFlakeSize;
+      uniforms.uPixelResolution.value = props.pixelResolution;
+      uniforms.uSpeed.value = props.speed;
+      uniforms.uDepthFade.value = props.depthFade;
+      uniforms.uFarPlane.value = props.farPlane;
+      uniforms.uBrightness.value = props.brightness;
+      uniforms.uGamma.value = props.gamma;
+      uniforms.uDensity.value = props.density;
+      uniforms.uVariant.value = variantValue.value;
+      uniforms.uDirection.value = (props.direction * Math.PI) / 180;
+      uniforms.uColor.value.copy(colorVector.value);
 
       webglRenderer.render(scene, camera);
     }

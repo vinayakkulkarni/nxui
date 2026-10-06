@@ -69,8 +69,8 @@
       const col = colHeights.indexOf(Math.min(...colHeights));
       const x = colWidth * col;
       const h = item.height / 2;
-      const y = colHeights[col];
-      colHeights[col] += h;
+      const y = colHeights[col] ?? 0;
+      colHeights[col] = y + h;
       return { ...item, x, y, w: colWidth, h };
     });
   });

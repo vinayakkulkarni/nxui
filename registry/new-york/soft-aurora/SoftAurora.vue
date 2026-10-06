@@ -54,8 +54,8 @@
   let renderer: Renderer | null = null;
   let program: Program | null = null;
   let animId = 0;
-  const currentMouse = [0.5, 0.5];
-  const targetMouse = [0.5, 0.5];
+  const currentMouse: [number, number] = [0.5, 0.5];
+  const targetMouse: [number, number] = [0.5, 0.5];
 
   const VERT = `
 attribute vec2 uv;

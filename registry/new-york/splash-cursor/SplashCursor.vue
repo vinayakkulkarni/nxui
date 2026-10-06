@@ -433,17 +433,19 @@
       setKeywords(keywords: string[]) {
         let hash = 0;
         for (const k of keywords) hash += hashCode(k);
-        if (!this.programs[hash]) {
+        let program = this.programs[hash];
+        if (!program) {
           const fs = compileShader(
             gl!.FRAGMENT_SHADER,
             this.fragmentShaderSource,
             keywords,
           );
-          this.programs[hash] = createProgram(this.vertexShader, fs);
+          program = createProgram(this.vertexShader, fs);
+          this.programs[hash] = program;
         }
-        if (this.programs[hash] === this.activeProgram) return;
-        this.uniforms = getUniforms(this.programs[hash]);
-        this.activeProgram = this.programs[hash];
+        if (program === this.activeProgram) return;
+        this.uniforms = getUniforms(program);
+        this.activeProgram = program;
       }
       bind() {
         gl!.useProgram(this.activeProgram);
@@ -593,7 +595,7 @@
     ) {
       const newFBO = createFBO(w, h, iF, f, t, p);
       copyProgram.bind();
-      gl!.uniform1i(copyProgram.uniforms.uTexture, target.attach(0));
+      gl!.uniform1i(copyProgram.uniforms.uTexture ?? null, target.attach(0));
       blit(newFBO);
       return newFBO;
     }
@@ -725,21 +727,29 @@
       color: { r: number; g: number; b: number },
     ) {
       splatProgram.bind();
-      gl!.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
+      gl!.uniform1i(
+        splatProgram.uniforms.uTarget ?? null,
+        velocity.read.attach(0),
+      );
       gl!.uniform1f(
-        splatProgram.uniforms.aspectRatio,
+        splatProgram.uniforms.aspectRatio ?? null,
         canvas!.width / canvas!.height,
       );
-      gl!.uniform2f(splatProgram.uniforms.point, x, y);
-      gl!.uniform3f(splatProgram.uniforms.color, dx, dy, 0.0);
+      gl!.uniform2f(splatProgram.uniforms.point ?? null, x, y);
+      gl!.uniform3f(splatProgram.uniforms.color ?? null, dx, dy, 0.0);
       gl!.uniform1f(
-        splatProgram.uniforms.radius,
+        splatProgram.uniforms.radius ?? null,
         correctRadius(config.SPLAT_RADIUS / 100.0),
       );
       blit(velocity.write);
       velocity.swap();
-      gl!.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
-      gl!.uniform3f(splatProgram.uniforms.color, color.r, color.g, color.b);
+      gl!.uniform1i(splatProgram.uniforms.uTarget ?? null, dye.read.attach(0));
+      gl!.uniform3f(
+        splatProgram.uniforms.color ?? null,
+        color.r,
+        color.g,
+        color.b,
+      );
       blit(dye.write);
       dye.swap();
     }
@@ -748,57 +758,66 @@
       gl!.disable(gl!.BLEND);
       curlProgram.bind();
       gl!.uniform2f(
-        curlProgram.uniforms.texelSize,
-        velocity.texelSizeX,
-        velocity.texelSizeY,
-      );
-      gl!.uniform1i(curlProgram.uniforms.uVelocity, velocity.read.attach(0));
-      blit(curlFBO);
-
-      vorticityProgram.bind();
-      gl!.uniform2f(
-        vorticityProgram.uniforms.texelSize,
+        curlProgram.uniforms.texelSize ?? null,
         velocity.texelSizeX,
         velocity.texelSizeY,
       );
       gl!.uniform1i(
-        vorticityProgram.uniforms.uVelocity,
+        curlProgram.uniforms.uVelocity ?? null,
         velocity.read.attach(0),
       );
-      gl!.uniform1i(vorticityProgram.uniforms.uCurl, curlFBO.attach(1));
-      gl!.uniform1f(vorticityProgram.uniforms.curl, config.CURL);
-      gl!.uniform1f(vorticityProgram.uniforms.dt, dt);
+      blit(curlFBO);
+
+      vorticityProgram.bind();
+      gl!.uniform2f(
+        vorticityProgram.uniforms.texelSize ?? null,
+        velocity.texelSizeX,
+        velocity.texelSizeY,
+      );
+      gl!.uniform1i(
+        vorticityProgram.uniforms.uVelocity ?? null,
+        velocity.read.attach(0),
+      );
+      gl!.uniform1i(vorticityProgram.uniforms.uCurl ?? null, curlFBO.attach(1));
+      gl!.uniform1f(vorticityProgram.uniforms.curl ?? null, config.CURL);
+      gl!.uniform1f(vorticityProgram.uniforms.dt ?? null, dt);
       blit(velocity.write);
       velocity.swap();
 
       divergenceProgram.bind();
       gl!.uniform2f(
-        divergenceProgram.uniforms.texelSize,
+        divergenceProgram.uniforms.texelSize ?? null,
         velocity.texelSizeX,
         velocity.texelSizeY,
       );
       gl!.uniform1i(
-        divergenceProgram.uniforms.uVelocity,
+        divergenceProgram.uniforms.uVelocity ?? null,
         velocity.read.attach(0),
       );
       blit(divergence);
 
       clearProgram.bind();
-      gl!.uniform1i(clearProgram.uniforms.uTexture, pressureFBO.read.attach(0));
-      gl!.uniform1f(clearProgram.uniforms.value, config.PRESSURE);
+      gl!.uniform1i(
+        clearProgram.uniforms.uTexture ?? null,
+        pressureFBO.read.attach(0),
+      );
+      gl!.uniform1f(clearProgram.uniforms.value ?? null, config.PRESSURE);
       blit(pressureFBO.write);
       pressureFBO.swap();
 
       pressureProgram.bind();
       gl!.uniform2f(
-        pressureProgram.uniforms.texelSize,
+        pressureProgram.uniforms.texelSize ?? null,
         velocity.texelSizeX,
         velocity.texelSizeY,
       );
-      gl!.uniform1i(pressureProgram.uniforms.uDivergence, divergence.attach(0));
+      gl!.uniform1i(
+        pressureProgram.uniforms.uDivergence ?? null,
+        divergence.attach(0),
+      );
       for (let i = 0; i < config.PRESSURE_ITERATIONS; i++) {
         gl!.uniform1i(
-          pressureProgram.uniforms.uPressure,
+          pressureProgram.uniforms.uPressure ?? null,
           pressureFBO.read.attach(1),
         );
         blit(pressureFBO.write);
@@ -807,16 +826,16 @@
 
       gradientSubtractProgram.bind();
       gl!.uniform2f(
-        gradientSubtractProgram.uniforms.texelSize,
+        gradientSubtractProgram.uniforms.texelSize ?? null,
         velocity.texelSizeX,
         velocity.texelSizeY,
       );
       gl!.uniform1i(
-        gradientSubtractProgram.uniforms.uPressure,
+        gradientSubtractProgram.uniforms.uPressure ?? null,
         pressureFBO.read.attach(0),
       );
       gl!.uniform1i(
-        gradientSubtractProgram.uniforms.uVelocity,
+        gradientSubtractProgram.uniforms.uVelocity ?? null,
         velocity.read.attach(1),
       );
       blit(velocity.write);
@@ -824,22 +843,22 @@
 
       advectionProgram.bind();
       gl!.uniform2f(
-        advectionProgram.uniforms.texelSize,
+        advectionProgram.uniforms.texelSize ?? null,
         velocity.texelSizeX,
         velocity.texelSizeY,
       );
       if (!ext.supportLinearFiltering)
         gl!.uniform2f(
-          advectionProgram.uniforms.dyeTexelSize,
+          advectionProgram.uniforms.dyeTexelSize ?? null,
           velocity.texelSizeX,
           velocity.texelSizeY,
         );
       const velId = velocity.read.attach(0);
-      gl!.uniform1i(advectionProgram.uniforms.uVelocity, velId);
-      gl!.uniform1i(advectionProgram.uniforms.uSource, velId);
-      gl!.uniform1f(advectionProgram.uniforms.dt, dt);
+      gl!.uniform1i(advectionProgram.uniforms.uVelocity ?? null, velId);
+      gl!.uniform1i(advectionProgram.uniforms.uSource ?? null, velId);
+      gl!.uniform1f(advectionProgram.uniforms.dt ?? null, dt);
       gl!.uniform1f(
-        advectionProgram.uniforms.dissipation,
+        advectionProgram.uniforms.dissipation ?? null,
         config.VELOCITY_DISSIPATION,
       );
       blit(velocity.write);
@@ -847,17 +866,20 @@
 
       if (!ext.supportLinearFiltering)
         gl!.uniform2f(
-          advectionProgram.uniforms.dyeTexelSize,
+          advectionProgram.uniforms.dyeTexelSize ?? null,
           dye.texelSizeX,
           dye.texelSizeY,
         );
       gl!.uniform1i(
-        advectionProgram.uniforms.uVelocity,
+        advectionProgram.uniforms.uVelocity ?? null,
         velocity.read.attach(0),
       );
-      gl!.uniform1i(advectionProgram.uniforms.uSource, dye.read.attach(1));
+      gl!.uniform1i(
+        advectionProgram.uniforms.uSource ?? null,
+        dye.read.attach(1),
+      );
       gl!.uniform1f(
-        advectionProgram.uniforms.dissipation,
+        advectionProgram.uniforms.dissipation ?? null,
         config.DENSITY_DISSIPATION,
       );
       blit(dye.write);
@@ -872,11 +894,14 @@
       displayMaterial.bind();
       if (config.SHADING)
         gl!.uniform2f(
-          displayMaterial.uniforms.texelSize,
+          displayMaterial.uniforms.texelSize ?? null,
           1.0 / width,
           1.0 / height,
         );
-      gl!.uniform1i(displayMaterial.uniforms.uTexture, dye.read.attach(0));
+      gl!.uniform1i(
+        displayMaterial.uniforms.uTexture ?? null,
+        dye.read.attach(0),
+      );
       blit(null);
     }
 
@@ -917,6 +942,7 @@
 
     const handleMouseMove = (e: MouseEvent) => {
       const p = pointers[0];
+      if (!p) return;
       const { x: posX, y: posY } = getLocalCoords(e.clientX, e.clientY);
       if (!firstMove) {
         p.prevTexcoordX = posX / canvas!.width;
@@ -936,6 +962,7 @@
 
     const handleMouseDown = (e: MouseEvent) => {
       const p = pointers[0];
+      if (!p) return;
       const { x: posX, y: posY } = getLocalCoords(e.clientX, e.clientY);
       p.texcoordX = posX / canvas!.width;
       p.texcoordY = 1.0 - posY / canvas!.height;
@@ -956,10 +983,13 @@
     const handleTouchMove = (e: TouchEvent) => {
       const touches = e.targetTouches;
       const p = pointers[0];
+      if (!p) return;
       for (let i = 0; i < touches.length; i++) {
+        const touch = touches[i];
+        if (!touch) continue;
         const { x: posX, y: posY } = getLocalCoords(
-          touches[i].clientX,
-          touches[i].clientY,
+          touch.clientX,
+          touch.clientY,
         );
         p.prevTexcoordX = p.texcoordX;
         p.prevTexcoordY = p.texcoordY;

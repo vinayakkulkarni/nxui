@@ -1,9 +1,13 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperFlutedGlass from '@registry/new-york/paper-fluted-glass/PaperFlutedGlass.vue';
+  import type { PaperFlutedGlassGridShape } from '@registry/new-york/paper-fluted-glass/types';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
+  const params = reactive<{
+    distortion: number;
+    shape: PaperFlutedGlassGridShape;
+  }>({
     distortion: 0.5,
     shape: 'lines',
   });

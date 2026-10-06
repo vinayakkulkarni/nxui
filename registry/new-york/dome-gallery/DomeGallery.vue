@@ -124,12 +124,15 @@
     );
 
     for (let i = 1; i < usedImages.length; i++) {
-      if (usedImages[i].src === usedImages[i - 1].src) {
+      const current = usedImages[i];
+      const previous = usedImages[i - 1];
+      if (!current || !previous) continue;
+      if (current.src === previous.src) {
         for (let j = i + 1; j < usedImages.length; j++) {
-          if (usedImages[j].src !== usedImages[i].src) {
-            const tmp = usedImages[i];
-            usedImages[i] = usedImages[j];
-            usedImages[j] = tmp;
+          const candidate = usedImages[j];
+          if (candidate && candidate.src !== current.src) {
+            usedImages[i] = candidate;
+            usedImages[j] = current;
             break;
           }
         }
@@ -138,8 +141,8 @@
 
     return coords.map((c, i) => ({
       ...c,
-      src: usedImages[i].src,
-      alt: usedImages[i].alt,
+      src: usedImages[i]?.src ?? '',
+      alt: usedImages[i]?.alt ?? '',
     }));
   });
 
@@ -150,7 +153,9 @@
   }
 
   useResizeObserver(rootRef, (entries) => {
-    const cr = entries[0].contentRect;
+    const entry = entries[0];
+    if (!entry) return;
+    const cr = entry.contentRect;
     const w = Math.max(1, cr.width);
     const h = Math.max(1, cr.height);
     const minDim = Math.min(w, h);

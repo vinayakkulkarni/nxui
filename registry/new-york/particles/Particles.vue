@@ -112,15 +112,23 @@
 
     const mesh = new Mesh(gl, { mode: gl.POINTS, geometry, program });
 
+    const positionAttribute = geometry.attributes.position;
+
     function animate() {
       for (let i = 0; i < count; i++) {
-        positions[i * 3] += velocities[i * 3];
-        positions[i * 3 + 1] += velocities[i * 3 + 1];
+        const ix = i * 3;
+        const iy = ix + 1;
+        const vx = velocities[ix] ?? 0;
+        const vy = velocities[iy] ?? 0;
+        const x = (positions[ix] ?? 0) + vx;
+        const y = (positions[iy] ?? 0) + vy;
+        positions[ix] = x;
+        positions[iy] = y;
 
-        if (Math.abs(positions[i * 3]) > 10) velocities[i * 3] *= -1;
-        if (Math.abs(positions[i * 3 + 1]) > 10) velocities[i * 3 + 1] *= -1;
+        if (Math.abs(x) > 10) velocities[ix] = vx * -1;
+        if (Math.abs(y) > 10) velocities[iy] = vy * -1;
       }
-      geometry.attributes.position.needsUpdate = true;
+      if (positionAttribute) positionAttribute.needsUpdate = true;
 
       renderer.render({ scene: mesh, camera });
       animId = requestAnimationFrame(animate);

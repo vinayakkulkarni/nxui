@@ -33,13 +33,13 @@
 
   function hexToRgb(hex: string) {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return m
-      ? {
-          r: Number.parseInt(m[1], 16),
-          g: Number.parseInt(m[2], 16),
-          b: Number.parseInt(m[3], 16),
-        }
-      : null;
+    if (!m) return null;
+    const [, r = '', g = '', b = ''] = m;
+    return {
+      r: Number.parseInt(r, 16),
+      g: Number.parseInt(g, 16),
+      b: Number.parseInt(b, 16),
+    };
   }
 
   function lerpColor(a: string, b: string, t: number) {
@@ -51,12 +51,17 @@
 
   function getColor(intensity: number, phase: number) {
     const c = props.colors;
-    if (c.length === 0) return '#ffffff';
-    if (c.length === 1) return c[0];
+    const first = c[0];
+    if (first === undefined) return '#ffffff';
+    if (c.length === 1) return first;
     const t = (phase + intensity) % 1;
     const idx = Math.floor(t * (c.length - 1));
     const next = Math.min(idx + 1, c.length - 1);
-    return lerpColor(c[idx], c[next], (t * (c.length - 1)) % 1);
+    return lerpColor(
+      c[idx] ?? first,
+      c[next] ?? first,
+      (t * (c.length - 1)) % 1,
+    );
   }
 
   function initPixels() {

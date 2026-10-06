@@ -75,18 +75,12 @@
       if (rotation.value >= 360) rotation.value -= 360;
     }
 
-    for (let i = 0; i < 4; i++) {
-      if (!isHovering.value) {
-        cornerPositions[i].x = lerp(
-          cornerPositions[i].x,
-          defaultCorners[i].x,
-          0.1,
-        );
-        cornerPositions[i].y = lerp(
-          cornerPositions[i].y,
-          defaultCorners[i].y,
-          0.1,
-        );
+    if (!isHovering.value) {
+      for (const [i, corner] of cornerPositions.entries()) {
+        const def = defaultCorners[i];
+        if (!def) continue;
+        corner.x = lerp(corner.x, def.x, 0.1);
+        corner.y = lerp(corner.y, def.y, 0.1);
       }
     }
 
@@ -144,9 +138,11 @@
       },
     ];
 
-    for (let i = 0; i < 4; i++) {
-      cornerPositions[i].x = targetCorners[i].x;
-      cornerPositions[i].y = targetCorners[i].y;
+    for (const [i, corner] of cornerPositions.entries()) {
+      const next = targetCorners[i];
+      if (!next) continue;
+      corner.x = next.x;
+      corner.y = next.y;
     }
 
     const leaveHandler = () => {

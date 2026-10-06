@@ -103,8 +103,7 @@
 
     const medias: MediaItem[] = [];
 
-    for (let i = 0; i < doubled.length; i++) {
-      const data = doubled[i];
+    for (const [i, data] of doubled.entries()) {
       const tex = new Texture(gl, { generateMipmaps: true });
       const program = new Program(gl, {
         depthTest: false,

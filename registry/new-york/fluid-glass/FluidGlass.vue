@@ -33,12 +33,24 @@
     },
   );
 
+  type GlassUniforms = {
+    uBackground: THREE.IUniform<THREE.Texture>;
+    uResolution: THREE.IUniform<THREE.Vector2>;
+    uTime: THREE.IUniform<number>;
+    uIor: THREE.IUniform<number>;
+    uThickness: THREE.IUniform<number>;
+    uRoughness: THREE.IUniform<number>;
+    uChromatic: THREE.IUniform<number>;
+    uColor: THREE.IUniform<THREE.Color>;
+  };
+
   const containerRef = ref<HTMLElement | null>(null);
 
   let renderer: THREE.WebGLRenderer | null = null;
   let scene: THREE.Scene | null = null;
   let camera: THREE.PerspectiveCamera | null = null;
   let glassMesh: THREE.Mesh | null = null;
+  let glassUniforms: GlassUniforms | null = null;
   let bgScene: THREE.Scene | null = null;
   let renderTarget: THREE.WebGLRenderTarget | null = null;
   let animFrame: number | null = null;
@@ -174,25 +186,27 @@
     // Glass scene
     scene = new THREE.Scene();
     const glassGeo = createGlassGeometry();
+    const uniforms: GlassUniforms = {
+      uBackground: { value: renderTarget.texture },
+      uResolution: {
+        value: new THREE.Vector2(
+          w * renderer.getPixelRatio(),
+          h * renderer.getPixelRatio(),
+        ),
+      },
+      uTime: { value: 0 },
+      uIor: { value: props.ior },
+      uThickness: { value: props.thickness },
+      uRoughness: { value: props.roughness },
+      uChromatic: { value: props.chromaticAberration },
+      uColor: { value: new THREE.Color(props.color) },
+    };
+    glassUniforms = uniforms;
     const glassMat = new THREE.ShaderMaterial({
       vertexShader: GLASS_VERT,
       fragmentShader: GLASS_FRAG,
       transparent: true,
-      uniforms: {
-        uBackground: { value: renderTarget.texture },
-        uResolution: {
-          value: new THREE.Vector2(
-            w * renderer.getPixelRatio(),
-            h * renderer.getPixelRatio(),
-          ),
-        },
-        uTime: { value: 0 },
-        uIor: { value: props.ior },
-        uThickness: { value: props.thickness },
-        uRoughness: { value: props.roughness },
-        uChromatic: { value: props.chromaticAberration },
-        uColor: { value: new THREE.Color(props.color) },
-      },
+      uniforms,
     });
 
     glassMesh = new THREE.Mesh(glassGeo, glassMat);
@@ -217,6 +231,7 @@
       !scene ||
       !camera ||
       !glassMesh ||
+      !glassUniforms ||
       !bgScene ||
       !renderTarget
     )
@@ -237,14 +252,15 @@
     glassMesh.rotation.x = mouse.y * 0.3;
     glassMesh.rotation.y = mouse.x * 0.3 + t * 0.1;
 
-    const mat = glassMesh.material as THREE.ShaderMaterial;
-    mat.uniforms.uTime.value = t;
+    glassUniforms.uTime.value = t;
 
     renderer.render(scene, camera);
   }
 
   useResizeObserver(containerRef, (entries) => {
-    const { width, height } = entries[0].contentRect;
+    const entry = entries[0];
+    if (!entry) return;
+    const { width, height } = entry.contentRect;
     if (!renderer || !camera || !renderTarget || width <= 0 || height <= 0)
       return;
     renderer.setSize(width, height);
@@ -252,9 +268,8 @@
     camera.updateProjectionMatrix();
     const pr = renderer.getPixelRatio();
     renderTarget.setSize(width * pr, height * pr);
-    if (glassMesh) {
-      const mat = glassMesh.material as THREE.ShaderMaterial;
-      mat.uniforms.uResolution.value.set(width * pr, height * pr);
+    if (glassUniforms) {
+      glassUniforms.uResolution.value.set(width * pr, height * pr);
     }
   });
 
@@ -267,13 +282,12 @@
       () => props.color,
     ],
     () => {
-      if (!glassMesh) return;
-      const mat = glassMesh.material as THREE.ShaderMaterial;
-      mat.uniforms.uIor.value = props.ior;
-      mat.uniforms.uThickness.value = props.thickness;
-      mat.uniforms.uRoughness.value = props.roughness;
-      mat.uniforms.uChromatic.value = props.chromaticAberration;
-      mat.uniforms.uColor.value.set(props.color);
+      if (!glassUniforms) return;
+      glassUniforms.uIor.value = props.ior;
+      glassUniforms.uThickness.value = props.thickness;
+      glassUniforms.uRoughness.value = props.roughness;
+      glassUniforms.uChromatic.value = props.chromaticAberration;
+      glassUniforms.uColor.value.set(props.color);
     },
   );
 
@@ -293,6 +307,7 @@
     scene = null;
     camera = null;
     glassMesh = null;
+    glassUniforms = null;
   }
 
   onMounted(() => {

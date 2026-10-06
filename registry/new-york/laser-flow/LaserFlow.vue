@@ -280,6 +280,7 @@ void main(){
   let scene: THREE.Scene | null = null;
   let camera: THREE.OrthographicCamera | null = null;
   let material: THREE.RawShaderMaterial | null = null;
+  let uniforms: ReturnType<typeof createUniforms> | null = null;
   let animFrame: number | null = null;
   let prevTime = 0;
   let fade = 0;
@@ -300,6 +301,35 @@ void main(){
       r: ((n >> 16) & 255) / 255,
       g: ((n >> 8) & 255) / 255,
       b: (n & 255) / 255,
+    };
+  }
+
+  function createUniforms() {
+    const { r, g, b } = hexToRGB(props.color);
+
+    return {
+      iTime: { value: 0 },
+      iResolution: { value: new THREE.Vector3(1, 1, 1) },
+      iMouse: { value: new THREE.Vector4(0, 0, 0, 0) },
+      uWispDensity: { value: props.wispDensity },
+      uTiltScale: { value: props.mouseTiltStrength },
+      uFlowTime: { value: 0 },
+      uFogTime: { value: 0 },
+      uBeamXFrac: { value: props.horizontalBeamOffset },
+      uBeamYFrac: { value: props.verticalBeamOffset },
+      uFlowSpeed: { value: props.flowSpeed },
+      uVLenFactor: { value: props.verticalSizing },
+      uHLenFactor: { value: props.horizontalSizing },
+      uFogIntensity: { value: props.fogIntensity },
+      uFogScale: { value: props.fogScale },
+      uWSpeed: { value: props.wispSpeed },
+      uWIntensity: { value: props.wispIntensity },
+      uFlowStrength: { value: props.flowStrength },
+      uDecay: { value: props.decay },
+      uFalloffStart: { value: props.falloffStart },
+      uFogFallSpeed: { value: props.fogFallSpeed },
+      uColor: { value: new THREE.Vector3(r, g, b) },
+      uFade: { value: 0 },
     };
   }
 
@@ -337,37 +367,13 @@ void main(){
       ),
     );
 
-    const { r, g, b } = hexToRGB(props.color);
-
-    const uniforms = {
-      iTime: { value: 0 },
-      iResolution: { value: new THREE.Vector3(1, 1, 1) },
-      iMouse: { value: new THREE.Vector4(0, 0, 0, 0) },
-      uWispDensity: { value: props.wispDensity },
-      uTiltScale: { value: props.mouseTiltStrength },
-      uFlowTime: { value: 0 },
-      uFogTime: { value: 0 },
-      uBeamXFrac: { value: props.horizontalBeamOffset },
-      uBeamYFrac: { value: props.verticalBeamOffset },
-      uFlowSpeed: { value: props.flowSpeed },
-      uVLenFactor: { value: props.verticalSizing },
-      uHLenFactor: { value: props.horizontalSizing },
-      uFogIntensity: { value: props.fogIntensity },
-      uFogScale: { value: props.fogScale },
-      uWSpeed: { value: props.wispSpeed },
-      uWIntensity: { value: props.wispIntensity },
-      uFlowStrength: { value: props.flowStrength },
-      uDecay: { value: props.decay },
-      uFalloffStart: { value: props.falloffStart },
-      uFogFallSpeed: { value: props.fogFallSpeed },
-      uColor: { value: new THREE.Vector3(r, g, b) },
-      uFade: { value: 0 },
-    };
+    const createdUniforms = createUniforms();
+    uniforms = createdUniforms;
 
     material = new THREE.RawShaderMaterial({
       vertexShader: VERT,
       fragmentShader: FRAG,
-      uniforms,
+      uniforms: createdUniforms,
       transparent: false,
       depthTest: false,
       depthWrite: false,
@@ -397,25 +403,25 @@ void main(){
 
     const animate = () => {
       animFrame = requestAnimationFrame(animate);
-      if (!renderer || !scene || !camera || !material) return;
+      if (!renderer || !scene || !camera || !material || !uniforms) return;
 
       timer.update();
       const t = timer.getElapsed();
       const dt = Math.max(0, Math.min(0.033, t - prevTime));
       prevTime = t;
 
-      material.uniforms.iTime.value = t;
-      material.uniforms.uFlowTime.value += dt;
-      material.uniforms.uFogTime.value += dt;
+      uniforms.iTime.value = t;
+      uniforms.uFlowTime.value += dt;
+      uniforms.uFogTime.value += dt;
 
       if (!hasFaded) {
         fade = Math.min(1, fade + dt);
-        material.uniforms.uFade.value = fade;
+        uniforms.uFade.value = fade;
         if (fade >= 1) hasFaded = true;
       }
 
       mouseSmooth.lerp(mouseTarget, 1 - Math.exp(-dt / Math.max(0.001, 0)));
-      material.uniforms.iMouse.value.set(mouseSmooth.x, mouseSmooth.y, 0, 0);
+      uniforms.iMouse.value.set(mouseSmooth.x, mouseSmooth.y, 0, 0);
 
       renderer.render(scene, camera);
     };
@@ -425,12 +431,12 @@ void main(){
 
   function setSize() {
     const mount = mountRef.value;
-    if (!mount || !renderer || !material) return;
+    if (!mount || !renderer || !uniforms) return;
     const w = mount.clientWidth || 1;
     const h = mount.clientHeight || 1;
     const pr = renderer.getPixelRatio();
     renderer.setSize(w, h, false);
-    material.uniforms.iResolution.value.set(w * pr, h * pr, pr);
+    uniforms.iResolution.value.set(w * pr, h * pr, pr);
   }
 
   useResizeObserver(mountRef, () => {
@@ -457,8 +463,8 @@ void main(){
       () => props.color,
     ],
     () => {
-      if (!material) return;
-      const u = material.uniforms;
+      const u = uniforms;
+      if (!u) return;
       u.uWispDensity.value = props.wispDensity;
       u.uTiltScale.value = props.mouseTiltStrength;
       u.uBeamXFrac.value = props.horizontalBeamOffset;
@@ -491,6 +497,7 @@ void main(){
     scene = null;
     camera = null;
     material = null;
+    uniforms = null;
   }
 
   onMounted(() => {

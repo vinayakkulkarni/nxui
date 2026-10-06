@@ -38,7 +38,7 @@
         displayText.value = props.text.split('').map((letter, i) => {
           if (letter === ' ') return ' ';
           if (i <= iterations.value) return props.text[i] ?? '';
-          return ALPHABETS[Math.floor(Math.random() * ALPHABETS.length)];
+          return ALPHABETS.charAt(Math.floor(Math.random() * ALPHABETS.length));
         });
         iterations.value += 0.1;
       } else {

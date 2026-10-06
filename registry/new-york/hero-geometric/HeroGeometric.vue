@@ -106,17 +106,19 @@ void main(){
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    if (mat) mat.uniforms.uResolution.value.set(width, height);
+    mat?.uniforms.uResolution?.value.set(width, height);
   }
 
   useResizeObserver(containerRef, resize);
 
   function loop() {
     if (!renderer || !scene || !camera || !mat || !timer) return;
+    const { uTime, uColor1, uColor2 } = mat.uniforms;
+    if (!uTime || !uColor1 || !uColor2) return;
     timer.update();
-    mat.uniforms.uTime.value = timer.getElapsed() * props.speed;
-    mat.uniforms.uColor1.value.set(sanitizeHex(props.color1, FALLBACK_1));
-    mat.uniforms.uColor2.value.set(sanitizeHex(props.color2, FALLBACK_2));
+    uTime.value = timer.getElapsed() * props.speed;
+    uColor1.value.set(sanitizeHex(props.color1, FALLBACK_1));
+    uColor2.value.set(sanitizeHex(props.color2, FALLBACK_2));
     renderer.render(scene, camera);
     rafId = requestAnimationFrame(loop);
   }

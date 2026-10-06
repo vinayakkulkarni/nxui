@@ -2,6 +2,7 @@
   import { ref, onMounted, onBeforeUnmount } from 'vue';
   import { useResizeObserver, useEventListener } from '@vueuse/core';
   import { Renderer, Program, Mesh, Triangle } from 'ogl';
+  import type { OGLRenderingContext } from 'ogl';
   import type { PlasmaProps, PlasmaDirection } from './types';
   import { cn } from '~/lib/utils';
 
@@ -104,7 +105,7 @@ void main() {
   const containerRef = ref<HTMLDivElement | null>(null);
   let animationId = 0;
   let renderer: InstanceType<typeof Renderer> | null = null;
-  let glContext: WebGL2RenderingContext | null = null;
+  let glContext: OGLRenderingContext | null = null;
   let program: InstanceType<typeof Program> | null = null;
   let mesh: InstanceType<typeof Mesh> | null = null;
   let t0 = 0;
@@ -143,7 +144,7 @@ void main() {
       antialias: false,
       dpr: Math.min(window.devicePixelRatio || 1, 2),
     });
-    const gl = renderer.gl as WebGL2RenderingContext;
+    const gl = renderer.gl;
     glContext = gl;
     const canvas = gl.canvas as HTMLCanvasElement;
     canvas.style.display = 'block';

@@ -72,7 +72,7 @@
 
   const maxItems = 3;
   function getPapers(): Array<string | null> {
-    const papers = props.items.slice(0, maxItems);
+    const papers: Array<string | null> = props.items.slice(0, maxItems);
     while (papers.length < maxItems) {
       papers.push(null);
     }

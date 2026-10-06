@@ -266,6 +266,24 @@ void main(){
     });
   }
 
+  function getUniform(
+    uniforms: Record<string, THREE.IUniform>,
+    name: string,
+  ): THREE.IUniform {
+    const uniform = uniforms[name];
+    if (!uniform) throw new Error(`LiquidEther: missing uniform "${name}"`);
+    return uniform;
+  }
+
+  type FboName =
+    | 'vel_0'
+    | 'vel_1'
+    | 'vel_viscous0'
+    | 'vel_viscous1'
+    | 'div'
+    | 'pressure_0'
+    | 'pressure_1';
+
   class ShaderPass {
     scene: THREE.Scene;
     camera: THREE.Camera;
@@ -311,7 +329,7 @@ void main(){
     paletteTex: THREE.DataTexture;
     bgVec4: THREE.Vector4;
     // Simulation state
-    fbos!: Record<string, THREE.WebGLRenderTarget>;
+    fbos!: Record<FboName, THREE.WebGLRenderTarget>;
     fboSize!: THREE.Vector2;
     cellScale!: THREE.Vector2;
     boundarySpace!: THREE.Vector2;
@@ -682,8 +700,8 @@ void main(){
       }
 
       // Advection
-      this.advection.uniforms.dt.value = opts.dt;
-      this.advection.uniforms.isBFECC.value = opts.BFECC;
+      getUniform(this.advection.uniforms, 'dt').value = opts.dt;
+      getUniform(this.advection.uniforms, 'isBFECC').value = opts.BFECC;
       this.advection.scene.children.forEach((c) => {
         if (c instanceof THREE.LineSegments) c.visible = opts.isBounce;
       });
@@ -691,13 +709,13 @@ void main(){
 
       // External force
       const mu = this.externalForceMouse.material as THREE.RawShaderMaterial;
-      mu.uniforms.force.value.set(
+      getUniform(mu.uniforms, 'force').value.set(
         (this.mouseDiff.x / 2) * opts.mouse_force,
         (this.mouseDiff.y / 2) * opts.mouse_force,
       );
       const csx = opts.cursor_size * this.cellScale.x;
       const csy = opts.cursor_size * this.cellScale.y;
-      mu.uniforms.center.value.set(
+      getUniform(mu.uniforms, 'center').value.set(
         Math.min(
           Math.max(this.mouseCoords.x, -1 + csx + this.cellScale.x * 2),
           1 - csx - this.cellScale.x * 2,
@@ -707,21 +725,25 @@ void main(){
           1 - csy - this.cellScale.y * 2,
         ),
       );
-      mu.uniforms.scale.value.set(opts.cursor_size, opts.cursor_size);
+      getUniform(mu.uniforms, 'scale').value.set(
+        opts.cursor_size,
+        opts.cursor_size,
+      );
       this.externalForce.render(this.threeRenderer);
 
       // Viscous
       let vel = this.fbos.vel_1;
       if (opts.isViscous) {
-        this.viscousPass.uniforms.v.value = opts.viscous;
-        this.viscousPass.uniforms.dt.value = opts.dt;
+        getUniform(this.viscousPass.uniforms, 'v').value = opts.viscous;
+        getUniform(this.viscousPass.uniforms, 'dt').value = opts.dt;
         let fboIn: THREE.WebGLRenderTarget;
         let fboOut: THREE.WebGLRenderTarget;
         for (let i = 0; i < opts.iterations_viscous; i++) {
           fboIn = i % 2 === 0 ? this.fbos.vel_viscous0 : this.fbos.vel_viscous1;
           fboOut =
             i % 2 === 0 ? this.fbos.vel_viscous1 : this.fbos.vel_viscous0;
-          this.viscousPass.uniforms.velocity_new.value = fboIn.texture;
+          getUniform(this.viscousPass.uniforms, 'velocity_new').value =
+            fboIn.texture;
           this.viscousPass.output = fboOut;
           this.viscousPass.render(this.threeRenderer);
         }
@@ -729,7 +751,7 @@ void main(){
       }
 
       // Divergence
-      this.divergencePass.uniforms.velocity.value = vel.texture;
+      getUniform(this.divergencePass.uniforms, 'velocity').value = vel.texture;
       this.divergencePass.render(this.threeRenderer);
 
       // Poisson
@@ -737,14 +759,14 @@ void main(){
       for (let i = 0; i < opts.iterations_poisson; i++) {
         const pIn = i % 2 === 0 ? this.fbos.pressure_0 : this.fbos.pressure_1;
         pOut = i % 2 === 0 ? this.fbos.pressure_1 : this.fbos.pressure_0;
-        this.poissonPass.uniforms.pressure.value = pIn.texture;
+        getUniform(this.poissonPass.uniforms, 'pressure').value = pIn.texture;
         this.poissonPass.output = pOut;
         this.poissonPass.render(this.threeRenderer);
       }
 
       // Pressure
-      this.pressurePass.uniforms.velocity.value = vel.texture;
-      this.pressurePass.uniforms.pressure.value = pOut.texture;
+      getUniform(this.pressurePass.uniforms, 'velocity').value = vel.texture;
+      getUniform(this.pressurePass.uniforms, 'pressure').value = pOut.texture;
       this.pressurePass.render(this.threeRenderer);
     }
 
@@ -763,8 +785,8 @@ void main(){
       );
       this.fboSize.set(fw, fh);
       this.cellScale.set(1.0 / fw, 1.0 / fh);
-      for (const key of Object.keys(this.fbos)) {
-        this.fbos[key].setSize(fw, fh);
+      for (const fbo of Object.values(this.fbos)) {
+        fbo.setSize(fw, fh);
       }
     }
 
@@ -790,15 +812,17 @@ void main(){
       const canvas = this.threeRenderer.domElement;
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
       this.threeRenderer.dispose();
-      for (const key of Object.keys(this.fbos)) {
-        this.fbos[key].dispose();
+      for (const fbo of Object.values(this.fbos)) {
+        fbo.dispose();
       }
     }
   }
 
   useResizeObserver(containerRef, (entries) => {
     if (!webglManager) return;
-    const { width, height } = entries[0].contentRect;
+    const entry = entries[0];
+    if (!entry) return;
+    const { width, height } = entry.contentRect;
     webglManager.resize(Math.floor(width), Math.floor(height));
   });
 

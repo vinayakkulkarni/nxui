@@ -64,9 +64,9 @@
   }
 
   function randomChar(): string {
-    return props.characters[
-      Math.floor(Math.random() * props.characters.length)
-    ];
+    return props.characters.charAt(
+      Math.floor(Math.random() * props.characters.length),
+    );
   }
 
   let interval: ReturnType<typeof setInterval> | undefined;

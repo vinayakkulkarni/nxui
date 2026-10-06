@@ -53,13 +53,14 @@
   const containerRef = ref<HTMLDivElement>();
   let webglRenderer: WebGLRenderer | null = null;
   let mat: ShaderMaterial | null = null;
+  let resolutionUniform: { value: Vector2 } | null = null;
   let rafId = 0;
   let timeValue = 0;
   const mouse = new Vector2(0, 0);
 
   function getSettings(q: string) {
     const settings: Record<
-      string,
+      'low' | 'medium' | 'high',
       {
         iterations: number;
         waveIterations: number;
@@ -86,7 +87,9 @@
         stepMult: 1.0,
       },
     };
-    return settings[q] || settings.medium;
+    if (q === 'low') return settings.low;
+    if (q === 'high') return settings.high;
+    return settings.medium;
   }
 
   function buildFragmentShader(quality: string) {
@@ -159,11 +162,12 @@ void main(){
   useEventListener(containerRef, 'mousemove', onMouseMove);
 
   function resize() {
-    if (!containerRef.value || !webglRenderer || !mat) return;
+    if (!containerRef.value || !webglRenderer || !mat || !resolutionUniform)
+      return;
     const w = containerRef.value.clientWidth;
     const h = containerRef.value.clientHeight;
     webglRenderer.setSize(w, h);
-    mat.uniforms.uResolution.value.set(w, h);
+    resolutionUniform.value.set(w, h);
   }
 
   useResizeObserver(containerRef, resize);
@@ -186,30 +190,46 @@ void main(){
     webglRenderer.domElement.style.display = 'block';
     containerRef.value.appendChild(webglRenderer.domElement);
 
+    const uTime = { value: 0 };
+    const uResolution = {
+      value: new Vector2(
+        containerRef.value.clientWidth,
+        containerRef.value.clientHeight,
+      ),
+    };
+    const uTopColor = { value: parseColor(props.topColor) };
+    const uBottomColor = { value: parseColor(props.bottomColor) };
+    const uIntensity = { value: props.intensity };
+    const uInteractive = { value: props.interactive };
+    const uGlowAmount = { value: props.glowAmount };
+    const uPillarWidth = { value: props.pillarWidth };
+    const uPillarHeight = { value: props.pillarHeight };
+    const uNoiseIntensity = { value: props.noiseIntensity };
+    const uRotCos = { value: 1.0 };
+    const uRotSin = { value: 0.0 };
+    const uPillarRotCos = { value: Math.cos(pillarRotRad) };
+    const uPillarRotSin = { value: Math.sin(pillarRotRad) };
+    resolutionUniform = uResolution;
+
     mat = new ShaderMaterial({
       vertexShader,
       fragmentShader: buildFragmentShader(props.quality),
       uniforms: {
-        uTime: { value: 0 },
-        uResolution: {
-          value: new Vector2(
-            containerRef.value.clientWidth,
-            containerRef.value.clientHeight,
-          ),
-        },
+        uTime,
+        uResolution,
         uMouse: { value: mouse },
-        uTopColor: { value: parseColor(props.topColor) },
-        uBottomColor: { value: parseColor(props.bottomColor) },
-        uIntensity: { value: props.intensity },
-        uInteractive: { value: props.interactive },
-        uGlowAmount: { value: props.glowAmount },
-        uPillarWidth: { value: props.pillarWidth },
-        uPillarHeight: { value: props.pillarHeight },
-        uNoiseIntensity: { value: props.noiseIntensity },
-        uRotCos: { value: 1.0 },
-        uRotSin: { value: 0.0 },
-        uPillarRotCos: { value: Math.cos(pillarRotRad) },
-        uPillarRotSin: { value: Math.sin(pillarRotRad) },
+        uTopColor,
+        uBottomColor,
+        uIntensity,
+        uInteractive,
+        uGlowAmount,
+        uPillarWidth,
+        uPillarHeight,
+        uNoiseIntensity,
+        uRotCos,
+        uRotSin,
+        uPillarRotCos,
+        uPillarRotSin,
         uWaveSin: { value: Math.sin(0.4) },
         uWaveCos: { value: Math.cos(0.4) },
       },
@@ -226,20 +246,20 @@ void main(){
     function update() {
       if (!webglRenderer || !mat) return;
       timeValue += 0.016 * props.rotationSpeed;
-      mat.uniforms.uTime.value = timeValue;
-      mat.uniforms.uRotCos.value = Math.cos(timeValue * 0.3);
-      mat.uniforms.uRotSin.value = Math.sin(timeValue * 0.3);
-      mat.uniforms.uTopColor.value = parseColor(props.topColor);
-      mat.uniforms.uBottomColor.value = parseColor(props.bottomColor);
-      mat.uniforms.uIntensity.value = props.intensity;
-      mat.uniforms.uInteractive.value = props.interactive;
-      mat.uniforms.uGlowAmount.value = props.glowAmount;
-      mat.uniforms.uPillarWidth.value = props.pillarWidth;
-      mat.uniforms.uPillarHeight.value = props.pillarHeight;
-      mat.uniforms.uNoiseIntensity.value = props.noiseIntensity;
+      uTime.value = timeValue;
+      uRotCos.value = Math.cos(timeValue * 0.3);
+      uRotSin.value = Math.sin(timeValue * 0.3);
+      uTopColor.value = parseColor(props.topColor);
+      uBottomColor.value = parseColor(props.bottomColor);
+      uIntensity.value = props.intensity;
+      uInteractive.value = props.interactive;
+      uGlowAmount.value = props.glowAmount;
+      uPillarWidth.value = props.pillarWidth;
+      uPillarHeight.value = props.pillarHeight;
+      uNoiseIntensity.value = props.noiseIntensity;
       const pRad = (props.pillarRotation * Math.PI) / 180;
-      mat.uniforms.uPillarRotCos.value = Math.cos(pRad);
-      mat.uniforms.uPillarRotSin.value = Math.sin(pRad);
+      uPillarRotCos.value = Math.cos(pRad);
+      uPillarRotSin.value = Math.sin(pRad);
       webglRenderer.render(scene, camera);
       rafId = requestAnimationFrame(update);
     }

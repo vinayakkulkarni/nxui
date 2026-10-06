@@ -40,26 +40,28 @@
 
   function getRandomChar(): string {
     const chars = Array.from(props.characters);
-    return chars[Math.floor(Math.random() * chars.length)];
+    return chars[Math.floor(Math.random() * chars.length)] ?? '';
   }
 
   function getRandomColor(): string {
-    return props.glitchColors[
-      Math.floor(Math.random() * props.glitchColors.length)
-    ];
+    return (
+      props.glitchColors[
+        Math.floor(Math.random() * props.glitchColors.length)
+      ] ?? ''
+    );
   }
 
   function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
     const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
     hex = hex.replace(shorthandRegex, (_m, r, g, b) => r + r + g + g + b + b);
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-      ? {
-          r: Number.parseInt(result[1], 16),
-          g: Number.parseInt(result[2], 16),
-          b: Number.parseInt(result[3], 16),
-        }
-      : null;
+    if (!result) return null;
+    const [, red = '', green = '', blue = ''] = result;
+    return {
+      r: Number.parseInt(red, 16),
+      g: Number.parseInt(green, 16),
+      b: Number.parseInt(blue, 16),
+    };
   }
 
   function interpolateColor(
@@ -116,6 +118,7 @@
 
     for (let i = 0; i < letters.length; i++) {
       const letter = letters[i];
+      if (!letter) continue;
       const x = (i % grid.columns) * charWidth;
       const y = Math.floor(i / grid.columns) * charHeight;
       ctx.fillStyle = letter.color;

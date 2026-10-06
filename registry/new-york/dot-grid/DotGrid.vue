@@ -35,11 +35,14 @@
 
   function hexToRgb(hex: string) {
     const m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    if (!m) return { r: 0, g: 0, b: 0 };
+    const [, r, g, b] = m ?? [];
+    if (r === undefined || g === undefined || b === undefined) {
+      return { r: 0, g: 0, b: 0 };
+    }
     return {
-      r: Number.parseInt(m[1], 16),
-      g: Number.parseInt(m[2], 16),
-      b: Number.parseInt(m[3], 16),
+      r: Number.parseInt(r, 16),
+      g: Number.parseInt(g, 16),
+      b: Number.parseInt(b, 16),
     };
   }
 

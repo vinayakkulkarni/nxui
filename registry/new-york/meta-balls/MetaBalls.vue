@@ -53,28 +53,26 @@
   function fract(x: number) {
     return x - Math.floor(x);
   }
-  function hash31(p: number): number[] {
-    const r = [p * 0.1031, p * 0.103, p * 0.0973].map(fract);
-    const yzx = [r[1], r[2], r[0]];
-    const d =
-      r[0] * (yzx[0] + 33.33) +
-      r[1] * (yzx[1] + 33.33) +
-      r[2] * (yzx[2] + 33.33);
-    return r.map((v) => fract(v + d));
+  function hash31(p: number): [number, number, number] {
+    const r0 = fract(p * 0.1031);
+    const r1 = fract(p * 0.103);
+    const r2 = fract(p * 0.0973);
+    const d = r0 * (r1 + 33.33) + r1 * (r2 + 33.33) + r2 * (r0 + 33.33);
+    return [fract(r0 + d), fract(r1 + d), fract(r2 + d)];
   }
-  function hash33(v: number[]): number[] {
-    let p = [v[0] * 0.1031, v[1] * 0.103, v[2] * 0.0973].map(fract);
-    const yxz = [p[1], p[0], p[2]];
-    const d =
-      p[0] * (yxz[0] + 33.33) +
-      p[1] * (yxz[1] + 33.33) +
-      p[2] * (yxz[2] + 33.33);
-    p = p.map((val) => fract(val + d));
+  function hash33(v: [number, number, number]): [number, number, number] {
+    const p0 = fract(v[0] * 0.1031);
+    const p1 = fract(v[1] * 0.103);
+    const p2 = fract(v[2] * 0.0973);
+    const d = p0 * (p1 + 33.33) + p1 * (p0 + 33.33) + p2 * (p2 + 33.33);
+    const q0 = fract(p0 + d);
+    const q1 = fract(p1 + d);
+    const q2 = fract(p2 + d);
     return [
-      (p[0] + p[1]) * p[2],
-      (p[0] + p[0]) * p[1],
-      (p[1] + p[0]) * p[0],
-    ].map(fract);
+      fract((q0 + q1) * q2),
+      fract((q0 + q0) * q1),
+      fract((q1 + q0) * q0),
+    ];
   }
 
   const VERT = `#version 300 es
@@ -246,11 +244,12 @@ void main() {
       const elapsed = (t - startTime) * 0.001;
       program.uniforms.iTime.value = elapsed;
 
-      for (let i = 0; i < effectiveBallCount; i++) {
-        const p = ballParams[i];
+      for (const [i, p] of ballParams.entries()) {
+        const ball = metaBallsUniform[i];
+        if (!ball) continue;
         const dt = elapsed * props.speed * p.dtFactor;
         const th = p.st + dt;
-        metaBallsUniform[i].set(
+        ball.set(
           Math.cos(th) * p.baseScale * props.clumpFactor,
           Math.sin(th + dt * p.toggle) * p.baseScale * props.clumpFactor,
           p.radius,

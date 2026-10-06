@@ -22,13 +22,13 @@
 
   function hexToRgb(hex: string): [number, number, number] {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result
-      ? [
-          Number.parseInt(result[1], 16),
-          Number.parseInt(result[2], 16),
-          Number.parseInt(result[3], 16),
-        ]
-      : [0, 0, 0];
+    const [, r, g, b] = result ?? [];
+    if (r === undefined || g === undefined || b === undefined) return [0, 0, 0];
+    return [
+      Number.parseInt(r, 16),
+      Number.parseInt(g, 16),
+      Number.parseInt(b, 16),
+    ];
   }
 
   function renderDither(canvas: HTMLCanvasElement) {

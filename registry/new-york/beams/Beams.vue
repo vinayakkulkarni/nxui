@@ -149,11 +149,12 @@ float cnoise(vec3 P){
     );
     camera.position.set(0, 0, 20);
 
-    renderer = new WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.domElement.style.width = '100%';
-    renderer.domElement.style.height = '100%';
-    containerRef.value.appendChild(renderer.domElement);
+    const activeRenderer = new WebGLRenderer({ antialias: true, alpha: true });
+    renderer = activeRenderer;
+    activeRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    activeRenderer.domElement.style.width = '100%';
+    activeRenderer.domElement.style.height = '100%';
+    containerRef.value.appendChild(activeRenderer.domElement);
 
     const physical = ShaderLib.physical;
     const baseUniforms = UniformsUtils.clone(physical.uniforms);
@@ -161,9 +162,11 @@ float cnoise(vec3 P){
       roughness: 0.3,
       metalness: 0.3,
     });
-    baseUniforms.diffuse.value = new Color(0, 0, 0);
-    baseUniforms.roughness.value = defaults.roughness;
-    baseUniforms.metalness.value = defaults.metalness;
+    if (baseUniforms.diffuse) baseUniforms.diffuse.value = new Color(0, 0, 0);
+    if (baseUniforms.roughness)
+      baseUniforms.roughness.value = defaults.roughness;
+    if (baseUniforms.metalness)
+      baseUniforms.metalness.value = defaults.metalness;
 
     const header = `
 varying vec3 vEye;
@@ -204,11 +207,11 @@ vec3 getNormal(vec3 pos) {
       `#include <dithering_fragment>\nfloat randomNoise = noise(gl_FragCoord.xy);\ngl_FragColor.rgb -= randomNoise / 15. * uNoiseIntensity;`,
     );
 
+    const timeUniform = { value: 0 };
     const material = new ShaderMaterial({
-      defines: { ...physical.defines },
       uniforms: {
         ...baseUniforms,
-        time: { value: 0 },
+        time: timeUniform,
         uSpeed: { value: props.speed },
         uNoiseIntensity: { value: props.noiseIntensity },
         uScale: { value: props.scale },
@@ -248,8 +251,8 @@ vec3 getNormal(vec3 pos) {
     resObs.observe(containerRef.value);
 
     function update() {
-      material.uniforms.time.value += 0.01;
-      renderer!.render(scene, camera);
+      timeUniform.value += 0.01;
+      activeRenderer.render(scene, camera);
       rafId = requestAnimationFrame(update);
     }
     rafId = requestAnimationFrame(update);

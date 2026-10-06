@@ -51,17 +51,17 @@
       0,
       MAX_COLORS,
     );
-    if (base.length === 1) base.push(base[0]);
-    while (base.length < MAX_COLORS) base.push(base[base.length - 1]);
+    const fallback = base[base.length - 1] ?? '#FF9FFC';
     const arr: Array<[number, number, number]> = [];
-    for (let i = 0; i < MAX_COLORS; i++) arr.push(hexToRgb(base[i]));
+    for (let i = 0; i < MAX_COLORS; i++)
+      arr.push(hexToRgb(base[i] ?? fallback));
     return { arr, count: Math.max(2, Math.min(MAX_COLORS, stops.length || 2)) };
   }
 
   const containerRef = ref<HTMLDivElement>();
   let rafId = 0;
   let renderer: Renderer | null = null;
-  const mouseTarget = [0, 0];
+  const mouseTarget: [number, number] = [0, 0];
   let lastTime = 0;
 
   const vertex = `attribute vec2 position;attribute vec2 uv;varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position,0.0,1.0);}`;
@@ -172,68 +172,76 @@ void main(){vec4 color;mainImage(color,vUv*iResolution.xy);gl_FragColor=color;}`
       props.gradientColors,
     );
     const geometry = new Triangle(gl);
-    const uniforms: Record<string, { value: unknown }> = {
-      iResolution: {
-        value: [gl.drawingBufferWidth, gl.drawingBufferHeight, 1],
-      },
-      iMouse: {
-        value: [gl.drawingBufferWidth / 2, gl.drawingBufferHeight / 2],
-      },
-      iTime: { value: 0 },
-      uAngle: { value: (props.angle * Math.PI) / 180 },
-      uNoise: { value: props.noise },
-      uBlindCount: { value: Math.max(1, props.blindCount) },
-      uSpotlightRadius: { value: props.spotlightRadius },
-      uSpotlightSoftness: { value: props.spotlightSoftness },
-      uSpotlightOpacity: { value: props.spotlightOpacity },
-      uMirror: { value: props.mirrorGradient ? 1 : 0 },
-      uDistort: { value: props.distortAmount },
-      uShineFlip: { value: props.shineDirection === 'right' ? 1 : 0 },
-      uColorCount: { value: colorCount },
+    const iResolution = {
+      value: [gl.drawingBufferWidth, gl.drawingBufferHeight, 1],
     };
-    for (let i = 0; i < MAX_COLORS; i++) {
-      uniforms[`uColor${i}`] = { value: colorArr[i] };
+    const iMouse: { value: [number, number] } = {
+      value: [gl.drawingBufferWidth / 2, gl.drawingBufferHeight / 2],
+    };
+    const iTime = { value: 0 };
+    const uAngle = { value: (props.angle * Math.PI) / 180 };
+    const uNoise = { value: props.noise };
+    const uBlindCount = { value: Math.max(1, props.blindCount) };
+    const uSpotlightRadius = { value: props.spotlightRadius };
+    const uSpotlightSoftness = { value: props.spotlightSoftness };
+    const uSpotlightOpacity = { value: props.spotlightOpacity };
+    const uMirror = { value: props.mirrorGradient ? 1 : 0 };
+    const uDistort = { value: props.distortAmount };
+    const uShineFlip = { value: props.shineDirection === 'right' ? 1 : 0 };
+    const uColorCount = { value: colorCount };
+    const colorUniforms = colorArr.map((color) => ({ value: color }));
+    const uniforms: Record<string, { value: unknown }> = {
+      iResolution,
+      iMouse,
+      iTime,
+      uAngle,
+      uNoise,
+      uBlindCount,
+      uSpotlightRadius,
+      uSpotlightSoftness,
+      uSpotlightOpacity,
+      uMirror,
+      uDistort,
+      uShineFlip,
+      uColorCount,
+    };
+    for (const [i, colorUniform] of colorUniforms.entries()) {
+      uniforms[`uColor${i}`] = colorUniform;
     }
 
     const program = new Program(gl, { vertex, fragment, uniforms });
     const mesh = new Mesh(gl, { geometry, program });
     resize();
-    uniforms.iResolution.value = [
-      gl.drawingBufferWidth,
-      gl.drawingBufferHeight,
-      1,
-    ];
+    iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1];
     mouseTarget[0] = gl.drawingBufferWidth / 2;
     mouseTarget[1] = gl.drawingBufferHeight / 2;
 
     function update(t: number) {
       rafId = requestAnimationFrame(update);
-      uniforms.iTime.value = t * 0.001;
-      uniforms.iResolution.value = [
-        gl.drawingBufferWidth,
-        gl.drawingBufferHeight,
-        1,
-      ];
-      uniforms.uAngle.value = (props.angle * Math.PI) / 180;
-      uniforms.uNoise.value = props.noise;
-      uniforms.uBlindCount.value = Math.max(1, props.blindCount);
-      uniforms.uSpotlightRadius.value = props.spotlightRadius;
-      uniforms.uSpotlightSoftness.value = props.spotlightSoftness;
-      uniforms.uSpotlightOpacity.value = props.spotlightOpacity;
-      uniforms.uMirror.value = props.mirrorGradient ? 1 : 0;
-      uniforms.uDistort.value = props.distortAmount;
-      uniforms.uShineFlip.value = props.shineDirection === 'right' ? 1 : 0;
+      iTime.value = t * 0.001;
+      iResolution.value = [gl.drawingBufferWidth, gl.drawingBufferHeight, 1];
+      uAngle.value = (props.angle * Math.PI) / 180;
+      uNoise.value = props.noise;
+      uBlindCount.value = Math.max(1, props.blindCount);
+      uSpotlightRadius.value = props.spotlightRadius;
+      uSpotlightSoftness.value = props.spotlightSoftness;
+      uSpotlightOpacity.value = props.spotlightOpacity;
+      uMirror.value = props.mirrorGradient ? 1 : 0;
+      uDistort.value = props.distortAmount;
+      uShineFlip.value = props.shineDirection === 'right' ? 1 : 0;
       const { arr, count } = prepStops(props.gradientColors);
-      uniforms.uColorCount.value = count;
-      for (let i = 0; i < MAX_COLORS; i++)
-        uniforms[`uColor${i}`].value = arr[i];
+      uColorCount.value = count;
+      for (const [i, colorUniform] of colorUniforms.entries()) {
+        const color = arr[i];
+        if (color !== undefined) colorUniform.value = color;
+      }
       if (props.mouseDampening > 0) {
         if (!lastTime) lastTime = t;
         const dt = (t - lastTime) / 1000;
         lastTime = t;
         const tau = Math.max(1e-4, props.mouseDampening);
         const factor = Math.min(1, 1 - Math.exp(-dt / tau));
-        const cur = uniforms.iMouse.value as number[];
+        const cur = iMouse.value;
         cur[0] += (mouseTarget[0] - cur[0]) * factor;
         cur[1] += (mouseTarget[1] - cur[1]) * factor;
       }

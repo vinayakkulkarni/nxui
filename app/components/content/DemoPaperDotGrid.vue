@@ -1,7 +1,10 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperDotGrid from '@registry/new-york/paper-dot-grid/PaperDotGrid.vue';
+  import type { PaperDotGridShape } from '@registry/new-york/paper-dot-grid/types';
   import type { Pane } from 'tweakpane';
+
+  const initialShape: PaperDotGridShape = 'circle';
 
   const params = reactive({
     colorBack: '#000000',
@@ -10,7 +13,7 @@
     size: 2,
     gapX: 32,
     gapY: 32,
-    shape: 'circle',
+    shape: initialShape,
   });
 
   function onPaneCreated(pane: Pane) {

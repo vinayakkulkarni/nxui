@@ -62,6 +62,7 @@
 
     for (let i = pixels.length - 1; i >= 0; i--) {
       const pixel = pixels[i];
+      if (!pixel) continue;
       const age = now - pixel.birth;
       if (age > fadeDuration) {
         pixels.splice(i, 1);
