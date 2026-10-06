@@ -205,6 +205,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Profile Card', path: '/docs/components/profile-card' },
       {
+        title: 'Progress Stepper',
+        path: '/docs/components/progress-stepper',
+        badge: 'new',
+      },
+      {
         title: 'Receipt Printer',
         path: '/docs/components/receipt-printer',
       },

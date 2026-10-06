@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (254)
+## Components (255)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 256 items total, of which these 254 are
+> on — so `npx shadcn-vue add` resolves 257 items total, of which these 255 are
 > user-facing components.
 
 ### Text Animations (33)
@@ -147,7 +147,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
 
-### Components (82)
+### Components (83)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -215,6 +215,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [PlayStation Navbar](https://nxui.geoql.in/docs/components/playstation-navbar)       | XMB-style cross-media navigation with a sliding category rail, glowing pill cursor, and full arrow-key control.                                                        |
 | [Podcast Player](https://nxui.geoql.in/docs/components/podcast-player)               | Expandable podcast episode card driving a real audio element — waveform seek with hover scrubber, chapters, speed cycling, volume, and a compact pill mode.            |
 | [Profile Card](https://nxui.geoql.in/docs/components/profile-card)                   | Holographic tilt card with pointer-tracking 3D transforms, rainbow shine effects, and avatar parallax.                                                                 |
+| [Progress Stepper](https://nxui.geoql.in/docs/components/progress-stepper)           | A vertical process timeline with a single rail, spinning in-progress markers, drawn-in checks and nested sub-steps that unfold under the active step.                  |
 | [Receipt Printer](https://nxui.geoql.in/docs/components/receipt-printer)             | A checkout state that turns payment processing into a printed order receipt — stepped paper feed, status screen, serrated paper tear.                                  |
 | [Reflective Card](https://nxui.geoql.in/docs/components/reflective-card)             | Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.                                                                      |
 | [Ripple Transition](https://nxui.geoql.in/docs/components/ripple-transition)         | WebGL image transitions with noisy refractive waves, chromatic edges, glow, and click-triggered ripple origins.                                                        |
