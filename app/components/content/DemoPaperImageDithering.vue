@@ -40,7 +40,11 @@
         :type="params.type"
         :color-steps="params.colorSteps"
       />
-      <ShaderPane title="Image Dithering" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Image Dithering"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

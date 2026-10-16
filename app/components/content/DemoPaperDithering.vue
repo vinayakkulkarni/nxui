@@ -68,7 +68,7 @@
         :size="params.size"
         :speed="params.speed"
       />
-      <ShaderPane title="Dithering" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Dithering" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

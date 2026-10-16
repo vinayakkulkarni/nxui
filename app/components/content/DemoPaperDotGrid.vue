@@ -62,7 +62,7 @@
         :gap-y="params.gapY"
         :shape="params.shape"
       />
-      <ShaderPane title="Dot Grid" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Dot Grid" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

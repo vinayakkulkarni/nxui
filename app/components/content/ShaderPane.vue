@@ -4,11 +4,17 @@
   // on-pane-created and adds bindings against its reactive params.
   import { VTweakpane } from 'v-tweakpane';
   import 'v-tweakpane/dist/index.css';
+  import { useMediaQuery } from '@vueuse/core';
   import type { Pane } from 'tweakpane';
 
-  defineProps<{
-    title: string;
-  }>();
+  const props = withDefaults(
+    defineProps<{
+      title: string;
+      /** Open on load. Folded panes keep the demo in view; the title bar opens them. */
+      expanded?: boolean;
+    }>(),
+    { expanded: false },
+  );
 
   const emit = defineEmits<{
     'on-pane-created': [pane: Pane];
@@ -21,6 +27,9 @@
     return key.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
   }
 
+  // On phones the open pane covers the demo, so it starts folded there.
+  const wide = useMediaQuery('(min-width: 640px)');
+
   function onPaneCreated(pane: Pane) {
     type AddBinding = typeof pane.addBinding;
     const original = pane.addBinding.bind(pane) as AddBinding;
@@ -30,13 +39,14 @@
       opts?: Record<string, unknown>,
     ) =>
       original(obj, key, { label: toKebabCase(key), ...opts })) as AddBinding;
+    pane.expanded = props.expanded && wide.value;
     emit('on-pane-created', pane);
   }
 </script>
 
 <template>
   <div
-    class="absolute top-16 right-3 z-10 max-h-[calc(100%-5rem)] w-64 overflow-y-auto opacity-90 transition-opacity hover:opacity-100"
+    class="absolute top-16 right-3 z-10 max-h-[calc(100%-5rem)] w-48 sm:w-64 overflow-y-auto opacity-90 transition-opacity hover:opacity-100"
   >
     <ClientOnly>
       <VTweakpane

@@ -69,7 +69,11 @@
         :seed="params.seed"
         :speed="params.speed"
       />
-      <ShaderPane title="Paper Texture" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Paper Texture"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

@@ -59,7 +59,11 @@
         :scale="0.6"
         :speed="params.speed"
       />
-      <ShaderPane title="Simplex Noise" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Simplex Noise"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

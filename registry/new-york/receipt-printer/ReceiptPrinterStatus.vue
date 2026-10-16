@@ -100,7 +100,7 @@
             y: context.shouldMove ? -4 : 0,
           }"
           :transition="{ duration: context.animate ? 0.18 : 0, ease: EASE_OUT }"
-          class="col-start-1 row-start-1 truncate text-xs leading-none font-medium text-zinc-500 dark:text-zinc-400"
+          class="col-start-1 row-start-1 truncate text-xs/none font-medium text-zinc-500 dark:text-zinc-400"
         >
           {{ props.label ?? STATUS_LABELS[context.stage] }}
         </component>

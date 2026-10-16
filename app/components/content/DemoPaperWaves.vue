@@ -55,7 +55,7 @@
         :proportion="params.proportion"
         :softness="params.softness"
       />
-      <ShaderPane title="Waves" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Waves" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

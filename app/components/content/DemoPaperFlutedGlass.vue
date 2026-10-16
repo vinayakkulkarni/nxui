@@ -40,7 +40,11 @@
         :distortion="params.distortion"
         :shape="params.shape"
       />
-      <ShaderPane title="Fluted Glass" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Fluted Glass"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

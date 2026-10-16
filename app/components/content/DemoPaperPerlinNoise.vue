@@ -47,7 +47,11 @@
         :octave-count="params.octaveCount"
         :speed="params.speed"
       />
-      <ShaderPane title="Perlin Noise" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Perlin Noise"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

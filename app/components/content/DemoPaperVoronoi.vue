@@ -57,7 +57,7 @@
         :glow="params.glow"
         :speed="params.speed"
       />
-      <ShaderPane title="Voronoi" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Voronoi" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

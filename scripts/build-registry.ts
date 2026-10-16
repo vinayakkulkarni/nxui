@@ -1626,6 +1626,348 @@ const COMPONENTS: Record<
       'A two-ring donut: solid category slices inside, patterned cause segments outside, a hover-driven center label, a pinnable legend and a computed insight.',
     deps: [],
   },
+  'accordion-gallery': {
+    title: 'Accordion Gallery',
+    description:
+      'Image panels that expand on hover, click or focus, with 3D tilt, parallax images and a staggered caption.',
+    deps: ['@vueuse/core'],
+  },
+  'bell-toggle': {
+    title: 'Bell Toggle',
+    description:
+      'Pill toggle where a press rings the bell, crossfades the label and unfurls the pill.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'branched-menu': {
+    title: 'Branched Menu',
+    description:
+      'Collapsible menu that branches each section from a trunk and traces a line to your pick.',
+    deps: ['@vueuse/core'],
+  },
+  'call-chip': {
+    title: 'Call Chip',
+    description:
+      'Tool-call chip whose fill wipes across as a live timer ticks, ending green or shaking red.',
+    deps: ['@vueuse/core'],
+  },
+  'circular-carousel': {
+    title: 'Circular Carousel',
+    description:
+      'A 3D ring of images with bendable cards, momentum drag, snapping and click to focus.',
+    deps: ['@vueuse/core'],
+  },
+  'code-slots': {
+    title: 'Code Slots',
+    description:
+      'One-time code input whose digits spring into their slots, with paste and SMS autofill, error drain and success wash.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'comet-dial': {
+    title: 'Comet Dial',
+    description:
+      'Circular dial you set by angle, with a comet trail that streaks behind the head when it moves fast and flick momentum.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'crystalized-ball': {
+    title: 'Crystalized Ball',
+    description:
+      'A WebGL glass ball with a crackling electric rim and glowing dust that swirls with the cursor.',
+    deps: ['@vueuse/core', 'ogl'],
+  },
+  'depth-carousel': {
+    title: 'Depth Carousel',
+    description:
+      'Image carousel whose cards recede along a tilted 3D rail, with drag, wheel, keyboard, dot and auto-advance navigation.',
+    deps: ['@vueuse/core'],
+  },
+  'depth-text': {
+    title: 'Depth Text',
+    description:
+      'Display type extruded from stacked layers in 3D that tilts toward the pointer, orbits when idle, and presses in on hover.',
+    deps: ['@vueuse/core'],
+  },
+  'dodge-field': {
+    title: 'Dodge Field',
+    description:
+      'Wrapper that makes any child dodge the pointer until it relents and glides home.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'drift-wall': {
+    title: 'Drift Wall',
+    description:
+      'An endless 3D wall of image tiles drifting in alternating columns, lifting a tile toward you on hover or focus.',
+    deps: ['@vueuse/core'],
+  },
+  'echo-text': {
+    title: 'Echo Text',
+    description:
+      'Tinted, blurred copies trail behind the text and settle into one word, following the cursor, drifting, or scrolling, with click bursts.',
+    deps: ['@vueuse/core'],
+  },
+  'elastic-mesh': {
+    title: 'Elastic Mesh',
+    description:
+      'Turns text or a logo into a puffy inflated WebGL2 shape you can press, poke and stretch like jelly.',
+    deps: ['@vueuse/core'],
+  },
+  'flex-carousel': {
+    title: 'Flex Carousel',
+    description:
+      'An infinite WebGL image row that bends, twists and splits into rainbow light where it crosses an invisible glass lens.',
+    deps: ['ogl'],
+  },
+  'flip-card': {
+    title: 'Flip Card',
+    description:
+      'Two-faced card that flips in 3D on a click, drag or flick and settles on a spring.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'flying-button': {
+    title: 'Flying Button',
+    description:
+      'A button that fires thrusters on hover, lifts off on a WebGL2 smoke plume, can be dragged in flight and lands in its own cloud.',
+    deps: ['@vueuse/core'],
+  },
+  'fold-text': {
+    title: 'Fold Text',
+    description:
+      'Text that unfolds piece by piece from a hinge edge like creased paper, with blinds and flip styles and a pointer refold.',
+    deps: ['@vueuse/core'],
+  },
+  'folder-float': {
+    title: 'Folder Float',
+    description:
+      'Folder whose notes spring out into a floating cloud on hover or press; once landed they drift and can be dragged and thrown.',
+    deps: ['@vueuse/core', 'matter-js'],
+  },
+  'fuse-button': {
+    title: 'Fuse Button',
+    description:
+      'Action button that turns into an Undo while a fuse burns around the pill; hover pauses it and Escape cancels.',
+    deps: ['@vueuse/core'],
+  },
+  'glide-select': {
+    title: 'Glide Select',
+    description:
+      'Select chip whose menu pops from its corner and whose highlight glides between rows.',
+    deps: ['@vueuse/core'],
+  },
+  'hold-button': {
+    title: 'Hold Button',
+    description:
+      'Hold-to-confirm button whose liquid fill with a wave crest sweeps across while pressed and snaps back if you let go.',
+    deps: ['@vueuse/core'],
+  },
+  'holo-card': {
+    title: 'Holo Card',
+    description:
+      'Trading card with a WebGL holographic foil, glittering border and pointer tilt. Optional back face flips on click.',
+    deps: ['@vueuse/core'],
+  },
+  'infinite-spiral': {
+    title: 'Infinite Spiral',
+    description:
+      'An endlessly looping 3D helix of image cards that plays by itself, follows a drag or follows page scroll.',
+    deps: ['@vueuse/core'],
+  },
+  'jelly-radio': {
+    title: 'Jelly Radio',
+    description:
+      'Radio group of chips where the chosen one swells and barges its neighbours outward.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'lattice-loader': {
+    title: 'Lattice Loader',
+    description:
+      'Agent status row with a lattice of cells that brighten in a wave beside a live stopwatch.',
+    deps: [],
+  },
+  'masked-heading': {
+    title: 'Masked Heading',
+    description:
+      'A heading whose letters show an image or looping video, with rise, scale, blur, wipe or fade entrances, pointer parallax and a spotlight.',
+    deps: ['@vueuse/core'],
+  },
+  'morph-slider': {
+    title: 'Morph Slider',
+    description:
+      'WebGL image slider that melts, ripples, shears or swirls between slides, with drag scrubbing, autoplay, captions and dots.',
+    deps: ['@vueuse/core', 'ogl'],
+  },
+  'option-wheel': {
+    title: 'Option Wheel',
+    description:
+      'Curved option picker that spins with scroll, drag or arrow keys, tilting items away.',
+    deps: ['@vueuse/core'],
+  },
+  'paper-crumple': {
+    title: 'Paper Crumple',
+    description:
+      'An image on a 3D paper sheet that crumples into a ball while you hold it, follows the pointer as you drag, and unfolds on release.',
+    deps: ['@vueuse/core', 'three'],
+  },
+  'particle-text': {
+    title: 'Particle Text',
+    description:
+      'Canvas text built from particles that gather, rain, spiral or scan into place, repel from the cursor and burst on click.',
+    deps: ['@vueuse/core'],
+  },
+  'peek-rating': {
+    title: 'Peek Rating',
+    description:
+      'Star rating that lifts a wave of stars up to the pointer, then commits with a pop on click.',
+    deps: ['@vueuse/core'],
+  },
+  'prompt-bar': {
+    title: 'Prompt Bar',
+    description:
+      'Chat composer with @ sources, / commands, a model picker, an effort slider, dictation and attachment chips.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'pulse-heart': {
+    title: 'Pulse Heart',
+    description:
+      'Like button whose glyph contracts to a dot, flips colour and swells back while the pill beats and the count rolls over.',
+    deps: ['@vueuse/core'],
+  },
+  'refine-frame': {
+    title: 'Refine Frame',
+    description:
+      'Media frame that steps an image through generation stages, from a coarse mosaic to sharp, without any layout shift.',
+    deps: ['@vueuse/core'],
+  },
+  'rubber-segment': {
+    title: 'Rubber Segment',
+    description:
+      'Segmented control whose rubber thumb stretches across the gap and squashes into place.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'scrub-field': {
+    title: 'Scrub Field',
+    description:
+      'Number chip you drag to scrub, with rubber-band limits and click to type.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  shredder: {
+    title: 'Shredder',
+    description:
+      'A list with a paper shredder at the bottom that cuts dragged rows into curling strips.',
+    deps: ['@vueuse/core'],
+  },
+  'slide-commit': {
+    title: 'Slide Commit',
+    description:
+      'Slide-to-confirm handle that spins while your action runs, then unfurls into a done pill or shakes back on failure.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'sling-button': {
+    title: 'Sling Button',
+    description:
+      'Send button you pull back like a slingshot and release to fire, with a stretching band, a power arc and a particle burst.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'slosh-gauge': {
+    title: 'Slosh Gauge',
+    description:
+      'Tank gauge whose liquid chases the value on a spring, tilts as it moves and splashes when it fills.',
+    deps: ['@vueuse/core'],
+  },
+  'specular-button': {
+    title: 'Specular Button',
+    description:
+      'Glass button with a WebGL2 rim light that rests on a corner, glides around the edge toward the cursor and flashes on press.',
+    deps: ['@vueuse/core'],
+  },
+  'split-flap-text': {
+    title: 'Split Flap Text',
+    description:
+      'A split-flap departure board whose tiles flip through random glyphs, one flap at a time, to show each new phrase.',
+    deps: ['@vueuse/core'],
+  },
+  'spring-check': {
+    title: 'Spring Check',
+    description:
+      'A checkbox row where one spring fills the box, draws the tick and strikes through the label.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'squish-switch': {
+    title: 'Squish Switch',
+    description:
+      'Switch whose thumb stretches with speed and squashes against the end when you flick it.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'status-mark': {
+    title: 'Status Mark',
+    description:
+      'Agent task status glyph that morphs from an idle ring to a progress arc, then a check.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'stroke-text': {
+    title: 'Stroke Text',
+    description:
+      'SVG letter outlines draw themselves on one by one, then fill by wipe or fade, with dashed or dotted marching outlines and a lifted shadow.',
+    deps: ['@vueuse/core'],
+  },
+  'swipe-row': {
+    title: 'Swipe Row',
+    description:
+      'List row you swipe to reveal a drawer of actions; a full swipe leaps the delete block across and folds the row away.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'swipe-toast': {
+    title: 'Swipe Toast',
+    description:
+      'Toast that swipes down to dismiss and burns a thin fuse along its edge for the time it has left.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'tear-ticket': {
+    title: 'Tear Ticket',
+    description:
+      'A ticket whose perforated stub tears off by hand, fibre by fibre, then drops away and leaves a greyed, used ticket.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'tech-text': {
+    title: 'Tech Text',
+    description:
+      'A canvas wordmark whose letters turn into dashed vector outlines under the cursor, with draggable spring letters and click ripples.',
+    deps: ['@vueuse/core'],
+  },
+  'text-loop': {
+    title: 'Text Loop',
+    description:
+      'A seamless text marquee along a curved SVG path, with a crossing band, hover pause, drag-to-fling and scroll boost.',
+    deps: ['@vueuse/core'],
+  },
+  'thought-line': {
+    title: 'Thought Line',
+    description:
+      'Reasoning trace header with a breathing glyph and live clock that folds its steps into one line when the work settles.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'voice-pill': {
+    title: 'Voice Pill',
+    description:
+      'Mic button that opens into a capsule with a scrolling waveform and a timer while recording; tap to latch, hold to talk, slide left to cancel.',
+    deps: ['@vueuse/core'],
+  },
+  'wake-slider': {
+    title: 'Wake Slider',
+    description:
+      'Thumbless range slider of thin bars where drag speed raises a wake behind the handle.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'warm-tooltip': {
+    title: 'Warm Tooltip',
+    description:
+      'A tooltip group where the first label waits, then siblings open instantly and the label glides between triggers while warm.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'warp-text': {
+    title: 'Warp Text',
+    description:
+      'WebGL glass warp that bends and refracts text around the pointer, with bulge, pinch or swirl lenses and click shockwaves.',
+    deps: ['@vueuse/core', 'ogl'],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:

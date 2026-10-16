@@ -55,6 +55,7 @@
         :rotation="270"
       />
       <ShaderPane
+        expanded
         title="Static Mesh Gradient"
         @on-pane-created="onPaneCreated"
       />

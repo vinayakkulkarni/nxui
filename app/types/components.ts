@@ -7,6 +7,12 @@ import type {
   NodeCanvasEdge,
   NodeCanvasNode,
 } from '@registry/new-york/node-canvas/types';
+import type {
+  SplitFlapAlign,
+  SplitFlapCharset,
+  SplitFlapOrder,
+  SplitFlapTileStyle,
+} from '@registry/new-york/split-flap-text/types';
 
 export * from '@registry/new-york/animated-gradient/types';
 export * from '@registry/new-york/auth-modal/types';
@@ -147,4 +153,25 @@ export interface DemoCanvasBoardOptions {
   notes?: Record<string, string>;
   views?: Record<string, DemoCanvasView>;
   selected?: string | null;
+}
+
+/** Tunable look of the split-flap-text demo (the ShaderPane params). */
+export interface DemoSplitFlapLook {
+  phraseSet: string;
+  charset: SplitFlapCharset;
+  align: SplitFlapAlign;
+  tileColor: string;
+  textColor: string;
+  flipDuration: number;
+  stagger: number;
+  cycleDelay: number;
+  flipsPerChar: number;
+  padTo: number;
+  fontSize: number;
+  tileRadius: number;
+  gap: number;
+  order: SplitFlapOrder;
+  tileStyle: SplitFlapTileStyle;
+  glare: number;
+  depth: number;
 }

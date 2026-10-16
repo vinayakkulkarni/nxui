@@ -69,7 +69,11 @@
         :grid="params.grid"
         :type="params.type"
       />
-      <ShaderPane title="Halftone Dots" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Halftone Dots"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

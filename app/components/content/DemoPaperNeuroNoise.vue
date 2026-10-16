@@ -49,7 +49,11 @@
         :contrast="params.contrast"
         :scale="3"
       />
-      <ShaderPane title="Neuro Noise" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Neuro Noise"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

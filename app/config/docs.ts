@@ -22,10 +22,25 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/depth-dive',
       },
       {
+        title: 'Depth Text',
+        path: '/docs/text-animations/depth-text',
+        badge: 'new',
+      },
+      {
+        title: 'Echo Text',
+        path: '/docs/text-animations/echo-text',
+        badge: 'new',
+      },
+      {
         title: 'Editorial Orbs',
         path: '/docs/text-animations/editorial-orbs',
       },
       { title: 'Falling Text', path: '/docs/text-animations/falling-text' },
+      {
+        title: 'Fold Text',
+        path: '/docs/text-animations/fold-text',
+        badge: 'new',
+      },
       { title: 'Fuzzy Text', path: '/docs/text-animations/fuzzy-text' },
       { title: 'Glitch Text', path: '/docs/text-animations/glitch-text' },
       { title: 'Gradient Text', path: '/docs/text-animations/gradient-text' },
@@ -35,6 +50,16 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/kinetic-text-reveal',
       },
       { title: 'Logo Loop', path: '/docs/text-animations/logo-loop' },
+      {
+        title: 'Masked Heading',
+        path: '/docs/text-animations/masked-heading',
+        badge: 'new',
+      },
+      {
+        title: 'Particle Text',
+        path: '/docs/text-animations/particle-text',
+        badge: 'new',
+      },
       { title: 'Rotating Text', path: '/docs/text-animations/rotating-text' },
       { title: 'Scrambled Text', path: '/docs/text-animations/scrambled-text' },
       {
@@ -45,9 +70,29 @@ export const docsNav: NavGroup[] = [
       { title: 'Scroll Reveal', path: '/docs/text-animations/scroll-reveal' },
       { title: 'Shiny Text', path: '/docs/text-animations/shiny-text' },
       { title: 'Shuffle', path: '/docs/text-animations/shuffle' },
+      {
+        title: 'Split Flap Text',
+        path: '/docs/text-animations/split-flap-text',
+        badge: 'new',
+      },
       { title: 'Split Text', path: '/docs/text-animations/split-text' },
+      {
+        title: 'Stroke Text',
+        path: '/docs/text-animations/stroke-text',
+        badge: 'new',
+      },
+      {
+        title: 'Tech Text',
+        path: '/docs/text-animations/tech-text',
+        badge: 'new',
+      },
       { title: 'Text Animate', path: '/docs/text-animations/text-animate' },
       { title: 'Text Cursor', path: '/docs/text-animations/text-cursor' },
+      {
+        title: 'Text Loop',
+        path: '/docs/text-animations/text-loop',
+        badge: 'new',
+      },
       { title: 'Text Pressure', path: '/docs/text-animations/text-pressure' },
       { title: 'Text String', path: '/docs/text-animations/text-string' },
       { title: 'Text Type', path: '/docs/text-animations/text-type' },
@@ -60,11 +105,201 @@ export const docsNav: NavGroup[] = [
         title: 'Variable Proximity',
         path: '/docs/text-animations/variable-proximity',
       },
+      {
+        title: 'Warp Text',
+        path: '/docs/text-animations/warp-text',
+        badge: 'new',
+      },
+    ],
+  },
+  {
+    title: 'Micro',
+    items: [
+      {
+        title: 'Bell Toggle',
+        path: '/docs/micro/bell-toggle',
+        badge: 'new',
+      },
+      {
+        title: 'Branched Menu',
+        path: '/docs/micro/branched-menu',
+        badge: 'new',
+      },
+      {
+        title: 'Call Chip',
+        path: '/docs/micro/call-chip',
+        badge: 'new',
+      },
+      {
+        title: 'Code Slots',
+        path: '/docs/micro/code-slots',
+        badge: 'new',
+      },
+      {
+        title: 'Comet Dial',
+        path: '/docs/micro/comet-dial',
+        badge: 'new',
+      },
+      {
+        title: 'Dodge Field',
+        path: '/docs/micro/dodge-field',
+        badge: 'new',
+      },
+      {
+        title: 'Flip Card',
+        path: '/docs/micro/flip-card',
+        badge: 'new',
+      },
+      {
+        title: 'Flying Button',
+        path: '/docs/micro/flying-button',
+        badge: 'new',
+      },
+      {
+        title: 'Folder Float',
+        path: '/docs/micro/folder-float',
+        badge: 'new',
+      },
+      {
+        title: 'Fuse Button',
+        path: '/docs/micro/fuse-button',
+        badge: 'new',
+      },
+      {
+        title: 'Glide Select',
+        path: '/docs/micro/glide-select',
+        badge: 'new',
+      },
+      {
+        title: 'Hold Button',
+        path: '/docs/micro/hold-button',
+        badge: 'new',
+      },
+      {
+        title: 'Jelly Radio',
+        path: '/docs/micro/jelly-radio',
+        badge: 'new',
+      },
+      {
+        title: 'Lattice Loader',
+        path: '/docs/micro/lattice-loader',
+        badge: 'new',
+      },
+      {
+        title: 'Paper Crumple',
+        path: '/docs/micro/paper-crumple',
+        badge: 'new',
+      },
+      {
+        title: 'Peek Rating',
+        path: '/docs/micro/peek-rating',
+        badge: 'new',
+      },
+      {
+        title: 'Prompt Bar',
+        path: '/docs/micro/prompt-bar',
+        badge: 'new',
+      },
+      {
+        title: 'Pulse Heart',
+        path: '/docs/micro/pulse-heart',
+        badge: 'new',
+      },
+      {
+        title: 'Refine Frame',
+        path: '/docs/micro/refine-frame',
+        badge: 'new',
+      },
+      {
+        title: 'Rubber Segment',
+        path: '/docs/micro/rubber-segment',
+        badge: 'new',
+      },
+      {
+        title: 'Scrub Field',
+        path: '/docs/micro/scrub-field',
+        badge: 'new',
+      },
+      {
+        title: 'Shredder',
+        path: '/docs/micro/shredder',
+        badge: 'new',
+      },
+      {
+        title: 'Slide Commit',
+        path: '/docs/micro/slide-commit',
+        badge: 'new',
+      },
+      {
+        title: 'Sling Button',
+        path: '/docs/micro/sling-button',
+        badge: 'new',
+      },
+      {
+        title: 'Slosh Gauge',
+        path: '/docs/micro/slosh-gauge',
+        badge: 'new',
+      },
+      {
+        title: 'Spring Check',
+        path: '/docs/micro/spring-check',
+        badge: 'new',
+      },
+      {
+        title: 'Squish Switch',
+        path: '/docs/micro/squish-switch',
+        badge: 'new',
+      },
+      {
+        title: 'Status Mark',
+        path: '/docs/micro/status-mark',
+        badge: 'new',
+      },
+      {
+        title: 'Swipe Row',
+        path: '/docs/micro/swipe-row',
+        badge: 'new',
+      },
+      {
+        title: 'Swipe Toast',
+        path: '/docs/micro/swipe-toast',
+        badge: 'new',
+      },
+      {
+        title: 'Tear Ticket',
+        path: '/docs/micro/tear-ticket',
+        badge: 'new',
+      },
+      {
+        title: 'Thought Line',
+        path: '/docs/micro/thought-line',
+        badge: 'new',
+      },
+      {
+        title: 'Voice Pill',
+        path: '/docs/micro/voice-pill',
+        badge: 'new',
+      },
+      {
+        title: 'Wake Slider',
+        path: '/docs/micro/wake-slider',
+        badge: 'new',
+      },
+      {
+        title: 'Warm Tooltip',
+        path: '/docs/micro/warm-tooltip',
+        badge: 'new',
+      },
     ],
   },
   {
     title: 'Components',
     items: [
+      {
+        title: 'Accordion Gallery',
+        path: '/docs/components/accordion-gallery',
+        badge: 'new',
+      },
       { title: 'Animated List', path: '/docs/components/animated-list' },
       {
         title: 'Animated TOC',
@@ -108,6 +343,11 @@ export const docsNav: NavGroup[] = [
         title: 'Circle Input',
         path: '/docs/components/circle-input',
       },
+      {
+        title: 'Circular Carousel',
+        path: '/docs/components/circular-carousel',
+        badge: 'new',
+      },
       { title: 'Circular Gallery', path: '/docs/components/circular-gallery' },
       {
         title: 'Collection Surfer',
@@ -129,6 +369,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Decay Card', path: '/docs/components/decay-card' },
       {
+        title: 'Depth Carousel',
+        path: '/docs/components/depth-carousel',
+        badge: 'new',
+      },
+      {
         title: 'Dithered Logo',
         path: '/docs/components/dithered-logo',
       },
@@ -139,11 +384,21 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/drag-reorder-list',
       },
       {
+        title: 'Drift Wall',
+        path: '/docs/components/drift-wall',
+        badge: 'new',
+      },
+      {
         title: 'Dynamic Island Header',
         path: '/docs/components/dynamic-island-header',
       },
       { title: 'Elastic Slider', path: '/docs/components/elastic-slider' },
       { title: 'Eye Tracking', path: '/docs/components/eye-tracking' },
+      {
+        title: 'Flex Carousel',
+        path: '/docs/components/flex-carousel',
+        badge: 'new',
+      },
       {
         title: 'Flight Status Card',
         path: '/docs/components/flight-status-card',
@@ -165,6 +420,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Gooey Nav', path: '/docs/components/gooey-nav' },
       {
+        title: 'Holo Card',
+        path: '/docs/components/holo-card',
+        badge: 'new',
+      },
+      {
         title: 'Holo Sticker',
         path: '/docs/components/holo-sticker',
       },
@@ -173,6 +433,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/holo-cloth',
       },
       { title: 'Infinite Menu', path: '/docs/components/infinite-menu' },
+      {
+        title: 'Infinite Spiral',
+        path: '/docs/components/infinite-spiral',
+        badge: 'new',
+      },
       { title: 'Lanyard', path: '/docs/components/lanyard' },
       { title: 'Layered Stack', path: '/docs/components/layered-stack' },
       {
@@ -188,6 +453,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
       { title: 'Masonry', path: '/docs/components/masonry' },
       { title: 'Model Viewer', path: '/docs/components/model-viewer' },
+      {
+        title: 'Morph Slider',
+        path: '/docs/components/morph-slider',
+        badge: 'new',
+      },
       { title: 'Music Player', path: '/docs/components/music-player' },
       {
         title: 'Node Canvas',
@@ -202,6 +472,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Notification Center',
         path: '/docs/components/notification-center',
+      },
+      {
+        title: 'Option Wheel',
+        path: '/docs/components/option-wheel',
+        badge: 'new',
       },
       {
         title: 'Orbit Card Stack',
@@ -248,6 +523,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Signature Eraser',
         path: '/docs/components/signature-eraser',
+      },
+      {
+        title: 'Specular Button',
+        path: '/docs/components/specular-button',
+        badge: 'new',
       },
       {
         title: 'Split Flap Display',
@@ -418,7 +698,17 @@ export const docsNav: NavGroup[] = [
       { title: 'Blob Cursor', path: '/docs/animations/blob-cursor' },
       { title: 'Click Spark', path: '/docs/animations/click-spark' },
       { title: 'Crosshair', path: '/docs/animations/crosshair' },
+      {
+        title: 'Crystalized Ball',
+        path: '/docs/animations/crystalized-ball',
+        badge: 'new',
+      },
       { title: 'Cubes', path: '/docs/animations/cubes' },
+      {
+        title: 'Elastic Mesh',
+        path: '/docs/animations/elastic-mesh',
+        badge: 'new',
+      },
       { title: 'Electric Border', path: '/docs/animations/electric-border' },
       { title: 'Fade Content', path: '/docs/animations/fade-content' },
       { title: 'Ghost Cursor', path: '/docs/animations/ghost-cursor' },
