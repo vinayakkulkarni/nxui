@@ -92,7 +92,11 @@
   // Left/Right move between the three buttons, as in an ARIA toolbar.
   function onToolbarKey(event: KeyboardEvent): void {
     if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-    const buttons = [viewTrigger.value, expandBtn.value, moreTrigger.value];
+    const buttons = [
+      viewTrigger.value,
+      expandBtn.value,
+      moreTrigger.value,
+    ].filter((el): el is HTMLButtonElement => el !== null);
     const index = buttons.findIndex((el) => el === event.target);
     if (index < 0) return;
     event.preventDefault();
@@ -116,7 +120,7 @@
     ]"
     @keydown="onToolbarKey"
   >
-    <div class="relative">
+    <div v-if="props.views.length" class="relative">
       <button
         ref="viewTrigger"
         type="button"

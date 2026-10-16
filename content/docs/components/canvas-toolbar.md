@@ -59,15 +59,15 @@ The defaults match the demo: tools `source`, `select`, `note` and `frame`; views
 
 ## CanvasSelectionToolbar props
 
-| Prop           | Type                 | Default                  | Description                                          |
-| -------------- | -------------------- | ------------------------ | ---------------------------------------------------- |
-| `v-model:view` | `string`             | `''`                     | `id` of the current view. Falls back to the first.   |
-| `views`        | `CanvasViewOption[]` | `DEFAULT_CANVAS_VIEWS`   | Options in the view menu.                            |
-| `actions`      | `CanvasMenuAction[]` | `DEFAULT_CANVAS_ACTIONS` | Items in the "more" menu. Set `destructive` for red. |
-| `expand-label` | `string`             | `'Open in full view'`    | Accessible name of the arrow button.                 |
-| `more-label`   | `string`             | `'More actions'`         | Accessible name of the dots button.                  |
-| `label`        | `string`             | `'Selection'`            | Accessible name of the toolbar.                      |
-| `class`        | `string`             | `''`                     | Extra classes for the root element.                  |
+| Prop           | Type                 | Default                  | Description                                                |
+| -------------- | -------------------- | ------------------------ | ---------------------------------------------------------- |
+| `v-model:view` | `string`             | `''`                     | `id` of the current view. Falls back to the first.         |
+| `views`        | `CanvasViewOption[]` | `DEFAULT_CANVAS_VIEWS`   | Options in the view menu. Pass `[]` to hide the view pill. |
+| `actions`      | `CanvasMenuAction[]` | `DEFAULT_CANVAS_ACTIONS` | Items in the "more" menu. Set `destructive` for red.       |
+| `expand-label` | `string`             | `'Open in full view'`    | Accessible name of the arrow button.                       |
+| `more-label`   | `string`             | `'More actions'`         | Accessible name of the dots button.                        |
+| `label`        | `string`             | `'Selection'`            | Accessible name of the toolbar.                            |
+| `class`        | `string`             | `''`                     | Extra classes for the root element.                        |
 
 ## Events
 
