@@ -1,2 +1,9 @@
 export { default as ClickSpark } from './ClickSpark.vue';
-export type { Spark } from './types';
+export type {
+  ClickSparkEasing,
+  ClickSparkExposed,
+  ClickSparkLayer,
+  ClickSparkProps,
+  ClickSparkShape,
+  Spark,
+} from './types';

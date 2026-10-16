@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>321 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>333 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (321)
+## Components (333)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 323 items total, of which these 321 are
+> on — so `npx shadcn-vue add` resolves 335 items total, of which these 333 are
 > user-facing components.
 
 ### Text Animations (44)
@@ -102,7 +102,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Hyper Text](https://nxui.geoql.in/docs/text-animations/hyper-text)                                               | A text component that scrambles letters before revealing the final text on hover or load.                                                                                            |
 | [Kinetic Text Reveal](https://nxui.geoql.in/docs/text-animations/kinetic-text-reveal)                             | A kinetic text reveal that segments text into words, characters, or lines and animates each into place with configurable direction, stagger, and blur.                               |
 | [Letter Cascade](https://nxui.geoql.in/docs/text-animations/letter-cascade)                                       | A 3D split-flap letter animation with spring physics that cascades on hover or click.                                                                                                |
-| [Logo Loop](https://nxui.geoql.in/docs/text-animations/logo-loop)                                                 | Infinite scrolling logo marquee with smooth animation and fade edges.                                                                                                                |
+| [Logo Loop](https://nxui.geoql.in/docs/text-animations/logo-loop)                                                 | Draggable looping strip of logos with a soft edge fade, intro, wave, arc and 3D orbit paths, center lens, dock magnify and labels.                                                   |
 | [Masked Heading](https://nxui.geoql.in/docs/text-animations/masked-heading)                                       | A heading whose letters show an image or looping video, with rise, scale, blur, wipe or fade entrances, pointer parallax and a spotlight.                                            |
 | [Particle Text](https://nxui.geoql.in/docs/text-animations/particle-text)                                         | Canvas text built from particles that gather, rain, spiral or scan into place, repel from the cursor and burst on click.                                                             |
 | [Rotating Text](https://nxui.geoql.in/docs/text-animations/rotating-text)                                         | Cycle through an array of text phrases with staggered character enter and exit transitions.                                                                                          |
@@ -130,33 +130,33 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 
 ### Animations (25)
 
-| Component                                                                  | Description                                                                                                                        |
-| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| [Animated Content](https://nxui.geoql.in/docs/animations/animated-content) | Scroll-triggered entrance animation with configurable direction, distance, and easing.                                             |
-| [Blob Cursor](https://nxui.geoql.in/docs/animations/blob-cursor)           | Gooey blob cursor trail with SVG filter and configurable appearance.                                                               |
-| [Click Spark](https://nxui.geoql.in/docs/animations/click-spark)           | Click-triggered spark burst animation rendered on canvas.                                                                          |
-| [Crosshair](https://nxui.geoql.in/docs/animations/crosshair)               | Smooth crosshair cursor replacement with horizontal and vertical lines.                                                            |
-| [Crystalized Ball](https://nxui.geoql.in/docs/animations/crystalized-ball) | A WebGL glass ball with a crackling electric rim and glowing dust that swirls with the cursor.                                     |
-| [Cubes](https://nxui.geoql.in/docs/animations/cubes)                       | Interactive 3D CSS cube grid that tilts toward cursor with auto-animation.                                                         |
-| [Elastic Mesh](https://nxui.geoql.in/docs/animations/elastic-mesh)         | Turns text or a logo into a puffy inflated WebGL2 shape you can press, poke and stretch like jelly.                                |
-| [Electric Border](https://nxui.geoql.in/docs/animations/electric-border)   | Animated electric border with noise-driven distortion and glow effects.                                                            |
-| [Fade Content](https://nxui.geoql.in/docs/animations/fade-content)         | Scroll-triggered fade-in with optional blur effect.                                                                                |
-| [Ghost Cursor](https://nxui.geoql.in/docs/animations/ghost-cursor)         | Three.js-powered ghostly cursor trail with bloom, grain, and FBM noise effects.                                                    |
-| [Glare Hover](https://nxui.geoql.in/docs/animations/glare-hover)           | A glare sweep animation on hover with configurable angle, size, and color.                                                         |
-| [Gradual Blur](https://nxui.geoql.in/docs/animations/gradual-blur)         | Layered backdrop-filter blur gradient overlay for smooth edge fading.                                                              |
-| [Image Trail](https://nxui.geoql.in/docs/animations/image-trail)           | Mouse-following image trail that spawns images at cursor position with fade and scale animations.                                  |
-| [Magic Rings](https://nxui.geoql.in/docs/animations/magic-rings)           | Concentric animated rings with glow, parallax, and click burst effects.                                                            |
-| [Magnet](https://nxui.geoql.in/docs/animations/magnet)                     | Element that magnetically pulls toward the cursor when nearby.                                                                     |
-| [Meta Balls](https://nxui.geoql.in/docs/animations/meta-balls)             | WebGL 2 metaball shader with cursor-reactive ball and configurable colors.                                                         |
-| [Noise](https://nxui.geoql.in/docs/animations/noise)                       | An animated canvas noise grain overlay for adding texture to backgrounds and sections.                                             |
-| [Pixel Trail](https://nxui.geoql.in/docs/animations/pixel-trail)           | Mouse-following pixel trail with SVG gooey filter for a blobby, organic cursor effect.                                             |
-| [Pixel Transition](https://nxui.geoql.in/docs/animations/pixel-transition) | Pixelated grid transition that reveals a second content layer on hover.                                                            |
-| [Ribbons](https://nxui.geoql.in/docs/animations/ribbons)                   | Interactive OGL ribbon lines that follow mouse movement with spring physics.                                                       |
-| [Shape Blur](https://nxui.geoql.in/docs/animations/shape-blur)             | SDF shape with cursor-reactive blur distortion rendered via Three.js shaders.                                                      |
-| [Splash Cursor](https://nxui.geoql.in/docs/animations/splash-cursor)       | Full WebGL fluid simulation cursor effect with realistic ink-in-water dynamics.                                                    |
-| [Star Border](https://nxui.geoql.in/docs/animations/star-border)           | Animated glowing border effect with dual radial gradient beams.                                                                    |
-| [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction. |
-| [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking.                             |
+| Component                                                                  | Description                                                                                                                                    |
+| -------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Animated Content](https://nxui.geoql.in/docs/animations/animated-content) | Scroll-triggered entrance animation with configurable direction, distance, and easing.                                                         |
+| [Blob Cursor](https://nxui.geoql.in/docs/animations/blob-cursor)           | A 3D liquid blob cursor that stretches into a tail, drips and bursts into droplets on click, in chrome, jelly, pearl or ink.                   |
+| [Click Spark](https://nxui.geoql.in/docs/animations/click-spark)           | Bursts of sparks on every click, as dashes, comets, dots or stars, that can spill around buttons and fire from code.                           |
+| [Crosshair](https://nxui.geoql.in/docs/animations/crosshair)               | Crosshair cursor with live coordinates that locks onto links and buttons with measuring brackets and pulses on click.                          |
+| [Crystalized Ball](https://nxui.geoql.in/docs/animations/crystalized-ball) | A WebGL glass ball with a crackling electric rim and glowing dust that swirls with the cursor.                                                 |
+| [Cubes](https://nxui.geoql.in/docs/animations/cubes)                       | A grid of outlined 3D cubes that turn to face the cursor, spin when swept and ripple on click, drawn with instanced WebGL2.                    |
+| [Elastic Mesh](https://nxui.geoql.in/docs/animations/elastic-mesh)         | Turns text or a logo into a puffy inflated WebGL2 shape you can press, poke and stretch like jelly.                                            |
+| [Electric Border](https://nxui.geoql.in/docs/animations/electric-border)   | Wraps any element in crackling strands of current that surge near the cursor, jolt on click and leap off in sparks.                            |
+| [Fade Content](https://nxui.geoql.in/docs/animations/fade-content)         | Fades content in on scroll: plain, out of focus, from washed-out gray, or through grain, mist and pixel blocks, with stagger and scrub.        |
+| [Ghost Cursor](https://nxui.geoql.in/docs/animations/ghost-cursor)         | A ghost of glowing smoke that follows the cursor on a spring, curls as it rises and puffs on click, on raw WebGL2.                             |
+| [Glare Hover](https://nxui.geoql.in/docs/animations/glare-hover)           | A glossy light streak that sweeps across any element in the direction the cursor moves, with a glinting rim edge.                              |
+| [Gradual Blur](https://nxui.geoql.in/docs/animations/gradual-blur)         | Layered backdrop-filter blur gradient overlay for smooth edge fading.                                                                          |
+| [Image Trail](https://nxui.geoql.in/docs/animations/image-trail)           | Mouse-following image trail that spawns images at cursor position with fade and scale animations.                                              |
+| [Magic Rings](https://nxui.geoql.in/docs/animations/magic-rings)           | Concentric animated rings with glow, parallax, and click burst effects.                                                                        |
+| [Magnet](https://nxui.geoql.in/docs/animations/magnet)                     | Element that magnetically pulls toward the cursor when nearby.                                                                                 |
+| [Meta Balls](https://nxui.geoql.in/docs/animations/meta-balls)             | Liquid metaballs that merge, stretch and pinch apart, with a cursor blob that pushes through them and splashes on click.                       |
+| [Noise](https://nxui.geoql.in/docs/animations/noise)                       | An animated canvas noise grain overlay for adding texture to backgrounds and sections.                                                         |
+| [Pixel Trail](https://nxui.geoql.in/docs/animations/pixel-trail)           | Glossy WebGL2 pixels melt into a fluid goo trail behind the cursor, with color shifts, drips, sparkle, click bursts, dither and image reveals. |
+| [Pixel Transition](https://nxui.geoql.in/docs/animations/pixel-transition) | Retro pixel dissolve that covers a card in pixels, swaps to the second slot and clears again, with ripple, wipe and dither patterns.           |
+| [Ribbons](https://nxui.geoql.in/docs/animations/ribbons)                   | Springy WebGL2 ribbons that trail the cursor in lens, comet or even shapes, with optional wave, soft edges and tail fade.                      |
+| [Shape Blur](https://nxui.geoql.in/docs/animations/shape-blur)             | A crisp logo or shape that drifts out of focus under the pointer like a camera lens.                                                           |
+| [Splash Cursor](https://nxui.geoql.in/docs/animations/splash-cursor)       | A WebGL2 fluid simulation that trails the cursor in swirling ink and bursts into a splash on click.                                            |
+| [Star Border](https://nxui.geoql.in/docs/animations/star-border)           | A star that glides around the outline of a button, pill or card with a fading trail, hover laps and a click pulse.                             |
+| [Strands](https://nxui.geoql.in/docs/animations/strands)                   | Spectral strands that twist inside a frosted glass orb and swell into one bulge, reacting to voice level, the cursor and clicks.               |
+| [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)       | A spinning reticle cursor whose corner brackets snap around targets, follow their corner radius and show a label.                              |
 
 ### Micro (35)
 
@@ -272,7 +272,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Notification Center](https://nxui.geoql.in/docs/components/notification-center)     | Frosted notification panel with badged bell trigger, spring-animated rows that expand in place, and live relative timestamps.                                          |
 | [Option Wheel](https://nxui.geoql.in/docs/components/option-wheel)                   | Curved option picker that spins with scroll, drag or arrow keys, tilting items away.                                                                                   |
 | [Orbit Card Stack](https://nxui.geoql.in/docs/components/orbit-card-stack)           | A stacked deck of profile cards that fans out into an orbital arc on hover, lifting the active card with spring physics.                                               |
-| [Orbit Images](https://nxui.geoql.in/docs/components/orbit-images)                   | Images orbiting along customizable path shapes including ellipse, circle, star, heart, infinity, and more.                                                             |
+| [Orbit Images](https://nxui.geoql.in/docs/components/orbit-images)                   | Photos travel along an SVG path with depth, passing behind and in front of center content. Drag to spin, click to bring one forward.                                   |
 | [Pill Nav](https://nxui.geoql.in/docs/components/pill-nav)                           | Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu.                                                                             |
 | [Pixel Card](https://nxui.geoql.in/docs/components/pixel-card)                       | Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.                                                                                     |
 | [PlayStation Navbar](https://nxui.geoql.in/docs/components/playstation-navbar)       | XMB-style cross-media navigation with a sliding category rail, glowing pill cursor, and full arrow-key control.                                                        |
@@ -303,59 +303,71 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Visual Stepper](https://nxui.geoql.in/docs/components/visual-stepper)               | Auto-playing vertical stepper with growing connector bars and a crossfading preview card.                                                                              |
 | [Weather Forecast](https://nxui.geoql.in/docs/components/weather-forecast)           | A weather card with a colored condition orb glowing behind frosted glass, unit toggle, and hover-driven day chips.                                                     |
 
-### Backgrounds (49)
+### Backgrounds (61)
 
-| Component                                                                 | Description                                                                                                                   |
-| ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [Antigravity](https://nxui.geoql.in/docs/backgrounds/antigravity)         | Three.js InstancedMesh particle field with mouse-driven magnetic attraction, wave animation, and configurable shapes.         |
-| [Aurora](https://nxui.geoql.in/docs/backgrounds/aurora)                   | WebGL aurora borealis effect with simplex noise and configurable color stops.                                                 |
-| [Balatro](https://nxui.geoql.in/docs/backgrounds/balatro)                 | Psychedelic spinning paint effect with configurable colors and pixel filtering.                                               |
-| [Ballpit](https://nxui.geoql.in/docs/backgrounds/ballpit)                 | 3D physics-based ball pit with instanced meshes, subsurface scattering, and cursor interaction.                               |
-| [Beams](https://nxui.geoql.in/docs/backgrounds/beams)                     | 3D light beam planes with Perlin noise deformation and directional lighting.                                                  |
-| [Color Bends](https://nxui.geoql.in/docs/backgrounds/color-bends)         | Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors.                                            |
-| [Dark Veil](https://nxui.geoql.in/docs/backgrounds/dark-veil)             | CPPN neural network shader background with hue shift, scanlines, and warp distortion.                                         |
-| [Dither](https://nxui.geoql.in/docs/backgrounds/dither)                   | Retro Bayer-matrix dithered noise shader background.                                                                          |
-| [Dot Field](https://nxui.geoql.in/docs/backgrounds/dot-field)             | Interactive canvas dot grid with cursor bulge, glow, sparkle, and wave effects.                                               |
-| [Dot Grid](https://nxui.geoql.in/docs/backgrounds/dot-grid)               | Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return.                                |
-| [Evil Eye](https://nxui.geoql.in/docs/backgrounds/evil-eye)               | An animated evil eye background with flame effects and cursor-tracking pupil.                                                 |
-| [Faulty Terminal](https://nxui.geoql.in/docs/backgrounds/faulty-terminal) | Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration.                                        |
-| [Ferrofluid](https://nxui.geoql.in/docs/backgrounds/ferrofluid)           | A WebGL ferrofluid metaball background with flowing turbulence, configurable colors, rim glow, and mouse interaction.         |
-| [Floating Lines](https://nxui.geoql.in/docs/backgrounds/floating-lines)   | Multi-layered glowing wave lines with cursor-reactive bending and gradient coloring.                                          |
-| [Galaxy](https://nxui.geoql.in/docs/backgrounds/galaxy)                   | OGL-powered starfield galaxy with thousands of animated points and parallax depth.                                            |
-| [Gradient Blinds](https://nxui.geoql.in/docs/backgrounds/gradient-blinds) | Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops.                                             |
-| [Grainient](https://nxui.geoql.in/docs/backgrounds/grainient)             | Animated gradient background with noise grain and smooth color blending.                                                      |
-| [Grid Distortion](https://nxui.geoql.in/docs/backgrounds/grid-distortion) | Three.js shader-based image distortion that warps a texture in response to mouse movement.                                    |
-| [Grid Motion](https://nxui.geoql.in/docs/backgrounds/grid-motion)         | A rotated grid of items that shifts horizontally based on cursor position with smooth easing.                                 |
-| [Grid Scan](https://nxui.geoql.in/docs/backgrounds/grid-scan)             | Three.js animated grid with scanning line effect, bloom, chromatic aberration, and mouse-reactive distortion.                 |
-| [Hyperspeed](https://nxui.geoql.in/docs/backgrounds/hyperspeed)           | Three.js highway light simulation with bloom, SMAA, distortion presets, and configurable car lights.                          |
-| [Iridescence](https://nxui.geoql.in/docs/backgrounds/iridescence)         | Mesmerizing iridescent color waves with mouse-reactive distortion.                                                            |
-| [Laser Flow](https://nxui.geoql.in/docs/backgrounds/laser-flow)           | Three.js volumetric laser beams with fog, mouse tilt, and flow animation using GLSL shaders.                                  |
-| [Letter Glitch](https://nxui.geoql.in/docs/backgrounds/letter-glitch)     | A grid of random characters with color glitching and vignette overlays.                                                       |
-| [Light Pillar](https://nxui.geoql.in/docs/backgrounds/light-pillar)       | 3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction.                        |
-| [Light Rays](https://nxui.geoql.in/docs/backgrounds/light-rays)           | Animated light rays emanating from a configurable origin with mouse following and color controls.                             |
-| [Lightfall](https://nxui.geoql.in/docs/backgrounds/lightfall)             | A WebGL raymarched light-streak background with falling luminous trails, configurable colors, density, and mouse interaction. |
-| [Lightning](https://nxui.geoql.in/docs/backgrounds/lightning)             | WebGL-powered lightning bolt effect with fbm noise and customizable hue.                                                      |
-| [Line Waves](https://nxui.geoql.in/docs/backgrounds/line-waves)           | A WebGL animated line wave background with warping, color cycling, and mouse interaction.                                     |
-| [Liquid Chrome](https://nxui.geoql.in/docs/backgrounds/liquid-chrome)     | Interactive liquid chrome effect with ripple distortion and mouse tracking.                                                   |
-| [Liquid Ether](https://nxui.geoql.in/docs/backgrounds/liquid-ether)       | Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette.                 |
-| [Metallic Paint](https://nxui.geoql.in/docs/backgrounds/metallic-paint)   | Raw WebGL2 metallic paint effect with Laplacian depth solve, chromatic aberration, and mouse-driven ripples.                  |
-| [Orb](https://nxui.geoql.in/docs/backgrounds/orb)                         | Glowing orb with hue-shifted noise, hover distortion, and optional rotation.                                                  |
-| [Particles](https://nxui.geoql.in/docs/backgrounds/particles)             | OGL particle system with velocity simulation, mouse influence, and connection lines.                                          |
-| [Pixel Blast](https://nxui.geoql.in/docs/backgrounds/pixel-blast)         | Dithered pixel pattern with Bayer matrix, FBM noise, click ripples, and configurable shapes.                                  |
-| [Pixel Snow](https://nxui.geoql.in/docs/backgrounds/pixel-snow)           | 3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction.                                     |
-| [PlasmaWave](https://nxui.geoql.in/docs/backgrounds/plasma-wave)          | Raymarched plasma waves with dual-wave interference and OGL.                                                                  |
-| [Plasma](https://nxui.geoql.in/docs/backgrounds/plasma)                   | WebGL2 ray-marched plasma background with mouse interaction, configurable colors, speed, and direction.                       |
-| [Prism](https://nxui.geoql.in/docs/backgrounds/prism)                     | A prismatic light refraction background rendered with WebGL shaders.                                                          |
-| [Prismatic Burst](https://nxui.geoql.in/docs/backgrounds/prismatic-burst) | WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes.                               |
-| [Radar](https://nxui.geoql.in/docs/backgrounds/radar)                     | An animated radar sweep background with concentric rings and radial spokes.                                                   |
-| [Ripple Grid](https://nxui.geoql.in/docs/backgrounds/ripple-grid)         | Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette.                                            |
-| [Shape Grid](https://nxui.geoql.in/docs/backgrounds/shape-grid)           | An animated grid of shapes with hover trail effects and directional movement.                                                 |
-| [Side Rays](https://nxui.geoql.in/docs/backgrounds/side-rays)             | A WebGL light-rays background emanating from a screen corner, with configurable origin, tilt, colors, spread, and falloff.    |
-| [Silk](https://nxui.geoql.in/docs/backgrounds/silk)                       | Silky fabric-like shader background with flowing noise patterns and configurable color.                                       |
-| [Soft Aurora](https://nxui.geoql.in/docs/backgrounds/soft-aurora)         | A WebGL aurora borealis background effect with perlin noise, cosine gradient coloring, and mouse interaction.                 |
-| [Squares](https://nxui.geoql.in/docs/backgrounds/squares)                 | Animated grid of squares with directional movement and hover interaction.                                                     |
-| [Threads](https://nxui.geoql.in/docs/backgrounds/threads)                 | Animated Perlin noise thread lines with mouse-reactive distortion and configurable color.                                     |
-| [Waves](https://nxui.geoql.in/docs/backgrounds/waves)                     | Perlin noise-driven wave lines with cursor-reactive distortion.                                                               |
+| Component                                                                 | Description                                                                                                                                       |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Acid Squares](https://nxui.geoql.in/docs/backgrounds/acid-squares)       | A rolling WebGL field of glossy squares that ripples under two drifting colored lights, with cursor press and click ripples.                      |
+| [Antigravity](https://nxui.geoql.in/docs/backgrounds/antigravity)         | Three.js InstancedMesh particle field with mouse-driven magnetic attraction, wave animation, and configurable shapes.                             |
+| [Aurora](https://nxui.geoql.in/docs/backgrounds/aurora)                   | WebGL aurora borealis effect with simplex noise and configurable color stops.                                                                     |
+| [Balatro](https://nxui.geoql.in/docs/backgrounds/balatro)                 | Psychedelic spinning paint effect with configurable colors and pixel filtering.                                                                   |
+| [Ballpit](https://nxui.geoql.in/docs/backgrounds/ballpit)                 | A soft-lit pit of physics balls you can shove with the cursor, grab, throw and blast apart.                                                       |
+| [Beams](https://nxui.geoql.in/docs/backgrounds/beams)                     | 3D light beam planes with Perlin noise deformation and directional lighting.                                                                      |
+| [Color Bends](https://nxui.geoql.in/docs/backgrounds/color-bends)         | Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors.                                                                |
+| [CRT Warp](https://nxui.geoql.in/docs/backgrounds/crt-warp)               | A blocky plasma glowing on a curved CRT, with scanlines, a phosphor mask, afterglow, a power-on intro, cursor magnet and click-to-change channel. |
+| [Dark Veil](https://nxui.geoql.in/docs/backgrounds/dark-veil)             | A silky veil of light that drifts in the dark and bends around the cursor, in any color, with a light-mode ink variant.                           |
+| [Dither](https://nxui.geoql.in/docs/backgrounds/dither)                   | Retro dithered waves with Bayer, halftone, line, crosshatch and noise patterns, palettes, cursor trails and click ripples.                        |
+| [Dot Field](https://nxui.geoql.in/docs/backgrounds/dot-field)             | Interactive canvas dot grid with cursor bulge, glow, sparkle, and wave effects.                                                                   |
+| [Dot Grid](https://nxui.geoql.in/docs/backgrounds/dot-grid)               | Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return.                                                    |
+| [Evil Eye](https://nxui.geoql.in/docs/backgrounds/evil-eye)               | An animated evil eye background with flame effects and cursor-tracking pupil.                                                                     |
+| [Faulty Terminal](https://nxui.geoql.in/docs/backgrounds/faulty-terminal) | Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration.                                                            |
+| [Ferrofluid](https://nxui.geoql.in/docs/backgrounds/ferrofluid)           | A glossy sea of magnetic fluid where swells of spikes roll in, the cursor raises a crown and clicks send out a ring of spikes.                    |
+| [Floating Lines](https://nxui.geoql.in/docs/backgrounds/floating-lines)   | Multi-layered glowing wave lines with cursor-reactive bending and gradient coloring.                                                              |
+| [Flux Lines](https://nxui.geoql.in/docs/backgrounds/flux-lines)           | Glowing flux lines trace a churning magnetic fluid. The cursor acts as a magnet that reveals and curls the lines, and a click stirs a swirl.      |
+| [Galaxy](https://nxui.geoql.in/docs/backgrounds/galaxy)                   | OGL-powered starfield galaxy with thousands of animated points and parallax depth.                                                                |
+| [Gradient ASCII](https://nxui.geoql.in/docs/backgrounds/gradient-ascii)   | Soft gradient glows drawn in ASCII characters that scramble under the cursor.                                                                     |
+| [Gradient Blinds](https://nxui.geoql.in/docs/backgrounds/gradient-blinds) | Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops.                                                                 |
+| [Gradient Waves](https://nxui.geoql.in/docs/backgrounds/gradient-waves)   | Ray-marched satin waves rolling in from a hazy horizon, with a light that follows the cursor and a swell on click.                                |
+| [Grainient](https://nxui.geoql.in/docs/backgrounds/grainient)             | Flowing grainy gradient that you drag like paint with the cursor and twist into swirls with a click.                                              |
+| [Grid Distortion](https://nxui.geoql.in/docs/backgrounds/grid-distortion) | Three.js shader-based image distortion that warps a texture in response to mouse movement.                                                        |
+| [Grid Motion](https://nxui.geoql.in/docs/backgrounds/grid-motion)         | A tilted wall of drifting tiles that slides with the pointer and lights up where it rests.                                                        |
+| [Grid Scan](https://nxui.geoql.in/docs/backgrounds/grid-scan)             | A lit 3D grid room swept by a scanning light. The view shifts with the cursor and clicks send a ping across the walls.                            |
+| [Hyperspeed](https://nxui.geoql.in/docs/backgrounds/hyperspeed)           | Night highway of glowing light trails on a winding road that warps into hyperspace while you hold the pointer down.                               |
+| [Iridescence](https://nxui.geoql.in/docs/backgrounds/iridescence)         | Mesmerizing iridescent color waves with mouse-reactive distortion.                                                                                |
+| [Laser Flow](https://nxui.geoql.in/docs/backgrounds/laser-flow)           | A beam of light that drops onto your content, runs along its top edge and pours over its corners, with a cursor reveal.                           |
+| [Letter Glitch](https://nxui.geoql.in/docs/backgrounds/letter-glitch)     | A calm field of letters that flicker, scramble and glitch in color, stirred by the cursor and torn by clicks.                                     |
+| [Light Pillar](https://nxui.geoql.in/docs/backgrounds/light-pillar)       | A swirling pillar of light that ignites on load, leans toward the cursor and surges on click.                                                     |
+| [Light Rays](https://nxui.geoql.in/docs/backgrounds/light-rays)           | Volumetric light rays from any edge with source glow and haze. The cursor steers the beam and casts a shadow; clicks send a wave of light.        |
+| [Light Tunnel](https://nxui.geoql.in/docs/backgrounds/light-tunnel)       | A swirling fibre-optic tunnel where comets of light race into depth, steered by the cursor.                                                       |
+| [Lightfall](https://nxui.geoql.in/docs/backgrounds/lightfall)             | A WebGL raymarched light-streak background with falling luminous trails, configurable colors, density, and mouse interaction.                     |
+| [Lightning](https://nxui.geoql.in/docs/backgrounds/lightning)             | Crackling, branching lightning that bends toward the cursor and strikes wherever you click.                                                       |
+| [Line Waves](https://nxui.geoql.in/docs/backgrounds/line-waves)           | A WebGL animated line wave background with warping, color cycling, and mouse interaction.                                                         |
+| [Liquid Chrome](https://nxui.geoql.in/docs/backgrounds/liquid-chrome)     | Soft ribbons of liquid chrome that swirl through a dark pool, ripple under the cursor and catch the light as it moves.                            |
+| [Liquid Ether](https://nxui.geoql.in/docs/backgrounds/liquid-ether)       | Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette.                                     |
+| [Metallic Paint](https://nxui.geoql.in/docs/backgrounds/metallic-paint)   | Liquid chrome that flows over a logo or text, bends around its edges, tilts with the cursor and pours in on load.                                 |
+| [Molten Metal](https://nxui.geoql.in/docs/backgrounds/molten-metal)       | Swirling caustic filaments with white-hot cores that ignite on load, heat up under the cursor and flare on click.                                 |
+| [Orb](https://nxui.geoql.in/docs/backgrounds/orb)                         | Glowing orb with hue-shifted noise, hover distortion, and optional rotation.                                                                      |
+| [Particles](https://nxui.geoql.in/docs/backgrounds/particles)             | OGL particle system with velocity simulation, mouse influence, and connection lines.                                                              |
+| [Pattern Waves](https://nxui.geoql.in/docs/backgrounds/pattern-waves)     | A lit halftone surface of dots, lines or glyphs that moves like draped silk and ripples under the cursor.                                         |
+| [Pixel Blast](https://nxui.geoql.in/docs/backgrounds/pixel-blast)         | Dithered pixel clouds that drift, shimmer and light up under the cursor, with ripples, six shapes and a perspective floor.                        |
+| [Pixel Snow](https://nxui.geoql.in/docs/backgrounds/pixel-snow)           | 3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction.                                                         |
+| [Plasma](https://nxui.geoql.in/docs/backgrounds/plasma)                   | WebGL2 ray-marched plasma background with mouse interaction, configurable colors, speed, and direction.                                           |
+| [PlasmaWave](https://nxui.geoql.in/docs/backgrounds/plasma-wave)          | Raymarched plasma waves with dual-wave interference and OGL.                                                                                      |
+| [Prism](https://nxui.geoql.in/docs/backgrounds/prism)                     | A prismatic light refraction background rendered with WebGL shaders.                                                                              |
+| [Prismatic Burst](https://nxui.geoql.in/docs/backgrounds/prismatic-burst) | WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes.                                                   |
+| [Radar](https://nxui.geoql.in/docs/backgrounds/radar)                     | A radar scope whose sweep leaves a phosphor afterglow, lights up clutter and pings moving contacts. Sonar and tilted floor modes.                 |
+| [Ripple Grid](https://nxui.geoql.in/docs/backgrounds/ripple-grid)         | Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette.                                                                |
+| [Scanner](https://nxui.geoql.in/docs/backgrounds/scanner)                 | Glowing interference lines swept by a scan beam, with a CRT finish, cursor lensing and click pings.                                               |
+| [Shape Grid](https://nxui.geoql.in/docs/backgrounds/shape-grid)           | An animated grid of shapes with hover trail effects and directional movement.                                                                     |
+| [Shape Waves](https://nxui.geoql.in/docs/backgrounds/shape-waves)         | A grid of triangles, circles and squares that morph and grow along noise waves, with text cutouts and cursor splash ripples.                      |
+| [Side Rays](https://nxui.geoql.in/docs/backgrounds/side-rays)             | A WebGL light-rays background emanating from a screen corner, with configurable origin, tilt, colors, spread, and falloff.                        |
+| [Silk](https://nxui.geoql.in/docs/backgrounds/silk)                       | Silky fabric-like shader background with flowing noise patterns and configurable color.                                                           |
+| [Sliced Waves](https://nxui.geoql.in/docs/backgrounds/sliced-waves)       | Waves of colored light sliced into glowing bars in depth, with a depth-of-field focus that follows the cursor.                                    |
+| [Soft Aurora](https://nxui.geoql.in/docs/backgrounds/soft-aurora)         | A WebGL aurora borealis background effect with perlin noise, cosine gradient coloring, and mouse interaction.                                     |
+| [Squares](https://nxui.geoql.in/docs/backgrounds/squares)                 | Animated grid of squares with directional movement and hover interaction.                                                                         |
+| [Threads](https://nxui.geoql.in/docs/backgrounds/threads)                 | Animated Perlin noise thread lines with mouse-reactive distortion and configurable color.                                                         |
+| [Waves](https://nxui.geoql.in/docs/backgrounds/waves)                     | Perlin noise-driven wave lines with cursor-reactive distortion.                                                                                   |
+| [Web Threads](https://nxui.geoql.in/docs/backgrounds/web-threads)         | Glowing threads woven through pinch points that draw in one by one, light up under the cursor and carry light on click.                           |
 
 ### Hero Backgrounds (6)
 
@@ -406,7 +418,7 @@ Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/chart
 | [Image Ripple Effect](https://nxui.geoql.in/docs/visual-effects/image-ripple-effect)   | A WebGL-based image distortion effect that creates ripple waves on mouse hover using FBO ping-pong displacement mapping. |
 | [Infinite Image Field](https://nxui.geoql.in/docs/visual-effects/infinite-image-field) | A camera-based infinite scrolling image grid on canvas, driven by cursor position with smooth velocity interpolation.    |
 | [Liquid Blob](https://nxui.geoql.in/docs/visual-effects/liquid-blob)                   | A morphing liquid blob animation that follows the cursor with spring physics.                                            |
-| [Magnet Lines](https://nxui.geoql.in/docs/visual-effects/magnet-lines)                 | Lines that bend toward the cursor like a magnetic field with smooth transitions.                                         |
+| [Magnet Lines](https://nxui.geoql.in/docs/visual-effects/magnet-lines)                 | A field of magnetic lines that swing toward the cursor, ripple outward and spin with every click.                        |
 | [Matrix Rain](https://nxui.geoql.in/docs/visual-effects/matrix-rain)                   | The iconic Matrix digital rain effect rendered on canvas with theme-aware colors.                                        |
 | [Noise Texture](https://nxui.geoql.in/docs/visual-effects/noise-texture)               | A subtle noise overlay that adds texture and depth to any container.                                                     |
 | [Particle Galaxy](https://nxui.geoql.in/docs/visual-effects/particle-galaxy)           | A swirling 3D particle galaxy effect with spiral arms that responds to mouse movement.                                   |
