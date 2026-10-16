@@ -83,6 +83,11 @@ export const docsNav: NavGroup[] = [
         title: 'Banknote Bento',
         path: '/docs/components/banknote-bento',
       },
+      {
+        title: 'Block Palette',
+        path: '/docs/components/block-palette',
+        badge: 'new',
+      },
       { title: 'Border Glow', path: '/docs/components/border-glow' },
       { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
       {
@@ -90,6 +95,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/bouncy-accordion',
       },
       { title: 'Bubble Menu', path: '/docs/components/bubble-menu' },
+      {
+        title: 'Canvas Toolbar',
+        path: '/docs/components/canvas-toolbar',
+        badge: 'new',
+      },
       { title: 'Card Nav', path: '/docs/components/card-nav' },
       { title: 'Card Swap', path: '/docs/components/card-swap' },
       { title: 'Carousel', path: '/docs/components/carousel' },
@@ -179,6 +189,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Masonry', path: '/docs/components/masonry' },
       { title: 'Model Viewer', path: '/docs/components/model-viewer' },
       { title: 'Music Player', path: '/docs/components/music-player' },
+      {
+        title: 'Node Canvas',
+        path: '/docs/components/node-canvas',
+        badge: 'new',
+      },
       { title: 'Node Diagram', path: '/docs/components/node-diagram' },
       {
         title: 'Nostalgia',
@@ -287,10 +302,20 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       { title: 'Data Table', path: '/docs/dashboard/data-table', badge: 'new' },
+      {
+        title: 'Downtime Log',
+        path: '/docs/dashboard/downtime-log',
+        badge: 'new',
+      },
       { title: 'KPI Card', path: '/docs/dashboard/kpi-card', badge: 'new' },
       {
         title: 'KPI Carousel',
         path: '/docs/dashboard/kpi-carousel',
+        badge: 'new',
+      },
+      {
+        title: 'Range Calendar',
+        path: '/docs/dashboard/range-calendar',
         badge: 'new',
       },
       {
@@ -304,7 +329,22 @@ export const docsNav: NavGroup[] = [
     title: 'Charts',
     items: [
       { title: 'Area Chart', path: '/docs/charts/area-chart', badge: 'new' },
+      {
+        title: 'Beeswarm Chart',
+        path: '/docs/charts/beeswarm-chart',
+        badge: 'new',
+      },
       { title: 'Donut Chart', path: '/docs/charts/donut-chart', badge: 'new' },
+      {
+        title: 'Iso Stacked Bars',
+        path: '/docs/charts/iso-stacked-bars',
+        badge: 'new',
+      },
+      {
+        title: 'Pattern Donut',
+        path: '/docs/charts/pattern-donut',
+        badge: 'new',
+      },
       {
         title: 'Progress Ring',
         path: '/docs/charts/progress-ring',

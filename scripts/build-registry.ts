@@ -1578,6 +1578,54 @@ const COMPONENTS: Record<
       'A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.',
     deps: ['@vueuse/core'],
   },
+  'block-palette': {
+    title: 'Block Palette',
+    description:
+      'An "Add Block" palette with search, colored block types and live previews, and pointer or keyboard drag-to-reorder that lifts the row as a tilted card.',
+    deps: ['@vueuse/core'],
+  },
+  'canvas-toolbar': {
+    title: 'Canvas Toolbar',
+    description:
+      'A canvas tool switcher with a sliding active pill and number-key shortcuts, plus a floating selection toolbar with view and action menus.',
+    deps: ['@vueuse/core'],
+  },
+  'node-canvas': {
+    title: 'Node Canvas',
+    description:
+      'A pannable, zoomable node canvas with draggable nodes, live bezier edges, selection handles, a minimap, a zoom control and multiplayer cursors.',
+    deps: ['@vueuse/core'],
+  },
+  'downtime-log': {
+    title: 'Downtime Log',
+    description:
+      'A machine downtime log with selectable stops, reason pills, a reason filter, sort modes and a 24-hour stop timeline linked to the rows.',
+    deps: ['@vueuse/core'],
+  },
+  'range-calendar': {
+    title: 'Range Calendar',
+    description:
+      'A month heatmap calendar for picking a date range, with presets, a live range pill, a shaded legend and a compare switch.',
+    deps: [],
+  },
+  'beeswarm-chart': {
+    title: 'Beeswarm Chart',
+    description:
+      'A cycle-time beeswarm dot plot with a machine switch, median and takt lines, a hatched over-takt zone, an axis break and an on-takt footer.',
+    deps: ['@vueuse/core'],
+  },
+  'iso-stacked-bars': {
+    title: 'Iso Stacked Bars',
+    description:
+      'An isometric 3D stacked bar chart: two rows of shaded, textured boxes on a floor plate, with tooltips, legend highlighting and a staggered grow-in.',
+    deps: ['@vueuse/core'],
+  },
+  'pattern-donut': {
+    title: 'Pattern Donut',
+    description:
+      'A two-ring donut: solid category slices inside, patterned cause segments outside, a hover-driven center label, a pinnable legend and a computed insight.',
+    deps: [],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:
