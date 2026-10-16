@@ -1578,6 +1578,12 @@ const COMPONENTS: Record<
       'A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.',
     deps: ['@vueuse/core'],
   },
+  'clean-table': {
+    title: 'Clean Table',
+    description:
+      'A quiet, paginated table with segmented tabs, a keyboard-focused search, zebra rows, mono columns, status pills and row selection.',
+    deps: ['@tanstack/vue-table', '@vueuse/core'],
+  },
   'control-card': {
     title: 'Control Card',
     description:

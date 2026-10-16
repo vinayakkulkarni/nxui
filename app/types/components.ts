@@ -116,3 +116,14 @@ export interface DemoStatusStep {
   message: string;
   level: 'info' | 'warning' | 'error' | 'success';
 }
+
+/** One row of the clean-table demo. `deadline` is an absolute epoch in ms. */
+export interface DemoProjectRow {
+  id: string;
+  project: string;
+  created: string;
+  program: string;
+  deadline: number;
+  applicants: number;
+  status: 'progress' | 'complete' | 'error';
+}

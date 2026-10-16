@@ -1528,6 +1528,12 @@
       "description": "A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours."
     },
     {
+      "name": "clean-table",
+      "type": "registry:ui",
+      "title": "Clean Table",
+      "description": "A quiet, paginated table with segmented tabs, a keyboard-focused search, zebra rows, mono columns, status pills and row selection."
+    },
+    {
       "name": "control-card",
       "type": "registry:ui",
       "title": "Control Card",

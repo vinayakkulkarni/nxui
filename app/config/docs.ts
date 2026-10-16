@@ -277,6 +277,11 @@ export const docsNav: NavGroup[] = [
     title: 'Dashboard',
     items: [
       {
+        title: 'Clean Table',
+        path: '/docs/dashboard/clean-table',
+        badge: 'new',
+      },
+      {
         title: 'Control Card',
         path: '/docs/dashboard/control-card',
         badge: 'new',

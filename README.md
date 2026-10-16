@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (255)
+## Components (256)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 257 items total, of which these 255 are
+> on — so `npx shadcn-vue add` resolves 258 items total, of which these 256 are
 > user-facing components.
 
 ### Text Animations (33)
@@ -305,15 +305,16 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Silk Aurora](https://nxui.geoql.in/docs/hero-backgrounds/silk-aurora)             | Premium WebGL hero with satin-dark aurora ribbons, pearlescent highlights, fine film grain, and cursor depth that bends the light toward the pointer.                             |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
 
-### Dashboard (5)
+### Dashboard (6)
 
-| Component                                                         | Description                                                                                                      |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card) | A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo. |
-| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)     | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.          |
-| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)         | A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.        |
-| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel) | A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.     |
-| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel) | Service health lamps with an overall status, uptime and latency, plus a live event log.                          |
+| Component                                                         | Description                                                                                                                        |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| [Clean Table](https://nxui.geoql.in/docs/dashboard/clean-table)   | A quiet, paginated table with segmented tabs, a keyboard-focused search, zebra rows, mono columns, status pills and row selection. |
+| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card) | A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.                   |
+| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)     | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.                            |
+| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)         | A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.                          |
+| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel) | A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.                       |
+| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel) | Service health lamps with an overall status, uptime and latency, plus a live event log.                                            |
 
 ### Charts (5)
 
