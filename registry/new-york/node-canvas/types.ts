@@ -3,6 +3,9 @@ export interface NodeCanvasPoint {
   y: number;
 }
 
+/** Corner a resize handle sits on. */
+export type NodeCanvasCorner = 'nw' | 'ne' | 'sw' | 'se';
+
 export type NodeCanvasSide = 'left' | 'right' | 'top' | 'bottom';
 
 export interface NodeCanvasAnchor {
@@ -30,6 +33,14 @@ export interface NodeCanvasNode {
   minimapColor?: string;
   /** Set `false` to keep the node from being dragged or selected. */
   interactive?: boolean;
+  /** Keeps the node selectable but stops dragging and resizing. */
+  locked?: boolean;
+  /** Set `false` to hide the resize handles. Defaults to `true`. */
+  resizable?: boolean;
+  /** Smallest width a resize can reach, in canvas units. Defaults to `80`. */
+  minWidth?: number;
+  /** Smallest height a resize can reach, in canvas units. Defaults to `48`. */
+  minHeight?: number;
 }
 
 export type NodeCanvasEdgeVariant = 'solid' | 'dashed';
@@ -48,23 +59,9 @@ export interface NodeCanvasEdge {
   arrow?: boolean;
 }
 
-export interface NodeCanvasCursor {
-  id: string;
-  /** Collaborator name shown in the label. */
-  name: string;
-  /** Arrow and label color, e.g. `#34d07f`. */
-  color: string;
-  /** Waypoints in canvas units. The cursor loops through them. */
-  path: NodeCanvasPoint[];
-  /** Duration of one loop in milliseconds. Defaults to `9000`. */
-  duration?: number;
-}
-
 export interface NodeCanvasProps {
   nodes: NodeCanvasNode[];
   edges?: NodeCanvasEdge[];
-  /** Live collaborator cursors. They stay still when reduced motion is on. */
-  cursors?: NodeCanvasCursor[];
   /** Breadcrumb in the header, e.g. `['Plant North', 'Line 3 Health']`. */
   breadcrumb?: string[];
   /** Grid cell size in canvas units. */
@@ -108,8 +105,8 @@ export interface NodeCanvasEdgePath {
 
 export interface NodeCanvasFrameProps {
   node: NodeCanvasNode;
-  /** Current position, which may differ from `node.x`/`node.y` after a drag. */
-  position: NodeCanvasPoint;
+  /** Current geometry, which may differ from the node's own after a drag or resize. */
+  rect: NodeCanvasRect;
   selected: boolean;
   zoom: number;
 }
@@ -129,12 +126,6 @@ export interface NodeCanvasZoomProps {
   maxZoom: number;
 }
 
-export interface NodeCanvasCursorProps {
-  cursor: NodeCanvasCursor;
-  /** Freezes the cursor on its first waypoint. */
-  still: boolean;
-}
-
 export interface NodeCanvasSourceProps {
   label: string;
   /** Lucide icon name. Defaults to `lucide:box`. */
@@ -143,7 +134,11 @@ export interface NodeCanvasSourceProps {
 }
 
 export interface NodeCanvasNoteProps {
-  text: string;
+  /** Lets the user type into the note. Bind the text with `v-model:text`. */
+  editable?: boolean;
+  /** Focuses the text field when the note mounts, e.g. right after it is placed. */
+  autofocus?: boolean;
+  placeholder?: string;
   class?: string;
 }
 

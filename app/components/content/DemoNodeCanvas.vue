@@ -11,7 +11,6 @@
   import type {
     NodeCanvasBarSegment,
     NodeCanvasChecklistRow,
-    NodeCanvasCursor,
     NodeCanvasEdge,
     NodeCanvasNode,
   } from '@registry/new-york/node-canvas/types';
@@ -74,21 +73,6 @@
     },
   ];
 
-  const cursors: NodeCanvasCursor[] = [
-    {
-      id: 'ana',
-      name: 'Ana',
-      color: '#34d07f',
-      duration: 11000,
-      path: [
-        { x: 372, y: 262 },
-        { x: 396, y: 236 },
-        { x: 414, y: 282 },
-        { x: 384, y: 300 },
-      ],
-    },
-  ];
-
   const C = '#3ee0d8';
   const Y = '#f5d03b';
   const G = '#34d07f';
@@ -127,11 +111,51 @@
     sourceIndex.value = (sourceIndex.value + 1) % SOURCES.length;
   }
 
-  const tool = ref('select');
-  const view = ref('chart');
-
+  const {
+    graph,
+    links,
+    kinds,
+    notes,
+    tool,
+    selected,
+    expanded,
+    expandedNode,
+    selectionViews,
+    selectionView,
+    actions,
+    viewOf,
+    onCanvasClick,
+    onNodeMove,
+    onNodeResize,
+    removeNode,
+    onAction,
+    onExpand,
+    closeExpanded,
+  } = useCanvasBoard({
+    nodes,
+    edges,
+    kinds: {
+      mes: 'source',
+      note: 'note',
+      stops: 'stops',
+      downtime: 'downtime',
+    },
+    notes: { note: 'CNC-04 spindle alarms spike after 14:00 — check coolant' },
+    views: { stops: 'chart', downtime: 'chart' },
+    selected: 'downtime',
+  });
   const zoom = ref(0.84);
-  const selected = ref<string | null>('downtime');
+
+  const hourly = computed(() =>
+    STACKS.map((stack, i) => ({
+      hour: `${String(7 + i).padStart(2, '0')}:00`,
+      stops: stack.reduce((sum, value) => sum + value, 0),
+    })),
+  );
+  const totalStops = computed(() =>
+    hourly.value.reduce((sum, row) => sum + row.stops, 0),
+  );
+  const totalDowntime = rows.reduce((sum, row) => sum + row.value, 0);
 </script>
 
 <template>
@@ -172,7 +196,7 @@
       <NodeCanvasSource label=&quot;MES (Postgres)&quot; />
     </template>
     <template #node-note>
-      <NodeCanvasNote text=&quot;CNC-04 spindle alarms spike after 14:00 — check coolant&quot; />
+      <NodeCanvasNote text=&quot;CNC-04 spindle alarms spike after 14:00 — check coolant&quot; editable />
     </template>
     <template #node-downtime>
       <NodeCanvasCard title=&quot;Downtime by cell&quot;>
@@ -183,58 +207,165 @@
 </template>`"
   >
     <div class="flex size-full min-h-100 items-center justify-center p-6">
-      <NodeCanvas
-        v-model:zoom="zoom"
-        v-model:selected="selected"
-        :nodes="nodes"
-        :edges="edges"
-        :cursors="cursors"
-        :breadcrumb="['Plant North', 'Line 3 Health']"
-        aria-label="Line 3 Health canvas"
-        class="max-w-155"
-      >
-        <template #toolbar>
-          <CanvasToolbar v-model="tool" />
-        </template>
-        <template #actions>
-          <button
-            type="button"
-            class="h-10 rounded-2xl bg-foreground px-4 text-[15px] font-medium text-background transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-          >
-            Share
-          </button>
-        </template>
+      <div class="relative w-full max-w-155">
+        <NodeCanvas
+          v-model:zoom="zoom"
+          v-model:selected="selected"
+          :nodes="graph"
+          :edges="links"
+          :breadcrumb="['Plant North', 'Line 3 Health']"
+          aria-label="Line 3 Health canvas"
+          :class="tool === 'select' ? '' : '**:data-viewport:cursor-crosshair'"
+          @canvas-click="onCanvasClick"
+          @node-move="onNodeMove"
+          @node-resize="onNodeResize"
+          @node-delete="removeNode"
+        >
+          <template #toolbar>
+            <CanvasToolbar v-model="tool" />
+          </template>
+          <template #actions>
+            <button
+              type="button"
+              class="h-10 rounded-2xl bg-foreground px-4 text-[15px] font-medium text-background transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+            >
+              Share
+            </button>
+          </template>
 
-        <template #node-mes>
-          <NodeCanvasSource :label="source" @switch="nextSource" />
-        </template>
-        <template #node-note>
-          <NodeCanvasNote
-            text="CNC-04 spindle alarms spike after 14:00 — check coolant"
-          />
-        </template>
-        <template #node-stops>
-          <NodeCanvasCard
-            title="Stops per hour"
-            icon="lucide:chart-column"
-            icon-class="text-[#34d07f]"
-          >
-            <NodeCanvasBars
-              :bars="bars"
-              label="Stops per hour over the last 10 hours, stacked by cause"
+          <template #node="{ node }">
+            <NodeCanvasSource
+              v-if="kinds[node.id] === 'source'"
+              :label="node.id === 'mes' ? source : 'New source'"
+              @switch="nextSource"
             />
-          </NodeCanvasCard>
-        </template>
-        <template #node-downtime>
-          <NodeCanvasCard title="Downtime by cell">
-            <NodeCanvasChecklist :rows="rows" chip="Shift" />
-          </NodeCanvasCard>
-        </template>
+            <NodeCanvasNote
+              v-else-if="kinds[node.id] === 'note'"
+              v-model:text="notes[node.id]"
+              editable
+              :autofocus="node.id !== 'note'"
+            />
+            <div
+              v-else-if="kinds[node.id] === 'frame'"
+              class="size-full rounded-[20px] border-2 border-dashed border-foreground/25 bg-foreground/3 p-3 text-xs text-muted-foreground"
+            >
+              Frame
+            </div>
+            <NodeCanvasCard
+              v-else-if="kinds[node.id] === 'stops'"
+              title="Stops per hour"
+              icon="lucide:chart-column"
+              icon-class="text-[#34d07f]"
+            >
+              <NodeCanvasBars
+                v-if="viewOf(node.id) === 'chart'"
+                :bars="bars"
+                label="Stops per hour over the last 10 hours, stacked by cause"
+              />
+              <table
+                v-else-if="viewOf(node.id) === 'table'"
+                class="w-full text-xs"
+              >
+                <tbody>
+                  <tr v-for="row in hourly.slice(0, 4)" :key="row.hour">
+                    <td class="py-0.5 font-mono text-muted-foreground">
+                      {{ row.hour }}
+                    </td>
+                    <td class="py-0.5 text-right font-mono tabular-nums">
+                      {{ row.stops }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p v-else class="font-mono text-3xl tabular-nums">
+                {{ totalStops }}
+                <span class="text-xs text-muted-foreground">stops</span>
+              </p>
+            </NodeCanvasCard>
+            <NodeCanvasCard v-else title="Downtime by cell">
+              <NodeCanvasChecklist
+                v-if="viewOf(node.id) === 'chart'"
+                :rows="rows"
+                chip="Shift"
+              />
+              <table
+                v-else-if="viewOf(node.id) === 'table'"
+                class="w-full text-sm"
+              >
+                <tbody>
+                  <tr v-for="row in rows" :key="row.id">
+                    <td class="py-1 font-mono text-muted-foreground">
+                      {{ row.label }}
+                    </td>
+                    <td class="py-1 text-right font-mono tabular-nums">
+                      {{ row.value }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <p v-else class="font-mono text-4xl tabular-nums">
+                {{ totalDowntime }}
+                <span class="text-xs text-muted-foreground">min down</span>
+              </p>
+            </NodeCanvasCard>
+          </template>
 
-        <template #selection-toolbar>
-          <CanvasSelectionToolbar v-model:view="view" />
-        </template>
-      </NodeCanvas>
+          <template #selection-toolbar>
+            <CanvasSelectionToolbar
+              v-model:view="selectionView"
+              :views="selectionViews"
+              :actions="actions"
+              @action="onAction"
+              @expand="onExpand"
+            />
+          </template>
+        </NodeCanvas>
+
+        <div
+          v-if="expanded"
+          role="dialog"
+          aria-label="Expanded node"
+          class="absolute inset-0 z-40 grid place-items-center rounded-3xl bg-background/70 p-8 backdrop-blur-sm"
+        >
+          <div
+            class="relative w-full max-w-md rounded-3xl border bg-card p-6 shadow-2xl"
+          >
+            <button
+              type="button"
+              aria-label="Close"
+              class="absolute top-4 right-4 grid size-8 place-items-center rounded-full text-muted-foreground hover:bg-muted focus-visible:outline-2 focus-visible:outline-ring"
+              @click="closeExpanded"
+            >
+              <Icon name="lucide:x" class="size-4" />
+            </button>
+            <p class="text-sm text-muted-foreground">
+              {{ expandedNode?.label }}
+            </p>
+            <table class="mt-4 w-full text-sm">
+              <tbody v-if="kinds[expanded] === 'stops'">
+                <tr v-for="row in hourly" :key="row.hour">
+                  <td class="py-1 font-mono text-muted-foreground">
+                    {{ row.hour }}
+                  </td>
+                  <td class="py-1 text-right font-mono tabular-nums">
+                    {{ row.stops }}
+                  </td>
+                </tr>
+              </tbody>
+              <tbody v-else>
+                <tr v-for="row in rows" :key="row.id">
+                  <td class="py-1 font-mono text-muted-foreground">
+                    {{ row.label }}
+                  </td>
+                  <td class="py-1 text-right font-mono tabular-nums">
+                    {{ row.value }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </ComponentDemo>
 </template>

@@ -3,6 +3,11 @@
 // consumers installing via shadcn-vue CLI never need this path. App code keeps
 // importing from '~/types/components' through this barrel.
 
+import type {
+  NodeCanvasEdge,
+  NodeCanvasNode,
+} from '@registry/new-york/node-canvas/types';
+
 export * from '@registry/new-york/animated-gradient/types';
 export * from '@registry/new-york/auth-modal/types';
 export * from '@registry/new-york/closing-plasma/types';
@@ -126,4 +131,20 @@ export interface DemoProjectRow {
   deadline: number;
   applicants: number;
   status: 'progress' | 'complete' | 'error';
+}
+
+/** What a node in the node-canvas demo renders. */
+export type DemoCanvasKind = 'source' | 'note' | 'stops' | 'downtime' | 'frame';
+
+/** How a card node in the node-canvas demo is shown. */
+export type DemoCanvasView = 'chart' | 'table' | 'number';
+
+/** Starting state for `useCanvasBoard`, shared by the node-canvas and canvas-toolbar demos. */
+export interface DemoCanvasBoardOptions {
+  nodes: NodeCanvasNode[];
+  edges?: NodeCanvasEdge[];
+  kinds: Record<string, DemoCanvasKind>;
+  notes?: Record<string, string>;
+  views?: Record<string, DemoCanvasView>;
+  selected?: string | null;
 }

@@ -1,22 +1,53 @@
 <script setup lang="ts">
   import { computed, ref } from 'vue';
-  import type { NodeCanvasFrameProps, NodeCanvasPoint } from './types';
+  import type {
+    NodeCanvasCorner,
+    NodeCanvasFrameProps,
+    NodeCanvasPoint,
+    NodeCanvasRect,
+  } from './types';
 
   const props = defineProps<NodeCanvasFrameProps>();
 
   const emit = defineEmits<{
     select: [id: string];
     move: [id: string, position: NodeCanvasPoint];
+    resize: [id: string, rect: NodeCanvasRect];
   }>();
 
   const DRAG_THRESHOLD = 3;
   const KEY_STEP = 8;
   const HANDLE = 8;
-  const CORNERS = [
-    { class: 'top-0 left-0', translate: '-50% -50%' },
-    { class: 'top-0 right-0', translate: '50% -50%' },
-    { class: 'bottom-0 left-0', translate: '-50% 50%' },
-    { class: 'right-0 bottom-0', translate: '50% 50%' },
+  const CORNERS: {
+    id: NodeCanvasCorner;
+    class: string;
+    translate: string;
+    label: string;
+  }[] = [
+    {
+      id: 'nw',
+      class: 'top-0 left-0 cursor-nwse-resize',
+      translate: '-50% -50%',
+      label: 'top left',
+    },
+    {
+      id: 'ne',
+      class: 'top-0 right-0 cursor-nesw-resize',
+      translate: '50% -50%',
+      label: 'top right',
+    },
+    {
+      id: 'sw',
+      class: 'bottom-0 left-0 cursor-nesw-resize',
+      translate: '-50% 50%',
+      label: 'bottom left',
+    },
+    {
+      id: 'se',
+      class: 'right-0 bottom-0 cursor-nwse-resize',
+      translate: '50% 50%',
+      label: 'bottom right',
+    },
   ];
 
   const dragging = ref(false);
@@ -24,12 +55,18 @@
     null;
 
   const interactive = computed(() => props.node.interactive !== false);
+  const movable = computed(() => interactive.value && !props.node.locked);
+  const resizable = computed(
+    () => movable.value && props.node.resizable !== false,
+  );
+  const minWidth = computed(() => props.node.minWidth ?? 80);
+  const minHeight = computed(() => props.node.minHeight ?? 48);
 
   const style = computed(() => ({
-    left: `${props.position.x}px`,
-    top: `${props.position.y}px`,
-    width: `${props.node.width}px`,
-    height: `${props.node.height}px`,
+    left: `${props.rect.x}px`,
+    top: `${props.rect.y}px`,
+    width: `${props.rect.width}px`,
+    height: `${props.rect.height}px`,
     transform: props.node.rotate ? `rotate(${props.node.rotate}deg)` : '',
   }));
 
@@ -50,10 +87,10 @@
     if (!interactive.value || event.button !== 0) return;
     event.stopPropagation();
     emit('select', props.node.id);
-    if (isControl(event.target)) return;
+    if (isControl(event.target) || !movable.value) return;
     origin = {
       pointer: { x: event.clientX, y: event.clientY },
-      position: { ...props.position },
+      position: { x: props.rect.x, y: props.rect.y },
     };
     if (event.currentTarget instanceof HTMLElement) {
       event.currentTarget.setPointerCapture(event.pointerId);
@@ -84,7 +121,88 @@
       emit('select', props.node.id);
       return;
     }
+    // Delete acts on the focused node: select it, then let the canvas handle it.
+    if (event.key === 'Delete' || event.key === 'Backspace') {
+      emit('select', props.node.id);
+      return;
+    }
     const step = event.shiftKey ? KEY_STEP * 4 : KEY_STEP;
+    const delta: Record<string, NodeCanvasPoint> = {
+      ArrowLeft: { x: -step, y: 0 },
+      ArrowRight: { x: step, y: 0 },
+      ArrowUp: { x: 0, y: -step },
+      ArrowDown: { x: 0, y: step },
+    };
+    const d = delta[event.key];
+    if (!d || !movable.value) return;
+    event.preventDefault();
+    emit('select', props.node.id);
+    emit('move', props.node.id, {
+      x: props.rect.x + d.x,
+      y: props.rect.y + d.y,
+    });
+  }
+
+  /* ---------- resize ---------- */
+
+  let resizeOrigin: {
+    corner: NodeCanvasCorner;
+    pointer: NodeCanvasPoint;
+    rect: NodeCanvasRect;
+  } | null = null;
+
+  function resized(
+    corner: NodeCanvasCorner,
+    start: NodeCanvasRect,
+    dx: number,
+    dy: number,
+  ): NodeCanvasRect {
+    const west = corner === 'nw' || corner === 'sw';
+    const north = corner === 'nw' || corner === 'ne';
+    const width = Math.max(minWidth.value, start.width + (west ? -dx : dx));
+    const height = Math.max(minHeight.value, start.height + (north ? -dy : dy));
+    return {
+      x: west ? start.x + start.width - width : start.x,
+      y: north ? start.y + start.height - height : start.y,
+      width,
+      height,
+    };
+  }
+
+  function onResizeStart(event: PointerEvent, corner: NodeCanvasCorner): void {
+    if (event.button !== 0) return;
+    event.stopPropagation();
+    resizeOrigin = {
+      corner,
+      pointer: { x: event.clientX, y: event.clientY },
+      rect: { ...props.rect },
+    };
+    if (event.currentTarget instanceof HTMLElement) {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    }
+  }
+
+  function onResizeMove(event: PointerEvent): void {
+    if (!resizeOrigin) return;
+    event.stopPropagation();
+    const dx = (event.clientX - resizeOrigin.pointer.x) / props.zoom;
+    const dy = (event.clientY - resizeOrigin.pointer.y) / props.zoom;
+    emit(
+      'resize',
+      props.node.id,
+      resized(resizeOrigin.corner, resizeOrigin.rect, dx, dy),
+    );
+  }
+
+  function onResizeEnd(event: PointerEvent): void {
+    if (!resizeOrigin) return;
+    event.stopPropagation();
+    resizeOrigin = null;
+  }
+
+  // Shift + arrow keys on a focused handle resize by one grid step.
+  function onResizeKey(event: KeyboardEvent, corner: NodeCanvasCorner): void {
+    const step = KEY_STEP;
     const delta: Record<string, NodeCanvasPoint> = {
       ArrowLeft: { x: -step, y: 0 },
       ArrowRight: { x: step, y: 0 },
@@ -94,11 +212,8 @@
     const d = delta[event.key];
     if (!d) return;
     event.preventDefault();
-    emit('select', props.node.id);
-    emit('move', props.node.id, {
-      x: props.position.x + d.x,
-      y: props.position.y + d.y,
-    });
+    event.stopPropagation();
+    emit('resize', props.node.id, resized(corner, props.rect, d.x, d.y));
   }
 </script>
 
@@ -114,7 +229,7 @@
     :style="style"
     :class="[
       'absolute touch-none outline-none select-none',
-      interactive ? (dragging ? 'cursor-grabbing' : 'cursor-grab') : '',
+      movable ? (dragging ? 'cursor-grabbing' : 'cursor-grab') : '',
       props.selected ? 'z-10' : '',
       'focus-visible:*:data-focus:opacity-100',
     ]"
@@ -139,11 +254,17 @@
       />
       <span
         v-for="corner in CORNERS"
-        :key="corner.class"
-        aria-hidden="true"
+        :key="corner.id"
+        :role="resizable ? 'button' : undefined"
+        :tabindex="resizable ? 0 : undefined"
+        :aria-hidden="resizable ? undefined : 'true'"
+        :aria-label="
+          resizable ? `Resize from ${corner.label} corner` : undefined
+        "
+        :data-handle="corner.id"
         :class="[
-          'pointer-events-none absolute border-blue-500 bg-background',
-          corner.class,
+          'absolute border-blue-500 bg-background outline-none focus-visible:bg-blue-500',
+          resizable ? corner.class : 'pointer-events-none',
         ]"
         :style="{
           width: handleSize,
@@ -151,7 +272,15 @@
           borderWidth: outline,
           translate: corner.translate,
         }"
-      />
+        @pointerdown="onResizeStart($event, corner.id)"
+        @pointermove="onResizeMove"
+        @pointerup="onResizeEnd"
+        @pointercancel="onResizeEnd"
+        @keydown="onResizeKey($event, corner.id)"
+      >
+        <!-- Invisible hit area: the drawn square is tiny at low zoom. -->
+        <span v-if="resizable" aria-hidden="true" class="absolute -inset-2" />
+      </span>
     </template>
   </div>
 </template>

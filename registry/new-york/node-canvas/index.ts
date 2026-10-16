@@ -11,7 +11,6 @@ export type {
   NodeCanvasCardProps,
   NodeCanvasChecklistProps,
   NodeCanvasChecklistRow,
-  NodeCanvasCursor,
   NodeCanvasEdge,
   NodeCanvasEdgeVariant,
   NodeCanvasNode,

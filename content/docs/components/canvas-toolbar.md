@@ -7,6 +7,8 @@ description: A whiteboard tool switcher with a sliding active pill and number-ke
 
 Two toolbars for node-based canvases. `CanvasToolbar` is the tool switcher: a rounded pill of icon buttons where a lighter pill slides to the active tool. Press `1`–`4` to switch tools, or hover a button to see its name and shortcut. `CanvasSelectionToolbar` floats above the selected node: the blue pill picks how the node is shown (Chart, Table or Number), the arrow opens the node in full view, and the dots open a menu of actions. Both ship from the same registry item.
 
+The demo wires both toolbars to a [Node Canvas](/docs/components/node-canvas). Pick the source, note or frame tool and click the canvas to place a node. Select a node to drag it, resize it from a corner, switch a card between Chart, Table and Number, open it in a larger view, or duplicate, lock and delete it (Delete or Backspace works too). The toolbars themselves only emit what was picked; the canvas does the rest.
+
 ::demo-canvas-toolbar
 ::
 

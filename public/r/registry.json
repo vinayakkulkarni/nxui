@@ -1543,7 +1543,7 @@
       "name": "node-canvas",
       "type": "registry:ui",
       "title": "Node Canvas",
-      "description": "A pannable, zoomable node canvas with draggable nodes, live bezier edges, selection handles, a minimap, a zoom control and multiplayer cursors."
+      "description": "A pannable, zoomable node canvas with draggable nodes, live bezier edges, selection handles, a minimap and a zoom control."
     },
     {
       "name": "downtime-log",

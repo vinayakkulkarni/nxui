@@ -64,21 +64,3 @@ export function unionRect(rects: NodeCanvasRect[]): NodeCanvasRect {
   if (!Number.isFinite(minX)) return { x: 0, y: 0, width: 1, height: 1 };
   return { x: minX, y: minY, width: maxX - minX, height: maxY - minY };
 }
-
-/** Point on a looping polyline at progress `t` (0–1). */
-export function pointOnLoop(
-  points: NodeCanvasPoint[],
-  t: number,
-): NodeCanvasPoint {
-  const first = points[0];
-  if (!first) return { x: 0, y: 0 };
-  if (points.length === 1) return first;
-  const scaled = (((t % 1) + 1) % 1) * points.length;
-  const index = Math.floor(scaled);
-  const from = points[index] ?? first;
-  const to = points[(index + 1) % points.length] ?? first;
-  // Smoothstep easing so the cursor slows at each waypoint, like a hand would.
-  const f = scaled - index;
-  const e = f * f * (3 - 2 * f);
-  return { x: from.x + (to.x - from.x) * e, y: from.y + (to.y - from.y) * e };
-}

@@ -1,11 +1,6 @@
 <script setup lang="ts">
   import { computed, ref, useTemplateRef, watch } from 'vue';
-  import {
-    useElementSize,
-    useEventListener,
-    usePreferredReducedMotion,
-  } from '@vueuse/core';
-  import NodeCanvasCursorMark from './NodeCanvasCursorMark.vue';
+  import { useElementSize, useEventListener } from '@vueuse/core';
   import NodeCanvasEdges from './NodeCanvasEdges.vue';
   import NodeCanvasFrame from './NodeCanvasFrame.vue';
   import NodeCanvasMinimap from './NodeCanvasMinimap.vue';
@@ -23,7 +18,6 @@
 
   const props = withDefaults(defineProps<NodeCanvasProps>(), {
     edges: () => [],
-    cursors: () => [],
     breadcrumb: () => [],
     gridSize: 24,
     minZoom: 0.25,
@@ -36,6 +30,11 @@
 
   const emit = defineEmits<{
     nodeMove: [id: string, position: NodeCanvasPoint];
+    /** A click on empty canvas, in canvas units. Use it to place new nodes. */
+    canvasClick: [point: NodeCanvasPoint];
+    nodeResize: [id: string, rect: NodeCanvasRect];
+    /** Delete or Backspace on the selected node. Remove it from `nodes` to delete it. */
+    nodeDelete: [id: string];
   }>();
 
   defineSlots<
@@ -43,6 +42,8 @@
       toolbar?: () => unknown;
       actions?: () => unknown;
       'selection-toolbar'?: (props: NodeCanvasNodeSlotProps) => unknown;
+      /** Fallback body for nodes without their own `#node-<id>` slot. */
+      node?: (props: NodeCanvasNodeSlotProps) => unknown;
     } & Record<`node-${string}`, (props: NodeCanvasNodeSlotProps) => unknown>
   >();
 
@@ -51,28 +52,39 @@
 
   const viewport = useTemplateRef<HTMLDivElement>('viewport');
   const { width: viewWidth, height: viewHeight } = useElementSize(viewport);
-  const reduced = usePreferredReducedMotion();
 
   const pan = ref<NodeCanvasPoint>({ x: 0, y: 0 });
-  const positions = ref<Record<string, NodeCanvasPoint>>({});
+  // Live geometry per node. Dragging and resizing update it; nodes added later
+  // start from their own x/y/width/height, and nodes already on the canvas keep
+  // where the user put them.
+  const rects = ref<Record<string, NodeCanvasRect>>({});
 
   watch(
     () => props.nodes,
     (nodes) => {
-      const next: Record<string, NodeCanvasPoint> = {};
-      for (const node of nodes) next[node.id] = { x: node.x, y: node.y };
-      positions.value = next;
+      const next: Record<string, NodeCanvasRect> = {};
+      for (const node of nodes) {
+        next[node.id] = rects.value[node.id] ?? {
+          x: node.x,
+          y: node.y,
+          width: node.width,
+          height: node.height,
+        };
+      }
+      rects.value = next;
     },
     { immediate: true },
   );
 
-  function positionOf(node: NodeCanvasNode): NodeCanvasPoint {
-    return positions.value[node.id] ?? { x: node.x, y: node.y };
-  }
-
   function rectOf(node: NodeCanvasNode): NodeCanvasRect {
-    const p = positionOf(node);
-    return { x: p.x, y: p.y, width: node.width, height: node.height };
+    return (
+      rects.value[node.id] ?? {
+        x: node.x,
+        y: node.y,
+        width: node.width,
+        height: node.height,
+      }
+    );
   }
 
   const byId = computed(() => {
@@ -139,14 +151,24 @@
     selected.value ? byId.value.get(selected.value) : undefined,
   );
 
+  const SELECTION_ROOM = 56;
+
   const selectionStyle = computed(() => {
     const node = selectedNode.value;
     if (!node) return undefined;
-    const p = positionOf(node);
-    return {
-      left: `${(p.x + node.width) * zoom.value + pan.value.x}px`,
-      top: `${p.y * zoom.value + pan.value.y}px`,
-    };
+    const p = rectOf(node);
+    const top = p.y * zoom.value + pan.value.y;
+    const left = `${(p.x + p.width) * zoom.value + pan.value.x}px`;
+    // Flip below the node when there is no room above it, so the toolbar never
+    // slides under the header.
+    if (top < SELECTION_ROOM) {
+      return {
+        left,
+        top: `${(p.y + p.height) * zoom.value + pan.value.y}px`,
+        translate: '-100% 10px',
+      };
+    }
+    return { left, top: `${top}px`, translate: '-100% calc(-100% - 10px)' };
   });
 
   /* ---------- zoom ---------- */
@@ -225,8 +247,16 @@
     pan.value = { x: panOrigin.pan.x + dx, y: panOrigin.pan.y + dy };
   }
 
-  function onPanEnd(): void {
-    if (panOrigin && !panMoved) selected.value = null;
+  function onPanEnd(event: PointerEvent): void {
+    const el = viewport.value;
+    if (panOrigin && !panMoved && el && event.type === 'pointerup') {
+      selected.value = null;
+      const box = el.getBoundingClientRect();
+      emit('canvasClick', {
+        x: (event.clientX - box.left - pan.value.x) / zoom.value,
+        y: (event.clientY - box.top - pan.value.y) / zoom.value,
+      });
+    }
     panOrigin = null;
     panning.value = false;
   }
@@ -238,8 +268,15 @@
   }
 
   function onMove(id: string, position: NodeCanvasPoint): void {
-    positions.value = { ...positions.value, [id]: position };
+    const current = rects.value[id];
+    if (!current) return;
+    rects.value = { ...rects.value, [id]: { ...current, ...position } };
     emit('nodeMove', id, position);
+  }
+
+  function onResize(id: string, rect: NodeCanvasRect): void {
+    rects.value = { ...rects.value, [id]: rect };
+    emit('nodeResize', id, rect);
   }
 
   const PAN_KEYS: Record<string, NodeCanvasPoint> = {
@@ -258,6 +295,15 @@
     }
     if (event.key === 'Escape') {
       selected.value = null;
+      return;
+    }
+    if (
+      (event.key === 'Delete' || event.key === 'Backspace') &&
+      selectedNode.value &&
+      !selectedNode.value.locked
+    ) {
+      event.preventDefault();
+      emit('nodeDelete', selectedNode.value.id);
       return;
     }
     if (event.key === '+' || event.key === '=') {
@@ -322,6 +368,7 @@
 
     <div
       ref="viewport"
+      data-viewport
       role="application"
       aria-roledescription="canvas"
       :aria-label="`${props.ariaLabel}. Drag to pan, Ctrl or Command plus scroll to zoom, plus and minus keys to zoom, arrow keys move the focused node.`"
@@ -352,36 +399,33 @@
           v-for="node in props.nodes"
           :key="node.id"
           :node="node"
-          :position="positionOf(node)"
+          :rect="rectOf(node)"
           :selected="selected === node.id"
           :zoom="zoom"
           @select="onSelect"
           @move="onMove"
+          @resize="onResize"
         >
           <slot
             :name="`node-${node.id}`"
             :node="node"
             :selected="selected === node.id"
           >
-            <div
-              class="grid size-full place-items-center rounded-3xl border bg-card px-4 text-sm"
-            >
-              {{ node.label }}
-            </div>
+            <slot name="node" :node="node" :selected="selected === node.id">
+              <div
+                class="grid size-full place-items-center rounded-3xl border bg-card px-4 text-sm"
+              >
+                {{ node.label }}
+              </div>
+            </slot>
           </slot>
         </NodeCanvasFrame>
-        <NodeCanvasCursorMark
-          v-for="cursor in props.cursors"
-          :key="cursor.id"
-          :cursor="cursor"
-          :still="reduced === 'reduce'"
-        />
       </div>
 
       <div
         v-if="selectedNode && selectionStyle && $slots['selection-toolbar']"
         data-selection-toolbar
-        class="absolute z-30 -translate-x-full -translate-y-[calc(100%+10px)]"
+        class="absolute z-30"
         :style="selectionStyle"
         @pointerdown.stop
       >

@@ -1593,7 +1593,7 @@ const COMPONENTS: Record<
   'node-canvas': {
     title: 'Node Canvas',
     description:
-      'A pannable, zoomable node canvas with draggable nodes, live bezier edges, selection handles, a minimap, a zoom control and multiplayer cursors.',
+      'A pannable, zoomable node canvas with draggable nodes, live bezier edges, selection handles, a minimap and a zoom control.',
     deps: ['@vueuse/core'],
   },
   'downtime-log': {
