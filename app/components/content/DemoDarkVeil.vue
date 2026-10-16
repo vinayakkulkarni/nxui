@@ -4,7 +4,7 @@
   import {
     darkVeilPreset,
     isDarkVeilPreset,
-  } from '@registry/new-york/dark-veil/dark-veil-presets';
+  } from '@registry/new-york/dark-veil/dark-veil-presets.ts';
   import type {
     DarkVeilLook,
     DarkVeilPreset,

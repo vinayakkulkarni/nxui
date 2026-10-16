@@ -4,7 +4,7 @@
   import {
     gridScanPreset,
     isGridScanPreset,
-  } from '@registry/new-york/grid-scan/grid-scan-presets';
+  } from '@registry/new-york/grid-scan/grid-scan-presets.ts';
   import type {
     GridScanClickEffect,
     GridScanLook,

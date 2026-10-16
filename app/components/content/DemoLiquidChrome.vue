@@ -4,7 +4,7 @@
   import {
     isLiquidChromePreset,
     liquidChromePreset,
-  } from '@registry/new-york/liquid-chrome/liquid-chrome-presets';
+  } from '@registry/new-york/liquid-chrome/liquid-chrome-presets.ts';
   import type {
     LiquidChromeLook,
     LiquidChromePreset,

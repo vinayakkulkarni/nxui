@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { reactive, shallowRef, watch } from 'vue';
   import CrtWarp from '@registry/new-york/crt-warp/CrtWarp.vue';
-  import { crtWarpPreset } from '@registry/new-york/crt-warp/crt-warp-presets';
+  import { crtWarpPreset } from '@registry/new-york/crt-warp/crt-warp-presets.ts';
   import type {
     CrtWarpLook,
     CrtWarpPreset,

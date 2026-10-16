@@ -2,7 +2,7 @@
   import { computed, reactive } from 'vue';
   import type { Pane } from 'tweakpane';
   import PatternWaves from '@registry/new-york/pattern-waves/PatternWaves.vue';
-  import { SURFACE_PRESETS } from '@registry/new-york/pattern-waves/pattern-waves';
+  import { SURFACE_PRESETS } from '@registry/new-york/pattern-waves/pattern-waves.ts';
   import type {
     PatternWavesPresetValues,
     PatternWavesProps,

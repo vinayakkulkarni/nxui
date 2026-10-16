@@ -6,7 +6,7 @@
     LETTER_GLITCH_FONTS,
     isLetterGlitchPreset,
     letterGlitchPreset,
-  } from '@registry/new-york/letter-glitch/letter-glitch-presets';
+  } from '@registry/new-york/letter-glitch/letter-glitch-presets.ts';
   import type {
     LetterGlitchClickEffect,
     LetterGlitchLook,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import { computed, reactive, watch } from 'vue';
   import Hyperspeed from '@registry/new-york/hyperspeed/Hyperspeed.vue';
-  import { THEMES } from '@registry/new-york/hyperspeed/hyperspeed-config';
+  import { THEMES } from '@registry/new-york/hyperspeed/hyperspeed-config.ts';
   import type { HyperspeedProps } from '@registry/new-york/hyperspeed/types';
   import type { Pane } from 'tweakpane';
 
