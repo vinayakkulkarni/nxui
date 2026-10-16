@@ -41,12 +41,12 @@ Motion respects `prefers-reduced-motion`: the chart jumps to its final state ins
 
 ## Use TanStack Charts instead
 
-Every chart imports its engine from one file, `components/ui/chart/chart-backend.ts`. The default engine is a small, dependency-free SVG renderer whose API matches [TanStack Charts](https://tanstack.com/charts) 0.18.0 exactly, so chart definitions are valid TanStack definitions.
+Every chart imports its engine from one file, `components/ui/chart/chart-backend.ts`. The default engine is a small, dependency-free SVG renderer whose API matches [TanStack Charts](https://tanstack.com/charts) 1.x exactly, so chart definitions are valid TanStack definitions.
 
-To switch, install the pinned alpha and replace the exports in that file:
+To switch, install TanStack Charts and replace the exports in that file:
 
 ```bash
-pnpm add @tanstack/charts@0.18.0 @tanstack/vue-charts@0.18.0
+pnpm add @tanstack/charts@^1.1.0 @tanstack/vue-charts@^1.1.0
 ```
 
 ```ts
@@ -58,4 +58,4 @@ export { scaleLinear } from '@tanstack/charts/scales/linear';
 export { scalePoint } from '@tanstack/charts/scales/point';
 ```
 
-No component code changes. TanStack Charts is in alpha and may break between minor versions, so keep the exact version pinned.
+No component code changes. Verified against TanStack Charts 1.1.0, the first stable line with a compatibility promise for its public API.

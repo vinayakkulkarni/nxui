@@ -1,5 +1,5 @@
 // Public types for the hand-rolled chart engine. Every name and option below
-// mirrors @tanstack/charts 0.18.0 so a definition written for this engine also
+// mirrors @tanstack/charts 1.x (checked against 1.1.0) so a definition written for this engine also
 // type-checks against TanStack Charts. Only a subset is implemented; options
 // TanStack supports but this engine does not are deliberately absent, so using
 // one fails type-checking instead of being silently ignored.
