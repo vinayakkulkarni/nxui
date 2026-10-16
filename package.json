@@ -29,14 +29,14 @@
   },
   "dependencies": {
     "@cf-wasm/og": "^0.5.0",
-    "@iconify-json/lucide": "^1.2.143",
+    "@iconify-json/lucide": "^1.2.145",
     "@iconify-json/simple-icons": "^1.2.100",
-    "@nuxt/content": "^3.16.1",
+    "@nuxt/content": "^3.16.2",
     "@nuxt/icon": "^2.5.1",
     "@nuxtjs/color-mode": "^4.0.1",
     "@nuxtjs/plausible": "^4.0.0",
-    "@nuxtjs/robots": "^6.2.4",
-    "@nuxtjs/sitemap": "^8.6.1",
+    "@nuxtjs/robots": "^7.0.2",
+    "@nuxtjs/sitemap": "^9.1.0",
     "@openpanel/nuxt": "^0.4.1",
     "@openpanel/sdk": "^1.3.1",
     "@paper-design/shaders": "0.0.81",
@@ -48,10 +48,10 @@
     "clsx": "^2.1.1",
     "gl-matrix": "4.0.0-beta.2",
     "matter-js": "^0.20.0",
-    "motion-v": "^2.7.0",
+    "motion-v": "^2.8.0",
     "nuxt": "^4.6.1",
     "nuxt-llms": "^0.2.0",
-    "nuxt-schema-org": "^6.4.3",
+    "nuxt-schema-org": "^7.0.1",
     "ogl": "^1.0.11",
     "opentype.js": "^2.0.0",
     "postprocessing": "^6.39.5",
@@ -63,7 +63,7 @@
     "three": "^0.186.1",
     "tw-animate-css": "^1.4.0",
     "tweakpane": "^4.0.5",
-    "v-tweakpane": "^0.3.2",
+    "v-tweakpane": "^0.3.4",
     "vue-sonner": "^2.0.9"
   },
   "devDependencies": {
@@ -76,24 +76,24 @@
     "@types/opentype.js": "^1.3.10",
     "@types/three": "^0.186.0",
     "eslint": "^10.12.0",
-    "eslint-plugin-better-tailwindcss": "^4.9.0",
-    "eslint-plugin-oxlint": "^1.87.0",
+    "eslint-plugin-better-tailwindcss": "^4.9.1",
+    "eslint-plugin-oxlint": "^1.88.0",
     "h3": "1.15.11",
     "husky": "^9.1.7",
     "is-ci": "^4.1.0",
     "lint-staged": "^17.6.0",
     "nuxt-security": "^2.6.0",
-    "oxfmt": "^0.72.0",
-    "oxlint": "^1.87.0",
+    "oxfmt": "^0.73.0",
+    "oxlint": "^1.88.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
-    "vue": "^3.5.43",
+    "vue": "^3.5.44",
     "vue-tsc": "^3.3.13",
-    "wrangler": "^4.149.0"
+    "wrangler": "^4.151.0"
   },
   "engines": {
     "node": ">=24.11.0"
   },
-  "packageManager": "pnpm@12.9.1+sha512.06b055fff5cd20dc12781de173ced3310ce0951bf2ec620211a16045d5444d5c93a663210764ef29a653a610459ba0368f0e74f84d80c54723cf95aae7bc0d6d"
+  "packageManager": "pnpm@12.11.2+sha512.25a51652a196785af5f28bda6dfe8dc582ebefa4ac1d180221ce1390231c5fb76637822ea4b6e4633ce74acdcb0a77f725af11bad38177fdeddaee818a955cb9"
 }
