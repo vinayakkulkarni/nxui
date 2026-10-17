@@ -181,7 +181,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/border-glow',
         badge: 'updated',
       },
-      { title: 'Bounce Cards', path: '/docs/components/bounce-cards' },
+      {
+        title: 'Bounce Cards',
+        path: '/docs/components/bounce-cards',
+        badge: 'updated',
+      },
       {
         title: 'Bouncy Accordion',
         path: '/docs/components/bouncy-accordion',
@@ -191,7 +195,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/branched-menu',
         badge: 'new',
       },
-      { title: 'Bubble Menu', path: '/docs/components/bubble-menu' },
+      {
+        title: 'Bubble Menu',
+        path: '/docs/components/bubble-menu',
+        badge: 'updated',
+      },
       {
         title: 'Call Chip',
         path: '/docs/components/call-chip',
@@ -202,15 +210,31 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/canvas-toolbar',
         badge: 'new',
       },
-      { title: 'Card Nav', path: '/docs/components/card-nav' },
-      { title: 'Card Swap', path: '/docs/components/card-swap' },
-      { title: 'Carousel', path: '/docs/components/carousel' },
+      {
+        title: 'Card Nav',
+        path: '/docs/components/card-nav',
+        badge: 'updated',
+      },
+      {
+        title: 'Card Swap',
+        path: '/docs/components/card-swap',
+        badge: 'updated',
+      },
+      {
+        title: 'Carousel',
+        path: '/docs/components/carousel',
+        badge: 'updated',
+      },
       {
         title: 'Case Study Flip Stack',
         path: '/docs/components/case-study-flip-stack',
         badge: 'new',
       },
-      { title: 'Chroma Grid', path: '/docs/components/chroma-grid' },
+      {
+        title: 'Chroma Grid',
+        path: '/docs/components/chroma-grid',
+        badge: 'updated',
+      },
       {
         title: 'Circle Input',
         path: '/docs/components/circle-input',
@@ -252,8 +276,13 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Curved Input',
         path: '/docs/components/curved-input',
+        badge: 'updated',
       },
-      { title: 'Decay Card', path: '/docs/components/decay-card' },
+      {
+        title: 'Decay Card',
+        path: '/docs/components/decay-card',
+        badge: 'updated',
+      },
       {
         title: 'Depth Carousel',
         path: '/docs/components/depth-carousel',
@@ -405,6 +434,7 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Line Sidebar',
         path: '/docs/components/line-sidebar',
+        badge: 'updated',
       },
       {
         title: 'Liquid Glass Carousel',
@@ -477,7 +507,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/pill-nav',
         badge: 'updated',
       },
-      { title: 'Pixel Card', path: '/docs/components/pixel-card' },
+      {
+        title: 'Pixel Card',
+        path: '/docs/components/pixel-card',
+        badge: 'updated',
+      },
       {
         title: 'PlayStation Navbar',
         path: '/docs/components/playstation-navbar',
@@ -486,7 +520,11 @@ export const docsNav: NavGroup[] = [
         title: 'Podcast Player',
         path: '/docs/components/podcast-player',
       },
-      { title: 'Profile Card', path: '/docs/components/profile-card' },
+      {
+        title: 'Profile Card',
+        path: '/docs/components/profile-card',
+        badge: 'updated',
+      },
       {
         title: 'Progress Stepper',
         path: '/docs/components/progress-stepper',
@@ -533,7 +571,11 @@ export const docsNav: NavGroup[] = [
         title: 'Scroll Split Card',
         path: '/docs/components/scroll-split-card',
       },
-      { title: 'Scroll Stack', path: '/docs/components/scroll-stack' },
+      {
+        title: 'Scroll Stack',
+        path: '/docs/components/scroll-stack',
+        badge: 'updated',
+      },
       {
         title: 'Scroll Tilted Grid',
         path: '/docs/components/scroll-tilted-grid',
@@ -610,7 +652,7 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/status-mark',
         badge: 'new',
       },
-      { title: 'Stepper', path: '/docs/components/stepper' },
+      { title: 'Stepper', path: '/docs/components/stepper', badge: 'updated' },
       {
         title: 'Holo Sticker',
         path: '/docs/components/holo-sticker',

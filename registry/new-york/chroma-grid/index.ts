@@ -1,2 +1,7 @@
 export { default as ChromaGrid } from './ChromaGrid.vue';
-export type { ChromaGridItem } from './types';
+export type {
+  ChromaGridItem,
+  ChromaGridProps,
+  ChromaGridReveal,
+  ChromaGridTheme,
+} from './types';

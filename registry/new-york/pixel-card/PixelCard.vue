@@ -1,254 +1,270 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount, computed } from 'vue';
-  import { useResizeObserver, useMediaQuery } from '@vueuse/core';
+  import {
+    computed,
+    onMounted,
+    ref,
+    shallowRef,
+    useTemplateRef,
+    watch,
+  } from 'vue';
+  import {
+    useEventListener,
+    useIntersectionObserver,
+    usePreferredReducedMotion,
+    useRafFn,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import {
+    PIXEL_CARD_SHAPES,
+    PIXEL_CARD_TRIGGERS,
+    PIXEL_CARD_VARIANTS,
+    clamp,
+    createPixelCardEngine,
+    toColorList,
+  } from './pixel-card-engine';
+  import type {
+    PixelCardEngine,
+    PixelCardProps,
+    PixelCardSettings,
+  } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      variant?: 'default' | 'blue' | 'yellow' | 'pink';
-      gap?: number;
-      speed?: number;
-      colors?: string;
-      noFocus?: boolean;
-      class?: string;
-    }>(),
-    {
-      variant: 'default',
-      gap: undefined,
-      speed: undefined,
-      colors: undefined,
-      noFocus: undefined,
-      class: '',
+  const props = withDefaults(defineProps<PixelCardProps>(), {
+    variant: 'default',
+    colors: undefined,
+    gap: undefined,
+    speed: undefined,
+    pixelSize: 2,
+    shape: 'square',
+    origin: 'center',
+    revealDuration: 600,
+    spotlight: 0.5,
+    glow: 0.5,
+    glowColor: undefined,
+    opacity: 1,
+    fade: 0,
+    trigger: 'hover',
+    clickPulse: true,
+    intro: true,
+    introDelay: 0,
+    noFocus: undefined,
+    theme: 'dark',
+    radius: 24,
+    class: '',
+  });
+
+  defineSlots<{ default?: () => unknown }>();
+
+  const rootRef = useTemplateRef<HTMLElement>('rootEl');
+  const canvasRef = useTemplateRef<HTMLCanvasElement>('canvasEl');
+  const engine = shallowRef<PixelCardEngine | null>(null);
+  const active = ref(false);
+
+  const reducedMotion = usePreferredReducedMotion();
+  const reduce = (): boolean => reducedMotion.value === 'reduce';
+
+  const tone = computed(() => (props.theme === 'light' ? 'light' : 'dark'));
+  const preset = computed(
+    () => PIXEL_CARD_VARIANTS[props.variant] ?? PIXEL_CARD_VARIANTS.default,
+  );
+  const focusOff = computed(() => props.noFocus ?? preset.value.noFocus);
+
+  const settings = computed<PixelCardSettings>(() => {
+    const base = preset.value;
+    const palette = props.colors ? toColorList(props.colors) : [];
+    const gap = Number(props.gap ?? base.gap) || base.gap;
+    return {
+      colors: palette.length ? palette : base.colors[tone.value],
+      gap: Math.max(2, gap),
+      speed: clamp(Number(props.speed ?? base.speed) || 0, 0, 100),
+      pixelSize: Math.max(0.5, props.pixelSize),
+      shape: PIXEL_CARD_SHAPES[props.shape] ?? 0,
+      origin: props.origin,
+      revealDuration: Math.max(50, props.revealDuration),
+      spotlight: clamp(props.spotlight, 0, 1),
+      glow: clamp(props.glow, 0, 1),
+      glowColor: props.glowColor || base.glow[tone.value],
+      opacity: clamp(props.opacity, 0, 1),
+      fade: clamp(props.fade, 0, 1),
+      trigger: PIXEL_CARD_TRIGGERS.includes(props.trigger)
+        ? props.trigger
+        : 'hover',
+      clickPulse: props.clickPulse,
+      intro: props.intro,
+      introDelay: Math.max(0, props.introDelay),
+    };
+  });
+
+  const { pause, resume, isActive } = useRafFn(
+    ({ timestamp }) => {
+      if (!engine.value?.frame(timestamp)) pause();
     },
+    { immediate: false },
   );
 
-  interface VariantConfig {
-    activeColor: string | null;
-    gap: number;
-    speed: number;
-    colors: string;
-    noFocus: boolean;
+  function wake(): void {
+    if (engine.value && !isActive.value) resume();
   }
 
-  const DEFAULT_VARIANT: VariantConfig = {
-    activeColor: null,
-    gap: 5,
-    speed: 35,
-    colors: '#f8fafc,#f1f5f9,#cbd5e1',
-    noFocus: false,
-  };
-
-  const VARIANTS: Record<string, VariantConfig> = {
-    default: DEFAULT_VARIANT,
-    blue: {
-      activeColor: '#e0f2fe',
-      gap: 10,
-      speed: 25,
-      colors: '#e0f2fe,#7dd3fc,#0ea5e9',
-      noFocus: false,
-    },
-    yellow: {
-      activeColor: '#fef08a',
-      gap: 3,
-      speed: 20,
-      colors: '#fef08a,#fde047,#eab308',
-      noFocus: false,
-    },
-    pink: {
-      activeColor: '#fecdd3',
-      gap: 6,
-      speed: 80,
-      colors: '#fecdd3,#fda4af,#e11d48',
-      noFocus: true,
-    },
-  };
-
-  const cfg = computed(() => VARIANTS[props.variant] ?? DEFAULT_VARIANT);
-  const finalGap = computed(() => props.gap ?? cfg.value.gap);
-  const finalSpeed = computed(() => props.speed ?? cfg.value.speed);
-  const finalColors = computed(() => props.colors ?? cfg.value.colors);
-  const finalNoFocus = computed(() => props.noFocus ?? cfg.value.noFocus);
-
-  const reducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
-
-  const containerRef = ref<HTMLDivElement>();
-  const canvasRef = ref<HTMLCanvasElement>();
-  let pixels: Pixel[] = [];
-  let animationId = 0;
-  let timePrev = 0;
-
-  class Pixel {
-    x: number;
-    y: number;
-    color: string;
-    speed: number;
-    size = 0;
-    sizeStep = Math.random() * 0.4;
-    minSize = 0.5;
-    maxSizeInt = 2;
-    maxSize: number;
-    delay: number;
-    counter = 0;
-    counterStep: number;
-    isIdle = false;
-    isReverse = false;
-    isShimmer = false;
-    ctx: CanvasRenderingContext2D;
-
-    constructor(
-      ctx: CanvasRenderingContext2D,
-      w: number,
-      h: number,
-      x: number,
-      y: number,
-      color: string,
-      speed: number,
-      delay: number,
-    ) {
-      this.ctx = ctx;
-      this.x = x;
-      this.y = y;
-      this.color = color;
-      this.speed = (Math.random() * 0.8 + 0.1) * speed;
-      this.maxSize =
-        Math.random() * (this.maxSizeInt - this.minSize) + this.minSize;
-      this.delay = delay;
-      this.counterStep = Math.random() * 4 + (w + h) * 0.01;
-    }
-
-    draw() {
-      const off = this.maxSizeInt * 0.5 - this.size * 0.5;
-      this.ctx.fillStyle = this.color;
-      this.ctx.fillRect(this.x + off, this.y + off, this.size, this.size);
-    }
-
-    appear() {
-      this.isIdle = false;
-      if (this.counter <= this.delay) {
-        this.counter += this.counterStep;
-        return;
-      }
-      if (this.size >= this.maxSize) this.isShimmer = true;
-      if (this.isShimmer) {
-        this.shimmer();
-      } else {
-        this.size += this.sizeStep;
-      }
-      this.draw();
-    }
-
-    disappear() {
-      this.isShimmer = false;
-      this.counter = 0;
-      if (this.size <= 0) {
-        this.isIdle = true;
-        return;
-      }
-      this.size -= 0.1;
-      this.draw();
-    }
-
-    shimmer() {
-      if (this.size >= this.maxSize) this.isReverse = true;
-      else if (this.size <= this.minSize) this.isReverse = false;
-      this.size += this.isReverse ? -this.speed : this.speed;
-    }
-  }
-
-  function getSpeed(val: number): number {
-    if (val <= 0 || reducedMotion.value) return 0;
-    return Math.min(val, 100) * 0.001;
-  }
-
-  function initPixels() {
-    const container = containerRef.value;
+  onMounted(() => {
+    const container = rootRef.value;
     const canvas = canvasRef.value;
     if (!container || !canvas) return;
+    engine.value = createPixelCardEngine({
+      container,
+      canvas,
+      getSettings: () => settings.value,
+      reduce,
+      onActive: (value) => {
+        active.value = value;
+      },
+      wake,
+    });
+  });
 
-    const rect = container.getBoundingClientRect();
-    const w = Math.floor(rect.width);
-    const h = Math.floor(rect.height);
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+  watch(settings, () => {
+    engine.value?.sync();
+    wake();
+  });
 
-    canvas.width = w;
-    canvas.height = h;
-    canvas.style.width = `${w}px`;
-    canvas.style.height = `${h}px`;
+  useResizeObserver(rootRef, () => {
+    engine.value?.build();
+    wake();
+  });
 
-    const colorsArr = finalColors.value.split(',');
-    const spd = getSpeed(finalSpeed.value);
-    const gp = finalGap.value;
-    pixels = [];
+  useIntersectionObserver(rootRef, (entries) => {
+    engine.value?.setVisible(entries.some((entry) => entry.isIntersecting));
+  });
 
-    for (let x = 0; x < w; x += gp) {
-      for (let y = 0; y < h; y += gp) {
-        const c = colorsArr[Math.floor(Math.random() * colorsArr.length)] ?? '';
-        const dx = x - w / 2;
-        const dy = y - h / 2;
-        const dist = reducedMotion.value ? 0 : Math.sqrt(dx * dx + dy * dy);
-        pixels.push(new Pixel(ctx, w, h, x, y, c, spd, dist));
-      }
-    }
+  useEventListener(rootRef, 'pointerenter', (event: PointerEvent) =>
+    engine.value?.enter(event),
+  );
+  useEventListener(rootRef, 'pointermove', (event: PointerEvent) =>
+    engine.value?.move(event),
+  );
+  useEventListener(rootRef, 'pointerleave', (event: PointerEvent) =>
+    engine.value?.leave(event),
+  );
+  useEventListener(rootRef, 'pointerdown', (event: PointerEvent) =>
+    engine.value?.down(event),
+  );
+  useEventListener('pointerdown', (event: PointerEvent) =>
+    engine.value?.outside(event.target),
+  );
+
+  useEventListener(rootRef, 'keydown', (event: KeyboardEvent) => {
+    if (settings.value.trigger !== 'click') return;
+    if (event.target !== rootRef.value) return;
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    engine.value?.toggle();
+  });
+
+  function within(event: FocusEvent): boolean {
+    const root = rootRef.value;
+    return Boolean(
+      root &&
+      event.relatedTarget instanceof Node &&
+      root.contains(event.relatedTarget),
+    );
   }
 
-  function doAnimate(fnName: 'appear' | 'disappear') {
-    cancelAnimationFrame(animationId);
-    timePrev = performance.now();
+  useEventListener(rootRef, 'focusin', (event: FocusEvent) => {
+    if (focusOff.value || within(event)) return;
+    engine.value?.focus();
+  });
 
-    function loop() {
-      animationId = requestAnimationFrame(loop);
-      const now = performance.now();
-      if (now - timePrev < 1000 / 60) return;
-      timePrev = now;
-
-      const canvas = canvasRef.value;
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      let allIdle = true;
-      for (const px of pixels) {
-        px[fnName]();
-        if (!px.isIdle) allIdle = false;
-      }
-      if (allIdle) cancelAnimationFrame(animationId);
-    }
-
-    animationId = requestAnimationFrame(loop);
-  }
-
-  function onEnter() {
-    doAnimate('appear');
-  }
-  function onLeave() {
-    doAnimate('disappear');
-  }
-
-  onMounted(() => initPixels());
-  useResizeObserver(containerRef, () => initPixels());
-  onBeforeUnmount(() => cancelAnimationFrame(animationId));
+  useEventListener(rootRef, 'focusout', (event: FocusEvent) => {
+    if (focusOff.value || within(event)) return;
+    engine.value?.blur();
+  });
 </script>
 
 <template>
   <div
-    ref="containerRef"
-    :class="
-      cn(
-        'relative grid aspect-4/5 h-100 w-75 select-none place-items-center overflow-hidden rounded-[25px] border border-zinc-800 isolate',
-        $props.class,
-      )
-    "
-    :tabindex="finalNoFocus ? -1 : 0"
-    @mouseenter="onEnter"
-    @mouseleave="onLeave"
-    @focus.self="onEnter"
-    @blur.self="onLeave"
+    ref="rootEl"
+    :class="cn('pixel-card h-100 w-75', props.class)"
+    :data-theme="tone"
+    :data-active="active ? 'true' : undefined"
+    :style="{ '--pixel-card-radius': `${radius}px` }"
+    :tabindex="focusOff ? -1 : 0"
+    :role="trigger === 'click' ? 'button' : undefined"
+    :aria-pressed="trigger === 'click' ? active : undefined"
   >
-    <canvas ref="canvasRef" class="block size-full"></canvas>
-    <div class="absolute inset-0 z-10 grid place-items-center">
-      <slot></slot>
-    </div>
+    <canvas ref="canvasEl" class="pixel-card-canvas" aria-hidden="true" />
+    <slot />
   </div>
 </template>
+
+<style scoped>
+  .pixel-card {
+    --pixel-card-surface: linear-gradient(180deg, #17151c 0%, #0f0e13 100%);
+    --pixel-card-edge: rgba(255, 255, 255, 0.08);
+    --pixel-card-edge-active: rgba(255, 255, 255, 0.16);
+    --pixel-card-highlight: rgba(255, 255, 255, 0.06);
+    --pixel-card-shadow:
+      0 24px 48px -24px rgba(0, 0, 0, 0.85), 0 8px 18px -10px rgba(0, 0, 0, 0.6);
+    position: relative;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border-radius: var(--pixel-card-radius, 24px);
+    background: var(--pixel-card-surface);
+    box-shadow: var(--pixel-card-shadow);
+    isolation: isolate;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .pixel-card[data-theme='light'] {
+    --pixel-card-surface: linear-gradient(180deg, #ffffff 0%, #f6f6f8 100%);
+    --pixel-card-edge: rgba(24, 24, 27, 0.08);
+    --pixel-card-edge-active: rgba(24, 24, 27, 0.16);
+    --pixel-card-highlight: rgba(255, 255, 255, 1);
+    --pixel-card-shadow:
+      0 24px 48px -26px rgba(24, 24, 27, 0.32),
+      0 8px 18px -12px rgba(24, 24, 27, 0.18);
+  }
+
+  .pixel-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    box-shadow:
+      inset 0 0 0 1px var(--pixel-card-edge),
+      inset 0 1px 0 var(--pixel-card-highlight);
+    pointer-events: none;
+    transition: box-shadow 260ms ease;
+  }
+
+  .pixel-card[data-active]::after {
+    box-shadow:
+      inset 0 0 0 1px var(--pixel-card-edge-active),
+      inset 0 1px 0 var(--pixel-card-highlight);
+  }
+
+  .pixel-card:focus-visible {
+    box-shadow:
+      var(--pixel-card-shadow),
+      0 0 0 3px rgba(127, 127, 140, 0.45);
+  }
+
+  .pixel-card-canvas {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+
+  .pixel-card > :deep(:not(.pixel-card-canvas)) {
+    position: relative;
+    z-index: 1;
+  }
+</style>

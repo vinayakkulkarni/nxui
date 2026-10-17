@@ -1,5 +1,6 @@
 <script setup lang="ts">
-  import { ref, computed, onBeforeUnmount } from 'vue';
+  import { computed, ref, watch } from 'vue';
+  import { useRafFn } from '@vueuse/core';
   import { cn } from '~/lib/utils';
   import type { LineSidebarProps, LineSidebarFalloff } from './types';
 
@@ -39,6 +40,7 @@
     itemGap: 20,
     fontSize: 1.1,
     smoothing: 100,
+    defaultActive: null,
     class: '',
   });
 
@@ -47,14 +49,13 @@
   }>();
 
   /** Currently active (clicked) item index; null = none. */
-  const activeIndex = defineModel<number | null>({ default: null });
+  const activeIndex = defineModel<number | null | undefined>();
+  if (activeIndex.value === undefined) activeIndex.value = props.defaultActive;
 
   const listRef = ref<HTMLUListElement | null>(null);
   const itemRefs = ref<HTMLLIElement[]>([]);
   const targets: number[] = [];
   const current: number[] = [];
-  let rafId: number | null = null;
-  let last = 0;
 
   function setItemRef(el: unknown, index: number): void {
     if (el instanceof HTMLLIElement) itemRefs.value[index] = el;
@@ -63,34 +64,37 @@
   // Single rAF loop that eases every item's --effect toward its target using
   // frame-rate independent exponential smoothing, so color, shift and scale
   // all move together without staggering CSS transitions.
-  function runFrame(now: number): void {
-    const dt = Math.min((now - last) / 1000, 0.05);
-    last = now;
-    const tau = Math.max(props.smoothing, 1) / 1000;
-    const k = 1 - Math.exp(-dt / tau);
+  const { pause, resume } = useRafFn(
+    ({ delta }) => {
+      const dt = Math.min(delta / 1000, 0.05);
+      const tau = Math.max(props.smoothing, 1) / 1000;
+      const k = 1 - Math.exp(-dt / tau);
 
-    let moving = false;
-    const els = itemRefs.value;
-    for (let i = 0; i < els.length; i++) {
-      const el = els[i];
-      if (!el) continue;
-      const target = Math.max(targets[i] || 0, activeIndex.value === i ? 1 : 0);
-      const cur = current[i] || 0;
-      const next = cur + (target - cur) * k;
-      const settled = Math.abs(target - next) < 0.0015;
-      const value = settled ? target : next;
-      current[i] = value;
-      el.style.setProperty('--effect', value.toFixed(4));
-      if (!settled) moving = true;
-    }
+      let moving = false;
+      const els = itemRefs.value;
+      for (let i = 0; i < els.length; i++) {
+        const el = els[i];
+        if (!el) continue;
+        const target = Math.max(
+          targets[i] || 0,
+          activeIndex.value === i ? 1 : 0,
+        );
+        const cur = current[i] || 0;
+        const next = cur + (target - cur) * k;
+        const settled = Math.abs(target - next) < 0.0015;
+        const value = settled ? target : next;
+        current[i] = value;
+        el.style.setProperty('--effect', value.toFixed(4));
+        if (!settled) moving = true;
+      }
 
-    rafId = moving ? requestAnimationFrame(runFrame) : null;
-  }
+      if (!moving) pause();
+    },
+    { immediate: false },
+  );
 
   function startLoop(): void {
-    if (rafId != null) return;
-    last = performance.now();
-    rafId = requestAnimationFrame(runFrame);
+    resume();
   }
 
   function handlePointerMove(e: PointerEvent): void {
@@ -118,12 +122,10 @@
   function handleClick(index: number, label: string): void {
     activeIndex.value = index;
     emit('itemClick', index, label);
-    startLoop();
   }
 
-  onBeforeUnmount(() => {
-    if (rafId != null) cancelAnimationFrame(rafId);
-  });
+  // Animate whenever the active item changes, including from v-model.
+  watch(activeIndex, startLoop, { immediate: true });
 
   const rootStyle = computed(() => ({
     '--accent-color': props.accentColor,
@@ -135,6 +137,7 @@
     '--max-shift': `${props.maxShift}px`,
     '--item-gap': `${props.itemGap}px`,
     '--font-size': `${props.fontSize}rem`,
+    '--smoothing': `${props.smoothing}ms`,
   }));
 </script>
 

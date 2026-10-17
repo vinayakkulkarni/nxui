@@ -1,712 +1,726 @@
 <script setup lang="ts">
-  import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+  import { computed, onMounted, ref, watch } from 'vue';
+  import {
+    useEventListener,
+    usePreferredReducedMotion,
+    useRafFn,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import {
+    PROFILE_CARD_FOILS,
+    PROFILE_CARD_GRAIN,
+    PROFILE_CARD_THEMES,
+    clampValue,
+    hasOrientationPermission,
+    isDarkColor,
+  } from './profile-card-theme';
+  import type { ProfileCardAxis, ProfileCardProps } from './types';
 
-  const DEFAULT_INNER_GRADIENT =
-    'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)';
-  const INITIAL_DURATION = 1200;
-  const INITIAL_X_OFFSET = 70;
-  const INITIAL_Y_OFFSET = 60;
-  const ENTER_TRANSITION_MS = 180;
-
-  const clamp = (v: number, min = 0, max = 100) =>
-    Math.min(Math.max(v, min), max);
-  const round = (v: number, precision = 3) =>
-    Number.parseFloat(v.toFixed(precision));
-  const adjust = (
-    v: number,
-    fMin: number,
-    fMax: number,
-    tMin: number,
-    tMax: number,
-  ) => round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin));
-
-  const props = withDefaults(
-    defineProps<{
-      avatarUrl?: string;
-      innerGradient?: string;
-      behindGlowEnabled?: boolean;
-      behindGlowColor?: string;
-      behindGlowSize?: string;
-      enableTilt?: boolean;
-      name?: string;
-      title?: string;
-      handle?: string;
-      status?: string;
-      contactText?: string;
-      showUserInfo?: boolean;
-      class?: string;
-    }>(),
-    {
-      avatarUrl:
-        'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop',
-      innerGradient: DEFAULT_INNER_GRADIENT,
-      behindGlowEnabled: true,
-      behindGlowColor: 'rgba(125, 190, 255, 0.67)',
-      behindGlowSize: '50%',
-      enableTilt: true,
-      name: 'Javi A. Torres',
-      title: 'Software Engineer',
-      handle: 'javicodes',
-      status: 'Online',
-      contactText: 'Contact',
-      showUserInfo: true,
-      class: '',
-    },
-  );
+  const props = withDefaults(defineProps<ProfileCardProps>(), {
+    avatarUrl: '',
+    iconUrl: undefined,
+    miniAvatarUrl: undefined,
+    name: 'Javi A. Torres',
+    title: 'Software Engineer',
+    handle: 'javicodes',
+    status: 'Online',
+    statusColor: '#22c55e',
+    contactText: 'Contact',
+    showUserInfo: true,
+    theme: 'dark',
+    backdropColor: undefined,
+    radius: 16,
+    holo: 0.8,
+    glare: 0.5,
+    enableTilt: true,
+    tiltStrength: 12,
+    parallax: 8,
+    enableMobileTilt: false,
+    mobileTiltSensitivity: 5,
+    intro: true,
+    class: '',
+  });
 
   const emit = defineEmits<{
-    contact: [];
+    contactClick: [];
   }>();
 
-  const wrapRef = ref<HTMLElement | null>(null);
-  const shellRef = ref<HTMLElement | null>(null);
-  const isActive = ref(false);
-  const isEntering = ref(false);
-  const cardOpacity = ref(0);
+  const rootRef = ref<HTMLElement | null>(null);
+  const reducedMotion = usePreferredReducedMotion();
+  const reduced = computed(() => reducedMotion.value === 'reduce');
 
-  let enterTimer: ReturnType<typeof setTimeout> | null = null;
-  let leaveRaf: number | null = null;
+  const size = { width: 0, height: 0 };
+  const x: ProfileCardAxis = { p: 0, v: 0, target: 0 };
+  const y: ProfileCardAxis = { p: 0, v: 0, target: 0 };
+  const light = { p: 0, target: 0 };
+  let slowUntil = 0;
+  let touchId: number | null = null;
 
-  // Tilt engine state
-  let currentX = 0;
-  let currentY = 0;
-  let targetX = 0;
-  let targetY = 0;
-  let rafId: number | null = null;
-  let running = false;
-  let lastTs = 0;
-  let initialUntil = 0;
-
-  const DEFAULT_TAU = 0.14;
-  const INITIAL_TAU = 0.6;
-
-  function setVarsFromXY(x: number, y: number) {
-    const shell = shellRef.value;
-    const wrap = wrapRef.value;
-    if (!shell || !wrap) return;
-
-    const width = shell.clientWidth || 1;
-    const height = shell.clientHeight || 1;
-
-    const percentX = clamp((100 / width) * x);
-    const percentY = clamp((100 / height) * y);
-    const centerX = percentX - 50;
-    const centerY = percentY - 50;
-
-    const s = wrap.style;
-    s.setProperty('--pointer-x', `${percentX}%`);
-    s.setProperty('--pointer-y', `${percentY}%`);
-    s.setProperty('--background-x', `${adjust(percentX, 0, 100, 35, 65)}%`);
-    s.setProperty('--background-y', `${adjust(percentY, 0, 100, 35, 65)}%`);
-    s.setProperty(
-      '--pointer-from-center',
-      `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
+  function write() {
+    const root = rootRef.value;
+    if (!root) return;
+    const angle = props.enableTilt && !reduced.value ? props.tiltStrength : 0;
+    const depth = reduced.value ? 0 : props.parallax;
+    const tilt = Math.min(1, Math.hypot(x.p, y.p));
+    const style = root.style;
+    style.setProperty(
+      '--pc-light-x',
+      `${((x.p + 1) * 0.5 * size.width).toFixed(1)}px`,
     );
-    s.setProperty('--pointer-from-top', `${percentY / 100}`);
-    s.setProperty('--pointer-from-left', `${percentX / 100}`);
-    s.setProperty('--rotate-x', `${round(-(centerX / 5))}deg`);
-    s.setProperty('--rotate-y', `${round(centerY / 4)}deg`);
+    style.setProperty(
+      '--pc-light-y',
+      `${((y.p + 1) * 0.5 * size.height).toFixed(1)}px`,
+    );
+    style.setProperty('--pc-pointer-x', `${((x.p + 1) * 50).toFixed(2)}%`);
+    style.setProperty('--pc-pointer-y', `${((y.p + 1) * 50).toFixed(2)}%`);
+    style.setProperty('--pc-band-x', `${(50 + x.p * 15).toFixed(2)}%`);
+    style.setProperty('--pc-band-y', `${(50 + y.p * 15).toFixed(2)}%`);
+    style.setProperty('--pc-rotate-x', `${(y.p * angle).toFixed(3)}deg`);
+    style.setProperty('--pc-rotate-y', `${(-x.p * angle).toFixed(3)}deg`);
+    style.setProperty('--pc-shift-x', `${(x.p * depth).toFixed(2)}px`);
+    style.setProperty('--pc-shift-y', `${(y.p * depth).toFixed(2)}px`);
+    style.setProperty('--pc-reach', tilt.toFixed(4));
+    style.setProperty('--pc-tilt', (tilt * light.p).toFixed(4));
+    style.setProperty('--pc-active', light.p.toFixed(4));
   }
 
-  function step(ts: number) {
-    if (!running) return;
-    if (lastTs === 0) lastTs = ts;
-    const dt = (ts - lastTs) / 1000;
-    lastTs = ts;
+  const { pause, resume, isActive } = useRafFn(
+    ({ delta }) => {
+      const dt = Math.min(0.05, delta / 1000);
+      const slow = performance.now() < slowUntil;
+      const stiffness = slow ? 24 : 120;
+      const damping = slow ? 9 : 16;
+      const steps = Math.max(1, Math.ceil(dt / (1 / 120)));
+      const h = dt / steps;
+      for (let i = 0; i < steps; i++) {
+        for (const axis of [x, y]) {
+          axis.v += (stiffness * (axis.target - axis.p) - damping * axis.v) * h;
+          axis.p += axis.v * h;
+        }
+      }
+      const tau = light.target > light.p ? 0.18 : slow ? 0.9 : 0.45;
+      light.p += (light.target - light.p) * (1 - Math.exp(-dt / tau));
+      write();
+      const moving =
+        Math.abs(x.target - x.p) > 0.0005 ||
+        Math.abs(y.target - y.p) > 0.0005 ||
+        Math.abs(x.v) > 0.0005 ||
+        Math.abs(y.v) > 0.0005 ||
+        Math.abs(light.target - light.p) > 0.002;
+      if (!moving) {
+        x.p = x.target;
+        y.p = y.target;
+        x.v = 0;
+        y.v = 0;
+        light.p = light.target;
+        write();
+        pause();
+      }
+    },
+    { immediate: false },
+  );
 
-    const tau = ts < initialUntil ? INITIAL_TAU : DEFAULT_TAU;
-    const k = 1 - Math.exp(-dt / tau);
+  function wake() {
+    if (!isActive.value) resume();
+  }
 
-    currentX += (targetX - currentX) * k;
-    currentY += (targetY - currentY) * k;
-    setVarsFromXY(currentX, currentY);
+  function aim(nx: number, ny: number, on = true) {
+    x.target = clampValue(nx, -1, 1);
+    y.target = clampValue(ny, -1, 1);
+    light.target = on ? 1 : 0;
+    slowUntil = 0;
+    wake();
+  }
 
-    const stillFar =
-      Math.abs(targetX - currentX) > 0.05 ||
-      Math.abs(targetY - currentY) > 0.05;
-    if (stillFar || document.hasFocus()) {
-      rafId = requestAnimationFrame(step);
+  function aimAt(event: PointerEvent) {
+    const root = rootRef.value;
+    if (!root) return;
+    const rect = root.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+    aim(
+      ((event.clientX - rect.left) / rect.width) * 2 - 1,
+      ((event.clientY - rect.top) / rect.height) * 2 - 1,
+    );
+  }
+
+  function release() {
+    aim(0, 0, false);
+  }
+
+  function onEnter(event: PointerEvent) {
+    if (event.pointerType === 'mouse') aimAt(event);
+  }
+  function onMove(event: PointerEvent) {
+    if (event.pointerType === 'mouse' || event.pointerId === touchId)
+      aimAt(event);
+  }
+  function onLeave(event: PointerEvent) {
+    if (event.pointerType === 'mouse') release();
+  }
+  function onDown(event: PointerEvent) {
+    if (event.pointerType === 'mouse') return;
+    touchId = event.pointerId;
+    aimAt(event);
+  }
+  function onUp(event: PointerEvent) {
+    if (event.pointerId !== touchId) return;
+    touchId = null;
+    release();
+  }
+
+  useEventListener(rootRef, 'pointerenter', onEnter);
+  useEventListener(rootRef, 'pointermove', onMove);
+  useEventListener(rootRef, 'pointerleave', onLeave);
+  useEventListener(rootRef, 'pointerdown', onDown);
+  useEventListener(rootRef, 'pointerup', onUp);
+  useEventListener(rootRef, 'pointercancel', onUp);
+
+  useResizeObserver(rootRef, () => {
+    const root = rootRef.value;
+    if (!root) return;
+    size.width = root.offsetWidth;
+    size.height = root.offsetHeight;
+    write();
+  });
+
+  // Phone tilt: listening starts after a tap (iOS needs a user gesture).
+  const orientationListening = ref(false);
+  const orientationTarget = computed(() =>
+    orientationListening.value && props.enableMobileTilt ? window : null,
+  );
+
+  function onOrientation(event: DeviceOrientationEvent) {
+    if (event.beta == null || event.gamma == null) return;
+    const sensitivity = props.mobileTiltSensitivity;
+    aim(
+      (event.gamma * sensitivity) / 150,
+      ((event.beta - 20) * sensitivity) / 150,
+    );
+  }
+
+  useEventListener(orientationTarget, 'deviceorientation', onOrientation);
+
+  function onRootClick() {
+    if (!props.enableMobileTilt || orientationListening.value) return;
+    const api: unknown = window.DeviceOrientationEvent;
+    if (hasOrientationPermission(api)) {
+      api
+        .requestPermission()
+        .then((state) => {
+          if (state === 'granted') orientationListening.value = true;
+        })
+        .catch(() => {});
     } else {
-      running = false;
-      lastTs = 0;
+      orientationListening.value = true;
     }
   }
 
-  function startLoop() {
-    if (running) return;
-    running = true;
-    lastTs = 0;
-    rafId = requestAnimationFrame(step);
-  }
+  useEventListener(rootRef, 'click', onRootClick);
 
-  function setTarget(x: number, y: number) {
-    targetX = x;
-    targetY = y;
-    startLoop();
-  }
+  watch(
+    () => props.enableMobileTilt,
+    (on) => {
+      if (!on) orientationListening.value = false;
+    },
+  );
 
-  function toCenter() {
-    const shell = shellRef.value;
-    if (!shell) return;
-    setTarget(shell.clientWidth / 2, shell.clientHeight / 2);
-  }
-
-  function getOffsets(evt: PointerEvent, el: HTMLElement) {
-    const rect = el.getBoundingClientRect();
-    return { x: evt.clientX - rect.left, y: evt.clientY - rect.top };
-  }
-
-  function onPointerMove(event: PointerEvent) {
-    if (!shellRef.value || !props.enableTilt) return;
-    const { x, y } = getOffsets(event, shellRef.value);
-    setTarget(x, y);
-  }
-
-  function onPointerEnter(event: PointerEvent) {
-    if (!shellRef.value || !props.enableTilt) return;
-    isActive.value = true;
-    isEntering.value = true;
-    cardOpacity.value = 1;
-
-    if (enterTimer) clearTimeout(enterTimer);
-    enterTimer = setTimeout(() => {
-      isEntering.value = false;
-    }, ENTER_TRANSITION_MS);
-
-    const { x, y } = getOffsets(event, shellRef.value);
-    setTarget(x, y);
-  }
-
-  function onPointerLeave() {
-    if (!shellRef.value || !props.enableTilt) return;
-    cardOpacity.value = 0;
-    toCenter();
-
-    const checkSettle = () => {
-      const settled = Math.hypot(targetX - currentX, targetY - currentY) < 0.6;
-      if (settled) {
-        isActive.value = false;
-        leaveRaf = null;
-      } else {
-        leaveRaf = requestAnimationFrame(checkSettle);
-      }
-    };
-    if (leaveRaf) cancelAnimationFrame(leaveRaf);
-    leaveRaf = requestAnimationFrame(checkSettle);
-  }
-
-  const cardStyle = computed(() => ({
-    '--inner-gradient': props.innerGradient,
-    '--behind-glow-color': props.behindGlowColor,
-    '--behind-glow-size': props.behindGlowSize,
-  }));
+  watch(
+    [() => props.enableTilt, () => props.tiltStrength, () => props.parallax],
+    write,
+  );
 
   onMounted(() => {
-    if (!props.enableTilt || !shellRef.value) return;
-    const shell = shellRef.value;
-    const initialX = (shell.clientWidth || 0) - INITIAL_X_OFFSET;
-    const initialY = INITIAL_Y_OFFSET;
-    currentX = initialX;
-    currentY = initialY;
-    setVarsFromXY(currentX, currentY);
-    toCenter();
-    initialUntil = performance.now() + INITIAL_DURATION;
-    startLoop();
+    const root = rootRef.value;
+    if (!root) return;
+    size.width = root.offsetWidth;
+    size.height = root.offsetHeight;
+    if (props.intro && !reduced.value) {
+      x.p = 0.62;
+      y.p = -0.55;
+      light.p = 1;
+      slowUntil = performance.now() + 1400;
+      write();
+      wake();
+    } else {
+      write();
+    }
   });
 
-  onBeforeUnmount(() => {
-    if (rafId) cancelAnimationFrame(rafId);
-    if (leaveRaf) cancelAnimationFrame(leaveRaf);
-    if (enterTimer) clearTimeout(enterTimer);
-    running = false;
+  const palette = computed(() => (props.theme === 'light' ? 'light' : 'dark'));
+  const foil = computed(() => {
+    if (!props.backdropColor) return palette.value;
+    return (isDarkColor(props.backdropColor) ?? palette.value === 'dark')
+      ? 'dark'
+      : 'light';
   });
+
+  const rootStyle = computed(() => {
+    const backdrop = props.backdropColor
+      ? `linear-gradient(180deg, color-mix(in srgb, ${props.backdropColor}, #ffffff 12%) 0%, color-mix(in srgb, ${props.backdropColor}, #000000 18%) 100%)`
+      : 'var(--pc-tile)';
+    return {
+      ...PROFILE_CARD_THEMES[palette.value],
+      ...PROFILE_CARD_FOILS[foil.value],
+      '--pc-radius': `${Math.max(0, props.radius)}px`,
+      '--pc-backdrop': backdrop,
+      '--pc-holo': String(clampValue(props.holo, 0, 1)),
+      '--pc-glare': String(clampValue(props.glare, 0, 1)),
+      '--pc-parallax': `${Math.max(0, props.parallax)}px`,
+      '--pc-status': props.statusColor,
+      '--pc-grain': PROFILE_CARD_GRAIN,
+      '--pc-pattern': props.iconUrl
+        ? `url("${props.iconUrl}")`
+        : 'linear-gradient(#000, #000)',
+      '--pc-pattern-size': props.iconUrl ? '180% auto' : '100% 100%',
+      '--pc-holo-gain': props.iconUrl ? '1.25' : '0.75',
+      '--pc-holo-detail': props.iconUrl && foil.value === 'dark' ? '1' : '0',
+    };
+  });
+
+  const contactLabel = computed(() =>
+    props.name ? `${props.contactText} ${props.name}` : props.contactText,
+  );
+
+  function onContact() {
+    emit('contactClick');
+  }
 </script>
 
 <template>
-  <div ref="wrapRef" :class="cn('pc-wrapper', props.class)" :style="cardStyle">
-    <div
-      v-if="props.behindGlowEnabled"
-      class="pc-behind"
-      :style="{ opacity: 0.8 * cardOpacity }"
-    ></div>
-    <div
-      ref="shellRef"
-      class="pc-shell"
-      @pointermove="onPointerMove"
-      @pointerenter="onPointerEnter"
-      @pointerleave="onPointerLeave"
-    >
-      <section :class="['pc-card', { active: isActive, entering: isEntering }]">
-        <div class="pc-inside">
-          <div class="pc-shine"></div>
-          <div class="pc-glare"></div>
-          <div class="pc-avatar-content">
-            <img
-              class="pc-avatar"
-              :src="props.avatarUrl"
-              :alt="`${props.name} avatar`"
-              loading="lazy"
-            />
-            <div v-if="props.showUserInfo" class="pc-user-info">
-              <div class="pc-user-details">
-                <div class="pc-mini-avatar">
-                  <img
-                    :src="props.avatarUrl"
-                    :alt="`${props.name} mini avatar`"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="pc-user-text">
-                  <div class="pc-handle">@{{ props.handle }}</div>
-                  <div class="pc-status">
-                    {{ props.status }}
-                  </div>
-                </div>
-              </div>
-              <button
-                class="pc-contact-btn"
-                type="button"
-                :aria-label="`Contact ${props.name}`"
-                @click="emit('contact')"
-              >
-                {{ props.contactText }}
-              </button>
-            </div>
+  <div
+    ref="rootRef"
+    :class="cn('profile-card', props.class)"
+    :style="rootStyle"
+  >
+    <div class="profile-card__body">
+      <div class="profile-card__tile">
+        <span class="profile-card__sheen" />
+        <span class="profile-card__holo">
+          <span class="profile-card__holo-glow" />
+          <span class="profile-card__holo-shift" />
+        </span>
+        <img
+          v-if="avatarUrl"
+          class="profile-card__photo"
+          :src="avatarUrl"
+          :alt="name || ''"
+          loading="lazy"
+          draggable="false"
+        />
+        <template v-if="name || title">
+          <span class="profile-card__scrim" />
+          <div class="profile-card__info">
+            <h3 v-if="name" class="profile-card__name">{{ name }}</h3>
+            <p v-if="title" class="profile-card__title">{{ title }}</p>
           </div>
-          <div class="pc-text-content">
-            <div class="pc-details">
-              <h3>{{ props.name }}</h3>
-              <p>{{ props.title }}</p>
-            </div>
-          </div>
+        </template>
+        <span class="profile-card__tile-rim" />
+      </div>
+
+      <div v-if="showUserInfo" class="profile-card__footer">
+        <span v-if="miniAvatarUrl" class="profile-card__avatar">
+          <img :src="miniAvatarUrl" alt="" loading="lazy" draggable="false" />
+        </span>
+        <div class="profile-card__meta">
+          <span v-if="handle" class="profile-card__handle">@{{ handle }}</span>
+          <span v-if="status" class="profile-card__status">{{ status }}</span>
         </div>
-      </section>
+        <button
+          v-if="contactText"
+          type="button"
+          class="profile-card__contact"
+          :aria-label="contactLabel"
+          @click="onContact"
+        >
+          <Icon name="lucide:mail" class="size-4" />
+          {{ contactText }}
+        </button>
+      </div>
+
+      <span class="profile-card__glare" />
+      <span class="profile-card__shade" />
+      <span class="profile-card__rim" />
     </div>
   </div>
 </template>
 
 <style scoped>
-  .pc-wrapper {
-    --pointer-x: 50%;
-    --pointer-y: 50%;
-    --pointer-from-center: 0;
-    --pointer-from-top: 0.5;
-    --pointer-from-left: 0.5;
-    --rotate-x: 0deg;
-    --rotate-y: 0deg;
-    --background-x: 50%;
-    --background-y: 50%;
-    --card-radius: 30px;
-    --sunpillar-1: hsl(2, 100%, 73%);
-    --sunpillar-2: hsl(53, 100%, 69%);
-    --sunpillar-3: hsl(93, 100%, 69%);
-    --sunpillar-4: hsl(176, 100%, 76%);
-    --sunpillar-5: hsl(228, 100%, 74%);
-    --sunpillar-6: hsl(283, 100%, 73%);
-    perspective: 500px;
-    transform: translate3d(0, 0, 0.1px);
+  .profile-card {
+    --pc-light-x: 50%;
+    --pc-light-y: 50%;
+    --pc-pointer-x: 50%;
+    --pc-pointer-y: 50%;
+    --pc-band-x: 50%;
+    --pc-band-y: 50%;
+    --pc-reach: 0;
+    --pc-rotate-x: 0deg;
+    --pc-rotate-y: 0deg;
+    --pc-shift-x: 0px;
+    --pc-shift-y: 0px;
+    --pc-tilt: 0;
+    --pc-active: 0;
     position: relative;
-    touch-action: none;
+    width: 340px;
+    max-width: 100%;
+    perspective: 1000px;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .pc-behind {
+  .profile-card__body {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+    border-radius: calc(var(--pc-radius) + 10px);
+    background: var(--pc-frame);
+    box-shadow: var(--pc-frame-shadow);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    backdrop-filter: blur(20px) saturate(1.6);
+    transform: rotateX(var(--pc-rotate-x)) rotateY(var(--pc-rotate-y));
+    will-change: transform;
+  }
+
+  .profile-card__tile {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--pc-radius);
+    background: var(--pc-backdrop);
+    box-shadow: var(--pc-tile-shadow);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .profile-card__sheen,
+  .profile-card__holo,
+  .profile-card__scrim,
+  .profile-card__tile-rim,
+  .profile-card__glare,
+  .profile-card__shade,
+  .profile-card__rim {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    border-radius: inherit;
     pointer-events: none;
+  }
+
+  .profile-card__sheen {
     background: radial-gradient(
-      circle at var(--pointer-x) var(--pointer-y),
-      var(--behind-glow-color) 0%,
-      transparent var(--behind-glow-size)
+      farthest-corner circle at calc(var(--pc-light-x) - 10px)
+        calc(var(--pc-light-y) - 10px),
+      var(--pc-sheen) 0%,
+      transparent 55%
     );
-    filter: blur(50px) saturate(1.1);
-    transition: opacity 200ms ease;
+    opacity: calc(var(--pc-holo) * var(--pc-active));
   }
 
-  .pc-shell {
-    position: relative;
-    z-index: 1;
-  }
-
-  .pc-card {
-    height: 80svh;
-    max-height: 540px;
-    display: grid;
-    aspect-ratio: 0.718;
-    border-radius: var(--card-radius);
-    position: relative;
-    animation: glow-bg 12s linear infinite;
-    box-shadow: rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px)
-      calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
-    transition: transform 1s ease;
-    transform: translateZ(0) rotateX(0deg) rotateY(0deg);
-    background: rgba(0, 0, 0, 0.9);
-    backface-visibility: hidden;
-    overflow: hidden;
-  }
-
-  .pc-card.active {
-    transition: none;
-    transform: translateZ(0) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
-  }
-
-  .pc-card.entering {
-    transition: transform 180ms ease-out;
-  }
-
-  .pc-card > * {
-    display: grid;
-    grid-area: 1/-1;
-    border-radius: var(--card-radius);
-    pointer-events: none;
-  }
-
-  .pc-inside {
-    inset: 0;
-    position: absolute;
-    background-image: var(--inner-gradient);
-    background-color: rgba(0, 0, 0, 0.9);
-    transform: none;
-  }
-
-  .pc-shine {
-    --space: 5%;
-    --angle: -45deg;
-    transform: translate3d(0, 0, 1px);
-    overflow: hidden;
-    z-index: 3;
-    background: transparent;
-    mask-mode: luminance;
-    mask-repeat: repeat;
-    mask-size: 150%;
-    transition: filter 0.8s ease;
-    filter: brightness(0.66) contrast(1.33) saturate(0.33) opacity(0.5);
-    animation: holo-bg 18s linear infinite;
-    mix-blend-mode: color-dodge;
-    background-image:
-      repeating-linear-gradient(
-        0deg,
-        var(--sunpillar-1) calc(var(--space) * 1),
-        var(--sunpillar-2) calc(var(--space) * 2),
-        var(--sunpillar-3) calc(var(--space) * 3),
-        var(--sunpillar-4) calc(var(--space) * 4),
-        var(--sunpillar-5) calc(var(--space) * 5),
-        var(--sunpillar-6) calc(var(--space) * 6),
-        var(--sunpillar-1) calc(var(--space) * 7)
-      ),
-      repeating-linear-gradient(
-        var(--angle),
-        #0e152e 0%,
-        hsl(180, 10%, 60%) 3.8%,
-        hsl(180, 29%, 66%) 4.5%,
-        hsl(180, 10%, 60%) 5.2%,
-        #0e152e 10%,
-        #0e152e 12%
-      ),
-      radial-gradient(
-        farthest-corner circle at var(--pointer-x) var(--pointer-y),
-        hsla(0, 0%, 0%, 0.1) 12%,
-        hsla(0, 0%, 0%, 0.15) 20%,
-        hsla(0, 0%, 0%, 0.25) 120%
-      );
+  .profile-card__holo {
+    --pc-spectrum: repeating-linear-gradient(
+      0deg,
+      hsl(2, 100%, 73%) 5%,
+      hsl(53, 100%, 69%) 10%,
+      hsl(93, 100%, 69%) 15%,
+      hsl(176, 100%, 76%) 20%,
+      hsl(228, 100%, 74%) 25%,
+      hsl(260, 100%, 76%) 30%,
+      hsl(2, 100%, 73%) 35%
+    );
+    --pc-bars: repeating-linear-gradient(
+      -45deg,
+      #0e152e 0%,
+      hsl(180, 10%, 60%) 3.8%,
+      hsl(180, 29%, 66%) 4.5%,
+      hsl(180, 10%, 60%) 5.2%,
+      #0e152e 10%,
+      #0e152e 12%
+    );
+    --pc-falloff: radial-gradient(
+      farthest-corner circle at var(--pc-pointer-x) var(--pc-pointer-y),
+      hsla(0, 0%, 0%, 0.1) 12%,
+      hsla(0, 0%, 0%, 0.15) 20%,
+      hsla(0, 0%, 0%, 0.25) 120%
+    );
+    background-image: var(--pc-spectrum), var(--pc-bars), var(--pc-falloff);
     background-position:
-      0 var(--background-y),
-      var(--background-x) var(--background-y),
+      0 var(--pc-band-y),
+      var(--pc-band-x) var(--pc-band-y),
       center;
-    background-blend-mode: color, hard-light;
     background-size:
       500% 500%,
       300% 300%,
       200% 200%;
+    background-blend-mode: color, hard-light;
+    mix-blend-mode: var(--pc-blend);
+    filter: brightness(calc(0.66 + 0.19 * var(--pc-active)))
+      contrast(calc(1.33 + 0.17 * var(--pc-active)))
+      saturate(calc(0.33 + 0.17 * var(--pc-active))) var(--pc-holo-filter);
+    opacity: calc(
+      var(--pc-holo) * var(--pc-holo-gain) * (0.5 + 0.5 * var(--pc-active))
+    );
+    -webkit-mask-image: var(--pc-pattern);
+    -webkit-mask-size: var(--pc-pattern-size);
+    -webkit-mask-position: calc(50% - var(--pc-shift-x) * 1.5)
+      calc(65% - var(--pc-shift-y) * 1.5);
+    -webkit-mask-repeat: repeat;
+    mask-image: var(--pc-pattern);
+    mask-size: var(--pc-pattern-size);
+    mask-position: calc(50% - var(--pc-shift-x) * 1.5)
+      calc(65% - var(--pc-shift-y) * 1.5);
+    mask-repeat: repeat;
   }
 
-  .pc-shine::before,
-  .pc-shine::after {
-    content: '';
-    grid-area: 1/1;
-    opacity: 0;
-    transition: opacity 0.8s ease;
-    border-radius: var(--card-radius);
+  .profile-card__holo-glow,
+  .profile-card__holo-shift {
+    position: absolute;
+    inset: 0;
+    opacity: calc(var(--pc-active) * var(--pc-holo-detail));
   }
 
-  .pc-card.active .pc-shine {
-    filter: brightness(0.85) contrast(1.5) saturate(0.5);
-    animation-play-state: paused;
-  }
-
-  .pc-card.active .pc-shine::before,
-  .pc-card.active .pc-shine::after {
-    opacity: 1;
-  }
-
-  .pc-shine::before {
+  .profile-card__holo-glow {
     background-image:
       linear-gradient(
         45deg,
-        var(--sunpillar-4),
-        var(--sunpillar-5),
-        var(--sunpillar-6),
-        var(--sunpillar-1),
-        var(--sunpillar-2),
-        var(--sunpillar-3)
+        hsl(176, 100%, 76%),
+        hsl(228, 100%, 74%),
+        hsl(260, 100%, 76%),
+        hsl(2, 100%, 73%),
+        hsl(53, 100%, 69%),
+        hsl(93, 100%, 69%)
       ),
       radial-gradient(
-        circle at var(--pointer-x) var(--pointer-y),
+        circle at var(--pc-pointer-x) var(--pc-pointer-y),
         hsl(0, 0%, 70%) 0%,
         hsla(0, 0%, 30%, 0.2) 90%
-      );
+      ),
+      var(--pc-grain);
     background-size:
       250% 250%,
-      100% 100%;
+      100% 100%,
+      220px 220px;
     background-position:
-      var(--pointer-x) var(--pointer-y),
-      center;
+      var(--pc-pointer-x) var(--pc-pointer-y),
+      center,
+      0 0;
     background-blend-mode: color-dodge;
-    filter: brightness(calc(2 - var(--pointer-from-center)))
-      contrast(calc(var(--pointer-from-center) + 2))
-      saturate(calc(0.5 + var(--pointer-from-center)));
+    filter: brightness(calc(2 - var(--pc-reach)))
+      contrast(calc(var(--pc-reach) + 2)) saturate(calc(0.5 + var(--pc-reach)));
     mix-blend-mode: luminosity;
   }
 
-  .pc-shine::after {
+  .profile-card__holo-shift {
+    background-image: var(--pc-spectrum), var(--pc-bars), var(--pc-falloff);
     background-position:
-      0 var(--background-y),
-      calc(var(--background-x) * 0.4) calc(var(--background-y) * 0.5),
+      0 var(--pc-band-y),
+      calc(var(--pc-band-x) * 0.4) calc(var(--pc-band-y) * 0.5),
       center;
     background-size:
       200% 300%,
       700% 700%,
       100% 100%;
+    background-blend-mode: color, hard-light;
     mix-blend-mode: difference;
     filter: brightness(0.8) contrast(1.5);
   }
 
-  .pc-glare {
-    transform: translate3d(0, 0, 1.1px);
-    overflow: hidden;
-    background-image: radial-gradient(
-      farthest-corner circle at var(--pointer-x) var(--pointer-y),
-      hsl(248, 25%, 80%) 12%,
-      hsla(207, 40%, 30%, 0.8) 90%
-    );
-    mix-blend-mode: overlay;
-    filter: brightness(0.8) contrast(1.2);
-    z-index: 4;
-  }
-
-  .pc-avatar-content {
-    mix-blend-mode: luminosity;
-    overflow: visible;
-    transform: translateZ(2px);
-    backface-visibility: hidden;
-  }
-
-  .pc-avatar {
-    width: 100%;
+  .profile-card__photo {
     position: absolute;
-    left: 50%;
-    transform-origin: 50% 100%;
-    transform: translateX(calc(-50% + (var(--pointer-from-left) - 0.5) * 6px))
-      translateZ(0) scaleY(calc(1 + (var(--pointer-from-top) - 0.5) * 0.02))
-      scaleX(calc(1 + (var(--pointer-from-left) - 0.5) * 0.01));
-    bottom: -1px;
-    backface-visibility: hidden;
-    will-change: transform;
-    transition: transform 120ms ease-out;
-    border-radius: var(--card-radius);
+    inset: calc(var(--pc-parallax) * -1);
+    width: calc(100% + var(--pc-parallax) * 2);
+    height: calc(100% + var(--pc-parallax) * 2);
+    object-fit: cover;
+    object-position: center bottom;
+    transform: translate3d(var(--pc-shift-x), var(--pc-shift-y), 0);
     pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
   }
 
-  .pc-user-info {
-    --ui-inset: 20px;
-    --ui-radius-bias: 6px;
-    position: absolute;
-    bottom: var(--ui-inset);
-    left: var(--ui-inset);
-    right: var(--ui-inset);
-    z-index: 2;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: calc(
-      max(0px, var(--card-radius) - var(--ui-inset) + var(--ui-radius-bias))
+  .profile-card__scrim {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.6) 0%,
+      rgba(0, 0, 0, 0.57) 6%,
+      rgba(0, 0, 0, 0.5) 12%,
+      rgba(0, 0, 0, 0.4) 19%,
+      rgba(0, 0, 0, 0.28) 26%,
+      rgba(0, 0, 0, 0.16) 33%,
+      rgba(0, 0, 0, 0.07) 40%,
+      rgba(0, 0, 0, 0.02) 46%,
+      rgba(0, 0, 0, 0) 52%
     );
-    padding: 12px 14px;
-    pointer-events: auto;
   }
 
-  .pc-user-details {
+  .profile-card__info {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 18px;
+    color: #ffffff;
+  }
+
+  .profile-card__name {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: inherit;
+  }
+
+  .profile-card__title {
+    margin: 4px 0 0;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(255, 255, 255, 0.78);
+  }
+
+  .profile-card__tile-rim {
+    box-shadow:
+      inset 0 0 0 1px var(--pc-tile-edge),
+      inset 0 1px 0 var(--pc-tile-highlight);
+  }
+
+  .profile-card__footer {
     display: flex;
     align-items: center;
     gap: 12px;
+    min-width: 0;
+    padding: 6px 20px 8px;
   }
 
-  .pc-mini-avatar {
-    width: 48px;
-    height: 48px;
+  .profile-card__avatar {
+    position: relative;
+    flex: none;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
+    background: var(--pc-tile);
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    flex-shrink: 0;
   }
 
-  .pc-mini-avatar img {
+  .profile-card__avatar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 1px var(--pc-tile-edge);
+  }
+
+  .profile-card__avatar img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
+    object-position: center top;
   }
 
-  .pc-user-text {
+  .profile-card__meta {
     display: flex;
-    align-items: flex-start;
+    flex: 1;
     flex-direction: column;
-    gap: 6px;
+    gap: 3px;
+    min-width: 0;
   }
 
-  .pc-handle {
-    font-size: 14px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
-    line-height: 1;
-  }
-
-  .pc-status {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1;
-  }
-
-  .pc-contact-btn {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 12px 16px;
-    font-size: 12px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.9);
-    cursor: pointer;
-    transition: all 0.2s ease;
-    backdrop-filter: blur(10px);
-    background: transparent;
-  }
-
-  .pc-contact-btn:hover {
-    border-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-1px);
-  }
-
-  .pc-text-content {
-    max-height: 100%;
+  .profile-card__handle {
     overflow: hidden;
-    text-align: center;
-    position: relative;
-    transform: translate3d(
-      calc(var(--pointer-from-left) * -6px + 3px),
-      calc(var(--pointer-from-top) * -6px + 3px),
-      0.1px
-    );
-    z-index: 5;
-    mix-blend-mode: luminosity;
-    border-radius: var(--card-radius);
-    pointer-events: none;
-  }
-
-  .pc-details {
-    width: 100%;
-    position: absolute;
-    top: 3em;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .pc-details h3 {
+    font-size: 14px;
     font-weight: 600;
-    margin: 0;
-    font-size: min(5svh, 3em);
-    background-image: linear-gradient(to bottom, #fff, #6f6fbe);
-    background-size: 1em 1.5em;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-  }
-
-  .pc-details p {
-    font-weight: 600;
-    position: relative;
-    top: -12px;
+    line-height: 1.25;
+    color: var(--pc-ink);
     white-space: nowrap;
-    font-size: 16px;
-    margin: 0 auto;
-    width: min-content;
-    background-image: linear-gradient(to bottom, #fff, #4a4ac0);
-    background-size: 1em 1.5em;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
+    text-overflow: ellipsis;
   }
 
-  @keyframes glow-bg {
-    0% {
-      --bgrotate: 0deg;
-    }
-    100% {
-      --bgrotate: 360deg;
-    }
+  .profile-card__status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    line-height: 1.25;
+    color: var(--pc-muted);
+    white-space: nowrap;
   }
 
-  @keyframes holo-bg {
-    0% {
-      background-position:
-        0 var(--background-y),
-        0 0,
-        center;
-    }
-    100% {
-      background-position:
-        0 var(--background-y),
-        90% 90%,
-        center;
-    }
+  .profile-card__status::before {
+    content: '';
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--pc-status);
   }
 
-  @media (max-width: 768px) {
-    .pc-card {
-      height: 70svh;
-      max-height: 450px;
+  .profile-card__contact {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: none;
+    height: 36px;
+    padding: 0 14px;
+    border: none;
+    border-radius: calc(var(--pc-radius) * 0.75);
+    background: var(--pc-tile);
+    box-shadow:
+      inset 0 0 0 1px var(--pc-tile-edge),
+      inset 0 1px 0 var(--pc-tile-highlight),
+      var(--pc-tile-shadow);
+    color: var(--pc-ink);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      filter 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .profile-card__contact:active {
+    filter: var(--pc-press);
+    transform: scale(0.96);
+    transition-duration: 0s;
+  }
+
+  .profile-card__contact:focus-visible {
+    outline: 2px solid var(--pc-ink);
+    outline-offset: 2px;
+  }
+
+  .profile-card__glare {
+    background: radial-gradient(
+      farthest-corner circle at var(--pc-light-x) var(--pc-light-y),
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.36) 20%,
+      rgba(255, 255, 255, 0) 60%
+    );
+    mix-blend-mode: overlay;
+    opacity: calc(var(--pc-glare) * var(--pc-active));
+  }
+
+  .profile-card__shade {
+    background: radial-gradient(
+      farthest-corner circle at var(--pc-light-x) var(--pc-light-y),
+      transparent 30%,
+      var(--pc-shade) 100%
+    );
+    opacity: calc(var(--pc-glare) * var(--pc-tilt));
+  }
+
+  .profile-card__rim {
+    box-shadow:
+      inset 0 0 0 1px var(--pc-frame-edge),
+      inset 0 1px 0 var(--pc-frame-highlight);
+  }
+
+  @media (hover: hover) {
+    .profile-card__contact:hover {
+      filter: var(--pc-hover);
     }
-    .pc-details {
-      top: 2em;
-    }
-    .pc-details h3 {
-      font-size: min(4svh, 2.5em);
-    }
-    .pc-details p {
-      font-size: 14px;
-    }
-    .pc-user-info {
-      --ui-inset: 15px;
-      padding: 10px 12px;
-    }
-    .pc-mini-avatar {
-      width: 28px;
-      height: 28px;
-    }
-    .pc-user-details {
-      gap: 10px;
-    }
-    .pc-handle {
-      font-size: 13px;
-    }
-    .pc-status {
-      font-size: 10px;
-    }
-    .pc-contact-btn {
-      padding: 6px 12px;
-      font-size: 11px;
+
+    .profile-card__contact:hover:active {
+      filter: var(--pc-press);
     }
   }
 </style>

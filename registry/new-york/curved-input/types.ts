@@ -2,7 +2,7 @@
 export type CurvedInputTheme = 'dark' | 'light';
 
 /** Drop-shadow presets. */
-export type CurvedInputShadowSize = 'sm' | 'md' | 'lg';
+export type CurvedInputShadowSize = 'none' | 'sm' | 'md' | 'lg';
 
 /**
  * Props for the CurvedInput registry component.
@@ -40,12 +40,12 @@ export interface CurvedInputProps {
   buttonColor?: string;
   buttonTextColor?: string;
   iconColor?: string;
-  /** Drop-shadow preset (sm | md | lg). */
+  /** Drop-shadow preset (none | sm | md | lg). */
   shadowSize?: CurvedInputShadowSize;
   shadowColor?: string;
   /** Show the submit button. */
   showButton?: boolean;
-  /** Show the mail chip icon. */
+  /** Show the leading icon (the mail chip, or the `icon` slot). */
   showIcon?: boolean;
   /** Additional classes on the root form. */
   class?: string;

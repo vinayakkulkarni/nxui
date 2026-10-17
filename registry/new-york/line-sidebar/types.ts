@@ -37,6 +37,8 @@ export interface LineSidebarProps {
   fontSize?: number;
   /** Exponential smoothing time constant (ms). */
   smoothing?: number;
+  /** Item active on first render when `v-model` is not bound. */
+  defaultActive?: number | null;
   /** Additional classes on the root element. */
   class?: string;
 }

@@ -714,7 +714,7 @@ const COMPONENTS: Record<
   'decay-card': {
     title: 'Decay Card',
     description:
-      'SVG displacement map card that warps on cursor movement with lerp physics.',
+      'An image card drawn with WebGL that tears and melts as the pointer moves, then pulls itself back together.',
     deps: ['@vueuse/core'],
   },
   'dithered-logo': {
@@ -786,14 +786,14 @@ const COMPONENTS: Record<
   'curved-input': {
     title: 'Curved Input',
     description:
-      'A real text input bent along a circular arc — SVG textPath rendering with a caret that rides the curve and arc-length scrolling.',
+      'An input bar bent along an arc, with text, caret and submit button that all follow the curve.',
     deps: ['@vueuse/core'],
   },
   'line-sidebar': {
     title: 'Line Sidebar',
     description:
-      'Line-and-rail sidebar navigation whose items shift, tint, and grow their markers as the cursor approaches, eased by a single rAF loop.',
-    deps: [],
+      'List navigation with a marker rail; items near the cursor shift, tint and grow their markers, and the clicked item stays lit.',
+    deps: ['@vueuse/core'],
   },
   'prism-gradient': {
     title: 'Prism Gradient',
@@ -834,13 +834,13 @@ const COMPONENTS: Record<
   'bounce-cards': {
     title: 'Bounce Cards',
     description:
-      'Fan of image cards with staggered entrance and hover push animation.',
-    deps: [],
+      'A fan of photo cards that bounce in, then spread apart and straighten the one you hover.',
+    deps: ['@vueuse/core'],
   },
   'pixel-card': {
     title: 'Pixel Card',
     description:
-      'Canvas pixel shimmer card with hover-activated sparkle effect and preset variants.',
+      'A card whose canvas pixels reveal in a glowing wave from the center or cursor, on hover, click or always on, with a cursor spotlight.',
     deps: ['@vueuse/core'],
   },
   'notification-center': {
@@ -864,13 +864,13 @@ const COMPONENTS: Record<
   stepper: {
     title: 'Stepper',
     description:
-      'Multi-step wizard with animated step indicators and slide transitions.',
-    deps: [],
+      'A multi-step flow in a frosted panel with a gliding step indicator, spring transitions and number, dot, bar or vertical layouts.',
+    deps: ['@vueuse/core'],
   },
   carousel: {
     title: 'Carousel',
     description:
-      'Draggable card carousel with 3D perspective rotation and dot indicators.',
+      'Swipeable spring-physics cards with five transitions, dots, timer bars or a counter, autoplay, loop and photo cards.',
     deps: ['@vueuse/core'],
   },
   'flowing-menu': {
@@ -924,19 +924,19 @@ const COMPONENTS: Record<
   'bubble-menu': {
     title: 'Bubble Menu',
     description:
-      'Animated full-screen pill navigation with staggered scale-in and rotation.',
-    deps: [],
+      'A logo bubble and round menu button that pop open large tilted pill links with a staggered scale-in.',
+    deps: ['@vueuse/core', 'motion-v'],
   },
   'card-swap': {
     title: 'Card Swap',
     description:
-      'Stacked card carousel that cycles the front card to the back with 3D transforms.',
-    deps: [],
+      'A 3D stack of cards that sends the front card to the back on a timer, or when you drag and fling it.',
+    deps: ['@vueuse/core'],
   },
   'chroma-grid': {
     title: 'Chroma Grid',
     description:
-      'Profile card grid with mouse-tracking spotlight reveal and per-card hover glow.',
+      'A grid of grayscale photo cards where a spotlight follows the cursor and brings back color.',
     deps: ['@vueuse/core'],
   },
   'magic-bento': {
@@ -954,7 +954,7 @@ const COMPONENTS: Record<
   'card-nav': {
     title: 'Card Nav',
     description:
-      'Expandable navbar with staggered card reveal, hamburger toggle, and color-coded panels.',
+      'A navigation bar that springs open into a row of cards, each with its own links.',
     deps: ['@vueuse/core'],
   },
   'glass-surface': {
@@ -966,7 +966,7 @@ const COMPONENTS: Record<
   'profile-card': {
     title: 'Profile Card',
     description:
-      'Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax.',
+      'A framed profile card that tilts toward the cursor, with holographic foil shining through a tiled pattern.',
     deps: ['@vueuse/core'],
   },
   'receipt-printer': {
@@ -1441,7 +1441,7 @@ const COMPONENTS: Record<
   'scroll-stack': {
     title: 'Scroll Stack',
     description:
-      'Scroll-driven stacked card animation with scale and sticky positioning effects.',
+      'Cards pin and stack as you scroll, settling back into a dimmed deck with smooth, jitter-free motion.',
     deps: ['@vueuse/core'],
   },
   'splash-cursor': {

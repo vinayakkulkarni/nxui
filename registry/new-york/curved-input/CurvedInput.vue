@@ -11,7 +11,11 @@
   } from './geometry';
   import type { CurvedInputProps, CurvedInputShadowSize } from './types';
 
-  const SHADOWS: Record<CurvedInputShadowSize, [number, number, number]> = {
+  const SHADOWS: Record<
+    CurvedInputShadowSize,
+    [number, number, number] | null
+  > = {
+    none: null,
     sm: [5, 12, 0.3],
     md: [10, 24, 0.4],
     lg: [16, 40, 0.52],
@@ -207,9 +211,20 @@
     }
   });
 
-  watch([display, caretIndex, geom, layout, focused], () => {
-    requestAnimationFrame(measure);
-  });
+  watch(
+    [
+      display,
+      caretIndex,
+      geom,
+      layout,
+      focused,
+      () => props.buttonText,
+      () => props.fontSize,
+    ],
+    () => {
+      requestAnimationFrame(measure);
+    },
+  );
 
   function handleInputChange(e: Event): void {
     const target = e.target as HTMLInputElement;
@@ -458,33 +473,35 @@
         :transform="`translate(${chip.x} ${chip.y}) rotate(${chip.angle})`"
         aria-hidden="true"
       >
-        <rect
-          :x="-chip.w / 2"
-          :y="-chip.h / 2"
-          :width="chip.w"
-          :height="chip.h"
-          :rx="chip.h * 0.27"
-          :fill="chip.fill"
-        />
-        <rect
-          :x="-chip.ew / 2"
-          :y="-chip.eh / 2"
-          :width="chip.ew"
-          :height="chip.eh"
-          :rx="1.4"
-          fill="none"
-          stroke="#ffffff"
-          :stroke-width="chip.sw"
-          stroke-linejoin="round"
-        />
-        <path
-          :d="chipFlapPath"
-          fill="none"
-          stroke="#ffffff"
-          :stroke-width="chip.sw"
-          stroke-linejoin="round"
-          stroke-linecap="round"
-        />
+        <slot name="icon">
+          <rect
+            :x="-chip.w / 2"
+            :y="-chip.h / 2"
+            :width="chip.w"
+            :height="chip.h"
+            :rx="chip.h * 0.27"
+            :fill="chip.fill"
+          />
+          <rect
+            :x="-chip.ew / 2"
+            :y="-chip.eh / 2"
+            :width="chip.ew"
+            :height="chip.eh"
+            :rx="1.4"
+            fill="none"
+            stroke="#ffffff"
+            :stroke-width="chip.sw"
+            stroke-linejoin="round"
+          />
+          <path
+            :d="chipFlapPath"
+            fill="none"
+            stroke="#ffffff"
+            :stroke-width="chip.sw"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+          />
+        </slot>
       </g>
 
       <g :clip-path="`url(#${clipId})`">
