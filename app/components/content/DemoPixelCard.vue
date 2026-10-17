@@ -423,7 +423,7 @@
                 </div>
                 <div class="mt-5.5 flex items-baseline gap-1">
                   <span
-                    class="text-[34px] leading-none font-semibold tracking-[-0.03em]"
+                    class="text-[34px]/none font-semibold tracking-[-0.03em]"
                     :style="{ color: ink.text }"
                   >
                     {{ plan.price }}
