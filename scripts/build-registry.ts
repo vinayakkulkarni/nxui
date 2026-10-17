@@ -425,13 +425,13 @@ const COMPONENTS: Record<
   balatro: {
     title: 'Balatro',
     description:
-      'Psychedelic spin-paint background with configurable colors and animation speed.',
-    deps: ['ogl', '@vueuse/core'],
+      'The swirling Balatro paint shader with crisp pixels, a cursor that stirs the paint, click whirlpools and an optional CRT look.',
+    deps: ['@vueuse/core'],
   },
   waves: {
     title: 'Waves',
     description:
-      'Animated Perlin noise wave lines with configurable colors, amplitude, and density.',
+      'Dense flowing lines that sway like silk, bend around the cursor and spring back, with click ripples, dashed lines and rotation.',
     deps: ['@vueuse/core'],
   },
   threads: {
@@ -443,26 +443,26 @@ const COMPONENTS: Record<
   orb: {
     title: 'Orb',
     description:
-      'Glowing orb with hue-shifted noise, hover distortion, and optional rotation.',
-    deps: ['ogl', '@vueuse/core'],
+      'A glowing ring of swirling color that breathes, trails an orbiting light, reaches toward the cursor and pulses on click.',
+    deps: ['@vueuse/core'],
   },
   silk: {
     title: 'Silk',
     description:
-      'Silky fabric-like shader background with flowing noise patterns.',
-    deps: ['three', '@vueuse/core'],
+      'Flowing satin folds with glossy highlights that turn toward the cursor and ripple on click.',
+    deps: ['@vueuse/core'],
   },
   'floating-lines': {
     title: 'Floating Lines',
     description:
-      'Multi-layered glowing wave lines with cursor-reactive bending.',
-    deps: ['three', '@vueuse/core'],
+      'Waves of fine glowing lines that drift, part around the cursor and curl into a swirl when you click.',
+    deps: ['@vueuse/core'],
   },
   beams: {
     title: 'Beams',
     description:
-      '3D light beam planes with Perlin noise deformation and directional lighting.',
-    deps: ['three', '@vueuse/core'],
+      'Glossy ribbons that ripple and catch a glowing light, which follows your cursor along the beams.',
+    deps: ['@vueuse/core'],
   },
   'dark-veil': {
     title: 'Dark Veil',
@@ -473,20 +473,20 @@ const COMPONENTS: Record<
   'faulty-terminal': {
     title: 'Faulty Terminal',
     description:
-      'Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration.',
-    deps: ['ogl', '@vueuse/core'],
+      'A flickering CRT terminal of glowing glyphs, with phosphor trails under the cursor and glitches on click.',
+    deps: ['@vueuse/core'],
   },
   'gradient-blinds': {
     title: 'Gradient Blinds',
     description:
-      'Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops.',
-    deps: ['ogl', '@vueuse/core'],
+      'Satin gradient blinds lit by a cursor spotlight that sway, turn toward the light and ripple on click.',
+    deps: ['@vueuse/core'],
   },
   'color-bends': {
     title: 'Color Bends',
     description:
-      'Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors.',
-    deps: ['three', '@vueuse/core'],
+      'Bands of color that bend and fold into each other in a slow, flowing warp that leans toward the cursor.',
+    deps: ['@vueuse/core', 'three'],
   },
   'light-pillar': {
     title: 'Light Pillar',
@@ -509,8 +509,8 @@ const COMPONENTS: Record<
   lightfall: {
     title: 'Lightfall',
     description:
-      'A WebGL raymarched light-streak background with falling luminous trails, configurable colors, density, and mouse interaction.',
-    deps: ['ogl'],
+      'Streaks of light falling down a curved tunnel, bending around the cursor and stretching into warp trails on hold.',
+    deps: ['@vueuse/core'],
   },
   'ripple-grid': {
     title: 'Ripple Grid',
@@ -575,20 +575,20 @@ const COMPONENTS: Record<
   'pixel-snow': {
     title: 'Pixel Snow',
     description:
-      '3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction.',
-    deps: ['three', '@vueuse/core'],
+      'Pixel-art snowflakes drifting down in layers of depth, brushed aside by the cursor.',
+    deps: ['@vueuse/core'],
   },
   'prismatic-burst': {
     title: 'Prismatic Burst',
     description:
-      'WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes.',
-    deps: ['ogl', '@vueuse/core'],
+      'A burst of prismatic light rays that leans toward the cursor and sends a wave of light outward on click.',
+    deps: ['@vueuse/core'],
   },
   'liquid-ether': {
     title: 'Liquid Ether',
     description:
-      'Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette.',
-    deps: ['three', '@vueuse/core'],
+      'A glowing liquid that swirls under the cursor, colored by how fast it flows, with an intro sweep, click puffs and a light mode.',
+    deps: ['@vueuse/core'],
   },
   'pixel-blast': {
     title: 'Pixel Blast',
@@ -599,7 +599,7 @@ const COMPONENTS: Record<
   'dot-grid': {
     title: 'Dot Grid',
     description:
-      'Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return.',
+      'A springy dot grid that the cursor flicks and drags through like jelly, with click shockwaves.',
     deps: ['@vueuse/core'],
   },
   'grid-distortion': {
@@ -617,7 +617,7 @@ const COMPONENTS: Record<
   'animated-content': {
     title: 'Animated Content',
     description:
-      'Scroll-triggered entrance animation with configurable direction, distance, and easing.',
+      'Reveals its content on scroll with slides, blur, rotation, 3D tilts, soft wipes, staggered children, scroll-linked progress and a mount trigger.',
     deps: ['@vueuse/core'],
   },
   'fade-content': {
@@ -641,14 +641,14 @@ const COMPONENTS: Record<
   magnet: {
     title: 'Magnet',
     description:
-      'Element that magnetically pulls toward the cursor when nearby.',
+      'Elements lean toward the cursor on a spring, with tilt, scale, axis locking and a movement cap; only the nearest magnet reacts.',
     deps: ['@vueuse/core'],
   },
   'gradual-blur': {
     title: 'Gradual Blur',
     description:
-      'Layered backdrop-filter blur gradient overlay for smooth edge fading.',
-    deps: [],
+      'Progressive edge blur for headers, footers and carousels, with a fade to color, hover to clear, and auto-hide at the ends of a scroll.',
+    deps: ['@vueuse/core'],
   },
   'glare-hover': {
     title: 'Glare Hover',
@@ -1019,26 +1019,26 @@ const COMPONENTS: Record<
   prism: {
     title: 'Prism',
     description:
-      'A prismatic light refraction background rendered with WebGL shaders via OGL.',
-    deps: ['ogl'],
+      'Rotating prism of glowing spectral light that tilts toward the cursor, with custom colors, shape, motion and a light mode.',
+    deps: ['@vueuse/core'],
   },
   'shape-grid': {
     title: 'Shape Grid',
     description:
-      'An animated grid of shapes (squares, hexagons, circles, triangles) with hover trail effects.',
+      'A drifting grid of shapes that lights up under the cursor, with perspective tilt, rainbow trails and click ripples.',
     deps: ['@vueuse/core'],
   },
   'magic-rings': {
     title: 'Magic Rings',
     description:
-      'Concentric animated rings rendered with Three.js shaders, featuring glow and parallax effects.',
-    deps: ['three'],
+      'Glowing rings that pulse, ripple or breathe, swell toward the cursor, flare on click, and can tilt, spin or split into prism fringes.',
+    deps: ['@vueuse/core'],
   },
   'evil-eye': {
     title: 'Evil Eye',
     description:
-      'An animated evil eye background with flame effects and cursor-tracking pupil.',
-    deps: ['ogl'],
+      'Procedural evil eye shader with an animated iris, a slit pupil that follows the cursor, and a fiery outer glow.',
+    deps: ['@vueuse/core', 'ogl'],
   },
   'soft-aurora': {
     title: 'Soft Aurora',
@@ -1061,7 +1061,7 @@ const COMPONENTS: Record<
   noise: {
     title: 'Noise',
     description:
-      'An animated canvas noise grain overlay for adding texture to backgrounds and sections.',
+      'Film grain overlay for photos and pages, from fine 35mm grain to dust, scratches, paper and TV static.',
     deps: ['@vueuse/core'],
   },
   'text-string': {
@@ -1296,13 +1296,13 @@ const COMPONENTS: Record<
   'plasma-wave': {
     title: 'Plasma Wave',
     description:
-      'Raymarched plasma waves with dual-wave interference, configurable colors, focal length, and rotation rendered with OGL.',
-    deps: ['ogl', '@vueuse/core'],
+      'Two ribbons of plasma curling through each other, with soft glow and white-hot cores.',
+    deps: ['@vueuse/core'],
   },
   'dot-field': {
     title: 'Dot Field',
     description:
-      'Interactive canvas dot grid with cursor bulge, glow, sparkle, and wave effects with smooth physics-based response.',
+      'A gradient dot field seen through a lens that follows the cursor, magnifying, pinching or swirling the dots.',
     deps: ['@vueuse/core'],
   },
   'sticky-scroll-cards': {
@@ -1326,8 +1326,8 @@ const COMPONENTS: Record<
   antigravity: {
     title: 'Antigravity',
     description:
-      'Three.js InstancedMesh particle field with mouse-driven magnetic attraction, wave animation, and configurable shapes.',
-    deps: ['three', '@vueuse/core'],
+      'A field of particles that lifts into a glowing ring around the cursor and bursts outward on click.',
+    deps: ['@vueuse/core'],
   },
   'ascii-text': {
     title: 'ASCII Text',
@@ -1356,8 +1356,8 @@ const COMPONENTS: Record<
   galaxy: {
     title: 'Galaxy',
     description:
-      'OGL-powered starfield galaxy with thousands of animated points and parallax depth.',
-    deps: ['ogl'],
+      'Endless flight through a twinkling starfield with warp jumps, cursor repulsion and star palettes.',
+    deps: ['@vueuse/core'],
   },
   'ghost-cursor': {
     title: 'Ghost Cursor',
@@ -1374,7 +1374,7 @@ const COMPONENTS: Record<
   'image-trail': {
     title: 'Image Trail',
     description:
-      'Mouse-following image trail that spawns images at cursor position with fade and scale animations.',
+      'A trail of photos behind the cursor with tunable size, timing, zoom, flash, drift, 3D tilt, rotation and a stacking pile.',
     deps: ['@vueuse/core'],
   },
   'infinite-menu': {
@@ -1422,8 +1422,8 @@ const COMPONENTS: Record<
   particles: {
     title: 'Particles',
     description:
-      'OGL particle system with velocity simulation, mouse influence, and connection lines.',
-    deps: ['ogl'],
+      'A drifting 3D field of particles with glow, twinkle, constellation lines, drift modes and cursor repel, attract or parallax.',
+    deps: ['@vueuse/core'],
   },
   'pill-nav': {
     title: 'Pill Nav',
