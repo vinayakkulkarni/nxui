@@ -11,6 +11,11 @@ export const docsNav: NavGroup[] = [
   {
     title: 'Text Animations',
     items: [
+      {
+        title: 'ASCII Effect',
+        path: '/docs/text-animations/ascii-effect',
+        badge: 'new',
+      },
       { title: 'ASCII Text', path: '/docs/text-animations/ascii-text' },
       { title: 'Blur Text', path: '/docs/text-animations/blur-text' },
       { title: 'Circular Text', path: '/docs/text-animations/circular-text' },
@@ -36,6 +41,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/editorial-orbs',
       },
       { title: 'Falling Text', path: '/docs/text-animations/falling-text' },
+      {
+        title: 'Flipping Word Swap',
+        path: '/docs/text-animations/flipping-word-swap',
+        badge: 'new',
+      },
       {
         title: 'Fold Text',
         path: '/docs/text-animations/fold-text',
@@ -93,6 +103,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/text-loop',
         badge: 'new',
       },
+      {
+        title: 'Text Morph',
+        path: '/docs/text-animations/text-morph',
+        badge: 'new',
+      },
       { title: 'Text Pressure', path: '/docs/text-animations/text-pressure' },
       { title: 'Text String', path: '/docs/text-animations/text-string' },
       { title: 'Text Type', path: '/docs/text-animations/text-type' },
@@ -124,6 +139,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Animated TOC',
         path: '/docs/components/animated-toc',
+      },
+      {
+        title: 'Annotated Text',
+        path: '/docs/components/annotated-text',
+        badge: 'new',
       },
       {
         title: 'Aurora Accordion',
@@ -173,6 +193,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Card Nav', path: '/docs/components/card-nav' },
       { title: 'Card Swap', path: '/docs/components/card-swap' },
       { title: 'Carousel', path: '/docs/components/carousel' },
+      {
+        title: 'Case Study Flip Stack',
+        path: '/docs/components/case-study-flip-stack',
+        badge: 'new',
+      },
       { title: 'Chroma Grid', path: '/docs/components/chroma-grid' },
       {
         title: 'Circle Input',
@@ -297,6 +322,11 @@ export const docsNav: NavGroup[] = [
         title: 'Holo Cloth',
         path: '/docs/components/holo-cloth',
       },
+      {
+        title: 'Hover Transition',
+        path: '/docs/components/hover-transition',
+        badge: 'new',
+      },
       { title: 'Infinite Menu', path: '/docs/components/infinite-menu' },
       {
         title: 'Infinite Spiral',
@@ -316,6 +346,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Layered Stack', path: '/docs/components/layered-stack' },
       {
+        title: 'Lens Clock',
+        path: '/docs/components/lens-clock',
+        badge: 'new',
+      },
+      {
         title: 'Line Sidebar',
         path: '/docs/components/line-sidebar',
       },
@@ -334,6 +369,11 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       { title: 'Music Player', path: '/docs/components/music-player' },
+      {
+        title: 'Newsletter Bookshelf',
+        path: '/docs/components/newsletter-bookshelf',
+        badge: 'new',
+      },
       {
         title: 'Node Canvas',
         path: '/docs/components/node-canvas',
@@ -423,6 +463,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Scroll Stack', path: '/docs/components/scroll-stack' },
       {
+        title: 'Scroll Tilted Grid',
+        path: '/docs/components/scroll-tilted-grid',
+        badge: 'new',
+      },
+      {
         title: 'Scrub Field',
         path: '/docs/components/scrub-field',
         badge: 'new',
@@ -452,6 +497,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Specular Button',
         path: '/docs/components/specular-button',
+        badge: 'new',
+      },
+      {
+        title: 'Spiral 3D Slider',
+        path: '/docs/components/spiral-3d-slider',
         badge: 'new',
       },
       {
@@ -541,6 +591,11 @@ export const docsNav: NavGroup[] = [
         title: 'Weather Forecast',
         path: '/docs/components/weather-forecast',
       },
+      {
+        title: 'Wheel Carousel',
+        path: '/docs/components/wheel-carousel',
+        badge: 'new',
+      },
     ],
   },
   {
@@ -623,6 +678,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/visual-effects/dither-gradient',
       },
       {
+        title: 'Fisheye Infinite Grid',
+        path: '/docs/visual-effects/fisheye-infinite-grid',
+        badge: 'new',
+      },
+      {
         title: 'Image Ripple Effect',
         path: '/docs/visual-effects/image-ripple-effect',
       },
@@ -639,6 +699,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/visual-effects/particle-galaxy',
       },
       { title: 'Pixel Canvas', path: '/docs/visual-effects/pixel-canvas' },
+      {
+        title: 'Pixel Image Trail',
+        path: '/docs/visual-effects/pixel-image-trail',
+        badge: 'new',
+      },
       {
         title: 'Pixel Wave',
         path: '/docs/visual-effects/pixel-wave',
@@ -989,8 +1054,18 @@ export const docsNav: NavGroup[] = [
         path: '/docs/hero-backgrounds/animated-gradient',
       },
       {
+        title: 'Aurora Flow',
+        path: '/docs/hero-backgrounds/aurora-flow',
+        badge: 'new',
+      },
+      {
         title: 'Dither Prism Hero',
         path: '/docs/hero-backgrounds/dither-prism-hero',
+      },
+      {
+        title: 'Grain Gradient',
+        path: '/docs/hero-backgrounds/grain-gradient',
+        badge: 'new',
       },
       {
         title: 'Hero Geometric',
@@ -1003,6 +1078,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Silk Aurora',
         path: '/docs/hero-backgrounds/silk-aurora',
+      },
+      {
+        title: 'Spectral Ribbon',
+        path: '/docs/hero-backgrounds/spectral-ribbon',
+        badge: 'new',
       },
       { title: 'WebGL Liquid', path: '/docs/hero-backgrounds/webgl-liquid' },
     ],

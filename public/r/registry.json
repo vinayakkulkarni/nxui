@@ -2074,6 +2074,102 @@
       "description": "A 3D landscape drawn in glowing contour lines that rises under the cursor, with light pulses on click."
     },
     {
+      "name": "annotated-text",
+      "type": "registry:ui",
+      "title": "Annotated Text",
+      "description": "Inline text marked with hand-drawn SVG circles, underlines, highlights, brackets and cross-outs that draw in once when they scroll into view."
+    },
+    {
+      "name": "ascii-effect",
+      "type": "registry:ui",
+      "title": "ASCII Effect",
+      "description": "Renders an image as dithered ASCII characters on a canvas, with static, flowing pointer-ripple, and glitch-reveal variants."
+    },
+    {
+      "name": "aurora-flow",
+      "type": "registry:ui",
+      "title": "Aurora Flow",
+      "description": "WebGL hero background with layered silk flow, diffused aurora light, film grain and a soft pointer bend, with twelve palette presets."
+    },
+    {
+      "name": "case-study-flip-stack",
+      "type": "registry:ui",
+      "title": "Case Study Flip Stack",
+      "description": "Editorial case study cards that fold upward on scroll to reveal the next story beneath."
+    },
+    {
+      "name": "fisheye-infinite-grid",
+      "type": "registry:ui",
+      "title": "Fisheye Infinite Grid",
+      "description": "A draggable image wall that repeats on both axes and bends through one fisheye lens, with momentum, wheel and arrow-key panning."
+    },
+    {
+      "name": "flipping-word-swap",
+      "type": "registry:ui",
+      "title": "Flipping Word Swap",
+      "description": "A word that flips into a second word one character at a time on hover, focus or tap, and flips back when you leave."
+    },
+    {
+      "name": "grain-gradient",
+      "type": "registry:ui",
+      "title": "Grain Gradient",
+      "description": "A breathing color field with a soft curved shadow, flowing light and fine film grain, drawn with WebGL."
+    },
+    {
+      "name": "hover-transition",
+      "type": "registry:ui",
+      "title": "Hover Transition",
+      "description": "A focusable wrapper that swaps a default and a hover slot with one of eight transitions from nine directions, plus a light tilt and glare."
+    },
+    {
+      "name": "lens-clock",
+      "type": "registry:ui",
+      "title": "Lens Clock",
+      "description": "A live clock that frames a corner of a large dial, panning with the hour hand while the edges blur out of focus."
+    },
+    {
+      "name": "newsletter-bookshelf",
+      "type": "registry:ui",
+      "title": "Newsletter Bookshelf",
+      "description": "A three.js shelf of cloth-bound books for a newsletter archive. Browse sideways, hover to lift a spine, click to pull a book forward."
+    },
+    {
+      "name": "pixel-image-trail",
+      "type": "registry:ui",
+      "title": "Pixel Image Trail",
+      "description": "An image reveal made from cursor-painted squares that expire into a bounded pixel trail."
+    },
+    {
+      "name": "scroll-tilted-grid",
+      "type": "registry:ui",
+      "title": "Scroll Tilted Grid",
+      "description": "A two-column image gallery whose frames tilt, blur and dim at the viewport edges and settle into focus as they cross the center."
+    },
+    {
+      "name": "spectral-ribbon",
+      "type": "registry:ui",
+      "title": "Spectral Ribbon",
+      "description": "A soft spectral light ribbon on black with slow liquid motion and a rainbow fringe, drawn by one WebGL fragment shader."
+    },
+    {
+      "name": "spiral-3d-slider",
+      "type": "registry:ui",
+      "title": "Spiral 3D Slider",
+      "description": "An autoplaying image gallery that flows along a 3D spiral of curved WebGL planes and moves with wheel and page scroll."
+    },
+    {
+      "name": "text-morph",
+      "type": "registry:ui",
+      "title": "Text Morph",
+      "description": "Words, numbers or prices melt into each other on a timer through blur and an SVG alpha-threshold filter, inheriting parent typography."
+    },
+    {
+      "name": "wheel-carousel",
+      "type": "registry:ui",
+      "title": "Wheel Carousel",
+      "description": "A rotating-wheel picker with inertial drag and scroll, curved fading labels, and a crossfading image for the active item."
+    },
+    {
       "name": "clean-table",
       "type": "registry:ui",
       "title": "Clean Table",

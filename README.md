@@ -47,7 +47,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>347 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>363 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -72,17 +72,18 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (347)
+## Components (363)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 349 items total, of which these 347 are
+> on — so `npx shadcn-vue add` resolves 365 items total, of which these 363 are
 > user-facing components.
 
-### Text Animations (44)
+### Text Animations (47)
 
 | Component                                                                                                         | Description                                                                                                                                                                          |
 | ----------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [ASCII Effect](https://nxui.geoql.in/docs/text-animations/ascii-effect)                                           | Renders an image as dithered ASCII characters on a canvas, with static, flowing pointer-ripple, and glitch-reveal variants.                                                          |
 | [ASCII Text](https://nxui.geoql.in/docs/text-animations/ascii-text)                                               | Three.js rendered text converted to ASCII art with animated wave distortion.                                                                                                         |
 | [Blur Text](https://nxui.geoql.in/docs/text-animations/blur-text)                                                 | Words or letters animate from blurred to clear with a staggered entrance, triggered on scroll into view.                                                                             |
 | [Circular Text](https://nxui.geoql.in/docs/text-animations/circular-text)                                         | Layouts characters around a circle with optional rotation animation.                                                                                                                 |
@@ -95,6 +96,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Echo Text](https://nxui.geoql.in/docs/text-animations/echo-text)                                                 | Tinted, blurred copies trail behind the text and settle into one word, following the cursor, drifting, or scrolling, with click bursts.                                              |
 | [Editorial Orbs](https://nxui.geoql.in/docs/text-animations/editorial-orbs)                                       | Bouncing glowing orbs with text that dynamically flows around them in multi-column layout with drop caps and pull quotes.                                                            |
 | [Falling Text](https://nxui.geoql.in/docs/text-animations/falling-text)                                           | Matter.js physics-based falling text where words collapse and tumble with realistic gravity.                                                                                         |
+| [Flipping Word Swap](https://nxui.geoql.in/docs/text-animations/flipping-word-swap)                               | A word that flips into a second word one character at a time on hover, focus or tap, and flips back when you leave.                                                                  |
 | [Fold Text](https://nxui.geoql.in/docs/text-animations/fold-text)                                                 | Text that unfolds piece by piece from a hinge edge like creased paper, with blinds and flip styles and a pointer refold.                                                             |
 | [Fuzzy Text](https://nxui.geoql.in/docs/text-animations/fuzzy-text)                                               | Canvas-based fuzzy blur text with hover intensity, directional displacement, glitch mode, gradient fill, and click effects.                                                          |
 | [Glitch Text](https://nxui.geoql.in/docs/text-animations/glitch-text)                                             | RGB split and distortion glitch effect with jitter animations and optional hover trigger.                                                                                            |
@@ -119,6 +121,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Text Animate](https://nxui.geoql.in/docs/text-animations/text-animate)                                           | A premium text animation component with multiple presets including blur, fade, slide, and scale effects.                                                                             |
 | [Text Cursor](https://nxui.geoql.in/docs/text-animations/text-cursor)                                             | A cursor trail effect that drops text or emoji characters along the mouse path, with configurable spacing and fade.                                                                  |
 | [Text Loop](https://nxui.geoql.in/docs/text-animations/text-loop)                                                 | A seamless text marquee along a curved SVG path, with a crossing band, hover pause, drag-to-fling and scroll boost.                                                                  |
+| [Text Morph](https://nxui.geoql.in/docs/text-animations/text-morph)                                               | Words, numbers or prices melt into each other on a timer through blur and an SVG alpha-threshold filter, inheriting parent typography.                                               |
 | [Text Pressure](https://nxui.geoql.in/docs/text-animations/text-pressure)                                         | Variable font text that responds to cursor proximity with weight, width, and italic axis changes.                                                                                    |
 | [Text Repel](https://nxui.geoql.in/docs/text-animations/text-repel)                                               | Physics-based text where letters are repelled or attracted by the cursor with spring dynamics.                                                                                       |
 | [Text String](https://nxui.geoql.in/docs/text-animations/text-string)                                             | A Verlet physics rope text animation where each character acts as a connected particle. Drag letters to unravel the string, toggle gravity, and watch characters collide and bounce. |
@@ -168,13 +171,14 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Swarm Cursor](https://nxui.geoql.in/docs/animations/swarm-cursor)           | A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons.                                   |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)         | A spinning reticle cursor whose corner brackets snap around targets, follow their corner radius and show a label.                              |
 
-### Components (131)
+### Components (139)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Accordion Gallery](https://nxui.geoql.in/docs/components/accordion-gallery)         | Image panels that expand on hover, click or focus, with 3D tilt, parallax images and a staggered caption.                                                              |
 | [Animated List](https://nxui.geoql.in/docs/components/animated-list)                 | Scroll-triggered list with scale entrance, keyboard navigation, and gradient edges.                                                                                    |
 | [Animated TOC](https://nxui.geoql.in/docs/components/animated-toc)                   | Table of contents with an SVG rail that snakes through nesting levels and a dot that glides along the curve to the active entry.                                       |
+| [Annotated Text](https://nxui.geoql.in/docs/components/annotated-text)               | Inline text marked with hand-drawn SVG circles, underlines, highlights, brackets and cross-outs that draw in once when they scroll into view.                          |
 | [Art Gallery](https://nxui.geoql.in/docs/components/art-gallery)                     | A museum-style painting showcase with crossfading featured artwork, poetic captions, and thumbnail navigation.                                                         |
 | [Aurora Accordion](https://nxui.geoql.in/docs/components/aurora-accordion)           | Accordion whose opened row detaches into its own card while an aurora gradient blooms behind the answer, then settles into a calm glow.                                |
 | [Auth Modal](https://nxui.geoql.in/docs/components/auth-modal)                       | An authentication modal with social login buttons and email form.                                                                                                      |
@@ -191,6 +195,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Card Nav](https://nxui.geoql.in/docs/components/card-nav)                           | Expandable navbar with staggered card reveal, hamburger toggle, and color-coded category panels.                                                                       |
 | [Card Swap](https://nxui.geoql.in/docs/components/card-swap)                         | Stacked card carousel that cycles the front card to the back with 3D transforms.                                                                                       |
 | [Carousel](https://nxui.geoql.in/docs/components/carousel)                           | Draggable card carousel with 3D perspective rotation and dot indicators.                                                                                               |
+| [Case Study Flip Stack](https://nxui.geoql.in/docs/components/case-study-flip-stack) | Editorial case study cards that fold upward on scroll to reveal the next story beneath.                                                                                |
 | [Chroma Grid](https://nxui.geoql.in/docs/components/chroma-grid)                     | Profile card grid with mouse-tracking spotlight reveal and per-card hover glow.                                                                                        |
 | [Circle Input](https://nxui.geoql.in/docs/components/circle-input)                   | A segmented character input rendered as a row of circular cells that auto-types words, collapses to a single circle, and spreads back out.                             |
 | [Circular Carousel](https://nxui.geoql.in/docs/components/circular-carousel)         | A 3D ring of images with bendable cards, momentum drag, snapping and click to focus.                                                                                   |
@@ -232,12 +237,14 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Holo Card](https://nxui.geoql.in/docs/components/holo-card)                         | Trading card with a WebGL holographic foil, glittering border and pointer tilt. Optional back face flips on click.                                                     |
 | [Holo Cloth](https://nxui.geoql.in/docs/components/holo-cloth)                       | A grabbable sheet of simulated cloth draped in an iridescent holo-foil material, floating in zero gravity.                                                             |
 | [Holo Sticker](https://nxui.geoql.in/docs/components/holo-sticker)                   | A die-cut holographic sticker rendered in WebGL: rainbow foil sweeps with your cursor, embossed ink relief, page-curled peel, and exploded production layers.          |
+| [Hover Transition](https://nxui.geoql.in/docs/components/hover-transition)           | A focusable wrapper that swaps a default and a hover slot with one of eight transitions from nine directions, plus a light tilt and glare.                             |
 | [Infinite Menu](https://nxui.geoql.in/docs/components/infinite-menu)                 | WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection.                                                                            |
 | [Infinite Spiral](https://nxui.geoql.in/docs/components/infinite-spiral)             | An endlessly looping 3D helix of image cards that plays by itself, follows a drag or follows page scroll.                                                              |
 | [Jelly Radio](https://nxui.geoql.in/docs/components/jelly-radio)                     | Radio group of chips where the chosen one swells and barges its neighbours outward.                                                                                    |
 | [Lanyard](https://nxui.geoql.in/docs/components/lanyard)                             | Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model.                                                                  |
 | [Lattice Loader](https://nxui.geoql.in/docs/components/lattice-loader)               | Agent status row with a lattice of cells that brighten in a wave beside a live stopwatch.                                                                              |
 | [Layered Stack](https://nxui.geoql.in/docs/components/layered-stack)                 | Stack of cards that fans out on hover, stacking back with random rotation on mouse leave.                                                                              |
+| [Lens Clock](https://nxui.geoql.in/docs/components/lens-clock)                       | A live clock that frames a corner of a large dial, panning with the hour hand while the edges blur out of focus.                                                       |
 | [Line Sidebar](https://nxui.geoql.in/docs/components/line-sidebar)                   | Line-and-rail sidebar navigation whose items shift, tint, and grow their markers as the cursor approaches, eased by a single rAF loop.                                 |
 | [Liquid Glass Carousel](https://nxui.geoql.in/docs/components/liquid-glass-carousel) | Infinite scroll-driven portfolio carousel drawn through a liquid-glass lens, with focus mode and an entry animation.                                                   |
 | [Mac Keyboard](https://nxui.geoql.in/docs/components/mac-keyboard)                   | An interactive Mac keyboard with real key tracking, sound effects, and visual feedback. Press keys on your keyboard to see them light up.                              |
@@ -247,6 +254,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Model Viewer](https://nxui.geoql.in/docs/components/model-viewer)                   | Three.js 3D model viewer with OrbitControls, GLTF/FBX/OBJ support, auto-framing, and screenshot.                                                                       |
 | [Morph Slider](https://nxui.geoql.in/docs/components/morph-slider)                   | WebGL image slider that melts, ripples, shears or swirls between slides, with drag scrubbing, autoplay, captions and dots.                                             |
 | [Music Player](https://nxui.geoql.in/docs/components/music-player)                   | An interactive vinyl-record music player with swinging tonearm and animated rotation.                                                                                  |
+| [Newsletter Bookshelf](https://nxui.geoql.in/docs/components/newsletter-bookshelf)   | A three.js shelf of cloth-bound books for a newsletter archive. Browse sideways, hover to lift a spine, click to pull a book forward.                                  |
 | [Node Canvas](https://nxui.geoql.in/docs/components/node-canvas)                     | A pannable, zoomable node canvas with draggable nodes, live bezier edges, selection handles, a minimap and a zoom control.                                             |
 | [Node Diagram](https://nxui.geoql.in/docs/components/node-diagram)                   | An animated node diagram with glowing data pulses flowing through connections.                                                                                         |
 | [Nostalgia](https://nxui.geoql.in/docs/components/nostalgia)                         | Vintage slide-viewer that cycles through memories while a fan of polaroid thumbnails arcs around it and a year + serif title crossfade underneath.                     |
@@ -272,6 +280,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Scroll Choreography](https://nxui.geoql.in/docs/components/scroll-choreography)     | Scroll-driven image choreography with diagonal movement, stacking, and hero expansion phases.                                                                          |
 | [Scroll Split Card](https://nxui.geoql.in/docs/components/scroll-split-card)         | Scroll-driven card that splits into 3 panels and flips to reveal content.                                                                                              |
 | [Scroll Stack](https://nxui.geoql.in/docs/components/scroll-stack)                   | Scroll-driven stacked card animation with scale and sticky positioning effects.                                                                                        |
+| [Scroll Tilted Grid](https://nxui.geoql.in/docs/components/scroll-tilted-grid)       | A two-column image gallery whose frames tilt, blur and dim at the viewport edges and settle into focus as they cross the center.                                       |
 | [Scrub Field](https://nxui.geoql.in/docs/components/scrub-field)                     | Number chip you drag to scrub, with rubber-band limits and click to type.                                                                                              |
 | [Scrub Input](https://nxui.geoql.in/docs/components/scrub-input)                     | An inline slider input styled as a pill, perfect for adjusting variables smoothly.                                                                                     |
 | [Showcase Card](https://nxui.geoql.in/docs/components/showcase-card)                 | A card with 3D tilt effect that responds to mouse movement for showcasing content.                                                                                     |
@@ -281,6 +290,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Slide Commit](https://nxui.geoql.in/docs/components/slide-commit)                   | Slide-to-confirm handle that spins while your action runs, then unfurls into a done pill or shakes back on failure.                                                    |
 | [Slosh Gauge](https://nxui.geoql.in/docs/components/slosh-gauge)                     | Tank gauge whose liquid chases the value on a spring, tilts as it moves and splashes when it fills.                                                                    |
 | [Specular Button](https://nxui.geoql.in/docs/components/specular-button)             | Glass button with a WebGL2 rim light that rests on a corner, glides around the edge toward the cursor and flashes on press.                                            |
+| [Spiral 3D Slider](https://nxui.geoql.in/docs/components/spiral-3d-slider)           | An autoplaying image gallery that flows along a 3D spiral of curved WebGL planes and moves with wheel and page scroll.                                                 |
 | [Split Flap Display](https://nxui.geoql.in/docs/components/split-flap-display)       | An airport-style split flap display with staggered character flip animations and configurable rows.                                                                    |
 | [Spotlight Card](https://nxui.geoql.in/docs/components/spotlight-card)               | A card that follows the cursor with a spotlight glow effect on hover.                                                                                                  |
 | [Spring Check](https://nxui.geoql.in/docs/components/spring-check)                   | A checkbox row where one spring fills the box, draws the tick and strikes through the label.                                                                           |
@@ -303,6 +313,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Wake Slider](https://nxui.geoql.in/docs/components/wake-slider)                     | Thumbless range slider of thin bars where drag speed raises a wake behind the handle.                                                                                  |
 | [Warm Tooltip](https://nxui.geoql.in/docs/components/warm-tooltip)                   | A tooltip group where the first label waits, then siblings open instantly and the label glides between triggers while warm.                                            |
 | [Weather Forecast](https://nxui.geoql.in/docs/components/weather-forecast)           | A weather card with a colored condition orb glowing behind frosted glass, unit toggle, and hover-driven day chips.                                                     |
+| [Wheel Carousel](https://nxui.geoql.in/docs/components/wheel-carousel)               | A rotating-wheel picker with inertial drag and scroll, curved fading labels, and a crossfading image for the active item.                                              |
 
 ### Backgrounds (65)
 
@@ -374,15 +385,18 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Waves](https://nxui.geoql.in/docs/backgrounds/waves)                     | Perlin noise-driven wave lines with cursor-reactive distortion.                                                                                   |
 | [Web Threads](https://nxui.geoql.in/docs/backgrounds/web-threads)         | Glowing threads woven through pinch points that draw in one by one, light up under the cursor and carry light on click.                           |
 
-### Hero Backgrounds (6)
+### Hero Backgrounds (9)
 
 | Component                                                                          | Description                                                                                                                                                                       |
 | ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Animated Gradient](https://nxui.geoql.in/docs/hero-backgrounds/animated-gradient) | A beautiful, animated, and customizable WebGL gradient with noise capabilities. Supports built-in presets (Aurora, Oceanic, Amber, Toxic, Ghost) and fully custom configurations. |
+| [Aurora Flow](https://nxui.geoql.in/docs/hero-backgrounds/aurora-flow)             | WebGL hero background with layered silk flow, diffused aurora light, film grain and a soft pointer bend, with twelve palette presets.                                             |
 | [Dither Prism Hero](https://nxui.geoql.in/docs/hero-backgrounds/dither-prism-hero) | A prismatic dithered hero section with advanced WebGL shaders featuring ordered dithering, holographic iridescence, and floating particles.                                       |
+| [Grain Gradient](https://nxui.geoql.in/docs/hero-backgrounds/grain-gradient)       | A breathing color field with a soft curved shadow, flowing light and fine film grain, drawn with WebGL.                                                                           |
 | [Hero Geometric](https://nxui.geoql.in/docs/hero-backgrounds/hero-geometric)       | A dithered geometric gradient hero section powered by Three.js shaders with simplex noise and Bayer dithering.                                                                    |
 | [Prism Gradient](https://nxui.geoql.in/docs/hero-backgrounds/prism-gradient)       | WebGL2 hero gradient — three colors swirled through sixteen iterations of sinusoidal distortion, tracking light and dark mode automatically.                                      |
 | [Silk Aurora](https://nxui.geoql.in/docs/hero-backgrounds/silk-aurora)             | Premium WebGL hero with satin-dark aurora ribbons, pearlescent highlights, fine film grain, and cursor depth that bends the light toward the pointer.                             |
+| [Spectral Ribbon](https://nxui.geoql.in/docs/hero-backgrounds/spectral-ribbon)     | A soft spectral light ribbon on black with slow liquid motion and a rainbow fringe, drawn by one WebGL fragment shader.                                                           |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
 
 ### Dashboard (8)
@@ -413,22 +427,24 @@ Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/chart
 | [Radial Gauge](https://nxui.geoql.in/docs/charts/radial-gauge)         | A 270° gauge with a rounded value arc, threshold colors, and a readout that counts up to the value.                                                      |
 | [Sparkline](https://nxui.geoql.in/docs/charts/sparkline)               | A compact trend line with a shaded area that rises into place, sized for KPI cards and table cells.                                                      |
 
-### Visual Effects (12)
+### Visual Effects (14)
 
-| Component                                                                              | Description                                                                                                              |
-| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| [Border Beam](https://nxui.geoql.in/docs/visual-effects/border-beam)                   | A moving gradient beam that travels along the border of its container. Perfect for highlighting active states.           |
-| [Closing Plasma](https://nxui.geoql.in/docs/visual-effects/closing-plasma)             | A premium footer-ready plasma background with atmospheric noise and smooth pointer-driven flow.                          |
-| [Dither Gradient](https://nxui.geoql.in/docs/visual-effects/dither-gradient)           | A dithered gradient effect rendered on canvas with customizable colors and animation.                                    |
-| [Image Ripple Effect](https://nxui.geoql.in/docs/visual-effects/image-ripple-effect)   | A WebGL-based image distortion effect that creates ripple waves on mouse hover using FBO ping-pong displacement mapping. |
-| [Infinite Image Field](https://nxui.geoql.in/docs/visual-effects/infinite-image-field) | A camera-based infinite scrolling image grid on canvas, driven by cursor position with smooth velocity interpolation.    |
-| [Liquid Blob](https://nxui.geoql.in/docs/visual-effects/liquid-blob)                   | A morphing liquid blob animation that follows the cursor with spring physics.                                            |
-| [Magnet Lines](https://nxui.geoql.in/docs/visual-effects/magnet-lines)                 | A field of magnetic lines that swing toward the cursor, ripple outward and spin with every click.                        |
-| [Matrix Rain](https://nxui.geoql.in/docs/visual-effects/matrix-rain)                   | The iconic Matrix digital rain effect rendered on canvas with theme-aware colors.                                        |
-| [Noise Texture](https://nxui.geoql.in/docs/visual-effects/noise-texture)               | A subtle noise overlay that adds texture and depth to any container.                                                     |
-| [Particle Galaxy](https://nxui.geoql.in/docs/visual-effects/particle-galaxy)           | A swirling 3D particle galaxy effect with spiral arms that responds to mouse movement.                                   |
-| [Pixel Canvas](https://nxui.geoql.in/docs/visual-effects/pixel-canvas)                 | An interactive pixel grid canvas that responds to mouse movement with customizable colors.                               |
-| [Pixel Wave](https://nxui.geoql.in/docs/visual-effects/pixel-wave)                     | A looping pixel-art scene on a dark LED grid with four swappable presets (ocean, desert, hearth, mind).                  |
+| Component                                                                                | Description                                                                                                                      |
+| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| [Border Beam](https://nxui.geoql.in/docs/visual-effects/border-beam)                     | A moving gradient beam that travels along the border of its container. Perfect for highlighting active states.                   |
+| [Closing Plasma](https://nxui.geoql.in/docs/visual-effects/closing-plasma)               | A premium footer-ready plasma background with atmospheric noise and smooth pointer-driven flow.                                  |
+| [Dither Gradient](https://nxui.geoql.in/docs/visual-effects/dither-gradient)             | A dithered gradient effect rendered on canvas with customizable colors and animation.                                            |
+| [Fisheye Infinite Grid](https://nxui.geoql.in/docs/visual-effects/fisheye-infinite-grid) | A draggable image wall that repeats on both axes and bends through one fisheye lens, with momentum, wheel and arrow-key panning. |
+| [Image Ripple Effect](https://nxui.geoql.in/docs/visual-effects/image-ripple-effect)     | A WebGL-based image distortion effect that creates ripple waves on mouse hover using FBO ping-pong displacement mapping.         |
+| [Infinite Image Field](https://nxui.geoql.in/docs/visual-effects/infinite-image-field)   | A camera-based infinite scrolling image grid on canvas, driven by cursor position with smooth velocity interpolation.            |
+| [Liquid Blob](https://nxui.geoql.in/docs/visual-effects/liquid-blob)                     | A morphing liquid blob animation that follows the cursor with spring physics.                                                    |
+| [Magnet Lines](https://nxui.geoql.in/docs/visual-effects/magnet-lines)                   | A field of magnetic lines that swing toward the cursor, ripple outward and spin with every click.                                |
+| [Matrix Rain](https://nxui.geoql.in/docs/visual-effects/matrix-rain)                     | The iconic Matrix digital rain effect rendered on canvas with theme-aware colors.                                                |
+| [Noise Texture](https://nxui.geoql.in/docs/visual-effects/noise-texture)                 | A subtle noise overlay that adds texture and depth to any container.                                                             |
+| [Particle Galaxy](https://nxui.geoql.in/docs/visual-effects/particle-galaxy)             | A swirling 3D particle galaxy effect with spiral arms that responds to mouse movement.                                           |
+| [Pixel Canvas](https://nxui.geoql.in/docs/visual-effects/pixel-canvas)                   | An interactive pixel grid canvas that responds to mouse movement with customizable colors.                                       |
+| [Pixel Image Trail](https://nxui.geoql.in/docs/visual-effects/pixel-image-trail)         | An image reveal made from cursor-painted squares that expire into a bounded pixel trail.                                         |
+| [Pixel Wave](https://nxui.geoql.in/docs/visual-effects/pixel-wave)                       | A looping pixel-art scene on a dark LED grid with four swappable presets (ocean, desert, hearth, mind).                          |
 
 ### Buttons (9)
 

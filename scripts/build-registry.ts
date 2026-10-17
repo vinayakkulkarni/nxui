@@ -2127,6 +2127,102 @@ const COMPONENTS: Record<
       'A 3D landscape drawn in glowing contour lines that rises under the cursor, with light pulses on click.',
     deps: ['@vueuse/core'],
   },
+  'annotated-text': {
+    title: 'Annotated Text',
+    description:
+      'Inline text marked with hand-drawn SVG circles, underlines, highlights, brackets and cross-outs that draw in once when they scroll into view.',
+    deps: ['@vueuse/core'],
+  },
+  'ascii-effect': {
+    title: 'ASCII Effect',
+    description:
+      'Renders an image as dithered ASCII characters on a canvas, with static, flowing pointer-ripple, and glitch-reveal variants.',
+    deps: ['@vueuse/core'],
+  },
+  'aurora-flow': {
+    title: 'Aurora Flow',
+    description:
+      'WebGL hero background with layered silk flow, diffused aurora light, film grain and a soft pointer bend, with twelve palette presets.',
+    deps: ['@vueuse/core'],
+  },
+  'case-study-flip-stack': {
+    title: 'Case Study Flip Stack',
+    description:
+      'Editorial case study cards that fold upward on scroll to reveal the next story beneath.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'fisheye-infinite-grid': {
+    title: 'Fisheye Infinite Grid',
+    description:
+      'A draggable image wall that repeats on both axes and bends through one fisheye lens, with momentum, wheel and arrow-key panning.',
+    deps: ['@vueuse/core'],
+  },
+  'flipping-word-swap': {
+    title: 'Flipping Word Swap',
+    description:
+      'A word that flips into a second word one character at a time on hover, focus or tap, and flips back when you leave.',
+    deps: ['@vueuse/core'],
+  },
+  'grain-gradient': {
+    title: 'Grain Gradient',
+    description:
+      'A breathing color field with a soft curved shadow, flowing light and fine film grain, drawn with WebGL.',
+    deps: ['@vueuse/core'],
+  },
+  'hover-transition': {
+    title: 'Hover Transition',
+    description:
+      'A focusable wrapper that swaps a default and a hover slot with one of eight transitions from nine directions, plus a light tilt and glare.',
+    deps: ['@vueuse/core'],
+  },
+  'lens-clock': {
+    title: 'Lens Clock',
+    description:
+      'A live clock that frames a corner of a large dial, panning with the hour hand while the edges blur out of focus.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'newsletter-bookshelf': {
+    title: 'Newsletter Bookshelf',
+    description:
+      'A three.js shelf of cloth-bound books for a newsletter archive. Browse sideways, hover to lift a spine, click to pull a book forward.',
+    deps: ['@vueuse/core', 'three'],
+  },
+  'pixel-image-trail': {
+    title: 'Pixel Image Trail',
+    description:
+      'An image reveal made from cursor-painted squares that expire into a bounded pixel trail.',
+    deps: ['@vueuse/core'],
+  },
+  'scroll-tilted-grid': {
+    title: 'Scroll Tilted Grid',
+    description:
+      'A two-column image gallery whose frames tilt, blur and dim at the viewport edges and settle into focus as they cross the center.',
+    deps: ['@vueuse/core'],
+  },
+  'spectral-ribbon': {
+    title: 'Spectral Ribbon',
+    description:
+      'A soft spectral light ribbon on black with slow liquid motion and a rainbow fringe, drawn by one WebGL fragment shader.',
+    deps: ['@vueuse/core'],
+  },
+  'spiral-3d-slider': {
+    title: 'Spiral 3D Slider',
+    description:
+      'An autoplaying image gallery that flows along a 3D spiral of curved WebGL planes and moves with wheel and page scroll.',
+    deps: ['@vueuse/core', 'three'],
+  },
+  'text-morph': {
+    title: 'Text Morph',
+    description:
+      'Words, numbers or prices melt into each other on a timer through blur and an SVG alpha-threshold filter, inheriting parent typography.',
+    deps: ['@vueuse/core'],
+  },
+  'wheel-carousel': {
+    title: 'Wheel Carousel',
+    description:
+      'A rotating-wheel picker with inertial drag and scroll, curved fading labels, and a crossfading image for the active item.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:
