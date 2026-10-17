@@ -1,4 +1,10 @@
 import type { H3Event } from 'h3';
+import {
+  createError,
+  defineEventHandler,
+  getRouterParam,
+  setResponseHeader,
+} from 'h3';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 

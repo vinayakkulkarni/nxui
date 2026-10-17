@@ -49,7 +49,7 @@
     "gl-matrix": "4.0.0-beta.2",
     "matter-js": "^0.20.0",
     "motion-v": "^2.8.0",
-    "nuxt": "^4.6.1",
+    "nuxt": "^4.6.2",
     "nuxt-llms": "^0.2.0",
     "nuxt-schema-org": "^7.0.1",
     "ogl": "^1.0.11",
@@ -75,7 +75,7 @@
     "@types/matter-js": "^0.20.2",
     "@types/opentype.js": "^1.3.10",
     "@types/three": "^0.186.0",
-    "eslint": "^10.12.0",
+    "eslint": "^10.13.0",
     "eslint-plugin-better-tailwindcss": "^4.9.1",
     "eslint-plugin-oxlint": "^1.88.0",
     "h3": "1.15.11",
@@ -90,10 +90,10 @@
     "typescript": "^6.0.3",
     "vue": "^3.5.44",
     "vue-tsc": "^3.3.13",
-    "wrangler": "^4.151.0"
+    "wrangler": "^4.151.1"
   },
   "engines": {
     "node": ">=24.11.0"
   },
-  "packageManager": "pnpm@12.11.2+sha512.25a51652a196785af5f28bda6dfe8dc582ebefa4ac1d180221ce1390231c5fb76637822ea4b6e4633ce74acdcb0a77f725af11bad38177fdeddaee818a955cb9"
+  "packageManager": "pnpm@12.14.0+sha512.c18ba6d87993d3d164cb5e8948f32b2c06ee854487e06cd8d86781342fb3e5bb4634367034711e86802baa9c37bea906ce1929ad08d70884c97d801df13389a6"
 }

@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3';
+import { defineEventHandler, setResponseHeader } from 'h3';
 
 defineRouteMeta({
   openAPI: {
