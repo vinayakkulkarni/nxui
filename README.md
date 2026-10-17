@@ -22,7 +22,7 @@
     <img src="https://github.com/vinayakkulkarni/nxui/actions/workflows/deploy-app.yml/badge.svg" alt="Deploy" />
   </a>
   <a href="https://nuxt.com">
-    <img src="https://img.shields.io/badge/Nuxt-4-00DC82?logo=nuxt.js&logoColor=white" alt="Nuxt" />
+    <img src="https://img.shields.io/badge/Nuxt-4.6-00DC82?logo=nuxt.js&logoColor=white" alt="Nuxt" />
   </a>
   <a href="https://vuejs.org">
     <img src="https://img.shields.io/badge/Vue-3.5-4FC08D?logo=vue.js&logoColor=white" alt="Vue" />
@@ -31,7 +31,7 @@
     <img src="https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
   </a>
   <a href="https://www.typescriptlang.org">
-    <img src="https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white" alt="TypeScript" />
   </a>
   <a href="./LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
@@ -54,12 +54,15 @@
 
 nxui is a collection of beautifully designed, interactive UI components built with Vue 3 and Tailwind CSS. Just run the CLI command, add the component to your project, and start building.
 
-It also ships the only Vue port of [Paper Shaders](https://shaders.paper.design) — all 30 WebGL shaders from paper.design wrapped as Vue components with typed props (`@paper-design/shaders` does 1.7M+ npm downloads/month; the Vue wrappers live here).
+It also ships the only Vue port of [Paper Shaders](https://shaders.paper.design) — all 30 WebGL shaders from paper.design wrapped as Vue components with typed props and the upstream presets (`@paper-design/shaders` does 1.7M+ npm downloads/month; the Vue wrappers live here). Paper Shaders for Vue is an unofficial community port, not maintained by Paper.
+
+The docs mark recent work with two badges: **new** for components added in the latest drop, and **updated** for components rebuilt to match a newer upstream design.
 
 ### Why nxui?
 
 - **Copy & Paste** — Not a dependency. You own the code.
-- **Interactive** — Cursor-following effects, 3D transforms, and smooth animations.
+- **Interactive** — Cursor-following effects, 3D transforms, WebGL2 shaders, and spring physics.
+- **Dashboards included** — Data table, KPI cards and charts with an API that mirrors TanStack Charts.
 - **Customizable** — Built with Tailwind CSS. Easy to modify.
 - **Dark Mode** — All components support light and dark modes.
 - **TypeScript** — Fully typed for the best developer experience.
@@ -501,6 +504,8 @@ Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/chart
 - **Styling**: [Tailwind CSS 4](https://tailwindcss.com)
 - **Components**: [Vue 3](https://vuejs.org)
 - **Animation**: [motion-v](https://github.com/motiondivision/motion-vue)
+- **Graphics**: raw WebGL2, [three.js](https://threejs.org) and [Paper Shaders](https://shaders.paper.design)
+- **Tables**: [TanStack Table](https://tanstack.com/table)
 - **Package Manager**: [pnpm](https://pnpm.io)
 
 ## Development
@@ -577,7 +582,7 @@ nxui is a Vue port of [Componentry](https://componentry.fun) by [Harsh Jadhav](h
 
 - [Componentry](https://componentry.fun) ([GitHub](https://github.com/harshjdhv/componentry)) — Original React component library that nxui ports to Vue
 - [Paper Shaders](https://shaders.paper.design) ([GitHub](https://github.com/paper-design/shaders)) — Zero-dependency WebGL shader library by [paper.design](https://paper.design), Apache-2.0. nxui wraps all 30 shaders as Vue components
-- [React Bits](https://reactbits.dev) ([GitHub](https://github.com/DavidHDev/react-bits)) — Animated React component collection and ecosystem inspiration
+- [React Bits](https://reactbits.dev) ([GitHub](https://github.com/DavidHDev/react-bits)) — Animated React component collection by David Haz. Many nxui components are Vue rebuilds inspired by its designs, including the 2.0 rebuilds
 - [shadcn-vue](https://www.shadcn-vue.com/) — Vue port of shadcn/ui
 - [motion-v](https://github.com/motiondivision/motion-vue) — Vue animation library
 - [VueUse](https://vueuse.org/) — Collection of Vue composition utilities

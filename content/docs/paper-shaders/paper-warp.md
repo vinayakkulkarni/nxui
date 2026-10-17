@@ -41,4 +41,5 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-warp.json"
 
 Powered by [Paper Shaders](https://github.com/paper-design/shaders)
 (© Lost Coast Labs, Inc., Apache-2.0) via the framework-agnostic
-`@paper-design/shaders` package driven by a Vue 3 mount.
+`@paper-design/shaders` package driven by a Vue 3 mount. This is an
+unofficial community port; it is not maintained by Paper.
