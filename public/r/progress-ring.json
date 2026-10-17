@@ -1,0 +1,29 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "progress-ring",
+  "type": "registry:ui",
+  "title": "Progress Ring",
+  "description": "A circular progress indicator with rounded ends and a percentage that counts up with the ring.",
+  "dependencies": ["@vueuse/core"],
+  "registryDependencies": ["https://nxui.geoql.in/r/chart.json"],
+  "files": [
+    {
+      "path": "registry/new-york/progress-ring/ProgressRing.vue",
+      "content": "<script setup lang=\"ts\">\n  import { computed } from 'vue';\n  import { Chart, defineChart, polar, radialArc } from '../chart/chart-backend';\n  import { useChartTween } from '../chart/use-chart-tween';\n  import type { ProgressRingProps } from './types';\n\n  const props = withDefaults(defineProps<ProgressRingProps>(), {\n    size: 120,\n    thickness: 10,\n    color: 'var(--chart-1)',\n    trackColor: 'var(--muted)',\n    label: '',\n    ariaLabel: '',\n    class: '',\n  });\n\n  const TAU = Math.PI * 2;\n  const clamped = computed(() => Math.min(100, Math.max(0, props.value)));\n  const shown = useChartTween(() => clamped.value, 1000);\n\n  const definition = computed(() => {\n    const outer = props.size / 2 - 2;\n    const inner = outer - props.thickness;\n    return defineChart({\n      marks: [\n        polar({\n          marks: [\n            radialArc([{ a: 0, b: TAU }], {\n              startAngle: 'a',\n              endAngle: 'b',\n              innerRadius: inner,\n              outerRadius: outer,\n              fill: props.trackColor,\n            }),\n            radialArc([{ a: 0, b: (TAU * shown.value) / 100 }], {\n              startAngle: 'a',\n              endAngle: 'b',\n              innerRadius: inner,\n              outerRadius: outer,\n              cornerRadius: props.thickness / 2,\n              fill: props.color,\n            }),\n          ],\n          scales: { angle: null, radius: null },\n        }),\n      ],\n      scales: { x: null, y: null },\n    });\n  });\n\n  const accessibleName = computed(\n    () =>\n      props.ariaLabel ||\n      `${props.label || 'Progress'}: ${Math.round(clamped.value)}%`,\n  );\n</script>\n\n<template>\n  <div\n    :class=\"['relative', props.class]\"\n    :style=\"{ width: `${props.size}px`, height: `${props.size}px` }\"\n  >\n    <Chart\n      :definition=\"definition\"\n      :width=\"props.size\"\n      :height=\"props.size\"\n      v-bind=\"{ ariaLabel: accessibleName }\"\n    />\n    <div\n      class=\"pointer-events-none absolute inset-0 flex flex-col items-center justify-center\"\n    >\n      <slot :value=\"shown\">\n        <span class=\"text-2xl font-semibold tabular-nums text-foreground\">\n          {{ Math.round(shown) }}%\n        </span>\n        <span v-if=\"props.label\" class=\"text-xs text-muted-foreground\">\n          {{ props.label }}\n        </span>\n      </slot>\n    </div>\n  </div>\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/progress-ring/ProgressRing.vue"
+    },
+    {
+      "path": "registry/new-york/progress-ring/index.ts",
+      "content": "export { default as ProgressRing } from './ProgressRing.vue';\nexport type { ProgressRingProps } from './types';\n",
+      "type": "registry:ui",
+      "target": "components/ui/progress-ring/index.ts"
+    },
+    {
+      "path": "registry/new-york/progress-ring/types.ts",
+      "content": "export interface ProgressRingProps {\n  /** Progress from 0 to 100. */\n  value: number;\n  /** Diameter in pixels. */\n  size?: number;\n  thickness?: number;\n  /** Any CSS color. Defaults to `var(--chart-1)`. */\n  color?: string;\n  trackColor?: string;\n  /** Caption under the percentage. */\n  label?: string;\n  ariaLabel?: string;\n  class?: string;\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/progress-ring/types.ts"
+    }
+  ]
+}

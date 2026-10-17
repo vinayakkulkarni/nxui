@@ -75,6 +75,7 @@
         :speed="params.speed"
       />
       <ShaderPane
+        expanded
         title="Static Radial Gradient"
         @on-pane-created="onPaneCreated"
       />

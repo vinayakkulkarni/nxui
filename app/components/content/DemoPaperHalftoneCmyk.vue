@@ -51,7 +51,11 @@
         :softness="params.softness"
         :type="params.type"
       />
-      <ShaderPane title="Halftone CMYK" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Halftone CMYK"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

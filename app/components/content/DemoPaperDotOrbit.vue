@@ -65,7 +65,7 @@
         :steps-per-color="params.stepsPerColor"
         :speed="params.speed"
       />
-      <ShaderPane title="Dot Orbit" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Dot Orbit" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

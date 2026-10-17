@@ -1,176 +1,226 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount } from 'vue';
-  import { useResizeObserver, useEventListener } from '@vueuse/core';
-  import { Renderer, Program, Mesh, Triangle } from 'ogl';
+  import {
+    computed,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    shallowRef,
+    watch,
+  } from 'vue';
+  import {
+    useDocumentVisibility,
+    useEventListener,
+    useIntersectionObserver,
+    usePreferredReducedMotion,
+    useRafFn,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import {
+    createLiquidChromeEngine,
+    parseChromeColor,
+  } from './liquid-chrome-engine';
+  import type {
+    LiquidChromeEngine,
+    LiquidChromeProps,
+    LiquidChromeSettings,
+    LiquidChromeSpot,
+  } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      baseColor?: [number, number, number];
-      speed?: number;
-      amplitude?: number;
-      frequencyX?: number;
-      frequencyY?: number;
-      interactive?: boolean;
-      class?: string;
-    }>(),
-    {
-      baseColor: () => [0.1, 0.1, 0.1] as [number, number, number],
-      speed: 0.2,
-      amplitude: 0.3,
-      frequencyX: 3,
-      frequencyY: 3,
-      interactive: true,
-      class: '',
-    },
-  );
+  const props = withDefaults(defineProps<LiquidChromeProps>(), {
+    color: '#ffffff',
+    speed: 0.2,
+    amplitude: 0.3,
+    frequencyX: 3,
+    frequencyY: 3,
+    detail: 4,
+    thickness: 1,
+    depth: 1,
+    roughness: 0.3,
+    exposure: 1,
+    interactive: true,
+    rippleStrength: 1,
+    rippleSize: 1,
+    tilt: 1,
+    intro: true,
+    lightMode: false,
+    maxDevicePixelRatio: 2,
+    class: '',
+  });
 
   const containerRef = ref<HTMLDivElement | null>(null);
-  let animationId = 0;
-  let renderer: InstanceType<typeof Renderer> | null = null;
-  let glContext: WebGLRenderingContext | null = null;
-  let programRef: InstanceType<typeof Program> | null = null;
+  const canvasRef = ref<HTMLCanvasElement | null>(null);
+  const rootEl = shallowRef<HTMLElement | null>(null);
+  let engine: LiquidChromeEngine | null = null;
+  let inView = true;
+  let lost = false;
+  let generation = 0;
 
-  const VERT = `
-attribute vec2 position;
-attribute vec2 uv;
-varying vec2 vUv;
-void main() {
-  vUv = uv;
-  gl_Position = vec4(position, 0.0, 1.0);
-}`;
+  const reducedMotion = usePreferredReducedMotion();
+  const visibility = useDocumentVisibility();
 
-  const FRAG = `
-precision highp float;
-uniform float uTime;
-uniform vec3 uResolution;
-uniform vec3 uBaseColor;
-uniform float uAmplitude;
-uniform float uFrequencyX;
-uniform float uFrequencyY;
-uniform vec2 uMouse;
-varying vec2 vUv;
+  const clamp = (value: number, min: number, max: number) =>
+    Math.min(max, Math.max(min, value));
 
-vec4 renderImage(vec2 uvCoord) {
-  vec2 fragCoord = uvCoord * uResolution.xy;
-  vec2 uv = (2.0 * fragCoord - uResolution.xy) / min(uResolution.x, uResolution.y);
-  for (float i = 1.0; i < 10.0; i++) {
-    uv.x += uAmplitude / i * cos(i * uFrequencyX * uv.y + uTime + uMouse.x * 3.14159);
-    uv.y += uAmplitude / i * cos(i * uFrequencyY * uv.x + uTime + uMouse.y * 3.14159);
+  const settings = computed<LiquidChromeSettings>(() => {
+    const [r, g, b] = parseChromeColor(props.color);
+    return {
+      tint: [r ** 2.2, g ** 2.2, b ** 2.2],
+      speed: Math.max(0, props.speed),
+      amplitude: clamp(props.amplitude, 0, 2),
+      frequency: [
+        Math.max(0.1, props.frequencyX),
+        Math.max(0.1, props.frequencyY),
+      ],
+      detail: clamp(Math.round(props.detail), 1, 8),
+      thickness: clamp(props.thickness, 0.25, 4),
+      depth: Math.max(0, props.depth),
+      roughness: clamp(props.roughness, 0, 1),
+      exposure: Math.max(0, props.exposure),
+      interactive: props.interactive,
+      rippleStrength: Math.max(0, props.rippleStrength),
+      rippleSize: clamp(props.rippleSize, 0.2, 4),
+      tilt: Math.max(0, props.tilt),
+      light: props.lightMode,
+      maxRatio: clamp(props.maxDevicePixelRatio, 0.5, 3),
+    };
+  });
+
+  const { pause, resume, isActive } = useRafFn(
+    ({ timestamp }) => {
+      if (!engine || lost || !inView || visibility.value === 'hidden') {
+        pause();
+        return;
+      }
+      if (!engine.frame(timestamp)) pause();
+    },
+    { immediate: false },
+  );
+
+  function wake() {
+    if (!engine || lost || isActive.value || !inView) return;
+    if (visibility.value === 'hidden') return;
+    engine.resetClock();
+    resume();
   }
-  vec2 diff = (uvCoord - uMouse);
-  float dist = length(diff);
-  float falloff = exp(-dist * 20.0);
-  float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
-  uv += (diff / (dist + 0.0001)) * ripple * falloff;
-  vec3 color = uBaseColor / abs(sin(uTime - uv.y - uv.x));
-  return vec4(color, 1.0);
-}
 
-void main() {
-  vec4 col = vec4(0.0);
-  int samples = 0;
-  for (int i = -1; i <= 1; i++) {
-    for (int j = -1; j <= 1; j++) {
-      vec2 offset = vec2(float(i), float(j)) * (1.0 / min(uResolution.x, uResolution.y));
-      col += renderImage(vUv + offset);
-      samples++;
-    }
+  function measure() {
+    const el = containerRef.value;
+    if (!el || !engine) return;
+    const rect = el.getBoundingClientRect();
+    engine.resize(rect.width, rect.height);
+    wake();
   }
-  gl_FragColor = col / float(samples);
-}`;
 
-  useResizeObserver(containerRef, (entries) => {
-    if (!renderer || !programRef) return;
-    const { width, height } = entries[0].contentRect;
-    renderer.setSize(width, height);
-    const gl = renderer.gl;
-    const resUniform = programRef.uniforms.uResolution.value as Float32Array;
-    resUniform[0] = (gl.canvas as HTMLCanvasElement).width;
-    resUniform[1] = (gl.canvas as HTMLCanvasElement).height;
-    resUniform[2] =
-      (gl.canvas as HTMLCanvasElement).width /
-      (gl.canvas as HTMLCanvasElement).height;
+  useResizeObserver(containerRef, measure);
+
+  useIntersectionObserver(containerRef, (entries) => {
+    inView = entries.some((entry) => entry.isIntersecting);
+    wake();
   });
 
-  useEventListener(containerRef, 'mousemove', (e: MouseEvent) => {
-    if (!props.interactive || !containerRef.value || !programRef) return;
-    const rect = containerRef.value.getBoundingClientRect();
-    const mouseUniform = programRef.uniforms.uMouse.value as Float32Array;
-    mouseUniform[0] = (e.clientX - rect.left) / rect.width;
-    mouseUniform[1] = 1 - (e.clientY - rect.top) / rect.height;
-  });
+  watch(visibility, wake);
+  watch(settings, measure);
 
-  useEventListener(containerRef, 'touchmove', (e: TouchEvent) => {
-    if (
-      !props.interactive ||
-      !containerRef.value ||
-      !programRef ||
-      e.touches.length === 0
-    )
-      return;
-    const touch = e.touches[0];
-    const rect = containerRef.value.getBoundingClientRect();
-    const mouseUniform = programRef.uniforms.uMouse.value as Float32Array;
-    mouseUniform[0] = (touch.clientX - rect.left) / rect.width;
-    mouseUniform[1] = 1 - (touch.clientY - rect.top) / rect.height;
-  });
+  function locate(event: PointerEvent): LiquidChromeSpot | null {
+    const el = containerRef.value;
+    if (!el) return null;
+    const rect = el.getBoundingClientRect();
+    return {
+      u: (event.clientX - rect.left) / Math.max(1, rect.width),
+      v: (event.clientY - rect.top) / Math.max(1, rect.height),
+      inside:
+        event.clientX >= rect.left &&
+        event.clientX <= rect.right &&
+        event.clientY >= rect.top &&
+        event.clientY <= rect.bottom,
+    };
+  }
+
+  function onPointerMove(event: PointerEvent) {
+    const spot = locate(event);
+    if (!spot || !engine) return;
+    engine.move(spot);
+    wake();
+  }
+
+  function onPointerDown(event: PointerEvent) {
+    const spot = locate(event);
+    if (!spot || !engine || !spot.inside) return;
+    engine.press(spot);
+    wake();
+  }
+
+  function onLeave() {
+    engine?.leave();
+    wake();
+  }
+
+  function onPointerUp(event: PointerEvent) {
+    if (event.pointerType !== 'mouse') onLeave();
+  }
+
+  function onContextLost(event: Event) {
+    event.preventDefault();
+    lost = true;
+    pause();
+  }
+
+  function start() {
+    const canvas = canvasRef.value;
+    if (!canvas) return;
+    const reduced =
+      reducedMotion.value === 'reduce' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    engine = createLiquidChromeEngine(canvas, () => settings.value, {
+      reduced,
+      rise: props.intro && generation === 0,
+      ratio: () => window.devicePixelRatio || 1,
+    });
+    measure();
+  }
+
+  function onContextRestored() {
+    lost = false;
+    generation += 1;
+    engine?.destroy();
+    engine = null;
+    start();
+  }
+
+  useEventListener('pointermove', onPointerMove, { passive: true });
+  useEventListener('pointerdown', onPointerDown, { passive: true });
+  useEventListener('pointerup', onPointerUp, { passive: true });
+  useEventListener('pointercancel', onPointerUp, { passive: true });
+  useEventListener(rootEl, 'pointerleave', onLeave);
+  useEventListener(canvasRef, 'webglcontextlost', onContextLost);
+  useEventListener(canvasRef, 'webglcontextrestored', onContextRestored);
 
   onMounted(() => {
-    const container = containerRef.value;
-    if (!container) return;
-
-    renderer = new Renderer({ antialias: true });
-    const gl = renderer.gl;
-    glContext = gl;
-    gl.clearColor(1, 1, 1, 1);
-    renderer.setSize(container.offsetWidth, container.offsetHeight);
-
-    const geometry = new Triangle(gl);
-    programRef = new Program(gl, {
-      vertex: VERT,
-      fragment: FRAG,
-      uniforms: {
-        uTime: { value: 0 },
-        uResolution: {
-          value: new Float32Array([
-            (gl.canvas as HTMLCanvasElement).width,
-            (gl.canvas as HTMLCanvasElement).height,
-            (gl.canvas as HTMLCanvasElement).width /
-              (gl.canvas as HTMLCanvasElement).height,
-          ]),
-        },
-        uBaseColor: { value: new Float32Array(props.baseColor) },
-        uAmplitude: { value: props.amplitude },
-        uFrequencyX: { value: props.frequencyX },
-        uFrequencyY: { value: props.frequencyY },
-        uMouse: { value: new Float32Array([0, 0]) },
-      },
-    });
-
-    const mesh = new Mesh(gl, { geometry, program: programRef });
-    container.appendChild(gl.canvas as HTMLCanvasElement);
-
-    function update(t: number) {
-      animationId = requestAnimationFrame(update);
-      if (programRef) {
-        programRef.uniforms.uTime.value = t * 0.001 * props.speed;
-      }
-      if (renderer) renderer.render({ scene: mesh });
-    }
-    animationId = requestAnimationFrame(update);
+    rootEl.value = document.documentElement;
+    start();
   });
 
   onBeforeUnmount(() => {
-    cancelAnimationFrame(animationId);
-    if (glContext) {
-      const canvas = glContext.canvas as HTMLCanvasElement;
-      if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
-      glContext.getExtension('WEBGL_lose_context')?.loseContext();
-    }
+    pause();
+    engine?.destroy();
+    engine = null;
+    canvasRef.value
+      ?.getContext('webgl2')
+      ?.getExtension('WEBGL_lose_context')
+      ?.loseContext();
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
+  <div
+    ref="containerRef"
+    :class="cn('relative size-full overflow-hidden', props.class)"
+  >
+    <canvas
+      ref="canvasRef"
+      class="absolute inset-0 block size-full"
+      aria-hidden="true"
+    />
+  </div>
 </template>

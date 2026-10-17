@@ -61,7 +61,7 @@
         :size="params.size"
         :speed="params.speed"
       />
-      <ShaderPane title="Metaballs" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Metaballs" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

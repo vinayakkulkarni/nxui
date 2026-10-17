@@ -66,7 +66,7 @@
         :shape="params.shape"
         :speed="params.speed"
       />
-      <ShaderPane title="Warp" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Warp" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

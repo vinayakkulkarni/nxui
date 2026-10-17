@@ -53,7 +53,7 @@
         :size="params.size"
         :speed="params.speed"
       />
-      <ShaderPane title="Water" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Water" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

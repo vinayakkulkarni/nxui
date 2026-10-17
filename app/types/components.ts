@@ -3,6 +3,17 @@
 // consumers installing via shadcn-vue CLI never need this path. App code keeps
 // importing from '~/types/components' through this barrel.
 
+import type {
+  NodeCanvasEdge,
+  NodeCanvasNode,
+} from '@registry/new-york/node-canvas/types';
+import type {
+  SplitFlapAlign,
+  SplitFlapCharset,
+  SplitFlapOrder,
+  SplitFlapTileStyle,
+} from '@registry/new-york/split-flap-text/types';
+
 export * from '@registry/new-york/animated-gradient/types';
 export * from '@registry/new-york/auth-modal/types';
 export * from '@registry/new-york/closing-plasma/types';
@@ -96,4 +107,71 @@ export interface DemoNamedPreset<TPreset> {
 export interface DemoSettingsPreset<TSettings> {
   label: string;
   settings: Partial<TSettings>;
+}
+
+export type DemoOrderStatus = 'Paid' | 'Pending' | 'Refunded' | 'Failed';
+
+export interface DemoOrderRow {
+  id: string;
+  customer: string;
+  email: string;
+  status: DemoOrderStatus;
+  amount: number;
+  change: number;
+}
+
+/** One scripted step of the status-panel demo's simulated incident. */
+export interface DemoStatusStep {
+  serviceId: string;
+  status: 'operational' | 'degraded' | 'down' | 'maintenance';
+  message: string;
+  level: 'info' | 'warning' | 'error' | 'success';
+}
+
+/** One row of the clean-table demo. `deadline` is an absolute epoch in ms. */
+export interface DemoProjectRow {
+  id: string;
+  project: string;
+  created: string;
+  program: string;
+  deadline: number;
+  applicants: number;
+  status: 'progress' | 'complete' | 'error';
+}
+
+/** What a node in the node-canvas demo renders. */
+export type DemoCanvasKind = 'source' | 'note' | 'stops' | 'downtime' | 'frame';
+
+/** How a card node in the node-canvas demo is shown. */
+export type DemoCanvasView = 'chart' | 'table' | 'number';
+
+/** Starting state for `useCanvasBoard`, shared by the node-canvas and canvas-toolbar demos. */
+export interface DemoCanvasBoardOptions {
+  nodes: NodeCanvasNode[];
+  edges?: NodeCanvasEdge[];
+  kinds: Record<string, DemoCanvasKind>;
+  notes?: Record<string, string>;
+  views?: Record<string, DemoCanvasView>;
+  selected?: string | null;
+}
+
+/** Tunable look of the split-flap-text demo (the ShaderPane params). */
+export interface DemoSplitFlapLook {
+  phraseSet: string;
+  charset: SplitFlapCharset;
+  align: SplitFlapAlign;
+  tileColor: string;
+  textColor: string;
+  flipDuration: number;
+  stagger: number;
+  cycleDelay: number;
+  flipsPerChar: number;
+  padTo: number;
+  fontSize: number;
+  tileRadius: number;
+  gap: number;
+  order: SplitFlapOrder;
+  tileStyle: SplitFlapTileStyle;
+  glare: number;
+  depth: number;
 }

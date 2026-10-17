@@ -63,7 +63,7 @@
         :outer-glow="params.outerGlow"
         :shape="params.shape"
       />
-      <ShaderPane title="Gem Smoke" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Gem Smoke" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

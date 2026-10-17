@@ -60,7 +60,11 @@
         :bloom="params.bloom"
         :speed="params.speed"
       />
-      <ShaderPane title="Pulsing Border" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Pulsing Border"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

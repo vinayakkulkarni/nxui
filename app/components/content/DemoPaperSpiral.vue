@@ -47,7 +47,7 @@
         :stroke-width="params.strokeWidth"
         :speed="params.speed"
       />
-      <ShaderPane title="Spiral" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Spiral" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

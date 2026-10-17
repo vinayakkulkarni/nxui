@@ -61,7 +61,11 @@
         :inner-shape="params.innerShape"
         :speed="params.speed"
       />
-      <ShaderPane title="Smoke Ring" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Smoke Ring"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

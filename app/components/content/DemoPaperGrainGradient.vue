@@ -71,7 +71,11 @@
         :shape="params.shape"
         :speed="params.speed"
       />
-      <ShaderPane title="Grain Gradient" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Grain Gradient"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

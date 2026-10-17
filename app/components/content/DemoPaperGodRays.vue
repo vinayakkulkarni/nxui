@@ -47,7 +47,7 @@
         :bloom="params.bloom"
         offset-y="-0.55"
       />
-      <ShaderPane title="God Rays" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="God Rays" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

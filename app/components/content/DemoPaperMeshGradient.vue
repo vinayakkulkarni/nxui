@@ -49,7 +49,11 @@
         :swirl="params.swirl"
         :speed="params.speed"
       />
-      <ShaderPane title="Mesh Gradient" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Mesh Gradient"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

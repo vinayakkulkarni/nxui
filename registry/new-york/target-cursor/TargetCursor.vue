@@ -1,275 +1,177 @@
 <script setup lang="ts">
-  import { ref, reactive, onMounted, onBeforeUnmount } from 'vue';
-  import { cn } from '~/lib/utils';
+  import {
+    computed,
+    nextTick,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    watch,
+  } from 'vue';
+  import { useEventListener, usePreferredReducedMotion } from '@vueuse/core';
+  import { CORNER_ANGLES, createTargetCursor } from './target-cursor-engine';
+  import type {
+    TargetCursorEngine,
+    TargetCursorProps,
+    TargetCursorSettings,
+  } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      targetSelector?: string;
-      spinDuration?: number;
-      hideDefaultCursor?: boolean;
-      hoverDuration?: number;
-      class?: string;
-    }>(),
-    {
-      targetSelector: '.cursor-target',
-      spinDuration: 2,
-      hideDefaultCursor: true,
-      hoverDuration: 200,
-      class: '',
-    },
-  );
-
-  const hostRef = ref<HTMLElement | null>(null);
-  const cursorPos = reactive({ x: 0, y: 0 });
-  const smoothPos = reactive({ x: 0, y: 0 });
-  const isHovering = ref(false);
-  const isPressed = ref(false);
-  const rotation = ref(0);
-  const BORDER_WIDTH = 3;
-  const CORNER_SIZE = 12;
-  const LERP = 0.15;
-
-  const cornerPositions = reactive([
-    { x: -CORNER_SIZE * 1.5, y: -CORNER_SIZE * 1.5 },
-    { x: CORNER_SIZE * 0.5, y: -CORNER_SIZE * 1.5 },
-    { x: CORNER_SIZE * 0.5, y: CORNER_SIZE * 0.5 },
-    { x: -CORNER_SIZE * 1.5, y: CORNER_SIZE * 0.5 },
-  ]);
-
-  const defaultCorners = [
-    { x: -CORNER_SIZE * 1.5, y: -CORNER_SIZE * 1.5 },
-    { x: CORNER_SIZE * 0.5, y: -CORNER_SIZE * 1.5 },
-    { x: CORNER_SIZE * 0.5, y: CORNER_SIZE * 0.5 },
-    { x: -CORNER_SIZE * 1.5, y: CORNER_SIZE * 0.5 },
-  ];
-
-  let animId = 0;
-  let originalCursor = '';
-  let activeTarget: Element | null = null;
-
-  // Ref set on mount (not a computed) so SSR never touches window.
-  const isMobile = ref(false);
-  onMounted(() => {
-    isMobile.value =
-      ('ontouchstart' in window || navigator.maxTouchPoints > 0) &&
-      window.innerWidth <= 768;
+  const props = withDefaults(defineProps<TargetCursorProps>(), {
+    targetSelector: '.cursor-target',
+    cursorColor: '#ffffff',
+    cursorColorOnTarget: undefined,
+    spinDuration: 2,
+    hoverDuration: 0.2,
+    parallaxOn: true,
+    hideDefaultCursor: true,
+    size: 36,
+    cornerSize: 12,
+    thickness: 3,
+    padding: 6,
+    matchRadius: true,
+    dotSize: 4,
+    blendMode: 'difference',
+    showLabel: true,
+    clickEffect: true,
+    container: null,
   });
 
-  function lerp(a: number, b: number, t: number) {
-    return a + (b - a) * t;
+  const rootRef = ref<HTMLElement>();
+  const cornerRefs = ref<HTMLElement[]>([]);
+  const dotRef = ref<HTMLElement>();
+  const labelRef = ref<HTMLElement>();
+  const finePointer = ref(false);
+  const reducedMotion = usePreferredReducedMotion();
+  let engine: TargetCursorEngine | null = null;
+
+  function resolveContainer(): HTMLElement | null {
+    const value = props.container;
+    if (!value) return null;
+    if (typeof value === 'string') {
+      const found = document.querySelector(value);
+      return found instanceof HTMLElement ? found : null;
+    }
+    return value;
   }
 
-  function getLocalCoords(e: MouseEvent): { x: number; y: number } {
-    const host = hostRef.value;
-    if (!host) return { x: e.clientX, y: e.clientY };
-    const rect = host.getBoundingClientRect();
-    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
-  }
+  const containerEl = computed(resolveContainer);
 
-  function animate() {
-    smoothPos.x = lerp(smoothPos.x, cursorPos.x, LERP);
-    smoothPos.y = lerp(smoothPos.y, cursorPos.y, LERP);
-
-    if (!isHovering.value) {
-      rotation.value += 360 / (props.spinDuration * 60);
-      if (rotation.value >= 360) rotation.value -= 360;
-    }
-
-    for (let i = 0; i < 4; i++) {
-      if (!isHovering.value) {
-        cornerPositions[i].x = lerp(
-          cornerPositions[i].x,
-          defaultCorners[i].x,
-          0.1,
-        );
-        cornerPositions[i].y = lerp(
-          cornerPositions[i].y,
-          defaultCorners[i].y,
-          0.1,
-        );
-      }
-    }
-
-    animId = requestAnimationFrame(animate);
-  }
-
-  function onPointerMove(e: MouseEvent) {
-    const local = getLocalCoords(e);
-    cursorPos.x = local.x;
-    cursorPos.y = local.y;
-  }
-
-  function onMouseOver(e: Event) {
-    const mouseEvent = e as MouseEvent;
-    const directTarget = mouseEvent.target as Element;
-    if (!directTarget) return;
-
-    const host = hostRef.value;
-    if (!host) return;
-
-    let target: Element | null = directTarget;
-    while (target && target !== host && target !== document.body) {
-      if (target.matches(props.targetSelector)) break;
-      target = target.parentElement;
-    }
-    if (!target || target === host || target === document.body) return;
-    if (activeTarget === target) return;
-
-    activeTarget = target;
-    isHovering.value = true;
-    rotation.value = 0;
-
-    const hostRect = host.getBoundingClientRect();
-    const rect = target.getBoundingClientRect();
-    const targetCorners = [
-      {
-        x: rect.left - hostRect.left - BORDER_WIDTH - smoothPos.x,
-        y: rect.top - hostRect.top - BORDER_WIDTH - smoothPos.y,
-      },
-      {
-        x:
-          rect.right - hostRect.left + BORDER_WIDTH - CORNER_SIZE - smoothPos.x,
-        y: rect.top - hostRect.top - BORDER_WIDTH - smoothPos.y,
-      },
-      {
-        x:
-          rect.right - hostRect.left + BORDER_WIDTH - CORNER_SIZE - smoothPos.x,
-        y:
-          rect.bottom - hostRect.top + BORDER_WIDTH - CORNER_SIZE - smoothPos.y,
-      },
-      {
-        x: rect.left - hostRect.left - BORDER_WIDTH - smoothPos.x,
-        y:
-          rect.bottom - hostRect.top + BORDER_WIDTH - CORNER_SIZE - smoothPos.y,
-      },
-    ];
-
-    for (let i = 0; i < 4; i++) {
-      cornerPositions[i].x = targetCorners[i].x;
-      cornerPositions[i].y = targetCorners[i].y;
-    }
-
-    const leaveHandler = () => {
-      isHovering.value = false;
-      activeTarget = null;
-      target?.removeEventListener('mouseleave', leaveHandler);
+  function settings(): TargetCursorSettings {
+    return {
+      targetSelector: props.targetSelector,
+      cursorColor: props.cursorColor,
+      cursorColorOnTarget: props.cursorColorOnTarget,
+      spinDuration: props.spinDuration,
+      hoverDuration: Math.max(0.05, props.hoverDuration),
+      parallaxOn: props.parallaxOn,
+      hideDefaultCursor: props.hideDefaultCursor,
+      size: Math.max(4, props.size),
+      cornerSize: Math.max(2, props.cornerSize),
+      thickness: Math.max(0.5, props.thickness),
+      padding: props.padding,
+      matchRadius: props.matchRadius,
+      dotSize: Math.max(0, props.dotSize),
+      showLabel: props.showLabel,
+      clickEffect: props.clickEffect,
+      container: containerEl.value,
+      reduce: reducedMotion.value === 'reduce',
     };
-    target.addEventListener('mouseleave', leaveHandler);
+  }
+
+  function teardown() {
+    engine?.destroy();
+    engine = null;
+  }
+
+  async function build() {
+    teardown();
+    if (!finePointer.value) return;
+    await nextTick();
+    const root = rootRef.value;
+    if (!root || engine) return;
+    engine = createTargetCursor(
+      {
+        root,
+        corners: cornerRefs.value,
+        dot: dotRef.value ?? null,
+        label: labelRef.value ?? null,
+      },
+      settings,
+    );
   }
 
   onMounted(() => {
-    if (isMobile.value) return;
-    const host = hostRef.value;
-    if (!host) return;
-
-    originalCursor = host.style.cursor;
-    if (props.hideDefaultCursor) host.style.cursor = 'none';
-
-    const rect = host.getBoundingClientRect();
-    smoothPos.x = rect.width / 2;
-    smoothPos.y = rect.height / 2;
-    cursorPos.x = smoothPos.x;
-    cursorPos.y = smoothPos.y;
-    animId = requestAnimationFrame(animate);
+    const query = window.matchMedia('(hover: hover) and (pointer: fine)');
+    finePointer.value = query.matches;
+    useEventListener(query, 'change', () => {
+      finePointer.value = query.matches;
+    });
   });
 
-  onBeforeUnmount(() => {
-    cancelAnimationFrame(animId);
-    const host = hostRef.value;
-    if (host) host.style.cursor = originalCursor;
-  });
+  watch(finePointer, build);
+
+  watch(props, () => engine?.wake(), { flush: 'post' });
+
+  onBeforeUnmount(teardown);
 </script>
 
 <template>
-  <div
-    v-if="!isMobile"
-    ref="hostRef"
-    :class="cn('target-cursor-host', $props.class)"
-    @pointermove="onPointerMove"
-    @mouseover="onMouseOver"
-    @mousedown="isPressed = true"
-    @mouseup="isPressed = false"
-  >
-    <slot></slot>
+  <Teleport v-if="finePointer" to="body">
     <div
-      class="target-cursor-wrapper"
-      :style="{
-        transform: `translate(${smoothPos.x}px, ${smoothPos.y}px) rotate(${rotation}deg) scale(${isPressed ? 0.9 : 1})`,
-      }"
+      ref="rootRef"
+      class="target-cursor"
+      :style="{ mixBlendMode: blendMode, opacity: 0 }"
+      aria-hidden="true"
     >
-      <div
-        class="target-cursor-dot"
-        :style="{
-          transform: `translate(-50%, -50%) scale(${isPressed ? 0.7 : 1})`,
-        }"
-      ></div>
-      <div
-        v-for="(pos, i) in cornerPositions"
-        :key="i"
-        class="target-cursor-corner"
-        :class="`corner-${['tl', 'tr', 'br', 'bl'][i]}`"
-        :style="{ transform: `translate(${pos.x}px, ${pos.y}px)` }"
-      ></div>
+      <span
+        v-for="angle in CORNER_ANGLES"
+        :key="angle"
+        ref="cornerRefs"
+        class="target-cursor__corner"
+      ></span>
+      <span ref="dotRef" class="target-cursor__dot"></span>
+      <span ref="labelRef" class="target-cursor__label"></span>
     </div>
-  </div>
+  </Teleport>
 </template>
 
-<style scoped>
-  .target-cursor-host {
-    position: relative;
-    contain: paint;
+<style>
+  .target-cursor {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    pointer-events: none;
   }
 
-  .target-cursor-wrapper {
+  .target-cursor__corner {
     position: absolute;
     top: 0;
     left: 0;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
+    box-sizing: border-box;
+    border-style: solid;
+    border-color: var(--target-cursor-color, #ffffff);
+    transform-origin: 0 0;
     will-change: transform;
   }
 
-  .target-cursor-dot {
+  .target-cursor__dot {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 4px;
-    height: 4px;
-    background: #fff;
+    top: 0;
+    left: 0;
     border-radius: 50%;
-    transition: transform 0.3s ease;
-  }
-
-  .target-cursor-corner {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 12px;
-    height: 12px;
-    border: 3px solid #fff;
+    background: var(--target-cursor-color, #ffffff);
     will-change: transform;
   }
 
-  .corner-tl {
-    border-right: none;
-    border-bottom: none;
-  }
-
-  .corner-tr {
-    border-left: none;
-    border-bottom: none;
-  }
-
-  .corner-br {
-    border-left: none;
-    border-top: none;
-  }
-
-  .corner-bl {
-    border-right: none;
-    border-top: none;
+  .target-cursor__label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: var(--target-cursor-color, #ffffff);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    will-change: transform, opacity;
   }
 </style>

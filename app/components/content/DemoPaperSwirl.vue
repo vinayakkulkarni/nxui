@@ -66,7 +66,7 @@
         :noise="params.noise"
         :speed="params.speed"
       />
-      <ShaderPane title="Swirl" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Swirl" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

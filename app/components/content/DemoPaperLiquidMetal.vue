@@ -61,7 +61,11 @@
         :repetition="params.repetition"
         :shape="params.shape"
       />
-      <ShaderPane title="Liquid Metal" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Liquid Metal"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

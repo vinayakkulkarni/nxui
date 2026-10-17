@@ -1,339 +1,352 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount } from 'vue';
-  import { Renderer, Program, Mesh, Triangle, RenderTarget, Color } from 'ogl';
+  import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+  import {
+    defaultDocument,
+    useEventListener,
+    useIntersectionObserver,
+    usePreferredReducedMotion,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import {
+    MAX_COLORS,
+    buildPalette,
+    clamp,
+    createStrandsProgram,
+    locateStrandsUniforms,
+    speech,
+  } from './strands-gl';
+  import type { StrandsUniform } from './strands-gl';
+  import type { StrandsProps } from './types';
 
-  const MAX_STRANDS = 12;
-  const MAX_COLORS = 8;
+  const props = withDefaults(defineProps<StrandsProps>(), {
+    colors: () => [
+      '#d95b56',
+      '#ba5046',
+      '#ffa24c',
+      '#ffe0b3',
+      '#93f1ff',
+      '#3569fa',
+      '#193d9b',
+    ],
+    count: 3,
+    speed: 1,
+    amplitude: 1,
+    waviness: 1,
+    thickness: 1,
+    glow: 1,
+    taper: 1,
+    spread: 1,
+    hueShift: 0,
+    intensity: 1,
+    saturation: 1,
+    opacity: 1,
+    scale: 1,
+    glass: true,
+    refraction: 1,
+    dispersion: 1,
+    glassSize: 1,
+    rim: 1,
+    energy: 0.65,
+    listening: false,
+    level: undefined,
+    interactive: true,
+    clickPulse: true,
+    intro: true,
+    lightMode: false,
+    maxDevicePixelRatio: 2,
+    class: '',
+  });
 
-  const VERT = `#version 300 es
-in vec2 position;
-void main() {
-  gl_Position = vec4(position, 0.0, 1.0);
-}
-`;
+  const containerRef = ref<HTMLDivElement | null>(null);
+  const canvasRef = ref<HTMLCanvasElement | null>(null);
+  const reducedMotion = usePreferredReducedMotion();
 
-  const FRAG = `#version 300 es
-precision highp float;
-uniform float uTime;
-uniform vec2 uResolution;
-uniform vec3 uColors[${MAX_COLORS}];
-uniform int uColorCount;
-uniform int uStrandCount;
-uniform float uSpeed;
-uniform float uAmplitude;
-uniform float uWaviness;
-uniform float uThickness;
-uniform float uGlow;
-uniform float uTaper;
-uniform float uSpread;
-uniform float uHueShift;
-uniform float uIntensity;
-uniform float uOpacity;
-uniform float uScale;
-uniform float uSaturation;
-out vec4 fragColor;
-const float PI = 3.14159265;
-vec3 spectrum(float t) {
-  return 0.5 + 0.5 * cos(2.0 * PI * (t + vec3(0.00, 0.33, 0.67)));
-}
-vec3 samplePalette(float t) {
-  t = fract(t);
-  float scaled = t * float(uColorCount);
-  int idx = int(floor(scaled));
-  float blend = fract(scaled);
-  int nextIdx = idx + 1;
-  if (nextIdx >= uColorCount) nextIdx = 0;
-  return mix(uColors[idx], uColors[nextIdx], blend);
-}
-vec3 strandColor(float t) {
-  if (uColorCount > 0) return samplePalette(t);
-  return spectrum(t);
-}
-void main() {
-  vec2 uv = (gl_FragCoord.xy - 0.5 * uResolution) / uResolution.y;
-  uv /= max(uScale, 0.0001);
-  float e = 0.06 + uIntensity * 0.94;
-  float env = pow(max(cos(uv.x * PI * 1.3), 0.0), uTaper);
-  vec3 col = vec3(0.0);
-  for (int i = 0; i < ${MAX_STRANDS}; i++) {
-    if (i >= uStrandCount) break;
-    float fi = float(i);
-    float ph = fi * 1.7 * uSpread;
-    float freq = (2.0 + fi * 0.35) * uWaviness;
-    float spd = 1.4 + fi * 1.2;
-    float tt = uTime * uSpeed;
-    float w = sin(uv.x * freq + tt * spd + ph) * 0.60
-            + sin(uv.x * freq * 1.1 - tt * spd * 0.7 + ph * 1.7) * 0.40;
-    float amp = (0.1 + 0.02 * e) * env * uAmplitude;
-    float y = w * amp;
-    float d = abs(uv.y - y);
-    float thick = (0.001 + 0.05 * e) * (0.35 + env) * uThickness;
-    float g = thick / (d + thick * 0.45);
-    g = g * g;
-    float h = fi / float(uStrandCount) + uv.x * 0.30 + uTime * 0.04 + uHueShift;
-    col += strandColor(h) * g * env;
-  }
-  col *= 0.45 + 0.7 * e;
-  col = 1.0 - exp(-col * uGlow);
-  float gray = dot(col, vec3(0.2126, 0.7152, 0.0722));
-  col = max(mix(vec3(gray), col, uSaturation), 0.0);
-  float lum = max(max(col.r, col.g), col.b);
-  float alpha = clamp(lum, 0.0, 1.0) * uOpacity;
-  fragColor = vec4(col * uOpacity, alpha);
-}
-`;
+  const st = {
+    clock: 0,
+    pace: 0,
+    activity: 0,
+    hover: 0,
+    hoverTarget: 0,
+    burst: 0,
+    lean: [0, 0],
+    leanTarget: [0, 0],
+    pulse: 0,
+    pulseV: 0,
+    introStart: -1,
+    intro: props.intro ? 0 : 1,
+    visible: false,
+    lost: false,
+    raf: 0,
+    last: 0,
+    width: 0,
+    height: 0,
+    speechT: 0,
+    paletteKey: '',
+    palette: new Float32Array(MAX_COLORS * 3),
+  };
 
-  const GLASS_FRAG = `#version 300 es
-precision highp float;
-uniform sampler2D uScene;
-uniform vec2 uResolution;
-uniform float uRadius;
-uniform float uRefraction;
-uniform float uDispersion;
-out vec4 fragColor;
-vec2 toUv(vec2 p) {
-  return p * (uResolution.y / uResolution) + 0.5;
-}
-void main() {
-  vec2 p = (gl_FragCoord.xy - 0.5 * uResolution) / uResolution.y;
-  float d = length(p);
-  float r = uRadius;
-  float edge = fwidth(d) * 1.5;
-  float mask = 1.0 - smoothstep(r - edge, r + edge, d);
-  if (mask <= 0.0) {
-    fragColor = vec4(0.0);
-    return;
-  }
-  float z = sqrt(max(r * r - d * d, 0.0)) / r;
-  float nd = d / r;
-  vec2 dir = d > 0.0 ? p / d : vec2(0.0);
-  float lens = smoothstep(0.85, 1.0, nd) * pow(nd, 6.0);
-  vec2 offset = -dir * lens * uRefraction * 0.15;
-  vec2 disp = -dir * lens * uDispersion * 0.012;
-  vec3 light;
-  light.r = texture(uScene, toUv(p + offset - disp)).r;
-  light.g = texture(uScene, toUv(p + offset)).g;
-  light.b = texture(uScene, toUv(p + offset + disp)).b;
-  float fres = pow(1.0 - z, 3.0);
-  vec3 rim = vec3(1.0) * fres * 0.18;
-  vec2 lightDir = normalize(vec2(-0.55, 0.6));
-  float spec = pow(max(dot(p / max(r, 1e-4), lightDir), 0.0), 6.0);
-  spec *= smoothstep(r, r * 0.55, d);
-  vec3 emissive = light + rim + vec3(spec) * 0.4;
-  float emissiveA = clamp(max(max(emissive.r, emissive.g), emissive.b), 0.0, 1.0);
-  float bodyA = 0.05 + fres * 0.05;
-  float outA = emissiveA + bodyA * (1.0 - emissiveA);
-  vec3 outRGB = emissive;
-  outRGB *= mask;
-  outA *= mask;
-  fragColor = vec4(outRGB, outA);
-}
-`;
+  let gl: WebGL2RenderingContext | null = null;
+  let program: WebGLProgram | null = null;
+  let buffer: WebGLBuffer | null = null;
+  let loc: (name: StrandsUniform) => WebGLUniformLocation | null = () => null;
+  let mounted = false;
 
-  const props = withDefaults(
-    defineProps<{
-      colors?: string[];
-      count?: number;
-      speed?: number;
-      amplitude?: number;
-      waviness?: number;
-      thickness?: number;
-      glow?: number;
-      taper?: number;
-      spread?: number;
-      hueShift?: number;
-      intensity?: number;
-      saturation?: number;
-      opacity?: number;
-      scale?: number;
-      glass?: boolean;
-      refraction?: number;
-      dispersion?: number;
-      glassSize?: number;
-      class?: string;
-    }>(),
-    {
-      colors: () => ['#FF4242', '#7C3AED', '#06B6D4', '#EAB308'],
-      count: 3,
-      speed: 0.5,
-      amplitude: 1,
-      waviness: 1,
-      thickness: 0.7,
-      glow: 2.6,
-      taper: 3,
-      spread: 1,
-      hueShift: 0,
-      intensity: 0.6,
-      saturation: 1.5,
-      opacity: 1,
-      scale: 1.5,
-      glass: false,
-      refraction: 1,
-      dispersion: 1,
-      glassSize: 1,
-      class: '',
-    },
-  );
-
-  const containerRef = ref<HTMLDivElement>();
-  let renderer: InstanceType<typeof Renderer> | null = null;
-  let glContext: WebGLRenderingContext | null = null;
-  let programRef: InstanceType<typeof Program> | null = null;
-  let meshRef: InstanceType<typeof Mesh> | null = null;
-  let renderTargetRef: InstanceType<typeof RenderTarget> | null = null;
-  let glassProgramRef: InstanceType<typeof Program> | null = null;
-  let glassMeshRef: InstanceType<typeof Mesh> | null = null;
-  let animationId = 0;
-
-  function buildPalette(colors: string[]): Array<[number, number, number]> {
-    const filled = colors.length ? colors : ['#ffffff'];
-    const padded: Array<[number, number, number]> = [];
-    for (let i = 0; i < MAX_COLORS; i++) {
-      const hex = filled[i] ?? filled[filled.length - 1];
-      const c = new Color(hex);
-      padded.push([c.r, c.g, c.b]);
-    }
-    return padded;
+  function setup(): boolean {
+    if (!gl) return false;
+    const next = createStrandsProgram(gl);
+    if (!next) return false;
+    program = next;
+    buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 3, -1, -1, 3]),
+      gl.STATIC_DRAW,
+    );
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    gl.useProgram(next);
+    loc = locateStrandsUniforms(gl, next);
+    gl.disable(gl.BLEND);
+    gl.clearColor(0, 0, 0, 0);
+    return true;
   }
 
   function resize() {
-    if (!renderer || !programRef || !containerRef.value) return;
-    const width = containerRef.value.offsetWidth;
-    const height = containerRef.value.offsetHeight;
-    renderer.setSize(width, height);
-    programRef.uniforms.uResolution.value = [width, height];
-    if (renderTargetRef) renderTargetRef.setSize(width, height);
-    if (glassProgramRef)
-      glassProgramRef.uniforms.uResolution.value = [width, height];
+    const container = containerRef.value;
+    const canvas = canvasRef.value;
+    if (!container || !canvas) return;
+    const dpr = Math.min(
+      window.devicePixelRatio || 1,
+      Math.max(0.5, props.maxDevicePixelRatio),
+    );
+    const w = Math.max(1, Math.round(container.clientWidth * dpr));
+    const h = Math.max(1, Math.round(container.clientHeight * dpr));
+    if (w !== st.width || h !== st.height) {
+      st.width = w;
+      st.height = h;
+      canvas.width = w;
+      canvas.height = h;
+    }
   }
 
-  onMounted(() => {
-    const ctn = containerRef.value;
-    if (!ctn) return;
+  function updatePalette() {
+    const list = Array.isArray(props.colors) ? props.colors : [];
+    const key = list.join(',');
+    if (key === st.paletteKey) return;
+    st.paletteKey = key;
+    st.palette = buildPalette(list);
+  }
 
-    renderer = new Renderer({
-      alpha: true,
-      premultipliedAlpha: true,
-      antialias: true,
-    });
-    const gl = renderer.gl;
-    glContext = gl;
-    gl.clearColor(0, 0, 0, 0);
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-    gl.canvas.style.backgroundColor = 'transparent';
-    gl.canvas.style.width = '100%';
-    gl.canvas.style.height = '100%';
-    gl.canvas.style.display = 'block';
+  function draw() {
+    if (!gl || st.lost || !program) return;
+    updatePalette();
+    gl.viewport(0, 0, st.width, st.height);
+    gl.uniform2f(loc('uResolution'), st.width, st.height);
+    const c = st.clock;
+    const sway = 0.75 + 0.45 * st.pace;
+    gl.uniform3f(
+      loc('uMotion'),
+      (0.26 * Math.sin(0.53 * c) + 0.1 * Math.sin(1.19 * c + 1.3)) * sway,
+      1 + (0.06 * Math.sin(0.71 * c) + 0.035 * Math.sin(1.37 * c + 0.4)) * sway,
+      0.06 * Math.sin(0.41 * c + 2) * sway,
+    );
+    gl.uniform1f(loc('uLevel'), clamp(st.activity, 0, 1));
+    gl.uniform3fv(loc('uColors'), st.palette);
+    gl.uniform1i(loc('uCount'), clamp(Math.round(props.count), 1, 3));
+    gl.uniform1f(loc('uAmplitude'), props.amplitude);
+    gl.uniform1f(loc('uWaviness'), props.waviness);
+    gl.uniform1f(loc('uThickness'), props.thickness);
+    gl.uniform1f(loc('uGlow'), props.glow);
+    gl.uniform1f(loc('uTaper'), Math.max(0.05, props.taper));
+    gl.uniform1f(loc('uSpread'), props.spread);
+    gl.uniform1f(loc('uHueShift'), props.hueShift);
+    gl.uniform1f(loc('uIntensity'), props.intensity);
+    gl.uniform1f(loc('uSaturation'), props.saturation);
+    gl.uniform1f(loc('uScale'), Math.max(0.05, props.scale));
+    gl.uniform1f(loc('uGlass'), props.glass ? 1 : 0);
+    gl.uniform1f(loc('uRadius'), 0.42 * props.glassSize);
+    gl.uniform1f(loc('uRefraction'), props.refraction);
+    gl.uniform1f(loc('uDispersion'), props.dispersion);
+    gl.uniform1f(loc('uRim'), props.rim);
+    gl.uniform2f(loc('uLean'), st.lean[0] ?? 0, st.lean[1] ?? 0);
+    gl.uniform1f(loc('uIntro'), st.intro);
+    gl.uniform1f(loc('uPulse'), st.pulse);
+    gl.uniform1f(loc('uLight'), props.lightMode ? 1 : 0);
+    gl.uniform1f(loc('uOpacity'), props.opacity);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
 
-    const geometry = new Triangle(gl);
-    if (geometry.attributes.uv) {
-      delete geometry.attributes.uv;
+  function frame(now: number) {
+    st.raf = 0;
+    const dt = st.last ? clamp((now - st.last) / 1000, 0, 0.05) : 0;
+    st.last = now;
+    const reduced = reducedMotion.value === 'reduce';
+    if (st.introStart < 0 && st.visible) st.introStart = now;
+    if (props.intro && !reduced && st.introStart >= 0) {
+      const t = clamp((now - st.introStart) / 1400, 0, 1);
+      st.intro = 1 - Math.pow(1 - t, 3);
+    } else {
+      st.intro = 1;
     }
+    st.hover +=
+      (st.hoverTarget - st.hover) *
+      (1 - Math.exp(-dt / (st.hoverTarget > st.hover ? 0.25 : 0.6)));
+    for (let i = 0; i < 2; i++) {
+      const cur = st.lean[i] ?? 0;
+      st.lean[i] =
+        cur + ((st.leanTarget[i] ?? 0) - cur) * (1 - Math.exp(-dt / 0.35));
+    }
+    st.pulseV += (-170 * st.pulse - 14 * st.pulseV) * dt;
+    st.pulse += st.pulseV * dt;
+    st.burst *= Math.exp(-dt / 0.45);
+    if (props.listening && !reduced) st.speechT += dt;
+    const voice =
+      typeof props.level === 'number'
+        ? clamp(props.level, 0, 1)
+        : props.listening && !reduced
+          ? speech(st.speechT)
+          : 0;
+    const target = Math.min(
+      1.2,
+      Math.max(clamp(props.energy, 0, 1), voice) + st.hover * 0.18 + st.burst,
+    );
+    st.activity +=
+      (target - st.activity) *
+      (1 - Math.exp(-dt / (target > st.activity ? 0.12 : 0.4)));
+    st.pace += (Math.min(1, st.activity) - st.pace) * (1 - Math.exp(-dt / 0.8));
+    if (!reduced) st.clock += dt * props.speed * (0.6 + 1.6 * st.pace);
+    draw();
+    const settled =
+      reduced &&
+      Math.abs(st.activity - target) < 1e-3 &&
+      Math.abs(st.pulse) < 1e-3 &&
+      Math.abs(st.pulseV) < 1e-3 &&
+      st.burst < 1e-3 &&
+      Math.abs(st.hover - st.hoverTarget) < 1e-3 &&
+      Math.abs((st.lean[0] ?? 0) - (st.leanTarget[0] ?? 0)) < 1e-3 &&
+      Math.abs((st.lean[1] ?? 0) - (st.leanTarget[1] ?? 0)) < 1e-3;
+    if (st.visible && !document.hidden && !st.lost && !settled) {
+      st.raf = requestAnimationFrame(frame);
+    }
+  }
 
-    programRef = new Program(gl, {
-      vertex: VERT,
-      fragment: FRAG,
-      uniforms: {
-        uTime: { value: 0 },
-        uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
-        uColors: { value: buildPalette(props.colors) },
-        uColorCount: { value: Math.min(props.colors.length, MAX_COLORS) },
-        uStrandCount: { value: Math.min(props.count, MAX_STRANDS) },
-        uSpeed: { value: props.speed },
-        uAmplitude: { value: props.amplitude },
-        uWaviness: { value: props.waviness },
-        uThickness: { value: props.thickness },
-        uGlow: { value: props.glow },
-        uTaper: { value: props.taper },
-        uSpread: { value: props.spread },
-        uHueShift: { value: props.hueShift },
-        uIntensity: { value: props.intensity },
-        uOpacity: { value: props.opacity },
-        uScale: { value: props.scale },
-        uSaturation: { value: props.saturation },
-      },
-    });
+  function wake() {
+    if (mounted && !st.raf && st.visible && !st.lost) {
+      st.last = 0;
+      st.raf = requestAnimationFrame(frame);
+    }
+  }
 
-    meshRef = new Mesh(gl, { geometry, program: programRef });
+  function local(e: PointerEvent): [number, number] {
+    const container = containerRef.value;
+    if (!container) return [0, 0];
+    const r = container.getBoundingClientRect();
+    const m = Math.min(r.width, r.height) || 1;
+    return [
+      (e.clientX - r.left - r.width / 2) / (m / 2),
+      (e.clientY - r.top - r.height / 2) / (m / 2),
+    ];
+  }
 
-    renderTargetRef = new RenderTarget(gl, {
-      width: ctn.offsetWidth,
-      height: ctn.offsetHeight,
-    });
+  function onMove(e: PointerEvent) {
+    if (!props.interactive) return;
+    const [x, y] = local(e);
+    st.hoverTarget = clamp(1.6 - Math.hypot(x, y), 0, 1);
+    st.leanTarget = [clamp(x, -1.2, 1.2) * 0.8, clamp(-y, -1.2, 1.2) * 0.8];
+    wake();
+  }
 
-    glassProgramRef = new Program(gl, {
-      vertex: VERT,
-      fragment: GLASS_FRAG,
-      uniforms: {
-        uScene: { value: renderTargetRef.texture },
-        uResolution: { value: [ctn.offsetWidth, ctn.offsetHeight] },
-        uRadius: { value: 0.46 * props.glassSize },
-        uRefraction: { value: props.refraction },
-        uDispersion: { value: props.dispersion },
-      },
-    });
+  function onLeave() {
+    st.hoverTarget = 0;
+    st.leanTarget = [0, 0];
+    wake();
+  }
 
-    glassMeshRef = new Mesh(gl, { geometry, program: glassProgramRef });
+  function onDown() {
+    if (!props.clickPulse) return;
+    st.pulseV += 5;
+    st.burst = Math.min(1.2, st.burst + 0.9);
+    wake();
+  }
 
-    ctn.appendChild(gl.canvas as HTMLCanvasElement);
-    window.addEventListener('resize', resize);
+  function onLost(e: Event) {
+    e.preventDefault();
+    st.lost = true;
+    if (st.raf) cancelAnimationFrame(st.raf);
+    st.raf = 0;
+  }
+
+  function onRestored() {
+    st.lost = false;
+    if (setup()) wake();
+  }
+
+  useEventListener(canvasRef, 'webglcontextlost', onLost);
+  useEventListener(canvasRef, 'webglcontextrestored', onRestored);
+  useEventListener(defaultDocument, 'visibilitychange', () => {
+    if (!defaultDocument?.hidden) wake();
+  });
+  useResizeObserver(containerRef, () => {
     resize();
-
-    const update = (t: number) => {
-      animationId = requestAnimationFrame(update);
-      if (!renderer || !programRef || !meshRef) return;
-
-      programRef.uniforms.uTime.value = t * 0.001;
-      programRef.uniforms.uColors.value = buildPalette(props.colors);
-      programRef.uniforms.uColorCount.value = Math.min(
-        props.colors.length,
-        MAX_COLORS,
-      );
-      programRef.uniforms.uStrandCount.value = Math.min(
-        Math.max(Math.round(props.count), 1),
-        MAX_STRANDS,
-      );
-      programRef.uniforms.uSpeed.value = props.speed;
-      programRef.uniforms.uAmplitude.value = props.amplitude;
-      programRef.uniforms.uWaviness.value = props.waviness;
-      programRef.uniforms.uThickness.value = props.thickness;
-      programRef.uniforms.uGlow.value = props.glow;
-      programRef.uniforms.uTaper.value = props.taper;
-      programRef.uniforms.uSpread.value = props.spread;
-      programRef.uniforms.uHueShift.value = props.hueShift;
-      programRef.uniforms.uIntensity.value = props.intensity;
-      programRef.uniforms.uOpacity.value = props.opacity;
-      programRef.uniforms.uScale.value = props.scale;
-      programRef.uniforms.uSaturation.value = props.saturation;
-
-      if (props.glass && renderTargetRef && glassProgramRef && glassMeshRef) {
-        renderer.render({ scene: meshRef, target: renderTargetRef });
-        glassProgramRef.uniforms.uScene.value = renderTargetRef.texture;
-        glassProgramRef.uniforms.uRefraction.value = props.refraction;
-        glassProgramRef.uniforms.uDispersion.value = props.dispersion;
-        glassProgramRef.uniforms.uRadius.value = 0.46 * props.glassSize;
-        renderer.render({ scene: glassMeshRef });
-      } else {
-        renderer.render({ scene: meshRef });
-      }
-    };
-
-    animationId = requestAnimationFrame(update);
+    draw();
+  });
+  useIntersectionObserver(containerRef, (entries) => {
+    st.visible = entries[entries.length - 1]?.isIntersecting ?? false;
+    if (st.visible) wake();
   });
 
+  onMounted(() => {
+    const canvas = canvasRef.value;
+    gl =
+      canvas?.getContext('webgl2', {
+        alpha: true,
+        premultipliedAlpha: true,
+        antialias: false,
+      }) ?? null;
+    if (!gl || !setup()) return;
+    mounted = true;
+    resize();
+    draw();
+    wake();
+  });
+
+  // The loop runs while visible; this only matters once it has settled (reduced motion).
+  watch(
+    () => props,
+    () => {
+      draw();
+      wake();
+    },
+    { deep: true, flush: 'post' },
+  );
+  watch(reducedMotion, wake);
+
   onBeforeUnmount(() => {
-    cancelAnimationFrame(animationId);
-    window.removeEventListener('resize', resize);
-    if (glContext) {
-      const canvas = glContext.canvas as HTMLCanvasElement;
-      if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
-      glContext.getExtension('WEBGL_lose_context')?.loseContext();
+    mounted = false;
+    if (st.raf) cancelAnimationFrame(st.raf);
+    st.raf = 0;
+    if (gl) {
+      if (program) gl.deleteProgram(program);
+      if (buffer) gl.deleteBuffer(buffer);
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
     }
+    gl = null;
+    program = null;
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
+  <div
+    ref="containerRef"
+    :class="cn('relative size-full bg-transparent', props.class)"
+    style="-webkit-tap-highlight-color: transparent"
+    @pointermove="onMove"
+    @pointerleave="onLeave"
+    @pointerdown="onDown"
+  >
+    <canvas ref="canvasRef" class="block size-full" aria-hidden="true" />
+  </div>
 </template>

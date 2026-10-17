@@ -68,7 +68,11 @@
         :density="params.density"
         :speed="params.speed"
       />
-      <ShaderPane title="Color Panels" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Color Panels"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

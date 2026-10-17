@@ -35,7 +35,7 @@
         :inner-glow="params.innerGlow"
         :outer-glow="params.outerGlow"
       />
-      <ShaderPane title="Heatmap" @on-pane-created="onPaneCreated" />
+      <ShaderPane expanded title="Heatmap" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>
