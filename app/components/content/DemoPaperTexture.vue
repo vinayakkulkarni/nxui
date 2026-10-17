@@ -5,7 +5,7 @@
     getPaperTexturePreset,
     isPaperTexturePresetName,
     paperTexturePresets,
-  } from '@registry/new-york/paper-texture/paper-texture-presets';
+  } from '@registry/new-york/paper-texture/paper-texture-presets.ts';
   import type { PaperTexturePresetName } from '@registry/new-york/paper-texture/types';
   import type { Pane } from 'tweakpane';
 

@@ -5,7 +5,7 @@
     getPaperLensDistortionPreset,
     isPaperLensDistortionPresetName,
     paperLensDistortionPresets,
-  } from '@registry/new-york/paper-lens-distortion/paper-lens-distortion-presets';
+  } from '@registry/new-york/paper-lens-distortion/paper-lens-distortion-presets.ts';
   import type { PaperLensDistortionPresetName } from '@registry/new-york/paper-lens-distortion/types';
   import type { Pane } from 'tweakpane';
 
