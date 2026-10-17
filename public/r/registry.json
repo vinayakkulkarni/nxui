@@ -79,7 +79,7 @@
       "name": "spotlight-card",
       "type": "registry:ui",
       "title": "Spotlight Card",
-      "description": "A card that follows the cursor with a spotlight glow effect."
+      "description": "Card lit by a soft spotlight that follows the pointer, catches its edge and reaches nearby cards."
     },
     {
       "name": "showcase-card",
@@ -343,7 +343,7 @@
       "name": "aurora",
       "type": "registry:ui",
       "title": "Aurora",
-      "description": "WebGL aurora borealis effect with simplex noise and configurable color stops."
+      "description": "A soft, calm aurora that flows across the top of the page and drifts toward the cursor."
     },
     {
       "name": "squares",
@@ -361,7 +361,7 @@
       "name": "iridescence",
       "type": "registry:ui",
       "title": "Iridescence",
-      "description": "Mesmerizing iridescent color waves with mouse-reactive distortion."
+      "description": "Liquid iridescent surface with shifting folds that you can stir with the cursor."
     },
     {
       "name": "liquid-chrome",
@@ -385,7 +385,7 @@
       "name": "threads",
       "type": "registry:ui",
       "title": "Threads",
-      "description": "Animated Perlin noise thread lines with mouse-reactive distortion."
+      "description": "Flowing threads that fray apart and part around the cursor, from fine silk to contour lines."
     },
     {
       "name": "orb",
@@ -451,7 +451,7 @@
       "name": "side-rays",
       "type": "registry:ui",
       "title": "Side Rays",
-      "description": "A WebGL light-rays background emanating from a screen corner, with configurable origin, tilt, colors, spread, and falloff."
+      "description": "Shafts of light that fan in from a corner or side, shimmer slowly and lean toward the cursor."
     },
     {
       "name": "lightfall",
@@ -463,7 +463,7 @@
       "name": "ripple-grid",
       "type": "registry:ui",
       "title": "Ripple Grid",
-      "description": "Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette."
+      "description": "A crisp grid that ripples like water, bending and lighting up as waves pass through it, with dot, cross and floor styles."
     },
     {
       "name": "ripple-transition",
@@ -553,7 +553,7 @@
       "name": "grid-distortion",
       "type": "registry:ui",
       "title": "Grid Distortion",
-      "description": "Three.js shader-based image distortion that warps a texture in response to mouse movement."
+      "description": "Image background that breaks into a grid of blocks under the cursor and settles back into place."
     },
     {
       "name": "grid-motion",
@@ -835,13 +835,13 @@
       "name": "circular-gallery",
       "type": "registry:ui",
       "title": "Circular Gallery",
-      "description": "OGL-powered curved image gallery with drag/scroll navigation and wave deformation."
+      "description": "A curved WebGL image gallery you can drag, scroll or tab through, with cards that open to the full image."
     },
     {
       "name": "counter",
       "type": "registry:ui",
       "title": "Counter",
-      "description": "Animated number counter with spring-physics digit rolling and gradient fade overlays."
+      "description": "An odometer-style number whose digits roll on springs to each new value, with motion blur, an intro spin and Intl formatting."
     },
     {
       "name": "animated-list",
@@ -853,7 +853,7 @@
       "name": "folder",
       "type": "registry:ui",
       "title": "Folder",
-      "description": "Pure CSS 3D folder with open/close animation and magnetic paper hover."
+      "description": "3D folder that drops its flap open or swings open like a book, in solid, glass or matte, with pages you can zoom, drag out and drop back in."
     },
     {
       "name": "glass-icons",
@@ -889,7 +889,7 @@
       "name": "magic-bento",
       "type": "registry:ui",
       "title": "Magic Bento",
-      "description": "Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism."
+      "description": "A bento grid of feature cards with live artwork, edge light that follows the cursor and a click wave across the grid."
     },
     {
       "name": "masonry",
@@ -925,7 +925,7 @@
       "name": "reflective-card",
       "type": "registry:ui",
       "title": "Reflective Card",
-      "description": "Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration."
+      "description": "A WebGL2 metal ID card that reflects a looping video or your camera, tilts toward the cursor and catches a moving light."
     },
     {
       "name": "scrub-input",
@@ -991,19 +991,19 @@
       "name": "soft-aurora",
       "type": "registry:ui",
       "title": "Soft Aurora",
-      "description": "A WebGL aurora borealis background effect with perlin noise, cosine gradient coloring, and mouse interaction."
+      "description": "Soft aurora band built from 3D Perlin noise that reaches toward the cursor and carries click pulses."
     },
     {
       "name": "line-waves",
       "type": "registry:ui",
       "title": "Line Waves",
-      "description": "A WebGL animated line wave background with warping, color cycling, and mouse interaction."
+      "description": "Fine lines that flow in silky waves while a band of light drifts through them, with a cursor spotlight and click ripples."
     },
     {
       "name": "border-glow",
       "type": "registry:ui",
       "title": "Border Glow",
-      "description": "A CSS-driven directional glow card that tracks cursor position and proximity to edges."
+      "description": "Card with a mesh-gradient border and outer glow that follow the cursor direction and grow stronger near the edges."
     },
     {
       "name": "noise",
@@ -1051,7 +1051,7 @@
       "name": "plasma",
       "type": "registry:ui",
       "title": "Plasma",
-      "description": "A WebGL2 plasma background with 60-iteration ray march shader, mouse interaction, and configurable direction."
+      "description": "Soft folds of satin light twisting slowly through the dark, turning in 3D to follow the cursor."
     },
     {
       "name": "paper-shader-mount",
@@ -1297,7 +1297,7 @@
       "name": "fluid-glass",
       "type": "registry:ui",
       "title": "Fluid Glass",
-      "description": "Three.js glass refraction effect with chromatic aberration shader in lens, bar, or cube mode."
+      "description": "A glass object that refracts your headline, image or video, follows the cursor and melts between seven shapes."
     },
     {
       "name": "galaxy",
@@ -1333,7 +1333,7 @@
       "name": "lanyard",
       "type": "registry:ui",
       "title": "Lanyard",
-      "description": "Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model."
+      "description": "Swinging 3D badge on a stretchy woven band that you can drag, throw or click to flip."
     },
     {
       "name": "laser-flow",
@@ -1351,7 +1351,7 @@
       "name": "model-viewer",
       "type": "registry:ui",
       "title": "Model Viewer",
-      "description": "Three.js 3D model viewer with OrbitControls, GLTF/FBX/OBJ support, auto-framing, and screenshot."
+      "description": "A 3D model viewer for glb, gltf, fbx and obj files that frames the model, lights it with an HDRI and floats it over a soft shadow."
     },
     {
       "name": "orbit-card-stack",
@@ -1399,7 +1399,7 @@
       "name": "staggered-menu",
       "type": "registry:ui",
       "title": "Staggered Menu",
-      "description": "Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links."
+      "description": "Side menu whose color layers slide in one after another, then links rise in with a staggered tilt as the toggle rolls from Menu to Close."
     },
     {
       "name": "holo-sticker",

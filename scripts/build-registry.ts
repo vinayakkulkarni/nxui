@@ -145,7 +145,8 @@ const COMPONENTS: Record<
   },
   'spotlight-card': {
     title: 'Spotlight Card',
-    description: 'A card that follows the cursor with a spotlight glow effect.',
+    description:
+      'Card lit by a soft spotlight that follows the pointer, catches its edge and reaches nearby cards.',
     deps: ['@vueuse/core'],
   },
   'showcase-card': {
@@ -395,8 +396,8 @@ const COMPONENTS: Record<
   aurora: {
     title: 'Aurora',
     description:
-      'WebGL aurora borealis effect with simplex noise and configurable color stops.',
-    deps: ['ogl'],
+      'A soft, calm aurora that flows across the top of the page and drifts toward the cursor.',
+    deps: ['@vueuse/core'],
   },
   squares: {
     title: 'Squares',
@@ -413,8 +414,8 @@ const COMPONENTS: Record<
   iridescence: {
     title: 'Iridescence',
     description:
-      'Mesmerizing iridescent color waves with mouse-reactive distortion.',
-    deps: ['ogl', '@vueuse/core'],
+      'Liquid iridescent surface with shifting folds that you can stir with the cursor.',
+    deps: ['@vueuse/core'],
   },
   'liquid-chrome': {
     title: 'Liquid Chrome',
@@ -437,8 +438,8 @@ const COMPONENTS: Record<
   threads: {
     title: 'Threads',
     description:
-      'Animated Perlin noise thread lines with mouse-reactive distortion.',
-    deps: ['ogl', '@vueuse/core'],
+      'Flowing threads that fray apart and part around the cursor, from fine silk to contour lines.',
+    deps: ['@vueuse/core'],
   },
   orb: {
     title: 'Orb',
@@ -503,8 +504,8 @@ const COMPONENTS: Record<
   'side-rays': {
     title: 'Side Rays',
     description:
-      'A WebGL light-rays background emanating from a screen corner, with configurable origin, tilt, colors, spread, and falloff.',
-    deps: ['ogl', '@vueuse/core'],
+      'Shafts of light that fan in from a corner or side, shimmer slowly and lean toward the cursor.',
+    deps: ['@vueuse/core'],
   },
   lightfall: {
     title: 'Lightfall',
@@ -515,8 +516,8 @@ const COMPONENTS: Record<
   'ripple-grid': {
     title: 'Ripple Grid',
     description:
-      'Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette.',
-    deps: ['ogl', '@vueuse/core'],
+      'A crisp grid that ripples like water, bending and lighting up as waves pass through it, with dot, cross and floor styles.',
+    deps: ['@vueuse/core'],
   },
   'ripple-transition': {
     title: 'Ripple Transition',
@@ -605,8 +606,8 @@ const COMPONENTS: Record<
   'grid-distortion': {
     title: 'Grid Distortion',
     description:
-      'Three.js shader-based image distortion that warps a texture in response to mouse movement.',
-    deps: ['three', '@vueuse/core'],
+      'Image background that breaks into a grid of blocks under the cursor and settles back into place.',
+    deps: ['@vueuse/core'],
   },
   'grid-motion': {
     title: 'Grid Motion',
@@ -887,14 +888,14 @@ const COMPONENTS: Record<
   'circular-gallery': {
     title: 'Circular Gallery',
     description:
-      'OGL-powered curved image gallery with drag/scroll navigation and wave deformation.',
-    deps: ['ogl', '@vueuse/core'],
+      'A curved WebGL image gallery you can drag, scroll or tab through, with cards that open to the full image.',
+    deps: ['@vueuse/core'],
   },
   counter: {
     title: 'Counter',
     description:
-      'Animated number counter with spring-physics digit rolling and gradient fade overlays.',
-    deps: [],
+      'An odometer-style number whose digits roll on springs to each new value, with motion blur, an intro spin and Intl formatting.',
+    deps: ['@vueuse/core'],
   },
   'animated-list': {
     title: 'Animated List',
@@ -905,8 +906,8 @@ const COMPONENTS: Record<
   folder: {
     title: 'Folder',
     description:
-      'Pure CSS 3D folder with open/close animation and magnetic paper hover.',
-    deps: [],
+      '3D folder that drops its flap open or swings open like a book, in solid, glass or matte, with pages you can zoom, drag out and drop back in.',
+    deps: ['@vueuse/core'],
   },
   'glass-icons': {
     title: 'Glass Icons',
@@ -941,7 +942,7 @@ const COMPONENTS: Record<
   'magic-bento': {
     title: 'Magic Bento',
     description:
-      'Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism.',
+      'A bento grid of feature cards with live artwork, edge light that follows the cursor and a click wave across the grid.',
     deps: ['@vueuse/core'],
   },
   masonry: {
@@ -977,8 +978,8 @@ const COMPONENTS: Record<
   'reflective-card': {
     title: 'Reflective Card',
     description:
-      'Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration.',
-    deps: [],
+      'A WebGL2 metal ID card that reflects a looping video or your camera, tilts toward the cursor and catches a moving light.',
+    deps: ['@vueuse/core'],
   },
   'scrub-input': {
     title: 'Scrub Input',
@@ -1043,20 +1044,20 @@ const COMPONENTS: Record<
   'soft-aurora': {
     title: 'Soft Aurora',
     description:
-      'A WebGL aurora borealis background effect with perlin noise, cosine gradient coloring, and mouse interaction.',
-    deps: ['ogl'],
+      'Soft aurora band built from 3D Perlin noise that reaches toward the cursor and carries click pulses.',
+    deps: ['@vueuse/core'],
   },
   'line-waves': {
     title: 'Line Waves',
     description:
-      'A WebGL animated line wave background with warping, color cycling, and mouse interaction.',
-    deps: ['ogl'],
+      'Fine lines that flow in silky waves while a band of light drifts through them, with a cursor spotlight and click ripples.',
+    deps: ['@vueuse/core'],
   },
   'border-glow': {
     title: 'Border Glow',
     description:
-      'A CSS-driven directional glow card that tracks cursor position and proximity to edges.',
-    deps: [],
+      'Card with a mesh-gradient border and outer glow that follow the cursor direction and grow stronger near the edges.',
+    deps: ['@vueuse/core'],
   },
   noise: {
     title: 'Noise',
@@ -1103,8 +1104,8 @@ const COMPONENTS: Record<
   plasma: {
     title: 'Plasma',
     description:
-      'A WebGL2 plasma background with 60-iteration ray march shader, mouse interaction, and configurable direction.',
-    deps: ['ogl', '@vueuse/core'],
+      'Soft folds of satin light twisting slowly through the dark, turning in 3D to follow the cursor.',
+    deps: ['@vueuse/core'],
   },
   'paper-shader-mount': {
     title: 'Paper Shader Mount',
@@ -1350,8 +1351,8 @@ const COMPONENTS: Record<
   'fluid-glass': {
     title: 'Fluid Glass',
     description:
-      'Three.js glass refraction effect with chromatic aberration shader in lens, bar, or cube mode.',
-    deps: ['three', '@vueuse/core'],
+      'A glass object that refracts your headline, image or video, follows the cursor and melts between seven shapes.',
+    deps: ['@vueuse/core'],
   },
   galaxy: {
     title: 'Galaxy',
@@ -1386,8 +1387,8 @@ const COMPONENTS: Record<
   lanyard: {
     title: 'Lanyard',
     description:
-      'Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model.',
-    deps: ['three', '@vueuse/core'],
+      'Swinging 3D badge on a stretchy woven band that you can drag, throw or click to flip.',
+    deps: ['@vueuse/core', 'three'],
   },
   'laser-flow': {
     title: 'Laser Flow',
@@ -1404,8 +1405,8 @@ const COMPONENTS: Record<
   'model-viewer': {
     title: 'Model Viewer',
     description:
-      'Three.js 3D model viewer with OrbitControls, GLTF/FBX/OBJ support, auto-framing, and screenshot.',
-    deps: ['three', '@vueuse/core'],
+      'A 3D model viewer for glb, gltf, fbx and obj files that frames the model, lights it with an HDRI and floats it over a soft shadow.',
+    deps: ['@vueuse/core', 'three'],
   },
   'orbit-card-stack': {
     title: 'Orbit Card Stack',
@@ -1452,8 +1453,8 @@ const COMPONENTS: Record<
   'staggered-menu': {
     title: 'Staggered Menu',
     description:
-      'Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links.',
-    deps: ['@vueuse/core'],
+      'Side menu whose color layers slide in one after another, then links rise in with a staggered tilt as the toggle rolls from Menu to Close.',
+    deps: ['@vueuse/core', 'motion-v'],
   },
   'holo-sticker': {
     title: 'Holo Sticker',

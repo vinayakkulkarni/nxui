@@ -1,2 +1,2 @@
 export { default as CircularGallery } from './CircularGallery.vue';
-export type { GalleryItem } from './types';
+export type { CircularGalleryProps, GalleryItem } from './types';
