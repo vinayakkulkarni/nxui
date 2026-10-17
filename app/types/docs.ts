@@ -1,7 +1,21 @@
+/** `new`: component added recently. `updated`: rebuilt to match a newer upstream. */
+export type NavBadge = 'new' | 'updated';
+
 export interface NavItem {
   title: string;
   path: string;
-  badge?: string;
+  badge?: NavBadge;
+}
+
+export interface DocsNavBadgeProps {
+  badge: NavBadge;
+}
+
+export interface DocsSidebarItemProps {
+  title: string;
+  path: string;
+  isActive: boolean;
+  badge?: NavBadge;
 }
 
 export interface NavGroup {
