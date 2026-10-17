@@ -99,14 +99,14 @@ const COMPONENTS: Record<
   'true-focus': {
     title: 'True Focus',
     description:
-      'A text component that highlights words in sequence with a glowing focus effect.',
+      'Blurs every word but one and marks it with brackets, a box, an underline or a highlight that glides or springs between words.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'scroll-based-velocity': {
     title: 'Scroll Based Velocity',
     description:
-      'Text that scrolls horizontally with velocity based on scroll speed.',
-    deps: ['@vueuse/core'],
+      'Text marquee rows whose speed follows scroll velocity; rows can lean, stretch, be thrown with inertia and alternate outlined text.',
+    deps: ['@vueuse/core', 'motion-v'],
   },
   'border-beam': {
     title: 'Border Beam',
@@ -281,111 +281,116 @@ const COMPONENTS: Record<
   'glitch-text': {
     title: 'Glitch Text',
     description:
-      'RGB split and distortion glitch effect with jitter animations and optional hover trigger.',
-    deps: [],
+      'Glitching text in four styles: sliced bands, jittering RGB split, a scanning tear or swapped glyphs, with intensity, skew, flicker and click bursts.',
+    deps: ['@vueuse/core'],
   },
   'circular-text': {
     title: 'Circular Text',
     description:
-      'Characters positioned around a circle with continuous spin animation.',
-    deps: [],
+      'Text around a spinning ring that reacts to hover, can be flung with inertia, tilts toward the cursor in 3D and holds an icon in the middle.',
+    deps: ['@vueuse/core', 'motion-v'],
   },
   shuffle: {
     title: 'Shuffle',
-    description: 'Random character shuffle that reveals text left-to-right.',
+    description:
+      'Letters slide past as a reel, flip in 3D or spin with motion blur through random glyphs before they land.',
     deps: ['@vueuse/core'],
   },
   'shiny-text': {
     title: 'Shiny Text',
     description:
-      'A metallic sheen sweep effect across text with theme-aware gradients.',
-    deps: [],
+      'A band of light that sweeps across text, from a soft sheen to chrome-like bands, on a loop, on hover, in view or following the pointer.',
+    deps: ['@vueuse/core'],
   },
   'gradient-text': {
     title: 'Gradient Text',
     description:
-      'Animated flowing gradient across text with customizable colors and speed.',
-    deps: [],
+      'Living gradients inside text: a sliding sweep, a drifting mesh or a swinging conic fan, with glow, border and colors that follow the cursor.',
+    deps: ['@vueuse/core'],
   },
   'count-up': {
     title: 'Count Up',
     description:
-      'Animated number counter with easeOutExpo easing, triggered on scroll into view.',
-    deps: ['@vueuse/core'],
+      'Animated number counter that counts or rolls like an odometer, with formatting, decimals and compact units.',
+    deps: ['@vueuse/core', 'motion-v'],
   },
   'split-text': {
     title: 'Split Text',
     description:
-      'Staggered character or word entrance animation triggered on scroll into view.',
-    deps: ['@vueuse/core', 'motion-v'],
+      'Splits text into letters, words or lines that rise, flip, pop, blur, skew or wave in, loop, replay on hover or click, and lift under the cursor.',
+    deps: ['@vueuse/core'],
   },
   'blur-text': {
     title: 'Blur Text',
     description:
-      'Words or letters animate from blurred to clear with a staggered entrance.',
+      'Text that blurs into focus by word or letter, with zoom, tilt, focus and drift effects, loop, hover or click replay and a start color.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'rotating-text': {
     title: 'Rotating Text',
     description:
-      'Cycle through an array of text phrases with staggered character transitions.',
+      'Cycles through words letter by letter with slide, flip, blur, scale or drop swaps, optionally on a highlight block that resizes to fit.',
     deps: ['@vueuse/core', 'motion-v'],
   },
   'text-type': {
     title: 'Text Type',
     description:
-      'Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor.',
-    deps: ['@vueuse/core'],
+      'Typewriter text with a gliding, softly blinking cursor, per-letter fade, blur or rise, corrected typos and an optional fixed prefix.',
+    deps: ['@vueuse/core', 'motion-v'],
   },
   'fuzzy-text': {
     title: 'Fuzzy Text',
     description:
-      'Canvas-based vibrating fuzzy text with horizontal displacement that intensifies on hover.',
+      'Canvas text that jitters in shifted strips, resolves out of static, splits into color fringes, and reacts to hover or clicks.',
     deps: ['@vueuse/core'],
   },
   'decrypted-text': {
     title: 'Decrypted Text',
     description:
-      'Hacker-style text decryption effect that scrambles characters before revealing the original text.',
+      'Text that cycles random glyphs before resolving, with flip-board and fade effects, a decoding accent color, loops and cursor-local scrambling.',
     deps: ['@vueuse/core'],
   },
   'variable-proximity': {
     title: 'Variable Proximity',
     description:
-      'Text that changes font variation settings based on cursor proximity.',
+      'Letters gain variable-font weight near the cursor and can shift color, grow and rise; an idle wave of weight runs while the cursor is away.',
     deps: ['@vueuse/core'],
   },
   'text-pressure': {
     title: 'Text Pressure',
     description:
-      'Variable font text responding to cursor with weight, width, italic changes.',
+      'Variable-font letters that swell near the cursor, with click ripples, idle wave or pulse motion and a pressure color.',
     deps: ['@vueuse/core'],
   },
   'scroll-reveal': {
     title: 'Scroll Reveal',
-    description: 'Text revealed word by word on scroll with optional blur.',
+    description:
+      'Text that reveals by word, letter or line on scroll, fading, rising, flipping or popping in, with an optional accent highlight.',
     deps: ['@vueuse/core'],
   },
   'scroll-float': {
     title: 'Scroll Float',
-    description: 'Characters float up with scale distortion on scroll.',
+    description:
+      'Scroll-linked heading whose letters float, flip, scatter, blur or wave into place, by letter or word, in any order and from an accent color.',
     deps: ['@vueuse/core'],
   },
   'text-cursor': {
     title: 'Text Cursor',
-    description: 'Cursor trail that drops text along the mouse path.',
-    deps: ['@vueuse/core', 'motion-v'],
+    description:
+      'Text or emoji that trails the pointer as stamped copies, a following chain or a ribbon of letters, then pulls back when it stops.',
+    deps: ['@vueuse/core'],
   },
   'scrambled-text': {
     title: 'Scrambled Text',
-    description: 'Proximity-based character scrambling effect.',
-    deps: ['@vueuse/core'],
+    description:
+      'Text that decodes into view, then scrambles, rises, blurs or swells like a lens near the cursor; a click sends a scramble wave through it.',
+    deps: [],
   },
   'curved-loop': {
     title: 'Curved Loop',
     description:
-      'Text scrolling along a curved SVG path with drag interaction.',
-    deps: [],
+      'Looping marquee text along an arc, wave, ring or line, with drag-to-fling, outlined letters, accent separators and a scroll boost.',
+    deps: ['@vueuse/core'],
   },
   'logo-loop': {
     title: 'Logo Loop',
@@ -1333,8 +1338,8 @@ const COMPONENTS: Record<
   'ascii-text': {
     title: 'ASCII Text',
     description:
-      'Three.js rendered text converted to ASCII art with animated wave distortion.',
-    deps: ['three', '@vueuse/core'],
+      'Waving ASCII text that tilts toward the pointer, scrambles on hover and ripples on click.',
+    deps: ['@vueuse/core'],
   },
   'dome-gallery': {
     title: 'Dome Gallery',
@@ -1345,8 +1350,8 @@ const COMPONENTS: Record<
   'falling-text': {
     title: 'Falling Text',
     description:
-      'Matter.js physics-based falling text where words collapse and tumble with realistic gravity.',
-    deps: ['matter-js'],
+      'Text that breaks apart and tumbles into a pile you can drag, throw and swipe, then flies back into place.',
+    deps: ['@vueuse/core', 'matter-js'],
   },
   'fluid-glass': {
     title: 'Fluid Glass',

@@ -16,12 +16,36 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/ascii-effect',
         badge: 'new',
       },
-      { title: 'ASCII Text', path: '/docs/text-animations/ascii-text' },
-      { title: 'Blur Text', path: '/docs/text-animations/blur-text' },
-      { title: 'Circular Text', path: '/docs/text-animations/circular-text' },
-      { title: 'Count Up', path: '/docs/text-animations/count-up' },
-      { title: 'Curved Loop', path: '/docs/text-animations/curved-loop' },
-      { title: 'Decrypted Text', path: '/docs/text-animations/decrypted-text' },
+      {
+        title: 'ASCII Text',
+        path: '/docs/text-animations/ascii-text',
+        badge: 'updated',
+      },
+      {
+        title: 'Blur Text',
+        path: '/docs/text-animations/blur-text',
+        badge: 'updated',
+      },
+      {
+        title: 'Circular Text',
+        path: '/docs/text-animations/circular-text',
+        badge: 'updated',
+      },
+      {
+        title: 'Count Up',
+        path: '/docs/text-animations/count-up',
+        badge: 'updated',
+      },
+      {
+        title: 'Curved Loop',
+        path: '/docs/text-animations/curved-loop',
+        badge: 'updated',
+      },
+      {
+        title: 'Decrypted Text',
+        path: '/docs/text-animations/decrypted-text',
+        badge: 'updated',
+      },
       {
         title: 'Depth Dive',
         path: '/docs/text-animations/depth-dive',
@@ -40,7 +64,11 @@ export const docsNav: NavGroup[] = [
         title: 'Editorial Orbs',
         path: '/docs/text-animations/editorial-orbs',
       },
-      { title: 'Falling Text', path: '/docs/text-animations/falling-text' },
+      {
+        title: 'Falling Text',
+        path: '/docs/text-animations/falling-text',
+        badge: 'updated',
+      },
       {
         title: 'Flipping Word Swap',
         path: '/docs/text-animations/flipping-word-swap',
@@ -51,9 +79,21 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/fold-text',
         badge: 'new',
       },
-      { title: 'Fuzzy Text', path: '/docs/text-animations/fuzzy-text' },
-      { title: 'Glitch Text', path: '/docs/text-animations/glitch-text' },
-      { title: 'Gradient Text', path: '/docs/text-animations/gradient-text' },
+      {
+        title: 'Fuzzy Text',
+        path: '/docs/text-animations/fuzzy-text',
+        badge: 'updated',
+      },
+      {
+        title: 'Glitch Text',
+        path: '/docs/text-animations/glitch-text',
+        badge: 'updated',
+      },
+      {
+        title: 'Gradient Text',
+        path: '/docs/text-animations/gradient-text',
+        badge: 'updated',
+      },
       { title: 'Hyper Text', path: '/docs/text-animations/hyper-text' },
       {
         title: 'Kinetic Text Reveal',
@@ -74,22 +114,51 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/particle-text',
         badge: 'new',
       },
-      { title: 'Rotating Text', path: '/docs/text-animations/rotating-text' },
-      { title: 'Scrambled Text', path: '/docs/text-animations/scrambled-text' },
+      {
+        title: 'Rotating Text',
+        path: '/docs/text-animations/rotating-text',
+        badge: 'updated',
+      },
+      {
+        title: 'Scrambled Text',
+        path: '/docs/text-animations/scrambled-text',
+        badge: 'updated',
+      },
       {
         title: 'Scroll Based Velocity',
         path: '/docs/text-animations/scroll-based-velocity',
+        badge: 'updated',
       },
-      { title: 'Scroll Float', path: '/docs/text-animations/scroll-float' },
-      { title: 'Scroll Reveal', path: '/docs/text-animations/scroll-reveal' },
-      { title: 'Shiny Text', path: '/docs/text-animations/shiny-text' },
-      { title: 'Shuffle', path: '/docs/text-animations/shuffle' },
+      {
+        title: 'Scroll Float',
+        path: '/docs/text-animations/scroll-float',
+        badge: 'updated',
+      },
+      {
+        title: 'Scroll Reveal',
+        path: '/docs/text-animations/scroll-reveal',
+        badge: 'updated',
+      },
+      {
+        title: 'Shiny Text',
+        path: '/docs/text-animations/shiny-text',
+        badge: 'updated',
+      },
+      {
+        title: 'Shuffle',
+        path: '/docs/text-animations/shuffle',
+        badge: 'updated',
+      },
       {
         title: 'Split Flap Text',
         path: '/docs/text-animations/split-flap-text',
         badge: 'new',
       },
-      { title: 'Split Text', path: '/docs/text-animations/split-text' },
+      {
+        title: 'Split Text',
+        path: '/docs/text-animations/split-text',
+        badge: 'updated',
+      },
       {
         title: 'Stroke Text',
         path: '/docs/text-animations/stroke-text',
@@ -101,7 +170,11 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       { title: 'Text Animate', path: '/docs/text-animations/text-animate' },
-      { title: 'Text Cursor', path: '/docs/text-animations/text-cursor' },
+      {
+        title: 'Text Cursor',
+        path: '/docs/text-animations/text-cursor',
+        badge: 'updated',
+      },
       {
         title: 'Text Loop',
         path: '/docs/text-animations/text-loop',
@@ -112,10 +185,22 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/text-morph',
         badge: 'new',
       },
-      { title: 'Text Pressure', path: '/docs/text-animations/text-pressure' },
+      {
+        title: 'Text Pressure',
+        path: '/docs/text-animations/text-pressure',
+        badge: 'updated',
+      },
       { title: 'Text String', path: '/docs/text-animations/text-string' },
-      { title: 'Text Type', path: '/docs/text-animations/text-type' },
-      { title: 'True Focus', path: '/docs/text-animations/true-focus' },
+      {
+        title: 'Text Type',
+        path: '/docs/text-animations/text-type',
+        badge: 'updated',
+      },
+      {
+        title: 'True Focus',
+        path: '/docs/text-animations/true-focus',
+        badge: 'updated',
+      },
       {
         title: 'Typer Text',
         path: '/docs/text-animations/typer-text',
@@ -123,6 +208,7 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Variable Proximity',
         path: '/docs/text-animations/variable-proximity',
+        badge: 'updated',
       },
       {
         title: 'Warp Text',

@@ -31,13 +31,13 @@
       "name": "true-focus",
       "type": "registry:ui",
       "title": "True Focus",
-      "description": "A text component that highlights words in sequence with a glowing focus effect."
+      "description": "Blurs every word but one and marks it with brackets, a box, an underline or a highlight that glides or springs between words."
     },
     {
       "name": "scroll-based-velocity",
       "type": "registry:ui",
       "title": "Scroll Based Velocity",
-      "description": "Text that scrolls horizontally with velocity based on scroll speed."
+      "description": "Text marquee rows whose speed follows scroll velocity; rows can lean, stretch, be thrown with inertia and alternate outlined text."
     },
     {
       "name": "border-beam",
@@ -223,115 +223,115 @@
       "name": "glitch-text",
       "type": "registry:ui",
       "title": "Glitch Text",
-      "description": "RGB split and distortion glitch effect with jitter animations and optional hover trigger."
+      "description": "Glitching text in four styles: sliced bands, jittering RGB split, a scanning tear or swapped glyphs, with intensity, skew, flicker and click bursts."
     },
     {
       "name": "circular-text",
       "type": "registry:ui",
       "title": "Circular Text",
-      "description": "Characters positioned around a circle with continuous spin animation."
+      "description": "Text around a spinning ring that reacts to hover, can be flung with inertia, tilts toward the cursor in 3D and holds an icon in the middle."
     },
     {
       "name": "shuffle",
       "type": "registry:ui",
       "title": "Shuffle",
-      "description": "Random character shuffle that reveals text left-to-right."
+      "description": "Letters slide past as a reel, flip in 3D or spin with motion blur through random glyphs before they land."
     },
     {
       "name": "shiny-text",
       "type": "registry:ui",
       "title": "Shiny Text",
-      "description": "A metallic sheen sweep effect across text with theme-aware gradients."
+      "description": "A band of light that sweeps across text, from a soft sheen to chrome-like bands, on a loop, on hover, in view or following the pointer."
     },
     {
       "name": "gradient-text",
       "type": "registry:ui",
       "title": "Gradient Text",
-      "description": "Animated flowing gradient across text with customizable colors and speed."
+      "description": "Living gradients inside text: a sliding sweep, a drifting mesh or a swinging conic fan, with glow, border and colors that follow the cursor."
     },
     {
       "name": "count-up",
       "type": "registry:ui",
       "title": "Count Up",
-      "description": "Animated number counter with easeOutExpo easing, triggered on scroll into view."
+      "description": "Animated number counter that counts or rolls like an odometer, with formatting, decimals and compact units."
     },
     {
       "name": "split-text",
       "type": "registry:ui",
       "title": "Split Text",
-      "description": "Staggered character or word entrance animation triggered on scroll into view."
+      "description": "Splits text into letters, words or lines that rise, flip, pop, blur, skew or wave in, loop, replay on hover or click, and lift under the cursor."
     },
     {
       "name": "blur-text",
       "type": "registry:ui",
       "title": "Blur Text",
-      "description": "Words or letters animate from blurred to clear with a staggered entrance."
+      "description": "Text that blurs into focus by word or letter, with zoom, tilt, focus and drift effects, loop, hover or click replay and a start color."
     },
     {
       "name": "rotating-text",
       "type": "registry:ui",
       "title": "Rotating Text",
-      "description": "Cycle through an array of text phrases with staggered character transitions."
+      "description": "Cycles through words letter by letter with slide, flip, blur, scale or drop swaps, optionally on a highlight block that resizes to fit."
     },
     {
       "name": "text-type",
       "type": "registry:ui",
       "title": "Text Type",
-      "description": "Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor."
+      "description": "Typewriter text with a gliding, softly blinking cursor, per-letter fade, blur or rise, corrected typos and an optional fixed prefix."
     },
     {
       "name": "fuzzy-text",
       "type": "registry:ui",
       "title": "Fuzzy Text",
-      "description": "Canvas-based vibrating fuzzy text with horizontal displacement that intensifies on hover."
+      "description": "Canvas text that jitters in shifted strips, resolves out of static, splits into color fringes, and reacts to hover or clicks."
     },
     {
       "name": "decrypted-text",
       "type": "registry:ui",
       "title": "Decrypted Text",
-      "description": "Hacker-style text decryption effect that scrambles characters before revealing the original text."
+      "description": "Text that cycles random glyphs before resolving, with flip-board and fade effects, a decoding accent color, loops and cursor-local scrambling."
     },
     {
       "name": "variable-proximity",
       "type": "registry:ui",
       "title": "Variable Proximity",
-      "description": "Text that changes font variation settings based on cursor proximity."
+      "description": "Letters gain variable-font weight near the cursor and can shift color, grow and rise; an idle wave of weight runs while the cursor is away."
     },
     {
       "name": "text-pressure",
       "type": "registry:ui",
       "title": "Text Pressure",
-      "description": "Variable font text responding to cursor with weight, width, italic changes."
+      "description": "Variable-font letters that swell near the cursor, with click ripples, idle wave or pulse motion and a pressure color."
     },
     {
       "name": "scroll-reveal",
       "type": "registry:ui",
       "title": "Scroll Reveal",
-      "description": "Text revealed word by word on scroll with optional blur."
+      "description": "Text that reveals by word, letter or line on scroll, fading, rising, flipping or popping in, with an optional accent highlight."
     },
     {
       "name": "scroll-float",
       "type": "registry:ui",
       "title": "Scroll Float",
-      "description": "Characters float up with scale distortion on scroll."
+      "description": "Scroll-linked heading whose letters float, flip, scatter, blur or wave into place, by letter or word, in any order and from an accent color."
     },
     {
       "name": "text-cursor",
       "type": "registry:ui",
       "title": "Text Cursor",
-      "description": "Cursor trail that drops text along the mouse path."
+      "description": "Text or emoji that trails the pointer as stamped copies, a following chain or a ribbon of letters, then pulls back when it stops."
     },
     {
       "name": "scrambled-text",
       "type": "registry:ui",
       "title": "Scrambled Text",
-      "description": "Proximity-based character scrambling effect."
+      "description": "Text that decodes into view, then scrambles, rises, blurs or swells like a lens near the cursor; a click sends a scramble wave through it."
     },
     {
       "name": "curved-loop",
       "type": "registry:ui",
       "title": "Curved Loop",
-      "description": "Text scrolling along a curved SVG path with drag interaction."
+      "description": "Looping marquee text along an arc, wave, ring or line, with drag-to-fling, outlined letters, accent separators and a scroll boost."
     },
     {
       "name": "logo-loop",
@@ -1279,7 +1279,7 @@
       "name": "ascii-text",
       "type": "registry:ui",
       "title": "ASCII Text",
-      "description": "Three.js rendered text converted to ASCII art with animated wave distortion."
+      "description": "Waving ASCII text that tilts toward the pointer, scrambles on hover and ripples on click."
     },
     {
       "name": "dome-gallery",
@@ -1291,7 +1291,7 @@
       "name": "falling-text",
       "type": "registry:ui",
       "title": "Falling Text",
-      "description": "Matter.js physics-based falling text where words collapse and tumble with realistic gravity."
+      "description": "Text that breaks apart and tumbles into a pile you can drag, throw and swipe, then flies back into place."
     },
     {
       "name": "fluid-glass",
