@@ -2043,6 +2043,90 @@ const COMPONENTS: Record<
       'Glowing threads woven through pinch points that draw in one by one, light up under the cursor and carry light on click.',
     deps: ['@vueuse/core'],
   },
+  'aero-shards': {
+    title: 'AeroShards',
+    description:
+      'Silk ribbons of thick glass shards streaming on layered depths among survey markers, catching light along their edges.',
+    deps: ['@vueuse/core'],
+  },
+  'cursor-grid': {
+    title: 'Cursor Grid',
+    description:
+      'A crisp grid whose cells light up and fade behind the cursor, with grid styles, tiles and click pulses.',
+    deps: ['@vueuse/core'],
+  },
+  'dither-veil': {
+    title: 'Dither Veil',
+    description:
+      'A 1-bit dithered photo the cursor burns through to full colour, knitting back cell by cell.',
+    deps: ['ogl'],
+  },
+  'electric-logo': {
+    title: 'Electric Logo',
+    description:
+      'Traces any logo or image into a living lightning outline with strands, arcs, hover charge and click ripples.',
+    deps: ['@vueuse/core', 'ogl'],
+  },
+  'ghost-fibers': {
+    title: 'Ghost Fibers',
+    description:
+      'Layered ribbons of fine glowing fibers that twist, fold and drift through soft depth of field.',
+    deps: ['@vueuse/core'],
+  },
+  'glow-cursor': {
+    title: 'Glow Cursor',
+    description:
+      'A WebGL fluid trail of light that follows the cursor, drifts and cools as it fades, with a burst on click.',
+    deps: ['@vueuse/core'],
+  },
+  'pixel-swap': {
+    title: 'Pixel Swap',
+    description:
+      'New content builds in pixel by pixel in a springy wave that starts wherever the cursor enters.',
+    deps: ['@vueuse/core'],
+  },
+  'swarm-cursor': {
+    title: 'Swarm Cursor',
+    description:
+      'A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons.',
+    deps: ['@vueuse/core'],
+  },
+  'scroll-expand': {
+    title: 'Scroll Expand',
+    description:
+      'A rounded media frame that grows to full bleed as it scrolls through the viewport.',
+    deps: ['@vueuse/core'],
+  },
+  'sticker-peel': {
+    title: 'Sticker Peel',
+    description:
+      'A die-cut WebGL sticker that peels at the edge nearest the cursor and can be dragged, thrown and swung, in gloss, matte or holo finishes.',
+    deps: ['@vueuse/core'],
+  },
+  'halftone-reveal': {
+    title: 'Halftone Reveal',
+    description:
+      'Prints an image as a mono, duotone or color halftone whose dots swell into the real photo under the pointer.',
+    deps: ['@vueuse/core'],
+  },
+  'micro-slats': {
+    title: 'Micro Slats',
+    description:
+      'A wall of tiny slats that becomes a rolling sea in perspective, with glinting crests and a cursor-stirred fluid trail.',
+    deps: ['@vueuse/core', 'ogl'],
+  },
+  'ripple-distortion': {
+    title: 'Ripple Distortion',
+    description:
+      'Pointer-driven water displacement that warps an image and leaves a decaying wake.',
+    deps: ['@vueuse/core', 'ogl'],
+  },
+  topography: {
+    title: 'Topography',
+    description:
+      'A 3D landscape drawn in glowing contour lines that rises under the cursor, with light pulses on click.',
+    deps: ['@vueuse/core'],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:

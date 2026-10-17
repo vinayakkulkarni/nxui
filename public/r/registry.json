@@ -1990,6 +1990,90 @@
       "description": "Glowing threads woven through pinch points that draw in one by one, light up under the cursor and carry light on click."
     },
     {
+      "name": "aero-shards",
+      "type": "registry:ui",
+      "title": "AeroShards",
+      "description": "Silk ribbons of thick glass shards streaming on layered depths among survey markers, catching light along their edges."
+    },
+    {
+      "name": "cursor-grid",
+      "type": "registry:ui",
+      "title": "Cursor Grid",
+      "description": "A crisp grid whose cells light up and fade behind the cursor, with grid styles, tiles and click pulses."
+    },
+    {
+      "name": "dither-veil",
+      "type": "registry:ui",
+      "title": "Dither Veil",
+      "description": "A 1-bit dithered photo the cursor burns through to full colour, knitting back cell by cell."
+    },
+    {
+      "name": "electric-logo",
+      "type": "registry:ui",
+      "title": "Electric Logo",
+      "description": "Traces any logo or image into a living lightning outline with strands, arcs, hover charge and click ripples."
+    },
+    {
+      "name": "ghost-fibers",
+      "type": "registry:ui",
+      "title": "Ghost Fibers",
+      "description": "Layered ribbons of fine glowing fibers that twist, fold and drift through soft depth of field."
+    },
+    {
+      "name": "glow-cursor",
+      "type": "registry:ui",
+      "title": "Glow Cursor",
+      "description": "A WebGL fluid trail of light that follows the cursor, drifts and cools as it fades, with a burst on click."
+    },
+    {
+      "name": "pixel-swap",
+      "type": "registry:ui",
+      "title": "Pixel Swap",
+      "description": "New content builds in pixel by pixel in a springy wave that starts wherever the cursor enters."
+    },
+    {
+      "name": "swarm-cursor",
+      "type": "registry:ui",
+      "title": "Swarm Cursor",
+      "description": "A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons."
+    },
+    {
+      "name": "scroll-expand",
+      "type": "registry:ui",
+      "title": "Scroll Expand",
+      "description": "A rounded media frame that grows to full bleed as it scrolls through the viewport."
+    },
+    {
+      "name": "sticker-peel",
+      "type": "registry:ui",
+      "title": "Sticker Peel",
+      "description": "A die-cut WebGL sticker that peels at the edge nearest the cursor and can be dragged, thrown and swung, in gloss, matte or holo finishes."
+    },
+    {
+      "name": "halftone-reveal",
+      "type": "registry:ui",
+      "title": "Halftone Reveal",
+      "description": "Prints an image as a mono, duotone or color halftone whose dots swell into the real photo under the pointer."
+    },
+    {
+      "name": "micro-slats",
+      "type": "registry:ui",
+      "title": "Micro Slats",
+      "description": "A wall of tiny slats that becomes a rolling sea in perspective, with glinting crests and a cursor-stirred fluid trail."
+    },
+    {
+      "name": "ripple-distortion",
+      "type": "registry:ui",
+      "title": "Ripple Distortion",
+      "description": "Pointer-driven water displacement that warps an image and leaves a decaying wake."
+    },
+    {
+      "name": "topography",
+      "type": "registry:ui",
+      "title": "Topography",
+      "description": "A 3D landscape drawn in glowing contour lines that rises under the cursor, with light pulses on click."
+    },
+    {
       "name": "clean-table",
       "type": "registry:ui",
       "title": "Clean Table",
