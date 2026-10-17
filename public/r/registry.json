@@ -637,13 +637,13 @@
       "name": "stack",
       "type": "registry:ui",
       "title": "Stack",
-      "description": "Draggable card stack with spring animations and send-to-back gesture."
+      "description": "Pile of cards you can drag, flick or click through, with thrown cards tucking underneath."
     },
     {
       "name": "tilted-card",
       "type": "registry:ui",
       "title": "Tilted Card",
-      "description": "3D tilting card that follows cursor with spring damping and tooltip caption."
+      "description": "A 3D card that tilts toward the cursor, with glare, a soft shadow, floating depth layers and a flip side."
     },
     {
       "name": "timezone-companion",
@@ -673,7 +673,7 @@
       "name": "dock",
       "type": "registry:ui",
       "title": "Dock",
-      "description": "A macOS-style dock with cursor-proximity magnification driven by configurable spring physics."
+      "description": "macOS style dock with spring magnification, launch hop, badges, auto hide, right-click menus with submenus, on any edge."
     },
     {
       "name": "visual-stepper",
@@ -775,7 +775,7 @@
       "name": "elastic-slider",
       "type": "registry:ui",
       "title": "Elastic Slider",
-      "description": "Draggable slider with elastic overflow bounce and animated icons."
+      "description": "A slider that grows under the cursor and stretches like rubber when pulled past either end, then springs back."
     },
     {
       "name": "bounce-cards",
@@ -823,13 +823,13 @@
       "name": "flowing-menu",
       "type": "registry:ui",
       "title": "Flowing Menu",
-      "description": "Hover-activated marquee menu with edge-aware slide-in animation."
+      "description": "A full-height menu with one liquid band that glides and stretches between rows and reveals a scrolling marquee of each item."
     },
     {
       "name": "flying-posters",
       "type": "registry:ui",
       "title": "Flying Posters",
-      "description": "OGL-powered vertical scroll gallery with rotating poster distortion."
+      "description": "3D posters that twist and flip as you scroll or drag through an endless column."
     },
     {
       "name": "circular-gallery",
@@ -847,7 +847,7 @@
       "name": "animated-list",
       "type": "registry:ui",
       "title": "Animated List",
-      "description": "Scroll-triggered list with scale entrance, keyboard navigation, and gradient edges."
+      "description": "Scrolling list whose rows spring in from the edge they scroll in from, with a gliding selection ring and arrow-key navigation."
     },
     {
       "name": "folder",
@@ -859,13 +859,13 @@
       "name": "glass-icons",
       "type": "registry:ui",
       "title": "Glass Icons",
-      "description": "Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover."
+      "description": "Liquid glass icons that bend the color behind them, for app grids, docks and social links."
     },
     {
       "name": "gooey-nav",
       "type": "registry:ui",
       "title": "Gooey Nav",
-      "description": "Particle-burst navigation with SVG gooey filter effect and spring animation."
+      "description": "A navigation bar whose active pill breaks into goo that flows over to the item you pick."
     },
     {
       "name": "bubble-menu",
@@ -895,7 +895,7 @@
       "name": "masonry",
       "type": "registry:ui",
       "title": "Masonry",
-      "description": "Responsive masonry image grid with blur-to-focus entrance animation and hover scaling."
+      "description": "A masonry gallery that springs tiles into place, reflows on resize, reorders by drag and opens images in a lightbox."
     },
     {
       "name": "card-nav",
@@ -907,7 +907,7 @@
       "name": "glass-surface",
       "type": "registry:ui",
       "title": "Glass Surface",
-      "description": "SVG displacement-based glass distortion with chromatic aberration and frosted backdrop filter."
+      "description": "Liquid glass that bends what is behind it, in a rounded panel or any logo shape, with SVG or WebGL refraction."
     },
     {
       "name": "profile-card",
@@ -1285,7 +1285,7 @@
       "name": "dome-gallery",
       "type": "registry:ui",
       "title": "Dome Gallery",
-      "description": "3D dome-shaped image gallery with CSS transforms, drag interaction, and click-to-enlarge."
+      "description": "Immersive 3D dome gallery projecting images on a hemispheric surface; drag to spin with inertia, click a tile to open it."
     },
     {
       "name": "falling-text",
@@ -1327,7 +1327,7 @@
       "name": "infinite-menu",
       "type": "registry:ui",
       "title": "Infinite Menu",
-      "description": "WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection."
+      "description": "A draggable WebGL sphere of image tiles that snaps the nearest tile forward and shows its title, description and link."
     },
     {
       "name": "lanyard",
@@ -1375,7 +1375,7 @@
       "name": "pill-nav",
       "type": "registry:ui",
       "title": "Pill Nav",
-      "description": "Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu."
+      "description": "A pill nav bar where a fill rises through each link as its label rolls over, with a sliding active dot and a menu that folds in on small screens."
     },
     {
       "name": "pixel-trail",

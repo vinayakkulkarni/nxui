@@ -690,13 +690,13 @@ const COMPONENTS: Record<
   stack: {
     title: 'Stack',
     description:
-      'Draggable card stack with spring animations and send-to-back gesture.',
-    deps: ['@vueuse/core'],
+      'Pile of cards you can drag, flick or click through, with thrown cards tucking underneath.',
+    deps: ['@vueuse/core', 'motion-v'],
   },
   'tilted-card': {
     title: 'Tilted Card',
     description:
-      '3D tilting card that follows cursor with spring damping and tooltip caption.',
+      'A 3D card that tilts toward the cursor, with glare, a soft shadow, floating depth layers and a flip side.',
     deps: ['@vueuse/core'],
   },
   'timezone-companion': {
@@ -726,8 +726,8 @@ const COMPONENTS: Record<
   dock: {
     title: 'Dock',
     description:
-      'A macOS-style dock with cursor-proximity magnification driven by configurable spring physics.',
-    deps: ['motion-v', '@vueuse/core'],
+      'macOS style dock with spring magnification, launch hop, badges, auto hide, right-click menus with submenus, on any edge.',
+    deps: ['@vueuse/core'],
   },
   'visual-stepper': {
     title: 'Visual Stepper',
@@ -828,8 +828,8 @@ const COMPONENTS: Record<
   'elastic-slider': {
     title: 'Elastic Slider',
     description:
-      'Draggable slider with elastic overflow bounce and animated icons.',
-    deps: [],
+      'A slider that grows under the cursor and stretches like rubber when pulled past either end, then springs back.',
+    deps: ['@vueuse/core'],
   },
   'bounce-cards': {
     title: 'Bounce Cards',
@@ -876,14 +876,14 @@ const COMPONENTS: Record<
   'flowing-menu': {
     title: 'Flowing Menu',
     description:
-      'Hover-activated marquee menu with edge-aware slide-in animation.',
-    deps: [],
+      'A full-height menu with one liquid band that glides and stretches between rows and reveals a scrolling marquee of each item.',
+    deps: ['@vueuse/core'],
   },
   'flying-posters': {
     title: 'Flying Posters',
     description:
-      'OGL-powered vertical scroll gallery with rotating poster distortion.',
-    deps: ['ogl', '@vueuse/core'],
+      '3D posters that twist and flip as you scroll or drag through an endless column.',
+    deps: ['@vueuse/core'],
   },
   'circular-gallery': {
     title: 'Circular Gallery',
@@ -900,7 +900,7 @@ const COMPONENTS: Record<
   'animated-list': {
     title: 'Animated List',
     description:
-      'Scroll-triggered list with scale entrance, keyboard navigation, and gradient edges.',
+      'Scrolling list whose rows spring in from the edge they scroll in from, with a gliding selection ring and arrow-key navigation.',
     deps: ['@vueuse/core'],
   },
   folder: {
@@ -912,13 +912,13 @@ const COMPONENTS: Record<
   'glass-icons': {
     title: 'Glass Icons',
     description:
-      'Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover.',
+      'Liquid glass icons that bend the color behind them, for app grids, docks and social links.',
     deps: [],
   },
   'gooey-nav': {
     title: 'Gooey Nav',
     description:
-      'Particle-burst navigation with SVG gooey filter effect and spring animation.',
+      'A navigation bar whose active pill breaks into goo that flows over to the item you pick.',
     deps: ['@vueuse/core'],
   },
   'bubble-menu': {
@@ -948,7 +948,7 @@ const COMPONENTS: Record<
   masonry: {
     title: 'Masonry',
     description:
-      'Responsive masonry image grid with blur-to-focus entrance animation and hover scaling.',
+      'A masonry gallery that springs tiles into place, reflows on resize, reorders by drag and opens images in a lightbox.',
     deps: ['@vueuse/core'],
   },
   'card-nav': {
@@ -960,7 +960,7 @@ const COMPONENTS: Record<
   'glass-surface': {
     title: 'Glass Surface',
     description:
-      'SVG displacement-based glass distortion with chromatic aberration and frosted backdrop filter.',
+      'Liquid glass that bends what is behind it, in a rounded panel or any logo shape, with SVG or WebGL refraction.',
     deps: ['@vueuse/core'],
   },
   'profile-card': {
@@ -1339,7 +1339,7 @@ const COMPONENTS: Record<
   'dome-gallery': {
     title: 'Dome Gallery',
     description:
-      '3D dome-shaped image gallery with CSS transforms, drag interaction, and click-to-enlarge.',
+      'Immersive 3D dome gallery projecting images on a hemispheric surface; drag to spin with inertia, click a tile to open it.',
     deps: ['@vueuse/core'],
   },
   'falling-text': {
@@ -1381,8 +1381,8 @@ const COMPONENTS: Record<
   'infinite-menu': {
     title: 'Infinite Menu',
     description:
-      'WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection.',
-    deps: ['gl-matrix', '@vueuse/core'],
+      'A draggable WebGL sphere of image tiles that snaps the nearest tile forward and shows its title, description and link.',
+    deps: ['@vueuse/core'],
   },
   lanyard: {
     title: 'Lanyard',
@@ -1429,7 +1429,7 @@ const COMPONENTS: Record<
   'pill-nav': {
     title: 'Pill Nav',
     description:
-      'Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu.',
+      'A pill nav bar where a fill rises through each link as its label rolls over, with a sliding active dot and a menu that folds in on small screens.',
     deps: ['@vueuse/core'],
   },
   'pixel-trail': {
