@@ -168,11 +168,6 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Swarm Cursor](https://nxui.geoql.in/docs/animations/swarm-cursor)           | A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons.                                   |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)         | A spinning reticle cursor whose corner brackets snap around targets, follow their corner radius and show a label.                              |
 
-### Micro (0)
-
-| Component | Description |
-| --------- | ----------- |
-
 ### Components (131)
 
 | Component                                                                            | Description                                                                                                                                                            |

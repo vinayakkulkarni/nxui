@@ -113,10 +113,6 @@ export const docsNav: NavGroup[] = [
     ],
   },
   {
-    title: 'Micro',
-    items: [],
-  },
-  {
     title: 'Components',
     items: [
       {
