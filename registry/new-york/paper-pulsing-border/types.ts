@@ -28,7 +28,7 @@ export interface PaperPulsingBorderProps {
   intensity?: number;
   /** Power of glow, 0 = normal blending, 1 = additive blending (0 to 1). */
   bloom?: number;
-  /** Number of spots added for each color (1 to 20). */
+  /** Number of spots added for each color (1 to 4). */
   spots?: number;
   /** Angular size of spots (0 to 1). */
   spotSize?: number;

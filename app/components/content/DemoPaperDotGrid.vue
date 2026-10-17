@@ -1,36 +1,50 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperDotGrid from '@registry/new-york/paper-dot-grid/PaperDotGrid.vue';
-  import type { PaperDotGridShape } from '@registry/new-york/paper-dot-grid/types';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperDotGridPresets } from '~/lib/paper-presets/dot-grid';
   import type { Pane } from 'tweakpane';
 
-  const initialShape: PaperDotGridShape = 'circle';
-
-  const params = reactive({
-    colorBack: '#000000',
-    colorFill: '#ffffff',
-    colorStroke: '#ffaa00',
-    size: 2,
-    gapX: 32,
-    gapY: 32,
-    shape: initialShape,
-  });
+  const params = reactive(
+    pickPaperPreset(paperDotGridPresets, [
+      'colorBack',
+      'colorFill',
+      'colorStroke',
+      'shape',
+      'size',
+      'gapX',
+      'gapY',
+      'strokeWidth',
+      'sizeRange',
+      'opacityRange',
+      'rotation',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperDotGridPresets);
 
   function onPaneCreated(pane: Pane) {
+    presets.addPresetBinding(pane);
     pane.addBinding(params, 'colorBack');
     pane.addBinding(params, 'colorFill');
     pane.addBinding(params, 'colorStroke');
+    pane.addBinding(params, 'shape', {
+      options: {
+        circle: 'circle',
+        diamond: 'diamond',
+        square: 'square',
+        triangle: 'triangle',
+      },
+    });
     pane.addBinding(params, 'size', { min: 1, max: 100, step: 1 });
     pane.addBinding(params, 'gapX', { min: 2, max: 500, step: 1 });
     pane.addBinding(params, 'gapY', { min: 2, max: 500, step: 1 });
-    pane.addBinding(params, 'shape', {
-      options: {
-        Circle: 'circle',
-        Diamond: 'diamond',
-        Square: 'square',
-        Triangle: 'triangle',
-      },
-    });
+    pane.addBinding(params, 'strokeWidth', { min: 0, max: 50, step: 1 });
+    pane.addBinding(params, 'sizeRange', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'opacityRange', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'rotation', { min: 0, max: 360, step: 1 });
   }
 </script>
 
@@ -56,15 +70,7 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperDotGrid
-        :color-back="params.colorBack"
-        :color-fill="params.colorFill"
-        :color-stroke="params.colorStroke"
-        :size="params.size"
-        :gap-x="params.gapX"
-        :gap-y="params.gapY"
-        :shape="params.shape"
-      />
+      <PaperDotGrid v-bind="params" />
       <ShaderPane expanded title="Dot Grid" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>

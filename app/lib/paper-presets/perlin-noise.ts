@@ -1,0 +1,93 @@
+// Presets from @paper-design/shaders-react 0.0.81
+// (packages/shaders-react/src/shaders/perlin-noise.tsx, Apache-2.0, © Lost Coast Labs).
+// The first entry is the default preset.
+import type { PaperPerlinNoiseProps } from '@registry/new-york/paper-perlin-noise/types';
+import type { PaperShaderPreset } from '~/types/paper-presets';
+
+export const paperPerlinNoisePresets: PaperShaderPreset<PaperPerlinNoiseProps>[] =
+  [
+    {
+      name: 'Default',
+      params: {
+        fit: 'none',
+        scale: 1,
+        rotation: 0,
+        offsetX: 0,
+        offsetY: 0,
+        originX: 0.5,
+        originY: 0.5,
+        speed: 0.5,
+        frame: 0,
+        colorBack: '#632ad5',
+        colorFront: '#fccff7',
+        proportion: 0.35,
+        softness: 0.1,
+        octaveCount: 1,
+        persistence: 1,
+        lacunarity: 1.5,
+      },
+    },
+    {
+      name: 'Nintendo Water',
+      params: {
+        fit: 'none',
+        scale: 5,
+        rotation: 0,
+        offsetX: 0,
+        offsetY: 0,
+        originX: 0.5,
+        originY: 0.5,
+        speed: 0.4,
+        frame: 0,
+        colorBack: '#2d69d4',
+        colorFront: '#d1eefc',
+        proportion: 0.42,
+        softness: 0,
+        octaveCount: 2,
+        persistence: 0.55,
+        lacunarity: 1.8,
+      },
+    },
+    {
+      name: 'Moss',
+      params: {
+        fit: 'none',
+        scale: 6.666666666666667,
+        rotation: 0,
+        offsetX: 0,
+        offsetY: 0,
+        originX: 0.5,
+        originY: 0.5,
+        speed: 0.02,
+        frame: 0,
+        colorBack: '#05ff4a',
+        colorFront: '#262626',
+        proportion: 0.65,
+        softness: 0.35,
+        octaveCount: 6,
+        persistence: 1,
+        lacunarity: 2.55,
+      },
+    },
+    {
+      name: 'Worms',
+      params: {
+        fit: 'none',
+        scale: 0.9,
+        rotation: 0,
+        offsetX: 0,
+        offsetY: 0,
+        originX: 0.5,
+        originY: 0.5,
+        speed: 0,
+        frame: 0,
+        colorBack: '#ffffff00',
+        colorFront: '#595959',
+        proportion: 0.5,
+        softness: 0,
+        octaveCount: 1,
+        persistence: 1,
+        lacunarity: 1.5,
+      },
+    },
+  ];

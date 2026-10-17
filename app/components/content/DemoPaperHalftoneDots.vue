@@ -1,41 +1,59 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperHalftoneDots from '@registry/new-york/paper-halftone-dots/PaperHalftoneDots.vue';
-  import type {
-    PaperHalftoneDotsGrid,
-    PaperHalftoneDotsType,
-  } from '@registry/new-york/paper-halftone-dots/types';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperHalftoneDotsPresets } from '~/lib/paper-presets/halftone-dots';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    colorFront: '#2b2b2b',
-    colorBack: '#f2f1e8',
-    size: 0.5,
-    radius: 1.25,
-    contrast: 0.4,
-    grid: 'hex' as PaperHalftoneDotsGrid,
-    type: 'gooey' as PaperHalftoneDotsType,
-  });
+  const params = reactive(
+    pickPaperPreset(paperHalftoneDotsPresets, [
+      'colorBack',
+      'colorFront',
+      'originalColors',
+      'type',
+      'grid',
+      'inverted',
+      'size',
+      'radius',
+      'contrast',
+      'grainMixer',
+      'grainOverlay',
+      'grainSize',
+      'scale',
+      'fit',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperHalftoneDotsPresets);
 
   function onPaneCreated(pane: Pane) {
-    pane.addBinding(params, 'colorFront');
+    presets.addPresetBinding(pane);
     pane.addBinding(params, 'colorBack');
-    pane.addBinding(params, 'size', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'radius', { min: 0, max: 2, step: 0.05 });
-    pane.addBinding(params, 'contrast', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'grid', {
-      options: {
-        Square: 'square',
-        Hex: 'hex',
-      },
-    });
+    pane.addBinding(params, 'colorFront');
+    pane.addBinding(params, 'originalColors');
     pane.addBinding(params, 'type', {
       options: {
-        Classic: 'classic',
-        Gooey: 'gooey',
-        Holes: 'holes',
-        Soft: 'soft',
+        classic: 'classic',
+        gooey: 'gooey',
+        holes: 'holes',
+        soft: 'soft',
       },
+    });
+    pane.addBinding(params, 'grid', {
+      options: { square: 'square', hex: 'hex' },
+    });
+    pane.addBinding(params, 'inverted');
+    pane.addBinding(params, 'size', { min: 0, max: 1, step: 0.001 });
+    pane.addBinding(params, 'radius', { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, 'contrast', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'grainMixer', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'grainOverlay', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'grainSize', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'scale', { min: 0.1, max: 4, step: 0.01 });
+    pane.addBinding(params, 'fit', {
+      options: { contain: 'contain', cover: 'cover' },
     });
   }
 </script>
@@ -63,16 +81,7 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperHalftoneDots
-        image="/flowers.webp"
-        :color-front="params.colorFront"
-        :color-back="params.colorBack"
-        :size="params.size"
-        :radius="params.radius"
-        :contrast="params.contrast"
-        :grid="params.grid"
-        :type="params.type"
-      />
+      <PaperHalftoneDots image="/flowers.webp" v-bind="params" />
       <ShaderPane
         expanded
         title="Halftone Dots"

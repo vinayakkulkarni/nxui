@@ -47,14 +47,14 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>363 animated components — including all 29 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>364 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
 
 nxui is a collection of beautifully designed, interactive UI components built with Vue 3 and Tailwind CSS. Just run the CLI command, add the component to your project, and start building.
 
-It also ships the only Vue port of [Paper Shaders](https://shaders.paper.design) — all 29 WebGL shaders from paper.design wrapped as Vue components with typed props (`@paper-design/shaders` does 1.7M+ npm downloads/month; the Vue wrappers live here).
+It also ships the only Vue port of [Paper Shaders](https://shaders.paper.design) — all 30 WebGL shaders from paper.design wrapped as Vue components with typed props (`@paper-design/shaders` does 1.7M+ npm downloads/month; the Vue wrappers live here).
 
 ### Why nxui?
 
@@ -72,11 +72,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (363)
+## Components (364)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 365 items total, of which these 363 are
+> on — so `npx shadcn-vue add` resolves 366 items total, of which these 364 are
 > user-facing components.
 
 ### Text Animations (47)
@@ -460,7 +460,7 @@ Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/chart
 | [Shimmer Button](https://nxui.geoql.in/docs/buttons/shimmer-button)                     | A button with a rotating shimmer/glow effect.                                                                                   |
 | [Sling Button](https://nxui.geoql.in/docs/buttons/sling-button)                         | Send button you pull back like a slingshot and release to fire, with a stretching band, a power arc and a particle burst.       |
 
-### Paper Shaders (29)
+### Paper Shaders (30)
 
 | Component                                                                                       | Description                                                                                                                                                                                                   |
 | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -468,7 +468,7 @@ Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/chart
 | [Dithering](https://nxui.geoql.in/docs/paper-shaders/paper-dithering)                           | Animated 2-color dithering over multiple pattern sources (noise, warp, dots, waves, ripple, swirl, sphere).                                                                                                   |
 | [Dot Grid](https://nxui.geoql.in/docs/paper-shaders/paper-dot-grid)                             | A static grid pattern made of circles, diamonds, squares, or triangles with adjustable colors, spacing, and size.                                                                                             |
 | [Dot Orbit](https://nxui.geoql.in/docs/paper-shaders/paper-dot-orbit)                           | Animated multi-color dots with each dot orbiting around its cell center. Supports up to 10 colors and a range of shape and motion controls.                                                                   |
-| [Fluted Glass](https://nxui.geoql.in/docs/paper-shaders/paper-fluted-glass)                     | Fluted glass image filter that transforms an image into streaked, ribbed distortions, giving a mix of clarity and obscurity.                                                                                  |
+| [Fluted Glass](https://nxui.geoql.in/docs/paper-shaders/paper-fluted-glass)                     | Image filter transforming a picture into streaked, ribbed glass distortions mixing clarity and obscurity. Ported from Paper Shaders (Apache-2.0).                                                             |
 | [Gem Smoke](https://nxui.geoql.in/docs/paper-shaders/paper-gem-smoke)                           | Animated color fields placed over an uploaded logo shape with smoky noise behind the glassy shape.                                                                                                            |
 | [God Rays](https://nxui.geoql.in/docs/paper-shaders/paper-god-rays)                             | Volumetric light rays with configurable colors, density, intensity, and bloom highlight.                                                                                                                      |
 | [Grain Gradient](https://nxui.geoql.in/docs/paper-shaders/paper-grain-gradient)                 | Multi-color gradients with grainy, noise-textured distortion available in 7 animated abstract forms.                                                                                                          |
@@ -476,19 +476,20 @@ Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/chart
 | [Halftone Dots](https://nxui.geoql.in/docs/paper-shaders/paper-halftone-dots)                   | A halftone-dot image filter featuring customizable grids, color palettes, and dot styles.                                                                                                                     |
 | [Heatmap](https://nxui.geoql.in/docs/paper-shaders/paper-heatmap)                               | A glowing gradient of colors flowing through an input shape. The effect creates a smoothly animated wave of intensity across the image.                                                                       |
 | [Image Dithering](https://nxui.geoql.in/docs/paper-shaders/paper-image-dithering)               | A dithering image filter with support for 4 dithering modes and multiple color palettes — 2-color, 3-color, and multicolor options, using either predefined colors or colors sampled from the original image. |
+| [Lens Distortion](https://nxui.geoql.in/docs/paper-shaders/paper-lens-distortion)               | An image filter that splits an image into shifting color layers like lens chromatic aberration and warps it like barrel or pincushion distortion. Ported from Paper Shaders (Apache-2.0).                     |
 | [Liquid Metal](https://nxui.geoql.in/docs/paper-shaders/paper-liquid-metal)                     | A futuristic liquid metal material applied to an uploaded logo or abstract shape, with fluid motion distortion along edges.                                                                                   |
 | [Mesh Gradient](https://nxui.geoql.in/docs/paper-shaders/paper-mesh-gradient)                   | A flowing composition of color spots moving along distinct trajectories with organic distortion.                                                                                                              |
 | [Metaballs](https://nxui.geoql.in/docs/paper-shaders/paper-metaballs)                           | Up to 20 colored gooey balls moving around the center and merging into smooth organic shapes.                                                                                                                 |
 | [Neuro Noise](https://nxui.geoql.in/docs/paper-shaders/paper-neuro-noise)                       | A glowing, web-like structure of fluid lines and soft intersections for atmospheric, organic-yet-futuristic visuals.                                                                                          |
+| [Paper Texture](https://nxui.geoql.in/docs/paper-shaders/paper-texture)                         | A static paper texture built from grain, fiber, wrinkles, crumples, folds and drops. Works as an image filter or as a standalone texture. Ported from Paper Shaders (Apache-2.0).                             |
 | [Perlin Noise](https://nxui.geoql.in/docs/paper-shaders/paper-perlin-noise)                     | Classic animated 3D Perlin noise with exposed controls for octaves, persistence, and lacunarity.                                                                                                              |
-| [Pulsing Border](https://nxui.geoql.in/docs/paper-shaders/paper-pulsing-border)                 | Luminous trails of color merging into a glowing gradient contour.                                                                                                                                             |
+| [Pulsing Border](https://nxui.geoql.in/docs/paper-shaders/paper-pulsing-border)                 | Luminous trails of color merging into a glowing gradient frame around the canvas edge. Ported from Paper Shaders (Apache-2.0).                                                                                |
 | [Simplex Noise](https://nxui.geoql.in/docs/paper-shaders/paper-simplex-noise)                   | A multi-color gradient mapped into smooth, animated curves built as a combination of two Simplex noises.                                                                                                      |
 | [Smoke Ring](https://nxui.geoql.in/docs/paper-shaders/paper-smoke-ring)                         | A radial, multi-colored gradient ring shaped with layered noise for a natural, smoky aesthetic.                                                                                                               |
 | [Spiral](https://nxui.geoql.in/docs/paper-shaders/paper-spiral)                                 | Configurable spiral with stroke width, taper, cap, density, and optional noise distortion.                                                                                                                    |
 | [Static Mesh Gradient](https://nxui.geoql.in/docs/paper-shaders/paper-static-mesh-gradient)     | Multi-point mesh gradient with up to 10 color spots, enhanced by two-direction warping, adjustable blend sharpness, and grain controls.                                                                       |
 | [Static Radial Gradient](https://nxui.geoql.in/docs/paper-shaders/paper-static-radial-gradient) | A static radial gradient with up to 10 blended colors, advanced mixing modes, focal point controls, and grain effects.                                                                                        |
 | [Swirl](https://nxui.geoql.in/docs/paper-shaders/paper-swirl)                                   | Animated bands of color twisting and bending, producing spirals, arcs, and flowing circular patterns.                                                                                                         |
-| [Paper Texture](https://nxui.geoql.in/docs/paper-shaders/paper-texture)                         | A static texture built from multiple noise layers, usable for realistic paper and cardboard surfaces. Can be used as an image filter or as a standalone texture.                                              |
 | [Voronoi](https://nxui.geoql.in/docs/paper-shaders/paper-voronoi)                               | Voronoi cell diagram with configurable colors, glow, gap width, and organic distortion.                                                                                                                       |
 | [Warp](https://nxui.geoql.in/docs/paper-shaders/paper-warp)                                     | Organic warp distortion of a multi-color field with selectable shape patterns, swirl, and noise distortion.                                                                                                   |
 | [Water](https://nxui.geoql.in/docs/paper-shaders/paper-water)                                   | Water-like surface distortion with natural caustic realism. Works as an image filter or standalone animated texture.                                                                                          |
@@ -575,7 +576,7 @@ See [LICENSE](./LICENSE) for more information.
 nxui is a Vue port of [Componentry](https://componentry.fun) by [Harsh Jadhav](https://github.com/harshjdhv). The original component designs and interactions come from that project.
 
 - [Componentry](https://componentry.fun) ([GitHub](https://github.com/harshjdhv/componentry)) — Original React component library that nxui ports to Vue
-- [Paper Shaders](https://shaders.paper.design) ([GitHub](https://github.com/paper-design/shaders)) — Zero-dependency WebGL shader library by [paper.design](https://paper.design), Apache-2.0. nxui wraps all 29 shaders as Vue components
+- [Paper Shaders](https://shaders.paper.design) ([GitHub](https://github.com/paper-design/shaders)) — Zero-dependency WebGL shader library by [paper.design](https://paper.design), Apache-2.0. nxui wraps all 30 shaders as Vue components
 - [React Bits](https://reactbits.dev) ([GitHub](https://github.com/DavidHDev/react-bits)) — Animated React component collection and ecosystem inspiration
 - [shadcn-vue](https://www.shadcn-vue.com/) — Vue port of shadcn/ui
 - [motion-v](https://github.com/motiondivision/motion-vue) — Vue animation library

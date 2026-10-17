@@ -41,6 +41,8 @@ export interface PaperFlutedGlassProps {
   blur?: number;
   /** Glass distortion and softness on the image edges (0 to 1). */
   edges?: number;
+  /** Convenience: sets all four margin values at once. Overrides margin-left/right/top/bottom if provided. */
+  margin?: number;
   /** Distance from the left edge to the effect (0 to 1). */
   marginLeft?: number;
   /** Distance from the right edge to the effect (0 to 1). */

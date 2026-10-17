@@ -1328,6 +1328,7 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Fluted Glass',
         path: '/docs/paper-shaders/paper-fluted-glass',
+        badge: 'updated',
       },
       { title: 'Gem Smoke', path: '/docs/paper-shaders/paper-gem-smoke' },
       { title: 'God Rays', path: '/docs/paper-shaders/paper-god-rays' },
@@ -1349,6 +1350,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/paper-shaders/paper-image-dithering',
       },
       {
+        title: 'Lens Distortion',
+        path: '/docs/paper-shaders/paper-lens-distortion',
+        badge: 'new',
+      },
+      {
         title: 'Liquid Metal',
         path: '/docs/paper-shaders/paper-liquid-metal',
       },
@@ -1358,7 +1364,11 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Metaballs', path: '/docs/paper-shaders/paper-metaballs' },
       { title: 'Neuro Noise', path: '/docs/paper-shaders/paper-neuro-noise' },
-      { title: 'Paper Texture', path: '/docs/paper-shaders/paper-texture' },
+      {
+        title: 'Paper Texture',
+        path: '/docs/paper-shaders/paper-texture',
+        badge: 'updated',
+      },
       {
         title: 'Perlin Noise',
         path: '/docs/paper-shaders/paper-perlin-noise',
@@ -1366,6 +1376,7 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Pulsing Border',
         path: '/docs/paper-shaders/paper-pulsing-border',
+        badge: 'updated',
       },
       {
         title: 'Simplex Noise',

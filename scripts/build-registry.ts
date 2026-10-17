@@ -1236,7 +1236,7 @@ const COMPONENTS: Record<
   'paper-texture': {
     title: 'Paper Texture',
     description:
-      'A static texture built from multiple noise layers for realistic paper and cardboard surfaces. Ported from Paper Shaders (Apache-2.0).',
+      'A static paper texture built from grain, fiber, wrinkles, crumples, folds and drops. Works as an image filter or as a standalone texture. Ported from Paper Shaders (Apache-2.0).',
     deps: ['@paper-design/shaders'],
   },
   'paper-water': {
@@ -2223,6 +2223,12 @@ const COMPONENTS: Record<
     description:
       'A rotating-wheel picker with inertial drag and scroll, curved fading labels, and a crossfading image for the active item.',
     deps: ['@vueuse/core', 'motion-v'],
+  },
+  'paper-lens-distortion': {
+    title: 'Lens Distortion',
+    description:
+      'An image filter that splits an image into shifting color layers like lens chromatic aberration and warps it like barrel or pincushion distortion. Ported from Paper Shaders (Apache-2.0).',
+    deps: ['@paper-design/shaders'],
   },
   'clean-table': {
     title: 'Clean Table',

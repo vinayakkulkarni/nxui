@@ -1,28 +1,41 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperWaves from '@registry/new-york/paper-waves/PaperWaves.vue';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperWavesPresets } from '~/lib/paper-presets/waves';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    colorFront: '#ffbb00',
-    colorBack: '#000000',
-    shape: 1.5,
-    frequency: 0.5,
-    amplitude: 0.5,
-    spacing: 1,
-    proportion: 0.5,
-    softness: 0,
-  });
+  const params = reactive(
+    pickPaperPreset(paperWavesPresets, [
+      'colorBack',
+      'colorFront',
+      'frequency',
+      'amplitude',
+      'spacing',
+      'proportion',
+      'softness',
+      'shape',
+      'scale',
+      'rotation',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperWavesPresets);
 
   function onPaneCreated(pane: Pane) {
-    pane.addBinding(params, 'colorFront');
+    presets.addPresetBinding(pane);
     pane.addBinding(params, 'colorBack');
+    pane.addBinding(params, 'colorFront');
+    pane.addBinding(params, 'frequency', { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, 'amplitude', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'spacing', { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, 'proportion', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'softness', { min: 0, max: 1, step: 0.01 });
     pane.addBinding(params, 'shape', { min: 0, max: 3, step: 0.05 });
-    pane.addBinding(params, 'frequency', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'amplitude', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'spacing', { min: 0.5, max: 3, step: 0.05 });
-    pane.addBinding(params, 'proportion', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'softness', { min: 0, max: 1, step: 0.05 });
+    pane.addBinding(params, 'scale', { min: 0.01, max: 4, step: 0.01 });
+    pane.addBinding(params, 'rotation', { min: 0, max: 360, step: 1 });
   }
 </script>
 
@@ -45,16 +58,7 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperWaves
-        :color-front="params.colorFront"
-        :color-back="params.colorBack"
-        :shape="params.shape"
-        :frequency="params.frequency"
-        :amplitude="params.amplitude"
-        :spacing="params.spacing"
-        :proportion="params.proportion"
-        :softness="params.softness"
-      />
+      <PaperWaves v-bind="params" />
       <ShaderPane expanded title="Waves" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>

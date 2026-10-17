@@ -1,0 +1,88 @@
+// Presets from @paper-design/shaders-react 0.0.81
+// (packages/shaders-react/src/shaders/dot-orbit.tsx, Apache-2.0, © Lost Coast Labs).
+// The first entry is the default preset.
+import type { PaperDotOrbitProps } from '@registry/new-york/paper-dot-orbit/types';
+import type { PaperShaderPreset } from '~/types/paper-presets';
+
+export const paperDotOrbitPresets: PaperShaderPreset<PaperDotOrbitProps>[] = [
+  {
+    name: 'Default',
+    params: {
+      fit: 'none',
+      scale: 1,
+      rotation: 0,
+      offsetX: 0,
+      offsetY: 0,
+      originX: 0.5,
+      originY: 0.5,
+      speed: 1.5,
+      frame: 0,
+      colorBack: '#000000',
+      colors: ['#ffc96b', '#ff6200', '#ff2f00', '#421100', '#1a0000'],
+      size: 1,
+      sizeRange: 0,
+      spreading: 1,
+      stepsPerColor: 4,
+    },
+  },
+  {
+    name: 'Bubbles',
+    params: {
+      fit: 'none',
+      scale: 1.64,
+      rotation: 0,
+      offsetX: 0,
+      offsetY: 0,
+      originX: 0.5,
+      originY: 0.5,
+      speed: 0.4,
+      frame: 0,
+      colors: ['#D0D2D5'],
+      colorBack: '#989CA4',
+      stepsPerColor: 2,
+      size: 0.9,
+      sizeRange: 0.7,
+      spreading: 1,
+    },
+  },
+  {
+    name: 'Shine',
+    params: {
+      fit: 'none',
+      scale: 0.4,
+      rotation: 0,
+      offsetX: 0,
+      offsetY: 0,
+      originX: 0.5,
+      originY: 0.5,
+      speed: 0.1,
+      frame: 0,
+      colors: ['#ffffff', '#006aff', '#fff675'],
+      colorBack: '#000000',
+      stepsPerColor: 4,
+      size: 0.3,
+      sizeRange: 0.2,
+      spreading: 1,
+    },
+  },
+  {
+    name: 'Hallucinatory',
+    params: {
+      fit: 'none',
+      scale: 0.5,
+      rotation: 0,
+      offsetX: 0,
+      offsetY: 0,
+      originX: 0.5,
+      originY: 0.5,
+      speed: 5,
+      frame: 0,
+      colors: ['#000000'],
+      colorBack: '#ffe500',
+      stepsPerColor: 2,
+      size: 0.65,
+      sizeRange: 0,
+      spreading: 0.3,
+    },
+  },
+];

@@ -1,52 +1,53 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperDithering from '@registry/new-york/paper-dithering/PaperDithering.vue';
-  import type {
-    PaperDitheringShape,
-    PaperDitheringType,
-  } from '@registry/new-york/paper-dithering/types';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperDitheringPresets } from '~/lib/paper-presets/dithering';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive<{
-    colorBack: string;
-    colorFront: string;
-    shape: PaperDitheringShape;
-    type: PaperDitheringType;
-    size: number;
-    speed: number;
-  }>({
-    colorBack: '#000000',
-    colorFront: '#00b2ff',
-    shape: 'sphere',
-    type: '4x4',
-    size: 2,
-    speed: 1,
-  });
+  const params = reactive(
+    pickPaperPreset(paperDitheringPresets, [
+      'colorBack',
+      'colorFront',
+      'shape',
+      'type',
+      'size',
+      'speed',
+      'scale',
+      'rotation',
+      'offsetX',
+      'offsetY',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperDitheringPresets);
 
   function onPaneCreated(pane: Pane) {
+    presets.addPresetBinding(pane);
     pane.addBinding(params, 'colorBack');
     pane.addBinding(params, 'colorFront');
     pane.addBinding(params, 'shape', {
       options: {
-        Simplex: 'simplex',
-        Warp: 'warp',
-        Dots: 'dots',
-        Wave: 'wave',
-        Ripple: 'ripple',
-        Swirl: 'swirl',
-        Sphere: 'sphere',
+        simplex: 'simplex',
+        warp: 'warp',
+        dots: 'dots',
+        wave: 'wave',
+        ripple: 'ripple',
+        swirl: 'swirl',
+        sphere: 'sphere',
       },
     });
     pane.addBinding(params, 'type', {
-      options: {
-        Random: 'random',
-        '2x2': '2x2',
-        '4x4': '4x4',
-        '8x8': '8x8',
-      },
+      options: { random: 'random', '2x2': '2x2', '4x4': '4x4', '8x8': '8x8' },
     });
-    pane.addBinding(params, 'size', { min: 0.5, max: 20, step: 0.1 });
-    pane.addBinding(params, 'speed', { min: 0, max: 3, step: 0.1 });
+    pane.addBinding(params, 'size', { min: 1, max: 20, step: 0.1 });
+    pane.addBinding(params, 'speed', { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, 'scale', { min: 0.01, max: 4, step: 0.01 });
+    pane.addBinding(params, 'rotation', { min: 0, max: 360, step: 1 });
+    pane.addBinding(params, 'offsetX', { min: -1, max: 1, step: 0.01 });
+    pane.addBinding(params, 'offsetY', { min: -1, max: 1, step: 0.01 });
   }
 </script>
 
@@ -71,14 +72,7 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperDithering
-        :color-back="params.colorBack"
-        :color-front="params.colorFront"
-        :shape="params.shape"
-        :type="params.type"
-        :size="params.size"
-        :speed="params.speed"
-      />
+      <PaperDithering v-bind="params" />
       <ShaderPane expanded title="Dithering" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>

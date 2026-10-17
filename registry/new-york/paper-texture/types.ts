@@ -1,34 +1,54 @@
 export type PaperTextureFit = 'none' | 'contain' | 'cover';
 
 export interface PaperTextureProps {
-  /** Optional source image URL — when set, the texture is composited over the image. */
+  /** Optional source image URL. Without it the shader renders a standalone paper sheet. */
   image?: string;
-  /** Foreground color in RGBA. */
-  colorFront?: string;
-  /** Background color in RGBA. */
+  /** Color behind the paper sheet in RGBA. */
   colorBack?: string;
-  /** Sharpness of color transitions (0 to 1). */
-  contrast?: number;
-  /** Pixel noise, related to canvas and not scalable (0 to 1). */
-  roughness?: number;
-  /** Curly-shaped noise intensity (0 to 1). */
-  fiber?: number;
-  /** Curly-shaped noise scale (0 to 1). */
-  fiberSize?: number;
-  /** Cell-based crumple pattern intensity (0 to 1). */
-  crumples?: number;
-  /** Cell-based crumple pattern scale (0 to 1). */
-  crumpleSize?: number;
-  /** Depth of the folds (0 to 1). */
-  folds?: number;
-  /** Number of folds (1 to 15). */
-  foldCount?: number;
-  /** Big-scale noise mask applied to the pattern (0 to 1). */
-  fade?: number;
-  /** Visibility of speckle pattern (0 to 1). */
-  drops?: number;
-  /** Seed applied to folds, crumples and dots (0 to 1000). */
+  /** Color of the paper sheet in RGBA. */
+  colorPaper?: string;
+  /** Color of the patterns over the paper sheet in RGBA. */
+  colorShadow?: string;
+  /** Amount of image-to-paper blending, needs image (0 to 1). */
+  blending?: number;
+  /** How much the image bends with the paper surface, needs image (-1 to 1). */
+  distortion?: number;
+  /** Cuts the paper sheet to the image frame, needs image. */
+  clip?: boolean;
+  /** Direction the surface is lit from in degrees, also the roughness rows direction (0 to 360). */
+  angle?: number;
+  /** Seed applied to every pattern (0 to 1000). */
   seed?: number;
+  /** Fine grain covering the surface evenly (0 to 1). */
+  roughness?: number;
+  /** Scale of the roughness grain, needs roughness > 0 (0 to 1). */
+  roughnessSize?: number;
+  /** Lines the roughness up into stripes: 0 = even scatter, 1 = laid-paper rows (0 to 1). */
+  roughnessRows?: number;
+  /** Curly thread-like noise covering the surface evenly (0 to 1). */
+  fiber?: number;
+  /** Scale of the fiber noise, needs fiber > 0 (0 to 1). */
+  fiberSize?: number;
+  /** Straight vertical and horizontal fold lines producing ridges and valleys (0 to 1). */
+  folds?: number;
+  /** Size of the vertical folds, needs folds > 0 (0 to 1). */
+  foldSizeX?: number;
+  /** Size of the horizontal folds, needs folds > 0 (0 to 1). */
+  foldSizeY?: number;
+  /** Shifts the vertical folds across the surface, needs folds > 0 (0 to 1). */
+  foldOffsetX?: number;
+  /** Shifts the horizontal folds across the surface, needs folds > 0 (0 to 1). */
+  foldOffsetY?: number;
+  /** Crumple-like facets repeating across the surface (0 to 1). */
+  wrinkles?: number;
+  /** Scale of the wrinkle facets, needs wrinkles > 0 (0 to 1). */
+  wrinkleSize?: number;
+  /** A set of irregular folding lines (0 to 1). */
+  crumples?: number;
+  /** Number of facets in the crumple field, needs crumples > 0 (2 to 15). */
+  crumpleCount?: number;
+  /** Visibility of the speckle pattern; darkens the image instead of coloring it (0 to 1). */
+  drops?: number;
   /** Animation speed multiplier. 0 renders a static frame. */
   speed?: number;
   /** Initial/seek frame for deterministic rendering. */
@@ -53,4 +73,16 @@ export interface PaperTextureProps {
   worldHeight?: number;
   /** Additional CSS classes. */
   class?: string;
+}
+
+export type PaperTexturePresetName = 'Default' | 'Spread' | 'Creased' | 'Flat';
+
+/** Every shader param except the image and CSS class. */
+export type PaperTexturePresetParams = Required<
+  Omit<PaperTextureProps, 'image' | 'class'>
+>;
+
+export interface PaperTexturePreset {
+  name: PaperTexturePresetName;
+  params: PaperTexturePresetParams;
 }

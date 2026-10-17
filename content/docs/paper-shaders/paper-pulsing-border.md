@@ -29,7 +29,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-pulsing-border.json"
 | `softness`      | `number`                         | `0.75`                                | Border edge sharpness, 0 = hard edge, 1 = smooth gradient (0 to 1)          |
 | `intensity`     | `number`                         | `0.2`                                 | Thickness of individual color spots (0 to 1)                                |
 | `bloom`         | `number`                         | `0.25`                                | Power of glow, 0 = normal blending, 1 = additive blending (0 to 1)          |
-| `spots`         | `number`                         | `5`                                   | Number of spots added for each color (1 to 20)                              |
+| `spots`         | `number`                         | `4`                                   | Number of spots added for each color (1 to 4)                               |
 | `spot-size`     | `number`                         | `0.5`                                 | Angular size of spots (0 to 1)                                              |
 | `pulse`         | `number`                         | `0.25`                                | Optional pulsing animation intensity (0 to 1)                               |
 | `smoke`         | `number`                         | `0.3`                                 | Optional noisy shape extending the border (0 to 1)                          |

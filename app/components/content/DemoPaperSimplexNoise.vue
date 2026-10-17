@@ -1,28 +1,33 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperSimplexNoise from '@registry/new-york/paper-simplex-noise/PaperSimplexNoise.vue';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperSimplexNoisePresets } from '~/lib/paper-presets/simplex-noise';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    color1: '#4449CF',
-    color2: '#FFD1E0',
-    color3: '#F94446',
-    color4: '#FFD36B',
-    color5: '#FFFFFF',
-    stepsPerColor: 2,
-    softness: 0,
-    speed: 0.5,
-  });
+  const params = reactive(
+    pickPaperPreset(paperSimplexNoisePresets, [
+      'colors',
+      'stepsPerColor',
+      'softness',
+      'speed',
+      'scale',
+      'rotation',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperSimplexNoisePresets);
 
   function onPaneCreated(pane: Pane) {
-    pane.addBinding(params, 'color1');
-    pane.addBinding(params, 'color2');
-    pane.addBinding(params, 'color3');
-    pane.addBinding(params, 'color4');
-    pane.addBinding(params, 'color5');
+    presets.addPresetBinding(pane);
+    presets.addColorsFolder(pane);
     pane.addBinding(params, 'stepsPerColor', { min: 1, max: 10, step: 1 });
-    pane.addBinding(params, 'softness', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'speed', { min: 0, max: 3, step: 0.1 });
+    pane.addBinding(params, 'softness', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'speed', { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, 'scale', { min: 0.01, max: 4, step: 0.01 });
+    pane.addBinding(params, 'rotation', { min: 0, max: 360, step: 1 });
   }
 </script>
 
@@ -46,19 +51,7 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperSimplexNoise
-        :colors="[
-          params.color1,
-          params.color2,
-          params.color3,
-          params.color4,
-          params.color5,
-        ]"
-        :steps-per-color="params.stepsPerColor"
-        :softness="params.softness"
-        :scale="0.6"
-        :speed="params.speed"
-      />
+      <PaperSimplexNoise v-bind="params" />
       <ShaderPane
         expanded
         title="Simplex Noise"
