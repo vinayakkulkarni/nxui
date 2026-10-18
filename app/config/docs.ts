@@ -6,6 +6,7 @@ export const docsNav: NavGroup[] = [
     items: [
       { title: 'Introduction', path: '/docs' },
       { title: 'MCP', path: '/docs/mcp' },
+      { title: 'Compare', path: '/docs/compare' },
     ],
   },
   {
