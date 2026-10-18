@@ -1,5 +1,5 @@
 ---
-title: GradientWaves
+title: Gradient Waves
 description: Lit satin waves rolling in from a hazy horizon, with a light that follows the cursor and swells on click.
 ---
 

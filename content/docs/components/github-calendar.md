@@ -1,5 +1,5 @@
 ---
-title: Github Calendar
+title: GitHub Calendar
 description: A premium, customizable visualization of GitHub contribution graphs with multiple color schemes and display variants.
 ---
 

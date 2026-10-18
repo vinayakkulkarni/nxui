@@ -2050,7 +2050,7 @@ const COMPONENTS: Record<
     deps: ['@vueuse/core'],
   },
   'aero-shards': {
-    title: 'AeroShards',
+    title: 'Aero Shards',
     description:
       'Silk ribbons of thick glass shards streaming on layered depths among survey markers, catching light along their edges.',
     deps: ['@vueuse/core'],

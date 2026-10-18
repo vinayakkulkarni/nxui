@@ -1,5 +1,5 @@
 ---
-title: WebThreads
+title: Web Threads
 description: Glowing threads woven through luminous pinch points that light up under the cursor and carry light on click.
 ---
 

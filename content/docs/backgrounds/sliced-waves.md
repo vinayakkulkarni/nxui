@@ -1,5 +1,5 @@
 ---
-title: SlicedWaves
+title: Sliced Waves
 description: Waves of colored light sliced into glowing bars, seen in depth with a focus that follows the cursor.
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: AcidSquares
+title: Acid Squares
 description: A rolling field of glossy squares that ripples under two drifting colored lights.
 ---
 

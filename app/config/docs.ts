@@ -1136,7 +1136,7 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       {
-        title: 'AeroShards',
+        title: 'Aero Shards',
         path: '/docs/backgrounds/aero-shards',
         badge: 'new',
       },

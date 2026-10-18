@@ -1,5 +1,5 @@
 ---
-title: MoltenMetal
+title: Molten Metal
 description: Swirling caustic filaments with white-hot cores that heat up under the cursor and flare on click.
 ---
 
