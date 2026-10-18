@@ -12,6 +12,22 @@ description: A beautiful, animated, and customizable WebGL gradient with noise c
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/animated-gradient.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import AnimatedGradient from '~/components/ui/animated-gradient/AnimatedGradient.vue';
+</script>
+
+<template>
+  <AnimatedGradient
+    :config="{ preset: 'Aurora' }"
+    :noise="{ opacity: 0.2, scale: 1 }"
+    class="h-100"
+  />
+</template>
+```
+
 ## Props
 
 | Prop     | Type             | Default                | Description                                                  |

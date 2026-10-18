@@ -12,6 +12,18 @@ description: A text component that scrambles letters before revealing the final 
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/hyper-text.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import HyperText from '~/components/ui/hyper-text/HyperText.vue';
+</script>
+
+<template>
+  <HyperText text="Hyper Text" class="text-4xl font-bold" />
+</template>
+```
+
 ## Props
 
 | Prop              | Type      | Default | Description                                           |

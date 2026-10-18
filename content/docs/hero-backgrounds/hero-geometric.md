@@ -12,6 +12,18 @@ description: A dithered geometric gradient hero section powered by Three.js shad
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/hero-geometric.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import HeroGeometric from '~/components/ui/hero-geometric/HeroGeometric.vue';
+</script>
+
+<template>
+  <HeroGeometric title1="Elevate" title2="Your Brand" />
+</template>
+```
+
 ## Props
 
 | Prop          | Type     | Default     | Description                          |

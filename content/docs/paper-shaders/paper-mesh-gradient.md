@@ -12,6 +12,25 @@ description: A flowing composition of color spots moving along distinct trajecto
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-mesh-gradient.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperMeshGradient from '~/components/ui/paper-mesh-gradient/PaperMeshGradient.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperMeshGradient
+      :colors="['#e0eaff', '#241d9a', '#f75092', '#9f50d3']"
+      :distortion="0.8"
+      :swirl="0.1"
+      :speed="1"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop            | Type                             | Default                                        | Description                                          |

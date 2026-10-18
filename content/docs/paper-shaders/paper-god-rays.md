@@ -12,6 +12,25 @@ description: Volumetric light rays with configurable colors, density, intensity,
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-god-rays.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperGodRays from '~/components/ui/paper-god-rays/PaperGodRays.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperGodRays
+      :colors="['#a600ff6e', '#6200fff0', '#ffffff', '#33fff5']"
+      :intensity="0.8"
+      :bloom="0.5"
+      :offset-y="-0.55"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop            | Type                             | Default                                            | Description                                        |

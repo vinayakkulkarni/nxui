@@ -12,6 +12,26 @@ description: Morphing wave pattern with controllable shape, frequency, amplitude
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-waves.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperWaves from '~/components/ui/paper-waves/PaperWaves.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperWaves
+      :color-front="'#ffbb00'"
+      :color-back="'#000000'"
+      :shape="1.5"
+      :frequency="0.5"
+      :amplitude="0.5"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                             | Default     | Description                                        |

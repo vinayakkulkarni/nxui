@@ -12,6 +12,21 @@ description: An interactive pixel grid canvas that responds to mouse movement wi
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/pixel-canvas.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PixelCanvas from '~/components/ui/pixel-canvas/PixelCanvas.vue';
+</script>
+
+<template>
+  <PixelCanvas
+    :colors="['#e879f9', '#a78bfa', '#38bdf8', '#22d3ee']"
+    class="h-100"
+  />
+</template>
+```
+
 ## Props
 
 | Prop         | Type       | Default                                                   | Description                              |

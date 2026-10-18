@@ -12,6 +12,25 @@ description: A WebGL-based image distortion effect that creates ripple waves on 
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/image-ripple-effect.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import ImageRippleEffect from '~/components/ui/image-ripple-effect/ImageRippleEffect.vue';
+</script>
+
+<template>
+  <ImageRippleEffect
+    :images="[
+      {
+        src: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop',
+        alt: 'Mountains',
+      },
+    ]"
+  />
+</template>
+```
+
 ## Props
 
 | Prop                   | Type                | Default | Description                                                |

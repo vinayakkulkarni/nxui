@@ -12,6 +12,18 @@ description: A premium, customizable visualization of GitHub contribution graphs
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/github-calendar.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import GithubCalendar from '~/components/ui/github-calendar/GithubCalendar.vue';
+</script>
+
+<template>
+  <GithubCalendar username="vinayakkulkarni" />
+</template>
+```
+
 ## Props
 
 | Prop             | Type                                                  | Default     | Description                                           |

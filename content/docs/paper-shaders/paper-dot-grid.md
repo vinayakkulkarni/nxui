@@ -12,6 +12,28 @@ description: A static grid pattern made of circles, diamonds, squares, or triang
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-dot-grid.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperDotGrid from '~/components/ui/paper-dot-grid/PaperDotGrid.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperDotGrid
+      :color-back="'#000000'"
+      :color-fill="'#ffffff'"
+      :color-stroke="'#ffaa00'"
+      :size="2"
+      :gap-x="32"
+      :gap-y="32"
+      :shape="'circle'"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop            | Type                                              | Default     | Description                                            |

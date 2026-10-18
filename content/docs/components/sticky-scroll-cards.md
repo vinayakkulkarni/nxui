@@ -12,6 +12,21 @@ description: Scroll-driven card stack where images pin and scale as you scroll.
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/sticky-scroll-cards.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import StickyScrollCards from '~/components/ui/sticky-scroll-cards/StickyScrollCards.vue';
+</script>
+
+<template>
+  <!-- Wrap in a tall scroll container so the sticky stack pins as you scroll -->
+  <div class="h-screen overflow-y-auto">
+    <StickyScrollCards />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop    | Type                     | Default | Description                              |

@@ -12,6 +12,18 @@ description: A button with a rotating shimmer/glow effect.
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/shimmer-button.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import ShimmerButton from '~/components/ui/shimmer-button/ShimmerButton.vue';
+</script>
+
+<template>
+  <ShimmerButton>Shimmer</ShimmerButton>
+</template>
+```
+
 ## Props
 
 | Prop               | Type     | Default              | Description                             |

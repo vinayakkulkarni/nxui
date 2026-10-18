@@ -12,6 +12,18 @@ description: An inline slider input styled as a pill, perfect for adjusting vari
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/scrub-input.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import ScrubInput from '~/components/ui/scrub-input/ScrubInput.vue';
+</script>
+
+<template>
+  <ScrubInput label="Opacity" :default-value="75" :min="0" :max="100" />
+</template>
+```
+
 ## Props
 
 | Prop            | Type     | Default | Description                 |

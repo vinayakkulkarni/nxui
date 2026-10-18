@@ -333,14 +333,16 @@
     mask-image: linear-gradient(
       to bottom,
       transparent,
-      black 24px,
+      transparent 40px,
+      black 96px,
       black calc(100% - 48px),
       transparent
     );
     -webkit-mask-image: linear-gradient(
       to bottom,
       transparent,
-      black 24px,
+      transparent 40px,
+      black 96px,
       black calc(100% - 48px),
       transparent
     );

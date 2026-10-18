@@ -12,6 +12,26 @@ description: Classic animated 3D Perlin noise with exposed controls for octaves,
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-perlin-noise.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperPerlinNoise from '~/components/ui/paper-perlin-noise/PaperPerlinNoise.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperPerlinNoise
+      :color-front="'#fccff7'"
+      :color-back="'#632ad5'"
+      :proportion="0.35"
+      :octave-count="2"
+      :speed="0.5"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                             | Default     | Description                                        |

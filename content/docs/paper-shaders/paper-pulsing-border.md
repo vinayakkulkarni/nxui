@@ -12,6 +12,28 @@ description: Luminous trails of color merging into a glowing gradient contour. P
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-pulsing-border.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperPulsingBorder from '~/components/ui/paper-pulsing-border/PaperPulsingBorder.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperPulsingBorder
+      :color-back="'#000000'"
+      :colors="['#0dc1fd', '#d915ef', '#ff3f2ecc']"
+      :roundness="0.25"
+      :thickness="0.1"
+      :softness="0.75"
+      :bloom="0.25"
+      :speed="1"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop            | Type                             | Default                               | Description                                                                 |

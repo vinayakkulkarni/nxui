@@ -12,6 +12,26 @@ description: Configurable spiral with stroke width, taper, cap, density, and opt
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-spiral.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperSpiral from '~/components/ui/paper-spiral/PaperSpiral.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperSpiral
+      :color-front="'#79D1FF'"
+      :color-back="'#001429'"
+      :density="0.7"
+      :stroke-width="0.6"
+      :speed="1"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop              | Type                             | Default     | Description                                                |

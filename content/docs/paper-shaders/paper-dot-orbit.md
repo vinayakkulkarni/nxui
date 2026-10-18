@@ -12,6 +12,27 @@ description: Animated multi-color dots with each dot orbiting around its cell ce
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-dot-orbit.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperDotOrbit from '~/components/ui/paper-dot-orbit/PaperDotOrbit.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperDotOrbit
+      :colors="['#ffc96b', '#ff6200', '#ff2f00', '#421100', '#1a0000']"
+      :color-back="'#000000'"
+      :size="1"
+      :spread="1"
+      :steps-per-color="4"
+      :speed="1.5"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop              | Type                             | Default                                                   | Description                                                                           |

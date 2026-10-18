@@ -12,6 +12,12 @@ description: A camera-based infinite scrolling image grid on canvas, driven by c
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/infinite-image-field.json"
 ```
 
+## Usage
+
+```vue
+<InfiniteImageField :image-width="200" :image-height="280" :gap="28" />
+```
+
 ## Props
 
 | Prop            | Type       | Default          | Description                                |

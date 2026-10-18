@@ -12,6 +12,14 @@ description: A Verlet physics rope text animation where each character acts as a
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/text-string.json"
 ```
 
+## Usage
+
+```vue
+<TextString
+  text="Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do."
+/>
+```
+
 ## Props
 
 | Prop                  | Type     | Default                     | Description                                      |

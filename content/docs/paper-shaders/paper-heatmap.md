@@ -12,6 +12,25 @@ description: A glowing gradient of colors flowing through an input shape. The ef
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-heatmap.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperHeatmap from '~/components/ui/paper-heatmap/PaperHeatmap.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperHeatmap
+      image="/flowers.webp"
+      :contour="0.5"
+      :inner-glow="0.5"
+      :outer-glow="0.5"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                             | Default                                                                         | Description                                                                                                                             |

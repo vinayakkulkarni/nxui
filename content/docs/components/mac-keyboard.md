@@ -12,6 +12,18 @@ description: An interactive Mac keyboard with real key tracking, sound effects, 
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/mac-keyboard.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import MacKeyboard from '~/components/ui/mac-keyboard/MacKeyboard.vue';
+</script>
+
+<template>
+  <MacKeyboard />
+</template>
+```
+
 ## Props
 
 ### MacKeyboard

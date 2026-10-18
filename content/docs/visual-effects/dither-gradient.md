@@ -12,6 +12,18 @@ description: A dithered gradient effect rendered on canvas with customizable col
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/dither-gradient.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import DitherGradient from '~/components/ui/dither-gradient/DitherGradient.vue';
+</script>
+
+<template>
+  <DitherGradient class="h-75 w-full" />
+</template>
+```
+
 ## Props
 
 | Prop         | Type     | Default     | Description                              |

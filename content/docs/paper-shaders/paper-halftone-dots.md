@@ -12,6 +12,29 @@ description: A halftone-dot image filter featuring customizable grids, color pal
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-halftone-dots.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperHalftoneDots from '~/components/ui/paper-halftone-dots/PaperHalftoneDots.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperHalftoneDots
+      :image="'/flowers.webp'"
+      :color-front="'#2b2b2b'"
+      :color-back="'#f2f1e8'"
+      :size="0.5"
+      :radius="1.25"
+      :contrast="0.4"
+      :grid="'hex'"
+      :type="'gooey'"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop              | Type                                        | Default     | Description                                          |

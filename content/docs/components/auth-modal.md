@@ -12,6 +12,21 @@ description: An authentication modal with social login buttons and email form.
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/auth-modal.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import AuthModal from '~/components/ui/auth-modal/AuthModal.vue';
+
+  const open = ref(false);
+</script>
+
+<template>
+  <button @click="open = true">Open Auth Modal</button>
+  <AuthModal v-model:open="open" />
+</template>
+```
+
 ## Props
 
 | Prop           | Type     | Default               | Description                                   |

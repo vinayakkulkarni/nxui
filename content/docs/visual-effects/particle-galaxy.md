@@ -12,6 +12,18 @@ description: A swirling 3D particle galaxy effect with spiral arms that responds
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/particle-galaxy.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import ParticleGalaxyRenderer from '~/components/ui/particle-galaxy/ParticleGalaxyRenderer.vue';
+</script>
+
+<template>
+  <ParticleGalaxyRenderer class="h-100 w-full" />
+</template>
+```
+
 ## Props
 
 | Prop              | Type     | Default     | Description                              |

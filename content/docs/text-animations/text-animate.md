@@ -12,6 +12,22 @@ description: A premium text animation component with multiple presets including 
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/text-animate.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import TextAnimate from '~/components/ui/text-animate/TextAnimate.vue';
+</script>
+
+<template>
+  <TextAnimate
+    text="Beautiful Animations"
+    animation="blur-in-up"
+    class="text-4xl font-bold"
+  />
+</template>
+```
+
 ## Examples
 
 ### Blur In Up (by Word)

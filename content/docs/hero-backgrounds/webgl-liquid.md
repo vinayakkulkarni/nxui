@@ -12,6 +12,18 @@ description: A premium liquid hero background powered by raw WebGL shaders, with
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/webgl-liquid.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import WebGLLiquid from '~/components/ui/webgl-liquid/WebGLLiquid.vue';
+</script>
+
+<template>
+  <WebGLLiquid title="Fluid Motion" subtitle="Premium Presence" />
+</template>
+```
+
 ## Props
 
 | Prop              | Type      | Default              | Description                                   |

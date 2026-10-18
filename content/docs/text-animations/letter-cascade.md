@@ -12,6 +12,18 @@ description: A 3D split-flap letter animation with spring physics that cascades 
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/letter-cascade.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import LetterCascade from '~/components/ui/letter-cascade/LetterCascade.vue';
+</script>
+
+<template>
+  <LetterCascade text="Letter Cascade" class="text-4xl font-bold" />
+</template>
+```
+
 ## Props
 
 | Prop               | Type                                      | Default   | Description                                   |

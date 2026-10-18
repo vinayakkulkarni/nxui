@@ -12,6 +12,18 @@ description: A prismatic dithered hero section with advanced WebGL shaders featu
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/dither-prism-hero.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import DitherPrismHero from '~/components/ui/dither-prism-hero/DitherPrismHero.vue';
+</script>
+
+<template>
+  <DitherPrismHero title1="Experience" title2="The Future" />
+</template>
+```
+
 ## Props
 
 | Prop               | Type      | Default     | Description                          |

@@ -12,6 +12,27 @@ description: An infinite scrolling marquee of testimonial cards with smooth anim
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/testimonial-marquee.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import TestimonialMarquee from '~/components/ui/testimonial-marquee/TestimonialMarquee.vue';
+
+  const items = [
+    {
+      name: 'Sarah Chen',
+      text: 'Amazing library!',
+      avatar: '/avatars/sarah.jpg',
+    },
+    { name: 'Alex Morgan', text: 'Best DX ever.', avatar: '/avatars/alex.jpg' },
+  ];
+</script>
+
+<template>
+  <TestimonialMarquee :items="items" :speed="30" />
+</template>
+```
+
 ## Props
 
 | Prop             | Type                | Default  | Description                          |

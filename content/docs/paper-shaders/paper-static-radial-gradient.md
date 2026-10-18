@@ -12,6 +12,26 @@ description: A static radial gradient with up to 10 blended colors, advanced mix
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-static-radial-gradient.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperStaticRadialGradient from '~/components/ui/paper-static-radial-gradient/PaperStaticRadialGradient.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperStaticRadialGradient
+      :color-back="'#000000'"
+      :colors="['#00bbff', '#00ffe1', '#ffffff']"
+      :radius="0.8"
+      :focal-distance="0.99"
+      :falloff="0.24"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop               | Type                             | Default                             | Description                                                           |

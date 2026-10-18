@@ -12,6 +12,34 @@ description: Pseudo-3D semi-transparent panels rotating around a central axis. P
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-color-panels.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperColorPanels from '~/components/ui/paper-color-panels/PaperColorPanels.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperColorPanels
+      :colors="[
+        '#ff9d00',
+        '#fd4f30',
+        '#809bff',
+        '#6d2eff',
+        '#333aff',
+        '#f15cff',
+        '#ffd557',
+      ]"
+      :color-back="'#000000'"
+      :length="1.1"
+      :density="3"
+      :speed="0.5"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                             | Default                                                                         | Description                                                   |

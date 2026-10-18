@@ -12,6 +12,25 @@ description: Organic warp distortion of a multi-color field with selectable shap
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-warp.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperWarp from '~/components/ui/paper-warp/PaperWarp.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperWarp
+      :colors="['#121212', '#9470ff', '#121212', '#8838ff']"
+      :shape="'edge'"
+      :distortion="0.3"
+      :swirl="0.9"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop               | Type                              | Default                                        | Description                                            |

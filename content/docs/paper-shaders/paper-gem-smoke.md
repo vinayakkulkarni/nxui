@@ -12,6 +12,28 @@ description: Animated color fields placed over an uploaded logo shape with smoky
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-gem-smoke.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperGemSmoke from '~/components/ui/paper-gem-smoke/PaperGemSmoke.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperGemSmoke
+      :image="'/flowers.webp'"
+      :colors="['#333333', '#e7e6df']"
+      :color-back="'#f0efea'"
+      :color-inner="'#fafaf5'"
+      :inner-glow="1"
+      :outer-glow="0.55"
+      :shape="'diamond'"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop               | Type                                                        | Default                  | Description                                          |

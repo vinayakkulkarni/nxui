@@ -1,3 +1,17 @@
+import type { MinimarkNode } from '@nuxt/content';
+
+/** One `## Heading` block of a component page body, rendered as a collapsible section. */
+export interface DocsBodySection {
+  id: string;
+  title: string;
+  nodes: MinimarkNode[];
+}
+
+export interface DocsPageBodyProps {
+  /** Top-level nodes of the page's minimark body. */
+  nodes: MinimarkNode[];
+}
+
 /** `new`: component added recently. `updated`: rebuilt to match a newer upstream. */
 export type NavBadge = 'new' | 'updated';
 

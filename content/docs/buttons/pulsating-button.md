@@ -12,6 +12,18 @@ description: Vue port of the pulsating-button component from componentry.fun.
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/pulsating-button.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PulsatingButton from '~/components/ui/pulsating-button/PulsatingButton.vue';
+</script>
+
+<template>
+  <PulsatingButton>Click Me</PulsatingButton>
+</template>
+```
+
 ## Props
 
 | Prop          | Type     | Default     | Description                        |

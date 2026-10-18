@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import type { Component } from 'vue';
   import { defineAsyncComponent } from 'vue';
-  import { useClipboard } from '@vueuse/core';
   import { docsNav } from '~/config/docs';
   import Tooltip from '~/components/ui/tooltip/Tooltip.vue';
   import TooltipContent from '~/components/ui/tooltip/TooltipContent.vue';
@@ -99,7 +98,8 @@
   );
   const hasMultipleVariants = computed(() => demoEntries.length > 1);
 
-  // Provide split mode for ComponentDemo
+  // Split mode: ComponentDemo hands its snippet here instead of rendering its
+  // own code tab. The page shows code only in the Usage section.
   const demoCode = ref('');
   const demoRefreshable = ref(false);
   provide('component-demo-code', demoCode);
@@ -115,15 +115,6 @@
   function replay() {
     refreshKey.value++;
   }
-
-  // Code display
-  const codeExpanded = ref(false);
-  const codeRef = computed(() => demoCode.value || undefined);
-  const langRef = computed(() => 'vue');
-  const { highlightedHtml } = useShiki(codeRef, langRef);
-  const { copy: copyCode, copied: codeCopied } = useClipboard({
-    source: () => demoCode.value,
-  });
 
   // Navigation: prev/next from docsNav
   const allItems = computed(() => docsNav.flatMap((g) => g.items));
@@ -208,58 +199,12 @@
           {{ page.description }}
         </p>
 
-        <!-- Code block -->
-        <div v-if="demoCode" class="not-prose">
-          <button
-            class="mb-3 flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-            :aria-expanded="codeExpanded"
-            aria-controls="code-panel"
-            @click="codeExpanded = !codeExpanded"
-          >
-            <Icon name="lucide:code" class="size-3.5" />
-            <span>{{ codeExpanded ? 'Hide code' : 'View code' }}</span>
-            <Icon
-              name="lucide:chevron-down"
-              :class="[
-                'size-3 transition-transform duration-200',
-                codeExpanded ? 'rotate-180' : '',
-              ]"
-            />
-          </button>
-
-          <div
-            v-show="codeExpanded"
-            id="code-panel"
-            role="region"
-            aria-label="Source code"
-            class="relative overflow-hidden rounded-xl border border-border/50"
-          >
-            <button
-              class="absolute right-2 top-2 z-10 grid size-8 place-items-center rounded-md text-muted-foreground/50 transition-colors hover:bg-muted hover:text-foreground"
-              :class="codeCopied ? 'text-foreground' : ''"
-              :aria-label="codeCopied ? 'Copied' : 'Copy code'"
-              @click="copyCode(demoCode)"
-            >
-              <Icon
-                :name="codeCopied ? 'lucide:check' : 'lucide:copy'"
-                class="size-3.5"
-              />
-            </button>
-
-            <!-- eslint-disable vue/no-v-html -- highlightedHtml is trusted build-time Shiki output, never user input -->
-            <!-- doctor-disable vue-doctor/security/no-v-html -->
-            <div
-              class="shiki-wrapper max-h-[60vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:p-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
-              v-html="highlightedHtml"
-            ></div>
-            <!-- doctor-enable vue-doctor/security/no-v-html -->
-            <!-- eslint-enable vue/no-v-html -->
-          </div>
-        </div>
-
         <!-- Installation -->
         <DocsInstallTabs :component="componentSlug" class="mt-8" />
         <DocsKeepInMind class="mt-4" />
+
+        <!-- Usage, props, accessibility: server-rendered for readers and crawlers -->
+        <DocsPageBody :nodes="page.body.value" class="mt-8" />
       </div>
       <!-- Sticky footer: navigation -->
       <div class="shrink-0 px-4 pb-2 pt-1 lg:px-10 lg:pb-4 lg:pt-2">
@@ -352,56 +297,9 @@
         >
           {{ page.description }}
         </p>
-        <!-- mobile code collapsible -->
-        <div v-if="demoCode" class="not-prose">
-          <button
-            class="mb-3 flex items-center gap-2 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground"
-            :aria-expanded="codeExpanded"
-            aria-controls="code-panel-mobile"
-            @click="codeExpanded = !codeExpanded"
-          >
-            <Icon name="lucide:code" class="size-3.5" />
-            <span>{{ codeExpanded ? 'Hide code' : 'View code' }}</span>
-            <Icon
-              name="lucide:chevron-down"
-              :class="[
-                'size-3 transition-transform duration-200',
-                codeExpanded ? 'rotate-180' : '',
-              ]"
-            />
-          </button>
-
-          <div
-            v-show="codeExpanded"
-            id="code-panel-mobile"
-            role="region"
-            aria-label="Source code"
-            class="relative overflow-hidden rounded-xl border border-border/50"
-          >
-            <button
-              class="absolute right-2 top-2 z-10 grid size-8 place-items-center rounded-md text-muted-foreground/50 transition-colors hover:bg-muted hover:text-foreground"
-              :class="codeCopied ? 'text-foreground' : ''"
-              :aria-label="codeCopied ? 'Copied' : 'Copy code'"
-              @click="copyCode(demoCode)"
-            >
-              <Icon
-                :name="codeCopied ? 'lucide:check' : 'lucide:copy'"
-                class="size-3.5"
-              />
-            </button>
-
-            <!-- eslint-disable vue/no-v-html -- highlightedHtml is trusted build-time Shiki output, never user input -->
-            <!-- doctor-disable vue-doctor/security/no-v-html -->
-            <div
-              class="shiki-wrapper max-h-[40vh] overflow-auto text-sm [&_pre]:m-0! [&_pre]:rounded-none! [&_pre]:border-0! [&_pre]:bg-transparent! [&_pre]:p-4 [&_code]:text-[13px]! [&_code]:leading-relaxed!"
-              v-html="highlightedHtml"
-            ></div>
-            <!-- doctor-enable vue-doctor/security/no-v-html -->
-            <!-- eslint-enable vue/no-v-html -->
-          </div>
-        </div>
         <DocsInstallTabs :component="componentSlug" class="mt-6" />
         <DocsKeepInMind class="mt-4" />
+        <DocsPageBody :nodes="page.body.value" class="mt-6" />
         <div class="mt-6 border-t border-border/50 pt-4">
           <DocsComponentNavigation
             :prev="prevItem ?? null"

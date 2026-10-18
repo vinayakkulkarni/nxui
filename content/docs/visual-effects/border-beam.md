@@ -12,6 +12,21 @@ description: A moving gradient beam that travels along the border of its contain
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/border-beam.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import BorderBeam from '~/components/ui/border-beam/BorderBeam.vue';
+</script>
+
+<template>
+  <div class="relative rounded-xl border p-8">
+    <p>Content with border beam effect</p>
+    <BorderBeam />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type     | Default     | Description                        |

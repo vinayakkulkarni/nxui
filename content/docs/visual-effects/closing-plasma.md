@@ -12,6 +12,18 @@ description: A premium footer-ready plasma background with atmospheric noise and
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/closing-plasma.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import ClosingPlasma from '~/components/ui/closing-plasma/ClosingPlasma.vue';
+</script>
+
+<template>
+  <ClosingPlasma class="h-100" />
+</template>
+```
+
 ## Props
 
 | Prop              | Type      | Default     | Description                       |

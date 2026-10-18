@@ -12,6 +12,27 @@ description: Multi-point mesh gradient with up to 10 color spots, enhanced by tw
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-static-mesh-gradient.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperStaticMeshGradient from '~/components/ui/paper-static-mesh-gradient/PaperStaticMeshGradient.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperStaticMeshGradient
+      :colors="['#ffad0a', '#6200ff', '#e2a3ff', '#ff99fd']"
+      :positions="2"
+      :wave-x="1.0"
+      :wave-y="1.0"
+      :mixing="0.93"
+      :rotation="270"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop            | Type                             | Default                                        | Description                                                             |

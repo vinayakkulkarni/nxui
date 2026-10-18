@@ -12,6 +12,26 @@ description: A kinetic text reveal that segments text into words, characters, or
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/kinetic-text-reveal.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import KineticTextReveal from '~/components/ui/kinetic-text-reveal/KineticTextReveal.vue';
+</script>
+
+<template>
+  <KineticTextReveal
+    text="Animate every word"
+    split-by="words"
+    direction="up"
+    :stagger="0.08"
+    :distance="20"
+    :blur="true"
+    class="text-3xl font-bold text-foreground"
+  />
+</template>
+```
+
 ## Props
 
 | Prop            | Type                                                            | Default                                        | Description                                          |

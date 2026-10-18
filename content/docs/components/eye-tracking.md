@@ -12,6 +12,18 @@ description: Animated eyes that follow your cursor with realistic blinking, reac
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/eye-tracking.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import EyeTracking from '~/components/ui/eye-tracking/EyeTracking.vue';
+</script>
+
+<template>
+  <EyeTracking :eye-size="120" variant="realistic" />
+</template>
+```
+
 ## Props
 
 | Prop                   | Type                                               | Default       | Description                              |

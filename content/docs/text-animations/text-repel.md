@@ -12,6 +12,18 @@ description: Physics-based text where letters are repelled or attracted by the c
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/text-repel.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import TextRepel from '~/components/ui/text-repel/TextRepel.vue';
+</script>
+
+<template>
+  <TextRepel text="Hover Me" class="text-4xl font-bold" />
+</template>
+```
+
 ## Props
 
 | Prop           | Type                   | Default   | Description                                      |

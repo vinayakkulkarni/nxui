@@ -12,6 +12,28 @@ description: A futuristic liquid metal material applied to an uploaded logo or a
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-liquid-metal.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperLiquidMetal from '~/components/ui/paper-liquid-metal/PaperLiquidMetal.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperLiquidMetal
+      :image="'/flowers.webp'"
+      :color-back="'#AAAAAC'"
+      :color-tint="'#ffffff'"
+      :contour="0.4"
+      :distortion="0.07"
+      :repetition="2"
+      :shape="'diamond'"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                                                        | Default     | Description                                        |

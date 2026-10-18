@@ -12,6 +12,28 @@ description: Multi-color gradients with grainy, noise-textured distortion availa
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-grain-gradient.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperGrainGradient from '~/components/ui/paper-grain-gradient/PaperGrainGradient.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperGrainGradient
+      :color-back="'#000000'"
+      :colors="['#7300ff', '#eba8ff', '#00bfff', '#2a00ff']"
+      :softness="0.5"
+      :intensity="0.5"
+      :noise="0.25"
+      :shape="'corners'"
+      :speed="1"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                                                                           | Default                                        | Description                                           |

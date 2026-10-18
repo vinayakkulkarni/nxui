@@ -12,6 +12,25 @@ description: Voronoi cell diagram with configurable colors, glow, gap width, and
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-voronoi.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperVoronoi from '~/components/ui/paper-voronoi/PaperVoronoi.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperVoronoi
+      :colors="['#ff8247', '#ffe53d']"
+      :distortion="0.4"
+      :glow="0.3"
+      :scale="0.5"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop              | Type                             | Default                  | Description                                        |

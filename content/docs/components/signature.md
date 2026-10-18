@@ -12,6 +12,12 @@ description: Animated handwriting effect that converts text to font glyph paths 
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/signature.json"
 ```
 
+## Usage
+
+```vue
+<Signature text="Hello World" :font-size="48" :duration="2" />
+```
+
 ## Props
 
 ### Signature

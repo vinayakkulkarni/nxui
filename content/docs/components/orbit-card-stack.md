@@ -12,6 +12,18 @@ description: A stacked deck of profile cards that fans out into an orbital arc o
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/orbit-card-stack.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import OrbitCardStack from '~/components/ui/orbit-card-stack/OrbitCardStack.vue';
+</script>
+
+<template>
+  <OrbitCardStack />
+</template>
+```
+
 ## Props
 
 | Prop                   | Type               | Default | Description                                               |

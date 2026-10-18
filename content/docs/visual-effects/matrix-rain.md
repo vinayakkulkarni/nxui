@@ -12,6 +12,20 @@ description: The iconic Matrix digital rain effect rendered on canvas with theme
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/matrix-rain.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import MatrixRain from '~/components/ui/matrix-rain/MatrixRain.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full bg-background">
+    <MatrixRain class="absolute inset-0" />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop        | Type     | Default  | Description                              |

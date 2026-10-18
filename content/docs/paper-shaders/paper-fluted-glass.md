@@ -12,6 +12,20 @@ description: Fluted glass image filter that transforms an image into streaked, r
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-fluted-glass.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperFlutedGlass from '~/components/ui/paper-fluted-glass/PaperFlutedGlass.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperFlutedGlass image="/flowers.webp" :distortion="0.5" shape="lines" />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop               | Type                                                             | Default       | Description                                                                         |

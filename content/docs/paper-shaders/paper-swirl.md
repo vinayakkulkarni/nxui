@@ -12,6 +12,26 @@ description: Animated bands of color twisting and bending, producing spirals, ar
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-swirl.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperSwirl from '~/components/ui/paper-swirl/PaperSwirl.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperSwirl
+      :color-back="'#330000'"
+      :colors="['#ffd1d1', '#ff8a8a', '#660000']"
+      :band-count="4"
+      :twist="0.1"
+      :speed="0.32"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop              | Type                             | Default                             | Description                                                       |

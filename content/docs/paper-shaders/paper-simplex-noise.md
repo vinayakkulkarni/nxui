@@ -12,6 +12,26 @@ description: A multi-color gradient mapped into smooth, animated curves built as
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-simplex-noise.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperSimplexNoise from '~/components/ui/paper-simplex-noise/PaperSimplexNoise.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperSimplexNoise
+      :colors="['#4449CF', '#FFD1E0', '#F94446', '#FFD36B', '#FFFFFF']"
+      :steps-per-color="2"
+      :softness="0"
+      :scale="0.6"
+      :speed="0.5"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop              | Type                             | Default                                                   | Description                                                             |

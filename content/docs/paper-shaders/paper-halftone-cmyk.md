@@ -12,6 +12,26 @@ description: A CMYK halftone printing effect applied to images with customizable
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-halftone-cmyk.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperHalftoneCmyk from '~/components/ui/paper-halftone-cmyk/PaperHalftoneCmyk.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperHalftoneCmyk
+      :image="'/flowers.webp'"
+      :size="0.2"
+      :contrast="1"
+      :softness="1"
+      :type="'ink'"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop            | Type                             | Default     | Description                                        |

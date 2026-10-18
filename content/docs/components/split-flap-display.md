@@ -12,6 +12,32 @@ description: An airport-style split flap display with staggered character flip a
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/split-flap-display.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import SplitFlapDisplay from '~/components/ui/split-flap-display/SplitFlapDisplay.vue';
+
+  const rows = [
+    { label: 'DEPARTURE', value: 'LOS ANGELES' },
+    { label: 'GATE', value: 'B42' },
+    { label: 'STATUS', value: 'ON TIME' },
+  ];
+</script>
+
+<template>
+  <SplitFlapDisplay
+    :rows="rows"
+    :columns="14"
+    size="md"
+    accent-color="#22c55e"
+    :show-indicators="true"
+    :stagger-delay="30"
+    :flip-speed="35"
+  />
+</template>
+```
+
 ## Props
 
 | Prop              | Type                   | Default     | Description                                      |

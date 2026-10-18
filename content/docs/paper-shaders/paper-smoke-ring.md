@@ -12,6 +12,28 @@ description: A radial, multi-colored gradient ring shaped with layered noise for
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-smoke-ring.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperSmokeRing from '~/components/ui/paper-smoke-ring/PaperSmokeRing.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperSmokeRing
+      :color-back="'#000000'"
+      :colors="['#ffffff', '#ffca0a', '#fc6203', '#fc620366']"
+      :noise-scale="2"
+      :radius="0.4"
+      :thickness="0.8"
+      :inner-shape="4"
+      :speed="1"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop               | Type                             | Default       | Description                                           |

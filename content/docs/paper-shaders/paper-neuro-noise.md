@@ -12,6 +12,27 @@ description: A glowing, web-like structure of fluid lines and soft intersections
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-neuro-noise.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperNeuroNoise from '~/components/ui/paper-neuro-noise/PaperNeuroNoise.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperNeuroNoise
+      :color-front="'#00c8ff'"
+      :color-mid="'#fbff00'"
+      :color-back="'#8b42ff'"
+      :brightness="0.19"
+      :contrast="0.12"
+      :scale="3"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                             | Default     | Description                                        |

@@ -12,6 +12,18 @@ description: A button with a slide-and-reveal hover effect that transitions cont
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/interactive-hover-button.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import InteractiveHoverButton from '~/components/ui/interactive-hover-button/InteractiveHoverButton.vue';
+</script>
+
+<template>
+  <InteractiveHoverButton>Hover Me</InteractiveHoverButton>
+</template>
+```
+
 ## Props
 
 | Prop    | Type     | Default | Description            |

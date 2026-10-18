@@ -12,6 +12,26 @@ description: Up to 20 colored gooey balls moving around the center and merging i
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-metaballs.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperMetaballs from '~/components/ui/paper-metaballs/PaperMetaballs.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperMetaballs
+      :color-back="'#000000'"
+      :colors="['#6e33cc', '#ff5500', '#ffc105', '#ffc800', '#f585ff']"
+      :count="10"
+      :size="0.83"
+      :speed="1"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                             | Default                                                   | Description                                        |

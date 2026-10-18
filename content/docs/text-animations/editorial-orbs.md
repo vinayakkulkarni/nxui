@@ -12,6 +12,18 @@ description: Bouncing glowing orbs with text that dynamically flows around them 
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/editorial-orbs.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import EditorialOrbs from '~/components/ui/editorial-orbs/EditorialOrbs.vue';
+</script>
+
+<template>
+  <EditorialOrbs class="size-full" :orb-count="5" />
+</template>
+```
+
 ## Props
 
 | Prop             | Type      | Default                    | Description               |

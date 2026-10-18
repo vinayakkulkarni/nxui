@@ -12,6 +12,26 @@ description: Animated grid of squares with directional movement and hover intera
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/squares.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import Squares from '~/components/ui/squares/Squares.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <Squares
+      :speed="0.5"
+      direction="diagonal"
+      border-color="#333"
+      hover-fill-color="#222"
+      :square-size="40"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop               | Type                                                | Default   | Description                   |

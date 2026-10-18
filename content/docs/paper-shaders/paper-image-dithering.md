@@ -12,6 +12,20 @@ description: A dithering image filter with support for 4 dithering modes and mul
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-image-dithering.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperImageDithering from '~/components/ui/paper-image-dithering/PaperImageDithering.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperImageDithering image="/flowers.webp" type="8x8" :color-steps="2" />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop              | Type                                  | Default     | Description                                                                                  |

@@ -12,6 +12,33 @@ description: Scroll-driven card that splits into 3 panels and flips to reveal co
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/scroll-split-card.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import ScrollSplitCard from '~/components/ui/scroll-split-card/ScrollSplitCard.vue';
+</script>
+
+<template>
+  <ScrollSplitCard
+    image-src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200"
+    start-hint="Scroll down"
+    end-hint="So cool, right?"
+    :cards="cards"
+  >
+    <template #icon-0>
+      <Icon name="lucide:image" class="size-8 text-white/70" />
+    </template>
+    <template #icon-1>
+      <Icon name="lucide:globe" class="size-8 text-white/70" />
+    </template>
+    <template #icon-2>
+      <Icon name="lucide:calendar" class="size-8 text-white/70" />
+    </template>
+  </ScrollSplitCard>
+</template>
+```
+
 ## Props
 
 | Prop        | Type                    | Default             | Description                    |

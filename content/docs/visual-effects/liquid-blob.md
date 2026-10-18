@@ -12,6 +12,18 @@ description: A morphing liquid blob animation that follows the cursor with sprin
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/liquid-blob.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import LiquidBlob from '~/components/ui/liquid-blob/LiquidBlob.vue';
+</script>
+
+<template>
+  <LiquidBlob class="h-75 w-full rounded-xl bg-neutral-100 dark:bg-zinc-900" />
+</template>
+```
+
 ## Props
 
 | Prop     | Type     | Default     | Description                              |

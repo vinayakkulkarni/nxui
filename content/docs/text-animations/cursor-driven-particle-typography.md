@@ -12,6 +12,18 @@ description: Canvas-based text rendered as particles that disperse on cursor hov
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/cursor-driven-particle-typography.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import CursorDrivenParticleTypography from '~/components/ui/cursor-driven-particle-typography/CursorDrivenParticleTypography.vue';
+</script>
+
+<template>
+  <CursorDrivenParticleTypography text="nxui" class="h-75 w-full" />
+</template>
+```
+
 ## Props
 
 | Prop                  | Type     | Default               | Description                                            |

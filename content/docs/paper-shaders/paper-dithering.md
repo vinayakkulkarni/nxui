@@ -12,6 +12,27 @@ description: Animated 2-color dithering over multiple pattern sources (noise, wa
 npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-dithering.json"
 ```
 
+## Usage
+
+```vue
+<script setup lang="ts">
+  import PaperDithering from '~/components/ui/paper-dithering/PaperDithering.vue';
+</script>
+
+<template>
+  <div class="relative h-100 w-full overflow-hidden rounded-lg">
+    <PaperDithering
+      :color-back="'#000000'"
+      :color-front="'#00b2ff'"
+      :shape="'sphere'"
+      :type="'4x4'"
+      :size="2"
+      :speed="1"
+    />
+  </div>
+</template>
+```
+
 ## Props
 
 | Prop           | Type                                                                         | Default     | Description                                        |
