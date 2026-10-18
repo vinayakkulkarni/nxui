@@ -1,6 +1,7 @@
 import { readdirSync, existsSync } from 'node:fs';
 import { readdir, rm } from 'node:fs/promises';
 import { join, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { docsNav } from './app/config/docs';
 
 const componentCount = readdirSync('registry/new-york', {
@@ -168,7 +169,7 @@ export default defineNuxtConfig({
   },
 
   alias: {
-    '@registry': '../registry',
+    '@registry': fileURLToPath(new URL('./registry', import.meta.url)),
   },
 
   app: {
