@@ -111,13 +111,32 @@ jobs:
       # IndexNow tells Bing (the index behind ChatGPT search), Yandex, Seznam
       # and Naver that pages changed, so new and updated components get
       # recrawled within hours instead of weeks. The key file lives in public/.
+      # A deploy changes the content checksum, so the first requests reseed D1
+      # and can take a minute. Wait until pages answer quickly before telling
+      # crawlers to come, so they never meet the slow window.
+      - name: Warm up docs pages
+        continue-on-error: true
+        run: |
+          for i in $(seq 1 30); do
+            t=$(curl -s -o /dev/null -w '%{http_code} %{time_total}' --max-time 90 "https://nxui.geoql.in/docs/components/magic-bento?warm=$i")
+            echo "attempt $i: $t"
+            case "$t" in 200\ [0-4].*) exit 0 ;; esac
+            sleep 10
+          done
+          exit 1
+
       - name: Ping IndexNow
         continue-on-error: true
         run: |
           urls=$(curl -sS https://nxui.geoql.in/sitemap.xml | grep -oE '<loc>[^<]+' | sed 's/<loc>//' | head -10000 | jq -R . | jq -s -c .)
           body=$(jq -n -c --argjson u "$urls" '{host:"nxui.geoql.in",key:"de4d002622ebcea117df12b8f6f3da2d",keyLocation:"https://nxui.geoql.in/de4d002622ebcea117df12b8f6f3da2d.txt",urlList:$u}')
-          status=$(curl -sS -o /tmp/indexnow.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
-            -H 'Content-Type: application/json; charset=utf-8' --data "$body")
-          echo "IndexNow HTTP $status, $(echo "$urls" | jq length) URLs"
-          cat /tmp/indexnow.txt
-          case "$status" in 200|202) ;; *) exit 1 ;; esac
+          # 403 means IndexNow could not read the key file yet; retry once.
+          for attempt in 1 2; do
+            status=$(curl -sS -o /tmp/indexnow.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+              -H 'Content-Type: application/json; charset=utf-8' --data "$body")
+            echo "IndexNow HTTP $status, $(echo "$urls" | jq length) URLs"
+            cat /tmp/indexnow.txt
+            case "$status" in 200|202) exit 0 ;; esac
+            sleep 60
+          done
+          exit 1

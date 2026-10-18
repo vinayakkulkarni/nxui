@@ -11,8 +11,8 @@
 </p>
 
 <p>
-  <a href="https://nxui.geoql.in">Documentation</a> ·
-  <a href="https://nxui.geoql.in/docs/components">Components</a> ·
+  <a href="https://nxui.geoql.in/docs">Documentation</a> ·
+  <a href="https://nxui.geoql.in/docs/compare">Compare</a> ·
   <a href="https://github.com/vinayakkulkarni/nxui/issues">Report Bug</a> ·
   <a href="https://github.com/vinayakkulkarni/nxui/issues">Request Feature</a>
 </p>
@@ -43,7 +43,7 @@
 ---
 
 <div align="center">
-  <a href="https://nxui.geoql.in">
+  <a href="https://nxui.geoql.in/docs">
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
@@ -66,6 +66,8 @@ The docs mark recent work with two badges: **new** for components added in the l
 - **Customizable** — Built with Tailwind CSS. Easy to modify.
 - **Dark Mode** — All components support light and dark modes.
 - **TypeScript** — Fully typed for the best developer experience.
+
+Looking at other Vue animation libraries too? See [nxui vs Vue Bits vs Inspira UI](https://nxui.geoql.in/docs/compare) for size, license and install method side by side.
 
 ## Quick Start
 
