@@ -1,30 +1,45 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperWater from '@registry/new-york/paper-water/PaperWater.vue';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperWaterPresets } from '~/lib/paper-presets/water';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    colorBack: '#000000',
-    colorHighlight: '#ffffff',
-    highlights: 0.07,
-    layering: 0,
-    edges: 0,
-    caustic: 0.1,
-    waves: 0.3,
-    size: 1,
-    speed: 0,
-  });
+  const params = reactive(
+    pickPaperPreset(paperWaterPresets, [
+      'colorBack',
+      'colorHighlight',
+      'highlights',
+      'layering',
+      'edges',
+      'waves',
+      'caustic',
+      'size',
+      'speed',
+      'scale',
+      'fit',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperWaterPresets);
 
   function onPaneCreated(pane: Pane) {
+    presets.addPresetBinding(pane);
     pane.addBinding(params, 'colorBack');
     pane.addBinding(params, 'colorHighlight');
-    pane.addBinding(params, 'highlights', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'layering', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'edges', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'caustic', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'waves', { min: 0, max: 1, step: 0.05 });
+    pane.addBinding(params, 'highlights', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'layering', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'edges', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'waves', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'caustic', { min: 0, max: 1, step: 0.01 });
     pane.addBinding(params, 'size', { min: 0.01, max: 7, step: 0.05 });
-    pane.addBinding(params, 'speed', { min: 0, max: 3, step: 0.1 });
+    pane.addBinding(params, 'speed', { min: 0, max: 3, step: 0.05 });
+    pane.addBinding(params, 'scale', { min: 0.1, max: 4, step: 0.01 });
+    pane.addBinding(params, 'fit', {
+      options: { contain: 'contain', cover: 'cover' },
+    });
   }
 </script>
 
@@ -41,19 +56,8 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperWater
-        image="/flowers.webp"
-        :color-back="params.colorBack"
-        :color-highlight="params.colorHighlight"
-        :highlights="params.highlights"
-        :layering="params.layering"
-        :edges="params.edges"
-        :caustic="params.caustic"
-        :waves="params.waves"
-        :size="params.size"
-        :speed="params.speed"
-      />
-      <ShaderPane title="Water" @on-pane-created="onPaneCreated" />
+      <PaperWater image="/flowers.webp" v-bind="params" />
+      <ShaderPane expanded title="Water" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

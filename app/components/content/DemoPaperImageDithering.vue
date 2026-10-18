@@ -1,23 +1,45 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperImageDithering from '@registry/new-york/paper-image-dithering/PaperImageDithering.vue';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperImageDitheringPresets } from '~/lib/paper-presets/image-dithering';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    type: '8x8',
-    colorSteps: 2,
-  });
+  const params = reactive(
+    pickPaperPreset(paperImageDitheringPresets, [
+      'colorBack',
+      'colorFront',
+      'colorHighlight',
+      'originalColors',
+      'inverted',
+      'type',
+      'size',
+      'colorSteps',
+      'scale',
+      'fit',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperImageDitheringPresets);
 
   function onPaneCreated(pane: Pane) {
+    presets.addPresetBinding(pane);
+    pane.addBinding(params, 'colorBack');
+    pane.addBinding(params, 'colorFront');
+    pane.addBinding(params, 'colorHighlight');
+    pane.addBinding(params, 'originalColors');
+    pane.addBinding(params, 'inverted');
     pane.addBinding(params, 'type', {
-      options: {
-        Random: 'random',
-        '2x2': '2x2',
-        '4x4': '4x4',
-        '8x8': '8x8',
-      },
+      options: { random: 'random', '2x2': '2x2', '4x4': '4x4', '8x8': '8x8' },
     });
+    pane.addBinding(params, 'size', { min: 0.5, max: 20, step: 0.1 });
     pane.addBinding(params, 'colorSteps', { min: 1, max: 7, step: 1 });
+    pane.addBinding(params, 'scale', { min: 0.1, max: 4, step: 0.01 });
+    pane.addBinding(params, 'fit', {
+      options: { contain: 'contain', cover: 'cover' },
+    });
   }
 </script>
 
@@ -37,10 +59,13 @@
       <PaperImageDithering
         class="absolute inset-0 size-full"
         image="/flowers.webp"
-        :type="params.type"
-        :color-steps="params.colorSteps"
+        v-bind="params"
       />
-      <ShaderPane title="Image Dithering" @on-pane-created="onPaneCreated" />
+      <ShaderPane
+        expanded
+        title="Image Dithering"
+        @on-pane-created="onPaneCreated"
+      />
     </div>
   </ComponentDemo>
 </template>

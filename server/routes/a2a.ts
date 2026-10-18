@@ -1,4 +1,10 @@
 import type { H3Event } from 'h3';
+import {
+  defineEventHandler,
+  readValidatedBody,
+  setResponseHeader,
+  setResponseStatus,
+} from 'h3';
 import type { JsonRpcRequest, JsonRpcResponse } from '~/types/mcp';
 import type { A2aMessage, A2aSendMessageParams } from '~/types/a2a';
 

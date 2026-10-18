@@ -1,2 +1,2 @@
 export { default as BubbleMenu } from './BubbleMenu.vue';
-export type { BubbleMenuItem } from './types';
+export * from './types';

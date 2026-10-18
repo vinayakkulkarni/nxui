@@ -1,2 +1,3 @@
 export { default as ScrollStack } from './ScrollStack.vue';
-export type { CardItem } from './types';
+export { default as ScrollStackItem } from './ScrollStackItem.vue';
+export type { ScrollStackItemProps, ScrollStackProps } from './types';

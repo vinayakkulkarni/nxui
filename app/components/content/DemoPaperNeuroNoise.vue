@@ -1,22 +1,37 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperNeuroNoise from '@registry/new-york/paper-neuro-noise/PaperNeuroNoise.vue';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperNeuroNoisePresets } from '~/lib/paper-presets/neuro-noise';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    colorFront: '#00c8ff',
-    colorMid: '#fbff00',
-    colorBack: '#8b42ff',
-    brightness: 0.19,
-    contrast: 0.12,
-  });
+  const params = reactive(
+    pickPaperPreset(paperNeuroNoisePresets, [
+      'colorFront',
+      'colorMid',
+      'colorBack',
+      'brightness',
+      'contrast',
+      'speed',
+      'scale',
+      'rotation',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperNeuroNoisePresets);
 
   function onPaneCreated(pane: Pane) {
+    presets.addPresetBinding(pane);
     pane.addBinding(params, 'colorFront');
     pane.addBinding(params, 'colorMid');
     pane.addBinding(params, 'colorBack');
-    pane.addBinding(params, 'brightness', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'contrast', { min: 0, max: 1, step: 0.05 });
+    pane.addBinding(params, 'brightness', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'contrast', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'speed', { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, 'scale', { min: 0.01, max: 4, step: 0.01 });
+    pane.addBinding(params, 'rotation', { min: 0, max: 360, step: 1 });
   }
 </script>
 
@@ -41,15 +56,12 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperNeuroNoise
-        :color-front="params.colorFront"
-        :color-mid="params.colorMid"
-        :color-back="params.colorBack"
-        :brightness="params.brightness"
-        :contrast="params.contrast"
-        :scale="3"
+      <PaperNeuroNoise v-bind="params" />
+      <ShaderPane
+        expanded
+        title="Neuro Noise"
+        @on-pane-created="onPaneCreated"
       />
-      <ShaderPane title="Neuro Noise" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

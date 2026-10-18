@@ -1,2 +1,2 @@
 export { default as TextCursor } from './TextCursor.vue';
-export type { TrailItem } from './types';
+export type { TextCursorMode, TextCursorProps } from './types';

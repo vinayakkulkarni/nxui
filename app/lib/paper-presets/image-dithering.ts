@@ -1,0 +1,98 @@
+// Presets from @paper-design/shaders-react 0.0.81
+// (packages/shaders-react/src/shaders/image-dithering.tsx, Apache-2.0, © Lost Coast Labs).
+// The first entry is the default preset.
+import type { PaperImageDitheringProps } from '@registry/new-york/paper-image-dithering/types';
+import type { PaperShaderPreset } from '~/types/paper-presets';
+
+export const paperImageDitheringPresets: PaperShaderPreset<
+  Omit<PaperImageDitheringProps, 'image'>
+>[] = [
+  {
+    name: 'Default',
+    params: {
+      fit: 'cover',
+      scale: 1,
+      rotation: 0,
+      offsetX: 0,
+      offsetY: 0,
+      originX: 0.5,
+      originY: 0.5,
+      speed: 0,
+      frame: 0,
+      colorFront: '#94ffaf',
+      colorBack: '#000c38',
+      colorHighlight: '#eaff94',
+      type: '8x8',
+      size: 2,
+      colorSteps: 2,
+      originalColors: false,
+      inverted: false,
+    },
+  },
+  {
+    name: 'Noise',
+    params: {
+      fit: 'cover',
+      scale: 1,
+      rotation: 0,
+      offsetX: 0,
+      offsetY: 0,
+      originX: 0.5,
+      originY: 0.5,
+      speed: 0,
+      frame: 0,
+      colorFront: '#a2997c',
+      colorBack: '#000000',
+      colorHighlight: '#ededed',
+      type: 'random',
+      size: 1,
+      colorSteps: 1,
+      originalColors: false,
+      inverted: false,
+    },
+  },
+  {
+    name: 'Retro',
+    params: {
+      fit: 'cover',
+      scale: 1,
+      rotation: 0,
+      offsetX: 0,
+      offsetY: 0,
+      originX: 0.5,
+      originY: 0.5,
+      speed: 0,
+      frame: 0,
+      colorFront: '#eeeeee',
+      colorBack: '#5452ff',
+      colorHighlight: '#eeeeee',
+      type: '2x2',
+      size: 3,
+      colorSteps: 1,
+      originalColors: true,
+      inverted: false,
+    },
+  },
+  {
+    name: 'Natural',
+    params: {
+      fit: 'cover',
+      scale: 1,
+      rotation: 0,
+      offsetX: 0,
+      offsetY: 0,
+      originX: 0.5,
+      originY: 0.5,
+      speed: 0,
+      frame: 0,
+      colorFront: '#ffffff',
+      colorBack: '#000000',
+      colorHighlight: '#ffffff',
+      type: '8x8',
+      size: 2,
+      colorSteps: 5,
+      originalColors: true,
+      inverted: false,
+    },
+  },
+];

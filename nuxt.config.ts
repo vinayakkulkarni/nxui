@@ -388,6 +388,11 @@ export default defineNuxtConfig({
   // rate-limits itself, so a genuinely missing chunk cannot reload-loop.
   experimental: {
     emitRouteChunkError: 'automatic-immediate',
+    // compatibilityVersion 5 turns Nitro auto-imports off, and Nuxt 4.6.2 now
+    // enforces it. nuxt-llms 0.2.0 (last release Jan 2026) still imports
+    // `useNitroApp` from `#imports`, so the server build fails without them.
+    // Our own server files import their h3 helpers explicitly.
+    nitroAutoImports: true,
   },
 
   // Prerendering runs for the crawl, not for the HTML: crawlLinks discovers

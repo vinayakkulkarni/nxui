@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import DepthDive from '@registry/new-york/depth-dive/DepthDive.vue';
+  import type { DemoPreset } from '~/types/components';
 
   const presets: DemoPreset[] = [
     { label: 'Manifesto', props: {} },

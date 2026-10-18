@@ -1,0 +1,29 @@
+{
+  "$schema": "https://shadcn-vue.com/schema/registry-item.json",
+  "name": "area-chart",
+  "type": "registry:ui",
+  "title": "Area Chart",
+  "description": "A responsive area chart with axes and grid lines whose values rise from the baseline on mount.",
+  "dependencies": ["@vueuse/core"],
+  "registryDependencies": ["https://nxui.geoql.in/r/chart.json"],
+  "files": [
+    {
+      "path": "registry/new-york/area-chart/AreaChart.vue",
+      "content": "<script setup lang=\"ts\">\n  import { computed } from 'vue';\n  import {\n    Chart,\n    areaY,\n    defineChart,\n    lineY,\n    scaleLinear,\n    scalePoint,\n  } from '../chart/chart-backend';\n  import { useChartTween } from '../chart/use-chart-tween';\n  import type { AreaChartProps } from './types';\n\n  const props = withDefaults(defineProps<AreaChartProps>(), {\n    color: 'var(--chart-1)',\n    height: 240,\n    strokeWidth: 2,\n    grid: true,\n    axes: true,\n    ariaLabel: 'Area chart',\n    class: '',\n  });\n\n  const progress = useChartTween(1, 1100);\n\n  // A fixed domain keeps the axis still while the values rise into place.\n  const domain = computed<[number, number]>(() => [\n    Math.min(0, ...props.data.map((d) => d.value)),\n    Math.max(1, ...props.data.map((d) => d.value)),\n  ]);\n\n  const rows = computed(() =>\n    props.data.map((d) => ({\n      label: d.label,\n      value: d.value * progress.value,\n    })),\n  );\n\n  const definition = computed(() => {\n    const axis: false | undefined = props.axes ? undefined : false;\n    return defineChart({\n      marks: [\n        areaY(rows.value, {\n          x: 'label',\n          y: 'value',\n          fill: props.color,\n          fillOpacity: 0.18,\n        }),\n        lineY(rows.value, {\n          x: 'label',\n          y: 'value',\n          stroke: props.color,\n          strokeWidth: props.strokeWidth,\n        }),\n      ],\n      scales: {\n        x: { scale: scalePoint, axis },\n        y: {\n          scale: scaleLinear().domain(domain.value),\n          nice: true,\n          grid: props.grid,\n          axis,\n        },\n      },\n    });\n  });\n</script>\n\n<template>\n  <Chart\n    :definition=\"definition\"\n    :height=\"props.height\"\n    v-bind=\"{ ariaLabel: props.ariaLabel }\"\n    :class=\"`text-muted-foreground ${props.class}`.trim()\"\n  />\n</template>\n",
+      "type": "registry:ui",
+      "target": "components/ui/area-chart/AreaChart.vue"
+    },
+    {
+      "path": "registry/new-york/area-chart/index.ts",
+      "content": "export { default as AreaChart } from './AreaChart.vue';\nexport type { AreaChartDatum, AreaChartProps } from './types';\n",
+      "type": "registry:ui",
+      "target": "components/ui/area-chart/index.ts"
+    },
+    {
+      "path": "registry/new-york/area-chart/types.ts",
+      "content": "export interface AreaChartDatum {\n  label: string;\n  value: number;\n}\n\nexport interface AreaChartProps {\n  data: AreaChartDatum[];\n  /** Any CSS color. Defaults to `var(--chart-1)`. */\n  color?: string;\n  height?: number;\n  strokeWidth?: number;\n  /** Horizontal grid lines at the y-axis ticks. */\n  grid?: boolean;\n  /** Shows the x and y axes. */\n  axes?: boolean;\n  ariaLabel?: string;\n  class?: string;\n}\n",
+      "type": "registry:ui",
+      "target": "components/ui/area-chart/types.ts"
+    }
+  ]
+}

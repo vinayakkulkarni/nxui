@@ -40,14 +40,14 @@ function weaveHeight(
       const ui = Math.floor(u);
       const uf = u - ui;
       // thread cross-section profile (half-sine bump per thread)
-      const warp = Math.sin(uf * Math.PI) * warpVar[ui % (threads + 1)];
-      const weft = Math.sin(vf * Math.PI) * weftVar[vi % (threads + 1)];
+      const warp = Math.sin(uf * Math.PI) * (warpVar[ui % (threads + 1)] ?? 0);
+      const weft = Math.sin(vf * Math.PI) * (weftVar[vi % (threads + 1)] ?? 0);
       // plain weave: alternate which thread lies on top
       const over = (ui + vi) % 2 === 0;
       const height = over
         ? warp * 0.62 + weft * 0.38
         : weft * 0.62 + warp * 0.38;
-      const g = grain[y * size + x];
+      const g = grain[y * size + x] ?? 0;
       h[y * size + x] = height * 0.85 + g * 0.15;
     }
   }
@@ -67,7 +67,7 @@ function heightToNormalTexture(
   const img = ctx.createImageData(size, size);
   const data = img.data;
   const at = (x: number, y: number) =>
-    h[((y + size) % size) * size + ((x + size) % size)];
+    h[((y + size) % size) * size + ((x + size) % size)] ?? 0;
   for (let y = 0; y < size; y++) {
     for (let x = 0; x < size; x++) {
       const dx = (at(x + 1, y) - at(x - 1, y)) * strength;

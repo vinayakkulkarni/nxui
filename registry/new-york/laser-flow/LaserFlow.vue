@@ -1,516 +1,551 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
-  import { useResizeObserver } from '@vueuse/core';
-  import * as THREE from 'three';
+  import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
+  import {
+    defaultDocument,
+    useEventListener,
+    useIntersectionObserver,
+    usePreferredReducedMotion,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import {
+    DEFAULT_RGB,
+    INTRO_DROP,
+    INTRO_END,
+    MAX_RENDER_DIM,
+    buildTints,
+    clamp,
+    easeOut,
+    linkProgram,
+    locateUniforms,
+    spring,
+  } from './laser-flow-gl';
+  import type { Rgb } from './laser-flow-gl';
+  import type { LaserFlowProps, LaserFlowSurface } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      wispDensity?: number;
-      mouseTiltStrength?: number;
-      horizontalBeamOffset?: number;
-      verticalBeamOffset?: number;
-      flowSpeed?: number;
-      verticalSizing?: number;
-      horizontalSizing?: number;
-      fogIntensity?: number;
-      fogScale?: number;
-      wispSpeed?: number;
-      wispIntensity?: number;
-      flowStrength?: number;
-      decay?: number;
-      falloffStart?: number;
-      fogFallSpeed?: number;
-      color?: string;
-      class?: string;
-    }>(),
-    {
-      wispDensity: 1,
-      mouseTiltStrength: 0.01,
-      horizontalBeamOffset: 0.1,
-      verticalBeamOffset: 0.0,
-      flowSpeed: 0.35,
-      verticalSizing: 2.0,
-      horizontalSizing: 0.5,
-      fogIntensity: 0.45,
-      fogScale: 0.3,
-      wispSpeed: 15.0,
-      wispIntensity: 5.0,
-      flowStrength: 0.25,
-      decay: 1.1,
-      falloffStart: 1.2,
-      fogFallSpeed: 0.6,
-      color: '#FF79C6',
-      class: '',
-    },
+  const props = withDefaults(defineProps<LaserFlowProps>(), {
+    surfaceRef: null,
+    beamPosition: 0.6,
+    surfaceLevel: 1,
+    color: '#3847ff',
+    intensity: 1.8,
+    beamWidth: 1.5,
+    flare: 1.5,
+    spread: 1.5,
+    spill: 1,
+    fog: 0.2,
+    dust: 1.6,
+    streaks: 1.5,
+    dots: 1,
+    pulse: 1.5,
+    speed: 1.5,
+    seed: 3,
+    mouseInteraction: true,
+    revealImage: undefined,
+    revealRadius: 220,
+    revealOpacity: 0.6,
+    intro: true,
+    theme: 'dark',
+    paused: false,
+    dpr: undefined,
+    class: '',
+  });
+
+  const containerRef = ref<HTMLDivElement | null>(null);
+  const canvasRef = ref<HTMLCanvasElement | null>(null);
+  const reducedMotion = usePreferredReducedMotion();
+
+  // Imperative hooks set once WebGL is up; no-ops before mount / after unmount.
+  let wake: () => void = () => {};
+  let resize: () => void = () => {};
+  let dispose: () => void = () => {};
+  let visible = true;
+  const pointer = { x: 0, y: 0, inside: false };
+
+  function onPointerMove(event: PointerEvent) {
+    const container = containerRef.value;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    pointer.x = x;
+    pointer.y = y;
+    pointer.inside = x >= 0 && y >= 0 && x <= rect.width && y <= rect.height;
+    wake();
+  }
+
+  function onPointerLeave() {
+    pointer.inside = false;
+    wake();
+  }
+
+  useEventListener('pointermove', onPointerMove, { passive: true });
+  useEventListener(
+    () => defaultDocument?.documentElement,
+    'pointerleave',
+    onPointerLeave,
   );
+  useEventListener(defaultDocument, 'visibilitychange', () => wake());
+  useResizeObserver(containerRef, () => resize());
+  useResizeObserver(
+    () => props.surfaceRef ?? null,
+    () => resize(),
+  );
+  useIntersectionObserver(containerRef, (entries) => {
+    visible = entries.some((entry) => entry.isIntersecting);
+    if (visible) wake();
+  });
 
-  const mountRef = ref<HTMLElement | null>(null);
-
-  const VERT = `
-precision highp float;
-attribute vec3 position;
-void main(){
-  gl_Position = vec4(position, 1.0);
-}
-`;
-
-  const FRAG = `
-#ifdef GL_ES
-#extension GL_OES_standard_derivatives : enable
-#endif
-precision highp float;
-precision mediump int;
-
-uniform float iTime;
-uniform vec3 iResolution;
-uniform vec4 iMouse;
-uniform float uWispDensity;
-uniform float uTiltScale;
-uniform float uFlowTime;
-uniform float uFogTime;
-uniform float uBeamXFrac;
-uniform float uBeamYFrac;
-uniform float uFlowSpeed;
-uniform float uVLenFactor;
-uniform float uHLenFactor;
-uniform float uFogIntensity;
-uniform float uFogScale;
-uniform float uWSpeed;
-uniform float uWIntensity;
-uniform float uFlowStrength;
-uniform float uDecay;
-uniform float uFalloffStart;
-uniform float uFogFallSpeed;
-uniform vec3 uColor;
-uniform float uFade;
-
-#define PI 3.14159265359
-#define TWO_PI 6.28318530718
-#define EPS 1e-6
-#define EDGE_SOFT (DT_LOCAL*4.0)
-#define DT_LOCAL 0.0038
-#define TAP_RADIUS 6
-#define R_H 150.0
-#define R_V 150.0
-#define FLARE_HEIGHT 16.0
-#define FLARE_AMOUNT 8.0
-#define FLARE_EXP 2.0
-#define TOP_FADE_START 0.1
-#define TOP_FADE_EXP 1.0
-#define FLOW_PERIOD 0.5
-#define FLOW_SHARPNESS 1.5
-
-#define W_BASE_X 1.5
-#define W_LAYER_GAP 0.25
-#define W_LANES 10
-#define W_SIDE_DECAY 0.5
-#define W_HALF 0.01
-#define W_AA 0.15
-#define W_CELL 20.0
-#define W_SEG_MIN 0.01
-#define W_SEG_MAX 0.55
-#define W_CURVE_AMOUNT 15.0
-#define W_CURVE_RANGE (FLARE_HEIGHT - 3.0)
-#define W_BOTTOM_EXP 10.0
-
-#define FOG_ON 1
-#define FOG_CONTRAST 1.2
-#define FOG_SPEED_U 0.1
-#define FOG_SPEED_V -0.1
-#define FOG_OCTAVES 5
-#define FOG_BOTTOM_BIAS 0.8
-#define FOG_TILT_TO_MOUSE 0.05
-#define FOG_TILT_DEADZONE 0.01
-#define FOG_TILT_MAX_X 0.35
-#define FOG_TILT_SHAPE 1.5
-#define FOG_BEAM_MIN 0.0
-#define FOG_BEAM_MAX 0.75
-#define FOG_MASK_GAMMA 0.5
-#define FOG_EXPAND_SHAPE 12.2
-#define FOG_EDGE_MIX 0.5
-
-#define HFOG_EDGE_START 0.20
-#define HFOG_EDGE_END 0.98
-#define HFOG_EDGE_GAMMA 1.4
-#define HFOG_Y_RADIUS 25.0
-#define HFOG_Y_SOFT 60.0
-
-#define EDGE_X0 0.22
-#define EDGE_X1 0.995
-#define EDGE_X_GAMMA 1.25
-#define EDGE_LUMA_T0 0.0
-#define EDGE_LUMA_T1 2.0
-#define DITHER_STRENGTH 1.0
-
-float g(float x){return x<=0.00031308?12.92*x:1.055*pow(x,1.0/2.4)-0.055;}
-float bs(vec2 p,vec2 q,float powr){
-  float d=distance(p,q),f=powr*uFalloffStart,r=(f*f)/(d*d+EPS);
-  return powr*min(1.0,r);
-}
-float bsa(vec2 p,vec2 q,float powr,vec2 s){
-  vec2 d=p-q; float dd=(d.x*d.x)/(s.x*s.x)+(d.y*d.y)/(s.y*s.y),f=powr*uFalloffStart,r=(f*f)/(dd+EPS);
-  return powr*min(1.0,r);
-}
-float tri01(float x){float f=fract(x);return 1.0-abs(f*2.0-1.0);}
-float tauWf(float t,float tmin,float tmax){float a=smoothstep(tmin,tmin+EDGE_SOFT,t),b=1.0-smoothstep(tmax-EDGE_SOFT,tmax,t);return max(0.0,a*b);}
-float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+34.123);return fract(p.x*p.y);}
-float vnoise(vec2 p){
-  vec2 i=floor(p),f=fract(p);
-  float a=h21(i),b=h21(i+vec2(1,0)),c=h21(i+vec2(0,1)),d=h21(i+vec2(1,1));
-  vec2 u=f*f*(3.0-2.0*f);
-  return mix(mix(a,b,u.x),mix(c,d,u.x),u.y);
-}
-float fbm2(vec2 p){
-  float v=0.0,amp=0.6; mat2 m=mat2(0.86,0.5,-0.5,0.86);
-  for(int i=0;i<FOG_OCTAVES;++i){v+=amp*vnoise(p); p=m*p*2.03+17.1; amp*=0.52;}
-  return v;
-}
-float rGate(float x,float l){float a=smoothstep(0.0,W_AA,x),b=1.0-smoothstep(l,l+W_AA,x);return max(0.0,a*b);}
-float flareY(float y){float t=clamp(1.0-(clamp(y,0.0,FLARE_HEIGHT)/max(FLARE_HEIGHT,EPS)),0.0,1.0);return pow(t,FLARE_EXP);}
-
-float vWisps(vec2 uv,float topF){
-  float y=uv.y,yf=(y+uFlowTime*uWSpeed)/W_CELL;
-  float dRaw=clamp(uWispDensity,0.0,2.0),d=dRaw<=0.0?1.0:dRaw;
-  float lanesF=floor(float(W_LANES)*min(d,1.0)+0.5);
-  int lanes=int(max(1.0,lanesF));
-  float sp=min(d,1.0),ep=max(d-1.0,0.0);
-  float fm=flareY(max(y,0.0)),rm=clamp(1.0-(y/max(W_CURVE_RANGE,EPS)),0.0,1.0),cm=fm*rm;
-  const float G=0.05; float xS=1.0+(FLARE_AMOUNT*W_CURVE_AMOUNT*G)*cm;
-  float sPix=clamp(y/R_V,0.0,1.0),bGain=pow(1.0-sPix,W_BOTTOM_EXP),sum=0.0;
-  for(int s=0;s<2;++s){
-    float sgn=s==0?-1.0:1.0;
-    for(int i=0;i<W_LANES;++i){
-      if(i>=lanes) break;
-      float off=W_BASE_X+float(i)*W_LAYER_GAP,xc=sgn*(off*xS);
-      float dx=abs(uv.x-xc),lat=1.0-smoothstep(W_HALF,W_HALF+W_AA,dx),amp=exp(-off*W_SIDE_DECAY);
-      float seed=h21(vec2(off,sgn*17.0)),yf2=yf+seed*7.0,ci=floor(yf2),fy=fract(yf2);
-      float seg=mix(W_SEG_MIN,W_SEG_MAX,h21(vec2(ci,off*2.3)));
-      float spR=h21(vec2(ci,off+sgn*31.0)),seg1=rGate(fy,seg)*step(spR,sp);
-      if(ep>0.0){float spR2=h21(vec2(ci*3.1+7.0,off*5.3+sgn*13.0)); float f2=fract(fy+0.5); seg1+=rGate(f2,seg*0.9)*step(spR2,ep);}
-      sum+=amp*lat*seg1;
-    }
-  }
-  float span=smoothstep(-3.0,0.0,y)*(1.0-smoothstep(R_V-6.0,R_V,y));
-  return uWIntensity*sum*topF*bGain*span;
-}
-
-void mainImage(out vec4 fc,in vec2 frag){
-  vec2 C=iResolution.xy*.5; float invW=1.0/max(C.x,1.0);
-  float sc=512.0/iResolution.x*.4;
-  vec2 uv=(frag-C)*sc,off=vec2(uBeamXFrac*iResolution.x*sc,uBeamYFrac*iResolution.y*sc);
-  vec2 uvc=uv-off;
-  float a=0.0,b=0.0;
-  float basePhase=1.5*PI+uDecay*.5; float tauMin=basePhase-uDecay; float tauMax=basePhase;
-  float cx=clamp(uvc.x/(R_H*uHLenFactor),-1.0,1.0),tH=clamp(TWO_PI-acos(cx),tauMin,tauMax);
-  for(int k=-TAP_RADIUS;k<=TAP_RADIUS;++k){
-    float tu=tH+float(k)*DT_LOCAL,wt=tauWf(tu,tauMin,tauMax); if(wt<=0.0) continue;
-    float spd=max(abs(sin(tu)),0.02),u=clamp((basePhase-tu)/max(uDecay,EPS),0.0,1.0),env=pow(1.0-abs(u*2.0-1.0),0.8);
-    vec2 p=vec2((R_H*uHLenFactor)*cos(tu),0.0);
-    a+=wt*bs(uvc,p,env*spd);
-  }
-  float yPix=uvc.y,cy=clamp(-yPix/(R_V*uVLenFactor),-1.0,1.0),tV=clamp(TWO_PI-acos(cy),tauMin,tauMax);
-  for(int k=-TAP_RADIUS;k<=TAP_RADIUS;++k){
-    float tu=tV+float(k)*DT_LOCAL,wt=tauWf(tu,tauMin,tauMax); if(wt<=0.0) continue;
-    float yb=(-R_V)*cos(tu),s=clamp(yb/R_V,0.0,1.0),spd=max(abs(sin(tu)),0.02);
-    float env=pow(1.0-s,0.6)*spd;
-    float cap=1.0-smoothstep(TOP_FADE_START,1.0,s); cap=pow(cap,TOP_FADE_EXP); env*=cap;
-    float ph=s/max(FLOW_PERIOD,EPS)+uFlowTime*uFlowSpeed;
-    float fl=pow(tri01(ph),FLOW_SHARPNESS);
-    env*=mix(1.0-uFlowStrength,1.0,fl);
-    float yp=(-R_V*uVLenFactor)*cos(tu),m=pow(smoothstep(FLARE_HEIGHT,0.0,yp),FLARE_EXP),wx=1.0+FLARE_AMOUNT*m;
-    vec2 sig=vec2(wx,1.0),p=vec2(0.0,yp);
-    float mask=step(0.0,yp);
-    b+=wt*bsa(uvc,p,mask*env,sig);
-  }
-  float sPix=clamp(yPix/R_V,0.0,1.0),topA=pow(1.0-smoothstep(TOP_FADE_START,1.0,sPix),TOP_FADE_EXP);
-  float L=a+b*topA;
-  float w=vWisps(vec2(uvc.x,yPix),topA);
-  float fog=0.0;
-#if FOG_ON
-  vec2 fuv=uvc*uFogScale;
-  float mAct=step(1.0,length(iMouse.xy)),nx=((iMouse.x-C.x)*invW)*mAct;
-  float ax=abs(nx);
-  float stMag=mix(ax,pow(ax,FOG_TILT_SHAPE),0.35);
-  float st=sign(nx)*stMag*uTiltScale;
-  st=clamp(st,-FOG_TILT_MAX_X,FOG_TILT_MAX_X);
-  vec2 dir=normalize(vec2(st,1.0));
-  fuv+=uFogTime*uFogFallSpeed*dir;
-  vec2 prp=vec2(-dir.y,dir.x);
-  fuv+=prp*(0.08*sin(dot(uvc,prp)*0.08+uFogTime*0.9));
-  float n=fbm2(fuv+vec2(fbm2(fuv+vec2(7.3,2.1)),fbm2(fuv+vec2(-3.7,5.9)))*0.6);
-  n=pow(clamp(n,0.0,1.0),FOG_CONTRAST);
-  float pixW=1.0/max(iResolution.y,1.0);
-#ifdef GL_OES_standard_derivatives
-  float wL=max(fwidth(L),pixW);
-#else
-  float wL=pixW;
-#endif
-  float m0=pow(smoothstep(FOG_BEAM_MIN-wL,FOG_BEAM_MAX+wL,L),FOG_MASK_GAMMA);
-  float bm=1.0-pow(1.0-m0,FOG_EXPAND_SHAPE); bm=mix(bm*m0,bm,FOG_EDGE_MIX);
-  float yP=1.0-smoothstep(HFOG_Y_RADIUS,HFOG_Y_RADIUS+HFOG_Y_SOFT,abs(yPix));
-  float nxF=abs((frag.x-C.x)*invW),hE=1.0-smoothstep(HFOG_EDGE_START,HFOG_EDGE_END,nxF); hE=pow(clamp(hE,0.0,1.0),HFOG_EDGE_GAMMA);
-  float hW=mix(1.0,hE,clamp(yP,0.0,1.0));
-  float bBias=mix(1.0,1.0-sPix,FOG_BOTTOM_BIAS);
-  float browserFogIntensity=uFogIntensity*1.8;
-  float radialFade=1.0-smoothstep(0.0,0.7,length(uvc)/120.0);
-  fog=n*browserFogIntensity*bBias*bm*hW*radialFade;
-#endif
-  float LF=L+fog;
-  float dith=(h21(frag)-0.5)*(DITHER_STRENGTH/255.0);
-  float tone=g(LF+w);
-  vec3 col=tone*uColor+dith;
-  float alpha=clamp(g(L+w*0.6)+dith*0.6,0.0,1.0);
-  float nxE=abs((frag.x-C.x)*invW),xF=pow(clamp(1.0-smoothstep(EDGE_X0,EDGE_X1,nxE),0.0,1.0),EDGE_X_GAMMA);
-  float scene=LF+max(0.0,w)*0.5,hi=smoothstep(EDGE_LUMA_T0,EDGE_LUMA_T1,scene);
-  float eM=mix(xF,1.0,hi);
-  col*=eM; alpha*=eM;
-  col*=uFade; alpha*=uFade;
-  fc=vec4(col,alpha);
-}
-
-void main(){
-  vec4 fc;
-  mainImage(fc, gl_FragCoord.xy);
-  gl_FragColor = fc;
-}
-`;
-
-  let renderer: THREE.WebGLRenderer | null = null;
-  let scene: THREE.Scene | null = null;
-  let camera: THREE.OrthographicCamera | null = null;
-  let material: THREE.RawShaderMaterial | null = null;
-  let animFrame: number | null = null;
-  let prevTime = 0;
-  let fade = 0;
-  let hasFaded = false;
-  const mouseTarget = new THREE.Vector2(0, 0);
-  const mouseSmooth = new THREE.Vector2(0, 0);
-
-  function hexToRGB(hex: string) {
-    let c = hex.trim();
-    if (c[0] === '#') c = c.slice(1);
-    if (c.length === 3)
-      c = c
-        .split('')
-        .map((x) => x + x)
-        .join('');
-    const n = Number.parseInt(c, 16) || 0xffffff;
-    return {
-      r: ((n >> 16) & 255) / 255,
-      g: ((n >> 8) & 255) / 255,
-      b: (n & 255) / 255,
-    };
-  }
-
-  function init() {
-    const mount = mountRef.value;
-    if (!mount) return;
-
-    renderer = new THREE.WebGLRenderer({
+  onMounted(() => {
+    const container = containerRef.value;
+    const canvas = canvasRef.value;
+    const gl = canvas?.getContext('webgl2', {
+      alpha: true,
+      premultipliedAlpha: true,
       antialias: false,
-      alpha: false,
       depth: false,
       stencil: false,
-      powerPreference: 'high-performance',
     });
+    if (!container || !canvas || !gl) return;
+    const program = linkProgram(gl);
+    if (!program) return;
+    const u = locateUniforms(gl, program);
 
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    renderer.setPixelRatio(dpr);
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.setClearColor(0x000000, 1);
-    const canvas = renderer.domElement;
-    canvas.style.width = '100%';
-    canvas.style.height = '100%';
-    canvas.style.display = 'block';
-    mount.appendChild(canvas);
-
-    scene = new THREE.Scene();
-    camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute(
-      'position',
-      new THREE.BufferAttribute(
-        new Float32Array([-1, -1, 0, 3, -1, 0, -1, 3, 0]),
-        3,
-      ),
+    const vao = gl.createVertexArray();
+    const buffer = gl.createBuffer();
+    gl.bindVertexArray(vao);
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 3, -1, -1, 3]),
+      gl.STATIC_DRAW,
     );
+    const positionLocation = gl.getAttribLocation(program, 'aPosition');
+    gl.enableVertexAttribArray(positionLocation);
+    gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+    gl.bindVertexArray(null);
 
-    const { r, g, b } = hexToRGB(props.color);
+    const revealTexture = gl.createTexture();
+    gl.bindTexture(gl.TEXTURE_2D, revealTexture);
+    gl.texImage2D(
+      gl.TEXTURE_2D,
+      0,
+      gl.RGBA,
+      1,
+      1,
+      0,
+      gl.RGBA,
+      gl.UNSIGNED_BYTE,
+      new Uint8Array([0, 0, 0, 0]),
+    );
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
 
-    const uniforms = {
-      iTime: { value: 0 },
-      iResolution: { value: new THREE.Vector3(1, 1, 1) },
-      iMouse: { value: new THREE.Vector4(0, 0, 0, 0) },
-      uWispDensity: { value: props.wispDensity },
-      uTiltScale: { value: props.mouseTiltStrength },
-      uFlowTime: { value: 0 },
-      uFogTime: { value: 0 },
-      uBeamXFrac: { value: props.horizontalBeamOffset },
-      uBeamYFrac: { value: props.verticalBeamOffset },
-      uFlowSpeed: { value: props.flowSpeed },
-      uVLenFactor: { value: props.verticalSizing },
-      uHLenFactor: { value: props.horizontalSizing },
-      uFogIntensity: { value: props.fogIntensity },
-      uFogScale: { value: props.fogScale },
-      uWSpeed: { value: props.wispSpeed },
-      uWIntensity: { value: props.wispIntensity },
-      uFlowStrength: { value: props.flowStrength },
-      uDecay: { value: props.decay },
-      uFalloffStart: { value: props.falloffStart },
-      uFogFallSpeed: { value: props.fogFallSpeed },
-      uColor: { value: new THREE.Vector3(r, g, b) },
-      uFade: { value: 0 },
+    const probe = document.createElement('canvas');
+    probe.width = 1;
+    probe.height = 1;
+    const probeContext = probe.getContext('2d', { willReadFrequently: true });
+    const isReduced = () => reducedMotion.value === 'reduce';
+
+    const state = {
+      time: 0,
+      introTime: props.intro && !isReduced() ? 0 : INTRO_END,
+      width: 1,
+      height: 1,
+      ratio: 1,
+      colorKey: '',
+      tints: buildTints(DEFAULT_RGB),
+      lens: { x: 0, y: 0, vx: 0, vy: 0, strength: 0, placed: false },
+      reveal: {
+        src: '',
+        ready: false,
+        width: 1,
+        height: 1,
+      },
+    };
+    let revealImageEl: HTMLImageElement | null = null;
+    let raf = 0;
+    let last = 0;
+    let alive = true;
+
+    const toRgb = (value: string): Rgb => {
+      if (!probeContext) return DEFAULT_RGB;
+      probeContext.clearRect(0, 0, 1, 1);
+      probeContext.fillStyle = '#3847ff';
+      probeContext.fillStyle = value;
+      probeContext.fillRect(0, 0, 1, 1);
+      const data = probeContext.getImageData(0, 0, 1, 1).data;
+      return [(data[0] ?? 0) / 255, (data[1] ?? 0) / 255, (data[2] ?? 0) / 255];
     };
 
-    material = new THREE.RawShaderMaterial({
-      vertexShader: VERT,
-      fragmentShader: FRAG,
-      uniforms,
-      transparent: false,
-      depthTest: false,
-      depthWrite: false,
-      blending: THREE.NormalBlending,
-    });
-
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.frustumCulled = false;
-    scene.add(mesh);
-
-    setSize();
-
-    const onMove = (ev: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = ev.clientX - rect.left;
-      const y = ev.clientY - rect.top;
-      const ratio = dpr;
-      mouseTarget.set(x * ratio, rect.height * ratio - y * ratio);
+    const resolveColor = () => {
+      const color = String(props.color);
+      if (color === state.colorKey) return;
+      state.colorKey = color;
+      state.tints = buildTints(toRgb(color));
     };
-    const onLeave = () => mouseTarget.set(0, 0);
 
-    canvas.addEventListener('pointermove', onMove, { passive: true });
-    canvas.addEventListener('pointerleave', onLeave, { passive: true });
+    const resolveReveal = () => {
+      const src = props.revealImage ? String(props.revealImage) : '';
+      const reveal = state.reveal;
+      if (src === reveal.src) return;
+      reveal.src = src;
+      reveal.ready = false;
+      if (revealImageEl) revealImageEl.onload = null;
+      if (!src) return;
+      const image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.decoding = 'async';
+      image.onload = () => {
+        if (!alive || reveal.src !== src) return;
+        const width = image.naturalWidth || image.width || 1;
+        const height = image.naturalHeight || image.height || 1;
+        const scale = Math.min(1, 2048 / Math.max(width, height));
+        const sheet = document.createElement('canvas');
+        sheet.width = Math.max(1, Math.round(width * scale));
+        sheet.height = Math.max(1, Math.round(height * scale));
+        sheet
+          .getContext('2d')
+          ?.drawImage(image, 0, 0, sheet.width, sheet.height);
+        gl.bindTexture(gl.TEXTURE_2D, revealTexture);
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+        gl.texImage2D(
+          gl.TEXTURE_2D,
+          0,
+          gl.RGBA,
+          gl.RGBA,
+          gl.UNSIGNED_BYTE,
+          sheet,
+        );
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+        reveal.width = sheet.width;
+        reveal.height = sheet.height;
+        reveal.ready = true;
+        wake();
+      };
+      image.src = src;
+      revealImageEl = image;
+    };
 
-    const timer = new THREE.Timer();
-    prevTime = 0;
+    const measure = (width: number, height: number): LaserFlowSurface => {
+      const element = props.surfaceRef ?? null;
+      if (element) {
+        const box = container.getBoundingClientRect();
+        const rect = element.getBoundingClientRect();
+        if (rect.width > 0) {
+          const computed = getComputedStyle(element);
+          const radius = Math.max(
+            Number.parseFloat(computed.borderTopLeftRadius) || 0,
+            Number.parseFloat(computed.borderTopRightRadius) || 0,
+          );
+          return {
+            left: rect.left - box.left,
+            top: rect.top - box.top,
+            right: rect.right - box.left,
+            bottom: rect.bottom - box.top,
+            radius: Math.min(radius, rect.width / 2, rect.height / 2),
+            real: true,
+          };
+        }
+      }
+      return {
+        left: -width * 2,
+        top: clamp(props.surfaceLevel, 0, 1) * height,
+        right: width * 3,
+        bottom: height * 3,
+        radius: 0,
+        real: false,
+      };
+    };
 
-    const animate = () => {
-      animFrame = requestAnimationFrame(animate);
-      if (!renderer || !scene || !camera || !material) return;
+    const render = () => {
+      resolveColor();
+      const { width, height } = state;
+      const scale = Math.max(0.2, Math.min(width / 585, height / 507));
+      const spreadValue = clamp(props.spread, 0.1, 4);
+      let surface = measure(width, height);
+      let beamX = clamp(props.beamPosition, 0, 1) * width;
+      if (surface.real) {
+        const margin = surface.radius + 6;
+        if (beamX >= surface.left && beamX <= surface.right) {
+          beamX = clamp(beamX, surface.left + margin, surface.right - margin);
+        } else {
+          surface = {
+            left: -width * 2,
+            top: height,
+            right: width * 3,
+            bottom: height * 3,
+            radius: 0,
+            real: false,
+          };
+        }
+      }
+      const startY = -0.15 * height;
+      const span = surface.top - startY + 0.3 * height;
+      const it = state.introTime;
+      const settled = it >= INTRO_END;
+      const front = settled
+        ? surface.top + 0.3 * height
+        : startY + span * Math.pow(clamp(it / INTRO_DROP, 0, 1), 1.3);
+      const impact =
+        INTRO_DROP *
+        Math.pow(Math.max(0, surface.top - startY) / span, 1 / 1.3);
+      const tau = it - impact;
+      const bloom = settled ? 1 : tau <= 0 ? 0 : spring(tau);
+      const flash =
+        settled || tau <= 0
+          ? 0
+          : Math.exp(-tau / 0.35) * (1 - Math.exp(-tau / 0.05));
+      const runRange = spreadValue * 250 * 1.3 + 80;
+      const runFront = settled
+        ? 100000
+        : tau <= 0
+          ? -40
+          : runRange * (1 - Math.exp(-1.15 * tau));
+      const beadStrength =
+        settled || tau <= 0
+          ? 0
+          : Math.exp(-1.15 * tau) * (1 - Math.exp(-tau / 0.08));
+      const pour = (reach: number): [number, number] => {
+        if (settled) return [1000, 1];
+        if (tau <= 0) return [-reach, 0];
+        const target = Math.min(reach, runRange * 0.97);
+        const arrival = -Math.log(1 - target / runRange) / 1.15;
+        const elapsed = tau - arrival;
+        const ease = clamp((elapsed + 0.15) / 0.8, 0, 1);
+        const fill = ease * ease * ease * (ease * (ease * 6 - 15) + 10);
+        if (elapsed <= 0) return [runFront - target, fill];
+        const pourSpeed = 1.15 * (runRange - target);
+        return [pourSpeed * elapsed + 260 * elapsed * elapsed, fill];
+      };
+      const [frontL, fillL] = pour((beamX - surface.left) / scale);
+      const [frontR, fillR] = pour((surface.right - beamX) / scale);
+      const atmosphere = settled
+        ? 1
+        : tau <= 0
+          ? 0.3 * easeOut(it / INTRO_DROP)
+          : 0.3 + 0.7 * (1 - Math.exp(-1.3 * tau));
+      const seedValue = Number(props.seed) || 0;
 
-      timer.update();
-      const t = timer.getElapsed();
-      const dt = Math.max(0, Math.min(0.033, t - prevTime));
-      prevTime = t;
+      gl.viewport(0, 0, canvas.width, canvas.height);
+      gl.clearColor(0, 0, 0, 0);
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.useProgram(program);
+      gl.uniform2f(u('uResolution'), width, height);
+      gl.uniform1f(u('uDpr'), state.ratio);
+      gl.uniform1f(u('uScale'), scale);
+      gl.uniform1f(u('uTime'), state.time);
+      gl.uniform1f(u('uBeamX'), beamX);
+      gl.uniform4f(
+        u('uSurface'),
+        surface.left,
+        surface.top,
+        surface.right,
+        surface.bottom,
+      );
+      gl.uniform1f(u('uRadius'), surface.radius);
+      gl.uniform3f(u('uIntro'), front, bloom, flash);
+      gl.uniform4f(u('uPour'), frontL, frontR, fillL, fillR);
+      gl.uniform2f(u('uRun'), runFront, beadStrength);
+      gl.uniform4f(
+        u('uLens'),
+        state.lens.x,
+        state.lens.y,
+        95 * scale,
+        state.lens.strength,
+      );
+      resolveReveal();
+      const { reveal } = state;
+      const cover = Math.max(width / reveal.width, height / reveal.height);
+      const coverWidth = reveal.width * cover;
+      const coverHeight = reveal.height * cover;
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, revealTexture);
+      gl.uniform1i(u('uReveal'), 0);
+      gl.uniform4f(
+        u('uRevealMap'),
+        1 / coverWidth,
+        1 / coverHeight,
+        (coverWidth - width) / 2 / coverWidth,
+        (coverHeight - height) / 2 / coverHeight,
+      );
+      gl.uniform2f(
+        u('uRevealInfo'),
+        Math.max(1, props.revealRadius),
+        reveal.ready ? clamp(props.revealOpacity, 0, 1) : 0,
+      );
+      gl.uniform1f(u('uAtmosphere'), atmosphere);
+      gl.uniform4f(
+        u('uAmount'),
+        Math.max(0, props.intensity),
+        Math.max(0, props.fog),
+        Math.max(0, props.dust),
+        Math.max(0, props.streaks),
+      );
+      gl.uniform4f(
+        u('uShape'),
+        clamp(props.beamWidth, 0.2, 5),
+        clamp(props.flare, 0.2, 4),
+        spreadValue,
+        Math.max(0, props.spill),
+      );
+      gl.uniform4f(
+        u('uExtra'),
+        Math.max(0, props.pulse),
+        Math.max(0, props.dots),
+        34.34 + seedValue * 7.31,
+        11.58 + seedValue * 3.17,
+      );
+      gl.uniform1f(u('uTheme'), props.theme === 'light' ? 1 : 0);
+      gl.uniform3fv(u('uTint'), state.tints);
+      gl.bindVertexArray(vao);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+      gl.bindVertexArray(null);
+    };
 
-      material.uniforms.iTime.value = t;
-      material.uniforms.uFlowTime.value += dt;
-      material.uniforms.uFogTime.value += dt;
-
-      if (!hasFaded) {
-        fade = Math.min(1, fade + dt);
-        material.uniforms.uFade.value = fade;
-        if (fade >= 1) hasFaded = true;
+    const frame = (now: number) => {
+      raf = 0;
+      if (!alive || !visible || document.hidden) return;
+      const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
+      last = now;
+      const reduce = isReduced();
+      const moving = !props.paused && !reduce;
+      if (moving) state.time += dt * props.speed;
+      const introducing = state.introTime < INTRO_END;
+      if (introducing) {
+        state.introTime = Math.min(INTRO_END, state.introTime + dt);
       }
 
-      mouseSmooth.lerp(mouseTarget, 1 - Math.exp(-dt / Math.max(0.001, 0)));
-      material.uniforms.iMouse.value.set(mouseSmooth.x, mouseSmooth.y, 0, 0);
+      const { lens } = state;
+      const active = props.mouseInteraction && pointer.inside && !reduce;
+      if (active && !lens.placed) {
+        lens.x = pointer.x;
+        lens.y = pointer.y;
+        lens.vx = 0;
+        lens.vy = 0;
+        lens.placed = true;
+      }
+      const ax = 120 * (pointer.x - lens.x) - 19 * lens.vx;
+      const ay = 120 * (pointer.y - lens.y) - 19 * lens.vy;
+      lens.vx += ax * dt;
+      lens.vy += ay * dt;
+      lens.x += lens.vx * dt;
+      lens.y += lens.vy * dt;
+      const goal = active ? 1 : 0;
+      lens.strength +=
+        (goal - lens.strength) *
+        (1 - Math.exp(-dt / (goal > lens.strength ? 0.3 : 0.55)));
+      if (lens.strength < 0.001 && !active) lens.placed = false;
 
-      renderer.render(scene, camera);
+      render();
+      const settling =
+        Math.abs(
+          lens.strength - (props.mouseInteraction && pointer.inside ? 1 : 0),
+        ) > 0.002 || Math.hypot(lens.vx, lens.vy) > 0.5;
+      if (moving || introducing || settling) raf = requestAnimationFrame(frame);
+      else last = 0;
     };
 
-    animate();
-  }
+    const start = () => {
+      if (!raf && alive && visible && !document.hidden) {
+        last = 0;
+        raf = requestAnimationFrame(frame);
+      }
+    };
 
-  function setSize() {
-    const mount = mountRef.value;
-    if (!mount || !renderer || !material) return;
-    const w = mount.clientWidth || 1;
-    const h = mount.clientHeight || 1;
-    const pr = renderer.getPixelRatio();
-    renderer.setSize(w, h, false);
-    material.uniforms.iResolution.value.set(w * pr, h * pr, pr);
-  }
+    resize = () => {
+      const width = Math.max(1, container.clientWidth);
+      const height = Math.max(1, container.clientHeight);
+      const baseDpr = Math.min(props.dpr || window.devicePixelRatio || 1, 2);
+      const longest = Math.max(width, height) * baseDpr;
+      const ratio =
+        longest > MAX_RENDER_DIM
+          ? (baseDpr * MAX_RENDER_DIM) / longest
+          : baseDpr;
+      const pixelWidth = Math.max(1, Math.round(width * ratio));
+      const pixelHeight = Math.max(1, Math.round(height * ratio));
+      if (canvas.width !== pixelWidth || canvas.height !== pixelHeight) {
+        canvas.width = pixelWidth;
+        canvas.height = pixelHeight;
+      }
+      state.width = width;
+      state.height = height;
+      state.ratio = canvas.width / width;
+      render();
+    };
 
-  useResizeObserver(mountRef, () => {
-    setSize();
+    wake = () => {
+      if (!alive) return;
+      if (!raf) render();
+      start();
+    };
+
+    dispose = () => {
+      alive = false;
+      cancelAnimationFrame(raf);
+      raf = 0;
+      wake = () => {};
+      resize = () => {};
+      if (revealImageEl) revealImageEl.onload = null;
+      gl.deleteTexture(revealTexture);
+      gl.deleteBuffer(buffer);
+      gl.deleteVertexArray(vao);
+      gl.deleteProgram(program);
+    };
+
+    resize();
+    start();
   });
 
   watch(
     [
-      () => props.wispDensity,
-      () => props.mouseTiltStrength,
-      () => props.horizontalBeamOffset,
-      () => props.verticalBeamOffset,
-      () => props.flowSpeed,
-      () => props.verticalSizing,
-      () => props.horizontalSizing,
-      () => props.fogIntensity,
-      () => props.fogScale,
-      () => props.wispSpeed,
-      () => props.wispIntensity,
-      () => props.flowStrength,
-      () => props.decay,
-      () => props.falloffStart,
-      () => props.fogFallSpeed,
+      () => props.surfaceRef,
+      () => props.beamPosition,
+      () => props.surfaceLevel,
       () => props.color,
+      () => props.intensity,
+      () => props.beamWidth,
+      () => props.flare,
+      () => props.spread,
+      () => props.spill,
+      () => props.fog,
+      () => props.dust,
+      () => props.streaks,
+      () => props.dots,
+      () => props.pulse,
+      () => props.speed,
+      () => props.seed,
+      () => props.mouseInteraction,
+      () => props.revealImage,
+      () => props.revealRadius,
+      () => props.revealOpacity,
+      () => props.theme,
+      () => props.paused,
+      () => reducedMotion.value,
     ],
-    () => {
-      if (!material) return;
-      const u = material.uniforms;
-      u.uWispDensity.value = props.wispDensity;
-      u.uTiltScale.value = props.mouseTiltStrength;
-      u.uBeamXFrac.value = props.horizontalBeamOffset;
-      u.uBeamYFrac.value = props.verticalBeamOffset;
-      u.uFlowSpeed.value = props.flowSpeed;
-      u.uVLenFactor.value = props.verticalSizing;
-      u.uHLenFactor.value = props.horizontalSizing;
-      u.uFogIntensity.value = props.fogIntensity;
-      u.uFogScale.value = props.fogScale;
-      u.uWSpeed.value = props.wispSpeed;
-      u.uWIntensity.value = props.wispIntensity;
-      u.uFlowStrength.value = props.flowStrength;
-      u.uDecay.value = props.decay;
-      u.uFalloffStart.value = props.falloffStart;
-      u.uFogFallSpeed.value = props.fogFallSpeed;
-      const { r, g, b } = hexToRGB(props.color);
-      u.uColor.value.set(r, g, b);
-    },
+    () => wake(),
+    { flush: 'post' },
   );
 
-  function cleanup() {
-    if (animFrame !== null) cancelAnimationFrame(animFrame);
-    if (renderer) {
-      const canvas = renderer.domElement;
-      canvas.parentElement?.removeChild(canvas);
-      renderer.dispose();
-    }
-    if (material) material.dispose();
-    renderer = null;
-    scene = null;
-    camera = null;
-    material = null;
-  }
+  watch(
+    () => props.dpr,
+    () => resize(),
+  );
 
-  onMounted(() => {
-    init();
-  });
-
-  onBeforeUnmount(() => {
-    cleanup();
-  });
+  onBeforeUnmount(() => dispose());
 </script>
 
 <template>
-  <div ref="mountRef" :class="cn('laser-flow-container', $props.class)"></div>
+  <div
+    ref="containerRef"
+    :class="cn('pointer-events-none relative size-full', props.class)"
+  >
+    <canvas
+      ref="canvasRef"
+      class="absolute inset-0 block size-full"
+      aria-hidden="true"
+    />
+  </div>
 </template>
-
-<style scoped>
-  .laser-flow-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    pointer-events: none;
-  }
-</style>

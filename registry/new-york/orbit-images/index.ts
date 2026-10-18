@@ -1,2 +1,10 @@
 export { default as OrbitImages } from './OrbitImages.vue';
-export type { OrbitItem, OrbitShape } from './types';
+export type {
+  OrbitDirection,
+  OrbitEasing,
+  OrbitImageSource,
+  OrbitImagesProps,
+  OrbitItem,
+  OrbitItemClickHandler,
+  OrbitShape,
+} from './types';

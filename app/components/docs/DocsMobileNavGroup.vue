@@ -34,12 +34,7 @@
             class="absolute left-0 top-1/2 -translate-y-1/2 h-4 w-0.5 rounded-full bg-foreground"
           ></span>
           <span class="flex-1">{{ item.title }}</span>
-          <span
-            v-if="item.badge"
-            class="ml-auto inline-flex items-center rounded-full bg-violet-500/10 px-1.5 py-0.5 text-[10px] font-medium leading-none text-violet-500 dark:bg-violet-400/10 dark:text-violet-400"
-          >
-            {{ item.badge }}
-          </span>
+          <DocsNavBadge v-if="item.badge" :badge="item.badge" class="ml-auto" />
         </NuxtLink>
       </li>
     </ul>

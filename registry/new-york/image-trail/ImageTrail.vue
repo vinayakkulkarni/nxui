@@ -1,123 +1,129 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount } from 'vue';
-  import { useEventListener } from '@vueuse/core';
+  import { computed, nextTick, onMounted, ref, watch } from 'vue';
+  import {
+    useEventListener,
+    usePreferredReducedMotion,
+    useRafFn,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-  import type { TrailImage } from './types';
+  import { createImageTrail } from './image-trail-engine';
+  import type { ImageTrailConfig, ImageTrailProps } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      images?: string[];
-      imageWidth?: number;
-      imageHeight?: number;
-      sensitivity?: number;
-      fadeOutDuration?: number;
-      rotationRange?: number;
-      class?: string;
-    }>(),
-    {
-      images: () => [],
-      imageWidth: 190,
-      imageHeight: 209,
-      sensitivity: 80,
-      fadeOutDuration: 1200,
-      rotationRange: 15,
-      class: '',
+  const props = withDefaults(defineProps<ImageTrailProps>(), {
+    items: () => [],
+    size: 190,
+    aspectRatio: 1.1,
+    radius: 15,
+    threshold: 80,
+    lifetime: 0.4,
+    appearScale: 1,
+    zoom: 1,
+    flash: 0,
+    exitScale: 0.2,
+    drift: 0,
+    rotation: 0,
+    sizeVariance: 0,
+    alignToMotion: false,
+    stack: 0,
+    tilt: 0,
+    class: '',
+  });
+
+  const containerRef = ref<HTMLDivElement>();
+  const reducedMotion = usePreferredReducedMotion();
+  let trail: ReturnType<typeof createImageTrail> | null = null;
+
+  const toCssLength = (value: number | string) =>
+    typeof value === 'number' ? `${value}px` : value;
+
+  const rootStyle = computed(() => ({
+    '--trail-size': toCssLength(props.size),
+    '--trail-aspect': String(props.aspectRatio),
+    '--trail-radius': toCssLength(props.radius),
+    perspective: props.tilt ? '1000px' : undefined,
+  }));
+
+  function config(): ImageTrailConfig {
+    return {
+      threshold: props.threshold,
+      lifetime: props.lifetime,
+      appearScale: props.appearScale,
+      zoom: props.zoom,
+      flash: props.flash,
+      exitScale: props.exitScale,
+      drift: props.drift,
+      rotation: props.rotation,
+      sizeVariance: props.sizeVariance,
+      alignToMotion: props.alignToMotion,
+      stack: props.stack,
+      tilt: props.tilt,
+    };
+  }
+
+  const { pause, resume, isActive } = useRafFn(
+    ({ timestamp }) => {
+      if (!trail?.tick(timestamp)) pause();
     },
+    { immediate: false },
   );
 
-  const containerRef = ref<HTMLDivElement | null>(null);
-  const activeImages = ref<TrailImage[]>([]);
-  let currentIndex = 0;
-  let lastMouseX = 0;
-  let lastMouseY = 0;
-  let accumulatedDistance = 0;
-  let zIndex = 1;
-  let animId = 0;
-
-  function getDistance(x1: number, y1: number, x2: number, y2: number) {
-    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+  function onMouseMove(event: MouseEvent) {
+    if (!trail) return;
+    trail.move(event.clientX, event.clientY);
+    if (!isActive.value) resume();
   }
 
-  function showNextImage(x: number, y: number) {
-    if (!props.images.length) return;
-    zIndex++;
-    activeImages.value.push({
-      x: x - props.imageWidth / 2,
-      y: y - props.imageHeight / 2,
-      opacity: 1,
-      scale: 1,
-      rotation: (Math.random() - 0.5) * 2 * props.rotationRange,
-      zIndex,
-      birth: performance.now(),
-      index: currentIndex % props.images.length,
-    });
-    currentIndex = (currentIndex + 1) % props.images.length;
+  function onTouchMove(event: TouchEvent) {
+    const point = event.touches[0];
+    if (!trail || !point) return;
+    trail.move(point.clientX, point.clientY);
+    if (!isActive.value) resume();
   }
 
-  function animate() {
-    const now = performance.now();
-    for (let i = activeImages.value.length - 1; i >= 0; i--) {
-      const img = activeImages.value[i];
-      const age = now - img.birth;
-      if (age > props.fadeOutDuration) {
-        activeImages.value.splice(i, 1);
-        continue;
-      }
-      const progress = age / props.fadeOutDuration;
-      img.opacity = 1 - progress;
-      img.scale = 1 - progress * 0.5;
-    }
-    animId = requestAnimationFrame(animate);
-  }
-
-  useEventListener(containerRef, 'mousemove', (e: MouseEvent) => {
-    const container = containerRef.value;
-    if (!container) return;
-    const rect = container.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const distance = getDistance(lastMouseX, lastMouseY, x, y);
-    accumulatedDistance += distance;
-    if (accumulatedDistance >= props.sensitivity) {
-      showNextImage(x, y);
-      accumulatedDistance = 0;
-    }
-    lastMouseX = x;
-    lastMouseY = y;
-  });
+  useEventListener(containerRef, 'mousemove', onMouseMove);
+  useEventListener(containerRef, 'touchmove', onTouchMove, { passive: true });
 
   onMounted(() => {
-    animId = requestAnimationFrame(animate);
+    const container = containerRef.value;
+    if (!container) return;
+    trail = createImageTrail(
+      container,
+      config,
+      () => reducedMotion.value === 'reduce',
+    );
   });
 
-  onBeforeUnmount(() => {
-    cancelAnimationFrame(animId);
-  });
+  watch(
+    () => props.items,
+    async () => {
+      await nextTick();
+      trail?.reset();
+    },
+  );
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('image-trail-content', $props.class)">
+  <div
+    ref="containerRef"
+    :class="cn('image-trail', props.class)"
+    :style="rootStyle"
+  >
     <div
-      v-for="(img, i) in activeImages"
-      :key="`${img.birth}-${i}`"
-      class="image-trail-img"
-      :style="{
-        transform: `translate(${img.x}px, ${img.y}px) scale(${img.scale}) rotate(${img.rotation}deg)`,
-        opacity: img.opacity,
-        zIndex: img.zIndex,
-      }"
+      v-for="(url, i) in items"
+      :key="i"
+      class="image-trail__img"
+      data-trail-image=""
     >
       <div
-        class="image-trail-img-inner"
-        :style="{ backgroundImage: `url(${images[img.index]})` }"
-      ></div>
+        class="image-trail__img-inner"
+        :style="{ backgroundImage: `url(${url})` }"
+      />
     </div>
-    <slot></slot>
   </div>
 </template>
 
 <style scoped>
-  .image-trail-content {
+  .image-trail {
     width: 100%;
     height: 100%;
     position: relative;
@@ -127,25 +133,26 @@
     overflow: visible;
   }
 
-  .image-trail-img {
-    width: v-bind('`${imageWidth}px`');
-    aspect-ratio: 1.1;
-    border-radius: 15px;
+  .image-trail__img {
+    width: var(--trail-size, 190px);
+    aspect-ratio: var(--trail-aspect, 1.1);
+    border-radius: var(--trail-radius, 15px);
     position: absolute;
     top: 0;
     left: 0;
+    opacity: 0;
     overflow: hidden;
-    will-change: transform, opacity;
     pointer-events: none;
+    will-change: transform, filter;
   }
 
-  .image-trail-img-inner {
+  .image-trail__img-inner {
     background-position: 50% 50%;
     width: calc(100% + 20px);
     height: calc(100% + 20px);
     background-size: cover;
     position: absolute;
-    top: -10px;
-    left: -10px;
+    top: calc(-1 * 20px / 2);
+    left: calc(-1 * 20px / 2);
   }
 </style>

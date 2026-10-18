@@ -1,42 +1,53 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperGrainGradient from '@registry/new-york/paper-grain-gradient/PaperGrainGradient.vue';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperGrainGradientPresets } from '~/lib/paper-presets/grain-gradient';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    colorBack: '#000000',
-    color1: '#7300ff',
-    color2: '#eba8ff',
-    color3: '#00bfff',
-    color4: '#2a00ff',
-    softness: 0.5,
-    intensity: 0.5,
-    noise: 0.25,
-    shape: 'corners',
-    speed: 1,
-  });
+  const params = reactive(
+    pickPaperPreset(paperGrainGradientPresets, [
+      'colorBack',
+      'colors',
+      'softness',
+      'intensity',
+      'noise',
+      'shape',
+      'speed',
+      'scale',
+      'rotation',
+      'offsetX',
+      'offsetY',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperGrainGradientPresets);
 
   function onPaneCreated(pane: Pane) {
+    presets.addPresetBinding(pane);
     pane.addBinding(params, 'colorBack');
-    pane.addBinding(params, 'color1');
-    pane.addBinding(params, 'color2');
-    pane.addBinding(params, 'color3');
-    pane.addBinding(params, 'color4');
-    pane.addBinding(params, 'softness', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'intensity', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'noise', { min: 0, max: 1, step: 0.05 });
+    presets.addColorsFolder(pane);
+    pane.addBinding(params, 'softness', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'intensity', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'noise', { min: 0, max: 1, step: 0.01 });
     pane.addBinding(params, 'shape', {
       options: {
-        Wave: 'wave',
-        Dots: 'dots',
-        Truchet: 'truchet',
-        Corners: 'corners',
-        Ripple: 'ripple',
-        Blob: 'blob',
-        Sphere: 'sphere',
+        wave: 'wave',
+        dots: 'dots',
+        truchet: 'truchet',
+        corners: 'corners',
+        ripple: 'ripple',
+        blob: 'blob',
+        sphere: 'sphere',
       },
     });
-    pane.addBinding(params, 'speed', { min: 0, max: 3, step: 0.1 });
+    pane.addBinding(params, 'speed', { min: 0, max: 2, step: 0.01 });
+    pane.addBinding(params, 'scale', { min: 0.01, max: 4, step: 0.01 });
+    pane.addBinding(params, 'rotation', { min: 0, max: 360, step: 1 });
+    pane.addBinding(params, 'offsetX', { min: -1, max: 1, step: 0.01 });
+    pane.addBinding(params, 'offsetY', { min: -1, max: 1, step: 0.01 });
   }
 </script>
 
@@ -62,16 +73,12 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperGrainGradient
-        :color-back="params.colorBack"
-        :colors="[params.color1, params.color2, params.color3, params.color4]"
-        :softness="params.softness"
-        :intensity="params.intensity"
-        :noise="params.noise"
-        :shape="params.shape"
-        :speed="params.speed"
+      <PaperGrainGradient v-bind="params" />
+      <ShaderPane
+        expanded
+        title="Grain Gradient"
+        @on-pane-created="onPaneCreated"
       />
-      <ShaderPane title="Grain Gradient" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

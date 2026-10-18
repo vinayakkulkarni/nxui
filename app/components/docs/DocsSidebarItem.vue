@@ -1,10 +1,7 @@
 <script setup lang="ts">
-  defineProps<{
-    title: string;
-    path: string;
-    isActive: boolean;
-    badge?: string;
-  }>();
+  import type { DocsSidebarItemProps } from '~/types/docs';
+
+  defineProps<DocsSidebarItemProps>();
 </script>
 
 <template>
@@ -22,11 +19,6 @@
       class="absolute -left-3 top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-full bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.5)]"
     ></div>
     <span class="flex-1">{{ title }}</span>
-    <span
-      v-if="badge"
-      class="ml-auto inline-flex items-center rounded-full bg-violet-500/10 px-1.5 py-0.5 text-[10px] font-medium leading-none text-violet-500 dark:bg-violet-400/10 dark:text-violet-400"
-    >
-      {{ badge }}
-    </span>
+    <DocsNavBadge v-if="badge" :badge="badge" class="ml-auto" />
   </NuxtLink>
 </template>

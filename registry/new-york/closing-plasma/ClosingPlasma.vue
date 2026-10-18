@@ -147,6 +147,10 @@ void main(){
 
   const uniforms: Uniforms = {};
 
+  function loc(name: string): WebGLUniformLocation | null {
+    return uniforms[name] ?? null;
+  }
+
   function compileShader(
     ctx: WebGLRenderingContext,
     type: number,
@@ -198,16 +202,16 @@ void main(){
     mouse.x += (targetMouse.x - mouse.x) * 0.05;
     mouse.y += (targetMouse.y - mouse.y) * 0.05;
 
-    gl.uniform1f(uniforms.u_time, elapsed);
-    gl.uniform2f(uniforms.u_mouse, mouse.x, mouse.y);
-    gl.uniform1f(uniforms.u_isDark, isDark.value ? 1 : 0);
-    gl.uniform1f(uniforms.u_speed, props.speed);
-    gl.uniform1f(uniforms.u_turbulence, props.turbulence);
-    gl.uniform1f(uniforms.u_mouseInfluence, props.mouseInfluence);
-    gl.uniform1f(uniforms.u_grain, props.grain);
-    gl.uniform1f(uniforms.u_sparkle, props.sparkle);
-    gl.uniform1f(uniforms.u_vignette, props.vignette);
-    gl.uniform1f(uniforms.u_opacity, props.opacity);
+    gl.uniform1f(loc('u_time'), elapsed);
+    gl.uniform2f(loc('u_mouse'), mouse.x, mouse.y);
+    gl.uniform1f(loc('u_isDark'), isDark.value ? 1 : 0);
+    gl.uniform1f(loc('u_speed'), props.speed);
+    gl.uniform1f(loc('u_turbulence'), props.turbulence);
+    gl.uniform1f(loc('u_mouseInfluence'), props.mouseInfluence);
+    gl.uniform1f(loc('u_grain'), props.grain);
+    gl.uniform1f(loc('u_sparkle'), props.sparkle);
+    gl.uniform1f(loc('u_vignette'), props.vignette);
+    gl.uniform1f(loc('u_opacity'), props.opacity);
     gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     rafId = requestAnimationFrame(render);
   }
@@ -266,9 +270,9 @@ void main(){
       'u_lightC',
     ];
     for (const n of names) {
-      const loc = gl.getUniformLocation(program, n);
-      if (!loc) return;
-      uniforms[n] = loc;
+      const found = gl.getUniformLocation(program, n);
+      if (!found) return;
+      uniforms[n] = found;
     }
 
     // Set static color uniforms
@@ -278,12 +282,12 @@ void main(){
     const lA = hexToRgb(props.lightColorA, LA);
     const lB = hexToRgb(props.lightColorB, LB);
     const lC = hexToRgb(props.lightColorC, LC);
-    gl.uniform3f(uniforms.u_darkA, dA[0], dA[1], dA[2]);
-    gl.uniform3f(uniforms.u_darkB, dB[0], dB[1], dB[2]);
-    gl.uniform3f(uniforms.u_darkC, dC[0], dC[1], dC[2]);
-    gl.uniform3f(uniforms.u_lightA, lA[0], lA[1], lA[2]);
-    gl.uniform3f(uniforms.u_lightB, lB[0], lB[1], lB[2]);
-    gl.uniform3f(uniforms.u_lightC, lC[0], lC[1], lC[2]);
+    gl.uniform3f(loc('u_darkA'), dA[0], dA[1], dA[2]);
+    gl.uniform3f(loc('u_darkB'), dB[0], dB[1], dB[2]);
+    gl.uniform3f(loc('u_darkC'), dC[0], dC[1], dC[2]);
+    gl.uniform3f(loc('u_lightA'), lA[0], lA[1], lA[2]);
+    gl.uniform3f(loc('u_lightB'), lB[0], lB[1], lB[2]);
+    gl.uniform3f(loc('u_lightC'), lC[0], lC[1], lC[2]);
 
     resize();
     startTime = performance.now();

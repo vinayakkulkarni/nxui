@@ -1,4 +1,11 @@
 import type { H3Event } from 'h3';
+import {
+  appendResponseHeader,
+  defineEventHandler,
+  getHeader,
+  getRequestURL,
+  setResponseHeader,
+} from 'h3';
 const ORIGIN = 'https://nxui.geoql.in';
 
 const LINK_HEADER = [

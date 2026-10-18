@@ -1,30 +1,41 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperVoronoi from '@registry/new-york/paper-voronoi/PaperVoronoi.vue';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperVoronoiPresets } from '~/lib/paper-presets/voronoi';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    color1: '#ff8247',
-    color2: '#ffe53d',
-    stepsPerColor: 1,
-    colorGlow: '#ffffff',
-    colorGap: '#000000',
-    distortion: 0.4,
-    gap: 0,
-    glow: 0.3,
-    speed: 0,
-  });
+  const params = reactive(
+    pickPaperPreset(paperVoronoiPresets, [
+      'colorGlow',
+      'colorGap',
+      'colors',
+      'stepsPerColor',
+      'distortion',
+      'gap',
+      'glow',
+      'speed',
+      'scale',
+      'rotation',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperVoronoiPresets);
 
   function onPaneCreated(pane: Pane) {
-    pane.addBinding(params, 'color1');
-    pane.addBinding(params, 'color2');
-    pane.addBinding(params, 'stepsPerColor', { min: 1, max: 10, step: 1 });
+    presets.addPresetBinding(pane);
     pane.addBinding(params, 'colorGlow');
     pane.addBinding(params, 'colorGap');
-    pane.addBinding(params, 'distortion', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'gap', { min: 0, max: 0.1, step: 0.005 });
-    pane.addBinding(params, 'glow', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'speed', { min: 0, max: 3, step: 0.1 });
+    presets.addColorsFolder(pane);
+    pane.addBinding(params, 'stepsPerColor', { min: 1, max: 3, step: 1 });
+    pane.addBinding(params, 'distortion', { min: 0, max: 0.5, step: 0.01 });
+    pane.addBinding(params, 'gap', { min: 0, max: 0.1, step: 0.01 });
+    pane.addBinding(params, 'glow', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'speed', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'scale', { min: 0.01, max: 4, step: 0.01 });
+    pane.addBinding(params, 'rotation', { min: 0, max: 360, step: 1 });
   }
 </script>
 
@@ -47,17 +58,8 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperVoronoi
-        :colors="[params.color1, params.color2]"
-        :steps-per-color="params.stepsPerColor"
-        :color-glow="params.colorGlow"
-        :color-gap="params.colorGap"
-        :distortion="params.distortion"
-        :gap="params.gap"
-        :glow="params.glow"
-        :speed="params.speed"
-      />
-      <ShaderPane title="Voronoi" @on-pane-created="onPaneCreated" />
+      <PaperVoronoi v-bind="params" />
+      <ShaderPane expanded title="Voronoi" @on-pane-created="onPaneCreated" />
     </div>
   </ComponentDemo>
 </template>

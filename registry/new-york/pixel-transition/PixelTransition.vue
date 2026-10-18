@@ -1,144 +1,230 @@
 <script setup lang="ts">
-  import { ref, onMounted, watch } from 'vue';
+  import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+  import { usePreferredReducedMotion, useResizeObserver } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import { clamp, createPixelEngine } from './pixel-engine';
+  import type {
+    PixelTransitionEngine,
+    PixelTransitionPoint,
+    PixelTransitionProps,
+    PixelTransitionSettings,
+  } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      gridSize?: number;
-      pixelColor?: string;
-      animationStepDuration?: number;
-      once?: boolean;
-      aspectRatio?: string;
-      class?: string;
-    }>(),
-    {
-      gridSize: 7,
-      pixelColor: 'currentColor',
-      animationStepDuration: 0.3,
-      once: false,
-      aspectRatio: '100%',
-      class: '',
+  const props = withDefaults(defineProps<PixelTransitionProps>(), {
+    gridSize: 10,
+    pixelColor: '#ffffff',
+    mosaic: 0,
+    animationStepDuration: 0.4,
+    pattern: 'random',
+    randomness: 0.3,
+    pixelAnimation: 'pop',
+    pixelShape: 'square',
+    gap: 0,
+    fps: 0,
+    trigger: 'hover',
+    active: undefined,
+    once: false,
+    aspectRatio: '100%',
+    class: '',
+  });
+
+  const emit = defineEmits<{
+    'update:active': [active: boolean];
+  }>();
+
+  const PATTERNS = ['random', 'dither', 'ripple', 'wipe'];
+  const ANIMATIONS = ['pop', 'grow', 'fade'];
+  const SHAPES = ['square', 'rounded', 'circle'];
+
+  const rootRef = ref<HTMLDivElement>();
+  const canvasRef = ref<HTMLCanvasElement>();
+  const initial = props.active ? 1 : 0;
+  const shown = ref(initial);
+  const revealed = ref(initial === 1);
+  const reducedMotion = usePreferredReducedMotion();
+
+  let engine: PixelTransitionEngine | null = null;
+  let pendingPoint: PixelTransitionPoint | null = null;
+  let hovering = false;
+  let focused = false;
+  let pointerType = 'mouse';
+
+  const hover = computed(() => props.trigger !== 'click');
+
+  function settings(): PixelTransitionSettings {
+    return {
+      gridSize: clamp(Math.round(props.gridSize), 2, 80),
+      pixelColor: props.pixelColor,
+      mosaic: clamp(props.mosaic, 0, 1),
+      duration: Math.max(0.05, props.animationStepDuration),
+      pattern: PATTERNS.includes(props.pattern) ? props.pattern : 'random',
+      randomness: clamp(props.randomness, 0, 1),
+      animation: ANIMATIONS.includes(props.pixelAnimation)
+        ? props.pixelAnimation
+        : 'pop',
+      shape: SHAPES.includes(props.pixelShape) ? props.pixelShape : 'square',
+      gap: Math.max(0, props.gap),
+      fps: clamp(props.fps, 0, 120),
+      once: props.once,
+      reduce: reducedMotion.value === 'reduce',
+    };
+  }
+
+  function setShown(index: number) {
+    shown.value = index;
+  }
+
+  onMounted(() => {
+    if (!rootRef.value || !canvasRef.value) return;
+    engine = createPixelEngine(
+      rootRef.value,
+      canvasRef.value,
+      settings,
+      setShown,
+      initial,
+    );
+  });
+
+  useResizeObserver(rootRef, () => engine?.resize());
+
+  onBeforeUnmount(() => {
+    engine?.destroy();
+    engine = null;
+  });
+
+  watch(
+    () => props.active,
+    (value) => {
+      if (value === undefined) return;
+      revealed.value = value;
+      engine?.go(value, pendingPoint);
+      pendingPoint = null;
     },
   );
 
-  const pixelGridRef = ref<HTMLDivElement>();
-  const isActive = ref(false);
-  const showSecond = ref(false);
-  let animating = false;
-
-  function buildPixels() {
-    const grid = pixelGridRef.value;
-    if (!grid) return;
-    grid.replaceChildren();
-    const size = 100 / props.gridSize;
-    for (let row = 0; row < props.gridSize; row++) {
-      for (let col = 0; col < props.gridSize; col++) {
-        const el = document.createElement('div');
-        el.style.position = 'absolute';
-        el.style.backgroundColor = props.pixelColor;
-        el.style.width = `${size}%`;
-        el.style.height = `${size}%`;
-        el.style.left = `${col * size}%`;
-        el.style.top = `${row * size}%`;
-        el.style.display = 'none';
-        grid.appendChild(el);
-      }
-    }
+  function request(next: boolean, point: PixelTransitionPoint | null) {
+    if (!engine || (!next && props.once && engine.goal() === 1)) return;
+    if (props.active === undefined) {
+      engine.go(next, point);
+      revealed.value = engine.goal() === 1;
+    } else pendingPoint = point;
+    emit('update:active', next);
   }
 
-  onMounted(buildPixels);
-  watch([() => props.gridSize, () => props.pixelColor], buildPixels);
+  function pointOf(event: MouseEvent): PixelTransitionPoint {
+    return { x: event.clientX, y: event.clientY };
+  }
 
-  function animatePixels(activate: boolean) {
-    if (animating) return;
-    animating = true;
-    isActive.value = activate;
+  function onPointerEnter(event: PointerEvent) {
+    if (event.pointerType === 'touch') return;
+    hovering = true;
+    if (hover.value) request(true, pointOf(event));
+  }
 
-    const grid = pixelGridRef.value;
-    if (!grid) {
-      animating = false;
+  function onPointerLeave(event: PointerEvent) {
+    if (event.pointerType === 'touch') return;
+    hovering = false;
+    if (hover.value && !focused) request(false, pointOf(event));
+  }
+
+  function onPointerDown(event: PointerEvent) {
+    pointerType = event.pointerType;
+  }
+
+  function onClick(event: MouseEvent) {
+    if (hover.value && pointerType !== 'touch') return;
+    request(engine?.goal() !== 1, pointOf(event));
+  }
+
+  function isInside(event: FocusEvent): boolean {
+    const target = event.relatedTarget;
+    return target instanceof Node && !!rootRef.value?.contains(target);
+  }
+
+  function onFocus(event: FocusEvent) {
+    if (!hover.value || isInside(event)) return;
+    if (
+      !(event.target instanceof Element) ||
+      !event.target.matches(':focus-visible')
+    )
       return;
-    }
-    const pixels = Array.from(grid.children) as HTMLElement[];
-    if (pixels.length === 0) {
-      animating = false;
-      return;
-    }
-
-    // Shuffle array for random stagger
-    const shuffled = [...pixels].sort(() => Math.random() - 0.5);
-    const totalDuration = props.animationStepDuration * 1000;
-    const stagger = totalDuration / shuffled.length;
-
-    // Phase 1: show pixels
-    shuffled.forEach((px, i) => {
-      setTimeout(() => {
-        px.style.display = 'block';
-      }, i * stagger);
-    });
-
-    // Flip content at midpoint
-    setTimeout(() => {
-      showSecond.value = activate;
-    }, totalDuration);
-
-    // Phase 2: hide pixels
-    const shuffled2 = [...pixels].sort(() => Math.random() - 0.5);
-    shuffled2.forEach((px, i) => {
-      setTimeout(
-        () => {
-          px.style.display = 'none';
-        },
-        totalDuration + i * stagger,
-      );
-    });
-
-    setTimeout(() => {
-      animating = false;
-    }, totalDuration * 2);
+    focused = true;
+    request(true, null);
   }
 
-  function handleEnter() {
-    if (!isActive.value) animatePixels(true);
+  function onBlur(event: FocusEvent) {
+    if (!focused || isInside(event)) return;
+    focused = false;
+    if (!hovering) request(false, null);
   }
 
-  function handleLeave() {
-    if (isActive.value && !props.once) animatePixels(false);
+  function onKeyDown(event: KeyboardEvent) {
+    if (hover.value || event.target !== event.currentTarget) return;
+    if (event.key !== 'Enter' && event.key !== ' ') return;
+    event.preventDefault();
+    request(engine?.goal() !== 1, null);
   }
+
+  const ratio = computed(() => String(props.aspectRatio).trim());
+  const padded = computed(() => ratio.value.endsWith('%'));
 </script>
 
 <template>
   <div
-    :class="cn('pixel-transition-wrap', $props.class)"
+    ref="rootRef"
+    :class="
+      cn(
+        'pixelated-image-card relative isolate w-75 max-w-full overflow-hidden rounded-2xl [-webkit-tap-highlight-color:transparent] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-current',
+        props.class,
+      )
+    "
+    :style="padded ? undefined : { aspectRatio: ratio }"
     tabindex="0"
-    @mouseenter="handleEnter"
-    @mouseleave="handleLeave"
-    @focus="handleEnter"
-    @blur="handleLeave"
+    :role="hover ? undefined : 'button'"
+    :aria-pressed="hover ? undefined : revealed"
+    @pointerenter="onPointerEnter"
+    @pointerleave="onPointerLeave"
+    @pointerdown="onPointerDown"
+    @click="onClick"
+    @focusin="onFocus"
+    @focusout="onBlur"
+    @keydown="onKeyDown"
   >
-    <div :style="{ paddingTop: aspectRatio }"></div>
+    <div v-if="padded" :style="{ paddingTop: ratio }"></div>
     <div
-      class="absolute inset-0 flex items-center justify-center"
-      :style="{ display: showSecond ? 'none' : 'flex' }"
-      :aria-hidden="isActive"
+      class="pixelated-image-card__default"
+      :style="{ visibility: shown === 0 ? undefined : 'hidden' }"
     >
       <slot name="first"></slot>
     </div>
     <div
-      class="absolute inset-0 flex items-center justify-center"
-      :style="{ display: showSecond ? 'flex' : 'none' }"
-      :aria-hidden="!isActive"
+      class="pixelated-image-card__active"
+      :style="{ visibility: shown === 1 ? undefined : 'hidden' }"
     >
       <slot name="second"></slot>
     </div>
-    <div ref="pixelGridRef" class="pointer-events-none absolute inset-0"></div>
+    <canvas
+      ref="canvasRef"
+      class="pixelated-image-card__pixels"
+      aria-hidden="true"
+    ></canvas>
   </div>
 </template>
 
 <style scoped>
-  .pixel-transition-wrap {
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
+  .pixelated-image-card__default,
+  .pixelated-image-card__active {
+    position: absolute;
+    inset: 0;
+  }
+
+  .pixelated-image-card__pixels {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
   }
 </style>

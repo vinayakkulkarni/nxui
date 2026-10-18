@@ -1,28 +1,47 @@
 <script setup lang="ts">
   import { reactive } from 'vue';
   import PaperStaticMeshGradient from '@registry/new-york/paper-static-mesh-gradient/PaperStaticMeshGradient.vue';
+  import {
+    pickPaperPreset,
+    usePaperPresets,
+  } from '~/composables/use-paper-presets';
+  import { paperStaticMeshGradientPresets } from '~/lib/paper-presets/static-mesh-gradient';
   import type { Pane } from 'tweakpane';
 
-  const params = reactive({
-    color1: '#ffad0a',
-    color2: '#6200ff',
-    color3: '#e2a3ff',
-    color4: '#ff99fd',
-    positions: 2,
-    waveX: 1.0,
-    waveY: 1.0,
-    mixing: 0.93,
-  });
+  const params = reactive(
+    pickPaperPreset(paperStaticMeshGradientPresets, [
+      'colors',
+      'positions',
+      'waveX',
+      'waveXShift',
+      'waveY',
+      'waveYShift',
+      'mixing',
+      'grainMixer',
+      'grainOverlay',
+      'scale',
+      'rotation',
+      'offsetX',
+      'offsetY',
+    ]),
+  );
+  const presets = usePaperPresets(params, paperStaticMeshGradientPresets);
 
   function onPaneCreated(pane: Pane) {
-    pane.addBinding(params, 'color1');
-    pane.addBinding(params, 'color2');
-    pane.addBinding(params, 'color3');
-    pane.addBinding(params, 'color4');
+    presets.addPresetBinding(pane);
+    presets.addColorsFolder(pane);
     pane.addBinding(params, 'positions', { min: 0, max: 100, step: 1 });
-    pane.addBinding(params, 'waveX', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'waveY', { min: 0, max: 1, step: 0.05 });
-    pane.addBinding(params, 'mixing', { min: 0, max: 1, step: 0.05 });
+    pane.addBinding(params, 'waveX', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'waveXShift', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'waveY', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'waveYShift', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'mixing', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'grainMixer', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'grainOverlay', { min: 0, max: 1, step: 0.01 });
+    pane.addBinding(params, 'scale', { min: 0.01, max: 4, step: 0.01 });
+    pane.addBinding(params, 'rotation', { min: 0, max: 360, step: 1 });
+    pane.addBinding(params, 'offsetX', { min: -1, max: 1, step: 0.01 });
+    pane.addBinding(params, 'offsetY', { min: -1, max: 1, step: 0.01 });
   }
 </script>
 
@@ -46,15 +65,9 @@
 </template>`"
   >
     <div class="relative size-full min-h-80 overflow-hidden rounded-lg">
-      <PaperStaticMeshGradient
-        :colors="[params.color1, params.color2, params.color3, params.color4]"
-        :positions="params.positions"
-        :wave-x="params.waveX"
-        :wave-y="params.waveY"
-        :mixing="params.mixing"
-        :rotation="270"
-      />
+      <PaperStaticMeshGradient v-bind="params" />
       <ShaderPane
+        expanded
         title="Static Mesh Gradient"
         @on-pane-created="onPaneCreated"
       />

@@ -1,301 +1,298 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount } from 'vue';
-  import { useResizeObserver, useEventListener } from '@vueuse/core';
   import {
-    Camera,
-    Mesh,
-    Plane,
-    Program,
-    Renderer,
-    Texture,
-    Transform,
-  } from 'ogl';
+    computed,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    useTemplateRef,
+    watch,
+  } from 'vue';
+  import {
+    defaultDocument,
+    useEventListener,
+    useIntersectionObserver,
+    usePreferredReducedMotion,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-  import type { GalleryItem, MediaItem } from './types';
+  import { createGalleryEngine } from './circular-gallery-engine';
+  import { DEFAULT_FONT, resolveFont } from './circular-gallery-font';
+  import { DEFAULT_GALLERY_ITEMS } from './circular-gallery-items';
+  import type {
+    CircularGalleryProps,
+    GalleryEngine,
+    GalleryItem,
+    GallerySettings,
+  } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      items?: GalleryItem[];
-      bend?: number;
-      textColor?: string;
-      borderRadius?: number;
-      scrollSpeed?: number;
-      scrollEase?: number;
-      class?: string;
-    }>(),
-    {
-      items: () => [
-        {
-          image: 'https://picsum.photos/seed/1/800/600?grayscale',
-          text: 'Bridge',
-        },
-        {
-          image: 'https://picsum.photos/seed/2/800/600?grayscale',
-          text: 'Setup',
-        },
-        {
-          image: 'https://picsum.photos/seed/3/800/600?grayscale',
-          text: 'Falls',
-        },
-        {
-          image: 'https://picsum.photos/seed/4/800/600?grayscale',
-          text: 'Berries',
-        },
-        {
-          image: 'https://picsum.photos/seed/5/800/600?grayscale',
-          text: 'Diving',
-        },
-        {
-          image: 'https://picsum.photos/seed/6/800/600?grayscale',
-          text: 'Tracks',
-        },
-      ],
-      bend: 3,
-      textColor: '#ffffff',
-      borderRadius: 0.05,
-      scrollSpeed: 2,
-      scrollEase: 0.05,
-      class: '',
-    },
+  const props = withDefaults(defineProps<CircularGalleryProps>(), {
+    items: undefined,
+    bend: 3,
+    textColor: '#ffffff',
+    borderRadius: 0.05,
+    font: 'bold 30px Figtree',
+    fontUrl: undefined,
+    scrollSpeed: 2,
+    scrollEase: 0.05,
+    itemSize: 1,
+    itemAspect: 0.78,
+    gap: 0.26,
+    wave: 1,
+    fadeEdges: 0.12,
+    shadow: 0.25,
+    grayscale: false,
+    showTitles: true,
+    snap: true,
+    autoScroll: 0,
+    openOnClick: true,
+    intro: true,
+    dpr: undefined,
+    class: '',
+  });
+
+  const emit = defineEmits<{
+    'item-click': [item: GalleryItem, index: number];
+    'active-change': [index: number];
+  }>();
+
+  const clamp = (value: number, min: number, max: number) =>
+    Math.min(max, Math.max(min, value));
+
+  const container = useTemplateRef<HTMLDivElement>('container');
+  const canvas = useTemplateRef<HTMLCanvasElement>('canvas');
+  const labels = useTemplateRef<HTMLDivElement>('labels');
+  const caption = useTemplateRef<HTMLDivElement>('caption');
+  const buttons = useTemplateRef<HTMLButtonElement[]>('buttons');
+
+  const active = ref(0);
+  const open = ref(false);
+  const reducedMotion = usePreferredReducedMotion();
+
+  const list = computed(() =>
+    props.items && props.items.length ? props.items : DEFAULT_GALLERY_ITEMS,
   );
 
-  const containerRef = ref<HTMLDivElement>();
-  let renderer: InstanceType<typeof Renderer> | null = null;
-  let rafId = 0;
+  const settings = computed<GallerySettings>(() => ({
+    items: list.value,
+    bend: props.bend,
+    textColor: props.textColor,
+    borderRadius: clamp(props.borderRadius, 0, 0.5),
+    scrollSpeed: Math.max(0, props.scrollSpeed),
+    scrollEase: clamp(props.scrollEase, 0.001, 1),
+    itemSize: clamp(props.itemSize, 0.2, 2),
+    itemAspect: clamp(props.itemAspect, 0.2, 5),
+    gap: Math.max(0, props.gap),
+    wave: Math.max(0, props.wave),
+    fadeEdges: clamp(props.fadeEdges, 0, 0.5),
+    shadow: clamp(props.shadow, 0, 1),
+    grayscale: props.grayscale,
+    showTitles: props.showTitles,
+    snap: props.snap,
+    autoScroll: props.autoScroll,
+    openOnClick: props.openOnClick,
+    intro: props.intro,
+    dpr: props.dpr,
+  }));
 
-  function lerp(a: number, b: number, t: number) {
-    return a + (b - a) * t;
+  const count = computed(() => list.value.length);
+  const current = computed(
+    () => list.value[active.value % count.value] ?? list.value[0],
+  );
+
+  let engine: GalleryEngine | null = null;
+  let resolvedFont = props.font || DEFAULT_FONT;
+  let fontToken = 0;
+
+  function loadFont() {
+    const token = ++fontToken;
+    resolvedFont = props.font;
+    resolveFont(props.font, props.fontUrl).then((font) => {
+      if (token !== fontToken) return;
+      resolvedFont = font;
+      engine?.wake();
+    });
+  }
+
+  function labelOf(item: GalleryItem, index: number): string {
+    return item.text || item.alt || `Image ${index + 1}`;
+  }
+
+  function ariaLabelOf(item: GalleryItem, index: number): string {
+    return `${item.text || item.alt || 'Image'}, ${index + 1} of ${count.value}`;
+  }
+
+  function focusButton(index: number) {
+    const target = buttons.value?.find(
+      (button) => button.dataset.index === String(index),
+    );
+    target?.focus({ preventScroll: true });
+  }
+
+  function onButtonFocus(index: number) {
+    engine?.focus(index);
+  }
+
+  function onButtonClick(index: number) {
+    engine?.open(index);
+  }
+
+  function onClose() {
+    engine?.close();
   }
 
   onMounted(() => {
-    const container = containerRef.value;
-    if (!container) return;
-
-    renderer = new Renderer({
-      alpha: true,
-      antialias: true,
-      dpr: Math.min(window.devicePixelRatio, 2),
-    });
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0);
-    container.appendChild(gl.canvas);
-
-    const camera = new Camera(gl);
-    camera.fov = 45;
-    camera.position.z = 20;
-
-    const scene = new Transform();
-    const geometry = new Plane(gl, { heightSegments: 50, widthSegments: 100 });
-
-    let screen = {
-      width: container.clientWidth,
-      height: container.clientHeight,
-    };
-    renderer.setSize(screen.width, screen.height);
-    camera.perspective({ aspect: screen.width / screen.height });
-
-    const fov = (camera.fov * Math.PI) / 180;
-    const vpH = 2 * Math.tan(fov / 2) * camera.position.z;
-    let viewport = { width: vpH * camera.aspect, height: vpH };
-
-    // Double items for infinite loop
-    const doubled = [...props.items, ...props.items];
-
-    const medias: MediaItem[] = [];
-
-    for (let i = 0; i < doubled.length; i++) {
-      const data = doubled[i];
-      const tex = new Texture(gl, { generateMipmaps: true });
-      const program = new Program(gl, {
-        depthTest: false,
-        depthWrite: false,
-        transparent: true,
-        vertex: `precision highp float;
-attribute vec3 position; attribute vec2 uv;
-uniform mat4 modelViewMatrix; uniform mat4 projectionMatrix;
-uniform float uTime; uniform float uSpeed;
-varying vec2 vUv;
-void main() {
-  vUv = uv; vec3 p = position;
-  p.z = (sin(p.x*4.0+uTime)*1.5+cos(p.y*2.0+uTime)*1.5)*(0.1+uSpeed*0.5);
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-}`,
-        fragment: `precision highp float;
-uniform vec2 uImageSizes; uniform vec2 uPlaneSizes;
-uniform sampler2D tMap; uniform float uBorderRadius;
-varying vec2 vUv;
-float roundedBoxSDF(vec2 p, vec2 b, float r) {
-  vec2 d = abs(p)-b; return length(max(d,vec2(0.)))+min(max(d.x,d.y),0.)-r;
-}
-void main() {
-  vec2 ratio = vec2(
-    min((uPlaneSizes.x/uPlaneSizes.y)/(uImageSizes.x/uImageSizes.y), 1.0),
-    min((uPlaneSizes.y/uPlaneSizes.x)/(uImageSizes.y/uImageSizes.x), 1.0)
-  );
-  vec2 uv = vUv*ratio+(1.0-ratio)*0.5;
-  vec4 color = texture2D(tMap, uv);
-  float d = roundedBoxSDF(vUv-0.5, vec2(0.5-uBorderRadius), uBorderRadius);
-  float alpha = 1.0-smoothstep(-0.002, 0.002, d);
-  gl_FragColor = vec4(color.rgb, alpha);
-}`,
-        uniforms: {
-          tMap: { value: tex },
-          uPlaneSizes: { value: [0, 0] },
-          uImageSizes: { value: [0, 0] },
-          uSpeed: { value: 0 },
-          uTime: { value: 100 * Math.random() },
-          uBorderRadius: { value: props.borderRadius },
-        },
-      });
-
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.src = data.image;
-      img.onload = () => {
-        tex.image = img;
-        program.uniforms.uImageSizes.value = [
-          img.naturalWidth,
-          img.naturalHeight,
-        ];
-      };
-
-      const plane = new Mesh(gl, { geometry, program });
-      plane.setParent(scene);
-
-      const sc = screen.height / 1500;
-      plane.scale.y = (viewport.height * (900 * sc)) / screen.height;
-      plane.scale.x = (viewport.width * (700 * sc)) / screen.width;
-      program.uniforms.uPlaneSizes.value = [plane.scale.x, plane.scale.y];
-
-      const pad = 2;
-      const w = plane.scale.x + pad;
-      const wTotal = w * doubled.length;
-
-      medias.push({
-        plane,
-        program,
-        x: w * i,
-        width: w,
-        widthTotal: wTotal,
-        extra: 0,
-        scale: sc,
-      });
+    if (!container.value || !canvas.value || !labels.value || !caption.value) {
+      return;
     }
-
-    const scroll = { current: 0, target: 0, last: 0 };
-    let isDown = false;
-    let startX = 0;
-    let scrollPos = 0;
-
-    useEventListener(
-      container,
-      'wheel',
-      (e: WheelEvent) => {
-        e.preventDefault();
-        const delta = e.deltaY || e.deltaX;
-        scroll.target +=
-          (delta > 0 ? props.scrollSpeed : -props.scrollSpeed) * 0.2;
+    loadFont();
+    engine = createGalleryEngine({
+      container: container.value,
+      canvas: canvas.value,
+      labelLayer: labels.value,
+      caption: caption.value,
+      reduce: reducedMotion.value === 'reduce',
+      getSettings: () => settings.value,
+      getFont: () => resolvedFont,
+      focusButton,
+      onActive: (index) => {
+        active.value = index;
+        emit('active-change', index);
       },
-      { passive: false },
-    );
-
-    useEventListener(container, 'pointerdown', (e: PointerEvent) => {
-      isDown = true;
-      startX = e.clientX;
-      scrollPos = scroll.current;
-    });
-    useEventListener(window, 'pointermove', (e: PointerEvent) => {
-      if (!isDown) return;
-      scroll.target =
-        scrollPos + (startX - e.clientX) * (props.scrollSpeed * 0.025);
-    });
-    useEventListener(window, 'pointerup', () => {
-      isDown = false;
-    });
-
-    function update() {
-      rafId = requestAnimationFrame(update);
-      if (!renderer) return;
-
-      scroll.current = lerp(scroll.current, scroll.target, props.scrollEase);
-      const direction = scroll.current > scroll.last ? 'right' : 'left';
-      const speed = scroll.current - scroll.last;
-
-      for (const m of medias) {
-        m.plane.position.x = m.x - scroll.current - m.extra;
-
-        // Bend
-        const x = m.plane.position.x;
-        const H = viewport.width / 2;
-        if (props.bend === 0) {
-          m.plane.position.y = 0;
-          m.plane.rotation.z = 0;
-        } else {
-          const bAbs = Math.abs(props.bend);
-          const R = (H * H + bAbs * bAbs) / (2 * bAbs);
-          const eX = Math.min(Math.abs(x), H);
-          const arc = R - Math.sqrt(R * R - eX * eX);
-          if (props.bend > 0) {
-            m.plane.position.y = -arc;
-            m.plane.rotation.z = -Math.sign(x) * Math.asin(eX / R);
-          } else {
-            m.plane.position.y = arc;
-            m.plane.rotation.z = Math.sign(x) * Math.asin(eX / R);
-          }
-        }
-
-        m.program.uniforms.uTime.value += 0.04;
-        m.program.uniforms.uSpeed.value = speed;
-
-        const half = m.plane.scale.x / 2;
-        const vHalf = viewport.width / 2;
-        const isBefore = m.plane.position.x + half < -vHalf;
-        const isAfter = m.plane.position.x - half > vHalf;
-
-        if (direction === 'right' && isBefore) m.extra -= m.widthTotal;
-        if (direction === 'left' && isAfter) m.extra += m.widthTotal;
-      }
-
-      renderer.render({ scene, camera });
-      scroll.last = scroll.current;
-    }
-    rafId = requestAnimationFrame(update);
-
-    useResizeObserver(containerRef, () => {
-      if (!renderer || !container) return;
-      screen = { width: container.clientWidth, height: container.clientHeight };
-      renderer.setSize(screen.width, screen.height);
-      camera.perspective({ aspect: screen.width / screen.height });
-      const f = (camera.fov * Math.PI) / 180;
-      const h = 2 * Math.tan(f / 2) * camera.position.z;
-      viewport = { width: h * camera.aspect, height: h };
-      for (const m of medias) {
-        m.scale = screen.height / 1500;
-        m.plane.scale.y = (viewport.height * (900 * m.scale)) / screen.height;
-        m.plane.scale.x = (viewport.width * (700 * m.scale)) / screen.width;
-        m.program.uniforms.uPlaneSizes.value = [
-          m.plane.scale.x,
-          m.plane.scale.y,
-        ];
-        const pad = 2;
-        m.width = m.plane.scale.x + pad;
-        m.widthTotal = m.width * doubled.length;
-      }
+      onOpen: (value) => {
+        open.value = value;
+      },
+      onItemClick: (item, index) => emit('item-click', item, index),
     });
   });
 
+  watch([() => props.font, () => props.fontUrl], loadFont);
+  watch(settings, () => engine?.wake());
+  watch(
+    () => props.dpr,
+    () => engine?.resize(),
+  );
+
+  useResizeObserver(container, () => engine?.resize());
+  useIntersectionObserver(container, (entries) => {
+    engine?.setVisible(entries.some((entry) => entry.isIntersecting));
+  });
+  useEventListener(container, 'pointerdown', (event: PointerEvent) =>
+    engine?.onPointerDown(event),
+  );
+  useEventListener(container, 'pointermove', (event: PointerEvent) =>
+    engine?.onPointerMove(event),
+  );
+  useEventListener(container, 'pointerup', (event: PointerEvent) =>
+    engine?.onPointerUp(event),
+  );
+  useEventListener(container, 'pointercancel', (event: PointerEvent) =>
+    engine?.onPointerCancel(event),
+  );
+  useEventListener(container, 'pointerleave', () => engine?.onPointerLeave());
+  useEventListener(
+    container,
+    'wheel',
+    (event: WheelEvent) => engine?.onWheel(event),
+    { passive: false },
+  );
+  useEventListener(container, 'keydown', (event: KeyboardEvent) =>
+    engine?.onKeyDown(event),
+  );
+  useEventListener(container, 'focusin', (event: FocusEvent) =>
+    engine?.onFocusIn(event),
+  );
+  useEventListener(container, 'focusout', (event: FocusEvent) =>
+    engine?.onFocusOut(event),
+  );
+  useEventListener(defaultDocument, 'visibilitychange', () =>
+    engine?.onVisibility(),
+  );
+  useEventListener(
+    defaultDocument,
+    'keydown',
+    (event: KeyboardEvent) => engine?.onAnyKey(event),
+    true,
+  );
+  useEventListener(
+    defaultDocument,
+    'pointerdown',
+    () => engine?.onAnyPointer(),
+    true,
+  );
+
   onBeforeUnmount(() => {
-    cancelAnimationFrame(rafId);
-    if (renderer) {
-      const canvas = renderer.gl.canvas;
-      canvas.parentNode?.removeChild(canvas);
-    }
+    fontToken++;
+    engine?.destroy();
+    engine = null;
   });
 </script>
 
 <template>
   <div
-    ref="containerRef"
-    :class="cn('relative size-full touch-none', $props.class)"
-  ></div>
+    ref="container"
+    :class="
+      cn(
+        'relative size-full cursor-grab touch-pan-y overflow-hidden select-none data-dragging:cursor-grabbing data-pointer:cursor-pointer',
+        props.class,
+      )
+    "
+    :style="{ color: textColor }"
+    role="region"
+    aria-roledescription="carousel"
+    aria-label="Image gallery"
+  >
+    <canvas
+      ref="canvas"
+      class="absolute inset-0 block size-full"
+      aria-hidden="true"
+    />
+    <div
+      ref="labels"
+      class="pointer-events-none absolute inset-0"
+      aria-hidden="true"
+    />
+    <div
+      ref="caption"
+      class="pointer-events-none absolute top-0 left-1/2 w-[min(90%,36rem)] text-center opacity-0"
+      :aria-hidden="!open"
+    >
+      <p v-if="current?.description" class="m-0 leading-normal opacity-65">
+        {{ current.description }}
+      </p>
+    </div>
+    <button
+      type="button"
+      class="pointer-events-none absolute top-3 right-3 grid size-10 cursor-pointer place-items-center rounded-full border-0 bg-transparent p-0 text-inherit opacity-0 transition-opacity duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current data-visible:pointer-events-auto data-visible:opacity-80"
+      data-gallery-close=""
+      :data-visible="open ? '' : undefined"
+      :tabindex="open ? 0 : -1"
+      aria-label="Close"
+      @click="onClose"
+    >
+      <Icon name="lucide:x" class="size-4.5" aria-hidden="true" />
+    </button>
+    <ul class="sr-only" data-gallery-list="">
+      <li v-for="(item, index) in list" :key="`${item.image}-${index}`">
+        <button
+          ref="buttons"
+          type="button"
+          :data-index="index"
+          :tabindex="index === active ? 0 : -1"
+          :aria-label="ariaLabelOf(item, index)"
+          :aria-current="index === active ? 'true' : undefined"
+          @focus="onButtonFocus(index)"
+          @click="onButtonClick(index)"
+        >
+          {{ labelOf(item, index) }}
+        </button>
+      </li>
+    </ul>
+    <div class="sr-only" aria-live="polite">
+      {{
+        open && current
+          ? `${current.text || current.alt || 'Image'} opened`
+          : ''
+      }}
+    </div>
+  </div>
 </template>

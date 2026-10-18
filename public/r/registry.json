@@ -31,13 +31,13 @@
       "name": "true-focus",
       "type": "registry:ui",
       "title": "True Focus",
-      "description": "A text component that highlights words in sequence with a glowing focus effect."
+      "description": "Blurs every word but one and marks it with brackets, a box, an underline or a highlight that glides or springs between words."
     },
     {
       "name": "scroll-based-velocity",
       "type": "registry:ui",
       "title": "Scroll Based Velocity",
-      "description": "Text that scrolls horizontally with velocity based on scroll speed."
+      "description": "Text marquee rows whose speed follows scroll velocity; rows can lean, stretch, be thrown with inertia and alternate outlined text."
     },
     {
       "name": "border-beam",
@@ -50,6 +50,18 @@
       "type": "registry:ui",
       "title": "Noise Texture",
       "description": "A canvas-based noise texture overlay for adding grain and texture to backgrounds."
+    },
+    {
+      "name": "fizzy-button",
+      "type": "registry:ui",
+      "title": "Fizzy Button",
+      "description": "A button that starts to fizz as your pointer approaches, then floods with rising particles and inverts on hover."
+    },
+    {
+      "name": "chaos-button",
+      "type": "registry:ui",
+      "title": "Chaos Button",
+      "description": "A pill button filled with drifting neon lines from a WebGL shader that tighten and scatter while pressed."
     },
     {
       "name": "shimmer-button",
@@ -67,7 +79,7 @@
       "name": "spotlight-card",
       "type": "registry:ui",
       "title": "Spotlight Card",
-      "description": "A card that follows the cursor with a spotlight glow effect."
+      "description": "Card lit by a soft spotlight that follows the pointer, catches its edge and reaches nearby cards."
     },
     {
       "name": "showcase-card",
@@ -103,7 +115,7 @@
       "name": "magnet-lines",
       "type": "registry:ui",
       "title": "Magnet Lines",
-      "description": "Lines that bend toward the cursor like a magnetic field."
+      "description": "A field of magnetic lines that swing toward the cursor, ripple outward and spin with every click."
     },
     {
       "name": "liquid-blob",
@@ -211,127 +223,127 @@
       "name": "glitch-text",
       "type": "registry:ui",
       "title": "Glitch Text",
-      "description": "RGB split and distortion glitch effect with jitter animations and optional hover trigger."
+      "description": "Glitching text in four styles: sliced bands, jittering RGB split, a scanning tear or swapped glyphs, with intensity, skew, flicker and click bursts."
     },
     {
       "name": "circular-text",
       "type": "registry:ui",
       "title": "Circular Text",
-      "description": "Characters positioned around a circle with continuous spin animation."
+      "description": "Text around a spinning ring that reacts to hover, can be flung with inertia, tilts toward the cursor in 3D and holds an icon in the middle."
     },
     {
       "name": "shuffle",
       "type": "registry:ui",
       "title": "Shuffle",
-      "description": "Random character shuffle that reveals text left-to-right."
+      "description": "Letters slide past as a reel, flip in 3D or spin with motion blur through random glyphs before they land."
     },
     {
       "name": "shiny-text",
       "type": "registry:ui",
       "title": "Shiny Text",
-      "description": "A metallic sheen sweep effect across text with theme-aware gradients."
+      "description": "A band of light that sweeps across text, from a soft sheen to chrome-like bands, on a loop, on hover, in view or following the pointer."
     },
     {
       "name": "gradient-text",
       "type": "registry:ui",
       "title": "Gradient Text",
-      "description": "Animated flowing gradient across text with customizable colors and speed."
+      "description": "Living gradients inside text: a sliding sweep, a drifting mesh or a swinging conic fan, with glow, border and colors that follow the cursor."
     },
     {
       "name": "count-up",
       "type": "registry:ui",
       "title": "Count Up",
-      "description": "Animated number counter with easeOutExpo easing, triggered on scroll into view."
+      "description": "Animated number counter that counts or rolls like an odometer, with formatting, decimals and compact units."
     },
     {
       "name": "split-text",
       "type": "registry:ui",
       "title": "Split Text",
-      "description": "Staggered character or word entrance animation triggered on scroll into view."
+      "description": "Splits text into letters, words or lines that rise, flip, pop, blur, skew or wave in, loop, replay on hover or click, and lift under the cursor."
     },
     {
       "name": "blur-text",
       "type": "registry:ui",
       "title": "Blur Text",
-      "description": "Words or letters animate from blurred to clear with a staggered entrance."
+      "description": "Text that blurs into focus by word or letter, with zoom, tilt, focus and drift effects, loop, hover or click replay and a start color."
     },
     {
       "name": "rotating-text",
       "type": "registry:ui",
       "title": "Rotating Text",
-      "description": "Cycle through an array of text phrases with staggered character transitions."
+      "description": "Cycles through words letter by letter with slide, flip, blur, scale or drop swaps, optionally on a highlight block that resizes to fit."
     },
     {
       "name": "text-type",
       "type": "registry:ui",
       "title": "Text Type",
-      "description": "Typewriter effect with character-by-character typing, delete-and-retype loop, and blinking cursor."
+      "description": "Typewriter text with a gliding, softly blinking cursor, per-letter fade, blur or rise, corrected typos and an optional fixed prefix."
     },
     {
       "name": "fuzzy-text",
       "type": "registry:ui",
       "title": "Fuzzy Text",
-      "description": "Canvas-based vibrating fuzzy text with horizontal displacement that intensifies on hover."
+      "description": "Canvas text that jitters in shifted strips, resolves out of static, splits into color fringes, and reacts to hover or clicks."
     },
     {
       "name": "decrypted-text",
       "type": "registry:ui",
       "title": "Decrypted Text",
-      "description": "Hacker-style text decryption effect that scrambles characters before revealing the original text."
+      "description": "Text that cycles random glyphs before resolving, with flip-board and fade effects, a decoding accent color, loops and cursor-local scrambling."
     },
     {
       "name": "variable-proximity",
       "type": "registry:ui",
       "title": "Variable Proximity",
-      "description": "Text that changes font variation settings based on cursor proximity."
+      "description": "Letters gain variable-font weight near the cursor and can shift color, grow and rise; an idle wave of weight runs while the cursor is away."
     },
     {
       "name": "text-pressure",
       "type": "registry:ui",
       "title": "Text Pressure",
-      "description": "Variable font text responding to cursor with weight, width, italic changes."
+      "description": "Variable-font letters that swell near the cursor, with click ripples, idle wave or pulse motion and a pressure color."
     },
     {
       "name": "scroll-reveal",
       "type": "registry:ui",
       "title": "Scroll Reveal",
-      "description": "Text revealed word by word on scroll with optional blur."
+      "description": "Text that reveals by word, letter or line on scroll, fading, rising, flipping or popping in, with an optional accent highlight."
     },
     {
       "name": "scroll-float",
       "type": "registry:ui",
       "title": "Scroll Float",
-      "description": "Characters float up with scale distortion on scroll."
+      "description": "Scroll-linked heading whose letters float, flip, scatter, blur or wave into place, by letter or word, in any order and from an accent color."
     },
     {
       "name": "text-cursor",
       "type": "registry:ui",
       "title": "Text Cursor",
-      "description": "Cursor trail that drops text along the mouse path."
+      "description": "Text or emoji that trails the pointer as stamped copies, a following chain or a ribbon of letters, then pulls back when it stops."
     },
     {
       "name": "scrambled-text",
       "type": "registry:ui",
       "title": "Scrambled Text",
-      "description": "Proximity-based character scrambling effect."
+      "description": "Text that decodes into view, then scrambles, rises, blurs or swells like a lens near the cursor; a click sends a scramble wave through it."
     },
     {
       "name": "curved-loop",
       "type": "registry:ui",
       "title": "Curved Loop",
-      "description": "Text scrolling along a curved SVG path with drag interaction."
+      "description": "Looping marquee text along an arc, wave, ring or line, with drag-to-fling, outlined letters, accent separators and a scroll boost."
     },
     {
       "name": "logo-loop",
       "type": "registry:ui",
       "title": "Logo Loop",
-      "description": "Infinite scrolling logo marquee with smooth animation and fade edges."
+      "description": "Draggable looping strip of logos with a soft edge fade, intro, wave, arc and 3D orbit paths, center lens, dock magnify and labels."
     },
     {
       "name": "aurora",
       "type": "registry:ui",
       "title": "Aurora",
-      "description": "WebGL aurora borealis effect with simplex noise and configurable color stops."
+      "description": "A soft, calm aurora that flows across the top of the page and drifts toward the cursor."
     },
     {
       "name": "squares",
@@ -343,133 +355,115 @@
       "name": "letter-glitch",
       "type": "registry:ui",
       "title": "Letter Glitch",
-      "description": "A grid of random characters with color glitching and vignette overlays."
-    },
-    {
-      "name": "lightning",
-      "type": "registry:ui",
-      "title": "Lightning",
-      "description": "WebGL-powered lightning bolt effect with fbm noise and customizable hue."
+      "description": "A calm field of letters that flicker, scramble and glitch in color, stirred by the cursor and torn by clicks."
     },
     {
       "name": "iridescence",
       "type": "registry:ui",
       "title": "Iridescence",
-      "description": "Mesmerizing iridescent color waves with mouse-reactive distortion."
+      "description": "Liquid iridescent surface with shifting folds that you can stir with the cursor."
     },
     {
       "name": "liquid-chrome",
       "type": "registry:ui",
       "title": "Liquid Chrome",
-      "description": "Interactive liquid chrome effect with ripple distortion and mouse tracking."
+      "description": "Soft ribbons of liquid chrome that swirl through a dark pool, ripple under the cursor and catch the light as it moves."
     },
     {
       "name": "balatro",
       "type": "registry:ui",
       "title": "Balatro",
-      "description": "Psychedelic spin-paint background with configurable colors and animation speed."
+      "description": "The swirling Balatro paint shader with crisp pixels, a cursor that stirs the paint, click whirlpools and an optional CRT look."
     },
     {
       "name": "waves",
       "type": "registry:ui",
       "title": "Waves",
-      "description": "Animated Perlin noise wave lines with configurable colors, amplitude, and density."
+      "description": "Dense flowing lines that sway like silk, bend around the cursor and spring back, with click ripples, dashed lines and rotation."
     },
     {
       "name": "threads",
       "type": "registry:ui",
       "title": "Threads",
-      "description": "Animated Perlin noise thread lines with mouse-reactive distortion."
+      "description": "Flowing threads that fray apart and part around the cursor, from fine silk to contour lines."
     },
     {
       "name": "orb",
       "type": "registry:ui",
       "title": "Orb",
-      "description": "Glowing orb with hue-shifted noise, hover distortion, and optional rotation."
+      "description": "A glowing ring of swirling color that breathes, trails an orbiting light, reaches toward the cursor and pulses on click."
     },
     {
       "name": "silk",
       "type": "registry:ui",
       "title": "Silk",
-      "description": "Silky fabric-like shader background with flowing noise patterns."
+      "description": "Flowing satin folds with glossy highlights that turn toward the cursor and ripple on click."
     },
     {
       "name": "floating-lines",
       "type": "registry:ui",
       "title": "Floating Lines",
-      "description": "Multi-layered glowing wave lines with cursor-reactive bending."
+      "description": "Waves of fine glowing lines that drift, part around the cursor and curl into a swirl when you click."
     },
     {
       "name": "beams",
       "type": "registry:ui",
       "title": "Beams",
-      "description": "3D light beam planes with Perlin noise deformation and directional lighting."
+      "description": "Glossy ribbons that ripple and catch a glowing light, which follows your cursor along the beams."
     },
     {
       "name": "dark-veil",
       "type": "registry:ui",
       "title": "Dark Veil",
-      "description": "CPPN neural network shader background with hue shift, scanlines, and warp distortion."
-    },
-    {
-      "name": "grainient",
-      "type": "registry:ui",
-      "title": "Grainient",
-      "description": "Animated gradient background with noise grain and smooth color blending."
+      "description": "A silky veil of light that drifts in the dark and bends around the cursor, in any color, with a light-mode ink variant."
     },
     {
       "name": "faulty-terminal",
       "type": "registry:ui",
       "title": "Faulty Terminal",
-      "description": "Matrix-style hacker terminal with digit patterns, scanlines, and chromatic aberration."
-    },
-    {
-      "name": "ferrofluid",
-      "type": "registry:ui",
-      "title": "Ferrofluid",
-      "description": "A WebGL ferrofluid metaball background with flowing turbulence, configurable colors, rim glow, and mouse interaction."
+      "description": "A flickering CRT terminal of glowing glyphs, with phosphor trails under the cursor and glitches on click."
     },
     {
       "name": "gradient-blinds",
       "type": "registry:ui",
       "title": "Gradient Blinds",
-      "description": "Animated gradient blinds with spotlight, mouse tracking, and up to 8 color stops."
+      "description": "Satin gradient blinds lit by a cursor spotlight that sway, turn toward the light and ripple on click."
     },
     {
       "name": "color-bends",
       "type": "registry:ui",
       "title": "Color Bends",
-      "description": "Complex warp shader with mouse parallax, auto-rotation, and up to 8 custom colors."
+      "description": "Bands of color that bend and fold into each other in a slow, flowing warp that leans toward the cursor."
     },
     {
       "name": "light-pillar",
       "type": "registry:ui",
       "title": "Light Pillar",
-      "description": "3D raymarched light pillar with configurable colors, quality settings, and optional mouse interaction."
+      "description": "A swirling pillar of light that ignites on load, leans toward the cursor and surges on click."
     },
     {
       "name": "light-rays",
       "type": "registry:ui",
       "title": "Light Rays",
-      "description": "Animated light rays emanating from a configurable origin with mouse following and color controls."
+      "description": "Volumetric light rays from any edge with source glow and haze. The cursor steers the beam and casts a shadow; clicks send a wave of light."
     },
     {
       "name": "side-rays",
       "type": "registry:ui",
       "title": "Side Rays",
-      "description": "A WebGL light-rays background emanating from a screen corner, with configurable origin, tilt, colors, spread, and falloff."
+      "description": "Shafts of light that fan in from a corner or side, shimmer slowly and lean toward the cursor."
     },
     {
       "name": "lightfall",
       "type": "registry:ui",
       "title": "Lightfall",
-      "description": "A WebGL raymarched light-streak background with falling luminous trails, configurable colors, density, and mouse interaction."
+      "description": "Streaks of light falling down a curved tunnel, bending around the cursor and stretching into warp trails on hold."
     },
     {
       "name": "ripple-grid",
       "type": "registry:ui",
       "title": "Ripple Grid",
-      "description": "Animated sine-wave ripple grid with mouse interaction, rainbow mode, and vignette."
+      "description": "A crisp grid that ripples like water, bending and lighting up as waves pass through it, with dot, cross and floor styles."
     },
     {
       "name": "ripple-transition",
@@ -488,6 +482,12 @@
       "type": "registry:ui",
       "title": "Pixel Wave",
       "description": "A looping pixel-art ocean swell rendered on a dark LED grid of colored patches, morphing through crest, trough, fade, and rebuild."
+    },
+    {
+      "name": "progress-stepper",
+      "type": "registry:ui",
+      "title": "Progress Stepper",
+      "description": "A vertical process timeline with a single rail, spinning in-progress markers, drawn-in checks and nested sub-steps that unfold under the active step."
     },
     {
       "name": "stacked-list",
@@ -523,157 +523,127 @@
       "name": "pixel-snow",
       "type": "registry:ui",
       "title": "Pixel Snow",
-      "description": "3D voxel-raymarched pixelated snowfall with configurable flake shapes and wind direction."
+      "description": "Pixel-art snowflakes drifting down in layers of depth, brushed aside by the cursor."
     },
     {
       "name": "prismatic-burst",
       "type": "registry:ui",
       "title": "Prismatic Burst",
-      "description": "WebGL 2 raymarched spectral burst with configurable colors, distortion, and 3D animation modes."
+      "description": "A burst of prismatic light rays that leans toward the cursor and sends a wave of light outward on click."
     },
     {
       "name": "liquid-ether",
       "type": "registry:ui",
       "title": "Liquid Ether",
-      "description": "Full Navier-Stokes fluid simulation with mouse interaction, auto-demo driver, and customizable color palette."
+      "description": "A glowing liquid that swirls under the cursor, colored by how fast it flows, with an intro sweep, click puffs and a light mode."
     },
     {
       "name": "pixel-blast",
       "type": "registry:ui",
       "title": "Pixel Blast",
-      "description": "Dithered pixel pattern with Bayer matrix, FBM noise, click ripples, and configurable shapes."
-    },
-    {
-      "name": "ballpit",
-      "type": "registry:ui",
-      "title": "Ballpit",
-      "description": "3D physics-based ball pit with instanced meshes, subsurface scattering, and cursor interaction."
+      "description": "Dithered pixel clouds that drift, shimmer and light up under the cursor, with ripples, six shapes and a perspective floor."
     },
     {
       "name": "dot-grid",
       "type": "registry:ui",
       "title": "Dot Grid",
-      "description": "Interactive canvas dot grid with velocity-based impulse, click shockwaves, and elastic return."
+      "description": "A springy dot grid that the cursor flicks and drags through like jelly, with click shockwaves."
     },
     {
       "name": "grid-distortion",
       "type": "registry:ui",
       "title": "Grid Distortion",
-      "description": "Three.js shader-based image distortion that warps a texture in response to mouse movement."
+      "description": "Image background that breaks into a grid of blocks under the cursor and settles back into place."
     },
     {
       "name": "grid-motion",
       "type": "registry:ui",
       "title": "Grid Motion",
-      "description": "A rotated grid of items that shifts horizontally based on cursor position with smooth easing."
+      "description": "A tilted wall of drifting tiles that slides with the pointer and lights up where it rests."
     },
     {
       "name": "animated-content",
       "type": "registry:ui",
       "title": "Animated Content",
-      "description": "Scroll-triggered entrance animation with configurable direction, distance, and easing."
+      "description": "Reveals its content on scroll with slides, blur, rotation, 3D tilts, soft wipes, staggered children, scroll-linked progress and a mount trigger."
     },
     {
       "name": "fade-content",
       "type": "registry:ui",
       "title": "Fade Content",
-      "description": "Scroll-triggered fade-in with optional blur effect."
+      "description": "Fades content in on scroll: plain, out of focus, from washed-out gray, or through grain, mist and pixel blocks, with stagger and scrub."
     },
     {
       "name": "click-spark",
       "type": "registry:ui",
       "title": "Click Spark",
-      "description": "Click-triggered spark burst animation rendered on canvas."
+      "description": "Bursts of sparks on every click, as dashes, comets, dots or stars, that can spill around buttons and fire from code."
     },
     {
       "name": "star-border",
       "type": "registry:ui",
       "title": "Star Border",
-      "description": "Animated glowing border effect with dual radial gradient beams."
+      "description": "A star that glides around the outline of a button, pill or card with a fading trail, hover laps and a click pulse."
     },
     {
       "name": "magnet",
       "type": "registry:ui",
       "title": "Magnet",
-      "description": "Element that magnetically pulls toward the cursor when nearby."
-    },
-    {
-      "name": "crosshair",
-      "type": "registry:ui",
-      "title": "Crosshair",
-      "description": "Smooth crosshair cursor replacement with horizontal and vertical lines."
+      "description": "Elements lean toward the cursor on a spring, with tilt, scale, axis locking and a movement cap; only the nearest magnet reacts."
     },
     {
       "name": "gradual-blur",
       "type": "registry:ui",
       "title": "Gradual Blur",
-      "description": "Layered backdrop-filter blur gradient overlay for smooth edge fading."
+      "description": "Progressive edge blur for headers, footers and carousels, with a fade to color, hover to clear, and auto-hide at the ends of a scroll."
     },
     {
       "name": "glare-hover",
       "type": "registry:ui",
       "title": "Glare Hover",
-      "description": "A glare sweep animation on hover with configurable angle, size, and color."
-    },
-    {
-      "name": "ribbons",
-      "type": "registry:ui",
-      "title": "Ribbons",
-      "description": "Interactive OGL ribbon lines that follow mouse movement with spring physics."
-    },
-    {
-      "name": "strands",
-      "type": "registry:ui",
-      "title": "Strands",
-      "description": "Animated flowing light strands rendered with OGL shaders, with configurable colors, waviness, glow, and optional glass refraction."
+      "description": "A glossy light streak that sweeps across any element in the direction the cursor moves, with a glinting rim edge."
     },
     {
       "name": "pixel-transition",
       "type": "registry:ui",
       "title": "Pixel Transition",
-      "description": "Pixelated grid transition that reveals a second content layer on hover."
+      "description": "Retro pixel dissolve that covers a card in pixels, swaps to the second slot and clears again, with ripple, wipe and dither patterns."
     },
     {
       "name": "electric-border",
       "type": "registry:ui",
       "title": "Electric Border",
-      "description": "Animated electric border with noise-driven distortion and glow effects."
+      "description": "Wraps any element in crackling strands of current that surge near the cursor, jolt on click and leap off in sparks."
     },
     {
       "name": "meta-balls",
       "type": "registry:ui",
       "title": "Meta Balls",
-      "description": "WebGL 2 metaball shader with cursor-reactive ball and configurable colors."
+      "description": "Liquid metaballs that merge, stretch and pinch apart, with a cursor blob that pushes through them and splashes on click."
     },
     {
       "name": "blob-cursor",
       "type": "registry:ui",
       "title": "Blob Cursor",
-      "description": "Gooey blob cursor trail with SVG filter and configurable appearance."
-    },
-    {
-      "name": "cubes",
-      "type": "registry:ui",
-      "title": "Cubes",
-      "description": "Interactive 3D CSS cube grid that tilts toward cursor with auto-animation."
+      "description": "A 3D liquid blob cursor that stretches into a tail, drips and bursts into droplets on click, in chrome, jelly, pearl or ink."
     },
     {
       "name": "shape-blur",
       "type": "registry:ui",
       "title": "Shape Blur",
-      "description": "SDF shape with cursor-reactive blur distortion rendered via Three.js shaders."
+      "description": "A crisp logo or shape that drifts out of focus under the pointer like a camera lens."
     },
     {
       "name": "stack",
       "type": "registry:ui",
       "title": "Stack",
-      "description": "Draggable card stack with spring animations and send-to-back gesture."
+      "description": "Pile of cards you can drag, flick or click through, with thrown cards tucking underneath."
     },
     {
       "name": "tilted-card",
       "type": "registry:ui",
       "title": "Tilted Card",
-      "description": "3D tilting card that follows cursor with spring damping and tooltip caption."
+      "description": "A 3D card that tilts toward the cursor, with glare, a soft shadow, floating depth layers and a flip side."
     },
     {
       "name": "timezone-companion",
@@ -691,7 +661,7 @@
       "name": "decay-card",
       "type": "registry:ui",
       "title": "Decay Card",
-      "description": "SVG displacement map card that warps on cursor movement with lerp physics."
+      "description": "An image card drawn with WebGL that tears and melts as the pointer moves, then pulls itself back together."
     },
     {
       "name": "dithered-logo",
@@ -703,7 +673,7 @@
       "name": "dock",
       "type": "registry:ui",
       "title": "Dock",
-      "description": "A macOS-style dock with cursor-proximity magnification driven by configurable spring physics."
+      "description": "macOS style dock with spring magnification, launch hop, badges, auto hide, right-click menus with submenus, on any edge."
     },
     {
       "name": "visual-stepper",
@@ -763,13 +733,13 @@
       "name": "curved-input",
       "type": "registry:ui",
       "title": "Curved Input",
-      "description": "A real text input bent along a circular arc — SVG textPath rendering with a caret that rides the curve and arc-length scrolling."
+      "description": "An input bar bent along an arc, with text, caret and submit button that all follow the curve."
     },
     {
       "name": "line-sidebar",
       "type": "registry:ui",
       "title": "Line Sidebar",
-      "description": "Line-and-rail sidebar navigation whose items shift, tint, and grow their markers as the cursor approaches, eased by a single rAF loop."
+      "description": "List navigation with a marker rail; items near the cursor shift, tint and grow their markers, and the clicked item stays lit."
     },
     {
       "name": "prism-gradient",
@@ -805,19 +775,19 @@
       "name": "elastic-slider",
       "type": "registry:ui",
       "title": "Elastic Slider",
-      "description": "Draggable slider with elastic overflow bounce and animated icons."
+      "description": "A slider that grows under the cursor and stretches like rubber when pulled past either end, then springs back."
     },
     {
       "name": "bounce-cards",
       "type": "registry:ui",
       "title": "Bounce Cards",
-      "description": "Fan of image cards with staggered entrance and hover push animation."
+      "description": "A fan of photo cards that bounce in, then spread apart and straighten the one you hover."
     },
     {
       "name": "pixel-card",
       "type": "registry:ui",
       "title": "Pixel Card",
-      "description": "Canvas pixel shimmer card with hover-activated sparkle effect and preset variants."
+      "description": "A card whose canvas pixels reveal in a glowing wave from the center or cursor, on hover, click or always on, with a cursor spotlight."
     },
     {
       "name": "notification-center",
@@ -841,109 +811,109 @@
       "name": "stepper",
       "type": "registry:ui",
       "title": "Stepper",
-      "description": "Multi-step wizard with animated step indicators and slide transitions."
+      "description": "A multi-step flow in a frosted panel with a gliding step indicator, spring transitions and number, dot, bar or vertical layouts."
     },
     {
       "name": "carousel",
       "type": "registry:ui",
       "title": "Carousel",
-      "description": "Draggable card carousel with 3D perspective rotation and dot indicators."
+      "description": "Swipeable spring-physics cards with five transitions, dots, timer bars or a counter, autoplay, loop and photo cards."
     },
     {
       "name": "flowing-menu",
       "type": "registry:ui",
       "title": "Flowing Menu",
-      "description": "Hover-activated marquee menu with edge-aware slide-in animation."
+      "description": "A full-height menu with one liquid band that glides and stretches between rows and reveals a scrolling marquee of each item."
     },
     {
       "name": "flying-posters",
       "type": "registry:ui",
       "title": "Flying Posters",
-      "description": "OGL-powered vertical scroll gallery with rotating poster distortion."
+      "description": "3D posters that twist and flip as you scroll or drag through an endless column."
     },
     {
       "name": "circular-gallery",
       "type": "registry:ui",
       "title": "Circular Gallery",
-      "description": "OGL-powered curved image gallery with drag/scroll navigation and wave deformation."
+      "description": "A curved WebGL image gallery you can drag, scroll or tab through, with cards that open to the full image."
     },
     {
       "name": "counter",
       "type": "registry:ui",
       "title": "Counter",
-      "description": "Animated number counter with spring-physics digit rolling and gradient fade overlays."
+      "description": "An odometer-style number whose digits roll on springs to each new value, with motion blur, an intro spin and Intl formatting."
     },
     {
       "name": "animated-list",
       "type": "registry:ui",
       "title": "Animated List",
-      "description": "Scroll-triggered list with scale entrance, keyboard navigation, and gradient edges."
+      "description": "Scrolling list whose rows spring in from the edge they scroll in from, with a gliding selection ring and arrow-key navigation."
     },
     {
       "name": "folder",
       "type": "registry:ui",
       "title": "Folder",
-      "description": "Pure CSS 3D folder with open/close animation and magnetic paper hover."
+      "description": "3D folder that drops its flap open or swings open like a book, in solid, glass or matte, with pages you can zoom, drag out and drop back in."
     },
     {
       "name": "glass-icons",
       "type": "registry:ui",
       "title": "Glass Icons",
-      "description": "Glass morphism icon buttons with gradient background, 3D tilt, and label reveal on hover."
+      "description": "Liquid glass icons that bend the color behind them, for app grids, docks and social links."
     },
     {
       "name": "gooey-nav",
       "type": "registry:ui",
       "title": "Gooey Nav",
-      "description": "Particle-burst navigation with SVG gooey filter effect and spring animation."
+      "description": "A navigation bar whose active pill breaks into goo that flows over to the item you pick."
     },
     {
       "name": "bubble-menu",
       "type": "registry:ui",
       "title": "Bubble Menu",
-      "description": "Animated full-screen pill navigation with staggered scale-in and rotation."
+      "description": "A logo bubble and round menu button that pop open large tilted pill links with a staggered scale-in."
     },
     {
       "name": "card-swap",
       "type": "registry:ui",
       "title": "Card Swap",
-      "description": "Stacked card carousel that cycles the front card to the back with 3D transforms."
+      "description": "A 3D stack of cards that sends the front card to the back on a timer, or when you drag and fling it."
     },
     {
       "name": "chroma-grid",
       "type": "registry:ui",
       "title": "Chroma Grid",
-      "description": "Profile card grid with mouse-tracking spotlight reveal and per-card hover glow."
+      "description": "A grid of grayscale photo cards where a spotlight follows the cursor and brings back color."
     },
     {
       "name": "magic-bento",
       "type": "registry:ui",
       "title": "Magic Bento",
-      "description": "Interactive bento grid with spotlight tracking, particle effects, border glow, and magnetism."
+      "description": "A bento grid of feature cards with live artwork, edge light that follows the cursor and a click wave across the grid."
     },
     {
       "name": "masonry",
       "type": "registry:ui",
       "title": "Masonry",
-      "description": "Responsive masonry image grid with blur-to-focus entrance animation and hover scaling."
+      "description": "A masonry gallery that springs tiles into place, reflows on resize, reorders by drag and opens images in a lightbox."
     },
     {
       "name": "card-nav",
       "type": "registry:ui",
       "title": "Card Nav",
-      "description": "Expandable navbar with staggered card reveal, hamburger toggle, and color-coded panels."
+      "description": "A navigation bar that springs open into a row of cards, each with its own links."
     },
     {
       "name": "glass-surface",
       "type": "registry:ui",
       "title": "Glass Surface",
-      "description": "SVG displacement-based glass distortion with chromatic aberration and frosted backdrop filter."
+      "description": "Liquid glass that bends what is behind it, in a rounded panel or any logo shape, with SVG or WebGL refraction."
     },
     {
       "name": "profile-card",
       "type": "registry:ui",
       "title": "Profile Card",
-      "description": "Holographic tilt card with pointer-tracking 3D transforms, rainbow shine, and avatar parallax."
+      "description": "A framed profile card that tilts toward the cursor, with holographic foil shining through a tiled pattern."
     },
     {
       "name": "receipt-printer",
@@ -955,7 +925,7 @@
       "name": "reflective-card",
       "type": "registry:ui",
       "title": "Reflective Card",
-      "description": "Metallic ID card with SVG displacement filters, live webcam background, and chromatic aberration."
+      "description": "A WebGL2 metal ID card that reflects a looping video or your camera, tilts toward the cursor and catches a moving light."
     },
     {
       "name": "scrub-input",
@@ -997,55 +967,49 @@
       "name": "prism",
       "type": "registry:ui",
       "title": "Prism",
-      "description": "A prismatic light refraction background rendered with WebGL shaders via OGL."
-    },
-    {
-      "name": "radar",
-      "type": "registry:ui",
-      "title": "Radar",
-      "description": "An animated radar sweep background with concentric rings and radial spokes."
+      "description": "Rotating prism of glowing spectral light that tilts toward the cursor, with custom colors, shape, motion and a light mode."
     },
     {
       "name": "shape-grid",
       "type": "registry:ui",
       "title": "Shape Grid",
-      "description": "An animated grid of shapes (squares, hexagons, circles, triangles) with hover trail effects."
+      "description": "A drifting grid of shapes that lights up under the cursor, with perspective tilt, rainbow trails and click ripples."
     },
     {
       "name": "magic-rings",
       "type": "registry:ui",
       "title": "Magic Rings",
-      "description": "Concentric animated rings rendered with Three.js shaders, featuring glow and parallax effects."
+      "description": "Glowing rings that pulse, ripple or breathe, swell toward the cursor, flare on click, and can tilt, spin or split into prism fringes."
     },
     {
       "name": "evil-eye",
       "type": "registry:ui",
       "title": "Evil Eye",
-      "description": "An animated evil eye background with flame effects and cursor-tracking pupil."
+      "description": "Procedural evil eye shader with an animated iris, a slit pupil that follows the cursor, and a fiery outer glow."
     },
     {
       "name": "soft-aurora",
       "type": "registry:ui",
       "title": "Soft Aurora",
-      "description": "A WebGL aurora borealis background effect with perlin noise, cosine gradient coloring, and mouse interaction."
+      "description": "Soft aurora band built from 3D Perlin noise that reaches toward the cursor and carries click pulses."
     },
     {
       "name": "line-waves",
       "type": "registry:ui",
       "title": "Line Waves",
-      "description": "A WebGL animated line wave background with warping, color cycling, and mouse interaction."
+      "description": "Fine lines that flow in silky waves while a band of light drifts through them, with a cursor spotlight and click ripples."
     },
     {
       "name": "border-glow",
       "type": "registry:ui",
       "title": "Border Glow",
-      "description": "A CSS-driven directional glow card that tracks cursor position and proximity to edges."
+      "description": "Card with a mesh-gradient border and outer glow that follow the cursor direction and grow stronger near the edges."
     },
     {
       "name": "noise",
       "type": "registry:ui",
       "title": "Noise",
-      "description": "An animated canvas noise grain overlay for adding texture to backgrounds and sections."
+      "description": "Film grain overlay for photos and pages, from fine 35mm grain to dust, scratches, paper and TV static."
     },
     {
       "name": "text-string",
@@ -1087,7 +1051,7 @@
       "name": "plasma",
       "type": "registry:ui",
       "title": "Plasma",
-      "description": "A WebGL2 plasma background with 60-iteration ray march shader, mouse interaction, and configurable direction."
+      "description": "Soft folds of satin light twisting slowly through the dark, turning in 3D to follow the cursor."
     },
     {
       "name": "paper-shader-mount",
@@ -1219,7 +1183,7 @@
       "name": "paper-texture",
       "type": "registry:ui",
       "title": "Paper Texture",
-      "description": "A static texture built from multiple noise layers for realistic paper and cardboard surfaces. Ported from Paper Shaders (Apache-2.0)."
+      "description": "A static paper texture built from grain, fiber, wrinkles, crumples, folds and drops. Works as an image filter or as a standalone texture. Ported from Paper Shaders (Apache-2.0)."
     },
     {
       "name": "paper-water",
@@ -1276,22 +1240,16 @@
       "description": "Bouncing glowing orbs with text that dynamically flows around them in multi-column layout."
     },
     {
-      "name": "dither",
-      "type": "registry:ui",
-      "title": "Dither",
-      "description": "Retro Bayer-matrix dithered noise shader background with cursor-reactive wave distortion powered by Three.js postprocessing."
-    },
-    {
       "name": "plasma-wave",
       "type": "registry:ui",
       "title": "Plasma Wave",
-      "description": "Raymarched plasma waves with dual-wave interference, configurable colors, focal length, and rotation rendered with OGL."
+      "description": "Two ribbons of plasma curling through each other, with soft glow and white-hot cores."
     },
     {
       "name": "dot-field",
       "type": "registry:ui",
       "title": "Dot Field",
-      "description": "Interactive canvas dot grid with cursor bulge, glow, sparkle, and wave effects with smooth physics-based response."
+      "description": "A gradient dot field seen through a lens that follows the cursor, magnifying, pinching or swirling the dots."
     },
     {
       "name": "sticky-scroll-cards",
@@ -1315,91 +1273,85 @@
       "name": "antigravity",
       "type": "registry:ui",
       "title": "Antigravity",
-      "description": "Three.js InstancedMesh particle field with mouse-driven magnetic attraction, wave animation, and configurable shapes."
+      "description": "A field of particles that lifts into a glowing ring around the cursor and bursts outward on click."
     },
     {
       "name": "ascii-text",
       "type": "registry:ui",
       "title": "ASCII Text",
-      "description": "Three.js rendered text converted to ASCII art with animated wave distortion."
+      "description": "Waving ASCII text that tilts toward the pointer, scrambles on hover and ripples on click."
     },
     {
       "name": "dome-gallery",
       "type": "registry:ui",
       "title": "Dome Gallery",
-      "description": "3D dome-shaped image gallery with CSS transforms, drag interaction, and click-to-enlarge."
+      "description": "Immersive 3D dome gallery projecting images on a hemispheric surface; drag to spin with inertia, click a tile to open it."
     },
     {
       "name": "falling-text",
       "type": "registry:ui",
       "title": "Falling Text",
-      "description": "Matter.js physics-based falling text where words collapse and tumble with realistic gravity."
+      "description": "Text that breaks apart and tumbles into a pile you can drag, throw and swipe, then flies back into place."
     },
     {
       "name": "fluid-glass",
       "type": "registry:ui",
       "title": "Fluid Glass",
-      "description": "Three.js glass refraction effect with chromatic aberration shader in lens, bar, or cube mode."
+      "description": "A glass object that refracts your headline, image or video, follows the cursor and melts between seven shapes."
     },
     {
       "name": "galaxy",
       "type": "registry:ui",
       "title": "Galaxy",
-      "description": "OGL-powered starfield galaxy with thousands of animated points and parallax depth."
+      "description": "Endless flight through a twinkling starfield with warp jumps, cursor repulsion and star palettes."
     },
     {
       "name": "ghost-cursor",
       "type": "registry:ui",
       "title": "Ghost Cursor",
-      "description": "Three.js-powered ghostly cursor trail with bloom, grain, and FBM noise effects."
+      "description": "A ghost of glowing smoke that follows the cursor on a spring, curls as it rises and puffs on click, on raw WebGL2."
     },
     {
       "name": "grid-scan",
       "type": "registry:ui",
       "title": "Grid Scan",
-      "description": "Three.js animated grid with scanning line effect, bloom, chromatic aberration, and mouse-reactive distortion."
-    },
-    {
-      "name": "hyperspeed",
-      "type": "registry:ui",
-      "title": "Hyperspeed",
-      "description": "Three.js highway light simulation with bloom, SMAA, distortion presets, and configurable car lights."
+      "description": "A lit 3D grid room swept by a scanning light. The view shifts with the cursor and clicks send a ping across the walls."
     },
     {
       "name": "image-trail",
       "type": "registry:ui",
       "title": "Image Trail",
-      "description": "Mouse-following image trail that spawns images at cursor position with fade and scale animations."
+      "description": "A trail of photos behind the cursor with tunable size, timing, zoom, flash, drift, 3D tilt, rotation and a stacking pile."
     },
     {
       "name": "infinite-menu",
       "type": "registry:ui",
       "title": "Infinite Menu",
-      "description": "WebGL icosahedron sphere menu with texture-mapped faces, drag rotation, and item selection."
+      "description": "A draggable WebGL sphere of image tiles that snaps the nearest tile forward and shows its title, description and link."
     },
     {
       "name": "lanyard",
       "type": "registry:ui",
       "title": "Lanyard",
-      "description": "Three.js lanyard with Verlet integration rope physics, draggable badge card, and optional GLTF model."
+      "description": "Swinging 3D badge on a stretchy woven band that you can drag, throw or click to flip."
     },
     {
       "name": "laser-flow",
       "type": "registry:ui",
       "title": "Laser Flow",
-      "description": "Three.js volumetric laser beams with fog, mouse tilt, and flow animation using GLSL shaders."
+      "description": "A beam of light that drops onto your content, runs along its top edge and pours over its corners, with a cursor reveal."
     },
     {
       "name": "metallic-paint",
       "type": "registry:ui",
       "title": "Metallic Paint",
-      "description": "Raw WebGL2 metallic paint effect with Laplacian depth solve, chromatic aberration, and mouse-driven ripples."
+      "description": "Liquid chrome that flows over a logo or text, bends around its edges, tilts with the cursor and pours in on load."
     },
     {
       "name": "model-viewer",
       "type": "registry:ui",
       "title": "Model Viewer",
-      "description": "Three.js 3D model viewer with OrbitControls, GLTF/FBX/OBJ support, auto-framing, and screenshot."
+      "description": "A 3D model viewer for glb, gltf, fbx and obj files that frames the model, lights it with an HDRI and floats it over a soft shadow."
     },
     {
       "name": "orbit-card-stack",
@@ -1411,43 +1363,43 @@
       "name": "orbit-images",
       "type": "registry:ui",
       "title": "Orbit Images",
-      "description": "Images orbiting along customizable path shapes including ellipse, circle, star, heart, infinity, and more."
+      "description": "Photos travel along an SVG path with depth, passing behind and in front of center content. Drag to spin, click to bring one forward."
     },
     {
       "name": "particles",
       "type": "registry:ui",
       "title": "Particles",
-      "description": "OGL particle system with velocity simulation, mouse influence, and connection lines."
+      "description": "A drifting 3D field of particles with glow, twinkle, constellation lines, drift modes and cursor repel, attract or parallax."
     },
     {
       "name": "pill-nav",
       "type": "registry:ui",
       "title": "Pill Nav",
-      "description": "Responsive pill-shaped navigation with smooth sliding indicator and mobile hamburger menu."
+      "description": "A pill nav bar where a fill rises through each link as its label rolls over, with a sliding active dot and a menu that folds in on small screens."
     },
     {
       "name": "pixel-trail",
       "type": "registry:ui",
       "title": "Pixel Trail",
-      "description": "Mouse-following pixel trail with SVG gooey filter for a blobby, organic cursor effect."
+      "description": "Glossy WebGL2 pixels melt into a fluid goo trail behind the cursor, with color shifts, drips, sparkle, click bursts, dither and image reveals."
     },
     {
       "name": "scroll-stack",
       "type": "registry:ui",
       "title": "Scroll Stack",
-      "description": "Scroll-driven stacked card animation with scale and sticky positioning effects."
+      "description": "Cards pin and stack as you scroll, settling back into a dimmed deck with smooth, jitter-free motion."
     },
     {
       "name": "splash-cursor",
       "type": "registry:ui",
       "title": "Splash Cursor",
-      "description": "Full WebGL fluid simulation cursor effect with realistic ink-in-water dynamics."
+      "description": "A WebGL2 fluid simulation that trails the cursor in swirling ink and bursts into a splash on click."
     },
     {
       "name": "staggered-menu",
       "type": "registry:ui",
       "title": "Staggered Menu",
-      "description": "Full-screen staggered menu with animated text cycling, gradient backgrounds, and social links."
+      "description": "Side menu whose color layers slide in one after another, then links rise in with a staggered tilt as the toggle rolls from Menu to Close."
     },
     {
       "name": "holo-sticker",
@@ -1459,7 +1411,793 @@
       "name": "target-cursor",
       "type": "registry:ui",
       "title": "Target Cursor",
-      "description": "Animated crosshair cursor that snaps to target elements with corner brackets and smooth lerp tracking."
+      "description": "A spinning reticle cursor whose corner brackets snap around targets, follow their corner radius and show a label."
+    },
+    {
+      "name": "chart",
+      "type": "registry:lib",
+      "title": "Chart",
+      "description": "Dependency-free SVG chart engine with the TanStack Charts API. Swap to @tanstack/vue-charts by editing one file."
+    },
+    {
+      "name": "sparkline",
+      "type": "registry:ui",
+      "title": "Sparkline",
+      "description": "A compact trend line with a shaded area that rises into place, sized for KPI cards and table cells."
+    },
+    {
+      "name": "area-chart",
+      "type": "registry:ui",
+      "title": "Area Chart",
+      "description": "A responsive area chart with axes and grid lines whose values rise from the baseline on mount."
+    },
+    {
+      "name": "donut-chart",
+      "type": "registry:ui",
+      "title": "Donut Chart",
+      "description": "A donut chart that sweeps in clockwise, with a counting total in the center and a legend that lifts its slice on hover."
+    },
+    {
+      "name": "radial-gauge",
+      "type": "registry:ui",
+      "title": "Radial Gauge",
+      "description": "A 270° gauge with a rounded value arc, threshold colors, and a readout that counts up to the value."
+    },
+    {
+      "name": "progress-ring",
+      "type": "registry:ui",
+      "title": "Progress Ring",
+      "description": "A circular progress indicator with rounded ends and a percentage that counts up with the ring."
+    },
+    {
+      "name": "kpi-card",
+      "type": "registry:ui",
+      "title": "KPI Card",
+      "description": "A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials."
+    },
+    {
+      "name": "kpi-carousel",
+      "type": "registry:ui",
+      "title": "KPI Carousel",
+      "description": "A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours."
+    },
+    {
+      "name": "block-palette",
+      "type": "registry:ui",
+      "title": "Block Palette",
+      "description": "An \"Add Block\" palette with search, colored block types and live previews, and pointer or keyboard drag-to-reorder that lifts the row as a tilted card."
+    },
+    {
+      "name": "canvas-toolbar",
+      "type": "registry:ui",
+      "title": "Canvas Toolbar",
+      "description": "A canvas tool switcher with a sliding active pill and number-key shortcuts, plus a floating selection toolbar with view and action menus."
+    },
+    {
+      "name": "node-canvas",
+      "type": "registry:ui",
+      "title": "Node Canvas",
+      "description": "A pannable, zoomable node canvas with draggable nodes, live bezier edges, selection handles, a minimap and a zoom control."
+    },
+    {
+      "name": "downtime-log",
+      "type": "registry:ui",
+      "title": "Downtime Log",
+      "description": "A machine downtime log with selectable stops, reason pills, a reason filter, sort modes and a 24-hour stop timeline linked to the rows."
+    },
+    {
+      "name": "range-calendar",
+      "type": "registry:ui",
+      "title": "Range Calendar",
+      "description": "A month heatmap calendar for picking a date range, with presets, a live range pill, a shaded legend and a compare switch."
+    },
+    {
+      "name": "beeswarm-chart",
+      "type": "registry:ui",
+      "title": "Beeswarm Chart",
+      "description": "A cycle-time beeswarm dot plot with a machine switch, median and takt lines, a hatched over-takt zone, an axis break and an on-takt footer."
+    },
+    {
+      "name": "iso-stacked-bars",
+      "type": "registry:ui",
+      "title": "Iso Stacked Bars",
+      "description": "An isometric 3D stacked bar chart: two rows of shaded, textured boxes on a floor plate, with tooltips, legend highlighting and a staggered grow-in."
+    },
+    {
+      "name": "pattern-donut",
+      "type": "registry:ui",
+      "title": "Pattern Donut",
+      "description": "A two-ring donut: solid category slices inside, patterned cause segments outside, a hover-driven center label, a pinnable legend and a computed insight."
+    },
+    {
+      "name": "accordion-gallery",
+      "type": "registry:ui",
+      "title": "Accordion Gallery",
+      "description": "Image panels that expand on hover, click or focus, with 3D tilt, parallax images and a staggered caption."
+    },
+    {
+      "name": "bell-toggle",
+      "type": "registry:ui",
+      "title": "Bell Toggle",
+      "description": "Pill toggle where a press rings the bell, crossfades the label and unfurls the pill."
+    },
+    {
+      "name": "branched-menu",
+      "type": "registry:ui",
+      "title": "Branched Menu",
+      "description": "Collapsible menu that branches each section from a trunk and traces a line to your pick."
+    },
+    {
+      "name": "call-chip",
+      "type": "registry:ui",
+      "title": "Call Chip",
+      "description": "Tool-call chip whose fill wipes across as a live timer ticks, ending green or shaking red."
+    },
+    {
+      "name": "circular-carousel",
+      "type": "registry:ui",
+      "title": "Circular Carousel",
+      "description": "A 3D ring of images with bendable cards, momentum drag, snapping and click to focus."
+    },
+    {
+      "name": "code-slots",
+      "type": "registry:ui",
+      "title": "Code Slots",
+      "description": "One-time code input whose digits spring into their slots, with paste and SMS autofill, error drain and success wash."
+    },
+    {
+      "name": "comet-dial",
+      "type": "registry:ui",
+      "title": "Comet Dial",
+      "description": "Circular dial you set by angle, with a comet trail that streaks behind the head when it moves fast and flick momentum."
+    },
+    {
+      "name": "crystalized-ball",
+      "type": "registry:ui",
+      "title": "Crystalized Ball",
+      "description": "A WebGL glass ball with a crackling electric rim and glowing dust that swirls with the cursor."
+    },
+    {
+      "name": "depth-carousel",
+      "type": "registry:ui",
+      "title": "Depth Carousel",
+      "description": "Image carousel whose cards recede along a tilted 3D rail, with drag, wheel, keyboard, dot and auto-advance navigation."
+    },
+    {
+      "name": "depth-text",
+      "type": "registry:ui",
+      "title": "Depth Text",
+      "description": "Display type extruded from stacked layers in 3D that tilts toward the pointer, orbits when idle, and presses in on hover."
+    },
+    {
+      "name": "dodge-field",
+      "type": "registry:ui",
+      "title": "Dodge Field",
+      "description": "Wrapper that makes any child dodge the pointer until it relents and glides home."
+    },
+    {
+      "name": "drift-wall",
+      "type": "registry:ui",
+      "title": "Drift Wall",
+      "description": "An endless 3D wall of image tiles drifting in alternating columns, lifting a tile toward you on hover or focus."
+    },
+    {
+      "name": "echo-text",
+      "type": "registry:ui",
+      "title": "Echo Text",
+      "description": "Tinted, blurred copies trail behind the text and settle into one word, following the cursor, drifting, or scrolling, with click bursts."
+    },
+    {
+      "name": "elastic-mesh",
+      "type": "registry:ui",
+      "title": "Elastic Mesh",
+      "description": "Turns text or a logo into a puffy inflated WebGL2 shape you can press, poke and stretch like jelly."
+    },
+    {
+      "name": "flex-carousel",
+      "type": "registry:ui",
+      "title": "Flex Carousel",
+      "description": "An infinite WebGL image row that bends, twists and splits into rainbow light where it crosses an invisible glass lens."
+    },
+    {
+      "name": "flip-card",
+      "type": "registry:ui",
+      "title": "Flip Card",
+      "description": "Two-faced card that flips in 3D on a click, drag or flick and settles on a spring."
+    },
+    {
+      "name": "flying-button",
+      "type": "registry:ui",
+      "title": "Flying Button",
+      "description": "A button that fires thrusters on hover, lifts off on a WebGL2 smoke plume, can be dragged in flight and lands in its own cloud."
+    },
+    {
+      "name": "fold-text",
+      "type": "registry:ui",
+      "title": "Fold Text",
+      "description": "Text that unfolds piece by piece from a hinge edge like creased paper, with blinds and flip styles and a pointer refold."
+    },
+    {
+      "name": "folder-float",
+      "type": "registry:ui",
+      "title": "Folder Float",
+      "description": "Folder whose notes spring out into a floating cloud on hover or press; once landed they drift and can be dragged and thrown."
+    },
+    {
+      "name": "fuse-button",
+      "type": "registry:ui",
+      "title": "Fuse Button",
+      "description": "Action button that turns into an Undo while a fuse burns around the pill; hover pauses it and Escape cancels."
+    },
+    {
+      "name": "glide-select",
+      "type": "registry:ui",
+      "title": "Glide Select",
+      "description": "Select chip whose menu pops from its corner and whose highlight glides between rows."
+    },
+    {
+      "name": "hold-button",
+      "type": "registry:ui",
+      "title": "Hold Button",
+      "description": "Hold-to-confirm button whose liquid fill with a wave crest sweeps across while pressed and snaps back if you let go."
+    },
+    {
+      "name": "holo-card",
+      "type": "registry:ui",
+      "title": "Holo Card",
+      "description": "Trading card with a WebGL holographic foil, glittering border and pointer tilt. Optional back face flips on click."
+    },
+    {
+      "name": "infinite-spiral",
+      "type": "registry:ui",
+      "title": "Infinite Spiral",
+      "description": "An endlessly looping 3D helix of image cards that plays by itself, follows a drag or follows page scroll."
+    },
+    {
+      "name": "jelly-radio",
+      "type": "registry:ui",
+      "title": "Jelly Radio",
+      "description": "Radio group of chips where the chosen one swells and barges its neighbours outward."
+    },
+    {
+      "name": "lattice-loader",
+      "type": "registry:ui",
+      "title": "Lattice Loader",
+      "description": "Agent status row with a lattice of cells that brighten in a wave beside a live stopwatch."
+    },
+    {
+      "name": "masked-heading",
+      "type": "registry:ui",
+      "title": "Masked Heading",
+      "description": "A heading whose letters show an image or looping video, with rise, scale, blur, wipe or fade entrances, pointer parallax and a spotlight."
+    },
+    {
+      "name": "morph-slider",
+      "type": "registry:ui",
+      "title": "Morph Slider",
+      "description": "WebGL image slider that melts, ripples, shears or swirls between slides, with drag scrubbing, autoplay, captions and dots."
+    },
+    {
+      "name": "option-wheel",
+      "type": "registry:ui",
+      "title": "Option Wheel",
+      "description": "Curved option picker that spins with scroll, drag or arrow keys, tilting items away."
+    },
+    {
+      "name": "paper-crumple",
+      "type": "registry:ui",
+      "title": "Paper Crumple",
+      "description": "An image on a 3D paper sheet that crumples into a ball while you hold it, follows the pointer as you drag, and unfolds on release."
+    },
+    {
+      "name": "particle-text",
+      "type": "registry:ui",
+      "title": "Particle Text",
+      "description": "Canvas text built from particles that gather, rain, spiral or scan into place, repel from the cursor and burst on click."
+    },
+    {
+      "name": "peek-rating",
+      "type": "registry:ui",
+      "title": "Peek Rating",
+      "description": "Star rating that lifts a wave of stars up to the pointer, then commits with a pop on click."
+    },
+    {
+      "name": "prompt-bar",
+      "type": "registry:ui",
+      "title": "Prompt Bar",
+      "description": "Chat composer with @ sources, / commands, a model picker, an effort slider, dictation and attachment chips."
+    },
+    {
+      "name": "pulse-heart",
+      "type": "registry:ui",
+      "title": "Pulse Heart",
+      "description": "Like button whose glyph contracts to a dot, flips colour and swells back while the pill beats and the count rolls over."
+    },
+    {
+      "name": "refine-frame",
+      "type": "registry:ui",
+      "title": "Refine Frame",
+      "description": "Media frame that steps an image through generation stages, from a coarse mosaic to sharp, without any layout shift."
+    },
+    {
+      "name": "rubber-segment",
+      "type": "registry:ui",
+      "title": "Rubber Segment",
+      "description": "Segmented control whose rubber thumb stretches across the gap and squashes into place."
+    },
+    {
+      "name": "scrub-field",
+      "type": "registry:ui",
+      "title": "Scrub Field",
+      "description": "Number chip you drag to scrub, with rubber-band limits and click to type."
+    },
+    {
+      "name": "shredder",
+      "type": "registry:ui",
+      "title": "Shredder",
+      "description": "A list with a paper shredder at the bottom that cuts dragged rows into curling strips."
+    },
+    {
+      "name": "slide-commit",
+      "type": "registry:ui",
+      "title": "Slide Commit",
+      "description": "Slide-to-confirm handle that spins while your action runs, then unfurls into a done pill or shakes back on failure."
+    },
+    {
+      "name": "sling-button",
+      "type": "registry:ui",
+      "title": "Sling Button",
+      "description": "Send button you pull back like a slingshot and release to fire, with a stretching band, a power arc and a particle burst."
+    },
+    {
+      "name": "slosh-gauge",
+      "type": "registry:ui",
+      "title": "Slosh Gauge",
+      "description": "Tank gauge whose liquid chases the value on a spring, tilts as it moves and splashes when it fills."
+    },
+    {
+      "name": "specular-button",
+      "type": "registry:ui",
+      "title": "Specular Button",
+      "description": "Glass button with a WebGL2 rim light that rests on a corner, glides around the edge toward the cursor and flashes on press."
+    },
+    {
+      "name": "split-flap-text",
+      "type": "registry:ui",
+      "title": "Split Flap Text",
+      "description": "A split-flap departure board whose tiles flip through random glyphs, one flap at a time, to show each new phrase."
+    },
+    {
+      "name": "spring-check",
+      "type": "registry:ui",
+      "title": "Spring Check",
+      "description": "A checkbox row where one spring fills the box, draws the tick and strikes through the label."
+    },
+    {
+      "name": "squish-switch",
+      "type": "registry:ui",
+      "title": "Squish Switch",
+      "description": "Switch whose thumb stretches with speed and squashes against the end when you flick it."
+    },
+    {
+      "name": "status-mark",
+      "type": "registry:ui",
+      "title": "Status Mark",
+      "description": "Agent task status glyph that morphs from an idle ring to a progress arc, then a check."
+    },
+    {
+      "name": "stroke-text",
+      "type": "registry:ui",
+      "title": "Stroke Text",
+      "description": "SVG letter outlines draw themselves on one by one, then fill by wipe or fade, with dashed or dotted marching outlines and a lifted shadow."
+    },
+    {
+      "name": "swipe-row",
+      "type": "registry:ui",
+      "title": "Swipe Row",
+      "description": "List row you swipe to reveal a drawer of actions; a full swipe leaps the delete block across and folds the row away."
+    },
+    {
+      "name": "swipe-toast",
+      "type": "registry:ui",
+      "title": "Swipe Toast",
+      "description": "Toast that swipes down to dismiss and burns a thin fuse along its edge for the time it has left."
+    },
+    {
+      "name": "tear-ticket",
+      "type": "registry:ui",
+      "title": "Tear Ticket",
+      "description": "A ticket whose perforated stub tears off by hand, fibre by fibre, then drops away and leaves a greyed, used ticket."
+    },
+    {
+      "name": "tech-text",
+      "type": "registry:ui",
+      "title": "Tech Text",
+      "description": "A canvas wordmark whose letters turn into dashed vector outlines under the cursor, with draggable spring letters and click ripples."
+    },
+    {
+      "name": "text-loop",
+      "type": "registry:ui",
+      "title": "Text Loop",
+      "description": "A seamless text marquee along a curved SVG path, with a crossing band, hover pause, drag-to-fling and scroll boost."
+    },
+    {
+      "name": "thought-line",
+      "type": "registry:ui",
+      "title": "Thought Line",
+      "description": "Reasoning trace header with a breathing glyph and live clock that folds its steps into one line when the work settles."
+    },
+    {
+      "name": "voice-pill",
+      "type": "registry:ui",
+      "title": "Voice Pill",
+      "description": "Mic button that opens into a capsule with a scrolling waveform and a timer while recording; tap to latch, hold to talk, slide left to cancel."
+    },
+    {
+      "name": "wake-slider",
+      "type": "registry:ui",
+      "title": "Wake Slider",
+      "description": "Thumbless range slider of thin bars where drag speed raises a wake behind the handle."
+    },
+    {
+      "name": "warm-tooltip",
+      "type": "registry:ui",
+      "title": "Warm Tooltip",
+      "description": "A tooltip group where the first label waits, then siblings open instantly and the label glides between triggers while warm."
+    },
+    {
+      "name": "warp-text",
+      "type": "registry:ui",
+      "title": "Warp Text",
+      "description": "WebGL glass warp that bends and refracts text around the pointer, with bulge, pinch or swirl lenses and click shockwaves."
+    },
+    {
+      "name": "acid-squares",
+      "type": "registry:ui",
+      "title": "Acid Squares",
+      "description": "A rolling WebGL field of glossy squares that ripples under two drifting colored lights, with cursor press and click ripples."
+    },
+    {
+      "name": "ballpit",
+      "type": "registry:ui",
+      "title": "Ballpit",
+      "description": "A soft-lit pit of physics balls you can shove with the cursor, grab, throw and blast apart."
+    },
+    {
+      "name": "crosshair",
+      "type": "registry:ui",
+      "title": "Crosshair",
+      "description": "Crosshair cursor with live coordinates that locks onto links and buttons with measuring brackets and pulses on click."
+    },
+    {
+      "name": "crt-warp",
+      "type": "registry:ui",
+      "title": "CRT Warp",
+      "description": "A blocky plasma glowing on a curved CRT, with scanlines, a phosphor mask, afterglow, a power-on intro, cursor magnet and click-to-change channel."
+    },
+    {
+      "name": "cubes",
+      "type": "registry:ui",
+      "title": "Cubes",
+      "description": "A grid of outlined 3D cubes that turn to face the cursor, spin when swept and ripple on click, drawn with instanced WebGL2."
+    },
+    {
+      "name": "dither",
+      "type": "registry:ui",
+      "title": "Dither",
+      "description": "Retro dithered waves with Bayer, halftone, line, crosshatch and noise patterns, palettes, cursor trails and click ripples."
+    },
+    {
+      "name": "ferrofluid",
+      "type": "registry:ui",
+      "title": "Ferrofluid",
+      "description": "A glossy sea of magnetic fluid where swells of spikes roll in, the cursor raises a crown and clicks send out a ring of spikes."
+    },
+    {
+      "name": "flux-lines",
+      "type": "registry:ui",
+      "title": "Flux Lines",
+      "description": "Glowing flux lines trace a churning magnetic fluid. The cursor acts as a magnet that reveals and curls the lines, and a click stirs a swirl."
+    },
+    {
+      "name": "gradient-ascii",
+      "type": "registry:ui",
+      "title": "Gradient ASCII",
+      "description": "Soft gradient glows drawn in ASCII characters that scramble under the cursor."
+    },
+    {
+      "name": "gradient-waves",
+      "type": "registry:ui",
+      "title": "Gradient Waves",
+      "description": "Ray-marched satin waves rolling in from a hazy horizon, with a light that follows the cursor and a swell on click."
+    },
+    {
+      "name": "grainient",
+      "type": "registry:ui",
+      "title": "Grainient",
+      "description": "Flowing grainy gradient that you drag like paint with the cursor and twist into swirls with a click."
+    },
+    {
+      "name": "hyperspeed",
+      "type": "registry:ui",
+      "title": "Hyperspeed",
+      "description": "Night highway of glowing light trails on a winding road that warps into hyperspace while you hold the pointer down."
+    },
+    {
+      "name": "light-tunnel",
+      "type": "registry:ui",
+      "title": "Light Tunnel",
+      "description": "A swirling fibre-optic tunnel where comets of light race into depth, steered by the cursor."
+    },
+    {
+      "name": "lightning",
+      "type": "registry:ui",
+      "title": "Lightning",
+      "description": "Crackling, branching lightning that bends toward the cursor and strikes wherever you click."
+    },
+    {
+      "name": "molten-metal",
+      "type": "registry:ui",
+      "title": "Molten Metal",
+      "description": "Swirling caustic filaments with white-hot cores that ignite on load, heat up under the cursor and flare on click."
+    },
+    {
+      "name": "pattern-waves",
+      "type": "registry:ui",
+      "title": "Pattern Waves",
+      "description": "A lit halftone surface of dots, lines or glyphs that moves like draped silk and ripples under the cursor."
+    },
+    {
+      "name": "radar",
+      "type": "registry:ui",
+      "title": "Radar",
+      "description": "A radar scope whose sweep leaves a phosphor afterglow, lights up clutter and pings moving contacts. Sonar and tilted floor modes."
+    },
+    {
+      "name": "ribbons",
+      "type": "registry:ui",
+      "title": "Ribbons",
+      "description": "Springy WebGL2 ribbons that trail the cursor in lens, comet or even shapes, with optional wave, soft edges and tail fade."
+    },
+    {
+      "name": "scanner",
+      "type": "registry:ui",
+      "title": "Scanner",
+      "description": "Glowing interference lines swept by a scan beam, with a CRT finish, cursor lensing and click pings."
+    },
+    {
+      "name": "shape-waves",
+      "type": "registry:ui",
+      "title": "Shape Waves",
+      "description": "A grid of triangles, circles and squares that morph and grow along noise waves, with text cutouts and cursor splash ripples."
+    },
+    {
+      "name": "sliced-waves",
+      "type": "registry:ui",
+      "title": "Sliced Waves",
+      "description": "Waves of colored light sliced into glowing bars in depth, with a depth-of-field focus that follows the cursor."
+    },
+    {
+      "name": "strands",
+      "type": "registry:ui",
+      "title": "Strands",
+      "description": "Spectral strands that twist inside a frosted glass orb and swell into one bulge, reacting to voice level, the cursor and clicks."
+    },
+    {
+      "name": "web-threads",
+      "type": "registry:ui",
+      "title": "Web Threads",
+      "description": "Glowing threads woven through pinch points that draw in one by one, light up under the cursor and carry light on click."
+    },
+    {
+      "name": "aero-shards",
+      "type": "registry:ui",
+      "title": "AeroShards",
+      "description": "Silk ribbons of thick glass shards streaming on layered depths among survey markers, catching light along their edges."
+    },
+    {
+      "name": "cursor-grid",
+      "type": "registry:ui",
+      "title": "Cursor Grid",
+      "description": "A crisp grid whose cells light up and fade behind the cursor, with grid styles, tiles and click pulses."
+    },
+    {
+      "name": "dither-veil",
+      "type": "registry:ui",
+      "title": "Dither Veil",
+      "description": "A 1-bit dithered photo the cursor burns through to full colour, knitting back cell by cell."
+    },
+    {
+      "name": "electric-logo",
+      "type": "registry:ui",
+      "title": "Electric Logo",
+      "description": "Traces any logo or image into a living lightning outline with strands, arcs, hover charge and click ripples."
+    },
+    {
+      "name": "ghost-fibers",
+      "type": "registry:ui",
+      "title": "Ghost Fibers",
+      "description": "Layered ribbons of fine glowing fibers that twist, fold and drift through soft depth of field."
+    },
+    {
+      "name": "glow-cursor",
+      "type": "registry:ui",
+      "title": "Glow Cursor",
+      "description": "A WebGL fluid trail of light that follows the cursor, drifts and cools as it fades, with a burst on click."
+    },
+    {
+      "name": "pixel-swap",
+      "type": "registry:ui",
+      "title": "Pixel Swap",
+      "description": "New content builds in pixel by pixel in a springy wave that starts wherever the cursor enters."
+    },
+    {
+      "name": "swarm-cursor",
+      "type": "registry:ui",
+      "title": "Swarm Cursor",
+      "description": "A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons."
+    },
+    {
+      "name": "scroll-expand",
+      "type": "registry:ui",
+      "title": "Scroll Expand",
+      "description": "A rounded media frame that grows to full bleed as it scrolls through the viewport."
+    },
+    {
+      "name": "sticker-peel",
+      "type": "registry:ui",
+      "title": "Sticker Peel",
+      "description": "A die-cut WebGL sticker that peels at the edge nearest the cursor and can be dragged, thrown and swung, in gloss, matte or holo finishes."
+    },
+    {
+      "name": "halftone-reveal",
+      "type": "registry:ui",
+      "title": "Halftone Reveal",
+      "description": "Prints an image as a mono, duotone or color halftone whose dots swell into the real photo under the pointer."
+    },
+    {
+      "name": "micro-slats",
+      "type": "registry:ui",
+      "title": "Micro Slats",
+      "description": "A wall of tiny slats that becomes a rolling sea in perspective, with glinting crests and a cursor-stirred fluid trail."
+    },
+    {
+      "name": "ripple-distortion",
+      "type": "registry:ui",
+      "title": "Ripple Distortion",
+      "description": "Pointer-driven water displacement that warps an image and leaves a decaying wake."
+    },
+    {
+      "name": "topography",
+      "type": "registry:ui",
+      "title": "Topography",
+      "description": "A 3D landscape drawn in glowing contour lines that rises under the cursor, with light pulses on click."
+    },
+    {
+      "name": "annotated-text",
+      "type": "registry:ui",
+      "title": "Annotated Text",
+      "description": "Inline text marked with hand-drawn SVG circles, underlines, highlights, brackets and cross-outs that draw in once when they scroll into view."
+    },
+    {
+      "name": "ascii-effect",
+      "type": "registry:ui",
+      "title": "ASCII Effect",
+      "description": "Renders an image as dithered ASCII characters on a canvas, with static, flowing pointer-ripple, and glitch-reveal variants."
+    },
+    {
+      "name": "aurora-flow",
+      "type": "registry:ui",
+      "title": "Aurora Flow",
+      "description": "WebGL hero background with layered silk flow, diffused aurora light, film grain and a soft pointer bend, with twelve palette presets."
+    },
+    {
+      "name": "case-study-flip-stack",
+      "type": "registry:ui",
+      "title": "Case Study Flip Stack",
+      "description": "Editorial case study cards that fold upward on scroll to reveal the next story beneath."
+    },
+    {
+      "name": "fisheye-infinite-grid",
+      "type": "registry:ui",
+      "title": "Fisheye Infinite Grid",
+      "description": "A draggable image wall that repeats on both axes and bends through one fisheye lens, with momentum, wheel and arrow-key panning."
+    },
+    {
+      "name": "flipping-word-swap",
+      "type": "registry:ui",
+      "title": "Flipping Word Swap",
+      "description": "A word that flips into a second word one character at a time on hover, focus or tap, and flips back when you leave."
+    },
+    {
+      "name": "grain-gradient",
+      "type": "registry:ui",
+      "title": "Grain Gradient",
+      "description": "A breathing color field with a soft curved shadow, flowing light and fine film grain, drawn with WebGL."
+    },
+    {
+      "name": "hover-transition",
+      "type": "registry:ui",
+      "title": "Hover Transition",
+      "description": "A focusable wrapper that swaps a default and a hover slot with one of eight transitions from nine directions, plus a light tilt and glare."
+    },
+    {
+      "name": "lens-clock",
+      "type": "registry:ui",
+      "title": "Lens Clock",
+      "description": "A live clock that frames a corner of a large dial, panning with the hour hand while the edges blur out of focus."
+    },
+    {
+      "name": "newsletter-bookshelf",
+      "type": "registry:ui",
+      "title": "Newsletter Bookshelf",
+      "description": "A three.js shelf of cloth-bound books for a newsletter archive. Browse sideways, hover to lift a spine, click to pull a book forward."
+    },
+    {
+      "name": "pixel-image-trail",
+      "type": "registry:ui",
+      "title": "Pixel Image Trail",
+      "description": "An image reveal made from cursor-painted squares that expire into a bounded pixel trail."
+    },
+    {
+      "name": "scroll-tilted-grid",
+      "type": "registry:ui",
+      "title": "Scroll Tilted Grid",
+      "description": "A two-column image gallery whose frames tilt, blur and dim at the viewport edges and settle into focus as they cross the center."
+    },
+    {
+      "name": "spectral-ribbon",
+      "type": "registry:ui",
+      "title": "Spectral Ribbon",
+      "description": "A soft spectral light ribbon on black with slow liquid motion and a rainbow fringe, drawn by one WebGL fragment shader."
+    },
+    {
+      "name": "spiral-3d-slider",
+      "type": "registry:ui",
+      "title": "Spiral 3D Slider",
+      "description": "An autoplaying image gallery that flows along a 3D spiral of curved WebGL planes and moves with wheel and page scroll."
+    },
+    {
+      "name": "text-morph",
+      "type": "registry:ui",
+      "title": "Text Morph",
+      "description": "Words, numbers or prices melt into each other on a timer through blur and an SVG alpha-threshold filter, inheriting parent typography."
+    },
+    {
+      "name": "wheel-carousel",
+      "type": "registry:ui",
+      "title": "Wheel Carousel",
+      "description": "A rotating-wheel picker with inertial drag and scroll, curved fading labels, and a crossfading image for the active item."
+    },
+    {
+      "name": "paper-lens-distortion",
+      "type": "registry:ui",
+      "title": "Lens Distortion",
+      "description": "An image filter that splits an image into shifting color layers like lens chromatic aberration and warps it like barrel or pincushion distortion. Ported from Paper Shaders (Apache-2.0)."
+    },
+    {
+      "name": "clean-table",
+      "type": "registry:ui",
+      "title": "Clean Table",
+      "description": "A quiet, paginated table with segmented tabs, a keyboard-focused search, zebra rows, mono columns, status pills and row selection."
+    },
+    {
+      "name": "control-card",
+      "type": "registry:ui",
+      "title": "Control Card",
+      "description": "A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo."
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change."
+    },
+    {
+      "name": "status-panel",
+      "type": "registry:ui",
+      "title": "Status Panel",
+      "description": "Service health lamps with an overall status, uptime and latency, plus a live event log."
     }
   ]
 }

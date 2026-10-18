@@ -1,2 +1,9 @@
 export { default as FlowingMenu } from './FlowingMenu.vue';
-export type { FlowingMenuItem } from './types';
+export type {
+  FlowingMenuAlign,
+  FlowingMenuDirection,
+  FlowingMenuEmits,
+  FlowingMenuImageShape,
+  FlowingMenuItem,
+  FlowingMenuProps,
+} from './types';

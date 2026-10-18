@@ -1,340 +1,392 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount } from 'vue';
-  import { useResizeObserver } from '@vueuse/core';
-  import * as THREE from 'three';
+  import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+  import {
+    useEventListener,
+    useIntersectionObserver,
+    usePreferredReducedMotion,
+    useRafFn,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import {
+    ASCII_CHARSET,
+    ASCII_COLORS,
+    ASCII_FONT,
+    GLYPH_HEIGHT,
+    RIPPLES,
+    TEXT_PX,
+    UNIFORM_NAMES,
+    clamp,
+    createProgram,
+    drawGlyphs,
+    drawText,
+    toRgb,
+    uploadTexture,
+  } from './ascii-text-gl';
+  import type { UniformName } from './ascii-text-gl';
+  import type {
+    ASCIITextProps,
+    ASCIITextRipple,
+    ASCIITextSettings,
+  } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      text?: string;
-      asciiFontSize?: number;
-      textFontSize?: number;
-      textColor?: string;
-      planeBaseHeight?: number;
-      enableWaves?: boolean;
-      class?: string;
-    }>(),
-    {
-      text: 'Hello!',
-      asciiFontSize: 8,
-      textFontSize: 200,
-      textColor: '#fdf9f3',
-      planeBaseHeight: 8,
-      enableWaves: true,
-      class: '',
-    },
-  );
-
-  const containerRef = ref<HTMLElement | null>(null);
-
-  const vertexShader = `
-    varying vec2 vUv;
-    uniform float uTime;
-    uniform float uEnableWaves;
-    void main() {
-      vUv = uv;
-      float time = uTime * 5.0;
-      float waveFactor = uEnableWaves;
-      vec3 transformed = position;
-      transformed.x += sin(time + position.y) * 0.5 * waveFactor;
-      transformed.y += cos(time + position.z) * 0.15 * waveFactor;
-      transformed.z += sin(time + position.x) * waveFactor;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(transformed, 1.0);
-    }
-  `;
-
-  const fragmentShader = `
-    varying vec2 vUv;
-    uniform float uTime;
-    uniform sampler2D uTexture;
-    void main() {
-      float time = uTime;
-      vec2 pos = vUv;
-      float r = texture2D(uTexture, pos + cos(time * 2.0 - time + pos.x) * 0.01).r;
-      float g = texture2D(uTexture, pos + tan(time * 0.5 + pos.x - time) * 0.01).g;
-      float b = texture2D(uTexture, pos - cos(time * 2.0 + time + pos.y) * 0.01).b;
-      float a = texture2D(uTexture, pos).a;
-      gl_FragColor = vec4(r, g, b, a);
-    }
-  `;
-
-  let renderer: THREE.WebGLRenderer | null = null;
-  let scene: THREE.Scene | null = null;
-  let camera: THREE.PerspectiveCamera | null = null;
-  let mesh: THREE.Mesh | null = null;
-  let material: THREE.ShaderMaterial | null = null;
-  let texture: THREE.CanvasTexture | null = null;
-  let animFrame: number | null = null;
-  let preElement: HTMLPreElement | null = null;
-  let asciiCanvas: HTMLCanvasElement | null = null;
-  let asciiCtx: CanvasRenderingContext2D | null = null;
-  let cols = 0;
-  let rows = 0;
-  let mousePos = { x: 0, y: 0 };
-  let centerPos = { x: 0, y: 0 };
-  let hueAngle = 0;
-
-  const charset =
-    ' .\'`^",:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$';
-
-  function mapRange(
-    n: number,
-    start: number,
-    stop: number,
-    start2: number,
-    stop2: number,
-  ) {
-    return ((n - start) / (stop - start)) * (stop2 - start2) + start2;
-  }
-
-  function createTextCanvas(): HTMLCanvasElement {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d')!;
-    const font = `600 ${props.textFontSize}px monospace`;
-    ctx.font = font;
-    const metrics = ctx.measureText(props.text);
-    const tw = Math.ceil(metrics.width) + 20;
-    const th =
-      Math.ceil(
-        metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent,
-      ) + 20;
-    canvas.width = tw;
-    canvas.height = th;
-    ctx.clearRect(0, 0, tw, th);
-    ctx.fillStyle = props.textColor;
-    ctx.font = font;
-    const yPos = 10 + ctx.measureText(props.text).actualBoundingBoxAscent;
-    ctx.fillText(props.text, 10, yPos);
-    return canvas;
-  }
-
-  function init() {
-    if (!containerRef.value) return;
-    const container = containerRef.value;
-    const { width, height } = container.getBoundingClientRect();
-    if (width <= 0 || height <= 0) return;
-
-    camera = new THREE.PerspectiveCamera(45, width / height, 1, 1000);
-    camera.position.z = 30;
-    scene = new THREE.Scene();
-
-    const textCanvas = createTextCanvas();
-    texture = new THREE.CanvasTexture(textCanvas);
-    texture.minFilter = THREE.NearestFilter;
-
-    const textAspect = textCanvas.width / textCanvas.height;
-    const planeW = props.planeBaseHeight * textAspect;
-    const planeH = props.planeBaseHeight;
-
-    const geometry = new THREE.PlaneGeometry(planeW, planeH, 36, 36);
-    material = new THREE.ShaderMaterial({
-      vertexShader,
-      fragmentShader,
-      transparent: true,
-      uniforms: {
-        uTime: { value: 0 },
-        uTexture: { value: texture },
-        uEnableWaves: { value: props.enableWaves ? 1.0 : 0.0 },
-      },
-    });
-
-    mesh = new THREE.Mesh(geometry, material);
-    scene.add(mesh);
-
-    renderer = new THREE.WebGLRenderer({
-      antialias: false,
-      alpha: true,
-      preserveDrawingBuffer: true,
-    });
-    renderer.setPixelRatio(1);
-    renderer.setClearColor(0x000000, 0);
-
-    // ASCII filter setup
-    const filterWrapper = document.createElement('div');
-    filterWrapper.style.cssText =
-      'position:absolute;top:0;left:0;width:100%;height:100%;';
-
-    preElement = document.createElement('pre');
-    filterWrapper.appendChild(preElement);
-
-    asciiCanvas = document.createElement('canvas');
-    asciiCanvas.style.display = 'none';
-    asciiCtx = asciiCanvas.getContext('2d');
-    filterWrapper.appendChild(asciiCanvas);
-
-    container.appendChild(filterWrapper);
-
-    setSize(width, height);
-
-    centerPos = { x: width / 2, y: height / 2 };
-    mousePos = { x: centerPos.x, y: centerPos.y };
-
-    container.addEventListener('mousemove', onMouseMove);
-    container.addEventListener('touchmove', onTouchMove);
-
-    animate();
-  }
-
-  function setSize(w: number, h: number) {
-    if (!renderer || !asciiCanvas || !asciiCtx || !preElement || !camera)
-      return;
-    renderer.setSize(w, h);
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-
-    asciiCtx.font = `${props.asciiFontSize}px monospace`;
-    const charWidth = asciiCtx.measureText('A').width;
-    cols = Math.floor(
-      w / (props.asciiFontSize * (charWidth / props.asciiFontSize)),
-    );
-    rows = Math.floor(h / props.asciiFontSize);
-    asciiCanvas.width = cols;
-    asciiCanvas.height = rows;
-
-    preElement.style.cssText = `font-family:monospace;font-size:${props.asciiFontSize}px;margin:0;padding:0;line-height:1em;position:absolute;left:0;top:0;z-index:9;background-image:radial-gradient(circle,#ff6188 0%,#fc9867 50%,#ffd866 100%);background-attachment:fixed;-webkit-text-fill-color:transparent;-webkit-background-clip:text;mix-blend-mode:difference;user-select:none;`;
-
-    centerPos = { x: w / 2, y: h / 2 };
-  }
-
-  function onMouseMove(e: MouseEvent) {
-    mousePos = { x: e.clientX, y: e.clientY };
-  }
-
-  function onTouchMove(e: TouchEvent) {
-    if (e.touches.length > 0) {
-      const bounds = containerRef.value?.getBoundingClientRect();
-      if (bounds) {
-        mousePos = {
-          x: e.touches[0].clientX - bounds.left,
-          y: e.touches[0].clientY - bounds.top,
-        };
-      }
-    }
-  }
-
-  function animate() {
-    animFrame = requestAnimationFrame(animate);
-    render();
-  }
-
-  function render() {
-    if (
-      !renderer ||
-      !scene ||
-      !camera ||
-      !mesh ||
-      !material ||
-      !asciiCanvas ||
-      !asciiCtx ||
-      !preElement
-    )
-      return;
-
-    const time = Date.now() * 0.001;
-    material.uniforms.uTime.value = Math.sin(time);
-
-    const { width, height } = containerRef.value?.getBoundingClientRect() ?? {
-      width: 0,
-      height: 0,
-    };
-    const mx = mapRange(mousePos.y, 0, height, 0.5, -0.5);
-    const my = mapRange(mousePos.x, 0, width, -0.5, 0.5);
-    mesh.rotation.x += (mx - mesh.rotation.x) * 0.05;
-    mesh.rotation.y += (my - mesh.rotation.y) * 0.05;
-
-    renderer.render(scene, camera);
-
-    const w = asciiCanvas.width;
-    const h = asciiCanvas.height;
-    asciiCtx.clearRect(0, 0, w, h);
-    if (w > 0 && h > 0) {
-      asciiCtx.drawImage(renderer.domElement, 0, 0, w, h);
-      const imgData = asciiCtx.getImageData(0, 0, w, h).data;
-      let str = '';
-      for (let y = 0; y < h; y++) {
-        for (let x = 0; x < w; x++) {
-          const i = (x + y * w) * 4;
-          const r = imgData[i];
-          const g = imgData[i + 1];
-          const b = imgData[i + 2];
-          const a = imgData[i + 3];
-          if (a === 0) {
-            str += ' ';
-            continue;
-          }
-          const gray = (0.3 * r + 0.6 * g + 0.1 * b) / 255;
-          let idx = Math.floor((1 - gray) * (charset.length - 1));
-          idx = charset.length - idx - 1;
-          str += charset[idx];
-        }
-        str += '\n';
-      }
-      preElement.textContent = str;
-    }
-
-    const dx = mousePos.x - centerPos.x;
-    const dy = mousePos.y - centerPos.y;
-    const deg = (Math.atan2(dy, dx) * 180) / Math.PI;
-    hueAngle += (deg - hueAngle) * 0.075;
-    if (containerRef.value?.firstElementChild) {
-      (containerRef.value.firstElementChild as HTMLElement).style.filter =
-        `hue-rotate(${hueAngle.toFixed(1)}deg)`;
-    }
-  }
-
-  function cleanup() {
-    if (animFrame !== null) cancelAnimationFrame(animFrame);
-    containerRef.value?.removeEventListener('mousemove', onMouseMove);
-    containerRef.value?.removeEventListener('touchmove', onTouchMove);
-    if (renderer) {
-      renderer.dispose();
-    }
-    if (material) material.dispose();
-    if (mesh?.geometry) mesh.geometry.dispose();
-    if (texture) texture.dispose();
-    scene = null;
-    camera = null;
-    renderer = null;
-    mesh = null;
-    material = null;
-    texture = null;
-  }
-
-  useResizeObserver(containerRef, (entries) => {
-    const { width, height } = entries[0].contentRect;
-    if (width > 0 && height > 0) {
-      setSize(width, height);
-    }
+  const props = withDefaults(defineProps<ASCIITextProps>(), {
+    text: 'Hey!',
+    asciiFontSize: 8,
+    charset: ASCII_CHARSET,
+    fontFamily: ASCII_FONT,
+    fontWeight: 600,
+    textColor: '#fdf9f3',
+    colors: () => [...ASCII_COLORS],
+    textScale: 1,
+    blocks: 0.9,
+    waves: 1,
+    waveSpeed: 1,
+    chroma: 1,
+    tilt: 1,
+    hueShift: 1,
+    scramble: 0.6,
+    clickRipple: true,
+    intro: true,
+    idle: true,
+    interactive: true,
+    theme: 'dark',
+    class: '',
   });
 
+  const containerRef = ref<HTMLDivElement | null>(null);
+  const canvasRef = ref<HTMLCanvasElement | null>(null);
+  const fallback = ref(false);
+  const reducedMotion = usePreferredReducedMotion();
+
+  const glyphs = computed(() =>
+    Array.from(props.charset).length > 1 ? props.charset : ASCII_CHARSET,
+  );
+
+  const settings = computed<ASCIITextSettings>(() => {
+    const palette = (
+      props.colors.length > 0 ? props.colors : ['#ffffff']
+    ).slice(0, 3);
+    const first = palette[0] ?? '#ffffff';
+    const second = palette[1] ?? first;
+    return {
+      cellSize: Math.max(3, props.asciiFontSize),
+      textScale: clamp(props.textScale, 0.1, 3),
+      blocks: clamp(props.blocks, 0, 1),
+      waves: Math.max(0, props.waves),
+      waveSpeed: Math.max(0, props.waveSpeed),
+      chroma: Math.max(0, props.chroma),
+      tilt: Math.max(0, props.tilt),
+      hueShift: clamp(props.hueShift, 0, 2),
+      scramble: clamp(props.scramble, 0, 1),
+      clickRipple: props.clickRipple,
+      intro: props.intro,
+      idle: props.idle,
+      interactive: props.interactive,
+      light: props.theme === 'light',
+      colors: [first, second, palette[2] ?? second],
+    };
+  });
+
+  let gl: WebGL2RenderingContext | null = null;
+  let program: WebGLProgram | null = null;
+  let buffer: WebGLBuffer | null = null;
+  let textTexture: WebGLTexture | null = null;
+  let glyphTexture: WebGLTexture | null = null;
+  const uniforms = new Map<UniformName, WebGLUniformLocation | null>();
+  const rippleData = new Float32Array(RIPPLES * 4);
+  const colorData = new Float32Array(9);
+  let colorKey = '';
+  let buildToken = 0;
+  let mounted = false;
+
+  const state = {
+    ready: false,
+    textAspect: 1,
+    glyphCount: 1,
+    time: 0,
+    tiltX: 0,
+    tiltY: 0,
+    hue: 0,
+    hover: 0,
+    intro: 0,
+    pointerX: 0,
+    pointerY: 0,
+    targetX: 0,
+    targetY: 0,
+    inside: false,
+    visible: true,
+    introPlayed: false,
+    ripples: [] as ASCIITextRipple[],
+  };
+
+  function loc(name: UniformName): WebGLUniformLocation | null {
+    return uniforms.get(name) ?? null;
+  }
+
+  function isReduced(): boolean {
+    return reducedMotion.value === 'reduce';
+  }
+
+  function build(): void {
+    if (!gl || !textTexture || !glyphTexture) return;
+    const textCanvas = drawText(
+      props.text,
+      props.fontFamily,
+      props.fontWeight,
+      props.textColor,
+    );
+    const glyphCanvas = drawGlyphs(glyphs.value, props.fontFamily);
+    if (!textCanvas || !glyphCanvas) return;
+    uploadTexture(gl, textTexture, textCanvas, false);
+    uploadTexture(gl, glyphTexture, glyphCanvas, true);
+    state.textAspect = textCanvas.width / textCanvas.height;
+    state.glyphCount = Array.from(glyphs.value).length;
+    state.ready = true;
+    if (settings.value.intro && !state.introPlayed && !isReduced()) {
+      state.introPlayed = true;
+      state.intro = 1;
+    }
+  }
+
+  function rebuild(): void {
+    if (!mounted) return;
+    const token = ++buildToken;
+    const run = () => {
+      if (token === buildToken && mounted) build();
+    };
+    run();
+    const fonts = document.fonts;
+    Promise.all([
+      fonts.load(
+        `${props.fontWeight} ${TEXT_PX}px ${props.fontFamily}`,
+        props.text || 'A',
+      ),
+      fonts.load(`500 ${GLYPH_HEIGHT}px ${props.fontFamily}`, glyphs.value),
+    ])
+      .catch(() => null)
+      .then(run);
+  }
+
+  function onFontsLoaded(): void {
+    if (mounted) build();
+  }
+
+  function resize(): void {
+    const container = containerRef.value;
+    const canvas = canvasRef.value;
+    if (!container || !canvas) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const width = Math.max(1, Math.round(container.clientWidth * dpr));
+    const height = Math.max(1, Math.round(container.clientHeight * dpr));
+    if (canvas.width !== width || canvas.height !== height) {
+      canvas.width = width;
+      canvas.height = height;
+    }
+  }
+
+  function frame(deltaMs: number): void {
+    const container = containerRef.value;
+    const canvas = canvasRef.value;
+    if (!gl || !program || !container || !canvas) return;
+    const s = settings.value;
+    const reduce = isReduced();
+    const dt = Math.min(0.05, Math.max(0.001, deltaMs / 1000));
+    state.time += reduce ? 0 : dt;
+    const dpr = canvas.width / Math.max(1, container.clientWidth);
+
+    let targetX = 0;
+    let targetY = 0;
+    if (s.interactive && state.inside) {
+      targetX = state.targetY * 0.5 * s.tilt;
+      targetY = state.targetX * 0.5 * s.tilt;
+    } else if (s.idle && !reduce) {
+      targetX = Math.sin(state.time * 0.55) * 0.12 * s.tilt;
+      targetY = Math.sin(state.time * 0.4 + 1.3) * 0.2 * s.tilt;
+    }
+    const follow = 1 - Math.exp(-dt / 0.3);
+    state.tiltX += (targetX - state.tiltX) * follow;
+    state.tiltY += (targetY - state.tiltY) * follow;
+    const angle = Math.atan2(state.targetY, state.targetX);
+    const hueTarget =
+      s.interactive && state.inside ? angle * s.hueShift : state.hue;
+    let delta = hueTarget - state.hue;
+    delta = Math.atan2(Math.sin(delta), Math.cos(delta));
+    state.hue += delta * (1 - Math.exp(-dt / 0.25));
+    state.hover +=
+      ((s.interactive && state.inside ? 1 : 0) - state.hover) *
+      (1 - Math.exp(-dt / 0.2));
+    if (state.intro > 0) state.intro = Math.max(0, state.intro - dt / 1.4);
+
+    rippleData.fill(0);
+    state.ripples = state.ripples.filter((ripple) => (ripple.age += dt) < 1.3);
+    state.ripples.slice(-RIPPLES).forEach((ripple, i) => {
+      rippleData.set([ripple.x * dpr, ripple.y * dpr, ripple.age, 1], i * 4);
+    });
+
+    const width = canvas.width;
+    const height = canvas.height;
+    gl.viewport(0, 0, width, height);
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.useProgram(program);
+    gl.activeTexture(gl.TEXTURE0);
+    gl.bindTexture(gl.TEXTURE_2D, textTexture);
+    gl.uniform1i(loc('uText'), 0);
+    gl.activeTexture(gl.TEXTURE1);
+    gl.bindTexture(gl.TEXTURE_2D, glyphTexture);
+    gl.uniform1i(loc('uGlyphs'), 1);
+    gl.uniform2f(loc('uSize'), width, height);
+    gl.uniform2f(loc('uCell'), s.cellSize * 0.62 * dpr, s.cellSize * dpr);
+    gl.uniform1f(loc('uGlyphCount'), state.glyphCount);
+    gl.uniform1f(loc('uTextAspect'), state.textAspect);
+    gl.uniform1f(loc('uPlaneHeight'), 0.5 * s.textScale);
+    gl.uniform2f(loc('uTilt'), state.tiltX, state.tiltY);
+    gl.uniform1f(loc('uTime'), state.time);
+    gl.uniform1f(loc('uWaves'), s.waves);
+    gl.uniform1f(loc('uWaveSpeed'), s.waveSpeed);
+    gl.uniform1f(loc('uChroma'), s.chroma);
+    gl.uniform1f(loc('uBlocks'), s.blocks);
+    const key = s.colors.join();
+    if (key !== colorKey) {
+      colorKey = key;
+      colorData.set(s.colors.flatMap(toRgb));
+    }
+    gl.uniform3fv(loc('uColors'), colorData);
+    gl.uniform1f(loc('uHue'), state.hue);
+    gl.uniform2f(loc('uPointer'), state.pointerX * dpr, state.pointerY * dpr);
+    gl.uniform1f(loc('uHover'), state.hover);
+    gl.uniform1f(loc('uScramble'), s.scramble);
+    gl.uniform4fv(loc('uRipples'), rippleData);
+    gl.uniform1f(loc('uIntro'), state.intro);
+    gl.uniform1f(loc('uLight'), s.light ? 1 : 0);
+    gl.uniform1f(loc('uReady'), state.ready ? 1 : 0);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+
+  const { pause, resume } = useRafFn(({ delta }) => frame(delta), {
+    immediate: false,
+  });
+
+  function locate(event: PointerEvent): void {
+    const container = containerRef.value;
+    if (!container) return;
+    const rect = container.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    state.pointerX = x;
+    state.pointerY = y;
+    state.targetX = clamp((x / Math.max(1, rect.width)) * 2 - 1, -1, 1);
+    state.targetY = clamp((y / Math.max(1, rect.height)) * 2 - 1, -1, 1);
+  }
+
+  function onPointerMove(event: PointerEvent): void {
+    locate(event);
+    state.inside = true;
+  }
+
+  function onPointerLeave(): void {
+    state.inside = false;
+  }
+
+  function onPointerDown(event: PointerEvent): void {
+    const s = settings.value;
+    if (!s.interactive || !s.clickRipple) return;
+    locate(event);
+    state.ripples.push({ x: state.pointerX, y: state.pointerY, age: 0 });
+  }
+
+  useEventListener(containerRef, 'pointermove', onPointerMove);
+  useEventListener(containerRef, 'pointerdown', onPointerDown);
+  useEventListener(containerRef, 'pointerleave', onPointerLeave);
+  useResizeObserver(containerRef, resize);
+  useIntersectionObserver(containerRef, (entries) => {
+    state.visible = entries.some((entry) => entry.isIntersecting);
+    if (!program) return;
+    if (state.visible) resume();
+    else pause();
+  });
+
+  watch(
+    [
+      () => props.text,
+      () => props.fontFamily,
+      () => props.fontWeight,
+      () => props.textColor,
+      glyphs,
+    ],
+    rebuild,
+  );
+
   onMounted(() => {
-    init();
+    const canvas = canvasRef.value;
+    if (!canvas) return;
+    gl = canvas.getContext('webgl2', {
+      alpha: true,
+      premultipliedAlpha: true,
+      antialias: false,
+    });
+    program = gl ? createProgram(gl) : null;
+    if (!gl || !program) {
+      fallback.value = true;
+      return;
+    }
+    buffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(
+      gl.ARRAY_BUFFER,
+      new Float32Array([-1, -1, 3, -1, -1, 3]),
+      gl.STATIC_DRAW,
+    );
+    gl.enableVertexAttribArray(0);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    textTexture = gl.createTexture();
+    glyphTexture = gl.createTexture();
+    for (const name of UNIFORM_NAMES) {
+      uniforms.set(name, gl.getUniformLocation(program, name));
+    }
+    mounted = true;
+    document.fonts.addEventListener('loadingdone', onFontsLoaded);
+    resize();
+    rebuild();
+    if (state.visible) resume();
   });
 
   onBeforeUnmount(() => {
-    cleanup();
+    mounted = false;
+    pause();
+    document.fonts.removeEventListener('loadingdone', onFontsLoaded);
+    if (gl) {
+      gl.deleteTexture(textTexture);
+      gl.deleteTexture(glyphTexture);
+      gl.deleteBuffer(buffer);
+      gl.deleteProgram(program);
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
+    }
+    gl = null;
+    program = null;
   });
 </script>
 
 <template>
   <div
     ref="containerRef"
-    :class="cn('ascii-text-container', $props.class)"
-  ></div>
+    role="img"
+    :aria-label="props.text"
+    :class="cn('absolute inset-0 touch-pan-y', props.class)"
+  >
+    <canvas ref="canvasRef" class="absolute inset-0 block size-full" />
+    <div
+      v-if="fallback"
+      class="absolute inset-0 flex items-center justify-center"
+      :style="{
+        fontFamily: props.fontFamily,
+        fontWeight: props.fontWeight,
+        fontSize: `${8 * props.textScale}vw`,
+        color: props.textColor,
+      }"
+    >
+      {{ props.text }}
+    </div>
+  </div>
 </template>
-
-<style scoped>
-  .ascii-text-container {
-    position: absolute;
-    inset: 0;
-  }
-
-  .ascii-text-container :deep(canvas) {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    image-rendering: pixelated;
-  }
-</style>

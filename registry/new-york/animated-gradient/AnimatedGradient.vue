@@ -371,36 +371,46 @@ void main() {
 
   useResizeObserver(containerRef, resize);
 
+  function uniformLoc(name: string): WebGLUniformLocation | null {
+    return uniforms[name] ?? null;
+  }
+
   function render(now: number) {
     if (!gl || !canvasRef.value) return;
     const elapsed = (now - startTime) / 1000;
     const speed = (params.value.speed / 100) * 5;
 
-    gl.uniform1f(uniforms.u_time, elapsed * speed + params.value.offset * 0.01);
+    gl.uniform1f(
+      uniformLoc('u_time'),
+      elapsed * speed + params.value.offset * 0.01,
+    );
     gl.uniform2f(
-      uniforms.u_resolution,
+      uniformLoc('u_resolution'),
       canvasRef.value.width,
       canvasRef.value.height,
     );
-    gl.uniform1f(uniforms.u_pixelRatio, window.devicePixelRatio || 1);
-    gl.uniform1f(uniforms.u_scale, params.value.scale);
-    gl.uniform1f(uniforms.u_rotation, (params.value.rotation * Math.PI) / 180);
+    gl.uniform1f(uniformLoc('u_pixelRatio'), window.devicePixelRatio || 1);
+    gl.uniform1f(uniformLoc('u_scale'), params.value.scale);
+    gl.uniform1f(
+      uniformLoc('u_rotation'),
+      (params.value.rotation * Math.PI) / 180,
+    );
 
     const c1 = hexToRgba(params.value.color1);
     const c2 = hexToRgba(params.value.color2);
     const c3 = hexToRgba(params.value.color3);
-    gl.uniform4f(uniforms.u_color1, c1[0], c1[1], c1[2], c1[3]);
-    gl.uniform4f(uniforms.u_color2, c2[0], c2[1], c2[2], c2[3]);
-    gl.uniform4f(uniforms.u_color3, c3[0], c3[1], c3[2], c3[3]);
+    gl.uniform4f(uniformLoc('u_color1'), c1[0], c1[1], c1[2], c1[3]);
+    gl.uniform4f(uniformLoc('u_color2'), c2[0], c2[1], c2[2], c2[3]);
+    gl.uniform4f(uniformLoc('u_color3'), c3[0], c3[1], c3[2], c3[3]);
 
-    gl.uniform1f(uniforms.u_proportion, params.value.proportion / 100);
-    gl.uniform1f(uniforms.u_softness, params.value.softness / 100);
-    gl.uniform1f(uniforms.u_shape, PatternShapes[params.value.shape]);
-    gl.uniform1f(uniforms.u_shapeScale, params.value.shapeSize / 100);
-    gl.uniform1f(uniforms.u_distortion, params.value.distortion / 50);
-    gl.uniform1f(uniforms.u_swirl, params.value.swirl / 100);
+    gl.uniform1f(uniformLoc('u_proportion'), params.value.proportion / 100);
+    gl.uniform1f(uniformLoc('u_softness'), params.value.softness / 100);
+    gl.uniform1f(uniformLoc('u_shape'), PatternShapes[params.value.shape]);
+    gl.uniform1f(uniformLoc('u_shapeScale'), params.value.shapeSize / 100);
+    gl.uniform1f(uniformLoc('u_distortion'), params.value.distortion / 50);
+    gl.uniform1f(uniformLoc('u_swirl'), params.value.swirl / 100);
     gl.uniform1f(
-      uniforms.u_swirlIterations,
+      uniformLoc('u_swirlIterations'),
       params.value.swirl === 0 ? 0 : params.value.swirlIterations,
     );
 

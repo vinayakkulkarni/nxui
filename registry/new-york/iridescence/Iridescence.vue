@@ -1,143 +1,169 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount } from 'vue';
-  import { useResizeObserver, useEventListener } from '@vueuse/core';
-  import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
+  import {
+    computed,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    shallowRef,
+    watch,
+  } from 'vue';
+  import {
+    useDocumentVisibility,
+    useEventListener,
+    useIntersectionObserver,
+    usePreferredReducedMotion,
+    useRafFn,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
+  import {
+    createIridescenceEngine,
+    toIridescenceSettings,
+  } from './iridescence-engine';
+  import type { IridescenceEngine, IridescenceProps } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      color?: [number, number, number];
-      speed?: number;
-      amplitude?: number;
-      mouseReact?: boolean;
-      class?: string;
-    }>(),
-    {
-      color: () => [1, 1, 1] as [number, number, number],
-      speed: 1.0,
-      amplitude: 0.1,
-      mouseReact: true,
-      class: '',
-    },
-  );
+  const props = withDefaults(defineProps<IridescenceProps>(), {
+    color: () => [1, 1, 1],
+    speed: 1,
+    amplitude: 0.1,
+    mouseReact: true,
+    scale: 1,
+    detail: 8,
+    rotation: 0,
+    warp: 1,
+    hueShift: 0,
+    saturation: 1,
+    brightness: 1.5,
+    contrast: 1,
+    stir: 0.5,
+    sheen: 0.3,
+    clickSwirl: true,
+    grain: 0,
+    fade: 0,
+    opacity: 1,
+    resolution: 1,
+    paused: false,
+    class: '',
+  });
 
   const containerRef = ref<HTMLDivElement | null>(null);
-  let animationId = 0;
-  let renderer: InstanceType<typeof Renderer> | null = null;
-  let glContext: WebGLRenderingContext | null = null;
-  let programRef: InstanceType<typeof Program> | null = null;
-  const mousePos = { x: 0.5, y: 0.5 };
+  const canvasRef = ref<HTMLCanvasElement | null>(null);
+  const rootEl = shallowRef<HTMLElement | null>(null);
+  const failed = ref(false);
+  let engine: IridescenceEngine | null = null;
+  let inView = true;
 
-  const VERT = `
-attribute vec2 uv;
-attribute vec2 position;
-varying vec2 vUv;
-void main() {
-  vUv = uv;
-  gl_Position = vec4(position, 0, 1);
-}`;
+  const reducedMotion = usePreferredReducedMotion();
+  const visibility = useDocumentVisibility();
+  const isReduced = () => reducedMotion.value === 'reduce';
 
-  const FRAG = `
-precision highp float;
-uniform float uTime;
-uniform vec3 uColor;
-uniform vec3 uResolution;
-uniform vec2 uMouse;
-uniform float uAmplitude;
-uniform float uSpeed;
-varying vec2 vUv;
+  const settings = computed(() => toIridescenceSettings(props));
 
-void main() {
-  float mr = min(uResolution.x, uResolution.y);
-  vec2 uv = (vUv.xy * 2.0 - 1.0) * uResolution.xy / mr;
-  uv += (uMouse - vec2(0.5)) * uAmplitude;
-  float d = -uTime * 0.5 * uSpeed;
-  float a = 0.0;
-  for (float i = 0.0; i < 8.0; ++i) {
-    a += cos(i - d - a * uv.x);
-    d += sin(uv.y * i + a);
+  const { pause, resume, isActive } = useRafFn(
+    ({ timestamp }) => {
+      if (!engine || !inView || visibility.value === 'hidden') {
+        pause();
+        return;
+      }
+      if (!engine.frame(timestamp)) pause();
+    },
+    { immediate: false },
+  );
+
+  function wake() {
+    if (!engine || isActive.value || !inView) return;
+    if (visibility.value === 'hidden') return;
+    resume();
   }
-  d += uTime * 0.5 * uSpeed;
-  vec3 col = vec3(cos(uv * vec2(d, a)) * 0.6 + 0.4, cos(a + d) * 0.5 + 0.5);
-  col = cos(col * cos(vec3(d, a, 2.5)) * 0.5 + 0.5) * uColor;
-  gl_FragColor = vec4(col, 1.0);
-}`;
 
-  useResizeObserver(containerRef, (entries) => {
-    if (!renderer || !programRef) return;
-    const { width, height } = entries[0]!.contentRect;
-    renderer.setSize(width, height);
-    programRef.uniforms.uResolution.value = new Color(
-      (renderer.gl.canvas as HTMLCanvasElement).width,
-      (renderer.gl.canvas as HTMLCanvasElement).height,
-      (renderer.gl.canvas as HTMLCanvasElement).width /
-        (renderer.gl.canvas as HTMLCanvasElement).height,
-    );
+  function measure() {
+    const el = containerRef.value;
+    if (!el || !engine) return;
+    engine.resize(el.clientWidth, el.clientHeight);
+    wake();
+  }
+
+  useResizeObserver(containerRef, measure);
+
+  useIntersectionObserver(containerRef, (entries) => {
+    inView = entries.some((entry) => entry.isIntersecting);
+    if (inView) {
+      engine?.resetClock();
+      wake();
+    }
   });
 
-  useEventListener(containerRef, 'mousemove', (e: MouseEvent) => {
-    if (!props.mouseReact || !containerRef.value || !programRef) return;
-    const rect = containerRef.value.getBoundingClientRect();
-    mousePos.x = (e.clientX - rect.left) / rect.width;
-    mousePos.y = 1.0 - (e.clientY - rect.top) / rect.height;
-    programRef.uniforms.uMouse.value[0] = mousePos.x;
-    programRef.uniforms.uMouse.value[1] = mousePos.y;
+  watch(visibility, () => {
+    engine?.resetClock();
+    wake();
   });
+
+  watch([settings, reducedMotion], () => {
+    if (!isActive.value) engine?.update();
+    wake();
+  });
+
+  function locate(event: PointerEvent) {
+    const el = containerRef.value;
+    if (!el) return null;
+    const rect = el.getBoundingClientRect();
+    return {
+      x: (event.clientX - rect.left) / Math.max(1, rect.width),
+      y: 1 - (event.clientY - rect.top) / Math.max(1, rect.height),
+    };
+  }
+
+  function onPointerMove(event: PointerEvent) {
+    const spot = locate(event);
+    if (!spot || !engine) return;
+    engine.pointerMove(spot.x, spot.y);
+    wake();
+  }
+
+  function onPointerDown(event: PointerEvent) {
+    const spot = locate(event);
+    if (!spot || !engine) return;
+    if (engine.swirl(spot.x, spot.y)) wake();
+  }
+
+  function onPointerLeave() {
+    engine?.pointerLeave();
+    wake();
+  }
+
+  useEventListener('pointermove', onPointerMove, { passive: true });
+  useEventListener('pointerdown', onPointerDown, { passive: true });
+  useEventListener(rootEl, 'pointerleave', onPointerLeave);
 
   onMounted(() => {
-    const container = containerRef.value;
-    if (!container) return;
-
-    renderer = new Renderer();
-    const gl = renderer.gl;
-    glContext = gl;
-    gl.clearColor(1, 1, 1, 1);
-    renderer.setSize(container.offsetWidth, container.offsetHeight);
-
-    const geometry = new Triangle(gl);
-    programRef = new Program(gl, {
-      vertex: VERT,
-      fragment: FRAG,
-      uniforms: {
-        uTime: { value: 0 },
-        uColor: { value: new Color(...props.color) },
-        uResolution: {
-          value: new Color(
-            (gl.canvas as HTMLCanvasElement).width,
-            (gl.canvas as HTMLCanvasElement).height,
-            (gl.canvas as HTMLCanvasElement).width /
-              (gl.canvas as HTMLCanvasElement).height,
-          ),
-        },
-        uMouse: { value: new Float32Array([0.5, 0.5]) },
-        uAmplitude: { value: props.amplitude },
-        uSpeed: { value: props.speed },
-      },
-    });
-
-    const mesh = new Mesh(gl, { geometry, program: programRef });
-    container.appendChild(gl.canvas as HTMLCanvasElement);
-
-    function update(t: number) {
-      animationId = requestAnimationFrame(update);
-      if (programRef) {
-        programRef.uniforms.uTime.value = t * 0.001;
-      }
-      if (renderer) renderer.render({ scene: mesh });
+    rootEl.value = document.documentElement;
+    const canvas = canvasRef.value;
+    if (!canvas) return;
+    engine = createIridescenceEngine(canvas, () => settings.value, isReduced);
+    if (!engine) {
+      failed.value = true;
+      return;
     }
-    animationId = requestAnimationFrame(update);
+    measure();
   });
 
   onBeforeUnmount(() => {
-    cancelAnimationFrame(animationId);
-    if (glContext) {
-      const canvas = glContext.canvas as HTMLCanvasElement;
-      if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
-      glContext.getExtension('WEBGL_lose_context')?.loseContext();
-    }
+    pause();
+    engine?.dispose();
+    engine = null;
   });
 </script>
 
 <template>
-  <div ref="containerRef" :class="cn('size-full', $props.class)"></div>
+  <div
+    ref="containerRef"
+    :class="cn('relative size-full overflow-hidden', props.class)"
+  >
+    <canvas
+      v-if="!failed"
+      ref="canvasRef"
+      class="absolute inset-0 block size-full"
+      aria-hidden="true"
+    />
+  </div>
 </template>

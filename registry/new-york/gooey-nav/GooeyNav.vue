@@ -1,388 +1,386 @@
 <script setup lang="ts">
-  import { ref, onMounted, onBeforeUnmount } from 'vue';
-  import { useResizeObserver } from '@vueuse/core';
+  import {
+    computed,
+    nextTick,
+    onBeforeUnmount,
+    onMounted,
+    ref,
+    shallowRef,
+    watch,
+  } from 'vue';
+  import {
+    useEventListener,
+    usePreferredReducedMotion,
+    useResizeObserver,
+  } from '@vueuse/core';
   import { cn } from '~/lib/utils';
-  import type { GooeyNavItem } from './types';
+  import {
+    GOOEY_DEFAULT_ITEMS,
+    GOOEY_PILLS,
+    GOOEY_THEMES,
+    contrastInk,
+    createGooeyEngine,
+    parseColor,
+  } from './gooey-engine';
+  import type { GooeyEngine, GooeyNavItem, GooeyNavProps } from './types';
 
-  const props = withDefaults(
-    defineProps<{
-      items: GooeyNavItem[];
-      animationTime?: number;
-      particleCount?: number;
-      particleDistances?: [number, number];
-      particleR?: number;
-      timeVariance?: number;
-      colors?: number[];
-      initialActiveIndex?: number;
-      class?: string;
-    }>(),
-    {
-      animationTime: 600,
-      particleCount: 15,
-      particleDistances: () => [90, 10],
-      particleR: 100,
-      timeVariance: 300,
-      colors: () => [1, 2, 3, 1, 2, 3, 1, 4],
-      initialActiveIndex: 0,
-      class: '',
-    },
+  const props = withDefaults(defineProps<GooeyNavProps>(), {
+    items: () => GOOEY_DEFAULT_ITEMS,
+    initialActiveIndex: 0,
+    activeIndex: undefined,
+    theme: 'dark',
+    color: undefined,
+    activeTextColor: undefined,
+    colors: () => [],
+    size: 'md',
+    frame: true,
+    animationTime: 600,
+    particleCount: 15,
+    timeVariance: 300,
+    spread: 56,
+    gooeyness: 0.5,
+    wobble: 0.5,
+    hoverEffect: true,
+    class: '',
+  });
+
+  const emit = defineEmits<{
+    change: [index: number, item: GooeyNavItem];
+    'update:activeIndex': [index: number];
+  }>();
+
+  const innerIndex = ref(props.initialActiveIndex);
+  const current = computed(() =>
+    Math.min(
+      Math.max(0, props.activeIndex ?? innerIndex.value),
+      Math.max(0, props.items.length - 1),
+    ),
   );
 
-  const containerRef = ref<HTMLElement | null>(null);
-  const navRef = ref<HTMLElement | null>(null);
-  const filterRef = ref<HTMLElement | null>(null);
-  const textRef = ref<HTMLElement | null>(null);
-  const activeIndex = ref(props.initialActiveIndex);
+  const stageRef = ref<HTMLElement | null>(null);
+  const canvasRef = ref<HTMLCanvasElement | null>(null);
+  const listRef = ref<HTMLElement | null>(null);
+  const overlayRef = ref<HTMLElement | null>(null);
+  const fallbackRef = ref<HTMLElement | null>(null);
+  const engine = shallowRef<GooeyEngine | null>(null);
+  const motion = usePreferredReducedMotion();
 
-  function noise(n = 1): number {
-    return n / 2 - Math.random() * n;
-  }
+  const palette = computed(() => (props.theme === 'light' ? 'light' : 'dark'));
+  const pillColor = computed(
+    () => props.color || GOOEY_PILLS[palette.value].color,
+  );
+  const pillRgb = computed(() => parseColor(pillColor.value));
+  const tints = computed(() => props.colors.map(parseColor));
+  const hoverRgb = computed(() => parseColor(GOOEY_PILLS[palette.value].hover));
+  const textColor = computed(
+    () => props.activeTextColor || contrastInk(pillRgb.value),
+  );
 
-  function getXY(
-    distance: number,
-    pointIndex: number,
-    totalPoints: number,
-  ): [number, number] {
-    const angle =
-      ((360 + noise(8)) / totalPoints) * pointIndex * (Math.PI / 180);
-    return [distance * Math.cos(angle), distance * Math.sin(angle)];
-  }
+  const navStyle = computed(() => ({
+    ...GOOEY_THEMES[palette.value],
+    '--gn-pill': pillColor.value,
+    '--gn-active-ink': textColor.value,
+  }));
 
-  function createParticle(
-    i: number,
-    t: number,
-    d: [number, number],
-    r: number,
-  ) {
-    const rotate = noise(r / 10);
+  function settings() {
     return {
-      start: getXY(d[0], props.particleCount - i, props.particleCount),
-      end: getXY(d[1] + noise(7), props.particleCount - i, props.particleCount),
-      time: t,
-      scale: 1 + noise(0.2),
-      color: props.colors[Math.floor(Math.random() * props.colors.length)],
-      rotate: rotate > 0 ? (rotate + r / 20) * 10 : (rotate - r / 20) * 10,
+      animationTime: props.animationTime,
+      particleCount: props.particleCount,
+      timeVariance: props.timeVariance,
+      spread: props.spread,
+      gooeyness: props.gooeyness,
+      wobble: props.wobble,
+      hoverEffect: props.hoverEffect,
+      pillRgb: pillRgb.value,
+      tints: tints.value,
+      hoverRgb: hoverRgb.value,
+      shadow: GOOEY_PILLS[palette.value].shadow,
     };
   }
 
-  function makeParticles(element: HTMLElement) {
-    const d = props.particleDistances;
-    const r = props.particleR;
-    const bubbleTime = props.animationTime * 2 + props.timeVariance;
-    element.style.setProperty('--time', `${bubbleTime}ms`);
-
-    for (let i = 0; i < props.particleCount; i++) {
-      const t = props.animationTime * 2 + noise(props.timeVariance * 2);
-      const p = createParticle(i, t, d, r);
-      element.classList.remove('active');
-
-      setTimeout(() => {
-        const particle = document.createElement('span');
-        const point = document.createElement('span');
-        particle.classList.add('gooey-particle');
-        particle.style.setProperty('--start-x', `${p.start[0]}px`);
-        particle.style.setProperty('--start-y', `${p.start[1]}px`);
-        particle.style.setProperty('--end-x', `${p.end[0]}px`);
-        particle.style.setProperty('--end-y', `${p.end[1]}px`);
-        particle.style.setProperty('--time', `${p.time}ms`);
-        particle.style.setProperty('--scale', `${p.scale}`);
-        particle.style.setProperty('--color', `var(--color-${p.color}, white)`);
-        particle.style.setProperty('--rotate', `${p.rotate}deg`);
-
-        point.classList.add('gooey-point');
-        particle.appendChild(point);
-        element.appendChild(particle);
-        requestAnimationFrame(() => {
-          element.classList.add('active');
-        });
-        setTimeout(() => {
-          try {
-            element.removeChild(particle);
-          } catch {
-            // Particle already removed
-          }
-        }, t);
-      }, 30);
-    }
+  function mount() {
+    const stage = stageRef.value;
+    const canvas = canvasRef.value;
+    const list = listRef.value;
+    const overlay = overlayRef.value;
+    const fallback = fallbackRef.value;
+    if (!stage || !canvas || !list || !overlay || !fallback) return;
+    engine.value = createGooeyEngine({
+      stage,
+      canvas,
+      list,
+      overlay,
+      fallback,
+      reduced: motion.value === 'reduce',
+      settings,
+    });
+    engine.value.settle(current.value);
   }
 
-  function updateEffectPosition(element: HTMLElement) {
-    if (!containerRef.value || !filterRef.value || !textRef.value) return;
-    const containerRect = containerRef.value.getBoundingClientRect();
-    const pos = element.getBoundingClientRect();
-    const styles = {
-      left: `${pos.x - containerRect.x}px`,
-      top: `${pos.y - containerRect.y}px`,
-      width: `${pos.width}px`,
-      height: `${pos.height}px`,
-    };
-    Object.assign(filterRef.value.style, styles);
-    Object.assign(textRef.value.style, styles);
-    textRef.value.textContent = element.textContent;
-  }
-
-  function handleClick(e: Event, index: number) {
-    e.preventDefault();
-    const liEl = (e.currentTarget as HTMLElement).parentElement;
-    if (!liEl || activeIndex.value === index) return;
-
-    activeIndex.value = index;
-    updateEffectPosition(liEl);
-
-    if (filterRef.value) {
-      const particles = filterRef.value.querySelectorAll('.gooey-particle');
-      particles.forEach((p) => filterRef.value?.removeChild(p));
-    }
-
-    if (textRef.value) {
-      textRef.value.classList.remove('active');
-      void (textRef.value as HTMLElement).offsetWidth;
-      textRef.value.classList.add('active');
-    }
-
-    if (filterRef.value) {
-      makeParticles(filterRef.value);
-    }
+  function unmount() {
+    engine.value?.dispose();
+    engine.value = null;
   }
 
   onMounted(() => {
-    if (!navRef.value || !containerRef.value) return;
-    const activeLi = navRef.value.querySelectorAll('li')[activeIndex.value];
-    if (activeLi) {
-      updateEffectPosition(activeLi);
-      textRef.value?.classList.add('active');
-    }
+    mount();
+    document.fonts?.ready.then(() => engine.value?.resize());
   });
+  onBeforeUnmount(unmount);
 
-  useResizeObserver(containerRef, () => {
-    if (!navRef.value) return;
-    const activeLi = navRef.value.querySelectorAll('li')[activeIndex.value];
-    if (activeLi) {
-      updateEffectPosition(activeLi);
-    }
-  });
+  watch(
+    () => props.items.length,
+    async () => {
+      unmount();
+      await nextTick();
+      mount();
+    },
+  );
 
-  onBeforeUnmount(() => {
-    // Cleanup handled by VueUse
-  });
+  watch(current, (index) => engine.value?.go(index));
+
+  watch(
+    [
+      pillColor,
+      palette,
+      () => props.gooeyness,
+      () => props.size,
+      () => props.frame,
+    ],
+    async () => {
+      await nextTick();
+      engine.value?.resize();
+      engine.value?.refresh();
+    },
+  );
+
+  useResizeObserver([stageRef, listRef], () => engine.value?.resize());
+
+  function onOver(event: PointerEvent) {
+    const list = listRef.value;
+    if (!(event.target instanceof Element) || !list) return;
+    const item = event.target.closest<HTMLElement>('[data-gooey-index]');
+    if (!item || !list.contains(item)) return;
+    engine.value?.hover(Number(item.dataset.gooeyIndex));
+  }
+
+  function onLeave() {
+    engine.value?.leave();
+  }
+
+  useEventListener(listRef, 'pointerover', onOver);
+  useEventListener(listRef, 'pointerleave', onLeave);
+
+  function select(index: number, event: MouseEvent) {
+    const item = props.items[index];
+    if (!item) return;
+    if (!item.href || item.href === '#') event.preventDefault();
+    if (index === current.value) return;
+    if (props.activeIndex === undefined) innerIndex.value = index;
+    emit('update:activeIndex', index);
+    emit('change', index, item);
+  }
 </script>
 
 <template>
-  <div
-    ref="containerRef"
-    :class="cn('gooey-nav-container relative', $props.class)"
+  <nav
+    :class="
+      cn(
+        'gooey-nav',
+        `gooey-nav--${size}`,
+        frame && 'gooey-nav--framed',
+        props.class,
+      )
+    "
+    :style="navStyle"
   >
-    <nav>
-      <ul ref="navRef" class="gooey-nav-list">
+    <span v-if="frame" class="gooey-nav__rim" />
+    <div ref="stageRef" class="gooey-nav__stage">
+      <canvas ref="canvasRef" class="gooey-nav__canvas" aria-hidden="true" />
+      <span ref="fallbackRef" class="gooey-nav__fallback" aria-hidden="true" />
+      <ul ref="listRef" class="gooey-nav__list">
         <li
           v-for="(item, index) in items"
           :key="index"
-          :class="{ active: activeIndex === index }"
+          class="gooey-nav__item"
+          :data-gooey-index="index"
+          :data-active="index === current ? '' : undefined"
         >
-          <a :href="item.href ?? '#'" @click="(e) => handleClick(e, index)">
-            {{ item.label }}
-          </a>
+          <component
+            :is="item.href ? 'a' : 'button'"
+            :href="item.href"
+            :type="item.href ? undefined : 'button'"
+            class="gooey-nav__link"
+            :aria-current="index === current ? 'page' : undefined"
+            @click="select(index, $event)"
+          >
+            <span v-if="item.icon" class="gooey-nav__icon">
+              <Icon :name="item.icon" class="gooey-nav__glyph" />
+            </span>
+            <span v-if="item.label" class="gooey-nav__label">
+              {{ item.label }}
+            </span>
+          </component>
         </li>
       </ul>
-    </nav>
-    <span ref="filterRef" class="gooey-effect gooey-filter"></span>
-    <span ref="textRef" class="gooey-effect gooey-text"></span>
-  </div>
+      <ul
+        ref="overlayRef"
+        class="gooey-nav__list gooey-nav__list--active"
+        aria-hidden="true"
+      >
+        <li v-for="(item, index) in items" :key="index" class="gooey-nav__item">
+          <span class="gooey-nav__link">
+            <span v-if="item.icon" class="gooey-nav__icon">
+              <Icon :name="item.icon" class="gooey-nav__glyph" />
+            </span>
+            <span v-if="item.label" class="gooey-nav__label">
+              {{ item.label }}
+            </span>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <style scoped>
-  .gooey-nav-container nav {
-    display: flex;
+  .gooey-nav {
+    --gn-pad: 6px;
+    --gn-gap: 4px;
+    --gn-font: 14px;
+    --gn-x: 16px;
+    --gn-y: 9px;
     position: relative;
-    transform: translate3d(0, 0, 0.01px);
+    display: inline-flex;
+    max-width: 100%;
+    font-size: var(--gn-font);
+    line-height: 1.2;
   }
 
-  .gooey-nav-list {
-    display: flex;
-    gap: 2em;
-    list-style: none;
-    padding: 0 1em;
-    margin: 0;
+  .gooey-nav--sm {
+    --gn-pad: 5px;
+    --gn-gap: 2px;
+    --gn-font: 13px;
+    --gn-x: 13px;
+    --gn-y: 7px;
+  }
+
+  .gooey-nav--lg {
+    --gn-pad: 7px;
+    --gn-gap: 6px;
+    --gn-font: 16px;
+    --gn-x: 20px;
+    --gn-y: 11px;
+  }
+
+  .gooey-nav--framed {
+    padding: var(--gn-pad);
+    border-radius: 999px;
+    background: var(--gn-frame);
+    box-shadow: var(--gn-frame-shadow);
+    -webkit-backdrop-filter: blur(20px) saturate(1.6);
+    backdrop-filter: blur(20px) saturate(1.6);
+  }
+
+  .gooey-nav__stage {
     position: relative;
-    z-index: 3;
-    color: white;
-    text-shadow: 0 1px 1px oklch(0.15 0.01 250 / 0.2);
+    max-width: 100%;
   }
 
-  .gooey-nav-list li {
-    border-radius: 100vw;
-    position: relative;
-    cursor: pointer;
-    transition:
-      background-color 0.3s ease,
-      color 0.3s ease,
-      box-shadow 0.3s ease;
-    box-shadow: 0 0 0.5px 1.5px transparent;
-    color: white;
-  }
-
-  .gooey-nav-list li a {
-    display: inline-block;
-    padding: 0.6em 1em;
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .gooey-nav-list li:focus-within:has(:focus-visible) {
-    box-shadow: 0 0 0.5px 1.5px white;
-  }
-
-  .gooey-nav-list li::after {
-    content: '';
+  .gooey-nav__canvas {
     position: absolute;
-    inset: 0;
-    border-radius: 10px;
-    background: white;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
-    z-index: -1;
-  }
-
-  .gooey-nav-list li.active {
-    color: black;
-    text-shadow: none;
-  }
-
-  .gooey-nav-list li.active::after {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  .gooey-effect {
-    position: absolute;
-    left: 0;
     top: 0;
-    width: 0;
-    height: 0;
-    opacity: 1;
+    left: 0;
     pointer-events: none;
-    display: grid;
-    place-items: center;
-    z-index: 1;
   }
 
-  .gooey-text {
-    color: white;
-    transition: color 0.3s ease;
-  }
-
-  .gooey-text.active {
-    color: black;
-  }
-
-  .gooey-filter {
-    filter: blur(7px) contrast(100) blur(0);
-    mix-blend-mode: lighten;
-  }
-
-  .gooey-filter::before {
-    content: '';
+  .gooey-nav__fallback {
     position: absolute;
-    inset: -75px;
-    z-index: -2;
-    background: black;
+    top: 0;
+    left: 0;
+    display: none;
+    border-radius: 999px;
+    background: var(--gn-pill);
+    pointer-events: none;
   }
 
-  .gooey-filter::after {
-    content: '';
+  .gooey-nav__list {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gn-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .gooey-nav__list--active {
     position: absolute;
     inset: 0;
-    background: white;
-    transform: scale(0);
-    opacity: 0;
-    z-index: -1;
-    border-radius: 100vw;
+    color: var(--gn-active-ink);
+    visibility: hidden;
+    clip-path: inset(100%);
+    pointer-events: none;
   }
 
-  .gooey-filter.active::after {
-    animation: gooey-pill 0.3s ease both;
+  .gooey-nav__item {
+    display: flex;
   }
 
-  @keyframes gooey-pill {
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
+  .gooey-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: var(--gn-y) var(--gn-x);
+    border: none;
+    border-radius: 999px;
+    background: none;
+    color: var(--gn-muted);
+    font: inherit;
+    font-weight: 500;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  :deep(.gooey-particle),
-  :deep(.gooey-point) {
-    display: block;
-    opacity: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    transform-origin: center;
+  .gooey-nav__list--active .gooey-nav__link {
+    color: inherit;
   }
 
-  :deep(.gooey-particle) {
-    --time: 5s;
+  .gooey-nav__item[data-active] .gooey-nav__link {
+    color: var(--gn-ink);
+  }
+
+  .gooey-nav__link:focus-visible {
+    outline: 2px solid var(--gn-ink);
+    outline-offset: 2px;
+  }
+
+  .gooey-nav__icon {
+    display: inline-flex;
+    flex: none;
+  }
+
+  .gooey-nav__glyph {
+    width: 1.15em;
+    height: 1.15em;
+  }
+
+  .gooey-nav__rim {
     position: absolute;
-    top: calc(50% - 8px);
-    left: calc(50% - 8px);
-    animation: gooey-particle-move calc(var(--time)) ease 1 -350ms;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow:
+      inset 0 0 0 1px var(--gn-frame-edge),
+      inset 0 1px 0 var(--gn-frame-highlight);
+    pointer-events: none;
   }
 
-  :deep(.gooey-point) {
-    background: var(--color);
-    opacity: 1;
-    animation: gooey-point-move calc(var(--time)) ease 1 -350ms;
-  }
-
-  @keyframes gooey-particle-move {
-    0% {
-      transform: rotate(0deg) translate(var(--start-x), var(--start-y));
-      opacity: 1;
-      animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
-    }
-    70% {
-      transform: rotate(calc(var(--rotate) * 0.5))
-        translate(calc(var(--end-x) * 1.2), calc(var(--end-y) * 1.2));
-      opacity: 1;
-      animation-timing-function: ease;
-    }
-    85% {
-      transform: rotate(calc(var(--rotate) * 0.66))
-        translate(var(--end-x), var(--end-y));
-      opacity: 1;
-    }
-    100% {
-      transform: rotate(calc(var(--rotate) * 1.2))
-        translate(calc(var(--end-x) * 0.5), calc(var(--end-y) * 0.5));
-      opacity: 1;
-    }
-  }
-
-  @keyframes gooey-point-move {
-    0% {
-      transform: scale(0);
-      opacity: 0;
-      animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
-    }
-    25% {
-      transform: scale(calc(var(--scale) * 0.25));
-    }
-    38% {
-      opacity: 1;
-    }
-    65% {
-      transform: scale(var(--scale));
-      opacity: 1;
-      animation-timing-function: ease;
-    }
-    85% {
-      transform: scale(var(--scale));
-      opacity: 1;
-    }
-    100% {
-      transform: scale(0);
-      opacity: 0;
+  @media (hover: hover) {
+    .gooey-nav__link:hover {
+      color: var(--gn-ink);
     }
   }
 </style>

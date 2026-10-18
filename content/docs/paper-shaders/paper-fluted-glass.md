@@ -30,6 +30,7 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-fluted-glass.json"
 | `shift`            | `number`                                                         | `0`           | Texture shift in direction opposite to the grid (-1 to 1)                           |
 | `blur`             | `number`                                                         | `0`           | One-directional blur over the image and extra blur around edges (0 to 1)            |
 | `edges`            | `number`                                                         | `0.25`        | Glass distortion and softness on the image edges (0 to 1)                           |
+| `margin`           | `number`                                                         | —             | Sets all four margin values at once; overrides margin-left/right/top/bottom         |
 | `margin-left`      | `number`                                                         | `0`           | Distance from the left edge to the effect (0 to 1)                                  |
 | `margin-right`     | `number`                                                         | `0`           | Distance from the right edge to the effect (0 to 1)                                 |
 | `margin-top`       | `number`                                                         | `0`           | Distance from the top edge to the effect (0 to 1)                                   |
@@ -54,4 +55,5 @@ npx shadcn-vue@latest add "https://nxui.geoql.in/r/paper-fluted-glass.json"
 
 Powered by [Paper Shaders](https://github.com/paper-design/shaders)
 (© Lost Coast Labs, Inc., Apache-2.0) via the framework-agnostic
-`@paper-design/shaders` package driven by a Vue 3 mount.
+`@paper-design/shaders` package driven by a Vue 3 mount. This is an
+unofficial community port; it is not maintained by Paper.
