@@ -8,7 +8,7 @@ Find the right animated Vue component in the nxui registry.
 curl https://nxui.geoql.in/r/registry.json
 ```
 
-Returns `{ items: [{ name, title, description }] }` for all 220+ components.
+Returns `{ items: [{ name, title, description }] }` for all 360+ components.
 Filter client-side by matching your query against `name`, `title`, and
 `description`.
 

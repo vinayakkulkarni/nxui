@@ -1,5 +1,5 @@
 ---
-title: Cursor Driven Particle Typography
+title: Particle Typography
 description: Canvas-based text rendered as particles that disperse on cursor hover with spring physics.
 ---
 

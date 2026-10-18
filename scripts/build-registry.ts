@@ -1005,7 +1005,7 @@ const COMPONENTS: Record<
     deps: ['@vueuse/core'],
   },
   'cursor-driven-particle-typography': {
-    title: 'Cursor Driven Particle Typography',
+    title: 'Particle Typography',
     description:
       'Canvas-based text rendered as particles that disperse on cursor hover with spring physics.',
     deps: ['@vueuse/core'],

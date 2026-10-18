@@ -105,7 +105,7 @@ export default defineEventHandler(async (event: H3Event) => {
           capabilities: { tools: {} },
           serverInfo: MCP_SERVER_INFO,
           instructions:
-            'nxui component registry. Use list_components to browse or search the 220+ animated Vue components, get_component for full source and install instructions, and get_install_command for the shadcn-vue CLI command.',
+            'nxui component registry. Use list_components to browse or search the 360+ animated Vue components, get_component for full source and install instructions, and get_install_command for the shadcn-vue CLI command.',
         }),
       );
       continue;

@@ -31,7 +31,7 @@ export default defineEventHandler((event: H3Event) => {
     },
     capabilities: { tools: {} },
     description:
-      'MCP server for the nxui component registry: browse, search, and fetch the source of 220+ animated Vue components, with shadcn-vue CLI install commands.',
+      'MCP server for the nxui component registry: browse, search, and fetch the source of 360+ animated Vue components, with shadcn-vue CLI install commands.',
     documentationUrl: 'https://nxui.geoql.in/docs',
   };
 });

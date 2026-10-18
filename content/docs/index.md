@@ -5,7 +5,7 @@ description: Beautiful animated components for Vue. Built with Tailwind CSS and 
 
 nxui is a collection of beautifully crafted animated Vue components that you can copy and paste into your applications. Built with Tailwind CSS and motion-v.
 
-The registry ships **241 components across 8 categories** — text animations, backgrounds, hero backgrounds, visual effects, buttons, animations, shaders and general components. Every one is installable in a single `shadcn-vue` command, ships with dark mode, and adds **zero runtime dependencies** beyond the ones already in your Nuxt 4 app.
+The registry ships **364 components across 10 categories**: text animations, components, dashboard widgets, charts, visual effects, buttons, animations, backgrounds, Paper shaders and hero backgrounds. Each one installs with a single `shadcn-vue` command as source you own, supports dark mode, and adds only the npm packages that component needs.
 
 ## Features
 

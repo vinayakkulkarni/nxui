@@ -9,7 +9,7 @@ export default defineNuxtPlugin(() => {
   const searchComponents: WebMcpTool = {
     name: 'search_components',
     description:
-      'Search the nxui registry of 220+ animated Vue components by name, title, or description. Returns matching components with install commands.',
+      'Search the nxui registry of 360+ animated Vue components by name, title, or description. Returns matching components with install commands.',
     inputSchema: {
       type: 'object',
       properties: {

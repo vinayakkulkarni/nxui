@@ -1,9 +1,17 @@
 import sharp from 'sharp';
 import { readdirSync } from 'node:fs';
 
-const componentCount = readdirSync('registry/new-york', {
-  withFileTypes: true,
-}).filter((d) => d.isDirectory()).length;
+// One docs page per user-facing component. Counting registry/new-york would
+// also count the internal registry:lib helpers (chart, paper-shader-mount).
+const componentCount = readdirSync('content/docs', { withFileTypes: true })
+  .filter((d) => d.isDirectory())
+  .reduce(
+    (n, d) =>
+      n +
+      readdirSync(`content/docs/${d.name}`).filter((f) => f.endsWith('.md'))
+        .length,
+    0,
+  );
 
 const f = "system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif";
 

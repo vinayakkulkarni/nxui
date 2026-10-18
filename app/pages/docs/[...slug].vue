@@ -133,8 +133,38 @@
   // SEO
   const canonicalUrl = `https://nxui.geoql.in${route.path}`;
   useHead({
-    link: [{ rel: 'canonical', href: canonicalUrl }],
+    link: [
+      { rel: 'canonical', href: canonicalUrl },
+      // Same page as plain markdown, for AI agents and crawlers.
+      {
+        rel: 'alternate',
+        type: 'text/markdown',
+        href: `https://nxui.geoql.in/raw${path.value}.md`,
+      },
+    ],
   });
+  // Tells search and answer engines this page documents a Vue component they
+  // can install, not a generic web page.
+  useSchemaOrg([
+    defineBreadcrumb({
+      itemListElement: [
+        { name: 'Docs', item: '/docs' },
+        { name: page.value?.title },
+      ],
+    }),
+    {
+      '@type': 'SoftwareSourceCode',
+      name: `${page.value?.title} — animated Vue component`,
+      description: page.value?.description,
+      url: canonicalUrl,
+      codeRepository: `https://github.com/vinayakkulkarni/nxui/tree/main/registry/new-york/${componentSlug.value}`,
+      programmingLanguage: ['Vue', 'TypeScript'],
+      runtimePlatform: 'Vue 3, Nuxt, Tailwind CSS',
+      license: 'https://opensource.org/licenses/MIT',
+      isAccessibleForFree: true,
+      author: { '@id': 'https://nxui.geoql.in/#identity' },
+    },
+  ]);
   // Per-page OG card, generated at build time by scripts/build-og-images.ts
   // (one static PNG per component under public/og/docs/**). The site-wide
   // og.png in nuxt.config remains the baseline for any route without a card.

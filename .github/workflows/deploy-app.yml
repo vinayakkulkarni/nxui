@@ -33,6 +33,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          # Full history: nuxt.config reads each docs file's last commit date
+          # for sitemap <lastmod>.
+          fetch-depth: 0
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v6.1.0
@@ -103,3 +107,17 @@ jobs:
             --data '{"purge_everything":true}')
           cat /tmp/purge.json
           test "$status" = '200'
+
+      # IndexNow tells Bing (the index behind ChatGPT search), Yandex, Seznam
+      # and Naver that pages changed, so new and updated components get
+      # recrawled within hours instead of weeks. The key file lives in public/.
+      - name: Ping IndexNow
+        continue-on-error: true
+        run: |
+          urls=$(curl -sS https://nxui.geoql.in/sitemap.xml | grep -oE '<loc>[^<]+' | sed 's/<loc>//' | head -10000 | jq -R . | jq -s -c .)
+          body=$(jq -n -c --argjson u "$urls" '{host:"nxui.geoql.in",key:"de4d002622ebcea117df12b8f6f3da2d",keyLocation:"https://nxui.geoql.in/de4d002622ebcea117df12b8f6f3da2d.txt",urlList:$u}')
+          status=$(curl -sS -o /tmp/indexnow.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data "$body")
+          echo "IndexNow HTTP $status, $(echo "$urls" | jq length) URLs"
+          cat /tmp/indexnow.txt
+          case "$status" in 200|202) ;; *) exit 1 ;; esac

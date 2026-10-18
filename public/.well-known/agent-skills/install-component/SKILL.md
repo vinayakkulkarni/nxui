@@ -1,6 +1,6 @@
 # Install an nxui component
 
-nxui is a registry of 220+ animated Vue 3 components (Tailwind CSS + motion-v),
+nxui is a registry of 360+ animated Vue 3 components (Tailwind CSS + motion-v),
 including the only Vue port of Paper Shaders. Components are installed with the
 shadcn-vue CLI — you copy the source into your project and own the code.
 
@@ -18,7 +18,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/shimmer-button.json
 
 ## Discover component names
 
-- Registry index (JSON): `GET https://nxui.geoql.in/r/registry.json` — 220+
+- Registry index (JSON): `GET https://nxui.geoql.in/r/registry.json` — 360+
   items with `name`, `title`, `description`.
 - Per-component payload: `GET https://nxui.geoql.in/r/<name>.json` — full Vue
   source in `files[].content`, npm deps in `dependencies`.

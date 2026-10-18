@@ -100,6 +100,10 @@ export const docsNav: NavGroup[] = [
         path: '/docs/text-animations/kinetic-text-reveal',
       },
       {
+        title: 'Letter Cascade',
+        path: '/docs/text-animations/letter-cascade',
+      },
+      {
         title: 'Logo Loop',
         path: '/docs/text-animations/logo-loop',
         badge: 'updated',
@@ -113,6 +117,10 @@ export const docsNav: NavGroup[] = [
         title: 'Particle Text',
         path: '/docs/text-animations/particle-text',
         badge: 'new',
+      },
+      {
+        title: 'Particle Typography',
+        path: '/docs/text-animations/cursor-driven-particle-typography',
       },
       {
         title: 'Rotating Text',
@@ -189,6 +197,10 @@ export const docsNav: NavGroup[] = [
         title: 'Text Pressure',
         path: '/docs/text-animations/text-pressure',
         badge: 'updated',
+      },
+      {
+        title: 'Text Repel',
+        path: '/docs/text-animations/text-repel',
       },
       { title: 'Text String', path: '/docs/text-animations/text-string' },
       {

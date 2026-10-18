@@ -11,7 +11,7 @@ const SITE_URL = 'https://nxui.geoql.in';
 export const A2A_AGENT_CARD: A2aAgentCard = {
   name: 'nxui Component Finder',
   description:
-    'Deterministic agent for the nxui registry of 220+ animated Vue components. Send a plain-text description of the UI you need (e.g. "shimmering call-to-action button") and it returns matching components with descriptions, docs links, and shadcn-vue CLI install commands. Backed by registry search, not an LLM: responses are instant, repeatable, and free of hallucination.',
+    'Deterministic agent for the nxui registry of 360+ animated Vue components. Send a plain-text description of the UI you need (e.g. "shimmering call-to-action button") and it returns matching components with descriptions, docs links, and shadcn-vue CLI install commands. Backed by registry search, not an LLM: responses are instant, repeatable, and free of hallucination.',
   version: '1.0.0',
   supportedInterfaces: [
     {

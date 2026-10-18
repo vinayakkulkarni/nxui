@@ -1,12 +1,39 @@
+import { execFileSync } from 'node:child_process';
 import { readdirSync, existsSync } from 'node:fs';
 import { readdir, rm } from 'node:fs/promises';
 import { join, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { docsNav } from './app/config/docs';
 
-const componentCount = readdirSync('registry/new-york', {
-  withFileTypes: true,
-}).filter((d) => d.isDirectory()).length;
+// Last commit date of a content file, for sitemap <lastmod>. Search and answer
+// engines use lastmod to decide what to recrawl. Returns undefined outside a
+// git checkout or for an uncommitted file.
+function gitLastModified(file: string): string | undefined {
+  try {
+    const date = execFileSync(
+      'git',
+      ['log', '-1', '--format=%cs', '--', file],
+      {
+        encoding: 'utf8',
+      },
+    ).trim();
+    return date || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+// One docs page per user-facing component. Counting registry/new-york would
+// also count the internal registry:lib helpers (chart, paper-shader-mount).
+const componentCount = readdirSync('content/docs', { withFileTypes: true })
+  .filter((d) => d.isDirectory())
+  .reduce(
+    (n, d) =>
+      n +
+      readdirSync(`content/docs/${d.name}`).filter((f) => f.endsWith('.md'))
+        .length,
+    0,
+  );
 
 // nitropack 2.13.4's bundled wrangler types predate Workers Cache GA and
 // observability traces GA; wrangler 4.108 supports both and nitro
@@ -404,6 +431,17 @@ export default defineNuxtConfig({
   // payloads and sitemap while dropping ~15 MB from every asset upload. This
   // only holds on Workers; under Pages the static HTML *was* the page.
   hooks: {
+    // Sitemap <lastmod> from each docs file's last commit. @nuxtjs/sitemap's
+    // own afterParse hook may run before or after this one, so set both the
+    // field it reads (`modifiedAt`) and the entry it writes (`sitemap`).
+    'content:file:afterParse': ({ file, content }) => {
+      // file.path is absolute here, so git can take it as-is.
+      const lastmod = gitLastModified(file.path);
+      if (!lastmod) return;
+      content.modifiedAt = lastmod;
+      if (content.sitemap && typeof content.sitemap === 'object')
+        content.sitemap = { ...content.sitemap, lastmod };
+    },
     'nitro:init': (nitro) => {
       nitro.hooks.hook('prerender:done', async () => {
         const publicDir = nitro.options.output.publicDir;
