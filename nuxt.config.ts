@@ -330,6 +330,18 @@ export default defineNuxtConfig({
     identity: 'Organization',
   },
 
+  // `pnpm dev --host` serves plain HTTP on the LAN (phone testing).
+  // upgrade-insecure-requests would rewrite every /_nuxt request on a LAN IP
+  // to https://, which nothing serves, so the page loads without CSS or JS.
+  $development: {
+    security: {
+      headers: {
+        contentSecurityPolicy: { 'upgrade-insecure-requests': false },
+        strictTransportSecurity: false,
+      },
+    },
+  },
+
   // securityheaders.com A+: nonce-based CSP + the core six headers, applied
   // at runtime by the worker (assets.run_worker_first below sends HTML
   // through the worker, dodging the _headers file's 100-rule cap — the cap

@@ -548,6 +548,11 @@ export const docsNav: NavGroup[] = [
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
       { title: 'Masonry', path: '/docs/components/masonry', badge: 'updated' },
       {
+        title: 'Model Picker',
+        path: '/docs/components/model-picker',
+        badge: 'new',
+      },
+      {
         title: 'Model Viewer',
         path: '/docs/components/model-viewer',
         badge: 'updated',
@@ -555,6 +560,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Morph Slider',
         path: '/docs/components/morph-slider',
+        badge: 'new',
+      },
+      {
+        title: 'Motion Bento',
+        path: '/docs/components/motion-bento',
         badge: 'new',
       },
       { title: 'Music Player', path: '/docs/components/music-player' },
@@ -686,6 +696,11 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       { title: 'Scrub Input', path: '/docs/components/scrub-input' },
+      {
+        title: 'Segment Display',
+        path: '/docs/components/segment-display',
+        badge: 'new',
+      },
       { title: 'Showcase Card', path: '/docs/components/showcase-card' },
       {
         title: 'Shredder',
@@ -823,6 +838,11 @@ export const docsNav: NavGroup[] = [
     title: 'Dashboard',
     items: [
       {
+        title: 'Backup Reserve',
+        path: '/docs/dashboard/backup-reserve',
+        badge: 'new',
+      },
+      {
         title: 'Clean Table',
         path: '/docs/dashboard/clean-table',
         badge: 'new',
@@ -834,8 +854,18 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Data Table', path: '/docs/dashboard/data-table', badge: 'new' },
       {
+        title: 'Device Pairing',
+        path: '/docs/dashboard/device-pairing',
+        badge: 'new',
+      },
+      {
         title: 'Downtime Log',
         path: '/docs/dashboard/downtime-log',
+        badge: 'new',
+      },
+      {
+        title: 'Equipment Panel',
+        path: '/docs/dashboard/equipment-panel',
         badge: 'new',
       },
       { title: 'KPI Card', path: '/docs/dashboard/kpi-card', badge: 'new' },
@@ -845,13 +875,33 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       {
+        title: 'Operating Mode Dial',
+        path: '/docs/dashboard/operating-mode-dial',
+        badge: 'new',
+      },
+      {
+        title: 'Power Monitor',
+        path: '/docs/dashboard/power-monitor',
+        badge: 'new',
+      },
+      {
         title: 'Range Calendar',
         path: '/docs/dashboard/range-calendar',
         badge: 'new',
       },
       {
+        title: 'Self-Powered Gauge',
+        path: '/docs/dashboard/self-powered-gauge',
+        badge: 'new',
+      },
+      {
         title: 'Status Panel',
         path: '/docs/dashboard/status-panel',
+        badge: 'new',
+      },
+      {
+        title: 'Usage Meter',
+        path: '/docs/dashboard/usage-meter',
         badge: 'new',
       },
     ],

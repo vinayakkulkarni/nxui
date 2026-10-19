@@ -68,6 +68,18 @@ const CHART_COMPONENTS = new Set([
   'sparkline',
 ]);
 
+/**
+ * Seven-segment LCD digits shared by the energy dashboard widgets.
+ */
+const SEGMENT_DISPLAY_URL = 'https://nxui.geoql.in/r/segment-display.json';
+const SEGMENT_DISPLAY_USERS = new Set([
+  'backup-reserve',
+  'device-pairing',
+  'equipment-panel',
+  'power-monitor',
+  'self-powered-gauge',
+]);
+
 const COMPONENTS: Record<
   string,
   { title: string; description: string; deps: string[] }
@@ -2235,6 +2247,66 @@ const COMPONENTS: Record<
       'An image filter that splits an image into shifting color layers like lens chromatic aberration and warps it like barrel or pincushion distortion. Ported from Paper Shaders (Apache-2.0).',
     deps: ['@paper-design/shaders'],
   },
+  'backup-reserve': {
+    title: 'Backup Reserve',
+    description:
+      'Battery reserve setting with an LCD readout, segmented charge bar, slider, presets, a storm watch switch and a grid charging stepper.',
+    deps: ['@vueuse/core'],
+  },
+  'device-pairing': {
+    title: 'Device Pairing',
+    description:
+      'A battery pairing card with an isometric line-art stage, a six-cell LCD code input, a code countdown and a three-step progress row.',
+    deps: ['@vueuse/core'],
+  },
+  'equipment-panel': {
+    title: 'Equipment Panel',
+    description:
+      'A home-energy equipment card with three LCD readouts, an All/Alerts filtered device table and rows that open to a live chart.',
+    deps: ['@vueuse/core'],
+  },
+  'model-picker': {
+    title: 'Model Picker',
+    description:
+      'A chat composer with a model menu that compares speed, quality and cost, with thinking effort, web search and a rolling price tray.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'motion-bento': {
+    title: 'Motion Bento',
+    description:
+      'A services bento grid with a headline, a call-to-action and cards whose illustrated artwork plays its own loop.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'operating-mode-dial': {
+    title: 'Operating Mode Dial',
+    description:
+      'A battery mode card with a knurled knob that springs between modes, an LCD description panel, schedule tabs and a 24-hour rate strip.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'power-monitor': {
+    title: 'Power Monitor',
+    description:
+      'Live home-energy card with an LCD readout, a pixel-grid solar and home-use chart with a time cursor, and a Day, Week, Month and Year switch.',
+    deps: ['@vueuse/core'],
+  },
+  'segment-display': {
+    title: 'Segment Display',
+    description:
+      'Seven-segment LCD digits with faint unlit segments, a soft glow and a slant, sized by font size.',
+    deps: [],
+  },
+  'self-powered-gauge': {
+    title: 'Self-Powered Gauge',
+    description:
+      'Analog needle meter for the self-powered share, with a stacked source bar and a seven-day segment chart.',
+    deps: ['@vueuse/core'],
+  },
+  'usage-meter': {
+    title: 'Usage Meter',
+    description:
+      'A plan usage card with a range switch, rolling credit total, stacked category meter, per-day bars, quota stats and a limit state.',
+    deps: ['@vueuse/core'],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:
@@ -2305,6 +2377,7 @@ function buildRegistryItem(slug: string): RegistryItem | null {
   const registryDependencies = [
     ...(needsMount ? [PAPER_SHADER_MOUNT_URL] : []),
     ...(CHART_COMPONENTS.has(slug) ? [CHART_LIB_URL] : []),
+    ...(SEGMENT_DISPLAY_USERS.has(slug) ? [SEGMENT_DISPLAY_URL] : []),
   ];
 
   return {

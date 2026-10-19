@@ -2176,6 +2176,66 @@
       "description": "An image filter that splits an image into shifting color layers like lens chromatic aberration and warps it like barrel or pincushion distortion. Ported from Paper Shaders (Apache-2.0)."
     },
     {
+      "name": "backup-reserve",
+      "type": "registry:ui",
+      "title": "Backup Reserve",
+      "description": "Battery reserve setting with an LCD readout, segmented charge bar, slider, presets, a storm watch switch and a grid charging stepper."
+    },
+    {
+      "name": "device-pairing",
+      "type": "registry:ui",
+      "title": "Device Pairing",
+      "description": "A battery pairing card with an isometric line-art stage, a six-cell LCD code input, a code countdown and a three-step progress row."
+    },
+    {
+      "name": "equipment-panel",
+      "type": "registry:ui",
+      "title": "Equipment Panel",
+      "description": "A home-energy equipment card with three LCD readouts, an All/Alerts filtered device table and rows that open to a live chart."
+    },
+    {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "title": "Model Picker",
+      "description": "A chat composer with a model menu that compares speed, quality and cost, with thinking effort, web search and a rolling price tray."
+    },
+    {
+      "name": "motion-bento",
+      "type": "registry:ui",
+      "title": "Motion Bento",
+      "description": "A services bento grid with a headline, a call-to-action and cards whose illustrated artwork plays its own loop."
+    },
+    {
+      "name": "operating-mode-dial",
+      "type": "registry:ui",
+      "title": "Operating Mode Dial",
+      "description": "A battery mode card with a knurled knob that springs between modes, an LCD description panel, schedule tabs and a 24-hour rate strip."
+    },
+    {
+      "name": "power-monitor",
+      "type": "registry:ui",
+      "title": "Power Monitor",
+      "description": "Live home-energy card with an LCD readout, a pixel-grid solar and home-use chart with a time cursor, and a Day, Week, Month and Year switch."
+    },
+    {
+      "name": "segment-display",
+      "type": "registry:ui",
+      "title": "Segment Display",
+      "description": "Seven-segment LCD digits with faint unlit segments, a soft glow and a slant, sized by font size."
+    },
+    {
+      "name": "self-powered-gauge",
+      "type": "registry:ui",
+      "title": "Self-Powered Gauge",
+      "description": "Analog needle meter for the self-powered share, with a stacked source bar and a seven-day segment chart."
+    },
+    {
+      "name": "usage-meter",
+      "type": "registry:ui",
+      "title": "Usage Meter",
+      "description": "A plan usage card with a range switch, rolling credit total, stacked category meter, per-day bars, quota stats and a limit state."
+    },
+    {
       "name": "clean-table",
       "type": "registry:ui",
       "title": "Clean Table",
