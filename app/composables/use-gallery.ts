@@ -14,6 +14,8 @@ const FEATURED = [
   'data-table',
 ];
 
+const NEW_TAB = 'New';
+
 function toItems(): GalleryCategory[] {
   const seen = new Set<string>();
   return docsNav
@@ -38,13 +40,21 @@ export function useGallery() {
     (i): i is GalleryItem => i !== undefined,
   );
 
+  // Everything carrying the `new` nav badge: the current drop.
+  const fresh = all.filter((i) => i.badge === 'new');
+
   const query = ref('');
   const active = ref('All');
 
   const visible = computed<GalleryCategory[]>(() => {
     const q = query.value.trim().toLowerCase();
-    return categories
-      .filter((c) => active.value === 'All' || c.title === active.value)
+    const source =
+      active.value === NEW_TAB
+        ? [{ title: NEW_TAB, items: fresh }]
+        : categories.filter(
+            (c) => active.value === 'All' || c.title === active.value,
+          );
+    return source
       .map((c) => ({
         title: c.title,
         items: q
@@ -55,6 +65,10 @@ export function useGallery() {
   });
 
   const total = all.length;
-  const tabs = ['All', ...categories.map((c) => c.title)];
+  const tabs = [
+    'All',
+    ...(fresh.length > 0 ? [NEW_TAB] : []),
+    ...categories.map((c) => c.title),
+  ];
   return { featured, visible, query, active, tabs, total };
 }
