@@ -2252,18 +2252,21 @@ const COMPONENTS: Record<
     description:
       'Battery reserve setting with an LCD readout, segmented charge bar, slider, presets, a storm watch switch and a grid charging stepper.',
     deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
   },
   'device-pairing': {
     title: 'Device Pairing',
     description:
       'A battery pairing card with an isometric line-art stage, a six-cell LCD code input, a code countdown and a three-step progress row.',
     deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
   },
   'equipment-panel': {
     title: 'Equipment Panel',
     description:
       'A home-energy equipment card with three LCD readouts, an All/Alerts filtered device table and rows that open to a live chart.',
     deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
   },
   'model-picker': {
     title: 'Model Picker',
@@ -2288,6 +2291,7 @@ const COMPONENTS: Record<
     description:
       'Live home-energy card with an LCD readout, a pixel-grid solar and home-use chart with a time cursor, and a Day, Week, Month and Year switch.',
     deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
   },
   'segment-display': {
     title: 'Segment Display',
@@ -2300,11 +2304,18 @@ const COMPONENTS: Record<
     description:
       'Analog needle meter for the self-powered share, with a stacked source bar and a seven-day segment chart.',
     deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
   },
   'usage-meter': {
     title: 'Usage Meter',
     description:
       'A plan usage card with a range switch, rolling credit total, stacked category meter, per-day bars, quota stats and a limit state.',
+    deps: ['@vueuse/core'],
+  },
+  'user-dropdown': {
+    title: 'User Dropdown',
+    description:
+      'An account card that grows into a user menu with key-cap shortcuts, side submenus for status, accounts and spaces, and a recessed footer.',
     deps: ['@vueuse/core'],
   },
   'clean-table': {

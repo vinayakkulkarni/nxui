@@ -805,6 +805,11 @@ export const docsNav: NavGroup[] = [
         badge: 'updated',
       },
       {
+        title: 'User Dropdown',
+        path: '/docs/components/user-dropdown',
+        badge: 'new',
+      },
+      {
         title: 'Visual Stepper',
         path: '/docs/components/visual-stepper',
       },

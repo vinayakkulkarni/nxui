@@ -52,7 +52,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>374 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>375 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -82,11 +82,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (374)
+## Components (375)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 376 items total, of which these 374 are
+> on — so `npx shadcn-vue add` resolves 377 items total, of which these 375 are
 > user-facing components.
 
 ### Text Animations (47)
@@ -181,7 +181,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Swarm Cursor](https://nxui.geoql.in/docs/animations/swarm-cursor)           | A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons.                                     |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)         | A spinning reticle cursor whose corner brackets snap around targets, follow their corner radius and show a label.                                |
 
-### Components (142)
+### Components (143)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -321,6 +321,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Thought Line](https://nxui.geoql.in/docs/components/thought-line)                   | Reasoning trace header with a breathing glyph and live clock that folds its steps into one line when the work settles.                                                 |
 | [Tilted Card](https://nxui.geoql.in/docs/components/tilted-card)                     | A 3D card that tilts toward the cursor, with glare, a soft shadow, floating depth layers and a flip side.                                                              |
 | [Timezone Companion](https://nxui.geoql.in/docs/components/timezone-companion)       | A meeting-overlap finder: a 24-hour grid of city working hours with a draggable scrubber and a find-best-time sweep.                                                   |
+| [User Dropdown](https://nxui.geoql.in/docs/components/user-dropdown)                 | An account card that grows into a user menu with key-cap shortcuts, side submenus for status, accounts and spaces, and a recessed footer.                              |
 | [Visual Stepper](https://nxui.geoql.in/docs/components/visual-stepper)               | Auto-playing vertical stepper with growing connector bars and a crossfading preview card.                                                                              |
 | [Voice Pill](https://nxui.geoql.in/docs/components/voice-pill)                       | Mic button that opens into a capsule with a scrolling waveform and a timer while recording; tap to latch, hold to talk, slide left to cancel.                          |
 | [Wake Slider](https://nxui.geoql.in/docs/components/wake-slider)                     | Thumbless range slider of thin bars where drag speed raises a wake behind the handle.                                                                                  |

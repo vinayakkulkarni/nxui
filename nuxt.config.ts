@@ -336,7 +336,11 @@ export default defineNuxtConfig({
   $development: {
     security: {
       headers: {
-        contentSecurityPolicy: { 'upgrade-insecure-requests': false },
+        contentSecurityPolicy: {
+          'upgrade-insecure-requests': false,
+          // Vite's HMR socket (ws://) on a LAN IP is not covered by https:.
+          'connect-src': ['ws:'],
+        },
         strictTransportSecurity: false,
       },
     },
