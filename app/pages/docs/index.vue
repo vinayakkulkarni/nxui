@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  definePageMeta({ layout: 'docs' });
+  definePageMeta({ layout: 'docs', wide: true });
 
   const { data: page } = await useAsyncData('docs-intro', () =>
     queryCollection('docs').path('/docs').first(),
@@ -99,29 +99,22 @@
 
 <template>
   <div v-if="page" class="space-y-16">
-    <!-- Header and intro read as one block; the 16-unit rhythm separates sections. -->
-    <div class="space-y-8">
-      <header class="space-y-4">
-        <h1
-          class="font-display text-4xl font-bold md:text-5xl lg:text-6xl"
-          style="letter-spacing: -0.04em; line-height: 1.1"
-        >
-          {{ page.title }}
-        </h1>
-        <p
-          v-if="page.description"
-          class="max-w-2xl font-serif text-lg/relaxed italic text-muted-foreground"
-        >
-          {{ page.description }}
-        </p>
-        <p class="text-sm font-medium text-muted-foreground">
-          {{ componentCount }}+ copy-paste components
-        </p>
-      </header>
-      <ContentRenderer :value="page" class="[&>p:first-child]:mt-0" />
-    </div>
+    <!-- Gallery first: live demos are the hero. Prose stays below for readers and crawlers. -->
+    <DocsGalleryHero :description="page.description" />
+    <DocsGalleryFeatured />
+    <DocsGallery />
 
-    <section class="space-y-4">
+    <section aria-labelledby="about-heading" class="max-w-3xl space-y-4">
+      <h2
+        id="about-heading"
+        class="font-display text-2xl font-bold md:text-3xl"
+      >
+        About nxui
+      </h2>
+      <ContentRenderer :value="page" class="[&>p:first-child]:mt-0" />
+    </section>
+
+    <section class="max-w-3xl space-y-4">
       <h2 class="font-display text-2xl font-bold md:text-3xl">
         Frequently asked questions
       </h2>

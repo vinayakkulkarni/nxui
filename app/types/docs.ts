@@ -37,6 +37,25 @@ export interface NavGroup {
   items: NavItem[];
 }
 
+/** One component card in the /docs gallery. */
+export interface GalleryItem extends NavItem {
+  /** Last path segment, e.g. `paper-crumple`. Also keys the demo module. */
+  slug: string;
+  /** Docs group title, e.g. `Components`. */
+  category: string;
+}
+
+export interface GalleryCategory {
+  title: string;
+  items: GalleryItem[];
+}
+
+export interface DocsGalleryTileProps {
+  item: GalleryItem;
+  /** Bento tiles span more grid cells and use a taller preview. */
+  size?: 'sm' | 'lg';
+}
+
 export interface TocHeading {
   id: string;
   text: string;

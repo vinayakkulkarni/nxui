@@ -753,10 +753,6 @@ export const docsNav: NavGroup[] = [
       },
       { title: 'Stepper', path: '/docs/components/stepper', badge: 'updated' },
       {
-        title: 'Holo Sticker',
-        path: '/docs/components/holo-sticker',
-      },
-      {
         title: 'Sticky Scroll Cards',
         path: '/docs/components/sticky-scroll-cards',
       },
