@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^21.2.4",
-    "@commitlint/config-conventional": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.4",
     "@nuxt/eslint-config": "^1.17.0",
     "@nuxtjs/tailwindcss": "7.0.0-beta.1",
     "@tweakpane/core": "^2.0.5",
