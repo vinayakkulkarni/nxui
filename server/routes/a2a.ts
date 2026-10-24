@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3';
+import { defineRouteMeta } from 'nitropack/runtime';
 import {
   defineEventHandler,
   readValidatedBody,

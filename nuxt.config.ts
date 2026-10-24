@@ -156,7 +156,7 @@ export default defineNuxtConfig({
   ],
 
   // @nuxt/content's build-time database uses Node's built-in SQLite
-  // (node:sqlite) rather than the native better-sqlite3 addon. Node 24 ships
+  // (node:sqlite) rather than the native better-sqlite3 addon. Node 26 ships
   // node:sqlite, so this removes the node-gyp compile step entirely — a clean
   // install works on any machine (and in CI) with no native toolchain,
   // because pnpm 12's standalone builds no longer bundle node-gyp.
@@ -431,10 +431,12 @@ export default defineNuxtConfig({
   // rate-limits itself, so a genuinely missing chunk cannot reload-loop.
   experimental: {
     emitRouteChunkError: 'automatic-immediate',
-    // compatibilityVersion 5 turns Nitro auto-imports off, and Nuxt 4.6.2 now
-    // enforces it. nuxt-llms 0.2.0 (last release Jan 2026) still imports
-    // `useNitroApp` from `#imports`, so the server build fails without them.
-    // Our own server files import their h3 helpers explicitly.
+    // compatibilityVersion 5 turns Nitro auto-imports off, and Nuxt 4.6.2
+    // enforces it. nuxt-llms 0.3.0 now imports from `nitropack/runtime`, but
+    // @nuxt/content 3.16.2 (latest, checked 2026-10-24) still imports
+    // `defineNitroPlugin` from `#imports` in content-llms.plugin.js, so the
+    // server build fails without them. Our own server files import their
+    // h3 and nitropack/runtime helpers explicitly.
     nitroAutoImports: true,
   },
 
