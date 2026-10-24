@@ -514,8 +514,8 @@ Dependency-free SVG charts with the [TanStack Charts](https://tanstack.com/chart
 
 ### Prerequisites
 
-- [Node.js 24+](https://nodejs.org)
-- [pnpm 12+](https://pnpm.io) (recommended: install via `corepack enable`)
+- [Node.js 26+](https://nodejs.org) (declared in `package.json` `devEngines.runtime`)
+- [pnpm 12.15+](https://pnpm.io) (the version is pinned in `package.json` `packageManager`)
 
 ### Setup
 

@@ -1,5 +1,6 @@
 import type { H3Event } from 'h3';
 import { OpenPanel } from '@openpanel/sdk';
+import { useRuntimeConfig } from 'nitropack/runtime';
 
 /**
  * Server-side OpenPanel tracker. The Nuxt module's SDK is client-only, so
