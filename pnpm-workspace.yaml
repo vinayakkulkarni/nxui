@@ -1,5 +1,5 @@
 # pnpm 11+ reads ONLY auth/registry keys from .npmrc; every other setting
-# lives here in camelCase. Nuxt module deps (@nuxtjs/mdc, @plausible-analytics)
+# lives here in camelCase. Nuxt module deps (e.g. @nuxtjs/mdc)
 # must be resolvable from the project root for Vite's optimizeDeps, which
 # needs a flat public hoist (nuxt/nuxt#31015).
 shamefullyHoist: true

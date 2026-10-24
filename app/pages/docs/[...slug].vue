@@ -110,6 +110,18 @@
     demoCode.value = '';
     demoRefreshable.value = false;
   });
+  const { track } = useAnalytics();
+  function trackComponentView() {
+    track('component_viewed', {
+      component: componentSlug.value,
+      category: category.value,
+    });
+  }
+  // onMounted covers the first view; the watch covers client navigation that
+  // reuses this page instance.
+  onMounted(trackComponentView);
+  watch(path, trackComponentView);
+
   // Refresh key for replay button
   const refreshKey = ref(0);
   function replay() {

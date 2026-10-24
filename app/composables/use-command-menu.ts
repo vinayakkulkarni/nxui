@@ -6,6 +6,7 @@ export function useCommandMenu() {
   const query = ref('');
   const inputRef = ref<HTMLInputElement | null>(null);
   const selectedIndex = ref(0);
+  const { track } = useAnalytics();
 
   watch(isOpen, (val) => {
     if (val) {
@@ -35,6 +36,7 @@ export function useCommandMenu() {
   );
 
   function handleSelect(path: string) {
+    track('search_result_selected', { path, queryLength: query.value.length });
     isOpen.value = false;
     router.push(path);
   }

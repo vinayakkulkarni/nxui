@@ -7,6 +7,16 @@
   const command =
     'npx shadcn-vue@latest add "https://nxui.geoql.in/r/data-table.json"';
   const { copy, copied } = useClipboard({ source: command });
+  const { track } = useAnalytics();
+
+  function copyCommand() {
+    copy(command);
+    track('install_command_copied', {
+      component: 'data-table',
+      location: 'gallery_hero',
+      packageManager: 'npm',
+    });
+  }
 </script>
 
 <template>
@@ -38,7 +48,7 @@
         type="button"
         class="inline-flex h-10 min-w-0 items-center gap-3 rounded-lg border border-border/60 bg-card px-4 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground"
         :aria-label="copied ? 'Copied install command' : 'Copy install command'"
-        @click="copy(command)"
+        @click="copyCommand"
       >
         <span class="truncate">{{ command }}</span>
         <Icon

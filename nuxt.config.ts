@@ -51,6 +51,17 @@ const workerRuntimeFeatures = {
 // Build the prerender route list from docsNav, only including paths whose
 // backing content/docs/{cat}/{slug}.md actually exists. This avoids
 // aborting prerender on missing pages (createError 404 with fatal: true).
+// Public analytics IDs for nxui.geoql.in. They ship in the HTML, so they are
+// not secrets; NUXT_PUBLIC_* env vars override them at runtime.
+const analytics = {
+  gtagId: 'G-0P290V33WX',
+  plausibleScriptId: 'pa-ZrScGkc1Caitm3aG39Xkb',
+  plausibleApiHost: 'https://analytics.geoql.in',
+  openpanelClientId:
+    process.env.NUXT_PUBLIC_OPENPANEL_CLIENT_ID ||
+    'e540b460-3e82-452b-94ca-e1c69245b3ca',
+};
+
 const docRoutes = docsNav
   .flatMap((g) => g.items.map((i: { path: string }) => i.path))
   .filter((p) => {
@@ -106,16 +117,13 @@ export default defineNuxtConfig({
         classSuffix: '',
       },
     ],
-    [
-      '@nuxtjs/plausible',
-      {
-        domain: 'nxui.geoql.in',
-        apiHost: 'https://analytics.geoql.in',
-        autoOutboundTracking: true,
-      },
-    ],
+    // GA4 loads through useScriptGoogleAnalytics in
+    // app/plugins/5.google-analytics.client.ts. Plausible loads its pa-*.js
+    // script from app/plugins/7.plausible.client.ts; @nuxtjs/plausible never
+    // boots that script, so it is not used.
+    '@nuxt/scripts',
     // OpenPanel product analytics (self-hosted at events.geoql.in),
-    // alongside Plausible. The module bundles the SDK into the app's own
+    // alongside Plausible and GA4. The module bundles the SDK into the app's own
     // nonce'd module script (no external op1.js), so only connect-src needs
     // events.geoql.in for the /track POST. The module copies every option
     // below into runtimeConfig.public (browser-exposed), so clientSecret is
@@ -160,7 +168,7 @@ export default defineNuxtConfig({
   },
 
   openpanel: {
-    clientId: process.env.NUXT_PUBLIC_OPENPANEL_CLIENT_ID ?? '',
+    clientId: analytics.openpanelClientId,
     apiUrl: 'https://events.geoql.in/api',
     trackScreenViews: true,
     trackOutgoingLinks: true,
@@ -330,8 +338,11 @@ export default defineNuxtConfig({
     headers: {
       contentSecurityPolicy: {
         'base-uri': ["'none'"],
-        // OpenPanel (events.geoql.in) + Plausible (analytics.geoql.in) event
-        // POSTs, plus demo components that fetch remote data over HTTPS.
+        // OpenPanel (events.geoql.in), Plausible (analytics.geoql.in) and GA4
+        // (*.google-analytics.com, *.analytics.google.com) event POSTs, plus
+        // demo components that fetch remote data over HTTPS. The tracker
+        // scripts (analytics.geoql.in, www.googletagmanager.com) are injected
+        // by nonce'd app code, so 'strict-dynamic' below allows them.
         'connect-src': ["'self'", 'https:'],
         'font-src': ["'self'", 'https:', 'data:'],
         'form-action': ["'self'"],
@@ -400,11 +411,15 @@ export default defineNuxtConfig({
     // Server-only: never exposed to the client bundle. Used by
     // server/utils/openpanel.ts to authenticate server-side track calls.
     openpanel: {
-      clientId: process.env.NUXT_PUBLIC_OPENPANEL_CLIENT_ID ?? '',
+      clientId: analytics.openpanelClientId,
       clientSecret: process.env.NUXT_OPENPANEL_CLIENT_SECRET ?? '',
     },
     public: {
       componentCount,
+      gtagId: analytics.gtagId,
+      plausibleScriptId: analytics.plausibleScriptId,
+      plausibleApiHost: analytics.plausibleApiHost,
+      openpanelClientId: analytics.openpanelClientId,
     },
   },
 

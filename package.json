@@ -23,6 +23,7 @@
     "lint:fix": "oxlint --fix && eslint . --fix",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
+    "test": "vitest run",
     "prepare": "is-ci || husky",
     "build:registry": "tsx scripts/build-registry.ts",
     "update:deps": "pnpm dlx taze -I"
@@ -33,8 +34,8 @@
     "@iconify-json/simple-icons": "^1.2.100",
     "@nuxt/content": "^3.16.2",
     "@nuxt/icon": "^2.5.1",
+    "@nuxt/scripts": "^1.3.12",
     "@nuxtjs/color-mode": "^4.0.1",
-    "@nuxtjs/plausible": "^4.0.0",
     "@nuxtjs/robots": "^7.0.2",
     "@nuxtjs/sitemap": "^9.1.0",
     "@openpanel/nuxt": "^0.4.1",
@@ -88,6 +89,7 @@
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",
     "typescript": "^6.0.3",
+    "vitest": "^5.0.5",
     "vue": "^3.5.44",
     "vue-tsc": "^3.3.13",
     "wrangler": "^4.151.2"
