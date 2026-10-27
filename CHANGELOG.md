@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.1.1](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.1.0...nxui-v0.1.1) (2026-10-27)
+
+
+### Features
+
+* **analytics:** send events to Plausible, OpenPanel and GA4 ([#317](https://github.com/vinayakkulkarni/nxui/issues/317)) ([427b6cc](https://github.com/vinayakkulkarni/nxui/commit/427b6ccccf7dd909f05329fb4d1e0e26a931b56a))
+* **docs:** turn /docs into a live component gallery ([e7386d9](https://github.com/vinayakkulkarni/nxui/commit/e7386d900677df27f04634cd8be712ddb3bb9483))
+
+
+### Bug Fixes
+
+* **deps:** Bump @iconify-json/lucide from 1.2.145 to 1.2.146 ([#311](https://github.com/vinayakkulkarni/nxui/issues/311)) ([df30de8](https://github.com/vinayakkulkarni/nxui/commit/df30de83b883826bd19999bba2748854f6948fc7))
+
+
+### Miscellaneous
+
+* bump dependencies ✨ ([dc6557a](https://github.com/vinayakkulkarni/nxui/commit/dc6557a145ba0d642d4ef9d739c73c1b4d6d1048))
+* **deps-dev:** Bump @commitlint/cli from 21.2.3 to 21.2.4 ([#310](https://github.com/vinayakkulkarni/nxui/issues/310)) ([153573f](https://github.com/vinayakkulkarni/nxui/commit/153573f6c63f8583a6c5f5ffa1cab636b3601ce1))
+* **deps-dev:** Bump @commitlint/config-conventional ([#312](https://github.com/vinayakkulkarni/nxui/issues/312)) ([efd9a55](https://github.com/vinayakkulkarni/nxui/commit/efd9a55a25e36cd66f8ae787261517fb38a0af29))
+* **deps-dev:** Bump eslint-plugin-better-tailwindcss ([#315](https://github.com/vinayakkulkarni/nxui/issues/315)) ([8b5b310](https://github.com/vinayakkulkarni/nxui/commit/8b5b3105dbc8e9295cbe0b662cfd6159f4a820a4))
+* **deps-dev:** Bump oxfmt from 0.73.0 to 0.74.0 ([#316](https://github.com/vinayakkulkarni/nxui/issues/316)) ([55011a9](https://github.com/vinayakkulkarni/nxui/commit/55011a90bc5316a8ee6f8271316eed4bd3349b2b))
+* **deps-dev:** Bump oxlint and eslint-plugin-oxlint ([#313](https://github.com/vinayakkulkarni/nxui/issues/313)) ([13edfcb](https://github.com/vinayakkulkarni/nxui/commit/13edfcb8d943db1f3d07b9df73e0a1fe8206eca7))
+* **deps-dev:** Bump wrangler from 4.151.1 to 4.151.2 ([#314](https://github.com/vinayakkulkarni/nxui/issues/314)) ([27fd861](https://github.com/vinayakkulkarni/nxui/commit/27fd861420abcba1eea5fcf7e8f6206cd2b504f6))
+* **deps:** latest dependencies, node 26 and pnpm 12.15.0 ([#318](https://github.com/vinayakkulkarni/nxui/issues/318)) ([712e4b9](https://github.com/vinayakkulkarni/nxui/commit/712e4b9660bc65865b3d080150ac8f86e700cb18))
+
 ## [0.1.0](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.0.20...nxui-v0.1.0) (2026-10-18)
 
 
