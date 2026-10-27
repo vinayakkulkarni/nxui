@@ -9,7 +9,7 @@ nxui, Vue Bits and Inspira UI are the three main collections of animated, copy-p
 
 |                              | nxui                                                                           | Vue Bits                          | Inspira UI                                                         |
 | ---------------------------- | ------------------------------------------------------------------------------ | --------------------------------- | ------------------------------------------------------------------ |
-| Components                   | 375                                                                            | about 200                         | about 155                                                          |
+| Components                   | 376                                                                            | about 200                         | about 155                                                          |
 | License                      | MIT                                                                            | MIT + Commons Clause              | MIT                                                                |
 | Install                      | `shadcn-vue` CLI, one command per component                                    | `jsrepo` CLI or a shadcn registry | `shadcn-vue` CLI, or copy the code                                 |
 | Built on                     | Vue 3, Nuxt 4, Tailwind CSS v4, motion-v                                       | Vue 3, Vite, GSAP, motion-v       | Vue 3, Nuxt, Tailwind CSS v4, motion-v, GSAP                       |

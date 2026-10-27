@@ -52,7 +52,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>375 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>376 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -82,11 +82,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (375)
+## Components (376)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 377 items total, of which these 375 are
+> on — so `npx shadcn-vue add` resolves 378 items total, of which these 376 are
 > user-facing components.
 
 ### Text Animations (47)
@@ -181,7 +181,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Swarm Cursor](https://nxui.geoql.in/docs/animations/swarm-cursor)           | A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons.                                     |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)         | A spinning reticle cursor whose corner brackets snap around targets, follow their corner radius and show a label.                                |
 
-### Components (143)
+### Components (144)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -257,6 +257,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Lens Clock](https://nxui.geoql.in/docs/components/lens-clock)                       | A live clock that frames a corner of a large dial, panning with the hour hand while the edges blur out of focus.                                                       |
 | [Line Sidebar](https://nxui.geoql.in/docs/components/line-sidebar)                   | List navigation with a marker rail; items near the cursor shift, tint and grow their markers, and the clicked item stays lit.                                          |
 | [Liquid Glass Carousel](https://nxui.geoql.in/docs/components/liquid-glass-carousel) | Infinite scroll-driven portfolio carousel drawn through a liquid-glass lens, with focus mode and an entry animation.                                                   |
+| [Liquid Tabs](https://nxui.geoql.in/docs/components/liquid-tabs)                     | A notifications card whose active tab is liquid: it slides to the next label on a spring and flows into the card body through a goo filter.                            |
 | [Mac Keyboard](https://nxui.geoql.in/docs/components/mac-keyboard)                   | An interactive Mac keyboard with real key tracking, sound effects, and visual feedback. Press keys on your keyboard to see them light up.                              |
 | [Magic Bento](https://nxui.geoql.in/docs/components/magic-bento)                     | A bento grid of feature cards with live artwork, edge light that follows the cursor and a click wave across the grid.                                                  |
 | [Magnetic Dock](https://nxui.geoql.in/docs/components/magnetic-dock)                 | A macOS-style dock with magnetic hover magnification and genie effect.                                                                                                 |

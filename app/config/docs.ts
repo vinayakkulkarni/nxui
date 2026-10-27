@@ -457,6 +457,11 @@ export const docsNav: NavGroup[] = [
         title: 'Liquid Glass Carousel',
         path: '/docs/components/liquid-glass-carousel',
       },
+      {
+        title: 'Liquid Tabs',
+        path: '/docs/components/liquid-tabs',
+        badge: 'new',
+      },
       { title: 'Mac Keyboard', path: '/docs/components/mac-keyboard' },
       {
         title: 'Magic Bento',

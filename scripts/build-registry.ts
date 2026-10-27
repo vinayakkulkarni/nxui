@@ -2318,6 +2318,12 @@ const COMPONENTS: Record<
       'An account card that grows into a user menu with key-cap shortcuts, side submenus for status, accounts and spaces, and a recessed footer.',
     deps: ['@vueuse/core'],
   },
+  'liquid-tabs': {
+    title: 'Liquid Tabs',
+    description:
+      'A notifications card whose active tab is liquid: it slides to the next label on a spring and flows into the card body through a goo filter.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:
