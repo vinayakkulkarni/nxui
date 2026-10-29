@@ -38,6 +38,11 @@
   </a>
 </p>
 
+<p>
+  <strong><a href="https://nxui.geoql.in?utm_source=github&utm_medium=readme&utm_campaign=nxui">Live demo</a></strong> ·
+  <a href="https://nxui.geoql.in/docs?utm_source=github&utm_medium=readme&utm_campaign=nxui">Docs</a>
+</p>
+
 </div>
 
 ---
@@ -588,6 +593,16 @@ nxui is a Vue port of [Componentry](https://componentry.fun) by [Harsh Jadhav](h
 - [shadcn-vue](https://www.shadcn-vue.com/) — Vue port of shadcn/ui
 - [motion-v](https://github.com/motiondivision/motion-vue) — Vue animation library
 - [VueUse](https://vueuse.org/) — Collection of Vue composition utilities
+
+## More from the author
+
+- [shadscan-vue](https://shadscan-vue.geoql.in?utm_source=github&utm_medium=readme&utm_campaign=nxui) — shadcn-vue component and registry scanner
+- [mapcn-vue](https://mapcn-vue.geoql.in?utm_source=github&utm_medium=readme&utm_campaign=nxui) — shadcn-vue map components built on MapLibre
+- [v-maplibre](https://v-maplibre.geoql.in?utm_source=github&utm_medium=readme&utm_campaign=nxui) — Vue 3 components for MapLibre GL
+- [v-tweakpane](https://v-tweakpane.vinayakkulkarni.dev?utm_source=github&utm_medium=readme&utm_campaign=nxui) — Vue 3 wrapper for Tweakpane
+- [the-doctor.report](https://the-doctor.report?utm_source=github&utm_medium=readme&utm_campaign=nxui) — Vue and Nuxt code health auditor
+
+See every project at [vinayakkulkarni.dev/projects](https://vinayakkulkarni.dev/projects?utm_source=github&utm_medium=readme&utm_campaign=nxui) and [geoql.in](https://geoql.in?utm_source=github&utm_medium=readme&utm_campaign=nxui).
 
 ---
 
