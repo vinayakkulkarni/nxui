@@ -2248,6 +2248,54 @@
       "description": "A notifications card whose active tab is liquid: it slides to the next label on a spring and flows into the card body through a goo filter."
     },
     {
+      "name": "desk-computer",
+      "type": "registry:ui",
+      "title": "Desk Computer",
+      "description": "An isometric late-90s desk computer you can use: type on its CRT, drag its mouse, load its CD and switch the screen off and on."
+    },
+    {
+      "name": "file-box",
+      "type": "registry:ui",
+      "title": "File Box",
+      "description": "A cardboard file box of five tabbed folders. Hover or focus a folder to lift it out by its tab; click or press Enter to tug it."
+    },
+    {
+      "name": "joystick",
+      "type": "registry:ui",
+      "title": "Joystick",
+      "description": "A pixel-art arcade stick in an octagonal gate. Drag it or use the arrow keys; it springs back with an overshoot and clicks per direction."
+    },
+    {
+      "name": "lamp-switch",
+      "type": "registry:ui",
+      "title": "Lamp Switch",
+      "description": "A pendant lamp over a liquid switch. Flip the switch, drag its knob, or pull the lamp down to turn the light on with a flicker."
+    },
+    {
+      "name": "magnify",
+      "type": "registry:ui",
+      "title": "Magnify",
+      "description": "A paper poster with one huge letter and a magnifying glass that shows the tiny characters the letter is printed from."
+    },
+    {
+      "name": "recorder",
+      "type": "registry:ui",
+      "title": "Recorder",
+      "description": "A voice recorder card with a scrolling waveform under a fixed playhead, a rolling timer, scrubbing and a hold-to-clear key."
+    },
+    {
+      "name": "taxi",
+      "type": "registry:ui",
+      "title": "Taxi",
+      "description": "A taxi-hailing card that runs a ride from one tap: a morphing glyph, a counting-down ETA with a moving car dot, and a star rating."
+    },
+    {
+      "name": "thermal-dial",
+      "type": "registry:ui",
+      "title": "Thermal Dial",
+      "description": "A thermostat card set by dragging round its dial, scrolling or arrow keys; the heat at its foot shifts from blue to red with the reading."
+    },
+    {
       "name": "clean-table",
       "type": "registry:ui",
       "title": "Clean Table",

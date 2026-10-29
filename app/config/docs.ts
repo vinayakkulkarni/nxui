@@ -328,6 +328,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/depth-carousel',
       },
       {
+        title: 'Desk Computer',
+        path: '/docs/components/desk-computer',
+        badge: 'new',
+      },
+      {
         title: 'Dithered Logo',
         path: '/docs/components/dithered-logo',
       },
@@ -357,6 +362,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/elastic-slider',
       },
       { title: 'Eye Tracking', path: '/docs/components/eye-tracking' },
+      {
+        title: 'File Box',
+        path: '/docs/components/file-box',
+        badge: 'new',
+      },
       {
         title: 'Flex Carousel',
         path: '/docs/components/flex-carousel',
@@ -439,6 +449,16 @@ export const docsNav: NavGroup[] = [
         title: 'Jelly Radio',
         path: '/docs/components/jelly-radio',
       },
+      {
+        title: 'Joystick',
+        path: '/docs/components/joystick',
+        badge: 'new',
+      },
+      {
+        title: 'Lamp Switch',
+        path: '/docs/components/lamp-switch',
+        badge: 'new',
+      },
       { title: 'Lanyard', path: '/docs/components/lanyard' },
       {
         title: 'Lattice Loader',
@@ -468,6 +488,11 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/magic-bento',
       },
       { title: 'Magnetic Dock', path: '/docs/components/magnetic-dock' },
+      {
+        title: 'Magnify',
+        path: '/docs/components/magnify',
+        badge: 'new',
+      },
       { title: 'Masonry', path: '/docs/components/masonry' },
       {
         title: 'Model Picker',
@@ -560,6 +585,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Receipt Printer',
         path: '/docs/components/receipt-printer',
+      },
+      {
+        title: 'Recorder',
+        path: '/docs/components/recorder',
+        badge: 'new',
       },
       {
         title: 'Refine Frame',
@@ -672,12 +702,22 @@ export const docsNav: NavGroup[] = [
         path: '/docs/components/swipe-toast',
       },
       {
+        title: 'Taxi',
+        path: '/docs/components/taxi',
+        badge: 'new',
+      },
+      {
         title: 'Tear Ticket',
         path: '/docs/components/tear-ticket',
       },
       {
         title: 'Testimonial Marquee',
         path: '/docs/components/testimonial-marquee',
+      },
+      {
+        title: 'Thermal Dial',
+        path: '/docs/components/thermal-dial',
+        badge: 'new',
       },
       {
         title: 'Thought Line',

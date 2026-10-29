@@ -2324,6 +2324,54 @@ const COMPONENTS: Record<
       'A notifications card whose active tab is liquid: it slides to the next label on a spring and flows into the card body through a goo filter.',
     deps: ['@vueuse/core', 'motion-v'],
   },
+  'desk-computer': {
+    title: 'Desk Computer',
+    description:
+      'An isometric late-90s desk computer you can use: type on its CRT, drag its mouse, load its CD and switch the screen off and on.',
+    deps: ['@vueuse/core'],
+  },
+  'file-box': {
+    title: 'File Box',
+    description:
+      'A cardboard file box of five tabbed folders. Hover or focus a folder to lift it out by its tab; click or press Enter to tug it.',
+    deps: ['motion-v'],
+  },
+  joystick: {
+    title: 'Joystick',
+    description:
+      'A pixel-art arcade stick in an octagonal gate. Drag it or use the arrow keys; it springs back with an overshoot and clicks per direction.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'lamp-switch': {
+    title: 'Lamp Switch',
+    description:
+      'A pendant lamp over a liquid switch. Flip the switch, drag its knob, or pull the lamp down to turn the light on with a flicker.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  magnify: {
+    title: 'Magnify',
+    description:
+      'A paper poster with one huge letter and a magnifying glass that shows the tiny characters the letter is printed from.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  recorder: {
+    title: 'Recorder',
+    description:
+      'A voice recorder card with a scrolling waveform under a fixed playhead, a rolling timer, scrubbing and a hold-to-clear key.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  taxi: {
+    title: 'Taxi',
+    description:
+      'A taxi-hailing card that runs a ride from one tap: a morphing glyph, a counting-down ETA with a moving car dot, and a star rating.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'thermal-dial': {
+    title: 'Thermal Dial',
+    description:
+      'A thermostat card set by dragging round its dial, scrolling or arrow keys; the heat at its foot shifts from blue to red with the reading.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:
