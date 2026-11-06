@@ -50,7 +50,7 @@
     "gl-matrix": "4.0.0-beta.2",
     "matter-js": "^0.20.0",
     "motion-v": "^2.10.0",
-    "nitropack": "^2.13.5",
+    "nitropack": "^2.13.6",
     "nuxt": "^4.6.4",
     "nuxt-llms": "^0.3.1",
     "nuxt-schema-org": "^7.0.1",
