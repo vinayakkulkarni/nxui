@@ -230,8 +230,8 @@ importers:
         specifier: ^0.20.0
         version: 0.20.0
       motion-v:
-        specifier: ^2.10.0
-        version: 2.10.0(@vueuse/core@15.0.0(vue@3.5.45(typescript@6.0.3)))(react@19.3.1)(vue@3.5.45(typescript@6.0.3))
+        specifier: ^2.11.1
+        version: 2.11.1(@vueuse/core@15.0.0(vue@3.5.45(typescript@6.0.3)))(react@19.3.1)(vue@3.5.45(typescript@6.0.3))
       nitropack:
         specifier: ^2.13.6
         version: 2.13.6(oxc-parser@0.153.0)(rolldown@1.2.15)(srvx@1.0.7)(supports-color@10.2.2)(vite@8.3.5(@types/node@26.6.5)(esbuild@0.28.2)(jiti@2.7.0)(terser@5.51.2)(tsx@4.23.15)(yaml@2.9.1))
@@ -4385,8 +4385,8 @@ packages:
   fraction.js@5.3.4:
     resolution: {integrity: sha512-1X1NTtiJphryn/uLQz3whtY6jK3fTqoE3ohKs0tT+Ujr1W59oopxmoEh7Lu5p6vBaPbgoM0bzveAW4Qi5RyWDQ==}
 
-  framer-motion@14.8.0:
-    resolution: {integrity: sha512-PQsSx+UlaKiyPhADjVT5wALBErJJdbMeKQS4gQx6ibOrSNni7qjqfTKMvf6YHGG8pQWi6njs7AqrIG7R2hbnxA==}
+  framer-motion@14.9.1:
+    resolution: {integrity: sha512-WDWNT2ixHdmpvGg02BZWI/SWwRYzPiMUf4aIkTBgrxxD8RYFdZO3fCM4pnLMo6j8mUpj0+BuJRHQBChI4v3Anw==}
     peerDependencies:
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
@@ -5317,14 +5317,14 @@ packages:
   mocked-exports@0.1.1:
     resolution: {integrity: sha512-aF7yRQr/Q0O2/4pIXm6PZ5G+jAd7QS4Yu8m+WEeEHGnbo+7mE36CbLSDQiXYV8bVL3NfmdeqPJct0tUlnjVSnA==}
 
-  motion-dom@14.8.0:
-    resolution: {integrity: sha512-HzA41kvV7BgluM7L/XbW+gHFzDtJUbHnEsrlnIzPS9dqSfoPy9YzL6VKF7ai0TiQcykkkLUqvIxECAdwa9gwAw==}
+  motion-dom@14.9.1:
+    resolution: {integrity: sha512-2eCCGXH2Yv09lM8GHK3TdfChrcvHxzVY19LD9VraoHEaQl5+PuGnTNnmJaBAR+5MdxUVdsLFXygFJjR9RwRSxw==}
 
   motion-utils@14.7.0:
     resolution: {integrity: sha512-woO0/Nb7ys75f94fjvQi/6leiHGvZUYkeHUPEZ3vxsV+9OpEVhkxp01x8MlRwX0zt31EqgXsKDAoBoJLC148Tw==}
 
-  motion-v@2.10.0:
-    resolution: {integrity: sha512-uWEEtQgS3fE1AWf6FNJ3JhXMJ9jNv6FJSQnE/Od1a6/dtk1zYcAU7ViBruXM7OgXI0B+fnJrzETIt0wQTIMeJA==}
+  motion-v@2.11.1:
+    resolution: {integrity: sha512-4/yP0rIutpw28itNLqhXGIuL6uwq5tJ+Z/izQOWpj2tFNTQSvtQkHsnQAsh9o+xJVsbLwMLXEs6RnQpYs21/Lg==}
     peerDependencies:
       '@vueuse/core': '>=10.0.0'
       vue: '>=3.0.0'
@@ -11373,9 +11373,9 @@ snapshots:
 
   fraction.js@5.3.4: {}
 
-  framer-motion@14.8.0(react@19.3.1):
+  framer-motion@14.9.1(react@19.3.1):
     dependencies:
-      motion-dom: 14.8.0
+      motion-dom: 14.9.1
       motion-utils: 14.7.0
       tslib: 2.8.1
     optionalDependencies:
@@ -12519,18 +12519,18 @@ snapshots:
 
   mocked-exports@0.1.1: {}
 
-  motion-dom@14.8.0:
+  motion-dom@14.9.1:
     dependencies:
       motion-utils: 14.7.0
 
   motion-utils@14.7.0: {}
 
-  motion-v@2.10.0(@vueuse/core@15.0.0(vue@3.5.45(typescript@6.0.3)))(react@19.3.1)(vue@3.5.45(typescript@6.0.3)):
+  motion-v@2.11.1(@vueuse/core@15.0.0(vue@3.5.45(typescript@6.0.3)))(react@19.3.1)(vue@3.5.45(typescript@6.0.3)):
     dependencies:
       '@vueuse/core': 15.0.0(vue@3.5.45(typescript@6.0.3))
-      framer-motion: 14.8.0(react@19.3.1)
+      framer-motion: 14.9.1(react@19.3.1)
       hey-listen: 1.0.8
-      motion-dom: 14.8.0
+      motion-dom: 14.9.1
       motion-utils: 14.7.0
       vue: 3.5.45(typescript@6.0.3)
     transitivePeerDependencies:
