@@ -1,5 +1,53 @@
 # Changelog
 
+## [0.1.2](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.1.1...nxui-v0.1.2) (2026-11-13)
+
+
+### Bug Fixes
+
+* **deps:** Bump @iconify-json/lucide from 1.2.147 to 1.2.149 ([#326](https://github.com/vinayakkulkarni/nxui/issues/326)) ([851004b](https://github.com/vinayakkulkarni/nxui/commit/851004b5c3410832fc64c6fd90f822661def5b88))
+* **deps:** Bump @iconify-json/lucide from 1.2.149 to 1.2.150 ([#337](https://github.com/vinayakkulkarni/nxui/issues/337)) ([1521680](https://github.com/vinayakkulkarni/nxui/commit/15216804e792dfcd19f7298a92acaca1715ee001))
+* **deps:** Bump @iconify-json/lucide from 1.2.150 to 1.2.151 ([#348](https://github.com/vinayakkulkarni/nxui/issues/348)) ([a3884b3](https://github.com/vinayakkulkarni/nxui/commit/a3884b35b91a755d8d9595cf83e1b1c59d9cca39))
+* **deps:** Bump @iconify-json/lucide from 1.2.151 to 1.2.152 ([#358](https://github.com/vinayakkulkarni/nxui/issues/358)) ([d2c7abc](https://github.com/vinayakkulkarni/nxui/commit/d2c7abcdc4f895cf84f91233414a04d993210dc8))
+* **deps:** Bump @nuxt/icon from 2.6.1 to 2.6.2 ([#329](https://github.com/vinayakkulkarni/nxui/issues/329)) ([ac39144](https://github.com/vinayakkulkarni/nxui/commit/ac391441a9a200df42d2bfc444c35074b0a7221f))
+* **deps:** Bump @nuxtjs/color-mode from 4.0.1 to 4.1.0 ([#325](https://github.com/vinayakkulkarni/nxui/issues/325)) ([8da9e99](https://github.com/vinayakkulkarni/nxui/commit/8da9e9940e1632fe0c7d890f882e52a8b77d4973))
+* **deps:** Bump @openpanel/nuxt from 0.4.2 to 0.4.3 ([#331](https://github.com/vinayakkulkarni/nxui/issues/331)) ([6ab7504](https://github.com/vinayakkulkarni/nxui/commit/6ab75042767449d7999630fefcd864cb51b3d545))
+* **deps:** Bump @openpanel/nuxt from 0.4.3 to 0.4.4 ([#357](https://github.com/vinayakkulkarni/nxui/issues/357)) ([67c5944](https://github.com/vinayakkulkarni/nxui/commit/67c594462a4a2d46ada72b25028cc5bbbedc5dc5))
+* **deps:** Bump @openpanel/sdk from 1.3.2 to 1.3.3 ([#330](https://github.com/vinayakkulkarni/nxui/issues/330)) ([2d565e8](https://github.com/vinayakkulkarni/nxui/commit/2d565e88d2df1426ebeafe2f4e5edfd2f2ea8c9f))
+* **deps:** Bump @openpanel/sdk from 1.3.3 to 1.3.4 ([#344](https://github.com/vinayakkulkarni/nxui/issues/344)) ([0ec43a0](https://github.com/vinayakkulkarni/nxui/commit/0ec43a09dd0a389d70da79ab092d2f567624f806))
+* **deps:** Bump @paper-design/shaders from 0.0.81 to 0.0.82 ([#320](https://github.com/vinayakkulkarni/nxui/issues/320)) ([c02a901](https://github.com/vinayakkulkarni/nxui/commit/c02a9014c9feb17a152163344531dc0e9e31e260))
+* **deps:** Bump glob ([#359](https://github.com/vinayakkulkarni/nxui/issues/359)) ([42405be](https://github.com/vinayakkulkarni/nxui/commit/42405be9c8dd4c761467572c4bdc6a64fcc735d6))
+* **deps:** Bump motion-v from 2.10.0 to 2.11.1 ([#354](https://github.com/vinayakkulkarni/nxui/issues/354)) ([5c2ebc8](https://github.com/vinayakkulkarni/nxui/commit/5c2ebc8e6d357156bb25fd10c87dd109359b0244))
+* **deps:** Bump motion-v from 2.8.0 to 2.10.0 ([#341](https://github.com/vinayakkulkarni/nxui/issues/341)) ([5d12636](https://github.com/vinayakkulkarni/nxui/commit/5d1263649dc993f71ff7702ed98046dfe2403a47))
+* **deps:** Bump nitropack from 2.13.5 to 2.13.6 ([#345](https://github.com/vinayakkulkarni/nxui/issues/345)) ([b281108](https://github.com/vinayakkulkarni/nxui/commit/b28110866215c5912d86205dad2f322fa4724b65))
+* **deps:** Bump node-forge ([#338](https://github.com/vinayakkulkarni/nxui/issues/338)) ([edd4a22](https://github.com/vinayakkulkarni/nxui/commit/edd4a2281972f23a7936f29674344d8bd63cb22b))
+* **deps:** Bump nuxt from 4.6.3 to 4.6.4 ([#343](https://github.com/vinayakkulkarni/nxui/issues/343)) ([3529a3e](https://github.com/vinayakkulkarni/nxui/commit/3529a3e979a7e42d7ff68f91ed0f6a533a0d959d))
+* **deps:** Bump nuxt-llms from 0.3.0 to 0.3.1 ([#327](https://github.com/vinayakkulkarni/nxui/issues/327)) ([7e7d0cd](https://github.com/vinayakkulkarni/nxui/commit/7e7d0cd08e137bf50923ffb29b9c9f415eacf7f1))
+* **deps:** Bump pnpm/action-setup from 6.1.0 to 6.1.1 ([#342](https://github.com/vinayakkulkarni/nxui/issues/342)) ([f2977f7](https://github.com/vinayakkulkarni/nxui/commit/f2977f7509765e79ef4491a702a541c6cd769dd6))
+* **deps:** Bump postprocessing from 6.39.5 to 6.39.6 ([#339](https://github.com/vinayakkulkarni/nxui/issues/339)) ([39ae307](https://github.com/vinayakkulkarni/nxui/commit/39ae30783f68197fec7d9115ae4fd172b19eeded))
+* **deps:** Bump shadcn-nuxt from 2.8.2 to 2.9.0 ([#333](https://github.com/vinayakkulkarni/nxui/issues/333)) ([527ecd8](https://github.com/vinayakkulkarni/nxui/commit/527ecd81f9e8562a413883d5469d4d46e1c1f50c))
+* **deps:** Bump shiki from 4.5.0 to 4.6.0 ([#351](https://github.com/vinayakkulkarni/nxui/issues/351)) ([22bd8ac](https://github.com/vinayakkulkarni/nxui/commit/22bd8ace50804a481db9aca0a575d95415a1efa4))
+* **deps:** Bump the npm_and_yarn group across 1 directory with 2 updates ([#364](https://github.com/vinayakkulkarni/nxui/issues/364)) ([8207c12](https://github.com/vinayakkulkarni/nxui/commit/8207c12a443e7852f93d22e4b44164a08ee699a0))
+* **deps:** Bump three and @types/three ([#350](https://github.com/vinayakkulkarni/nxui/issues/350)) ([36e70e8](https://github.com/vinayakkulkarni/nxui/commit/36e70e8a2dd2c51e51909b688ea6d030d163fc27))
+* **deps:** Bump v-tweakpane from 0.3.4 to 0.3.6 ([#336](https://github.com/vinayakkulkarni/nxui/issues/336)) ([c11a4d3](https://github.com/vinayakkulkarni/nxui/commit/c11a4d3d217cd5c5813de4176925e20a4eae93cc))
+
+
+### Miscellaneous
+
+* **deps-dev:** Bump eslint from 10.13.0 to 10.14.0 ([#334](https://github.com/vinayakkulkarni/nxui/issues/334)) ([2966ca9](https://github.com/vinayakkulkarni/nxui/commit/2966ca9d6e0e6a34b5290592cf22c29d6be25a0e))
+* **deps-dev:** Bump eslint-plugin-better-tailwindcss ([#360](https://github.com/vinayakkulkarni/nxui/issues/360)) ([53a2825](https://github.com/vinayakkulkarni/nxui/commit/53a2825bde5098893c48ea162adce57af556207b))
+* **deps-dev:** Bump eslint-plugin-oxlint from 1.89.0 to 1.90.0 ([#324](https://github.com/vinayakkulkarni/nxui/issues/324)) ([cc2dbf6](https://github.com/vinayakkulkarni/nxui/commit/cc2dbf64a466ca022b8f594bd4fc5a4e064c5d8d))
+* **deps-dev:** Bump oxlint and eslint-plugin-oxlint ([#355](https://github.com/vinayakkulkarni/nxui/issues/355)) ([4e6f4e3](https://github.com/vinayakkulkarni/nxui/commit/4e6f4e34da7e3140ab248e49e5421863087f569c))
+* **deps-dev:** Bump oxlint and eslint-plugin-oxlint ([#363](https://github.com/vinayakkulkarni/nxui/issues/363)) ([13cf3d0](https://github.com/vinayakkulkarni/nxui/commit/13cf3d0e1ba5e0001d6b26c04e03636dbe28990e))
+* **deps-dev:** Bump tailwindcss from 4.3.3 to 4.3.5 ([#356](https://github.com/vinayakkulkarni/nxui/issues/356)) ([82be504](https://github.com/vinayakkulkarni/nxui/commit/82be504a417ffbaca116d5480fc24515e2f49adf))
+* **deps-dev:** Bump vitest from 5.0.5 to 5.1.0 ([#346](https://github.com/vinayakkulkarni/nxui/issues/346)) ([d576b79](https://github.com/vinayakkulkarni/nxui/commit/d576b791ed3af74dc50074d7a0724014c7722d0f))
+* **deps-dev:** Bump vue from 3.5.44 to 3.5.45 ([#349](https://github.com/vinayakkulkarni/nxui/issues/349)) ([9266647](https://github.com/vinayakkulkarni/nxui/commit/9266647227475cc3d9b0585639d8f44d8e4a0b4e))
+* **deps-dev:** Bump wrangler from 4.153.0 to 4.156.0 ([#332](https://github.com/vinayakkulkarni/nxui/issues/332)) ([9e5f802](https://github.com/vinayakkulkarni/nxui/commit/9e5f8027232e5e8b47262b9bd70e50122d17f616))
+* **deps-dev:** Bump wrangler from 4.156.0 to 4.156.1 ([#340](https://github.com/vinayakkulkarni/nxui/issues/340)) ([ceb656c](https://github.com/vinayakkulkarni/nxui/commit/ceb656c077737d248588bef04663549d7a208d36))
+* **deps-dev:** Bump wrangler from 4.156.1 to 4.156.2 ([#347](https://github.com/vinayakkulkarni/nxui/issues/347)) ([11c37d9](https://github.com/vinayakkulkarni/nxui/commit/11c37d93b3765e011e544d6b4577750969395b0f))
+* **deps-dev:** Bump wrangler from 4.156.2 to 4.158.0 ([#353](https://github.com/vinayakkulkarni/nxui/issues/353)) ([bc0790f](https://github.com/vinayakkulkarni/nxui/commit/bc0790ff5da16fe2bbeaed6c2acf7c9c57099dd6))
+* **deps-dev:** Bump wrangler from 4.158.0 to 4.159.0 ([#362](https://github.com/vinayakkulkarni/nxui/issues/362)) ([a368b31](https://github.com/vinayakkulkarni/nxui/commit/a368b31ef6efa5e09ee2e4ddb0d7c61d5a6267b5))
+
 ## [0.1.1](https://github.com/vinayakkulkarni/nxui/compare/nxui-v0.1.0...nxui-v0.1.1) (2026-10-29)
 
 
