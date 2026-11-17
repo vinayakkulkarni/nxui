@@ -52,7 +52,7 @@
     "motion-v": "^2.11.1",
     "nitropack": "^2.13.6",
     "nuxt": "^4.6.4",
-    "nuxt-llms": "^0.3.1",
+    "nuxt-llms": "^0.3.2",
     "nuxt-schema-org": "^7.0.1",
     "ogl": "^1.0.11",
     "opentype.js": "^2.0.0",
