@@ -126,7 +126,7 @@
   div {
     --frost-tab-idle: oklch(0.45 0.04 260);
   }
-  :global(.dark) div {
+  .dark div {
     --frost-tab-idle: oklch(0.72 0.02 260);
   }
 </style>
