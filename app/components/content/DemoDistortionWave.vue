@@ -1,6 +1,10 @@
 <script setup lang="ts">
   import { onBeforeUnmount, onMounted, ref, watch } from 'vue';
-  import { useElementVisibility, useEventListener } from '@vueuse/core';
+  import {
+    useElementVisibility,
+    useEventListener,
+    useMediaQuery,
+  } from '@vueuse/core';
   import DistortionWave from '@registry/new-york/distortion-wave/DistortionWave.vue';
 
   const stage = ref<HTMLElement | null>(null);
@@ -52,6 +56,15 @@
   const auto = ref(true);
   const visible = useElementVisibility(stage);
 
+  /** Phones show one scene at a time; wider screens show all three. */
+  const wide = useMediaQuery('(min-width: 640px)');
+  const scenes = [
+    { id: 'pay', label: 'Payment' },
+    { id: 'credits', label: 'Credits' },
+    { id: 'toast', label: 'Toast' },
+  ] as const;
+  const scene = ref<(typeof scenes)[number]['id']>('pay');
+
   function buyCredits() {
     if (processing.value || credited.value) return;
     processing.value = true;
@@ -95,9 +108,35 @@
     timers = [];
   }
 
+  function cycleNarrow() {
+    scene.value = 'pay';
+    later(700, () => {
+      paid.value = true;
+    });
+    later(3600, () => {
+      paid.value = false;
+    });
+    later(4800, () => {
+      scene.value = 'credits';
+    });
+    later(5300, buyCredits);
+    later(8600, closeCredits);
+    later(9800, () => {
+      scene.value = 'toast';
+    });
+    later(10300, () => {
+      if (sent.value) sendAgain();
+    });
+    later(13800, cycle);
+  }
+
   function cycle() {
     clearAuto();
     if (!auto.value || !visible.value) return;
+    if (!wide.value) {
+      cycleNarrow();
+      return;
+    }
     later(700, () => {
       paid.value = true;
     });
@@ -121,6 +160,9 @@
   watch(visible, (value) => {
     if (value) cycle();
     else clearAuto();
+  });
+  watch(wide, () => {
+    if (visible.value) cycle();
   });
   useEventListener(stage, 'pointerdown', stopAuto, { passive: true });
   useEventListener(stage, 'keydown', stopAuto);
@@ -162,16 +204,41 @@
   </DistortionWave>
 </template>`"
   >
-    <div class="flex size-full min-h-100 items-center justify-center p-6">
+    <div
+      class="flex size-full min-h-100 items-center-safe justify-center overflow-y-auto p-6"
+    >
       <div
         ref="stage"
-        class="grid w-full max-w-170 items-start gap-5 sm:grid-cols-2"
+        class="grid w-full max-w-170 items-start gap-5 max-sm:max-w-80 sm:grid-cols-2"
       >
+        <div
+          role="tablist"
+          aria-label="Demo scene"
+          class="flex justify-center gap-1 rounded-full border border-border bg-muted/40 p-1 sm:hidden"
+        >
+          <button
+            v-for="item in scenes"
+            :key="item.id"
+            type="button"
+            role="tab"
+            :aria-selected="scene === item.id"
+            :class="[
+              'flex-1 rounded-full px-3 py-1.5 text-sm font-medium transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring',
+              scene === item.id
+                ? 'bg-foreground text-background'
+                : 'text-muted-foreground',
+            ]"
+            @click="scene = item.id"
+          >
+            {{ item.label }}
+          </button>
+        </div>
         <div class="grid gap-5">
           <DistortionWave
             v-model:revealed="paid"
             :source="confirmButton"
             class="w-full overflow-hidden rounded-4xl border border-border bg-card text-card-foreground shadow-xl shadow-black/10"
+            :class="scene !== 'pay' && 'max-sm:hidden'"
           >
             <div class="flex flex-col items-center px-5 pt-6 pb-22">
               <div
@@ -239,6 +306,7 @@
             colors="lagoon"
             :duration="1.3"
             class="w-full overflow-hidden rounded-full border border-border bg-card text-card-foreground shadow-xl shadow-black/10"
+            :class="scene !== 'toast' && 'max-sm:hidden'"
           >
             <div class="flex items-center gap-3 py-3 pr-16 pl-3">
               <span
@@ -303,6 +371,7 @@
           :source="coin"
           colors="meadow"
           class="w-full overflow-hidden rounded-4xl border border-border bg-card text-card-foreground shadow-xl shadow-black/10"
+          :class="scene !== 'credits' && 'max-sm:hidden'"
           @finish="onCreditsFinish"
         >
           <div class="flex flex-col items-center px-5 pt-6 pb-22">

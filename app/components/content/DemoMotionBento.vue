@@ -58,7 +58,9 @@
   />
 </template>`"
   >
-    <div class="flex size-full min-h-100 items-center justify-center p-6">
+    <div
+      class="flex size-full min-h-100 items-center-safe justify-center overflow-y-auto p-6"
+    >
       <MotionBento
         class="max-w-5xl"
         heading="Not a generic agency. A studio with a contractual commitment to performance."

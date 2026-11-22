@@ -174,14 +174,21 @@ export async function rasterize(
     `${clone.getAttribute('style') ?? ''}position:relative;left:0;top:0;margin:0;transform:none;translate:none;scale:none;rotate:none;opacity:1;width:${width}px;height:${height}px;box-sizing:border-box;border-radius:0;`,
   );
   const fonts = await pageFonts();
+  const W = Math.max(1, Math.round(width * scale));
+  const H = Math.max(1, Math.round(height * scale));
+  // Scale with a CSS transform, not the SVG viewBox: Safari draws
+  // <foreignObject> content at 1:1 and ignores viewBox scaling, which
+  // shrank the picture to 1/devicePixelRatio of the card on iPhones.
   const wrap = document.createElementNS(XHTML, 'div');
+  wrap.setAttribute(
+    'style',
+    `width:${width}px;height:${height}px;transform:scale(${W / width},${H / height});transform-origin:0 0;`,
+  );
   const style = document.createElementNS(XHTML, 'style');
   style.textContent = fonts;
   wrap.append(style, clone);
   const xml = new XMLSerializer().serializeToString(wrap);
-  const W = Math.max(1, Math.round(width * scale));
-  const H = Math.max(1, Math.round(height * scale));
-  const svg = `<svg xmlns="${SVG}" width="${W}" height="${H}" viewBox="0 0 ${width} ${height}"><foreignObject x="0" y="0" width="${width}" height="${height}">${xml}</foreignObject></svg>`;
+  const svg = `<svg xmlns="${SVG}" width="${W}" height="${H}"><foreignObject x="0" y="0" width="${W}" height="${H}">${xml}</foreignObject></svg>`;
   const img = new Image();
   img.decoding = 'async';
   img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
