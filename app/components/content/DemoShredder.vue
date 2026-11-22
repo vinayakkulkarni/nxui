@@ -217,7 +217,7 @@
     box-sizing: border-box;
   }
 
-  :global(.dark) .shredder-demo-row {
+  .dark .shredder-demo-row {
     background: #27272a;
   }
 

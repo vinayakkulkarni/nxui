@@ -96,8 +96,8 @@ Adding `Person` JSON-LD with `sameAs` cross-references (LinkedIn, Twitter/X, Git
     <h1>{{ post.title }}</h1>
     <p class="byline">
       By
-      <a :href="author.url" rel="author">{{ author.name }}</a
-      >, {{ author.jobTitle }} at {{ author.worksFor }}
+      <a :href="author.url" rel="author">{{ author.name }}</a>,
+      {{ author.jobTitle }} at {{ author.worksFor }}
       ·
       <time :datetime="post.datePublished">
         Published {{ new Date(post.datePublished).toLocaleDateString() }}

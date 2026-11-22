@@ -52,7 +52,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>364 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>388 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -82,11 +82,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (364)
+## Components (388)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 366 items total, of which these 364 are
+> on — so `npx shadcn-vue add` resolves 390 items total, of which these 388 are
 > user-facing components.
 
 ### Text Animations (47)
@@ -181,7 +181,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Swarm Cursor](https://nxui.geoql.in/docs/animations/swarm-cursor)           | A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons.                                     |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)         | A spinning reticle cursor whose corner brackets snap around targets, follow their corner radius and show a label.                                |
 
-### Components (139)
+### Components (153)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -220,6 +220,8 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Curved Input](https://nxui.geoql.in/docs/components/curved-input)                   | An input bar bent along an arc, with text, caret and submit button that all follow the curve.                                                                          |
 | [Decay Card](https://nxui.geoql.in/docs/components/decay-card)                       | An image card drawn with WebGL that tears and melts as the pointer moves, then pulls itself back together.                                                             |
 | [Depth Carousel](https://nxui.geoql.in/docs/components/depth-carousel)               | Image carousel whose cards recede along a tilted 3D rail, with drag, wheel, keyboard, dot and auto-advance navigation.                                                 |
+| [Desk Computer](https://nxui.geoql.in/docs/components/desk-computer)                 | An isometric late-90s desk computer you can use: type on its CRT, drag its mouse, load its CD and switch the screen off and on.                                        |
+| [Distortion Wave](https://nxui.geoql.in/docs/components/distortion-wave)             | A WebGL 2 wave that leaves a button or icon, bends the view with refraction and colour split, and leaves the next view behind.                                         |
 | [Dithered Logo](https://nxui.geoql.in/docs/components/dithered-logo)                 | Renders any logo as a Floyd-Steinberg dithered particle field with cursor repulsion and click ripples.                                                                 |
 | [Dock](https://nxui.geoql.in/docs/components/dock)                                   | macOS style dock with spring magnification, launch hop, badges, auto hide, right-click menus with submenus, on any edge.                                               |
 | [Dodge Field](https://nxui.geoql.in/docs/components/dodge-field)                     | Wrapper that makes any child dodge the pointer until it relents and glides home.                                                                                       |
@@ -229,6 +231,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Dynamic Island Header](https://nxui.geoql.in/docs/components/dynamic-island-header) | Navbar that collapses into a compact pill on scroll, morphing to show the active section and reading progress.                                                         |
 | [Elastic Slider](https://nxui.geoql.in/docs/components/elastic-slider)               | A slider that grows under the cursor and stretches like rubber when pulled past either end, then springs back.                                                         |
 | [Eye Tracking](https://nxui.geoql.in/docs/components/eye-tracking)                   | Animated eyes that follow your cursor with realistic blinking, reactive pupils, and idle micro-movements. Supports realistic, cartoon, minimal, and cyber variants.    |
+| [File Box](https://nxui.geoql.in/docs/components/file-box)                           | A cardboard file box of five tabbed folders. Hover or focus a folder to lift it out by its tab; click or press Enter to tug it.                                        |
 | [Flex Carousel](https://nxui.geoql.in/docs/components/flex-carousel)                 | An infinite WebGL image row that bends, twists and splits into rainbow light where it crosses an invisible glass lens.                                                 |
 | [Flight Status Card](https://nxui.geoql.in/docs/components/flight-status-card)       | An animated card displaying real-time flight information with progress tracking.                                                                                       |
 | [Flip Card](https://nxui.geoql.in/docs/components/flip-card)                         | Two-faced card that flips in 3D on a click, drag or flick and settles on a spring.                                                                                     |
@@ -251,18 +254,24 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Infinite Menu](https://nxui.geoql.in/docs/components/infinite-menu)                 | A draggable WebGL sphere of image tiles that snaps the nearest tile forward and shows its title, description and link.                                                 |
 | [Infinite Spiral](https://nxui.geoql.in/docs/components/infinite-spiral)             | An endlessly looping 3D helix of image cards that plays by itself, follows a drag or follows page scroll.                                                              |
 | [Jelly Radio](https://nxui.geoql.in/docs/components/jelly-radio)                     | Radio group of chips where the chosen one swells and barges its neighbours outward.                                                                                    |
+| [Joystick](https://nxui.geoql.in/docs/components/joystick)                           | A pixel-art arcade stick in an octagonal gate. Drag it or use the arrow keys; it springs back with an overshoot and clicks per direction.                              |
+| [Lamp Switch](https://nxui.geoql.in/docs/components/lamp-switch)                     | A pendant lamp over a liquid switch. Flip the switch, drag its knob, or pull the lamp down to turn the light on with a flicker.                                        |
 | [Lanyard](https://nxui.geoql.in/docs/components/lanyard)                             | Swinging 3D badge on a stretchy woven band that you can drag, throw or click to flip.                                                                                  |
 | [Lattice Loader](https://nxui.geoql.in/docs/components/lattice-loader)               | Agent status row with a lattice of cells that brighten in a wave beside a live stopwatch.                                                                              |
 | [Layered Stack](https://nxui.geoql.in/docs/components/layered-stack)                 | Stack of cards that fans out on hover, stacking back with random rotation on mouse leave.                                                                              |
 | [Lens Clock](https://nxui.geoql.in/docs/components/lens-clock)                       | A live clock that frames a corner of a large dial, panning with the hour hand while the edges blur out of focus.                                                       |
 | [Line Sidebar](https://nxui.geoql.in/docs/components/line-sidebar)                   | List navigation with a marker rail; items near the cursor shift, tint and grow their markers, and the clicked item stays lit.                                          |
 | [Liquid Glass Carousel](https://nxui.geoql.in/docs/components/liquid-glass-carousel) | Infinite scroll-driven portfolio carousel drawn through a liquid-glass lens, with focus mode and an entry animation.                                                   |
+| [Liquid Tabs](https://nxui.geoql.in/docs/components/liquid-tabs)                     | A notifications card whose active tab is liquid: it slides to the next label on a spring and flows into the card body through a goo filter.                            |
 | [Mac Keyboard](https://nxui.geoql.in/docs/components/mac-keyboard)                   | An interactive Mac keyboard with real key tracking, sound effects, and visual feedback. Press keys on your keyboard to see them light up.                              |
 | [Magic Bento](https://nxui.geoql.in/docs/components/magic-bento)                     | A bento grid of feature cards with live artwork, edge light that follows the cursor and a click wave across the grid.                                                  |
 | [Magnetic Dock](https://nxui.geoql.in/docs/components/magnetic-dock)                 | A macOS-style dock with magnetic hover magnification and genie effect.                                                                                                 |
+| [Magnify](https://nxui.geoql.in/docs/components/magnify)                             | A paper poster with one huge letter and a magnifying glass that shows the tiny characters the letter is printed from.                                                  |
 | [Masonry](https://nxui.geoql.in/docs/components/masonry)                             | A masonry gallery that springs tiles into place, reflows on resize, reorders by drag and opens images in a lightbox.                                                   |
+| [Model Picker](https://nxui.geoql.in/docs/components/model-picker)                   | A chat composer with a model menu that compares speed, quality and cost, with thinking effort, web search and a rolling price tray.                                    |
 | [Model Viewer](https://nxui.geoql.in/docs/components/model-viewer)                   | A 3D model viewer for glb, gltf, fbx and obj files that frames the model, lights it with an HDRI and floats it over a soft shadow.                                     |
 | [Morph Slider](https://nxui.geoql.in/docs/components/morph-slider)                   | WebGL image slider that melts, ripples, shears or swirls between slides, with drag scrubbing, autoplay, captions and dots.                                             |
+| [Motion Bento](https://nxui.geoql.in/docs/components/motion-bento)                   | A services bento grid with a headline, a call-to-action and cards whose illustrated artwork plays its own loop.                                                        |
 | [Music Player](https://nxui.geoql.in/docs/components/music-player)                   | An interactive vinyl-record music player with swinging tonearm and animated rotation.                                                                                  |
 | [Newsletter Bookshelf](https://nxui.geoql.in/docs/components/newsletter-bookshelf)   | A three.js shelf of cloth-bound books for a newsletter archive. Browse sideways, hover to lift a spine, click to pull a book forward.                                  |
 | [Node Canvas](https://nxui.geoql.in/docs/components/node-canvas)                     | A pannable, zoomable node canvas with draggable nodes, live bezier edges, selection handles, a minimap and a zoom control.                                             |
@@ -283,6 +292,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Prompt Bar](https://nxui.geoql.in/docs/components/prompt-bar)                       | Chat composer with @ sources, / commands, a model picker, an effort slider, dictation and attachment chips.                                                            |
 | [Pulse Heart](https://nxui.geoql.in/docs/components/pulse-heart)                     | Like button whose glyph contracts to a dot, flips colour and swells back while the pill beats and the count rolls over.                                                |
 | [Receipt Printer](https://nxui.geoql.in/docs/components/receipt-printer)             | A checkout state that turns payment processing into a printed order receipt — stepped paper feed, status screen, serrated paper tear.                                  |
+| [Recorder](https://nxui.geoql.in/docs/components/recorder)                           | A voice recorder card with a scrolling waveform under a fixed playhead, a rolling timer, scrubbing and a hold-to-clear key.                                            |
 | [Refine Frame](https://nxui.geoql.in/docs/components/refine-frame)                   | Media frame that steps an image through generation stages, from a coarse mosaic to sharp, without any layout shift.                                                    |
 | [Reflective Card](https://nxui.geoql.in/docs/components/reflective-card)             | A WebGL2 metal ID card that reflects a looping video or your camera, tilts toward the cursor and catches a moving light.                                               |
 | [Ripple Transition](https://nxui.geoql.in/docs/components/ripple-transition)         | WebGL image transitions with noisy refractive waves, chromatic edges, glow, and click-triggered ripple origins.                                                        |
@@ -293,6 +303,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Scroll Tilted Grid](https://nxui.geoql.in/docs/components/scroll-tilted-grid)       | A two-column image gallery whose frames tilt, blur and dim at the viewport edges and settle into focus as they cross the center.                                       |
 | [Scrub Field](https://nxui.geoql.in/docs/components/scrub-field)                     | Number chip you drag to scrub, with rubber-band limits and click to type.                                                                                              |
 | [Scrub Input](https://nxui.geoql.in/docs/components/scrub-input)                     | An inline slider input styled as a pill, perfect for adjusting variables smoothly.                                                                                     |
+| [Segment Display](https://nxui.geoql.in/docs/components/segment-display)             | Seven-segment LCD digits with faint unlit segments, a soft glow and a slant, sized by font size.                                                                       |
 | [Showcase Card](https://nxui.geoql.in/docs/components/showcase-card)                 | A card with 3D tilt effect that responds to mouse movement for showcasing content.                                                                                     |
 | [Shredder](https://nxui.geoql.in/docs/components/shredder)                           | A list with a paper shredder at the bottom that cuts dragged rows into curling strips.                                                                                 |
 | [Signature](https://nxui.geoql.in/docs/components/signature)                         | Animated handwriting effect that converts text to font glyph paths and reveals them with staggered SVG stroke animations.                                              |
@@ -313,11 +324,14 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Sticky Scroll Cards](https://nxui.geoql.in/docs/components/sticky-scroll-cards)     | Scroll-driven card stack where images pin and scale as you scroll.                                                                                                     |
 | [Swipe Row](https://nxui.geoql.in/docs/components/swipe-row)                         | List row you swipe to reveal a drawer of actions; a full swipe leaps the delete block across and folds the row away.                                                   |
 | [Swipe Toast](https://nxui.geoql.in/docs/components/swipe-toast)                     | Toast that swipes down to dismiss and burns a thin fuse along its edge for the time it has left.                                                                       |
+| [Taxi](https://nxui.geoql.in/docs/components/taxi)                                   | A taxi-hailing card that runs a ride from one tap: a morphing glyph, a counting-down ETA with a moving car dot, and a star rating.                                     |
 | [Tear Ticket](https://nxui.geoql.in/docs/components/tear-ticket)                     | A ticket whose perforated stub tears off by hand, fibre by fibre, then drops away and leaves a greyed, used ticket.                                                    |
 | [Testimonial Marquee](https://nxui.geoql.in/docs/components/testimonial-marquee)     | An infinite scrolling marquee of testimonial cards with smooth animation.                                                                                              |
+| [Thermal Dial](https://nxui.geoql.in/docs/components/thermal-dial)                   | A thermostat card set by dragging round its dial, scrolling or arrow keys; the heat at its foot shifts from blue to red with the reading.                              |
 | [Thought Line](https://nxui.geoql.in/docs/components/thought-line)                   | Reasoning trace header with a breathing glyph and live clock that folds its steps into one line when the work settles.                                                 |
 | [Tilted Card](https://nxui.geoql.in/docs/components/tilted-card)                     | A 3D card that tilts toward the cursor, with glare, a soft shadow, floating depth layers and a flip side.                                                              |
 | [Timezone Companion](https://nxui.geoql.in/docs/components/timezone-companion)       | A meeting-overlap finder: a 24-hour grid of city working hours with a draggable scrubber and a find-best-time sweep.                                                   |
+| [User Dropdown](https://nxui.geoql.in/docs/components/user-dropdown)                 | An account card that grows into a user menu with key-cap shortcuts, side submenus for status, accounts and spaces, and a recessed footer.                              |
 | [Visual Stepper](https://nxui.geoql.in/docs/components/visual-stepper)               | Auto-playing vertical stepper with growing connector bars and a crossfading preview card.                                                                              |
 | [Voice Pill](https://nxui.geoql.in/docs/components/voice-pill)                       | Mic button that opens into a capsule with a scrolling waveform and a timer while recording; tap to latch, hold to talk, slide left to cancel.                          |
 | [Wake Slider](https://nxui.geoql.in/docs/components/wake-slider)                     | Thumbless range slider of thin bars where drag speed raises a wake behind the handle.                                                                                  |
@@ -409,18 +423,28 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Spectral Ribbon](https://nxui.geoql.in/docs/hero-backgrounds/spectral-ribbon)     | A soft spectral light ribbon on black with slow liquid motion and a rainbow fringe, drawn by one WebGL fragment shader.                                                           |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
 
-### Dashboard (8)
+### Dashboard (18)
 
-| Component                                                             | Description                                                                                                                             |
-| --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| [Clean Table](https://nxui.geoql.in/docs/dashboard/clean-table)       | A quiet, paginated table with segmented tabs, a keyboard-focused search, zebra rows, mono columns, status pills and row selection.      |
-| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card)     | A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.                        |
-| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)         | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.                                 |
-| [Downtime Log](https://nxui.geoql.in/docs/dashboard/downtime-log)     | A machine downtime log with selectable stops, reason pills, a reason filter, sort modes and a 24-hour stop timeline linked to the rows. |
-| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)             | A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.                               |
-| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel)     | A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.                            |
-| [Range Calendar](https://nxui.geoql.in/docs/dashboard/range-calendar) | A month heatmap calendar for picking a date range, with presets, a live range pill, a shaded legend and a compare switch.               |
-| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel)     | Service health lamps with an overall status, uptime and latency, plus a live event log.                                                 |
+| Component                                                                             | Description                                                                                                                                    |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Aura Speed Test](https://nxui.geoql.in/docs/dashboard/aura-speed-test)               | A frosted-glass speed test: the download figure counts up, a dot spectrum fills, and ping, upload, packet-loss and radar tiles follow.         |
+| [Aura Stability](https://nxui.geoql.in/docs/dashboard/aura-stability)                 | A frosted-glass capsule with a min/max range chart of speed-test runs and a violet glow that rises to the stability score.                     |
+| [Backup Reserve](https://nxui.geoql.in/docs/dashboard/backup-reserve)                 | Battery reserve setting with an LCD readout, segmented charge bar, slider, presets, a storm watch switch and a grid charging stepper.          |
+| [Clean Table](https://nxui.geoql.in/docs/dashboard/clean-table)                       | A quiet, paginated table with segmented tabs, a keyboard-focused search, zebra rows, mono columns, status pills and row selection.             |
+| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card)                     | A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.                               |
+| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)                         | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.                                        |
+| [Device Pairing](https://nxui.geoql.in/docs/dashboard/device-pairing)                 | A battery pairing card with an isometric line-art stage, a six-cell LCD code input, a code countdown and a three-step progress row.            |
+| [Downtime Log](https://nxui.geoql.in/docs/dashboard/downtime-log)                     | A machine downtime log with selectable stops, reason pills, a reason filter, sort modes and a 24-hour stop timeline linked to the rows.        |
+| [Equipment Panel](https://nxui.geoql.in/docs/dashboard/equipment-panel)               | A home-energy equipment card with three LCD readouts, an All/Alerts filtered device table and rows that open to a live chart.                  |
+| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)                             | A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.                                      |
+| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel)                     | A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.                                   |
+| [Operating Mode Dial](https://nxui.geoql.in/docs/dashboard/operating-mode-dial)       | A battery mode card with a knurled knob that springs between modes, an LCD description panel, schedule tabs and a 24-hour rate strip.          |
+| [Power Monitor](https://nxui.geoql.in/docs/dashboard/power-monitor)                   | Live home-energy card with an LCD readout, a pixel-grid solar and home-use chart with a time cursor, and a Day, Week, Month and Year switch.   |
+| [Productivity Dashboard](https://nxui.geoql.in/docs/dashboard/productivity-dashboard) | A daily overview card with a rolling energy chart, a sleep tile that expands into a hypnogram, a preset focus timer and a live sound waveform. |
+| [Range Calendar](https://nxui.geoql.in/docs/dashboard/range-calendar)                 | A month heatmap calendar for picking a date range, with presets, a live range pill, a shaded legend and a compare switch.                      |
+| [Self-Powered Gauge](https://nxui.geoql.in/docs/dashboard/self-powered-gauge)         | Analog needle meter for the self-powered share, with a stacked source bar and a seven-day segment chart.                                       |
+| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel)                     | Service health lamps with an overall status, uptime and latency, plus a live event log.                                                        |
+| [Usage Meter](https://nxui.geoql.in/docs/dashboard/usage-meter)                       | A plan usage card with a range switch, rolling credit total, stacked category meter, per-day bars, quota stats and a limit state.              |
 
 ### Charts (8)
 

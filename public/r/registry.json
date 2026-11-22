@@ -2176,6 +2176,150 @@
       "description": "An image filter that splits an image into shifting color layers like lens chromatic aberration and warps it like barrel or pincushion distortion. Ported from Paper Shaders (Apache-2.0)."
     },
     {
+      "name": "backup-reserve",
+      "type": "registry:ui",
+      "title": "Backup Reserve",
+      "description": "Battery reserve setting with an LCD readout, segmented charge bar, slider, presets, a storm watch switch and a grid charging stepper."
+    },
+    {
+      "name": "device-pairing",
+      "type": "registry:ui",
+      "title": "Device Pairing",
+      "description": "A battery pairing card with an isometric line-art stage, a six-cell LCD code input, a code countdown and a three-step progress row."
+    },
+    {
+      "name": "equipment-panel",
+      "type": "registry:ui",
+      "title": "Equipment Panel",
+      "description": "A home-energy equipment card with three LCD readouts, an All/Alerts filtered device table and rows that open to a live chart."
+    },
+    {
+      "name": "model-picker",
+      "type": "registry:ui",
+      "title": "Model Picker",
+      "description": "A chat composer with a model menu that compares speed, quality and cost, with thinking effort, web search and a rolling price tray."
+    },
+    {
+      "name": "motion-bento",
+      "type": "registry:ui",
+      "title": "Motion Bento",
+      "description": "A services bento grid with a headline, a call-to-action and cards whose illustrated artwork plays its own loop."
+    },
+    {
+      "name": "operating-mode-dial",
+      "type": "registry:ui",
+      "title": "Operating Mode Dial",
+      "description": "A battery mode card with a knurled knob that springs between modes, an LCD description panel, schedule tabs and a 24-hour rate strip."
+    },
+    {
+      "name": "power-monitor",
+      "type": "registry:ui",
+      "title": "Power Monitor",
+      "description": "Live home-energy card with an LCD readout, a pixel-grid solar and home-use chart with a time cursor, and a Day, Week, Month and Year switch."
+    },
+    {
+      "name": "segment-display",
+      "type": "registry:ui",
+      "title": "Segment Display",
+      "description": "Seven-segment LCD digits with faint unlit segments, a soft glow and a slant, sized by font size."
+    },
+    {
+      "name": "self-powered-gauge",
+      "type": "registry:ui",
+      "title": "Self-Powered Gauge",
+      "description": "Analog needle meter for the self-powered share, with a stacked source bar and a seven-day segment chart."
+    },
+    {
+      "name": "usage-meter",
+      "type": "registry:ui",
+      "title": "Usage Meter",
+      "description": "A plan usage card with a range switch, rolling credit total, stacked category meter, per-day bars, quota stats and a limit state."
+    },
+    {
+      "name": "user-dropdown",
+      "type": "registry:ui",
+      "title": "User Dropdown",
+      "description": "An account card that grows into a user menu with key-cap shortcuts, side submenus for status, accounts and spaces, and a recessed footer."
+    },
+    {
+      "name": "liquid-tabs",
+      "type": "registry:ui",
+      "title": "Liquid Tabs",
+      "description": "A notifications card whose active tab is liquid: it slides to the next label on a spring and flows into the card body through a goo filter."
+    },
+    {
+      "name": "desk-computer",
+      "type": "registry:ui",
+      "title": "Desk Computer",
+      "description": "An isometric late-90s desk computer you can use: type on its CRT, drag its mouse, load its CD and switch the screen off and on."
+    },
+    {
+      "name": "file-box",
+      "type": "registry:ui",
+      "title": "File Box",
+      "description": "A cardboard file box of five tabbed folders. Hover or focus a folder to lift it out by its tab; click or press Enter to tug it."
+    },
+    {
+      "name": "joystick",
+      "type": "registry:ui",
+      "title": "Joystick",
+      "description": "A pixel-art arcade stick in an octagonal gate. Drag it or use the arrow keys; it springs back with an overshoot and clicks per direction."
+    },
+    {
+      "name": "lamp-switch",
+      "type": "registry:ui",
+      "title": "Lamp Switch",
+      "description": "A pendant lamp over a liquid switch. Flip the switch, drag its knob, or pull the lamp down to turn the light on with a flicker."
+    },
+    {
+      "name": "magnify",
+      "type": "registry:ui",
+      "title": "Magnify",
+      "description": "A paper poster with one huge letter and a magnifying glass that shows the tiny characters the letter is printed from."
+    },
+    {
+      "name": "recorder",
+      "type": "registry:ui",
+      "title": "Recorder",
+      "description": "A voice recorder card with a scrolling waveform under a fixed playhead, a rolling timer, scrubbing and a hold-to-clear key."
+    },
+    {
+      "name": "taxi",
+      "type": "registry:ui",
+      "title": "Taxi",
+      "description": "A taxi-hailing card that runs a ride from one tap: a morphing glyph, a counting-down ETA with a moving car dot, and a star rating."
+    },
+    {
+      "name": "thermal-dial",
+      "type": "registry:ui",
+      "title": "Thermal Dial",
+      "description": "A thermostat card set by dragging round its dial, scrolling or arrow keys; the heat at its foot shifts from blue to red with the reading."
+    },
+    {
+      "name": "aura-speed-test",
+      "type": "registry:ui",
+      "title": "Aura Speed Test",
+      "description": "A frosted-glass speed test: the download figure counts up, a dot spectrum fills, and ping, upload, packet-loss and radar tiles follow."
+    },
+    {
+      "name": "aura-stability",
+      "type": "registry:ui",
+      "title": "Aura Stability",
+      "description": "A frosted-glass capsule with a min/max range chart of speed-test runs and a violet glow that rises to the stability score."
+    },
+    {
+      "name": "distortion-wave",
+      "type": "registry:ui",
+      "title": "Distortion Wave",
+      "description": "A WebGL 2 wave that leaves a button or icon, bends the view with refraction and colour split, and leaves the next view behind."
+    },
+    {
+      "name": "productivity-dashboard",
+      "type": "registry:ui",
+      "title": "Productivity Dashboard",
+      "description": "A daily overview card with a rolling energy chart, a sleep tile that expands into a hypnogram, a preset focus timer and a live sound waveform."
+    },
+    {
       "name": "clean-table",
       "type": "registry:ui",
       "title": "Clean Table",

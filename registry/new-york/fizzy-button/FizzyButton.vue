@@ -332,9 +332,7 @@
       @click="onClick"
     >
       <canvas ref="canvas" class="fizzy-button__canvas" aria-hidden="true" />
-      <span class="fizzy-button__label"
-        ><slot>{{ props.label }}</slot></span
-      >
+      <span class="fizzy-button__label"><slot>{{ props.label }}</slot></span>
       <span ref="fill" class="fizzy-button__fill" aria-hidden="true" />
     </button>
   </div>

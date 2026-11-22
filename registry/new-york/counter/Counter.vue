@@ -460,8 +460,8 @@
 <template>
   <span ref="rootRef" :class="cn('counter', props.class)" :style="rootStyle">
     <span class="counter__sr">
-      <slot name="prefix">{{ prefix }}</slot
-      >{{ label }}<slot name="suffix">{{ suffix }}</slot>
+      <slot name="prefix">{{ prefix }}</slot>{{ label
+      }}<slot name="suffix">{{ suffix }}</slot>
     </span>
     <span ref="rowRef" class="counter__row" aria-hidden="true">
       <span v-if="hasPrefix" class="counter__affix">

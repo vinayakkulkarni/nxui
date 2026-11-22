@@ -508,7 +508,6 @@
   .signature-eraser {
     --se-ink: oklch(0.21 0 0);
   }
-  :global(.dark) .signature-eraser,
   :global(.dark .signature-eraser) {
     --se-ink: oklch(0.96 0 0);
   }

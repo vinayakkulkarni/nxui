@@ -1,4 +1,9 @@
 version: 2
+# Dependency bumps use the `build(deps)` prefix. release-please hides the
+# `build` type (`hidden: true` in release-please-config.json) and does not
+# count it as a releasable unit, so Dependabot merges no longer appear as
+# "Bug Fixes" or cut a patch release on their own. They ship with the next
+# feat/fix release. `build` is an allowed type in lint-pr.yml and commitlint.
 updates:
   - package-ecosystem: github-actions
     directory: '/'
@@ -8,8 +13,8 @@ updates:
     assignees:
       - vinayakkulkarni
     commit-message:
-      prefix: fix
-      prefix-development: chore
+      prefix: build
+      prefix-development: build
       include: scope
 
   # Dependabot's `package-ecosystem: pnpm` is NOT supported yet — tracked in
@@ -26,8 +31,8 @@ updates:
     assignees:
       - vinayakkulkarni
     commit-message:
-      prefix: fix
-      prefix-development: chore
+      prefix: build
+      prefix-development: build
       include: scope
     # Vue must resolve to ONE version across the whole graph. Nuxt declares a
     # caret range on the stable line, so a prerelease pin from this manifest

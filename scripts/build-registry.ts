@@ -68,6 +68,18 @@ const CHART_COMPONENTS = new Set([
   'sparkline',
 ]);
 
+/**
+ * Seven-segment LCD digits shared by the energy dashboard widgets.
+ */
+const SEGMENT_DISPLAY_URL = 'https://nxui.geoql.in/r/segment-display.json';
+const SEGMENT_DISPLAY_USERS = new Set([
+  'backup-reserve',
+  'device-pairing',
+  'equipment-panel',
+  'power-monitor',
+  'self-powered-gauge',
+]);
+
 const COMPONENTS: Record<
   string,
   { title: string; description: string; deps: string[] }
@@ -2235,6 +2247,155 @@ const COMPONENTS: Record<
       'An image filter that splits an image into shifting color layers like lens chromatic aberration and warps it like barrel or pincushion distortion. Ported from Paper Shaders (Apache-2.0).',
     deps: ['@paper-design/shaders'],
   },
+  'backup-reserve': {
+    title: 'Backup Reserve',
+    description:
+      'Battery reserve setting with an LCD readout, segmented charge bar, slider, presets, a storm watch switch and a grid charging stepper.',
+    deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
+  },
+  'device-pairing': {
+    title: 'Device Pairing',
+    description:
+      'A battery pairing card with an isometric line-art stage, a six-cell LCD code input, a code countdown and a three-step progress row.',
+    deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
+  },
+  'equipment-panel': {
+    title: 'Equipment Panel',
+    description:
+      'A home-energy equipment card with three LCD readouts, an All/Alerts filtered device table and rows that open to a live chart.',
+    deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
+  },
+  'model-picker': {
+    title: 'Model Picker',
+    description:
+      'A chat composer with a model menu that compares speed, quality and cost, with thinking effort, web search and a rolling price tray.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'motion-bento': {
+    title: 'Motion Bento',
+    description:
+      'A services bento grid with a headline, a call-to-action and cards whose illustrated artwork plays its own loop.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'operating-mode-dial': {
+    title: 'Operating Mode Dial',
+    description:
+      'A battery mode card with a knurled knob that springs between modes, an LCD description panel, schedule tabs and a 24-hour rate strip.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'power-monitor': {
+    title: 'Power Monitor',
+    description:
+      'Live home-energy card with an LCD readout, a pixel-grid solar and home-use chart with a time cursor, and a Day, Week, Month and Year switch.',
+    deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
+  },
+  'segment-display': {
+    title: 'Segment Display',
+    description:
+      'Seven-segment LCD digits with faint unlit segments, a soft glow and a slant, sized by font size.',
+    deps: [],
+  },
+  'self-powered-gauge': {
+    title: 'Self-Powered Gauge',
+    description:
+      'Analog needle meter for the self-powered share, with a stacked source bar and a seven-day segment chart.',
+    deps: ['@vueuse/core'],
+    registryDependencies: ['segment-display'],
+  },
+  'usage-meter': {
+    title: 'Usage Meter',
+    description:
+      'A plan usage card with a range switch, rolling credit total, stacked category meter, per-day bars, quota stats and a limit state.',
+    deps: ['@vueuse/core'],
+  },
+  'user-dropdown': {
+    title: 'User Dropdown',
+    description:
+      'An account card that grows into a user menu with key-cap shortcuts, side submenus for status, accounts and spaces, and a recessed footer.',
+    deps: ['@vueuse/core'],
+  },
+  'liquid-tabs': {
+    title: 'Liquid Tabs',
+    description:
+      'A notifications card whose active tab is liquid: it slides to the next label on a spring and flows into the card body through a goo filter.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'desk-computer': {
+    title: 'Desk Computer',
+    description:
+      'An isometric late-90s desk computer you can use: type on its CRT, drag its mouse, load its CD and switch the screen off and on.',
+    deps: ['@vueuse/core'],
+  },
+  'file-box': {
+    title: 'File Box',
+    description:
+      'A cardboard file box of five tabbed folders. Hover or focus a folder to lift it out by its tab; click or press Enter to tug it.',
+    deps: ['motion-v'],
+  },
+  joystick: {
+    title: 'Joystick',
+    description:
+      'A pixel-art arcade stick in an octagonal gate. Drag it or use the arrow keys; it springs back with an overshoot and clicks per direction.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'lamp-switch': {
+    title: 'Lamp Switch',
+    description:
+      'A pendant lamp over a liquid switch. Flip the switch, drag its knob, or pull the lamp down to turn the light on with a flicker.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  magnify: {
+    title: 'Magnify',
+    description:
+      'A paper poster with one huge letter and a magnifying glass that shows the tiny characters the letter is printed from.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  recorder: {
+    title: 'Recorder',
+    description:
+      'A voice recorder card with a scrolling waveform under a fixed playhead, a rolling timer, scrubbing and a hold-to-clear key.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  taxi: {
+    title: 'Taxi',
+    description:
+      'A taxi-hailing card that runs a ride from one tap: a morphing glyph, a counting-down ETA with a moving car dot, and a star rating.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'thermal-dial': {
+    title: 'Thermal Dial',
+    description:
+      'A thermostat card set by dragging round its dial, scrolling or arrow keys; the heat at its foot shifts from blue to red with the reading.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'aura-speed-test': {
+    title: 'Aura Speed Test',
+    description:
+      'A frosted-glass speed test: the download figure counts up, a dot spectrum fills, and ping, upload, packet-loss and radar tiles follow.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'aura-stability': {
+    title: 'Aura Stability',
+    description:
+      'A frosted-glass capsule with a min/max range chart of speed-test runs and a violet glow that rises to the stability score.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'distortion-wave': {
+    title: 'Distortion Wave',
+    description:
+      'A WebGL 2 wave that leaves a button or icon, bends the view with refraction and colour split, and leaves the next view behind.',
+    deps: ['@vueuse/core'],
+  },
+  'productivity-dashboard': {
+    title: 'Productivity Dashboard',
+    description:
+      'A daily overview card with a rolling energy chart, a sleep tile that expands into a hypnogram, a preset focus timer and a live sound waveform.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:
@@ -2305,6 +2466,7 @@ function buildRegistryItem(slug: string): RegistryItem | null {
   const registryDependencies = [
     ...(needsMount ? [PAPER_SHADER_MOUNT_URL] : []),
     ...(CHART_COMPONENTS.has(slug) ? [CHART_LIB_URL] : []),
+    ...(SEGMENT_DISPLAY_USERS.has(slug) ? [SEGMENT_DISPLAY_URL] : []),
   ];
 
   return {

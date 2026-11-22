@@ -182,9 +182,7 @@
     @click="onClick"
   >
     <canvas ref="canvas" class="chaos-button__canvas" aria-hidden="true" />
-    <span class="chaos-button__label"
-      ><slot>{{ props.label }}</slot></span
-    >
+    <span class="chaos-button__label"><slot>{{ props.label }}</slot></span>
   </button>
 </template>
 

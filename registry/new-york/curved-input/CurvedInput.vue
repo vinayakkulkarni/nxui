@@ -510,8 +510,7 @@
           :style="{ fontSize: `${fontSize}px`, fontWeight: 500 }"
           :fill="fgColor"
           xml:space="preserve"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
           <textPath :href="`#${layoutPathId}`">{{ display }}</textPath>
         </text>
         <text
@@ -519,8 +518,7 @@
           :style="{ fontSize: `${fontSize}px`, fontWeight: 500 }"
           :fill="phColor"
           xml:space="preserve"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
           <textPath :href="`#${layoutPathId}`">{{ placeholder }}</textPath>
         </text>
         <g

@@ -179,8 +179,14 @@
   }
 
   onBeforeUnmount(() => {
-    if (raiseTimeoutRef.value) window.clearTimeout(raiseTimeoutRef.value);
-    if (collapseTimeoutRef.value) window.clearTimeout(collapseTimeoutRef.value);
+    if (raiseTimeoutRef.value) {
+      window.clearTimeout(raiseTimeoutRef.value);
+      raiseTimeoutRef.value = null;
+    }
+    if (collapseTimeoutRef.value) {
+      window.clearTimeout(collapseTimeoutRef.value);
+      collapseTimeoutRef.value = null;
+    }
   });
 </script>
 
