@@ -333,6 +333,11 @@ export const docsNav: NavGroup[] = [
         badge: 'new',
       },
       {
+        title: 'Distortion Wave',
+        path: '/docs/components/distortion-wave',
+        badge: 'new',
+      },
+      {
         title: 'Dithered Logo',
         path: '/docs/components/dithered-logo',
       },
@@ -766,6 +771,16 @@ export const docsNav: NavGroup[] = [
     title: 'Dashboard',
     items: [
       {
+        title: 'Aura Speed Test',
+        path: '/docs/dashboard/aura-speed-test',
+        badge: 'new',
+      },
+      {
+        title: 'Aura Stability',
+        path: '/docs/dashboard/aura-stability',
+        badge: 'new',
+      },
+      {
         title: 'Backup Reserve',
         path: '/docs/dashboard/backup-reserve',
         badge: 'new',
@@ -806,6 +821,11 @@ export const docsNav: NavGroup[] = [
       {
         title: 'Power Monitor',
         path: '/docs/dashboard/power-monitor',
+        badge: 'new',
+      },
+      {
+        title: 'Productivity Dashboard',
+        path: '/docs/dashboard/productivity-dashboard',
         badge: 'new',
       },
       {

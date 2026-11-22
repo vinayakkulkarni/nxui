@@ -2372,6 +2372,30 @@ const COMPONENTS: Record<
       'A thermostat card set by dragging round its dial, scrolling or arrow keys; the heat at its foot shifts from blue to red with the reading.',
     deps: ['@vueuse/core', 'motion-v'],
   },
+  'aura-speed-test': {
+    title: 'Aura Speed Test',
+    description:
+      'A frosted-glass speed test: the download figure counts up, a dot spectrum fills, and ping, upload, packet-loss and radar tiles follow.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'aura-stability': {
+    title: 'Aura Stability',
+    description:
+      'A frosted-glass capsule with a min/max range chart of speed-test runs and a violet glow that rises to the stability score.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
+  'distortion-wave': {
+    title: 'Distortion Wave',
+    description:
+      'A WebGL 2 wave that leaves a button or icon, bends the view with refraction and colour split, and leaves the next view behind.',
+    deps: ['@vueuse/core'],
+  },
+  'productivity-dashboard': {
+    title: 'Productivity Dashboard',
+    description:
+      'A daily overview card with a rolling energy chart, a sleep tile that expands into a hypnogram, a preset focus timer and a live sound waveform.',
+    deps: ['@vueuse/core', 'motion-v'],
+  },
   'clean-table': {
     title: 'Clean Table',
     description:

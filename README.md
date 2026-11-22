@@ -52,7 +52,7 @@
     <img src="https://nxui.geoql.in/nxui-demo.gif?v=2" alt="nxui — animated, copy-paste UI components for Vue" width="800" />
   </a>
   <br />
-  <sub>384 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
+  <sub>388 animated components — including all 30 Paper Shaders as Vue components. Dark mode. Copy, paste, ship.</sub>
 </div>
 
 ## Introduction
@@ -82,11 +82,11 @@ The fastest way to add components is using the shadcn-vue CLI:
 npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 ```
 
-## Components (384)
+## Components (388)
 
 > The registry also ships two internal helpers — `paper-shader-mount`, which
 > the Paper Shaders depend on, and `chart`, the chart engine the Charts depend
-> on — so `npx shadcn-vue add` resolves 386 items total, of which these 384 are
+> on — so `npx shadcn-vue add` resolves 390 items total, of which these 388 are
 > user-facing components.
 
 ### Text Animations (47)
@@ -181,7 +181,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Swarm Cursor](https://nxui.geoql.in/docs/animations/swarm-cursor)           | A liquid swarm of particles that flows after the cursor, curls into eddies and pours around hovered buttons.                                     |
 | [Target Cursor](https://nxui.geoql.in/docs/animations/target-cursor)         | A spinning reticle cursor whose corner brackets snap around targets, follow their corner radius and show a label.                                |
 
-### Components (152)
+### Components (153)
 
 | Component                                                                            | Description                                                                                                                                                            |
 | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -221,6 +221,7 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Decay Card](https://nxui.geoql.in/docs/components/decay-card)                       | An image card drawn with WebGL that tears and melts as the pointer moves, then pulls itself back together.                                                             |
 | [Depth Carousel](https://nxui.geoql.in/docs/components/depth-carousel)               | Image carousel whose cards recede along a tilted 3D rail, with drag, wheel, keyboard, dot and auto-advance navigation.                                                 |
 | [Desk Computer](https://nxui.geoql.in/docs/components/desk-computer)                 | An isometric late-90s desk computer you can use: type on its CRT, drag its mouse, load its CD and switch the screen off and on.                                        |
+| [Distortion Wave](https://nxui.geoql.in/docs/components/distortion-wave)             | A WebGL 2 wave that leaves a button or icon, bends the view with refraction and colour split, and leaves the next view behind.                                         |
 | [Dithered Logo](https://nxui.geoql.in/docs/components/dithered-logo)                 | Renders any logo as a Floyd-Steinberg dithered particle field with cursor repulsion and click ripples.                                                                 |
 | [Dock](https://nxui.geoql.in/docs/components/dock)                                   | macOS style dock with spring magnification, launch hop, badges, auto hide, right-click menus with submenus, on any edge.                                               |
 | [Dodge Field](https://nxui.geoql.in/docs/components/dodge-field)                     | Wrapper that makes any child dodge the pointer until it relents and glides home.                                                                                       |
@@ -422,25 +423,28 @@ npx shadcn-vue@latest add https://nxui.geoql.in/r/spotlight-card.json
 | [Spectral Ribbon](https://nxui.geoql.in/docs/hero-backgrounds/spectral-ribbon)     | A soft spectral light ribbon on black with slow liquid motion and a rainbow fringe, drawn by one WebGL fragment shader.                                                           |
 | [WebGL Liquid](https://nxui.geoql.in/docs/hero-backgrounds/webgl-liquid)           | A premium liquid hero background powered by raw WebGL shaders, with configurable palette, grain, reveal timing, and flow behavior.                                                |
 
-### Dashboard (15)
+### Dashboard (18)
 
-| Component                                                                       | Description                                                                                                                                  |
-| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Backup Reserve](https://nxui.geoql.in/docs/dashboard/backup-reserve)           | Battery reserve setting with an LCD readout, segmented charge bar, slider, presets, a storm watch switch and a grid charging stepper.        |
-| [Clean Table](https://nxui.geoql.in/docs/dashboard/clean-table)                 | A quiet, paginated table with segmented tabs, a keyboard-focused search, zebra rows, mono columns, status pills and row selection.           |
-| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card)               | A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.                             |
-| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)                   | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.                                      |
-| [Device Pairing](https://nxui.geoql.in/docs/dashboard/device-pairing)           | A battery pairing card with an isometric line-art stage, a six-cell LCD code input, a code countdown and a three-step progress row.          |
-| [Downtime Log](https://nxui.geoql.in/docs/dashboard/downtime-log)               | A machine downtime log with selectable stops, reason pills, a reason filter, sort modes and a 24-hour stop timeline linked to the rows.      |
-| [Equipment Panel](https://nxui.geoql.in/docs/dashboard/equipment-panel)         | A home-energy equipment card with three LCD readouts, an All/Alerts filtered device table and rows that open to a live chart.                |
-| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)                       | A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.                                    |
-| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel)               | A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.                                 |
-| [Operating Mode Dial](https://nxui.geoql.in/docs/dashboard/operating-mode-dial) | A battery mode card with a knurled knob that springs between modes, an LCD description panel, schedule tabs and a 24-hour rate strip.        |
-| [Power Monitor](https://nxui.geoql.in/docs/dashboard/power-monitor)             | Live home-energy card with an LCD readout, a pixel-grid solar and home-use chart with a time cursor, and a Day, Week, Month and Year switch. |
-| [Range Calendar](https://nxui.geoql.in/docs/dashboard/range-calendar)           | A month heatmap calendar for picking a date range, with presets, a live range pill, a shaded legend and a compare switch.                    |
-| [Self-Powered Gauge](https://nxui.geoql.in/docs/dashboard/self-powered-gauge)   | Analog needle meter for the self-powered share, with a stacked source bar and a seven-day segment chart.                                     |
-| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel)               | Service health lamps with an overall status, uptime and latency, plus a live event log.                                                      |
-| [Usage Meter](https://nxui.geoql.in/docs/dashboard/usage-meter)                 | A plan usage card with a range switch, rolling credit total, stacked category meter, per-day bars, quota stats and a limit state.            |
+| Component                                                                             | Description                                                                                                                                    |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Aura Speed Test](https://nxui.geoql.in/docs/dashboard/aura-speed-test)               | A frosted-glass speed test: the download figure counts up, a dot spectrum fills, and ping, upload, packet-loss and radar tiles follow.         |
+| [Aura Stability](https://nxui.geoql.in/docs/dashboard/aura-stability)                 | A frosted-glass capsule with a min/max range chart of speed-test runs and a violet glow that rises to the stability score.                     |
+| [Backup Reserve](https://nxui.geoql.in/docs/dashboard/backup-reserve)                 | Battery reserve setting with an LCD readout, segmented charge bar, slider, presets, a storm watch switch and a grid charging stepper.          |
+| [Clean Table](https://nxui.geoql.in/docs/dashboard/clean-table)                       | A quiet, paginated table with segmented tabs, a keyboard-focused search, zebra rows, mono columns, status pills and row selection.             |
+| [Control Card](https://nxui.geoql.in/docs/dashboard/control-card)                     | A frosted-glass device card with a round power button, a device name and a boxed stat, made to sit over a photo.                               |
+| [Data Table](https://nxui.geoql.in/docs/dashboard/data-table)                         | A sortable, searchable table on TanStack Table with cell slots and a flash on rows whose values change.                                        |
+| [Device Pairing](https://nxui.geoql.in/docs/dashboard/device-pairing)                 | A battery pairing card with an isometric line-art stage, a six-cell LCD code input, a code countdown and a three-step progress row.            |
+| [Downtime Log](https://nxui.geoql.in/docs/dashboard/downtime-log)                     | A machine downtime log with selectable stops, reason pills, a reason filter, sort modes and a 24-hour stop timeline linked to the rows.        |
+| [Equipment Panel](https://nxui.geoql.in/docs/dashboard/equipment-panel)               | A home-energy equipment card with three LCD readouts, an All/Alerts filtered device table and rows that open to a live chart.                  |
+| [KPI Card](https://nxui.geoql.in/docs/dashboard/kpi-card)                             | A metric card with a tinted icon, an actions button, a counting value and a stack of avatars or initials.                                      |
+| [KPI Carousel](https://nxui.geoql.in/docs/dashboard/kpi-carousel)                     | A titled panel of best, worst and neutral metric cards with tone tints, arrows, dots and peeking neighbours.                                   |
+| [Operating Mode Dial](https://nxui.geoql.in/docs/dashboard/operating-mode-dial)       | A battery mode card with a knurled knob that springs between modes, an LCD description panel, schedule tabs and a 24-hour rate strip.          |
+| [Power Monitor](https://nxui.geoql.in/docs/dashboard/power-monitor)                   | Live home-energy card with an LCD readout, a pixel-grid solar and home-use chart with a time cursor, and a Day, Week, Month and Year switch.   |
+| [Productivity Dashboard](https://nxui.geoql.in/docs/dashboard/productivity-dashboard) | A daily overview card with a rolling energy chart, a sleep tile that expands into a hypnogram, a preset focus timer and a live sound waveform. |
+| [Range Calendar](https://nxui.geoql.in/docs/dashboard/range-calendar)                 | A month heatmap calendar for picking a date range, with presets, a live range pill, a shaded legend and a compare switch.                      |
+| [Self-Powered Gauge](https://nxui.geoql.in/docs/dashboard/self-powered-gauge)         | Analog needle meter for the self-powered share, with a stacked source bar and a seven-day segment chart.                                       |
+| [Status Panel](https://nxui.geoql.in/docs/dashboard/status-panel)                     | Service health lamps with an overall status, uptime and latency, plus a live event log.                                                        |
+| [Usage Meter](https://nxui.geoql.in/docs/dashboard/usage-meter)                       | A plan usage card with a range switch, rolling credit total, stacked category meter, per-day bars, quota stats and a limit state.              |
 
 ### Charts (8)
 
