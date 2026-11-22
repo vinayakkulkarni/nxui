@@ -394,8 +394,7 @@
           :stroke="color"
           :stroke-width="fontSize * 0.05"
           stroke-linejoin="round"
-          :mask="`url(#${maskId})`"
-        >
+          :mask="`url(#${maskId})`">
           <textPath v-if="accent" :href="`#${pathId}`" xml:space="preserve">
             <template v-for="i in copies" :key="i">
               <tspan v-text="bodyText" />
@@ -429,8 +428,7 @@
           v-if="outline && accent"
           xml:space="preserve"
           fill="none"
-          aria-hidden="true"
-        >
+          aria-hidden="true">
           <textPath :href="`#${pathId}`" xml:space="preserve">
             <template v-for="i in copies" :key="i">
               <tspan v-text="bodyText" />

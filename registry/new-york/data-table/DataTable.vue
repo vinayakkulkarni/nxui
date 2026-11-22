@@ -201,9 +201,7 @@
     <div class="overflow-x-auto rounded-xl border bg-card">
       <table class="w-full border-collapse text-sm">
         <caption v-if="props.caption" class="sr-only">
-          {{
-            props.caption
-          }}
+          {{ props.caption }}
         </caption>
         <thead>
           <tr

@@ -193,9 +193,7 @@
     <canvas ref="canvasRef" class="flying-button__smoke" aria-hidden="true" />
     <button ref="buttonRef" type="button" class="flying-button__craft">
       <span class="flying-button__face" aria-hidden="true" />
-      <span class="flying-button__label"
-        ><slot>{{ props.label }}</slot></span
-      >
+      <span class="flying-button__label"><slot>{{ props.label }}</slot></span>
       <span
         v-for="left in pods"
         :key="left"

@@ -287,9 +287,7 @@
         class="w-full min-w-225 border-separate border-spacing-0 text-[0.8125rem]"
       >
         <caption v-if="props.caption" class="sr-only">
-          {{
-            props.caption
-          }}
+          {{ props.caption }}
         </caption>
         <colgroup>
           <col

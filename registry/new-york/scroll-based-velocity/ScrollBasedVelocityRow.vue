@@ -250,8 +250,7 @@
         :aria-hidden="i > 1 ? 'true' : undefined"
         :style="copyStyle"
         >{{ text }}&nbsp;<template v-if="separator"
-          ><span :style="separatorStyle">{{ separator }}</span
-          >&nbsp;</template
+          ><span :style="separatorStyle">{{ separator }}</span>&nbsp;</template
         ></span
       >
     </div>
