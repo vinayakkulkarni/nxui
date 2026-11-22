@@ -2,8 +2,10 @@
   const colorMode = useColorMode();
   const { showFps, toggle: toggleFps } = useFpsMeter();
 
+  const isDark = computed(() => colorMode.value === 'dark');
+
   function toggleColorMode() {
-    colorMode.preference = colorMode.value === 'dark' ? 'light' : 'dark';
+    colorMode.preference = isDark.value ? 'light' : 'dark';
   }
 </script>
 
@@ -23,21 +25,18 @@
     </DocsToolbarLink>
     <DocsToolbarButton
       label="Toggle theme"
-      :tip="colorMode.value === 'dark' ? 'Light mode' : 'Dark mode'"
+      :tip="isDark ? 'Light mode' : 'Dark mode'"
       @click="toggleColorMode"
     >
       <ClientOnly>
-        <Icon
-          :name="colorMode.value === 'dark' ? 'lucide:sun' : 'lucide:moon'"
-          class="size-4"
-        />
+        <Icon :name="isDark ? 'lucide:sun' : 'lucide:moon'" class="size-4" />
         <template #fallback>
           <Icon name="lucide:moon" class="size-4" />
         </template>
       </ClientOnly>
       <template #tip>
         <ClientOnly>
-          {{ colorMode.value === 'dark' ? 'Light mode' : 'Dark mode' }}
+          {{ isDark ? 'Light mode' : 'Dark mode' }}
           <template #fallback>Dark mode</template>
         </ClientOnly>
       </template>
