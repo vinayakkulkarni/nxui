@@ -14,6 +14,9 @@ export type PaperShaderUniformValue =
 
 export type PaperShaderUniforms = Record<string, PaperShaderUniformValue>;
 
+/** The parts of an HTMLImageElement needed to wait for it to load. */
+export type LoadableImage = Pick<HTMLImageElement, 'complete'> & EventTarget;
+
 export interface PaperShaderMountProps {
   /** Fragment shader source from @paper-design/shaders. */
   fragmentShader: string;
