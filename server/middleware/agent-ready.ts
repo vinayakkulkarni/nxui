@@ -1,11 +1,5 @@
-import type { H3Event } from 'h3';
-import {
-  appendResponseHeader,
-  defineEventHandler,
-  getHeader,
-  getRequestURL,
-  setResponseHeader,
-} from 'h3';
+import { defineHandler, getRequestHeader, serverFetch } from 'nuxt/server';
+
 const ORIGIN = 'https://nxui.geoql.in';
 
 const LINK_HEADER = [
@@ -16,15 +10,15 @@ const LINK_HEADER = [
 
 const SKIP_PREFIXES = ['/api/', '/_nuxt/', '/r/', '/raw/', '/__nuxt_content/'];
 
-export default defineEventHandler(async (event: H3Event) => {
-  if (event.method !== 'GET') return;
+export default defineHandler(async (event) => {
+  if (event.req.method !== 'GET') return;
 
-  const path = getRequestURL(event).pathname;
+  const path = event.url.pathname;
   if (SKIP_PREFIXES.some((prefix) => path.startsWith(prefix))) return;
   if (path === '/mcp' || path === '/a2a' || path.startsWith('/.well-known/'))
     return;
 
-  appendResponseHeader(event, 'link', LINK_HEADER);
+  event.res.headers.append('link', LINK_HEADER);
 
   if (path !== '/docs' && !path.startsWith('/docs/')) return;
 
@@ -32,24 +26,23 @@ export default defineEventHandler(async (event: H3Event) => {
   // Vary: Accept — the Workers cache stores variants per the response's
   // Vary header, so an HTML entry cached without it would be served to
   // Accept: text/markdown agents (and vice versa).
-  setResponseHeader(event, 'vary', 'Accept');
+  event.res.headers.set('vary', 'Accept');
 
-  const accept = getHeader(event, 'accept') ?? '';
+  const accept = getRequestHeader(event, 'accept') ?? '';
   if (!accept.includes('text/markdown')) return;
 
   // @nuxt/content already serves each docs page as raw markdown under
-  // /raw/**.md; relative event.$fetch stays in-process (an absolute self-URL
-  // $fetch returns empty on the deployed worker's same-zone loopback).
+  // /raw/**.md; serverFetch stays in-process (an absolute self-URL fetch
+  // returns empty on the deployed worker's same-zone loopback).
   const rawPath =
     path === '/docs' || path === '/docs/'
       ? '/raw/docs/index.md'
       : `/raw${path.replace(/\/$/, '')}.md`;
 
-  const markdown = await event
-    .$fetch<string>(rawPath, { responseType: 'text' })
-    .catch(() => null);
+  const response = await serverFetch(event, rawPath).catch(() => null);
+  const markdown = response?.ok ? await response.text() : '';
   if (!markdown) return;
 
-  setResponseHeader(event, 'content-type', 'text/markdown; charset=utf-8');
+  event.res.headers.set('content-type', 'text/markdown; charset=utf-8');
   return markdown;
 });

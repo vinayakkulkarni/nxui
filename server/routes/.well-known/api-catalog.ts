@@ -1,6 +1,5 @@
-import type { H3Event } from 'h3';
-import { defineRouteMeta } from 'nitropack/runtime';
-import { defineEventHandler, setResponseHeader } from 'h3';
+import { defineRouteMeta } from 'nitro';
+import { defineHandler } from 'nuxt/server';
 const ORIGIN = 'https://nxui.geoql.in';
 
 defineRouteMeta({
@@ -20,14 +19,13 @@ defineRouteMeta({
   },
 });
 
-export default defineEventHandler((event: H3Event) => {
-  setResponseHeader(
-    event,
+export default defineHandler((event) => {
+  event.res.headers.set(
     'content-type',
     'application/linkset+json; charset=utf-8',
   );
-  setResponseHeader(event, 'cache-control', 'public, max-age=3600');
-  setResponseHeader(event, 'x-content-type-options', 'nosniff');
+  event.res.headers.set('cache-control', 'public, max-age=3600');
+  event.res.headers.set('x-content-type-options', 'nosniff');
   return {
     linkset: [
       {

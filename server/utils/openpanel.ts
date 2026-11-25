@@ -1,6 +1,5 @@
-import type { H3Event } from 'h3';
 import { OpenPanel } from '@openpanel/sdk';
-import { useRuntimeConfig } from 'nitropack/runtime';
+import { useRuntimeConfig } from 'nuxt/server';
 
 /**
  * Server-side OpenPanel tracker. The Nuxt module's SDK is client-only, so
@@ -10,11 +9,10 @@ import { useRuntimeConfig } from 'nitropack/runtime';
  * response resolves or the event is dropped.
  */
 export async function trackOpenPanelEvent(
-  event: H3Event,
   name: string,
   properties?: Record<string, unknown>,
 ): Promise<void> {
-  const { clientId, clientSecret } = useRuntimeConfig(event).openpanel as {
+  const { clientId, clientSecret } = useRuntimeConfig().openpanel as {
     clientId?: string;
     clientSecret?: string;
   };

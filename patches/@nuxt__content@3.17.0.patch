@@ -1,0 +1,46 @@
+diff --git a/dist/features/llms/module.js b/dist/features/llms/module.js
+index c75fdbba67d7bc30735f06fdf85563ce0005e33b..605479963999567cf5ddd959d1c5595851156016 100644
+--- a/dist/features/llms/module.js
++++ b/dist/features/llms/module.js
+@@ -1,5 +1,5 @@
+ import defu from "defu";
+-import { createResolver, defineNuxtModule, addTypeTemplate, addNitroPlugin, addServerHandler } from "@nuxt/kit";
++import { createResolver, defineNuxtModule, addTypeTemplate, addNitroPlugin, addServerHandler, getNitroVersion } from "@nuxt/kit";
+ export default defineNuxtModule({
+   meta: {
+     name: "Content LLMS",
+@@ -17,7 +17,7 @@ export default defineNuxtModule({
+     });
+     if (contentRawMarkdown !== false) {
+       addServerHandler({
+-        route: "/raw/**:slug.md",
++        route: getNitroVersion(nuxt) === 2 ? "/raw/**:slug.md" : "/raw/**:slug",
+         handler: {
+           nuxt: resolve("runtime/server/routes/raw/[...slug].md.get"),
+           nitro2: resolve("runtime/server/routes/raw/[...slug].md.get.legacy")
+diff --git a/dist/features/llms/runtime/server/routes/raw/[...slug].md.get.js b/dist/features/llms/runtime/server/routes/raw/[...slug].md.get.js
+index 1aad5f353137acfb6c82f4cdd526626868b8cda7..82176a4be80a577cab380ef82b0ab9cc035e7aa6 100644
+--- a/dist/features/llms/runtime/server/routes/raw/[...slug].md.get.js
++++ b/dist/features/llms/runtime/server/routes/raw/[...slug].md.get.js
+@@ -2,7 +2,7 @@ import { createError, defineEventHandler, getRouterParams, useRuntimeConfig } fr
+ import { getRawMarkdown } from "../../raw-markdown.js";
+ export default defineEventHandler(async (event) => {
+   const config = useRuntimeConfig();
+-  const markdown = await getRawMarkdown(event, getRouterParams(event)["slug.md"], config.llms);
++  const markdown = await getRawMarkdown(event, (getRouterParams(event).slug ?? getRouterParams(event)["slug.md"]), config.llms);
+   if (markdown === void 0) {
+     throw createError({ status: 404, statusText: "Page not found", fatal: true });
+   }
+diff --git a/dist/features/llms/runtime/server/routes/raw/[...slug].md.get.legacy.js b/dist/features/llms/runtime/server/routes/raw/[...slug].md.get.legacy.js
+index c5325a0f089b304691082ab32b3b8b744ded6634..5d3733f68197d73476a59016b82010ba827177af 100644
+--- a/dist/features/llms/runtime/server/routes/raw/[...slug].md.get.legacy.js
++++ b/dist/features/llms/runtime/server/routes/raw/[...slug].md.get.legacy.js
+@@ -3,7 +3,7 @@ import { useRuntimeConfig } from "nitropack/runtime";
+ import { getRawMarkdown } from "../../raw-markdown.js";
+ export default eventHandler(async (event) => {
+   const config = useRuntimeConfig(event);
+-  const markdown = await getRawMarkdown(event, getRouterParams(event)["slug.md"], config.llms);
++  const markdown = await getRawMarkdown(event, (getRouterParams(event).slug ?? getRouterParams(event)["slug.md"]), config.llms);
+   if (markdown === void 0) {
+     throw createError({ statusCode: 404, statusMessage: "Page not found", fatal: true });
+   }

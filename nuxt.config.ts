@@ -502,7 +502,7 @@ export default defineNuxtConfig({
   // JS redirects, so a prerendered 200 stub at '/' leaves them with no OG
   // card; a real HTTP 301 is followed to the tagged /docs page.
   routeRules: {
-    '/': { redirect: { to: '/docs', statusCode: 301 } },
+    '/': { redirect: { to: '/docs', status: 301 } },
     // Worker-rendered HTML must not outlive a deploy in a CDN cache. Each page
     // embeds content-hashed `/_nuxt/*` URLs, and `wrangler deploy` drops the
     // previous asset set once the new manifest is live — so a page held at the
@@ -514,17 +514,15 @@ export default defineNuxtConfig({
     '/docs/**': {
       headers: { 'cache-control': 'public, max-age=0, s-maxage=60' },
     },
-    // Static-layer security headers: Nitro bakes routeRules headers into
-    // the _headers file, which Workers static assets apply to asset-served
-    // responses (prerendered docs pages, _nuxt chunks, registry JSON).
-    // Worker-served HTML gets its CSP replaced at runtime by nuxt-security's
-    // per-request nonce version; static files keep this 'unsafe-inline' CSP
-    // since their build-time inline scripts (and Cloudflare edge-injected
-    // challenge scripts) cannot carry a per-request nonce.
+    // Nitro bakes routeRules headers into the _headers file for asset-served
+    // responses, and Nitro v3 also applies them AFTER the handler, replacing
+    // a header of the same name. So no Content-Security-Policy here: it
+    // would overwrite nuxt-security's per-request nonce CSP on every
+    // worker-rendered page. No HTML document is served from static assets
+    // (prerendered docs HTML is deleted after the crawl, and `/` is
+    // worker-first), so a static CSP had nothing left to protect.
     '/**': {
       headers: {
-        'Content-Security-Policy':
-          "base-uri 'none'; connect-src 'self' https:; font-src 'self' https: data:; form-action 'self'; frame-ancestors 'none'; frame-src 'self' https://www.youtube.com; img-src 'self' data: blob: https:; media-src 'self' data: blob: https:; object-src 'none'; script-src 'self' https: 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' https: 'unsafe-inline'; worker-src 'self' blob:; upgrade-insecure-requests",
         'Permissions-Policy':
           'camera=(self), display-capture=(), fullscreen=(self), geolocation=(), microphone=()',
       },
@@ -533,6 +531,14 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'cloudflare_module',
+    // Nitro v3 runs the cloudflare dev server inside Miniflare by default, and
+    // that runner cannot start this app yet: with wrangler's Miniflare 5 beta
+    // it fails to load `node:process`, and with Miniflare 4 a dependency
+    // generates random values at module scope, which workerd forbids
+    // (nitrojs/nitro#4621 tracks the dev emulation gaps). Run dev in a Node
+    // worker, as it ran under Nitro v2. Production still builds for workerd,
+    // and `wrangler dev --remote` on .output tests the real runtime.
+    devServer: { runner: 'node-worker' },
     prerender: {
       crawlLinks: true,
       failOnError: false,

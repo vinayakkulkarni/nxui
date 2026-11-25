@@ -1,13 +1,12 @@
-import type { H3Event } from 'h3';
-import { defineRouteMeta } from 'nitropack/runtime';
+import { defineRouteMeta } from 'nitro';
 import {
-  defineEventHandler,
+  defineHandler,
   readValidatedBody,
-  setResponseHeader,
   setResponseStatus,
-} from 'h3';
+} from 'nuxt/server';
 import type { JsonRpcRequest, JsonRpcResponse } from '~/types/mcp';
 import type { A2aMessage, A2aSendMessageParams } from '~/types/a2a';
+import { queryFromTaskId, runFindComponentsTask } from '../utils/a2a';
 
 function success(
   id: number | string | null,
@@ -101,22 +100,22 @@ defineRouteMeta({
   },
 });
 
-export default defineEventHandler(async (event: H3Event) => {
-  setResponseHeader(event, 'access-control-allow-origin', '*');
-  setResponseHeader(event, 'x-content-type-options', 'nosniff');
-  setResponseHeader(
-    event,
+export default defineHandler(async (event) => {
+  const headers = event.res.headers;
+  headers.set('access-control-allow-origin', '*');
+  headers.set('x-content-type-options', 'nosniff');
+  headers.set(
     'access-control-allow-headers',
     'content-type, accept, a2a-version, a2a-extensions',
   );
-  setResponseHeader(event, 'access-control-allow-methods', 'POST, OPTIONS');
+  headers.set('access-control-allow-methods', 'POST, OPTIONS');
 
-  if (event.method === 'OPTIONS') {
+  if (event.req.method === 'OPTIONS') {
     setResponseStatus(event, 204);
     return null;
   }
 
-  if (event.method !== 'POST') {
+  if (event.req.method !== 'POST') {
     setResponseStatus(event, 405);
     return {
       error:
@@ -126,7 +125,7 @@ export default defineEventHandler(async (event: H3Event) => {
 
   const body = await readValidatedBody(
     event,
-    (data: unknown): JsonRpcRequest => {
+    (data: unknown): JsonRpcRequest | false => {
       const candidate = data as JsonRpcRequest | null;
       if (
         candidate === null ||
@@ -134,7 +133,7 @@ export default defineEventHandler(async (event: H3Event) => {
         candidate.jsonrpc !== '2.0' ||
         typeof candidate.method !== 'string'
       ) {
-        throw new TypeError('Invalid JSON-RPC request');
+        return false;
       }
       return candidate;
     },

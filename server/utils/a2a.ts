@@ -5,6 +5,7 @@ import type {
   A2aTask,
 } from '~/types/a2a';
 import type { RegistryIndexItem } from '~/types/mcp';
+import { getRegistryIndex } from './registry';
 
 const SITE_URL = 'https://nxui.geoql.in';
 

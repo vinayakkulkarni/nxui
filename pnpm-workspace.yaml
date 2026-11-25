@@ -41,3 +41,8 @@ allowBuilds:
   unrs-resolver: true
   vue-demi: false
   workerd: true
+# @nuxt/content 3.17.0 registers /raw/**:slug.md, which Nitro v3's router
+# (rou3) rejects. Same fix as nuxt/content#3928 (open, unreleased): use
+# /raw/**:slug on Nitro v3. Drop this patch once a release includes it.
+patchedDependencies:
+  '@nuxt/content@3.17.0': patches/@nuxt__content@3.17.0.patch

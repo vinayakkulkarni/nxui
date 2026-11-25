@@ -1,13 +1,8 @@
-import type { H3Event } from 'h3';
-import { defineRouteMeta } from 'nitropack/runtime';
-import {
-  createError,
-  defineEventHandler,
-  getRouterParam,
-  setResponseHeader,
-} from 'h3';
+import { defineRouteMeta } from 'nitro';
+import { createError, defineHandler, getRouterParam } from 'nuxt/server';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { trackOpenPanelEvent } from '../../utils/openpanel';
 
 defineRouteMeta({
   openAPI: {
@@ -34,10 +29,10 @@ defineRouteMeta({
   },
 });
 
-export default defineEventHandler((event: H3Event) => {
-  const name = getRouterParam(event, 'name');
+export default defineHandler((event) => {
+  const name = getRouterParam(event, 'name', { decode: true });
   if (!name) {
-    throw createError({ statusCode: 400, message: 'Missing component name' });
+    throw createError({ status: 400, message: 'Missing component name' });
   }
 
   const slug = name.replace(/\.json$/, '');
@@ -45,18 +40,18 @@ export default defineEventHandler((event: H3Event) => {
 
   if (!existsSync(filePath)) {
     throw createError({
-      statusCode: 404,
+      status: 404,
       message: `Component "${slug}" not found`,
     });
   }
 
-  trackOpenPanelEvent(event, 'registry_download', {
+  trackOpenPanelEvent('registry_download', {
     component: slug,
     url: `https://nxui.geoql.in/r/${slug}`,
   }).catch(() => {});
 
   const content = readFileSync(filePath, 'utf-8');
-  setResponseHeader(event, 'content-type', 'application/json');
-  setResponseHeader(event, 'x-content-type-options', 'nosniff');
+  event.res.headers.set('content-type', 'application/json');
+  event.res.headers.set('x-content-type-options', 'nosniff');
   return JSON.parse(content);
 });

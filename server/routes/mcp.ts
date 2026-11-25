@@ -1,16 +1,16 @@
-import type { H3Event } from 'h3';
-import { defineRouteMeta } from 'nitropack/runtime';
+import { defineRouteMeta } from 'nitro';
 import {
-  defineEventHandler,
+  defineHandler,
   readValidatedBody,
-  setResponseHeader,
   setResponseStatus,
-} from 'h3';
+} from 'nuxt/server';
 import type {
   JsonRpcRequest,
   JsonRpcResponse,
   McpToolResult,
 } from '~/types/mcp';
+import { MCP_SERVER_INFO, MCP_TOOLS, callMcpTool } from '../utils/mcp-tools';
+import { trackOpenPanelEvent } from '../utils/openpanel';
 
 const PROTOCOL_VERSION = '2025-06-18';
 
@@ -49,40 +49,40 @@ function failure(
   return { jsonrpc: '2.0', id, error: { code, message } };
 }
 
-export default defineEventHandler(async (event: H3Event) => {
-  setResponseHeader(event, 'access-control-allow-origin', '*');
-  setResponseHeader(event, 'x-content-type-options', 'nosniff');
-  setResponseHeader(
-    event,
+export default defineHandler(async (event) => {
+  const headers = event.res.headers;
+  headers.set('access-control-allow-origin', '*');
+  headers.set('x-content-type-options', 'nosniff');
+  headers.set(
     'access-control-allow-headers',
     'content-type, accept, mcp-session-id, mcp-protocol-version',
   );
-  setResponseHeader(event, 'access-control-allow-methods', 'POST, OPTIONS');
+  headers.set('access-control-allow-methods', 'POST, OPTIONS');
 
-  if (event.method === 'OPTIONS') {
+  const method = event.req.method;
+  if (method === 'OPTIONS') {
     setResponseStatus(event, 204);
     return null;
   }
 
-  if (event.method === 'GET' || event.method === 'DELETE') {
+  if (method === 'GET' || method === 'DELETE') {
     // Stateless server: no SSE stream to resume, no session to delete.
     setResponseStatus(event, 405);
     return { error: 'Method not allowed. POST JSON-RPC messages to /mcp.' };
   }
 
-  if (event.method !== 'POST') {
+  if (method !== 'POST') {
     setResponseStatus(event, 405);
     return { error: 'Method not allowed.' };
   }
 
   const body = await readValidatedBody(
     event,
-    (data: unknown): JsonRpcRequest | JsonRpcRequest[] => {
-      if (typeof data !== 'object' || data === null) {
-        throw new TypeError('JSON-RPC payload must be an object or array');
-      }
-      return data as JsonRpcRequest | JsonRpcRequest[];
-    },
+    // An object or array passes through; anything else is a 400.
+    (data: unknown): JsonRpcRequest | JsonRpcRequest[] | false =>
+      typeof data === 'object' && data !== null
+        ? (data as JsonRpcRequest | JsonRpcRequest[])
+        : false,
   );
   const messages = Array.isArray(body) ? body : [body];
   const responses: JsonRpcResponse[] = [];
@@ -145,7 +145,7 @@ export default defineEventHandler(async (event: H3Event) => {
     responses.push(failure(id, -32601, `Method not found: ${message.method}`));
   }
 
-  trackOpenPanelEvent(event, 'mcp_request', {
+  trackOpenPanelEvent('mcp_request', {
     method: messages[0]?.method ?? 'unknown',
     url: 'https://nxui.geoql.in/mcp',
   }).catch(() => {});
@@ -155,6 +155,6 @@ export default defineEventHandler(async (event: H3Event) => {
     return null;
   }
 
-  setResponseHeader(event, 'content-type', 'application/json');
+  headers.set('content-type', 'application/json');
   return responses.length === 1 ? responses[0] : responses;
 });

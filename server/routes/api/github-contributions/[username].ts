@@ -1,6 +1,5 @@
-import type { H3Event } from 'h3';
-import { defineRouteMeta } from 'nitropack/runtime';
-import { createError, defineEventHandler, getRouterParam, setHeader } from 'h3';
+import { defineRouteMeta } from 'nitro';
+import { createError, defineHandler, getRouterParam } from 'nuxt/server';
 import type {
   FlatContributionData,
   GithubEvent,
@@ -119,10 +118,10 @@ defineRouteMeta({
   },
 });
 
-export default defineEventHandler(async (event: H3Event) => {
-  const username = getRouterParam(event, 'username') ?? '';
+export default defineHandler(async (event) => {
+  const username = getRouterParam(event, 'username', { decode: true }) ?? '';
   if (!/^[a-z0-9-]{1,39}$/i.test(username)) {
-    throw createError({ statusCode: 400, statusMessage: 'Invalid username' });
+    throw createError({ status: 400, statusText: 'Invalid username' });
   }
   const upstream = await fetch(
     `https://github-contributions-api.jogruber.de/v4/${username}?y=last`,
@@ -130,15 +129,15 @@ export default defineEventHandler(async (event: H3Event) => {
   );
   if (!upstream.ok) {
     throw createError({
-      statusCode: upstream.status,
-      statusMessage: `Upstream responded ${upstream.status}`,
+      status: upstream.status,
+      statusText: `Upstream responded ${upstream.status}`,
     });
   }
   const data: unknown = await upstream.json();
   if (!isFlatContributionData(data)) {
     throw createError({
-      statusCode: 502,
-      statusMessage: 'Malformed upstream payload',
+      status: 502,
+      statusText: 'Malformed upstream payload',
     });
   }
 
@@ -161,8 +160,8 @@ export default defineEventHandler(async (event: H3Event) => {
 
   const topContributions = await fetchTopContributions(username);
 
-  setHeader(event, 'cache-control', 'public, max-age=3600, s-maxage=3600');
-  setHeader(event, 'x-content-type-options', 'nosniff');
+  event.res.headers.set('cache-control', 'public, max-age=3600, s-maxage=3600');
+  event.res.headers.set('x-content-type-options', 'nosniff');
   return {
     contributions: weeks,
     totalContributions: Object.values(data.total).reduce(

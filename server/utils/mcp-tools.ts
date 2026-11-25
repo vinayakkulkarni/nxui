@@ -1,9 +1,10 @@
-import type { H3Event } from 'h3';
+import type { RequestEvent } from 'nuxt/server';
 import type {
   McpToolDefinition,
   McpToolResult,
   RegistryIndexItem,
 } from '~/types/mcp';
+import { getRegistryIndex, getRegistryItem } from './registry';
 
 const SITE_URL = 'https://nxui.geoql.in';
 
@@ -78,7 +79,7 @@ function formatIndexItem(item: RegistryIndexItem): string {
 }
 
 export async function callMcpTool(
-  event: H3Event,
+  event: RequestEvent,
   name: string,
   args: Record<string, unknown>,
 ): Promise<McpToolResult> {

@@ -1,6 +1,6 @@
-import type { H3Event } from 'h3';
-import { defineRouteMeta } from 'nitropack/runtime';
-import { defineEventHandler, setResponseHeader } from 'h3';
+import { defineRouteMeta } from 'nitro';
+import { defineHandler } from 'nuxt/server';
+import { MCP_SERVER_INFO } from '../../../utils/mcp-tools';
 
 defineRouteMeta({
   openAPI: {
@@ -17,10 +17,10 @@ defineRouteMeta({
   },
 });
 
-export default defineEventHandler((event: H3Event) => {
-  setResponseHeader(event, 'content-type', 'application/json');
-  setResponseHeader(event, 'cache-control', 'public, max-age=3600');
-  setResponseHeader(event, 'x-content-type-options', 'nosniff');
+export default defineHandler((event) => {
+  event.res.headers.set('content-type', 'application/json');
+  event.res.headers.set('cache-control', 'public, max-age=3600');
+  event.res.headers.set('x-content-type-options', 'nosniff');
   return {
     $schema:
       'https://static.modelcontextprotocol.io/schemas/2025-11-25/server-card.schema.json',

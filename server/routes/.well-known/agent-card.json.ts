@@ -1,6 +1,6 @@
-import type { H3Event } from 'h3';
-import { defineRouteMeta } from 'nitropack/runtime';
-import { defineEventHandler, setResponseHeader } from 'h3';
+import { defineRouteMeta } from 'nitro';
+import { defineHandler } from 'nuxt/server';
+import { A2A_AGENT_CARD } from '../../utils/a2a';
 
 defineRouteMeta({
   openAPI: {
@@ -17,10 +17,10 @@ defineRouteMeta({
   },
 });
 
-export default defineEventHandler((event: H3Event) => {
-  setResponseHeader(event, 'content-type', 'application/json');
-  setResponseHeader(event, 'cache-control', 'public, max-age=3600');
-  setResponseHeader(event, 'x-content-type-options', 'nosniff');
-  setResponseHeader(event, 'etag', `"a2a-${A2A_AGENT_CARD.version}"`);
+export default defineHandler((event) => {
+  event.res.headers.set('content-type', 'application/json');
+  event.res.headers.set('cache-control', 'public, max-age=3600');
+  event.res.headers.set('x-content-type-options', 'nosniff');
+  event.res.headers.set('etag', `"a2a-${A2A_AGENT_CARD.version}"`);
   return A2A_AGENT_CARD;
 });
