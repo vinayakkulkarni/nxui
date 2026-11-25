@@ -11,6 +11,7 @@
     PaperShaderMountProps,
     PaperShaderUniforms,
   } from './mount-types';
+  import { imageReady } from './image-ready';
   import { cn } from '~/lib/utils';
 
   const props = withDefaults(defineProps<PaperShaderMountProps>(), {
@@ -89,8 +90,10 @@
           }),
         );
       } else if (value instanceof HTMLImageElement) {
-        setMinImageSize(value);
+        // Wait for the image to load: ShaderMount throws on an image that is
+        // not fully loaded yet (WebKit hits this for the noise texture).
         processed[key] = value;
+        imageLoads.push(imageReady(value).then(() => setMinImageSize(value)));
       } else {
         processed[key] = value;
       }
